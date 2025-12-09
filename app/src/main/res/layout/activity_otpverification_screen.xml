@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_screen_12"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/truck_just_logo" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="bottom|center"
+            android:textColor="@color/white"
+            android:text="Truck Trip"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:textAllCaps="true"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/otp_verification"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/otpVerificationMsg"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_marginStart="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_28sdp"
+            android:textSize="@dimen/_14sdp"
+            android:text="@string/enter_otp"
+            />
+
+        <com.chaos.view.PinView
+            android:id="@+id/etOtpVerify"
+            style="@style/PinWidget.PinView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:autofillHints="smsOTPCode"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:importantForAutofill="yes"
+            android:inputType="number"
+            app:hideLineWhenFilled="false"
+            app:itemCount="6"
+            app:itemHeight="@dimen/_38sdp"
+            app:itemRadius="10dp"
+            app:itemSpacing="@dimen/_5sdp"
+            app:itemWidth="@dimen/_38sdp"
+            app:lineColor="@color/new_black" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_28sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="start"
+                android:layout_gravity="center"
+                android:text="@string/resend_otp"
+                android:id="@+id/resendOtp"
+                android:textColor="@color/green"
+                android:textSize="15sp" />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/resend"
+                android:gravity="center"
+                android:layout_gravity="start"
+                android:id="@+id/resend"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:gravity="end"
+                android:visibility="gone"
+                android:text="0:00"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btLogin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginHorizontal="@dimen/_42sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:backgroundTint="@color/green"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/verify_and_proceed"
+            android:textSize="16sp"
+            app:cornerRadius="@dimen/_10sdp" />
+
+    </LinearLayout>
+
+</LinearLayout>

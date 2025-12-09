@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".fragment.VahanInfoFragment">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stay_tuned_we_re_working_on_this_feature"
+        android:textSize="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:gravity="center"
+        android:fontFamily="@font/plusjakartasans_bold"
+        android:textStyle="italic"
+        android:textColor="@color/greencolor"
+        android:layout_gravity="center"/>
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/_10sdp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_marginStart="@dimen/_5sdp"-->
+<!--        android:layout_marginEnd="@dimen/_5sdp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:weightSum="2">-->
+
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1.4"-->
+<!--            app:cardBackgroundColor="@color/white"-->
+<!--            app:cardCornerRadius="@dimen/_10sdp">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_margin="@dimen/_5sdp"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1.5"-->
+<!--                    android:gravity="center"-->
+<!--                    android:weightSum="2">-->
+
+<!--                    <com.google.android.material.textfield.TextInputEditText-->
+<!--                        android:id="@+id/number"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                        android:layout_weight="1.8"-->
+<!--                        android:background="@null"-->
+<!--                        android:hint="GJ 11 B 2345" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/closeBtn"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="@dimen/_5sdp"-->
+<!--                        android:layout_weight="0.2"-->
+<!--                        android:src="@drawable/baseline_close_24" />-->
+
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
+
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="0.6"-->
+<!--            android:layout_marginStart="@dimen/_5sdp"-->
+<!--            android:text="Search"-->
+<!--            android:id="@+id/searchBtn"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="@dimen/_10sdp" />-->
+<!--    </LinearLayout>-->
+
+
+    <com.google.android.ads.nativetemplates.TemplateView
+        android:id="@+id/my_template"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:gnt_template_type="@layout/gnt_medium_template_view" />
+
+</LinearLayout>

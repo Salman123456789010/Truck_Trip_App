@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/spalsh_bg"
+    android:alpha="80"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".activity.SplashActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/truck_just_logo" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="bottom|center"
+            android:textColor="@color/white"
+            android:text="@string/truck_trip_hisab"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:textAllCaps="true"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/white"
+            android:text='"Your journey, Our calculations!"'
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/splash_rectangle"
+        android:gravity="bottom|center"
+        android:orientation="vertical">
+          <ProgressBar
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:layout_marginBottom="@dimen/_10sdp"
+              android:indeterminateTint="@color/white"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:fontFamily="@font/roboto_bold"-->
+<!--            android:textColor="@color/green"-->
+<!--            android:text='from'-->
+<!--            android:layout_marginTop="@dimen/_5sdp"-->
+<!--            android:textSize="@dimen/_16sdp"-->
+<!--            android:textStyle="bold"/>-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginBottom="@dimen/_20sdp"-->
+<!--            android:fontFamily="@font/roboto_bold"-->
+<!--            android:textColor="#e57130"-->
+<!--            android:text='B2S Khatara Wallah'-->
+<!--            android:textSize="@dimen/_18sdp"-->
+<!--            android:textStyle="bold"/>-->
+
+    </LinearLayout>
+</LinearLayout>

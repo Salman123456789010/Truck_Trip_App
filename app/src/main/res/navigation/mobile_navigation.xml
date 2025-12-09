@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.dadabarbie.TruckTrip.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_homefragment_to_navigation_vahanInfoFragment"
+            app:destination="@id/vahanInfoFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/main_navigation"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/vahanInfoFragment"
+        android:name="com.dadabarbie.TruckTrip.fragment.VahanInfoFragment"
+        android:label="fragment_vahan_info"
+        tools:layout="@layout/fragment_vahan_info" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.dadabarbie.TruckTrip.fragment.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.dadabarbie.TruckTrip.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

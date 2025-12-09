@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ടെസ്റ്റ് ആപ്ലിക്കേഷൻ</string>
+    <string name="ruppe">₹</string>
+    <string name="hello_blank_fragment">നമസ്കാരം വാഹനം വിവരങ്ങൾ</string>
+    <string name="total_days">മൊത്തം ദിവസങ്ങൾ</string>
+    <string name="map_key">\nUo0cpVFRPzjjEQHJoI-FuqXC24bNJGeqIgBCAeAPLmU</string>
+    <string name="resendOtp">ഞാൻ ഏത് കോഡും സ്വീകരിച്ചില്ല <u>ഒടിപി വീണ്ടും അയക്കൂ</u></string>
+    <string name="please_add_truck_number">ട്രക്ക് നമ്പർ ചേർക്കുക</string>
+    <string name="please_add_source_place">ഉറവിടം ചേർക്കുക</string>
+    <string name="please_add_destination_place">ഗമ്യസ്ഥലത്ത് ചേർക്കുക</string>
+    <string name="truck_trip_hisab">ട്രക്ക് ട്രിപ്പ്</string>
+    <string name="truck_trip_hisab_"><font color="#FF000000"><b>ട്രക്ക്</b></font>ട്രിപ്പ്</string>
+    <string name="next">അടുത്തത്</string>
+    <string name="enter_mobile_number">മൊബൈൽ നമ്പർ നൽകുക</string>
+    <string name="we_have_send_otp">ഞങ്ങൾ ഈ മൊബൈൽ നമ്പറിലേക്ക് <font color="#2155FF"><b>ഒരു തവണ പാസ്‌വേഡ് (ഒടിപി)</b></font> അയച്ചിട്ടുണ്ട്.</string>
+    <string name="we_will_send_otp">ഞങ്ങൾ ഈ മൊബൈൽ നമ്പറിലേക്ക് <font color="#2155FF"><b>ഒരു തവണ പാസ്‌വേഡ് (ഒടിപി)</b></font> അയയ്ക്കും.</string>
+    <string name="get_otp">ഒടിപി നേടുക</string>
+    <string name="please_enter_valid_mobile_number">ശരിയായ മൊബൈൽ നമ്പർ നൽകുക</string>
+    <string name="otp_verification">ഒടിപി സ്ഥിരീകരണം</string>
+    <string name="enter_otp">ഒടിപി നൽകുക</string>
+    <string name="resend_otp">ഒടിപി വീണ്ടും അയക്കൂ</string>
+    <string name="verify_and_proceed">സ്ഥിരീകരിച്ച് മുന്നോട്ട് പോവുക</string>
+    <string name="resend">വീണ്ടും അയക്കുക</string>
+    <string name="resend_otp_in_s">ഒടിപി വീണ്ടും അയക്കാൻ കഴിയും</string>
+    <string name="my_trip_list">എന്റെ ട്രിപ്പ് പട്ടിക</string>
+    <string name="home">ഹോം</string>
+    <string name="vahan_info">വാഹന വിവരം</string>
+    <string name="news">വാർത്ത</string>
+    <string name="profile">പ്രൊഫൈൽ</string>
+    <string name="driver_s_gross_income">ഡ്രൈവറുടെ മൊത്തം വരുമാനം:</string>
+    <string name="owner_s_gross_income">മാലിക്കന്റെ മൊത്തം വരുമാനം:</string>
+    <string name="add_trip">ട്രിപ്പ് ചേർക്കുക</string>
+    <string name="gross_income">മൊത്തം വരുമാനം</string>
+    <string name="total_expenditure">മൊത്തം ചെലവ്</string>
+    <string name="add_trip_data">ട്രിപ്പ് ഡാറ്റ ചേർക്കുക</string>
+    <string name="source_place_">ആരംഭ സ്ഥലത്ത് <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="dest_place_">അവസാന സ്ഥലത്ത് <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="truck_number_">ട്രക്ക് നമ്പർ <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="trip_date">ട്രിപ്പിന്റെ ആരംഭ തീയതി <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="trip_start_date">ട്രിപ്പിന്റെ ആരംഭ തീയതി </string>
+    <string name="driver_s_income">ഡ്രൈവറുടെ വരുമാനം:</string>
+    <string name="trip_payment">ട്രിപ്പ് പണമടവ്</string>
+    <string name="total_days_10">മൊത്തം ദിവസങ്ങൾ : 10</string>
+    <string name="start_trip">ട്രിപ്പ് ആരംഭിക്കുക :</string>
+    <string name="end_trip">ട്രിപ്പ് അവസാനിക്കുക :</string>
+    <string name="get_average">ശരാശരി നേടുക :</string>
+    <string name="click_here">ഇവിടെ ക്ലിക്ക് ചെയ്യുക</string>
+    <string name="truck_average">ഇന്ധനം (ഡീസൽ) ശരാശരി</string>
+    <string name="add">ചേർക്കുക</string>
+    <string name="add_hissab">ഹിസാബ് ചേർക്കുക</string>
+    <string name="save">സേവ്</string>
+    <string name="total_profit">മൊത്തം ലാഭം</string>
+    <string name="total_income_credit">മൊത്തം വരുമാനം (ക്രെഡിറ്റ്)</string>
+    <string name="total_expense_debit">മൊത്തം ചെലവ് (ഡെബിറ്റ്)</string>
+    <string name="expense">ചെലവ്</string>
+    <string name="add_expense">ചെലവ് ചേർക്കുക</string>
+    <string name="income">വരുമാനം</string>
+    <string name="add_income">വരുമാനം ചേർക്കുക</string>
+    <string name="add_fuel">ഇന്ധനം ചേർക്കുക</string>
+    <string name="enter_text">ടെക്സ്റ്റ് നൽകുക</string>
+    <string name="amount">രാശി</string>
+    <string name="enter_expenditure_name">ചെലവിന്റെ പേര് നൽകുക <font fgcolor='#FF0000'>*</font></string>
+    <string name="enter_expenditure_amount">ചെലവിന്റെ തുക നൽകുക</string>
+    <string name="change_language">ഭാഷ മാറ്റുക</string>
+    <string name="choose_your_desired_language">നിങ്ങളുടെ ഇച്ഛിക്കുള്ള ഭാഷ തിരഞ്ഞെടുക്കുക</string>
+    <string name="how_to_use_the_app">ആപ്ലിക്കേഷൻ എങ്ങനെ ഉപയോഗിക്കണം</string>
+    <string name="you_can_learn_how_to_use_app">നിങ്ങൾ ആപ്ലിക്കേഷൻ എങ്ങനെ ഉപയോഗിക്കാമെന്ന് അറിയാം</string>
+    <string name="contact_us">ഞങ്ങളെ ബന്ധപ്പെടുക</string>
+    <string name="you_can_contact_us">നിങ്ങൾ ഞങ്ങളെ ബന്ധപ്പെടാം</string>
+    <string name="rate_us">ഞങ്ങളെ റേറ്റുചെയ്യുക</string>
+    <string name="you_can_give_feedback_here">നിങ്ങൾ ഇവിടെ പ്രതികരണം നൽകാം</string>
+    <string name="logout">ലോഗ്ഔട്ട്</string>
+    <string name="delete_account">അക്കൗണ്ട് മായ്ക്കുക</string>
+    <string name="enter_your_total_diesel_in_liter">നിങ്ങളുടെ മൊത്തം ഡീസൽ ലിറ്ററിൽ നൽകുക</string>
+    <string name="enter_your_total_kilometer">നിങ്ങളുടെ മൊത്തം കിലോമീറ്റർ നൽകുക</string>
+    <string name="done">ശേഷം</string>
+    <string name="start_and_end_date">ആരംഭവും അവസാനത്തെയും തീയതി</string>
+    <string name="truck_number">ട്രക്ക് നമ്പർ</string>
+    <string name="truck_number_n">ട്രക്ക് നമ്പർ <font fgcolor='#FF0000'>*</font></string>
+    <string name="pending_trip_list">പ്രവേശിക്കുന്ന ട്രിപ്പ് പട്ടിക</string>
+    <string name="log_out">ലോഗ് ഔട്ട്</string>
+    <string name="are_you_sure_want_to_log_out">നിങ്ങൾ నిజമായും ലോഗ് ഔട്ട് ചെയ്യണമെന്നു കരുതുന്നുവോ?</string>
+    <string name="are_you_sure_want_to_delete_your_account">നിങ്ങൾ നിങ്ങളുടെ അക്കൗണ്ട് ഇല്ലാതാക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?</string>
+    <string name="are_you_sure_want_to_delete_your_trip_data">നിങ്ങൾ നിങ്ങളുടെ ട്രിപ്പ് ഡാറ്റ ഇല്ലാതാക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ?</string>
+    <string name="delete_trip_data">ട്രിപ്പ് ഡാറ്റ ഇല്ലാതാക്കുക</string>
+    <string name="no"> ഇല്ല</string>
+    <string name="yes">അതെ</string>
+    <string name="something_issue_in_server_please_try_again_later">അവനെ, എന്തെങ്കിലും തെറ്റായി, ദയവായി വീണ്ടും ശ്രമിക്കൂ!</string>
+    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">ഇവിടെ ട്രിപ്പിന്റെ ആരംഭ തീയതി നൽകുക</string>
+    <string name="sarvat_no_place_nakho">ആരംഭിക്കുന്ന സ്ഥലം നൽകുക</string>
+    <string name="end_no_place_nakho">അവസാന സ്ഥലം നൽകുക</string>
+    <string name="driver_ni_per_trip_aavak_nakho">ഡ്രൈവർക്ക് നേരിടുന്ന വരുമാനം നൽകുക</string>
+    <string name="truck_number_add_karo">ട്രക്കിന്റെ നമ്പർ ചേർക്കുക</string>
+    <string name="owner_name">മലികയുടെ പേര് :</string>
+    <string name="registered_place">രജിസ്റ്റർ ചെയ്ത സ്ഥലം</string>
+    <string name="fuel_type">ഇന്ധന തരം</string>
+    <string name="puc_valid_up_to">PUC സാധുത വരെ :</string>
+    <string name="manufacturer_model">നിർമ്മാതാവിന്റെ മോഡൽ</string>
+    <string name="vehicle_class">വാഹന ക്ലാസ്</string>
+    <string name="chassis_number">ചാസിസ് നമ്പർ</string>
+    <string name="permit_validity_from">പരമിറ്റ് സാധുത :</string>
+    <string name="registration_number">രജിസ്ട്രേഷൻ നമ്പർ :</string>
+    <string name="seating_capacity">സീറ്റിംഗ് ശേഷി</string>
+    <string name="owner_mobile_no">മലികയുടെ മൊബൈൽ നമ്പർ :</string>
+    <string name="vahan_details">വാഹന വിവരങ്ങൾ</string>
+    <string name="emergency_number">അടിയന്തര നമ്പർ</string>
+    <string name="transports_number">ഗതാഗത നമ്പർ</string>
+    <string name="favorite_number">പ്രിയപ്പെട്ട നമ്പർ</string>
+    <string name="stay_tuned_we_re_working_on_this_feature">കാത്തിരിക്കൂ, ഞങ്ങൾ ഈ സവിശേഷതയിൽ പ്രവർത്തിക്കുന്നു!</string>
+    <string name="a_new_version_of_the_app_is_available_please_update_to_continue">ആപ്ലിക്കേഷന്റെ പുതിയ പതിപ്പ് ലഭ്യമാണ്, ദയവായി അപ്ഡേറ്റ് ചെയ്യുക.</string>
+    <string name="draft_data">ഡ്രാഫ്റ്റ് ഡാറ്റ</string>
+    <string name="if_you_want_to_logout_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">നിങ്ങൾ ലോഗൗട്ട് ചെയ്താൽ, നിങ്ങളുടെ ഡ്രാഫ്റ്റ് ഡാറ്റ മായ്ക്കപ്പെടും. നിങ്ങൾ ലോഗൗട്ട് ചെയ്യണോ?</string>
+    <string name="enter_income_name">വരുമാനത്തിന്റെ പേര് നൽകുക <font fgcolor='#FF0000'>*</font></string>
+    <string name="enter_income_amount">വരുമാന തുക നൽകുക</string>
+
+    <!-- Expense Bottom Sheet Strings -->
+    <string name="note_expense_hint">കുറിപ്പ് (ഭക്ഷണം, ടോൾ, പഞ്ചർ, ഡ്രൈവർ ചെലവ്, മുതലായവ)</string>
+    <string name="place_city">സ്ഥലം/നഗരം</string>
+    <string name="select_expense_type">ചെലവ് തരം തിരഞ്ഞെടുക്കുക</string>
+    <string name="date">തീയതി</string>
+
+    <!-- Income Bottom Sheet Strings -->
+    <string name="note_income_hint">കുറിപ്പ് (പാർട്ടി പേര് മുതലായവ)</string>
+    <string name="total_income_bhada">മൊത്തം വരുമാനം (ഭാഡ)</string>
+    <string name="advance_taken">മുൻകൂർ എടുത്തത്</string>
+    <string name="balance">ബാലൻസ്</string>
+
+    <!-- Fuel Bottom Sheet Strings -->
+    <string name="diesel_liters">ഡീസൽ ലിറ്റർ</string>
+    <string name="amount_required">തുക</string>
+    <string name="km_reading_odometer">കിമി റീഡിംഗ് (ഓഡോമീറ്റർ)</string>
+    <string name="place_pump">സ്ഥലം / പമ്പ്</string>
+
+    <!-- Trip End Dialog -->
+    <string name="trip_end_date">ട്രിപ്പ് അവസാന തീയതി</string>
+    <string name="driver_income_for_trip">ട്രിപ്പിനുള്ള ഡ്രൈവർ വരുമാനം</string>
+    <string name="complete_trip">ട്രിപ്പ് പൂർത്തിയാക്കുക</string>
+    <string name="cancel">റദ്ദാക്കുക</string>
+    <string name="submit">സമർപ്പിക്കുക</string>
+
+    <string name="trip_help_text">
+    ഇവിടെ നിങ്ങൾക്ക് നിങ്ങളുടെ എല്ലാ യാത്രകളും കാണാം।
+    യാത്ര പങ്കിടാൻ, ഡൗൺലോഡ് ചെയ്യാൻ, തിരുത്താൻ അല്ലെങ്കിൽ ഇല്ലാതാക്കാൻ ബട്ടണുകൾ ഉപയോഗിക്കുക।
+    പുതിയ യാത്ര ആരംഭിക്കാൻ “+ Add Trip” ടാപ്പ് ചെയ്യുക।
+    സംരക്ഷിച്ച ഡ്രാഫ്റ്റുകൾ തുറക്കാൻ നോട്ടിഫിക്കേഷൻ ഐക്കണിൽ ടാപ്പ് ചെയ്യുക।</string>
+    <string name="trip_list_title">യാത്ര പട്ടികയും പ്രവർത്തനങ്ങളും</string>
+    <string name="start_new_trip">പുതിയ യാത്ര ആരംഭിക്കുക</string>
+    <string name="add_trip_dec">
+    ആരംഭ തീയതി, ആരംഭ സ്ഥലം, അവസാന സ്ഥലം, ട്രക്ക് നമ്പർ എന്നിവ നൽകുക।
+    മൈക്ക് ഉപയോഗിച്ച് സംസാരിച്ചും വിവരങ്ങൾ നൽകാനാകും।
+    യാത്രാ കണക്കെടുപ്പ് ആരംഭിക്കാൻ Add ടാപ്പ് ചെയ്യുക।
+</string>
+    <string name="manage_trip_title">ട്രിപ്പ് হিচാബ് മാനേജ്മെന്റ്</string>
+
+
+</resources>

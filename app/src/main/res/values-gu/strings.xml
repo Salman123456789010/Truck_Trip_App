@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ટેસ્ટ એપ્લિકેશન</string>
+    <string name="ruppe">\u20b9</string>
+    <string name="hello_blank_fragment">હેલો વાહન માહિતી</string>
+    <string name="total_days">કુલ દિવસો</string>
+    <string name="map_key">\nUo0cpVFRPzjjEQHJoI-FuqXC24bNJGeqIgBCAeAPLmU</string>
+    <string name="resendOtp">મને કોઈ કોડ મળ્યો નથી <u>OTP ફરીથી મોકલો</u></string>
+    <string name="please_add_truck_number">ટ્રક નંબર ઉમેરો</string>
+    <string name="please_add_source_place">સ્ત્રોત સ્થાન ઉમેરો</string>
+    <string name="please_add_destination_place">ગંતવ્ય સ્થાન ઉમેરો</string>
+    <string name="truck_trip_hisab">ટ્રક ટ્રિપ</string>
+    <string name="truck_trip_hisab_"><font color="#FF000000"><b>ટ્રક</b></font>ટ્રિપ</string>
+    <string name="next">આગળ</string>
+    <string name="enter_mobile_number">મોબાઈલ નંબર દાખલ કરો</string>
+    <string name="we_have_send_otp">
+        અમે તમને આ મોબાઈલ નંબર પર <font color="#2155FF"><b>વન ટાઈમ પાસવર્ડ(OTP)</b></font> મોકલ્યો છે.</string>
+    <string name="we_will_send_otp">અમે તમને આ મોબાઈલ નંબર પર <font color="#2155FF"><b>વન ટાઈમ પાસવર્ડ(OTP)</b></font> મોકલીશું</string>
+    <string name="get_otp">OTP મેળવો</string>
+    <string name="please_enter_valid_mobile_number">કૃપા કરીને માન્ય મોબાઇલ નંબર દાખલ કરો</string>
+    <string name="otp_verification">OTP ચકાસણી</string>
+    <string name="enter_otp">ઓટીપી દાખલ કરો</string>
+    <string name="resend_otp">OTP ફરીથી મોકલો</string>
+    <string name="verify_and_proceed">ચકાસો અને આગળ વધો</string>
+    <string name="resend">ફરી મોકલો</string>
+    <string name="resend_otp_in_s">ઓટીપી ફરીથી મોકલી શકશો</string>
+    <string name="my_trip_list">મારા સફરની સૂચિ</string>
+    <string name="home">હોમ</string>
+    <string name="vahan_info">વાહન માહિતી</string>
+    <string name="news">સમાચાર</string>
+    <string name="profile">પ્રોફાઇલ</string>
+    <string name="driver_s_gross_income">ડ્રાઇવરની કુલ આવક:</string>
+    <string name="owner_s_gross_income">માલિકની કુલ આવક:</string>
+    <string name="add_trip">ટ્રીપ ઉમેરો</string>
+    <string name="gross_income">કુલ આવક</string>
+    <string name="total_expenditure">કુલ ખર્ચ</string>
+    <string name="add_trip_data">ટ્રિપ ડેટા ઉમેરો</string>
+    <string name="source_place_">પ્રારંભ સ્થાન <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="dest_place_">અંતિમ સ્થાન <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="truck_number_">ટ્રક નંબર <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="trip_date">ટ્રિપની શરૂઆતની તારીખ <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="trip_start_date">ટ્રિપની શરૂઆતની તારીખ </string>
+    <string name="driver_s_income">ડ્રાઇવરની આવક:</string>
+    <string name="trip_payment">ટ્રીપ ચુકવણી</string>
+    <string name="total_days_10">કુલ દિવસો : 10</string>
+    <string name="start_trip">ટ્રીપ શરૂ કરો :</string>
+    <string name="end_trip">સફર સમાપ્ત કરો :</string>
+    <string name="get_average">સરેરાશ મેળવો :</string>
+    <string name="click_here">અહીં ક્લિક કરો</string>
+    <string name="truck_average">ઇંધણ(ડીઝલ) સરેરાશ</string>
+    <string name="add">ઉમેરો</string>
+    <string name="add_hissab">હિસાબ ઉમેરો</string>
+    <string name="save">સાચવો</string>
+    <string name="total_profit">કુલ નફો</string>
+    <string name="total_income_credit">કુલ આવક(ક્રેડિટ)</string>
+    <string name="total_expense_debit">કુલ ખર્ચ(ડેબિટ)</string>
+    <string name="expense">ખર્ચ</string>
+    <string name="add_expense">ખર્ચ ઉમેરો</string>
+    <string name="income">આવક</string>
+    <string name="add_income">આવક ઉમેરો</string>
+    <string name="add_fuel">ઇંધણ ઉમેરો</string>
+    <string name="enter_text">ટેક્સ્ટ દાખલ કરો</string>
+    <string name="amount">રકમ</string>
+    <string name="enter_expenditure_name">ખર્ચનું નામ દાખલ કરો <font fgcolor='#FF0000'>*</font></string>
+    <string name="enter_expenditure_amount">ખર્ચની રકમ દાખલ કરો</string>
+    <string name="change_language">ભાષા બદલો</string>
+    <string name="choose_your_desired_language">તમારી ઇચ્છિત ભાષા પસંદ કરો</string>
+    <string name="how_to_use_the_app">એપ્લિકેશનનો ઉપયોગ કેવી રીતે કરવો</string>
+    <string name="you_can_learn_how_to_use_app">તમે એપ્લિકેશનનો ઉપયોગ કેવી રીતે કરવો તે શીખી શકો છો</string>
+    <string name="contact_us">અમારો સંપર્ક કરો</string>
+    <string name="you_can_contact_us">તમે અમારો સંપર્ક કરી શકો છો</string>
+    <string name="rate_us">અમને રેટ કરો</string>
+    <string name="you_can_give_feedback_here">તમે અહીં પ્રતિસાદ આપી શકો છો</string>
+    <string name="logout">લોગઆઉટ</string>
+    <string name="delete_account">એકાઉન્ટ કાઢી નાખો</string>
+    <string name="enter_your_total_diesel_in_liter">તમારું કુલ ડીઝલ લિટરમાં દાખલ કરો</string>
+    <string name="enter_your_total_kilometer">તમારું કુલ કિલોમીટર દાખલ કરો</string>
+    <string name="done">થઈ ગયું</string>
+    <string name="start_and_end_date">પ્રારંભ અને સમાપ્તિ તારીખ</string>
+    <string name="truck_number">ટ્રક નંબર</string>
+    <string name="truck_number_n">ટ્રક નંબર <font fgcolor='#FF0000'>*</font></string>
+    <string name="pending_trip_list">બાકી ટ્રિપ સૂચિ</string>
+    <string name="log_out">લૉગ આઉટ</string>
+    <string name="are_you_sure_want_to_log_out">શું તમે ખરેખર લૉગ આઉટ કરવા માંગો છો?</string>
+    <string name="are_you_sure_want_to_delete_your_account">શું તમે તમારો એકાઉન્ટ કાઢવા માંગો છો?</string>
+    <string name="are_you_sure_want_to_delete_your_trip_data">શું તમે તમારા ટ્રિપ ડેટા દૂર કરવા માંગો છો?</string>
+    <string name="delete_trip_data">ટ્રિપ ડેટા કાઢો</string>
+    <string name="no">નહીં</string>
+    <string name="yes">હા</string>
+    <string name="something_issue_in_server_please_try_again_later">અરે, કઈંક ખોટું થયું, કૃપા કરીને ફરી પ્રયાસ કરો!</string>
+    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">અહીં ટ્રિપની શરૂઆતની તારીખ દાખલ કરો</string>
+    <string name="sarvat_no_place_nakho">શરૂઆતનું સ્થાન દાખલ કરો</string>
+    <string name="end_no_place_nakho">અંતિમ સ્થાન દાખલ કરો</string>
+    <string name="driver_ni_per_trip_aavak_nakho">ડ્રાઈવરની પ્રતિ ટ્રિપ આવક દાખલ કરો</string>
+    <string name="truck_number_add_karo">ટ્રક નંબર ઉમેરો</string>
+    <string name="owner_name">માલિકનું નામ :</string>
+    <string name="registered_place">નોંધાયેલ સ્થળ</string>
+    <string name="fuel_type">ઇંધણનો પ્રકાર</string>
+    <string name="puc_valid_up_to">PUC માન્યતા સુધી :</string>
+    <string name="manufacturer_model">ઉત્પાદક મોડલ</string>
+    <string name="vehicle_class">વાહન વર્ગ</string>
+    <string name="chassis_number">ચેસિસ નંબર</string>
+    <string name="permit_validity_from">પરમિટ માન્યતા :</string>
+    <string name="registration_number">નોંધણી નંબર :</string>
+    <string name="seating_capacity">બેઠક ક્ષમતા</string>
+    <string name="owner_mobile_no">માલિકનો મોબાઇલ નંબર :</string>
+    <string name="vahan_details">વાહન વિગતો</string>
+    <string name="emergency_number">કટોકટી નંબર</string>
+    <string name="transports_number">ટ્રાન્સપોર્ટ નંબર</string>
+    <string name="favorite_number">પ્રિય નંબર</string>
+    <string name="stay_tuned_we_re_working_on_this_feature">રહો, અમે આ સુવિધા પર કામ કરી રહ્યા છીએ!</string>
+    <string name="a_new_version_of_the_app_is_available_please_update_to_continue">એપ્લિકેશનનું નવું સંસ્કરણ ઉપલબ્ધ છે, કૃપા કરીને અપડેટ કરો.</string>
+    <string name="draft_data">ડ્રાફ્ટ ડેટા</string>
+    <string name="if_you_want_to_logout_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">જો તમે લૉગઆઉટ કરશો, તો તમારું ડ્રાફ્ટ ડેટા સાફ થઈ જશે. શું તમે લૉગઆઉટ કરવા માંગો છો?</string>
+    <string name="enter_income_name">આવકનું નામ દાખલ કરો <font fgcolor='#FF0000'>*</font></string>
+    <string name="enter_income_amount">આવક રકમ દાખલ કરો</string>
+
+    <!-- Expense Bottom Sheet Strings -->
+    <string name="note_expense_hint">નોંધ (ખોરાક, ટોલ, પંક્ચર, ડ્રાઇવર ખર્ચ, વગેરે)</string>
+    <string name="place_city">સ્થાન/શહેર</string>
+    <string name="select_expense_type">ખર્ચ પ્રકાર પસંદ કરો</string>
+    <string name="date">તારીખ</string>
+
+    <!-- Income Bottom Sheet Strings -->
+    <string name="note_income_hint">નોંધ (પાર્ટીનું નામ વગેરે)</string>
+    <string name="total_income_bhada">કુલ આવક (ભાડું)</string>
+    <string name="advance_taken">અગાઉથી લીધેલ</string>
+    <string name="balance">બેલેન્સ</string>
+
+    <!-- Fuel Bottom Sheet Strings -->
+    <string name="diesel_liters">ડીઝલ લીટર</string>
+    <string name="amount_required">રકમ</string>
+    <string name="km_reading_odometer">કિમી રીડિંગ (ઓડોમીટર)</string>
+    <string name="place_pump">સ્થાન / પંપ</string>
+
+    <!-- Trip End Dialog -->
+    <string name="trip_end_date">ટ્રિપ સમાપ્તિ તારીખ</string>
+    <string name="driver_income_for_trip">ટ્રિપ માટે ડ્રાઇવર આવક</string>
+    <string name="complete_trip">ટ્રિપ પૂર્ણ કરો</string>
+    <string name="cancel">રદ્દ કરો</string>
+    <string name="submit">સબમિટ કરો</string>
+
+    <string name="trip_help_text">
+    અહીં તમે ваша બધી ટ્રિપ્સ જોઈ શકો છો।
+    ટ્રિપ શેર, ડાઉનલોડ, સંપાદિત અથવા ડિલીટ કરવા માટે બટનોનો ઉપયોગ કરો।
+    નવી ટ્રિપ શરૂ કરવા માટે “+ Add Trip” પર ટેપ કરો।
+    સેવ થયેલા ડ્રાફ્ટ્સ ખોલવા માટે નોટિફિકેશન આઇકન પર ટેપ કરો।
+</string>
+    <string name="trip_list_title">ટ્રિપ સૂચિ અને ક્રિયાઓ</string>
+    <string name="start_new_trip">નવી ટ્રિપ શરૂ કરો</string>
+    <string name="add_trip_dec">
+    શરૂઆતની તારીખ, શરૂ કરવાની જગ્યા, અંતિમ જગ્યા અને ટ્રક નંબર દાખલ કરો।
+    તમે માઇકનો ઉપયોગ કરીને બોલીને પણ વિગતો ભરી શકો છો।
+    ટ્રિપ ગણતરી શરૂ કરવા માટે Add પર ટેપ કરો।</string>
+    <string name="manage_trip_title">ટ્રિપ હિસાબ મેનેજ કરો</string>
+
+
+
+</resources>

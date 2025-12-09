@@ -1,0 +1,173 @@
+<resources>
+    <string name="app_name">Truck Trip</string>
+    <string name="ruppe">\u20b9</string>
+    <string name="hello_blank_fragment">Hello Vahan info</string>
+    <string name="total_days">Total Days</string>
+    <string name="map_key">\nUo0cpVFRPzjjEQHJoI-FuqXC24bNJGeqIgBCAeAPLmU</string>
+    <string name="resendOtp">I didn\'t receive any code <u>Resend OTP</u></string>
+    <string name="please_add_truck_number">Please Add Truck Number</string>
+    <string name="please_add_source_place">Please add Source Place</string>
+    <string name="please_add_destination_place">Please add destination place</string>
+    <string name="truck_trip_hisab">Truck Trip</string>
+    <string name="truck_trip_hisab_"><font color="#FF000000"><b>Truck</b></font>Trip</string>
+    <string name="next">Next</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="we_have_send_otp">We have send you an <font color="#2155FF"><b>One Time Password(OTP)</b></font> on this mobile number.</string>
+    <string name="we_will_send_otp">We will send you an <font color="#2155FF"><b>One Time Password(OTP)</b></font> on this mobile number.</string>
+    <string name="get_otp">Get OTP</string>
+    <string name="please_enter_valid_mobile_number">Please enter valid mobile number</string>
+    <string name="otp_verification">OTP Verification</string>
+    <string name="enter_otp">Enter otp</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="verify_and_proceed">Verify and Proceed</string>
+    <string name="resend">RESEND</string>
+    <string name="resend_otp_in_s">Can resend otp in </string>
+    <string name="my_trip_list">My Trip List</string>
+    <string name="home">Home</string>
+    <string name="vahan_info">Vahan Info</string>
+    <string name="news">News</string>
+    <string name="profile">Profile</string>
+    <string name="driver_s_gross_income">Driver\'s gross income:</string>
+    <string name="owner_s_gross_income">Owner\'s Gross Income:</string>
+    <string name="add_trip">Add Trip</string>
+    <string name="gross_income">Gross Income</string>
+    <string name="total_expenditure">Total Expenditure</string>
+    <string name="add_trip_data">Add Trip Data</string>
+    <string name="source_place_">Starting Place <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="dest_place_">Ending Place <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="truck_number_">Truck Number <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="trip_date">Start Trip Date <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="trip_start_date">Start Trip Date</string>
+    <string name="driver_s_income">Driver\'s income:</string>
+    <string name="trip_payment">Trip Payment</string>
+    <string name="total_days_10">Total Days : 10</string>
+    <string name="start_trip">Start Trip :</string>
+    <string name="end_trip">End Trip :</string>
+    <string name="get_average">Get Average :</string>
+    <string name="click_here">Click here</string>
+    <string name="truck_average">Fuel(Diesel) Average</string>
+    <string name="add">Add</string>
+    <string name="add_hissab">Add Hissab</string>
+    <string name="save">Save</string>
+    <string name="total_profit">Total Profit</string>
+    <string name="total_income_credit">Total Income(Credit)</string>
+    <string name="total_expense_debit">Total Expenditure(Debit)</string>
+    <string name="expense">Expenditure</string>
+    <string name="add_expense">Add Expenditure</string>
+    <string name="income">Income</string>
+    <string name="add_income">Add Income</string>
+    <string name="add_fuel">Add Fuel</string>
+    <string name="enter_text">Enter Text</string>
+    <string name="amount">amount</string>
+    <string name="enter_expenditure_name">Enter Expenditure Name <font fgcolor='#FF0000'>*</font></string>
+    <string name="enter_income_name">Enter Income Name <font fgcolor='#FF0000'>*</font></string>
+    <string name="enter_income_amount">Enter Income Amount</string>
+    <string name="enter_expenditure_amount">Enter Expenditure Amount</string>
+    <string name="change_language">Change Language</string>
+    <string name="choose_your_desired_language">Choose your desired language</string>
+    <string name="how_to_use_the_app">How to use the app</string>
+    <string name="you_can_learn_how_to_use_app">You can learn how to use app</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="you_can_contact_us">You can contact us</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="you_can_give_feedback_here">You can give feedback here</string>
+    <string name="logout">Logout</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="enter_your_total_diesel_in_liter">Enter Your Total Diesel in Liter</string>
+    <string name="enter_your_total_kilometer">Enter Your Total Kilometer</string>
+    <string name="done">Done</string>
+    <string name="start_and_end_date">start and end date</string>
+    <string name="truck_number">Truck Number</string>
+    <string name="truck_number_n">Truck Number <font fgcolor='#FF0000'>*</font></string>
+    <string name="pending_trip_list">Pending trip list</string>
+    <string name="log_out">Log Out</string>
+    <string name="are_you_sure_want_to_log_out">Do you really want to log out?</string>
+    <string name="are_you_sure_want_to_delete_your_account">Are you sure you want to delete your account?</string>
+    <string name="are_you_sure_want_to_delete_your_trip_data">Are you sure you want to delete your trip data?</string>
+    <string name="delete_trip_data">Delete Trip Data</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="something_issue_in_server_please_try_again_later">Oops, something went wrong, please try again!</string>
+    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">Enter the start date of the trip here</string>
+    <string name="sarvat_no_place_nakho">Enter the starting place</string>
+    <string name="end_no_place_nakho">Enter the ending place</string>
+    <string name="driver_ni_per_trip_aavak_nakho">Enter the per-trip income of the driver</string>
+    <string name="truck_number_add_karo">Add truck number</string>
+    <string name="owner_name" translatable="false">Owner Name :</string>
+    <string name="registered_place">Registered place</string>
+    <string name="fuel_type">Fuel Type</string>
+    <string name="puc_valid_up_to">Puc Valid Up To:</string>
+    <string name="manufacturer_model">Manufacturer Model</string>
+    <string name="vehicle_class">Vehicle Class</string>
+    <string name="chassis_number">Chassis Number</string>
+    <string name="permit_validity_from">Permit Validity From :</string>
+    <string name="registration_number">Registration Number :</string>
+    <string name="seating_capacity">Seating Capacity</string>
+    <string name="owner_mobile_no">Owner Mobile No :</string>
+    <string name="vahan_details">Vahan Details</string>
+    <string name="emergency_number">Emergency Number</string>
+    <string name="transports_number">Transports Number</string>
+    <string name="favorite_number">Favorite Number</string>
+    <string name="stay_tuned_we_re_working_on_this_feature">Stay tuned, we’re working on this feature!</string>
+    <string name="a_new_version_of_the_app_is_available_please_update_to_continue">A new version of the app is available. Please update to continue.</string>
+    <string name="draft_data">Draft Data</string>
+    <string name="if_you_want_to_logout_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">If You Want to logout so your draft data will be clear so are you want to logOut</string>
+
+    <!-- Expense Bottom Sheet Strings -->
+    <string name="note_expense_hint">Note (Food, Toll, Puncture, Driver Kharch, etc.)</string>
+    <string name="place_city">Place/City</string>
+    <string name="select_expense_type">Select Expense Type</string>
+    <string name="date">Date</string>
+
+    <!-- Income Bottom Sheet Strings -->
+    <string name="note_income_hint">Note (Party name etc.)</string>
+    <string name="total_income_bhada">Total Income (भाड़ा)</string>
+    <string name="advance_taken">Advance Taken</string>
+    <string name="balance">Balance</string>
+
+    <!-- Fuel Bottom Sheet Strings -->
+    <string name="diesel_liters">Diesel Liters</string>
+    <string name="amount_required">Amount</string>
+    <string name="km_reading_odometer">KM Reading (Odometer)</string>
+    <string name="place_pump">Place / Pump</string>
+
+    <!-- Trip End Dialog -->
+    <string name="trip_end_date">Trip End Date</string>
+    <string name="driver_income_for_trip">Driver Income for Trip</string>
+    <string name="complete_trip">Complete Trip</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+
+
+    <string name="trip_help_text">
+        Here you can see all your trips.
+Use the buttons to share, download, edit or delete a trip.
+Tap “+ Add Trip” to start a new trip.
+Tap the notification icon to open saved drafts.
+    </string>
+    <string name="trip_list_title">Trip List And Actions</string>
+    <string name="start_new_trip">Start a new trip</string>
+    <string name="add_trip_dec">
+    Enter the start date, starting place, ending place and truck number.
+    You can also use the mic to speak and fill details.
+    Tap Add to start trip calculations.</string>
+    <string name="manage_trip_title">Manage Trip Hisab</string>
+
+
+
+    <string name="onboard_skip">Skip</string>
+    <string name="onboard_back">Back</string>
+    <string name="onboard_title_1">All trips in one place</string>
+    <string name="onboard_desc_1">See all your trips with status, truck number and route. Open any trip to view full hisab of income, expenses and profit.</string>
+    <string name="onboard_title_2">Add a new trip</string>
+    <string name="onboard_desc_2">Tap Add Trip, enter From–To, truck number and start date. All income and expenses will be linked to this trip.</string>
+    <string name="onboard_title_3">Add income (bhada / advance)</string>
+    <string name="onboard_desc_3">Use Add Income to add bhada, extra income or advance. This increases your trip income and is used in final profit.</string>
+    <string name="onboard_title_4">Add expenses and fuel correctly</string>
+    <string name="onboard_desc_4">Use Add Expense for all trip kharcha: diesel, toll, food, driver, etc. While adding Fuel, fill amount for kharcha and litres + odometer for average.</string>
+    <string name="onboard_title_5">Check trip profit and share PDF</string>
+    <string name="onboard_desc_5">App automatically shows total income, total expense, profit/loss and fuel average (if data available). Generate and share PDF on WhatsApp.</string>
+    <string name="onboard_title_6">Use in your own language</string>
+    <string name="onboard_desc_6">Select your language from Profile. You can also open the How to Use screen anytime if you forget anything.</string>
+
+</resources>

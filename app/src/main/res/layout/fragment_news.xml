@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".fragment.NewsFragment">
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:id="@+id/emergencyNumber"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/emergency_number"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:id="@+id/transportNumber"
+        android:text="@string/transports_number"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:id="@+id/favoriteNumber"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/favorite_number"/>
+
+
+    <com.google.android.ads.nativetemplates.TemplateView
+        android:id="@+id/my_template"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:gnt_template_type="@layout/gnt_medium_template_view" />
+
+<!--<TextView-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:gravity="center"-->
+<!--    android:text="Coming Soon..."-->
+<!--    android:fontFamily="@font/roboto_medium"-->
+<!--    android:textSize="@dimen/_20sdp"-->
+<!--    android:textColor="@color/green"/>-->
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_below="@+id/totalAavakMainLayout"-->
+<!--        android:layout_marginTop="@dimen/_10sdp"-->
+<!--        android:visibility="gone"-->
+<!--        android:layout_height="wrap_content">-->
+<!--        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--            android:id="@+id/swipeToRefreshBasicDetails"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginBottom="@dimen/_5sdp"-->
+<!--            >-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <ProgressBar-->
+<!--                    android:id="@+id/progressbar"-->
+<!--                    android:layout_width="@dimen/_50sdp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:progressBackgroundTint="@color/white"-->
+<!--                    android:visibility="gone" />-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    tools:listitem="@layout/item_news_layout"-->
+<!--                    android:visibility="gone"-->
+<!--                    android:paddingBottom="@dimen/_50sdp"-->
+<!--                    android:clipToPadding="false"-->
+<!--                    android:id="@+id/recycleList"-->
+<!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>-->
+
+
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:id="@+id/noProductFound"-->
+<!--                    android:visibility="gone"-->
+<!--                    android:src="@drawable/profile_icon"/>-->
+<!--            </LinearLayout>-->
+
+
+<!--        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+</LinearLayout>
