@@ -15,7 +15,6 @@ class TripListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityTripListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Constants.setStatusBar(this, isLight = true, colorRes = com.dadabarbie.TruckTrip.R.color.white)
         initViews()
     }
 

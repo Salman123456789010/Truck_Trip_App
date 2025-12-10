@@ -113,59 +113,49 @@
     <string name="if_you_want_to_logout_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">আপুনি লগ আউট কৰিব বিচাৰিলে, আপোনাৰ খচৰা তথ্য মচি পেলাব। আপুনি লগ আউট কৰিব বিচাৰেনে?</string>
     <string name="enter_income_name">আয়ৰ নাম প্ৰবিষ্ট কৰক <font fgcolor='#FF0000'>*</font></string>
     <string name="enter_income_amount">আয়ৰ পৰিমাণ প্ৰবিষ্ট কৰক</string>
-
-    <!-- Expense Bottom Sheet Strings -->
     <string name="note_expense_hint">টোকা (খাদ্য, টোল, পাংচাৰ, ড্ৰাইভাৰ খৰচ, আদি)</string>
     <string name="place_city">স্থান/নগৰ</string>
     <string name="select_expense_type">খৰচৰ প্ৰকাৰ নিৰ্বাচন কৰক</string>
     <string name="date">তাৰিখ</string>
-
-    <!-- Income Bottom Sheet Strings -->
     <string name="note_income_hint">টোকা (পাৰ্টিৰ নাম আদি)</string>
     <string name="total_income_bhada">মুঠ আয় (ভাড়া)</string>
     <string name="advance_taken">অগ্ৰিম লোৱা</string>
     <string name="balance">ব্যালেন্স</string>
-
-    <!-- Fuel Bottom Sheet Strings -->
     <string name="diesel_liters">ডিজেল লিটাৰ</string>
     <string name="amount_required">পৰিমাণ</string>
     <string name="km_reading_odometer">কিমি ৰিডিং (ওডোমিটাৰ)</string>
     <string name="place_pump">স্থান / পাম্প</string>
-
-    <!-- Trip End Dialog -->
     <string name="trip_end_date">ট্ৰিপ সমাপ্তি তাৰিখ</string>
     <string name="driver_income_for_trip">ট্ৰিপৰ বাবে ড্ৰাইভাৰ আয়</string>
     <string name="complete_trip">ট্ৰিপ সম্পূৰ্ণ কৰক</string>
     <string name="cancel">বাতিল কৰক</string>
     <string name="submit">দাখিল কৰক</string>
+<!--    <string name="trip_help_text">-->
+<!--    ইয়াত আপুনি নিজৰ সকলো ভ্ৰমণ চাব পাৰিব।-->
+<!--    ভ্ৰমণ শ্বেয়াৰ, ডাউনলোড, সম্পাদনা বা মচিবলৈ বুটামবোৰ ব্যৱহাৰ কৰক।-->
+<!--    নতুন ভ্ৰমণ আৰম্ভ কৰিবলৈ “+ Add Trip” টেপ কৰক।-->
+<!--    সংৰক্ষিত ড্ৰাফ্টবোৰ খুলিবলৈ নোটিফিকেশ্বন আইকন টেপ কৰক।-->
+<!--</string>-->
+<!--    <string name="trip_list_title">ভ্ৰমণ তালিকা আৰু কাৰ্যসমূহ</string>-->
+<!--    <string name="start_new_trip">নতুন ভ্ৰমণ আৰম্ভ কৰক</string>-->
+<!--    <string name="add_trip_dec">-->
+<!--    আৰম্ভণিৰ তাৰিখ, আৰম্ভণিৰ ঠাই, অন্তিম ঠাই আৰু ট্ৰাক নম্বৰ লিখক।-->
+<!--    আপুনি মাইক ব্যৱহাৰ কৰি কওক আৰু বিৱৰণ পূৰণ কৰিব পাৰে।-->
+<!--    ভ্ৰমণ গণনা আৰম্ভ কৰিবলৈ Add টেপ কৰক।-->
+<!--</string>-->
+<!--    <string name="manage_trip_title">ট্ৰিপ হিচাপ ব্যৱস্থাপনা</string>-->
+<!--    <string name="trip_transaction_dec">ইয়াৰ পৰা সকলো যাত্ৰাৰ ৰেকৰ্ড যোগ কৰক। খৰচ যোগ কৰিবলৈ Add Expenditure, উপাৰ্জন যোগ কৰিবলৈ Add Income আৰু ডিজেলৰ বিৱৰণ দিবলৈ Add Fuel ব্যৱহাৰ কৰক। সকলো লেনদেন তলত তালিকাত দেখা যায়। ওপৰত নীলা ৰঙত মুঠ লাভ দেখুওৱা হয়।</string>-->
+<!--    <string name="add_expanse_tittle">ব্যয় যোগ কৰক</string>-->
+<!--    <string name="add_fuel_tittle">ইন্ধনৰ বিৱৰণ যোগ কৰক</string>-->
+<!--    <string name="complete_trip_tittle">ভ্ৰমণ সম্পূৰ্ণ কৰক</string>-->
+<!--    <string name="add_expense_dec">ব্যয়ৰ পৰিমাণ, টোকা আৰু স্থান লিখক। ব্যয়ৰ ধৰণ আৰু তাৰিখ বাছনি কৰক। মাইক ব্যৱহাৰ কৰি কওক আৰু বিৱৰণ যোগ কৰিব পাৰিব। ছেভ টেপ কৰিলে ব্যয় ট্ৰিপ হিচাপ তালিকাত দেখা যাব।</string>-->
+<!--    <string name="add_income_tittle">আয় যোগ কৰক (ভাড়া / অগ্ৰিম)</string>-->
 
-    <string name="trip_help_text">
-    ইয়াত আপুনি নিজৰ সকলো ভ্ৰমণ চাব পাৰিব।
-    ভ্ৰমণ শ্বেয়াৰ, ডাউনলোড, সম্পাদনা বা মচিবলৈ বুটামবোৰ ব্যৱহাৰ কৰক।
-    নতুন ভ্ৰমণ আৰম্ভ কৰিবলৈ “+ Add Trip” টেপ কৰক।
-    সংৰক্ষিত ড্ৰাফ্টবোৰ খুলিবলৈ নোটিফিকেশ্বন আইকন টেপ কৰক।
-</string>
-    <string name="trip_list_title">ভ্ৰমণ তালিকা আৰু কাৰ্যসমূহ</string>
-    <string name="start_new_trip">নতুন ভ্ৰমণ আৰম্ভ কৰক</string>
-    <string name="add_trip_dec">
-    আৰম্ভণিৰ তাৰিখ, আৰম্ভণিৰ ঠাই, অন্তিম ঠাই আৰু ট্ৰাক নম্বৰ লিখক।
-    আপুনি মাইক ব্যৱহাৰ কৰি কওক আৰু বিৱৰণ পূৰণ কৰিব পাৰে।
-    ভ্ৰমণ গণনা আৰম্ভ কৰিবলৈ Add টেপ কৰক।
-</string>
+<!--    <string name="add_income_dec">আয়ৰ পৰিমাণ লিখক আৰু দলৰ নাম বা কাৰণ যেনে এখন টোকা যোগ কৰক। মাইক ব্যৱহাৰ কৰি কওক আৰু বিৱৰণ যোগ কৰিব পাৰিব। ছেভ টেপ কৰিলে আয় ট্ৰিপ হিচাপ আৰু মুঠ লাভত যোগ হব।</string>-->
+
+<!--    <string name="add_fuel_dec">ফুৱেল ব্যয় যোগ কৰিবলৈ ডিজেল লিটাৰ আৰু মুঠ ৰাশি লিখক। মাইলेज গণনা কৰিবলৈ KM (অ’ডমিটাৰ) ৰিডিং দিয়ক। স্থান বা পাম্পৰ নাম যোগ কৰি তাৰিখ বাছনি কৰক। ছেভ টেপ কৰিলে ফুৱেল ট্ৰিপ হিচাপ আৰু গড়ত যোগ হব।</string>-->
+
+<!--    <string name="complete_trip_dec">ট্ৰিপৰ শেষ তাৰিখ বাছনি কৰক আৰু চালকৰ আয় দেখুৱাবলৈ প্ৰয়োজ্য পৰিমাণ লিখক। এই পৰিমাণ গণনাত ব্যৱহাৰ কৰা নহয়, কেৱল দেখুৱাবলৈ। সাবমিট টেপ করলে ট্ৰিপ সম্পূৰ্ণ হ&apos;ব আৰু ভাগ-বতৰা বাবে PDF ডাউনলোড হ&apos;ব।</string>-->
 
 
-    <string name="onboard_skip">Skip</string>
-    <string name="onboard_back">Back</string>
-    <string name="onboard_title_1">All trips in one place</string>
-    <string name="onboard_desc_1">See all your trips with status, truck number and route. Open any trip to view full hisab of income, expenses and profit.</string>
-    <string name="onboard_title_2">Add a new trip</string>
-    <string name="onboard_desc_2">Tap Add Trip, enter From–To, truck number and start date. All income and expenses will be linked to this trip.</string>
-    <string name="onboard_title_3">Add income (bhada / advance)</string>
-    <string name="onboard_desc_3">Use Add Income to add bhada, extra income or advance. This increases your trip income and is used in final profit.</string>
-    <string name="onboard_title_4">Add expenses and fuel correctly</string>
-    <string name="onboard_desc_4">Use Add Expense for all trip kharcha: diesel, toll, food, driver, etc. While adding Fuel, fill amount for kharcha and litres + odometer for average.</string>
-    <string name="onboard_title_5">Check trip profit and share PDF</string>
-    <string name="onboard_desc_5">App automatically shows total income, total expense, profit/loss and fuel average (if data available). Generate and share PDF on WhatsApp.</string>
-    <string name="onboard_title_6">Use in your own language</string>
-    <string name="onboard_desc_6">Select your language from Profile. You can also open the How to Use screen anytime if you forget anything.</string>
 </resources>

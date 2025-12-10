@@ -139,34 +139,29 @@
     <string name="cancel">रद्द करें</string>
     <string name="submit">सबमिट करें</string>
 
-    <string name="trip_help_text">
-    यहाँ आप अपनी सभी यात्राएँ देख सकते हैं।
-    किसी यात्रा को साझा करने, डाउनलोड करने, संपादित करने या हटाने के लिए बटनों का उपयोग करें।
-    नई यात्रा शुरू करने के लिए “+ Add Trip” पर टैप करें।
-    सहेजे गए ड्राफ्ट खोलने के लिए नोटिफिकेशन आइकन पर टैप करें।
-</string>
+    <!-- wrap multiline/help text in CDATA to avoid parsing issues -->
+    <string name="trip_help_text"><![CDATA[
+यहाँ आप अपनी सभी यात्राएँ देख सकते हैं।
+किसी यात्रा को साझा करने, डाउनलोड करने, संपादित करने या हटाने के लिए बटनों का उपयोग करें।
+नई यात्रा शुरू करने के लिए “+ Add Trip” पर टैप करें।
+सहेजे गए ड्राफ्ट खोलने के लिए नोटिफिकेशन आइकन पर टैप करें।]]></string>
+
     <string name="trip_list_title">ट्रिप सूची और क्रियाएँ</string>
     <string name="start_new_trip">नई यात्रा शुरू करें</string>
-    <string name="add_trip_dec">
-    प्रारंभ तिथि, शुरू होने का स्थान, समाप्त होने का स्थान और ट्रक नंबर दर्ज करें।
-    आप माइक्रोफोन का उपयोग करके बोलकर भी विवरण भर सकते हैं।
-    ट्रिप की गणना शुरू करने के लिए Add पर टैप करें।
-</string>
+
+    <string name="add_trip_dec"><![CDATA[
+प्रारंभ तिथि, शुरू होने का स्थान, समाप्त होने का स्थान और ट्रक नंबर दर्ज करें।
+आप माइक्रोफोन का उपयोग करके बोलकर भी विवरण भर सकते हैं।
+ट्रिप की गणना शुरू करने के लिए Add पर टैप करें।]]></string>
+
     <string name="manage_trip_title">ट्रिप हिसाब प्रबंधन</string>
-
-
-    <string name="onboard_skip">Skip</string>
-    <string name="onboard_back">Back</string>
-    <string name="onboard_title_1">All trips in one place</string>
-    <string name="onboard_desc_1">See all your trips with status, truck number and route. Open any trip to view full hisab of income, expenses and profit.</string>
-    <string name="onboard_title_2">Add a new trip</string>
-    <string name="onboard_desc_2">Tap Add Trip, enter From–To, truck number and start date. All income and expenses will be linked to this trip.</string>
-    <string name="onboard_title_3">Add income (bhada / advance)</string>
-    <string name="onboard_desc_3">Use Add Income to add bhada, extra income or advance. This increases your trip income and is used in final profit.</string>
-    <string name="onboard_title_4">Add expenses and fuel correctly</string>
-    <string name="onboard_desc_4">Use Add Expense for all trip kharcha: diesel, toll, food, driver, etc. While adding Fuel, fill amount for kharcha and litres + odometer for average.</string>
-    <string name="onboard_title_5">Check trip profit and share PDF</string>
-    <string name="onboard_desc_5">App automatically shows total income, total expense, profit/loss and fuel average (if data available). Generate and share PDF on WhatsApp.</string>
-    <string name="onboard_title_6">Use in your own language</string>
-    <string name="onboard_desc_6">Select your language from Profile. You can also open the How to Use screen anytime if you forget anything.</string>
+    <string name="trip_transaction_dec">यहाँ से सभी ट्रिप रिकॉर्ड जोड़ें। खर्च जोड़ने के लिए Add Expenditure, कमाई जोड़ने के लिए Add Income और डीज़ल विवरण भरने के लिए Add Fuel का उपयोग करें। सभी लेनदेन नीचे सूची में दिखते हैं। ऊपर नीले रंग में कुल लाभ दिखाया जाता है।</string>
+    <string name="add_expanse_tittle">खर्च जोड़ें</string>
+    <string name="add_expense_dec">खर्च की राशि, नोट और स्थान दर्ज करें। खर्च का प्रकार और तारीख चुनें। आप माइक्रोफ़ोन का उपयोग करके बोलकर भी विवरण जोड़ सकते हैं। सेव पर टैप करें और खर्च ट्रिप हिसाब सूची में दिखाई देगा।</string>
+    <string name="add_income_tittle">आय जोड़ें (भाड़ा / एडवांस)</string>
+    <string name="add_income_dec">आय की राशि दर्ज करें और नोट जोड़ें, जैसे पार्टी का नाम या कारण। आप माइक्रोफ़ोन का उपयोग करके बोलकर भी विवरण जोड़ सकते हैं। सेव पर टैप करें और आय ट्रिप हिसाब और कुल लाभ में जुड़ जाएगी।</string>
+    <string name="add_fuel_tittle">फ्यूल विवरण जोड़ें</string>
+    <string name="add_fuel_dec">फ्यूल खर्च जोड़ने के लिए डीज़ल के लीटर और राशि दर्ज करें। माइलेज निकालने के लिए किलोमीटर (ओडोमीटर) रीडिंग भरें। स्थान या पंप का नाम जोड़ें और तारीख चुनें। सेव पर टैप करें, फ्यूल ट्रिप हिसाब और औसत में जुड़ जाएगा।</string>
+    <string name="complete_trip_tittle">ट्रिप पूरा करें</string>
+    <string name="complete_trip_dec">ट्रिप की समाप्ति तिथि चुनें और ड्राइवर की आय दिखाने के लिए राशि दर्ज करें। यह राशि केवल ड्राइवर की आय दिखाने के लिए है, इसे गणना में उपयोग नहीं किया जाता। सबमिट पर टैप करें, ट्रिप पूरी होगी और शेयर करने के लिए PDF डाउनलोड हो जाएगा।</string>
 </resources>

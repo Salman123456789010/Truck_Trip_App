@@ -37,7 +37,6 @@ class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.O
         super.onCreate(savedInstanceState)
         binding = ActivityLanguageSelctionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Constants.setStatusBar(this, isLight = true, colorRes = com.dadabarbie.TruckTrip.R.color.white)
         initViews()
 
         languageList.add(Language(locale_code = "hi", label = "हिन्दी", english_label = "Hindi"))

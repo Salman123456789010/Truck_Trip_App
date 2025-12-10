@@ -55,7 +55,6 @@ class OTPVerificationScreen : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        Constants.setStatusBar(this, isLight = true, colorRes = R.color.white)
         mAuth = FirebaseAuth.getInstance()
         setOnClickListner()
         if (savedInstanceState == null) {

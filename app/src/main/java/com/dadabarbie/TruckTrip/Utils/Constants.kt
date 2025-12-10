@@ -1,6 +1,5 @@
 package com.dadabarbie.TruckTrip.Utils
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -12,8 +11,6 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.ContextCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dadabarbie.TruckTrip.R
@@ -168,12 +165,5 @@ object Constants {
     }
     fun View.gone() {
         this.visibility = View.GONE
-    }
-
-    fun setStatusBar(activity: Activity, isLight: Boolean = true, colorRes: Int = R.color.white) {
-        val window = activity.window
-        window.statusBarColor = ContextCompat.getColor(activity, colorRes)
-        val controller = WindowInsetsControllerCompat(window, window.decorView)
-        controller.isAppearanceLightStatusBars = isLight
     }
 }

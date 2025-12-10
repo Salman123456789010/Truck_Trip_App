@@ -55,12 +55,10 @@ class DebitAdapter(
         holder.binding.mainCardLayout.setStrokeColor(ColorStateList.valueOf(context.getColor(R.color.tamil_txt)))
         
         // Show place and date if available
-        val place = item.place ?: ""
-        val date = item.date ?: ""
-        if (place.isNotEmpty() || date.isNotEmpty()) {
+        if (item.place.isNotEmpty() || item.date.isNotEmpty()) {
             holder.binding.placeDateLayout.visibility = android.view.View.VISIBLE
-            holder.binding.tvPlace.text = place
-            holder.binding.tvDate.text = date
+            holder.binding.tvPlace.text = item.place
+            holder.binding.tvDate.text = item.date
         } else {
             holder.binding.placeDateLayout.visibility = android.view.View.GONE
         }

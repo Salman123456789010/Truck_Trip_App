@@ -2,6 +2,7 @@ package com.dadabarbie.TruckTrip.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.adapter.OnboardingAdapter
@@ -17,7 +18,6 @@ class HowToUseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHowToUseBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Constants.setStatusBar(this, isLight = true, colorRes = R.color.white)
         initAdapter()
         setOnClickListeners()
     }
@@ -39,44 +39,29 @@ class HowToUseActivity : AppCompatActivity() {
             ),
             OnboardingItem(
                 imageRes = R.drawable.trip_transcation,
-                title = "Manage Trip Hisab",
-                description = "Add all trip records from here.\n" +
-                        "Use Add Expenditure to add expenses,\n" +
-                        "Add Income to add earnings,\n" +
-                        "and Add Fuel to enter diesel details.\n" +
-                        "All transactions appear in the list below.\n" +
-                        "Total profit is shown at the top in blue."
+                title = getString(R.string.manage_trip_title),
+                description = getString(R.string.trip_transaction_dec)
             ),
             OnboardingItem(
                 imageRes = R.drawable.add_expenditure,
-                title = "Add expenses",
-                description = "Enter the expense amount, note and place.\n" +
-                        "Select the expense type and date.\n" +
-                        "You can also use the mic to speak and add details.\n" +
-                        "Tap Save and the expense will appear in the trip hisab list."
+                title = getString(R.string.add_expanse_tittle),
+                description = getString(R.string.add_expense_dec)
             ),
             OnboardingItem(
                 imageRes = R.drawable.add_income,
-                title = "Add income (bhada / advance)",
-                description = "Enter the income amount and add a note like party name or reason.\n" +
-                        "You can also use the mic to speak and add details.\n" +
-                        "Tap Save and the income will be added to the trip hisab and total profit."
+                title = getString(R.string.add_income_tittle),
+                description = getString(R.string.add_income_dec)
             ),
 
             OnboardingItem(
                 imageRes = R.drawable.add_fuel,
-                title = "Add fuel Details",
-                description = "Enter diesel liters and amount to add fuel expense.\n" +
-                        "Enter the KM reading (odometer) to calculate mileage.\n" +
-                        "Add the place or pump name and select the date.\n" +
-                        "Tap Save to add fuel to trip hisab and average."
+                title = getString(R.string.add_fuel_tittle),
+                description = getString(R.string.add_fuel_dec)
             ),
             OnboardingItem(
                 imageRes = R.drawable.complelte_trip,
-                title = "Complete the Trip",
-                description = "Select the trip end date and enter the driver income for display.\n" +
-                        "This amount is only for showing driver income, it is not used in calculations.\n" +
-                        "Tap Submit to complete the trip and download the PDF for sharing."
+                title = getString(R.string.complete_trip_tittle),
+                description = getString(R.string.complete_trip_dec)
             ),
 
         )
@@ -84,6 +69,13 @@ class HowToUseActivity : AppCompatActivity() {
         TabLayoutMediator(binding.indicator, binding.viewPager) { tab, _ ->
             tab.setIcon(R.drawable.tab_dot_selector)
         }.attach()
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                updateBottomButtons(position)
+            }
+        })
+
 //        TabLayoutMediator(binding.indicator, binding.viewPager) { _, _ -> }.attach()
     }
 
@@ -107,13 +99,15 @@ class HowToUseActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+
     }
 
     private fun updateBottomButtons(position: Int) {
         if (position == 0) {
-            binding.btnSkip.text = getString(R.string.onboard_skip)
+            binding.btnSkip.text = "Skip"
         } else {
-            binding.btnSkip.text = getString(R.string.onboard_back)
+            binding.btnSkip.text = "Back"
         }
     }
 }

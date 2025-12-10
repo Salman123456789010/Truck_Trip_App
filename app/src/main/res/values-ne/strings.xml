@@ -139,19 +139,43 @@
     <string name="cancel">रद्द गर्नुहोस्</string>
     <string name="submit">पेश गर्नुहोस्</string>
 
-    <string name="trip_help_text">
-    यहाँ तपाईंले आफ्ना सबै यात्रा हेर्न सक्नुहुन्छ।
-    यात्रा सेयर, डाउनलोड, सम्पादन वा मेटाउन बटनहरू प्रयोग गर्नुहोस्।
-    नयाँ यात्रा सुरु गर्न “+ Add Trip” ट्याप गर्नुहोस्।
-    सेभ गरिएका ड्राफ्ट खोल्न नोटिफिकेशन आइकन ट्याप गर्नुहोस्।</string>
-    <string name="trip_list_title">यात्रा सूची र कार्यहरू</string>
-    <string name="start_new_trip">नयाँ यात्रा सुरु गर्नुहोस्</string>
-    <string name="add_trip_dec">
-    सुरु मिति, सुरु हुने स्थान, अन्त्य हुने स्थान र ट्रक नम्बर प्रविष्ट गर्नुहोस्।
-    तपाईं माइक्रोफोन प्रयोग गरेर बोलेर पनि विवरण भरिदिन सक्नुहुन्छ।
-    यात्रा गणना सुरु गर्न Add मा ट्याप गर्नुहोस्।
-</string>
-    <string name="manage_trip_title">ट्रिप हिसाब व्यवस्थापन</string>
+<!--    <string name="trip_help_text">-->
+<!--    यहाँ तपाईंले आफ्ना सबै यात्रा हेर्न सक्नुहुन्छ।-->
+<!--    यात्रा सेयर, डाउनलोड, सम्पादन वा मेटाउन बटनहरू प्रयोग गर्नुहोस्।-->
+<!--    नयाँ यात्रा सुरु गर्न “+ Add Trip” ट्याप गर्नुहोस्।-->
+<!--    सेभ गरिएका ड्राफ्ट खोल्न नोटिफिकेशन आइकन ट्याप गर्नुहोस्।-->
+<!--    </string>-->
+<!--    <string name="trip_list_title">यात्रा सूची र कार्यहरू</string>-->
+<!--    <string name="start_new_trip">नयाँ यात्रा सुरु गर्नुहोस्</string>-->
+<!--    <string name="add_trip_dec">-->
+<!--    सुरु मिति, सुरु हुने स्थान, अन्त्य हुने स्थान र ट्रक नम्बर प्रविष्ट गर्नुहोस्।-->
+<!--    तपाईं माइक्रोफोन प्रयोग गरेर बोलेर पनि विवरण भरिदिन सक्नुहुन्छ।-->
+<!--    यात्रा गणना सुरु गर्न Add मा ट्याप गर्नुहोस्।-->
+<!--    </string>-->
+<!--    <string name="manage_trip_title">ट्रिप हिसाब व्यवस्थापन</string>-->
+<!--    <string name="trip_transaction_dec">यहाँबाट सबै ट्रिप रेकर्डहरू थप्नुहोस्। खर्च थप्न Add Expenditure, आम्दानी थप्न Add Income र डिजेल विवरण राख्न Add Fuel प्रयोग गर्नुहोस्। सबै कारोबार तलको सूचीमा देखिन्छ। माथि निलो रंगमा कुल नाफा देखाइन्छ।</string>-->
+<!--    <string name="add_expanse_tittle">खर्च थप्नुहोस्</string>-->
+<!--    <string name="add_expense_dec">खर्च रकम, नोट र स्थान प्रविष्ट गर्नुहोस्। खर्चको प्रकार र मिति छान्नुहोस्। तपाईंले माइक प्रयोग गरेर बोलेर पनि विवरण थप्न सक्नुहुन्छ। सेव ट्याप गरेपछि खर्च ट्रिप हिसाब सूचीमा देखिन्छ।</string>-->
+<!--    <string name="add_income_tittle">आय थप्नुहोस् (भाडा / एडभान्स)</string>-->
+<!--    <string name="add_income_dec">आयको रकम प्रविष्ट गर्नुहोस् र पार्टी नाम वा कारण जस्तै एउटा नोट थप्नुहोस्। तपाईं माइक्रोफोन प्रयोग गरेर बोलेर पनि विवरण थप्न सक्नुहुन्छ। सेव ट्याप गरेपछि आय ट्रिप हिसाब र कुल नाफामा जोडिन्छ।</string>-->
+<!--    <string name="add_fuel_tittle">इन्धन विवरण थप्नुहोस्</string>-->
+<!--    <string name="add_fuel_dec">इन्धन खर्च थप्न डीजलका लिटर र रकम प्रविष्ट गर्नुहोस्। माइलेज निकाल्न किमी (ओडोमीटर) रिडिङ थप्नुहोस्। स्थान वा पम्पको नाम लेखी मिति छान्नुहोस्। सेव ट्याप गरेपछि इन्धन ट्रिप हिसाब र औसतमा जोडिन्छ।</string>-->
+<!--    <string name="complete_trip_tittle">ट्रिप पूरा गर्नुहोस्</string>-->
+<!--    <string name="complete_trip_dec">ट्रिप समाप्ति मिति छान्नुहोस् र ड्राइभरको आय देखाउन रकम प्रविष्ट गर्नुहोस्। यो रकम केवल देखाउनका लागि हो, गणनामा प्रयोग हुँदैन। सबमिट थिचेपछि ट्रिप पूरा हुन्छ र साझेदारीका लागि PDF डाउनलोड गर्न सकिन्छ।</string>-->
+    <string name="trip_list_title">Trip List And Actions</string>
+    <string name="start_new_trip">Start a new trip</string>
+    <string name="add_trip_dec">Enter the start date, starting place, ending place and truck number. You can also use the mic to speak and fill details. Tap Add to start trip calculations.</string>
+    <string name="manage_trip_title">Manage Trip Hisab</string>
+    <string name="trip_transaction_dec">Add all trip records from here. Use Add Expenditure to add expenses, Add Income to add earnings, and Add Fuel to enter diesel details. All transactions appear in the list below. Total profit is shown at the top in blue.</string>
+    <string name="add_expanse_tittle">Add Expenses</string>
+    <string name="add_expense_dec">Enter the expense amount, note and place. Select the expense type and date. You can also use the mic to speak and add details. Tap Save and the expense will appear in the trip hisab list.</string>
+    <string name="add_income_tittle">Add income (bhada / advance)</string>
+    <string name="add_income_dec">Enter the income amount and add a note like party name or reason. You can also use the mic to speak and add details. Tap Save and the income will be added to the trip hisab and total profit.</string>
+    <string name="add_fuel_tittle">Add Fuel Details</string>
+    <string name="add_fuel_dec">Enter diesel liters and amount to add fuel expense. Enter the KM reading (odometer) to calculate mileage. Add the place or pump name and select the date. Tap Save to add fuel to trip hisab and average.</string>
+    <string name="complete_trip_tittle">Complete the Trip</string>
+    <string name="complete_trip_dec" translatable="false">Select the trip end date and enter the driver income for display. This amount is only for showing driver income, it is not used in calculations. Tap Submit to complete the trip and download the PDF for sharing.</string>
 
-
+    <string name="onboard_skip">Skip</string>
+    <string name="onboard_back">Back</string>
 </resources>

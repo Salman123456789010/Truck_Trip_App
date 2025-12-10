@@ -126,32 +126,64 @@
     <string name="advance_taken">முன்பணம் எடுக்கப்பட்டது</string>
     <string name="balance">இருப்பு</string>
 
-    <!-- Fuel Bottom Sheet Strings -->
     <string name="diesel_liters">டீசல் லிட்டர்</string>
     <string name="amount_required">தொகை</string>
     <string name="km_reading_odometer">கிமீ வாசிப்பு (ஓடோமீட்டர்)</string>
     <string name="place_pump">இடம் / பம்ப்</string>
 
-    <!-- Trip End Dialog -->
     <string name="trip_end_date">பயண முடிவு தேதி</string>
     <string name="driver_income_for_trip">பயணத்திற்கான டிரைவர் வருவாய்</string>
     <string name="complete_trip">பயணத்தை முடிக்கவும்</string>
     <string name="cancel">ரத்துசெய்</string>
     <string name="submit">சமர்ப்பிக்கவும்</string>
 
-    <string name="trip_help_text">
-    இங்கே நீங்கள் உங்கள் அனைத்து பயணங்களையும் பார்க்கலாம்.
-    பயணத்தை பகிர, பதிவிறக்க, திருத்த அல்லது நீக்க பொத்தான்களை பயன்படுத்தவும்.
-    புதிய பயணத்தை தொடங்க “+ Add Trip” ஐ தட்டவும்.
-    சேமிக்கப்பட்ட வரைவைத் திறக்க அறிவிப்பு ஐகானைத் தட்டவும்.
-</string>
-    <string name="trip_list_title">பயண பட்டியல் &amp; செயல்கள்</string>
-    <string name="start_new_trip">புதிய பயணத்தை தொடங்கவும்</string>
-    <string name="add_trip_dec">
-    தொடக்க தேதி, தொடக்க இடம், முடிவு இடம் மற்றும் லாரி எண்ணை உள்ளிடவும்.
-    நீங்கள் மைக் பயன்படுத்தி பேசி விவரங்களையும் நிரப்பலாம்.
-    பயணக் கணக்கீட்டைத் தொடங்க Add ஐ தட்டவும்.
-</string>
-    <string name="manage_trip_title">ட்ரிப் ஹிசாப் மேலாண்மை</string>
+    <string name="trip_list_title">Trip List And Actions</string>
+    <string name="start_new_trip">Start a new trip</string>
+    <string name="add_trip_dec">Enter the start date, starting place, ending place and truck number. You can also use the mic to speak and fill details. Tap Add to start trip calculations.</string>
+    <string name="manage_trip_title">Manage Trip Hisab</string>
+    <string name="trip_transaction_dec">Add all trip records from here. Use Add Expenditure to add expenses, Add Income to add earnings, and Add Fuel to enter diesel details. All transactions appear in the list below. Total profit is shown at the top in blue.</string>
+    <string name="add_expanse_tittle">Add Expenses</string>
+    <string name="add_expense_dec">Enter the expense amount, note and place. Select the expense type and date. You can also use the mic to speak and add details. Tap Save and the expense will appear in the trip hisab list.</string>
+    <string name="add_income_tittle">Add income (bhada / advance)</string>
+    <string name="add_income_dec">Enter the income amount and add a note like party name or reason. You can also use the mic to speak and add details. Tap Save and the income will be added to the trip hisab and total profit.</string>
+    <string name="add_fuel_tittle">Add Fuel Details</string>
+    <string name="add_fuel_dec">Enter diesel liters and amount to add fuel expense. Enter the KM reading (odometer) to calculate mileage. Add the place or pump name and select the date. Tap Save to add fuel to trip hisab and average.</string>
+    <string name="complete_trip_tittle">Complete the Trip</string>
+    <string name="complete_trip_dec" translatable="false">Select the trip end date and enter the driver income for display. This amount is only for showing driver income, it is not used in calculations. Tap Submit to complete the trip and download the PDF for sharing.</string>
+
+    <string name="onboard_skip">Skip</string>
+    <string name="onboard_back">Back</string>
+
+
+<!--    <string name="trip_help_text"><![CDATA[-->
+<!--    இங்கே நீங்கள் உங்கள் அனைத்து பயணங்களையும் பார்க்கலாம்.-->
+<!--    பயணத்தை பகிர, பதிவிறக்க, திருத்த அல்லது நீக்க பொத்தான்களை பயன்படுத்தவும்.-->
+<!--    புதிய பயணத்தை தொடங்க “+ Add Trip” ஐ தட்டவும்.-->
+<!--    சேமிக்கப்பட்ட வரைவைத் திறக்க அறிவிப்பு ஐகானைத் தட்டவும்.-->
+<!--    ]]></string>-->
+
+<!--    <string name="trip_list_title">பயண பட்டியல் &amp; செயல்கள்</string>-->
+<!--    <string name="start_new_trip">புதிய பயணத்தை தொடங்கவும்</string>-->
+
+<!--    <string name="add_trip_dec"><![CDATA[-->
+<!--    தொடக்க தேதி, தொடக்க இடம், முடிவு இடம் மற்றும் லாரி எண்ணை உள்ளிடவும்.-->
+<!--    நீங்கள் மைக் பயன்படுத்தி பேசி விவரங்களையும் நிரப்பலாம்.-->
+<!--    பயணக் கணக்கீட்டைத் தொடங்க Add ஐ தட்டவும்.-->
+<!--    ]]></string>-->
+
+<!--    <string name="manage_trip_title">ட்ரிப் ஹிசாப் மேலாண்மை</string>-->
+<!--    <string name="trip_transaction_dec"><![CDATA[இங்கிருந்து அனைத்து பயண பதிவுகளையும் சேர்க்கவும். செலவுகளைச் சேர்க்க Add Expenditure, வருமானத்தைச் சேர்க்க Add Income மற்றும் டீசல் விவரங்களுக்கு Add Fuel பயன்படுத்தவும். அனைத்து பரிவர்த்தனைகளும் கீழே உள்ள பட்டியலில் காட்டப்படும். மேலே நீல நிறத்தில் மொத்த லாபம் காட்டப்படும்.]]></string>-->
+
+<!--    <string name="add_expanse_tittle">செலவுகளைச் சேர்க்கவும்</string>-->
+<!--    <string name="add_expense_dec"><![CDATA[செலவு தொகை, குறிப்பு மற்றும் இடத்தை உள்ளிடவும். செலவு வகை மற்றும் தேதியைத் தேர்ந்தெடுக்கவும். நீங்கள் மைக் மூலம் பேசிக் கொண்டும் விவரங்களைச் சேர்க்கலாம். சேவை தட்டவும், செலவு டிரிப் ஹிசாப் பட்டியலில் தோன்றும்.]]></string>-->
+
+<!--    <string name="add_income_tittle">வருமானத்தைச் சேர்க்கவும் (பாடா / முன்பணம்)</string>-->
+<!--    <string name="add_income_dec"><![CDATA[வருமானத் தொகையை உள்ளிடவும் மற்றும் கட்சி பெயர் அல்லது காரணம் போன்ற ஒரு குறிப்பைச் சேர்க்கவும். நீங்கள் மைக்ரோஃபோனைப் பயன்படுத்தி பேசிக் கொண்டும் விவரங்களைச் சேர்க்கலாம். சேவ் அழுத்தினால் வருமானம் டிரிப் ஹிசாப் மற்றும் மொத்த லாபத்தில் சேர்க்கப்படும்.]]></string>-->
+
+<!--    <string name="add_fuel_tittle">எரிபொருள் விவரங்களைச் சேர்க்கவும்</string>-->
+<!--    <string name="add_fuel_dec"><![CDATA[எரிபொருள் செலவு சேர்க்க டீசல் லிட்டர் மற்றும் தொகையை உள்ளிடவும். மைலேஜ் கணக்கிட கி.மீ (ஓடோமீட்டர்) ரீடிங் சேர்க்கவும். இடம் அல்லது பம்ப் பெயரைச் சேர்த்து தேதியைத் தேர்ந்தெடுக்கவும். சேவ் அழுத்தினால் எரிபொருள் டிரிப் ஹிசாப் மற்றும் சராசரியில் சேர்க்கப்படும்.]]></string>-->
+
+<!--    <string name="complete_trip_tittle">பயணத்தை முடிக்கவும்</string>-->
+<!--    <string name="complete_trip_dec"><![CDATA[பயணத்தின் முடிவு தேதியைத் தேர்ந்தெடுத்து, டிரைவரின் வருமானத்தை காட்டுவதற்கான தொகையை உள்ளிடவும். இந்த தொகை கணக்குகளில் பயன்படுத்தப்படாது — காட்டுதலுக்காக மட்டுமே. Submit அல்லது சமர்ப்பிக்கவும் பொத்தானைப் புகுத்தினால் பயணம் முடிவு ஆகி பகிர்வதற்காக PDF பதிவிறக்கம் செய்யப்படும்.]]></string>-->
 
 </resources>

@@ -67,7 +67,6 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Constants.setStatusBar(this, isLight = true, colorRes = R.color.white)
         appVersionNameCheck()
         setObserver()
     }
@@ -154,7 +153,6 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        Constants.setStatusBar(this, isLight = true, colorRes = R.color.white)
 
         setData()
     }

@@ -25,7 +25,6 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        Constants.setStatusBar(this, isLight = true, colorRes = com.dadabarbie.TruckTrip.R.color.white)
         CoroutineScope(Dispatchers.Main).launch {
             delay(2000)
             if (Prefs[Constants.isLogin]) {

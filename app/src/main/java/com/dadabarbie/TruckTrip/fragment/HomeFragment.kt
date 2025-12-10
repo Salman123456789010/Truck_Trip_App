@@ -30,7 +30,6 @@ import com.dadabarbie.TruckTrip.databinding.FragmentHomeBinding
 import com.dadabarbie.TruckTrip.diologFragment.DeleteDialogFragment
 import com.dadabarbie.TruckTrip.model.addTrip.Expense
 import com.dadabarbie.TruckTrip.model.getTrip.Record
-import com.dadabarbie.TruckTrip.room.AppDatabase
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
@@ -39,10 +38,6 @@ import com.vasyerp.freshvegetables.util.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import com.google.gson.Gson
-import com.vasyerp.cafvd.room.model.TripEntity
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -97,12 +92,9 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
                 event.let { it ->
                     when (it) {
                         is NetworkResult.Error -> {
-                            val msg = it.message?.toString() ?: ""
-                            if (!(msg.contains("internet", true))) {
-                                Constants.showSnackBar(
-                                    binding.root, msg
-                                )
-                            }
+                            Constants.showSnackBar(
+                                binding.root, it.message.toString()
+                            )
                             binding.progressbar.gone()
                             binding.recycleList.visible()
                             binding.swipeToRefreshBasicDetails.isRefreshing = false
@@ -136,7 +128,6 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
                                         it.data.data.totalOwnerIncome.toString()
                                     tripListAdapter.submitList(tripList.toList())
                                     isLoading = false
-                                    saveTripsToLocal(newRecords)
 
 
                                 } else {
@@ -282,8 +273,8 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
         materialDatePicker.addOnPositiveButtonClickListener { selection: Any ->
             val myDates = selection as Pair<Long, Long>
 
-            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-            val simpleDateFormatExport = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val simpleDateFormatExport = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val dateStart = simpleDateFormat.format(Date(myDates.first))
             val dateEnd = simpleDateFormat.format(Date(myDates.second))
             startDate = dateStart
@@ -293,7 +284,6 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
             binding.date.text = "From:$dateStart To:$dateEnd"
             tripList.clear()
             authViewModel.resetTripPagination()
-            loadLocalTrips()
             authViewModel.getAllTripData(fromDate = startDate, toDate = endDate, size = pageSize)
         }
     }
@@ -307,10 +297,10 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
         materialDatePicker = materialDateBuilder.build()
         materialDateBuilder.setTitleText("Select Date")
         val date = getCurrentDateTime()
-        val dateStart = getOneYearFromNow().toString(format = "yyyy-MM-dd", locale = Locale.US)
-        val ateStartExport = getOneYearFromNow().toString(format = "yyyy-MM-dd", locale = Locale.US)
-        val dateEnd = date.toString("yyyy-MM-dd", locale = Locale.US)
-        val dateEndExport = date.toString(format = "yyyy-MM-dd", locale = Locale.US)
+        val dateStart = getOneYearFromNow().toString(format = "yyyy-MM-dd")
+        val ateStartExport = getOneYearFromNow().toString(format = "yyyy-MM-dd")
+        val dateEnd = date.toString("yyyy-MM-dd")
+        val dateEndExport = date.toString(format = "yyyy-MM-dd")
         startDate = dateStart
         endDate = dateEnd
         binding.date.text = "From:$dateStart To:$dateEnd"
@@ -344,7 +334,6 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
         Constants.refreshApiGet(Event(-1))
         tripList.clear()
         authViewModel.resetTripPagination()
-        loadLocalTrips()
         authViewModel.getAllTripData(startDate, endDate, size = pageSize)
     }
 
@@ -397,7 +386,6 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
         }
     }
 
-
     override fun editTripDataMethod(position: Int) {
         startActivity(
             Intent(requireActivity(), MainActivity::class.java).putExtra(
@@ -415,92 +403,6 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
         Constants.creditList =
             tripList[position].income as ArrayList<com.dadabarbie.TruckTrip.model.addTrip.Income>
         Constants.debitList = tripList[position].expense as ArrayList<Expense>
-    }
-
-    private fun loadLocalTrips() {
-        GlobalScope.launch(Dispatchers.IO) {
-            val db = AppDatabase.getDatabase(requireContext())
-            val local = db.tripsDao().getTripsByRange(startDate, endDate)
-            val records = local.map {
-                val income = try { Gson().fromJson(it.income_json, Array<com.dadabarbie.TruckTrip.model.addTrip.Income>::class.java).toList() } catch (e: Exception) { emptyList() }
-                val expense = try { Gson().fromJson(it.expense_json, Array<Expense>::class.java).toList() } catch (e: Exception) { emptyList() }
-                Record(
-                    __v = 0,
-                    _id = it.id,
-                    createdDate = it.createdDate,
-                    destination = it.destination,
-                    driver_income = it.driver_income,
-                    end_date = it.end_date,
-                    expense = expense,
-                    income = income,
-                    mobile = it.mobile,
-                    owner_profit = it.owner_profit,
-                    source = it.source,
-                    start_date = it.start_date,
-                    total_days = it.total_days,
-                    total_expense = it.total_expense,
-                    total_income = it.total_income,
-                    truck_average = it.truck_average,
-                    truck_no = it.truck_no,
-                    updatedDate = it.updatedDate
-                )
-            }
-            val totalDriver = records.sumOf {
-                val d = it.driver_income.toDoubleOrNull()
-                d?.toInt() ?: 0
-            }
-            val totalOwner = records.sumOf {
-                val owner = it.owner_profit.toDoubleOrNull()
-                if (owner != null) owner.toInt() else {
-                    val ti = it.total_income.toDoubleOrNull() ?: 0.0
-                    val te = it.total_expense.toDoubleOrNull() ?: 0.0
-                    (ti - te).toInt()
-                }
-            }
-            withContext(Dispatchers.Main) {
-                if (records.isNotEmpty()) {
-                    binding.noProductFound.gone()
-                    binding.recycleList.visible()
-                    binding.progressbar.gone()
-                    tripList.clear()
-                    tripList.addAll(records)
-                    binding.drivertotalAavak.text = totalDriver.toString()
-                    binding.totalMalikAavak.text = totalOwner.toString()
-                    tripListAdapter.submitList(tripList.toList())
-                } else {
-                    binding.drivertotalAavak.text = "0"
-                    binding.totalMalikAavak.text = "0"
-                }
-            }
-        }
-    }
-
-    private fun saveTripsToLocal(records: List<Record>) {
-        GlobalScope.launch(Dispatchers.IO) {
-            val db = AppDatabase.getDatabase(requireContext())
-            val entities = records.map {
-                TripEntity(
-                    id = it._id,
-                    createdDate = it.createdDate,
-                    updatedDate = it.updatedDate,
-                    destination = it.destination,
-                    driver_income = it.driver_income,
-                    end_date = it.end_date,
-                    source = it.source,
-                    start_date = it.start_date,
-                    total_days = it.total_days,
-                    total_expense = it.total_expense,
-                    total_income = it.total_income,
-                    truck_average = it.truck_average,
-                    truck_no = it.truck_no,
-                    owner_profit = it.owner_profit,
-                    mobile = it.mobile,
-                    income_json = Gson().toJson(it.income),
-                    expense_json = Gson().toJson(it.expense)
-                )
-            }
-            db.tripsDao().insertAll(entities)
-        }
     }
 
     fun sharePdf(filePdf: String) {

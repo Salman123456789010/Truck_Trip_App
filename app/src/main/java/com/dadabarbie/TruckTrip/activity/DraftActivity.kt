@@ -46,7 +46,6 @@ class DraftActivity : AppCompatActivity(), DraftAdapter.DraftEditListner,DraftAd
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        Constants.setStatusBar(this, isLight = true, colorRes = R.color.white)
         MobileAds.initialize(this)
         setLanguage()
         setOnClickListner()

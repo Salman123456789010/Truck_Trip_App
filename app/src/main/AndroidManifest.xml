@@ -50,6 +50,9 @@
             android:name=".activity.LanguageSelction"
             android:exported="false" />
         <activity
+            android:name=".activity.HowToUseActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.TripListActivity"
             android:exported="false" />
         <activity
@@ -58,9 +61,6 @@
         <activity
             android:name=".activity.MainActivity"
             android:exported="true" />
-        <activity
-            android:name=".activity.HowToUseActivity"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
