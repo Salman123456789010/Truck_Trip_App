@@ -44,6 +44,7 @@ object Constants {
     const val appVersion=MIDDLEWARE_HISSAB+"util/app/version"
     const val supportedLanguages=MIDDLEWARE_HISSAB+"util/supported/languages"
     const val getTripPdf=MIDDLEWARE_HISSAB+"trip/add"
+    const val updatedLanguage=MIDDLEWARE_HISSAB+"user/lang"
     const val getAllTripData=MIDDLEWARE_HISSAB+"trip/data"
     const val getParticualrTripPdf=MIDDLEWARE_HISSAB+"trip/generate-pdf"
     const val getAllNews=MIDDLEWARE_HISSAB+"news/feed"

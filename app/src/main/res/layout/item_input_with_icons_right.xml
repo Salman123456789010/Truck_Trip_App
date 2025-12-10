@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:padding="@dimen/_15sdp"
+    app:cardCornerRadius="@dimen/_6sdp"
+    app:strokeColor="@color/green"
+    app:strokeWidth="@dimen/_1sdp"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="2">
+
+        <ImageView
+            android:id="@+id/speakLandest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:src="@drawable/baseline_speaker_24"
+            app:tint="@color/color_primary"
+            android:gravity="center" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/destPlaceValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.4"
+            android:hint="Jodhpur"
+            android:padding="@dimen/_7sdp"
+            android:textColorHint="@color/_78060c29"
+            android:fontFamily="@font/roboto_medium"
+            android:background="@null"
+            android:textSize="@dimen/_11sdp"
+            android:inputType="text" />
+
+        <ImageView
+            android:id="@+id/destMic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:src="@drawable/baseline_mic_24"
+            app:tint="@color/color_primary"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bg_color"
+    android:background="@color/white"
+    android:elevation="@dimen/_5sdp"
     app:cardCornerRadius="@dimen/_10sdp"
     android:orientation="vertical">
     <LinearLayout
@@ -13,9 +14,10 @@
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_gravity="center"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:layout_height="wrap_content">
+            android:layout_marginBottom="@dimen/_5sdp"
+           >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -24,16 +26,21 @@
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/add_trip_data"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_16sdp" />
 
+            <!-- 🌟 Beautiful Blue Circular Close Button -->
             <ImageView
                 android:id="@+id/closeBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:src="@drawable/baseline_close_24" />
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_blue_circle"
+                android:padding="@dimen/_8sdp"
+                android:src="@drawable/baseline_close_24"
+                app:tint="@color/white" />
         </RelativeLayout>
+
 
 
         <TextView
@@ -490,4 +497,4 @@
     </LinearLayout>
 
 
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

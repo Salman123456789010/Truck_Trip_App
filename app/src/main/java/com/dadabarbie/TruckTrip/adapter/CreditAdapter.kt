@@ -44,17 +44,18 @@ class CreditAdapter(var context: Context,var editCreditClickListner: EditCreditC
 
     override fun onBindViewHolder(holder: CreditAdapter.ViewHolder, position: Int) {
         val item = differ.currentList[position]
-        // Show amount with plus sign for credit
-        holder.binding.amount.text = "+${item.amount}"
+        val amountSafe = runCatching { item.amount }.getOrElse { "0" }
+        val descSafe = runCatching { item.desc }.getOrElse { "" }
+        holder.binding.amount.text = "+$amountSafe"
         holder.binding.amount.setTextColor(context.getColor(R.color.greencolor))
-        holder.binding.amountText.text = item.desc
+        holder.binding.amountText.text = descSafe
         holder.binding.mainCardLayout.setStrokeColor(ColorStateList.valueOf(context.getColor(R.color.gujrati_txt)))
-        
-        // Show place and date if available
-        if (item.place.isNotEmpty() || item.date.isNotEmpty()) {
+        val placeSafe = runCatching { item.place }.getOrElse { "" }.trim()
+        val dateSafe = runCatching { item.date }.getOrElse { "" }.trim()
+        if (placeSafe.isNotEmpty() || dateSafe.isNotEmpty()) {
             holder.binding.placeDateLayout.visibility = android.view.View.VISIBLE
-            holder.binding.tvPlace.text = item.place
-            holder.binding.tvDate.text = item.date
+            holder.binding.tvPlace.text = placeSafe
+            holder.binding.tvDate.text = dateSafe
         } else {
             holder.binding.placeDateLayout.visibility = android.view.View.GONE
         }
@@ -68,16 +69,10 @@ class CreditAdapter(var context: Context,var editCreditClickListner: EditCreditC
                     when (item.itemId) {
                         R.id.delete -> {
                             deleteCreditClickLitsner.clickCreditDeleteMethod(position)
-//                        sheetFlag = true
-//                        productSheetFormat = getString(R.string.xlsx)
-//                        productListViewModel.getProductFile(getString(R.string.file_type_excel))
                         }
 
                         R.id.edit -> {
                             editCreditClickListner.clickCreditEditMethod(position)
-//                        sheetFlag = true
-//                        productSheetFormat = getString(R.string.pdf)
-//                        productListViewModel.getProductFile(getString(R.string.file_type_pdf))
                         }
                     }
                     return true

@@ -117,6 +117,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        com.dadabarbie.TruckTrip.Utils.SystemUiUtils.setupStatusBar(this, R.color.green, false)
         setLanguage()
         initViews()
         setOnclickListner()

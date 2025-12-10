@@ -47,6 +47,12 @@ class AuthRepository @Inject constructor(private val apiService: ApiService) : B
         }.flowOn(Dispatchers.IO)
     }
 
+    suspend fun updateLanguage(lang: String):Flow<NetworkResult<DeleteTripResponseModel>> {
+        return flow {
+            emit(safeApiCall { apiService.updateLanguage(lang) })
+        }.flowOn(Dispatchers.IO)
+    }
+
     fun getTripPdfExport(): ApiService {
         return apiService
     }

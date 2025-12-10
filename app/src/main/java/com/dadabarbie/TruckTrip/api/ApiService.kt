@@ -30,6 +30,13 @@ interface ApiService {
 
     @GET(Constants.supportedLanguages)
     suspend fun getAllSupporetdLanguags(): Response<LanguageResponseModel>
+
+
+    @GET(Constants.updatedLanguage)
+    suspend fun updateLanguage(
+        @Body lang: String
+    ): Response<DeleteTripResponseModel>
+
     @GET(Constants.appVersion)
     suspend fun getVersionName():Response<AppVersionModel>
 

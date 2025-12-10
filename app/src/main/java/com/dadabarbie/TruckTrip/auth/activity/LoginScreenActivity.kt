@@ -41,6 +41,7 @@ class LoginScreenActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        com.dadabarbie.TruckTrip.Utils.SystemUiUtils.setupStatusBar(this, R.color.green, false)
         setupCountryPickerView()
         setOnClickListner()
     }

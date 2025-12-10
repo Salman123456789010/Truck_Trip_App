@@ -42,7 +42,7 @@ class AuthViewModel @Inject constructor(
     private val networkHelper: NetworkHelper
 ): ViewModel() {
 
-    var filePdfPath:String=""
+    var filePdfPath: String = ""
 
     private val _res = MutableLiveData<NetworkResult<LoginUserResponseModel>>()
     val res: LiveData<NetworkResult<LoginUserResponseModel>>
@@ -52,10 +52,14 @@ class AuthViewModel @Inject constructor(
     val languageSupported: LiveData<NetworkResult<LanguageResponseModel>>
         get() = _languageSupported
 
-    private val _appVersionName= MutableLiveData<NetworkResult<AppVersionModel>>()
+    private val _appVersionName = MutableLiveData<NetworkResult<AppVersionModel>>()
     val appVersionName: LiveData<NetworkResult<AppVersionModel>>
         get() = _appVersionName
 
+
+    private val _updateLangModel = MutableLiveData<NetworkResult<DeleteTripResponseModel>>()
+    val updateLangModel: LiveData<NetworkResult<DeleteTripResponseModel>>
+        get() = _updateLangModel
     private val _getAllTripData = MutableLiveData<Event<NetworkResult<TripGetResponseModel>>>()
     val getAllTripData: LiveData<Event<NetworkResult<TripGetResponseModel>>>
         get() = _getAllTripData
@@ -75,19 +79,17 @@ class AuthViewModel @Inject constructor(
         get() = _deleteAccount
 
 
-
     private val _getAllNewsData = MutableLiveData<NetworkResult<NewsDetailsModel>>()
     val getAllNewsData: LiveData<NetworkResult<NewsDetailsModel>>
         get() = _getAllNewsData
 
-    var attemptForResendOtp : Int = 2
-    var otpVerificationTimer : CountDownTimer? = null
+    var attemptForResendOtp: Int = 2
+    var otpVerificationTimer: CountDownTimer? = null
 
 
     private val _timerTick = MutableLiveData<Long>()
-    val timerTick : LiveData<Long>
+    val timerTick: LiveData<Long>
         get() = _timerTick
-
 
 
     var page: Int = 0
@@ -96,44 +98,59 @@ class AuthViewModel @Inject constructor(
     var page_news: Int = 0
     var maxPossiblePageCount_news: Int = 1
 
-    fun requestOTP(mobileNumber: String, fcmToken:String,idToken:String,lang:String) = viewModelScope.launch {
-        _res.postValue(NetworkResult.Loading())
-        if (networkHelper.isNetworkConnected()) {
-            authRepository.requestOTP(mobileNumber, fcmToken = fcmToken,idToken,lang).onStart {
-                Log.d("sendOTP", "StartStream: ")
-            }.onCompletion {
-                Log.d("sendOTP", "EndStream: ")
-            }.onEach {
-                Log.d("sendOTP", "EachStream: ")
-            }.collect {
-                _res.postValue(it)
+    fun requestOTP(mobileNumber: String, fcmToken: String, idToken: String, lang: String) =
+        viewModelScope.launch {
+            _res.postValue(NetworkResult.Loading())
+            if (networkHelper.isNetworkConnected()) {
+                authRepository.requestOTP(mobileNumber, fcmToken = fcmToken, idToken, lang)
+                    .onStart {
+                        Log.d("sendOTP", "StartStream: ")
+                    }.onCompletion {
+                    Log.d("sendOTP", "EndStream: ")
+                }.onEach {
+                    Log.d("sendOTP", "EachStream: ")
+                }.collect {
+                    _res.postValue(it)
+                }
+            } else {
+                _res.postValue(NetworkResult.Error("No internet connection"))
             }
-        } else {
-            _res.postValue(NetworkResult.Error("No internet connection"))
         }
-    }
 
-    fun getAllSupporetdLanguags()=viewModelScope.launch {
+    fun getAllSupporetdLanguags() = viewModelScope.launch {
         _languageSupported.postValue(NetworkResult.Loading())
-        if(networkHelper.isNetworkConnected()){
-            authRepository.getAllSupporetdLanguags().onStart {  }.collect{
+        if (networkHelper.isNetworkConnected()) {
+            authRepository.getAllSupporetdLanguags().onStart { }.collect {
                 _languageSupported.postValue(it)
             }
-        } else{
+        } else {
             _languageSupported.postValue(NetworkResult.Error("No internet connection"))
         }
     }
 
-    fun getVersionName()=viewModelScope.launch {
+    fun getVersionName() = viewModelScope.launch {
         _appVersionName.postValue(NetworkResult.Loading())
-        if(networkHelper.isNetworkConnected()){
-            authRepository.getVersionName().onStart {  }.collect{
+        if (networkHelper.isNetworkConnected()) {
+            authRepository.getVersionName().onStart { }.collect {
                 _appVersionName.postValue(it)
             }
-        } else{
+        } else {
             _appVersionName.postValue(NetworkResult.Error("No internet connection"))
         }
     }
+
+    fun updateLanguage(lang: String) = viewModelScope.launch {
+        _updateLangModel.postValue(NetworkResult.Loading())
+        if (networkHelper.isNetworkConnected()) {
+            authRepository.updateLanguage(lang).onStart { }.collect {
+                _updateLangModel.postValue(it)
+            }
+        }
+        else {
+            _updateLangModel.postValue(NetworkResult.Error("No internet connection"))
+        }
+    }
+
 
     fun getAllTripData(fromDate: String, toDate: String, size: Int = 20) = viewModelScope.launch {
         _getAllTripData.postValue(Event(NetworkResult.Loading()))

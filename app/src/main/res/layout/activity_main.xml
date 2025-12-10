@@ -14,7 +14,7 @@
         android:id="@+id/topBarLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_60sdp"
-        android:background="@drawable/bg_primary_gradient">
+        android:background="@color/color_primary">
 
         <ImageView
             android:id="@+id/backBtn"

@@ -67,6 +67,7 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        com.dadabarbie.TruckTrip.Utils.SystemUiUtils.setupStatusBar(this, R.color.green, false)
         appVersionNameCheck()
         setObserver()
     }
