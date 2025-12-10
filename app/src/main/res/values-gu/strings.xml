@@ -166,4 +166,7 @@
     <string name="complete_trip_tittle">ટ્રિપ પૂર્ણ કરો</string>
     <string name="complete_trip_dec">ટ્રિપની અંતિમ તારીખ પસંદ કરો અને ડ્રાઈવરનું આવક દર્શાવવા માટે રકમ દાખલ કરો. આ રકમ માત્ર ડ્રાઈવર આવક બતાવવા માટે છે, ગણતરીમાં તેનો ઉપયોગ થતો નથી. સબમિટ પર ટેપ કરો, ટ્રિપ પૂર્ણ થશે અને શેર કરવા PDF ડાઉનલોડ થશે.</string>
 
+    <string name="how_to_use">એપ્લિકેશનનો ઉપયોગ કેવી રીતે કરવો</string>
+    <string name="onboard_skip">સ્કિપ</string>
+
 </resources>

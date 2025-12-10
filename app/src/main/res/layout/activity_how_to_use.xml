@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/roboto_medium"
-            android:text="How to Use"
+            android:text="@string/how_to_use"
             android:textColor="@color/white"
             android:textSize="@dimen/_15sdp" />
     </RelativeLayout>
@@ -45,8 +45,8 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:overScrollMode="never"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp" />
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_5sdp" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/indicator"
@@ -82,7 +82,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Skip"
+            android:text="@string/onboard_skip"
             android:textAllCaps="false"
             android:textColor="@color/color_primary" />
 
@@ -96,7 +96,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Next"
+            android:text="@string/next"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:insetTop="@dimen/_6sdp"

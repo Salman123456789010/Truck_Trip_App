@@ -54,8 +54,8 @@ class DebitAdapter(
         holder.binding.amount.setTextColor(context.getColor(android.R.color.holo_red_dark))
         holder.binding.amountText.text = descSafe
         holder.binding.mainCardLayout.setStrokeColor(ColorStateList.valueOf(context.getColor(R.color.tamil_txt)))
-        val placeSafe = runCatching { item.place }.getOrElse { "" }.trim()
-        val dateSafe = runCatching { item.date }.getOrElse { "" }.trim()
+        val placeSafe = runCatching { item.place?.trim() }.getOrNull().orEmpty()
+        val dateSafe  = runCatching { item.date?.trim()  }.getOrNull().orEmpty()
         if (placeSafe.isNotEmpty() || dateSafe.isNotEmpty()) {
             holder.binding.placeDateLayout.visibility = android.view.View.VISIBLE
             holder.binding.tvPlace.text = placeSafe

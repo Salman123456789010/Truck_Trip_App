@@ -65,6 +65,8 @@
     <string name="change_language">மொழி மாற்றவும்</string>
     <string name="choose_your_desired_language">உங்கள் விருப்பமான மொழியை தேர்வு செய்யவும்</string>
     <string name="how_to_use_the_app">செயலியை எப்படி பயன்படுத்துவது</string>
+    <string name="how_to_use">செயலியை எப்படி பயன்படுத்துவது</string>
+    <string name="onboard_skip">தவிர்க்கவும்</string>
     <string name="you_can_learn_how_to_use_app">நீங்கள் செயலியை எவ்வாறு பயன்படுத்துவது என்பதை கற்றுக் கொள்ளலாம்</string>
     <string name="contact_us">எங்களை தொடர்புகொள்ளவும்</string>
     <string name="you_can_contact_us">நீங்கள் எங்களை தொடர்புகொள்ளலாம்</string>

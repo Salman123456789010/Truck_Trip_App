@@ -64,7 +64,9 @@
     <string name="enter_expenditure_amount">खर्च रक्कम प्रविष्ट करा</string>
     <string name="change_language">भाषा बदला</string>
     <string name="choose_your_desired_language">आपली इच्छित भाषा निवडा</string>
-    <string name="how_to_use_the_app">अ‍ॅप कसे वापरायचे</string>
+    <string name="how_to_use_the_app">अ‍ॅप कसे वापरावे</string>
+    <string name="how_to_use">अ‍ॅप कसे वापरावे</string>
+    <string name="onboard_skip">वगळा</string>
     <string name="you_can_learn_how_to_use_app">आपण अ‍ॅप वापरण्याचे शिकू शकता</string>
     <string name="contact_us">आमच्याशी संपर्क साधा</string>
     <string name="you_can_contact_us">आपण आमच्याशी संपर्क साधू शकता</string>

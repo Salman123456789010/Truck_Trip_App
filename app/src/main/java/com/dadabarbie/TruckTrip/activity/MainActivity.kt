@@ -198,6 +198,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             val endDate = intent.getStringExtra("endingDate")
             id = intent.getStringExtra("id").toString()
             Log.d("TAG1233", "initViews: $id")
+            if (showingFlag == 2 && id.isNotEmpty()) {
+                randomNumber = id.toIntOrNull() ?: randomNumber
+                databaseAddFlag = true
+                if (creditList.isEmpty() || debitList.isEmpty()) {
+                    intent.getStringExtra("incomeJson")?.let { json ->
+                        val parsed: List<Income> = Gson().fromJson(json, object : TypeToken<List<Income>>() {}.type)
+                        Constants.creditList.clear()
+                        Constants.creditList.addAll(parsed)
+                    }
+                    intent.getStringExtra("expenseJson")?.let { json ->
+                        val parsed: List<Expense> = Gson().fromJson(json, object : TypeToken<List<Expense>>() {}.type)
+                        Constants.debitList.clear()
+                        Constants.debitList.addAll(parsed)
+                    }
+                }
+            }
             binding.truckNumber.text =truckNumber.toString()
             binding.srcName.text = srcPlace.toString()
 //            binding.driverIncome.text = driverAvak.toString()
@@ -292,6 +308,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                         creditAdapter.submitList(creditList)
                         creditAdapter.notifyDataSetChanged()
                         creditIncomeUpdate()
+                        databaseAddFlag = false
                     }
                 }
             }
@@ -321,6 +338,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                         debitAdapter.submitList(debitList)
                         debitAdapter.notifyDataSetChanged()
                         debitIncomeUpdate()
+                        databaseAddFlag = false
                     }
                 }
 
@@ -444,6 +462,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     private fun setAllData() {
         var flag = false
         GlobalScope.launch {
+            val db = AppDatabase.getDatabase(applicationContext)
+            val draftDao = db.productsDao()
+            val currentModel = TripDataTestModel(
+                truckNumberGiven.toString(),
+                binding.srcName.text.toString(),
+                binding.dest.text.toString(),
+                startTripDate.toString(),
+                "",
+                "",
+                randomNumber.toString(),
+                "",
+                creditList as List<Income>,
+                debitList as List<Expense>
+            )
+            val existing = draftDao.getDraftById(randomNumber.toString())
+            if (existing != null) {
+                val existingModel = convertToModel(existing)
+                if (existingModel == currentModel) {
+                    return@launch
+                }
+            }
             if (!getAllData(applicationContext).contains(
                     TripDataTestModel(
                         truckNumberGiven.toString(),
@@ -507,7 +546,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                     val tripDataDao = db.productsDao()
                     tripDataEntities.forEach {
                         tripDataDao.update(
-                            it.randomNumber.toInt(),
+                            it.randomNumber,
                             it.truckNumber,
                             it.srcPlace,
                             it.destPlace,
@@ -518,6 +557,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                             it.modelList2
                         )
                     }
+                    Constants.refreshApiGet(Event(1))
                 } else {
                     testList.add(
                         TripDataTestModel(
@@ -553,6 +593,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                     val db = AppDatabase.getDatabase(applicationContext)
                     val tripDataDao = db.productsDao()
                     tripDataEntities.forEach { tripDataDao.insert(it) }
+                    Constants.refreshApiGet(Event(1))
                 }
             }
         }
@@ -662,6 +703,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         debitAdapter.submitList(debitList)
         debitAdapter.notifyDataSetChanged()
         debitIncomeUpdate()
+        databaseAddFlag = false
     }
 
     fun creditDeleteHissab(position: Int) {
@@ -669,6 +711,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         creditAdapter.submitList(creditList)
         creditAdapter.notifyDataSetChanged()
         creditIncomeUpdate()
+        databaseAddFlag = false
     }
 
     fun debitDataUpdate() {

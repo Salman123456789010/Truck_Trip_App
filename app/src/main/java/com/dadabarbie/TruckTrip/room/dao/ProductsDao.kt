@@ -24,7 +24,7 @@ interface ProductsDao {
 
     @Query("UPDATE products SET truckNumber = :truckNumber, srcPlace = :srcPlace, destPlace = :destPlace, srcDate = :srcDate, destDate = :destDate, avg = :avg,modelList1=:modelList1,modelList2=:modelList2 WHERE randomNumber = :id")
     suspend fun update(
-        id: Int,
+        id: String,
         truckNumber: String,
         srcPlace: String,
         destPlace: String,
@@ -37,7 +37,7 @@ interface ProductsDao {
     )
 
     @Query("SELECT * FROM products WHERE randomNumber = :randomNumber LIMIT 1")
-    suspend fun getDraftById(randomNumber: Int): Products?
+    suspend fun getDraftById(randomNumber: String): Products?
 
     @Query("DELETE FROM products")
     suspend fun deleteAll()
