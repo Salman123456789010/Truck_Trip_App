@@ -121,7 +121,8 @@ class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.O
                     if (languageLocale != "") {
                         LocaleHelper.setNewLocale(applicationContext, languageLocale)
                         if(intent.getStringExtra("languageFlag").equals("")){
-                            startActivity(Intent(this, LoginScreenActivity::class.java))
+                            startActivity(Intent(this, HowToUseActivity::class.java))
+                            finish()
                         }else{
                             authViewModel.updateLanguage(languageLocale.toString())
                         }

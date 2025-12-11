@@ -130,7 +130,13 @@
     <string name="complete_trip">ট্ৰিপ সম্পূৰ্ণ কৰক</string>
     <string name="cancel">বাতিল কৰক</string>
     <string name="submit">দাখিল কৰক</string>
-<!--    <string name="trip_help_text">-->
+
+    <string name="how_to_use">কিদৰে ব্যৱহাৰ কৰিব</string>
+    <string name="onboard_skip">এৰি যাওক</string>
+    <string name="onboard_back">পূৰ্বৰ</string>
+    <string name="no_trip_found">কোনো যাত্ৰা পোৱা নগল</string>
+
+    <!--    <string name="trip_help_text">-->
 <!--    ইয়াত আপুনি নিজৰ সকলো ভ্ৰমণ চাব পাৰিব।-->
 <!--    ভ্ৰমণ শ্বেয়াৰ, ডাউনলোড, সম্পাদনা বা মচিবলৈ বুটামবোৰ ব্যৱহাৰ কৰক।-->
 <!--    নতুন ভ্ৰমণ আৰম্ভ কৰিবলৈ “+ Add Trip” টেপ কৰক।-->

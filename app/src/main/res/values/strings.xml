@@ -162,6 +162,7 @@ Tap the notification icon to open saved drafts.
 
         <string name="onboard_skip">Skip</string>
         <string name="onboard_back">Back</string>
+    <string name="no_trip_found">No Trip Found</string>
     <!--    <string name="onboard_title_1">All trips in one place</string>-->
     <!--    <string name="onboard_desc_1">See all your trips with status, truck number and route. Open any trip to view full hisab of income, expenses and profit.</string>-->
     <!--    <string name="onboard_title_2">Add a new trip</string>-->

@@ -153,7 +153,7 @@
     <string name="complete_trip_tittle">Complete the Trip</string>
     <string name="complete_trip_dec" translatable="false">Select the trip end date and enter the driver income for display. This amount is only for showing driver income, it is not used in calculations. Tap Submit to complete the trip and download the PDF for sharing.</string>
 
-    <string name="onboard_skip">Skip</string>
+
     <string name="onboard_back">Back</string>
 
 
@@ -187,5 +187,6 @@
 
 <!--    <string name="complete_trip_tittle">பயணத்தை முடிக்கவும்</string>-->
 <!--    <string name="complete_trip_dec"><![CDATA[பயணத்தின் முடிவு தேதியைத் தேர்ந்தெடுத்து, டிரைவரின் வருமானத்தை காட்டுவதற்கான தொகையை உள்ளிடவும். இந்த தொகை கணக்குகளில் பயன்படுத்தப்படாது — காட்டுதலுக்காக மட்டுமே. Submit அல்லது சமர்ப்பிக்கவும் பொத்தானைப் புகுத்தினால் பயணம் முடிவு ஆகி பகிர்வதற்காக PDF பதிவிறக்கம் செய்யப்படும்.]]></string>-->
+    <string name="no_trip_found">ஏதும் பயணம் கிடைக்கவில்லை</string>
 
 </resources>

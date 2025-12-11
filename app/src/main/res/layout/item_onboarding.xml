@@ -61,6 +61,33 @@
                     android:textSize="@dimen/_11sdp"
                     android:textColor="@color/grey" />
 
+                <!-- place inside the LinearLayout (below textDescription) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_8sdp">
+
+                    <ImageView
+                        android:id="@+id/btnSpeak"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:src="@drawable/voice_assistants"
+                        android:tint="@color/color_primary"
+                        android:contentDescription="@string/dest_place_"
+                     />
+
+                    <ImageView
+                        android:id="@+id/btnStopSpeak"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:src="@drawable/stop"
+                        android:contentDescription="@string/place_city"
+                        android:tint="@color/color_primary"
+                        android:layout_marginStart="@dimen/_20sdp"/>
+                </LinearLayout>
+
             </LinearLayout>
 
         </ScrollView>

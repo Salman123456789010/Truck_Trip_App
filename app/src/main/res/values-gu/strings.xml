@@ -168,5 +168,6 @@
 
     <string name="how_to_use">એપ્લિકેશનનો ઉપયોગ કેવી રીતે કરવો</string>
     <string name="onboard_skip">સ્કિપ</string>
+    <string name="no_trip_found">કોઈ ટ્રિપ મળી નથી</string>
 
 </resources>

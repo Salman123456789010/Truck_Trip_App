@@ -177,6 +177,7 @@
     <string name="add_fuel_dec">Enter diesel liters and amount to add fuel expense. Enter the KM reading (odometer) to calculate mileage. Add the place or pump name and select the date. Tap Save to add fuel to trip hisab and average.</string>
     <string name="complete_trip_tittle">Complete the Trip</string>
     <string name="complete_trip_dec" translatable="false">Select the trip end date and enter the driver income for display. This amount is only for showing driver income, it is not used in calculations. Tap Submit to complete the trip and download the PDF for sharing.</string>
+    <string name="no_trip_found">कोनो ट्रिप नहि भेटल</string>
 
     <string name="onboard_skip">Skip</string>
     <string name="onboard_back">Back</string>
