@@ -190,6 +190,10 @@
     <string name="complete_trip_tittle">Complete the Trip</string>
     <string name="complete_trip_dec" translatable="false">Select the trip end date and enter the driver income for display. This amount is only for showing driver income, it is not used in calculations. Tap Submit to complete the trip and download the PDF for sharing.</string>
     <string name="no_trip_found">ഒരു ട്രിപ്പും കണ്ടെത്താനായില്ല</string>
+    <string name="term_condition">നിബന്ധനകളും വ്യവസ്ഥകളും</string>
+    <string name="privacy_policy">സ്വകാര്യതാ നയം</string>
+    <string name="you_can_check_term_condition">നിങ്ങൾ നിബന്ധനകളും വ്യവസ്ഥകളും പരിശോധിക്കാം.</string>
+    <string name="you_can_check_privacy">നിങ്ങൾ സ്വകാര്യതാ നയം പരിശോധിക്കാം.</string>
 
     <string name="onboard_back">Back</string>
 </resources>

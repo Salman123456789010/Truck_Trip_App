@@ -241,19 +241,12 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <FrameLayout
-                    android:layout_width="@dimen/_36sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:background="@drawable/bg_icon_circle_blue">
-
-                    <ImageView
-                        android:id="@+id/shareIcon"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_share_24"
-                        app:tint="@color/white" />
-                </FrameLayout>
+                <ImageView
+                    android:id="@+id/shareIcon"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/baseline_share_24"
+                    app:tint="@color/color_primary" />
             </LinearLayout>
 
             <!-- Download -->
@@ -263,19 +256,13 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <FrameLayout
-                    android:layout_width="@dimen/_36sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:background="@drawable/bg_icon_circle_blue">
-
-                    <ImageView
-                        android:id="@+id/dowanloadIcon"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_arrow_downward_24"
-                        app:tint="@color/white" />
-                </FrameLayout>
+                <ImageView
+                    android:id="@+id/dowanloadIcon"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    app:tint="@color/color_primary"
+                    android:src="@drawable/baseline_arrow_downward_24"
+                    />
             </LinearLayout>
 
             <!-- Edit -->
@@ -285,19 +272,13 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <FrameLayout
-                    android:layout_width="@dimen/_36sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:background="@drawable/bg_icon_circle_blue">
-
-                    <ImageView
-                        android:id="@+id/editIcon"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_edit_24"
-                        app:tint="@color/white" />
-                </FrameLayout>
+                <ImageView
+                    android:id="@+id/editIcon"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    app:tint="@color/color_primary"
+                    android:src="@drawable/baseline_edit_24"
+                   />
             </LinearLayout>
 
             <!-- Delete -->
@@ -307,19 +288,12 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <FrameLayout
-                    android:layout_width="@dimen/_36sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:background="@drawable/bg_icon_circle_blue">
-
-                    <ImageView
-                        android:id="@+id/deleteIcon"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/delete_20dp_000000_fill0_wght300_grad0_opsz20"
-                        app:tint="@color/white" />
-                </FrameLayout>
+                <ImageView
+                    android:id="@+id/deleteIcon"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/delete_20dp_000000_fill0_wght300_grad0_opsz20"
+                    app:tint="#F16060" />
             </LinearLayout>
         </LinearLayout>
             <com.google.android.ads.nativetemplates.TemplateView

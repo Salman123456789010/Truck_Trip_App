@@ -37,8 +37,7 @@
     <string name="source_place_">स्रोत स्थान <font fgcolor='#FF0000'>*</font> :</string>
     <string name="dest_place_">गंतव्य स्थान <font fgcolor='#FF0000'>*</font> :</string>
     <string name="truck_number_">ट्रक नंबर <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="trip_date">यात्रा दी शुरुआत दी तारीख <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="trip_start_date">यात्रा दी शुरुआत दी तारीख</string>
+    <string name="trip_date">यात्रा की तारीख <font fgcolor='#FF0000'>*</font> :</string>
     <string name="driver_s_income">ड्राइवर की आय:</string>
     <string name="trip_payment">यात्रा का भुगतान</string>
     <string name="total_days_10">कुल दिन: 10</string>
@@ -54,10 +53,7 @@
     <string name="total_income_credit">कुल आय (क्रेडिट)</string>
     <string name="total_expense_debit">कुल व्यय (डेबिट)</string>
     <string name="expense">व्यय</string>
-    <string name="add_expense">खर्च जोड़ो</string>
     <string name="income">आय</string>
-    <string name="add_income">आमदनी जोड़ो</string>
-    <string name="add_fuel">डीज़ल जोड़ो</string>
     <string name="enter_text">पाठ दर्ज करें</string>
     <string name="amount">राशि</string>
     <string name="enter_expenditure_name">व्यय का नाम दर्ज करें <font fgcolor='#FF0000'>*</font></string>
@@ -87,7 +83,7 @@
     <string name="no">नाहीं</string>
     <string name="yes">हाँ</string>
     <string name="something_issue_in_server_please_try_again_later">ओह, कुछ गड़बड़ हो गया, कृपया फिर से कोशिश करो!</string>
-    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">इथे ट्रिप दी शुरुआत दी तारीख दसी जाओ</string>
+    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">इथे ट्रिप दी शुरुआत अते अंत दी तारीख दसी जाओ</string>
     <string name="sarvat_no_place_nakho">शुरुआती स्थान दसी जाओ</string>
     <string name="end_no_place_nakho">अंतिम स्थान दसी जाओ</string>
     <string name="driver_ni_per_trip_aavak_nakho">ड्राइवर दी प्रति ट्रिप आमदनी दसी जाओ</string>
@@ -114,85 +110,5 @@
     <string name="enter_income_name">आय दा नां लिखो <font fgcolor='#FF0000'>*</font></string>
     <string name="enter_income_amount">आय दी राशि लिखो</string>
 
-    <!-- Expense Bottom Sheet Strings -->
-    <string name="note_expense_hint">नोट (खाना, टोल, पंक्चर, ड्राइवर खर्च, आदि)</string>
-    <string name="place_city">स्थान/शहर</string>
-    <string name="select_expense_type">खर्च प्रकार चुनो</string>
-    <string name="date">तारीख</string>
-
-    <!-- Income Bottom Sheet Strings -->
-    <string name="note_income_hint">नोट (पार्टी दा नां आदि)</string>
-    <string name="total_income_bhada">कुल आय (भाडा)</string>
-    <string name="advance_taken">अग्रिम लिया</string>
-    <string name="balance">बैलेंस</string>
-
-    <!-- Fuel Bottom Sheet Strings -->
-    <string name="diesel_liters">डीजल लीटर</string>
-    <string name="amount_required">राशि</string>
-    <string name="km_reading_odometer">किमी रीडिंग (ओडोमीटर)</string>
-    <string name="place_pump">स्थान / पंप</string>
-
-    <!-- Trip End Dialog -->
-    <string name="trip_end_date">ट्रिप समाप्ति तारीख</string>
-    <string name="driver_income_for_trip">ट्रिप लेई ड्राइवर आय</string>
-    <string name="complete_trip">ट्रिप पूर्ण करो</string>
-    <string name="cancel">रद्द करो</string>
-    <string name="submit">सबमिट करो</string>
-
-    <!-- Use CDATA for multiline/help text to avoid parsing issues -->
-<!--    <string name="trip_help_text"><![CDATA[-->
-<!--इथे तुस्सी अपनी सारी यात्राएँ देख सकदे ओ।-->
-<!--यात्रा नूं शेयर, डाउनलोड, एडिट जा डिलीट करन लिए बटनां दा इस्तेमाल करो।-->
-<!--नवीं यात्रा शुरू करन लिए “+ Add Trip” ते टैप करो।-->
-<!--सेव कित्ते ड्राफ्ट खोलण लिए नोटिफिकेशन आइकन ते टैप करो।-->
-<!--]]></string>-->
-
-<!--    <string name="trip_list_title">यात्रा सूची ते कार्रवाइयाँ</string>-->
-<!--    <string name="start_new_trip">नवीं यात्रा शुरू करो</string>-->
-
-<!--    <string name="add_trip_dec"><![CDATA[-->
-<!--शुरू तारीख, शुरू थां, आखिरी थां अते ट्रक नंबर भरो।-->
-<!--तुस्सी माइक नाल बोल के वी जानकारी भर सकदे ओ।-->
-<!--यात्रा दी गणना शुरू करन लेई Add ते टैप करो।-->
-<!--]]></string>-->
-
-<!--    <string name="manage_trip_title">ਟ੍ਰਿਪ ਹਿਸਾਬ ਪ੍ਰਬੰਧਨ</string>-->
-<!--    <string name="trip_transaction_dec">इत्तों सारे ट्रिप रिकार्ड जोड़ो। खर्च जोड़ण लई Add Expenditure, कमाई जोड़ण लई Add Income अते डीज़ल दी जानकारी पैण लई Add Fuel दा इस्तेमाल करो। सारे लेनदेन थल्ले लिस्ट विच दिखदे ने। उत्ते नील रंग विच कुल नफा दिखाया जान्दा ऐ।</string>-->
-<!--    <string name="add_expanse_tittle">खर्च जोड़ो</string>-->
-<!--    <string name="add_expense_dec">खर्च दी रकम, नोट ते थां लिखो। खर्च दी किस्म अते तारीख चुणो। तुस्सीं माइक नाल बोल के वी ब्योरा जोड़ सकदे ओ। सेव \'ते टेप करो, खर्च ट्रिप हिसाब सूची विच़ दिसू।</string>-->
-<!--    <string name="add_income_tittle">आमदन जोड़ो (भाड़ा / एडवांस)</string>-->
-<!--    <string name="add_income_dec">आमदन दी रकम लिखो अते पार्टी दा नांह जा कारण वरगा नोट जोड़ो। तुस्सीं माइक नाल बोल के वी ब्योरा जोड़ सकदे ओ। सेव \'ते टेप करो, आमदन ट्रिप हिसाब अते कुल नफे विच शामिल हो जावेगी।</string>-->
-<!--    <string name="add_fuel_tittle">फ्यूल दा ब्योरा जोड़ो</string>-->
-<!--    <string name="add_fuel_dec">फ्यूल खर्च जोड़ण लई डीजल दे लीटर अते रकम लिखो। माइलेज कढण लई KM (ओडोमीटर) रीडिंग भरो। थां जा पंप दा नांह जोड़ो अते तारीख चुणो। सेव \'ते टेप करो, फ्यूल ट्रिप हिसाब अते औसत विच़ शामिल हो जावेगा।</string>-->
-<!--    <string name="complete_trip_tittle">ਟ੍ਰਿਪ ਮੁਕੰਮਲ ਕਰੋ</string>-->
-<!--    <string name="complete_trip_dec">ਟ੍ਰਿਪ ਦੇ ਖ਼ਤਮ ਹੋਣ ਦੀ ਤਾਰੀਖ ਚੁਣੋ ਤੇ ਡਰਾਈਵਰ ਦੀ ਆਮਦਨ ਵੇਖਾਉਣ ਲਈ ਰਕਮ ਲਿਖੋ। ਏ ਰਕਮ ਸਿਰਫ਼ ਵੇਖਾਉਣ ਲਈ ए, ਹਿਸਾਬ ਚ ਨਹੀਂ लगदी। ਸਬਮਿਟ ਤੇ ਟੈਪ करो, ਟ੍ਰਿਪ मुकम्मल हो ਜावेगा अते शेयर करण लई PDF डाउनलोड हो जावेगा।</string>-->
-    <string name="trip_help_text"><![CDATA[
-यहाँ आप अपनी सभी यात्राएँ देख सकते हैं।
-किसी यात्रा को साझा करने, डाउनलोड करने, संपादित करने या हटाने के लिए बटनों का उपयोग करें।
-नई यात्रा शुरू करने के लिए “+ Add Trip” पर टैप करें।
-सहेजे गए ड्राफ्ट खोलने के लिए नोटिफिकेशन आइकन पर टैप करें।]]></string>
-
-    <string name="trip_list_title">ट्रिप सूची और क्रियाएँ</string>
-    <string name="start_new_trip">नई यात्रा शुरू करें</string>
-
-    <string name="add_trip_dec"><![CDATA[
-प्रारंभ तिथि, शुरू होने का स्थान, समाप्त होने का स्थान और ट्रक नंबर दर्ज करें।
-आप माइक्रोफोन का उपयोग करके बोलकर भी विवरण भर सकते हैं।
-ट्रिप की गणना शुरू करने के लिए Add पर टैप करें।]]></string>
-
-    <string name="manage_trip_title">ट्रिप हिसाब प्रबंधन</string>
-    <string name="trip_transaction_dec">यहाँ से सभी ट्रिप रिकॉर्ड जोड़ें। खर्च जोड़ने के लिए Add Expenditure, कमाई जोड़ने के लिए Add Income और डीज़ल विवरण भरने के लिए Add Fuel का उपयोग करें। सभी लेनदेन नीचे सूची में दिखते हैं। ऊपर नीले रंग में कुल लाभ दिखाया जाता है।</string>
-    <string name="add_expanse_tittle">खर्च जोड़ें</string>
-    <string name="add_expense_dec">खर्च की राशि, नोट और स्थान दर्ज करें। खर्च का प्रकार और तारीख चुनें। आप माइक्रोफ़ोन का उपयोग करके बोलकर भी विवरण जोड़ सकते हैं। सेव पर टैप करें और खर्च ट्रिप हिसाब सूची में दिखाई देगा।</string>
-    <string name="add_income_tittle">आय जोड़ें (भाड़ा / एडवांस)</string>
-    <string name="add_income_dec">आय की राशि दर्ज करें और नोट जोड़ें, जैसे पार्टी का नाम या कारण। आप माइक्रोफ़ोन का उपयोग करके बोलकर भी विवरण जोड़ सकते हैं। सेव पर टैप करें और आय ट्रिप हिसाब और कुल लाभ में जुड़ जाएगी।</string>
-    <string name="add_fuel_tittle">फ्यूल विवरण जोड़ें</string>
-    <string name="add_fuel_dec">फ्यूल खर्च जोड़ने के लिए डीज़ल के लीटर और राशि दर्ज करें। माइलेज निकालने के लिए किलोमीटर (ओडोमीटर) रीडिंग भरें। स्थान या पंप का नाम जोड़ें और तारीख चुनें। सेव पर टैप करें, फ्यूल ट्रिप हिसाब और औसत में जुड़ जाएगा।</string>
-    <string name="complete_trip_tittle">ट्रिप पूरा करें</string>
-    <string name="complete_trip_dec">ट्रिप की समाप्ति तिथि चुनें और ड्राइवर की आय दिखाने के लिए राशि दर्ज करें। यह राशि केवल ड्राइवर की आय दिखाने के लिए है, इसे गणना में उपयोग नहीं किया जाता। सबमिट पर टैप करें, ट्रिप पूरी होगी और शेयर करने के लिए PDF डाउनलोड हो जाएगा।</string>
-    <string name="how_to_use">किंमे चलाऊ</string>
-    <string name="onboard_skip">छड्डो</string>
-    <string name="onboard_back">पিছू जाओ</string>
-    <string name="no_trip_found">कोई सफर नइ मिल्या</string>
 
 </resources>

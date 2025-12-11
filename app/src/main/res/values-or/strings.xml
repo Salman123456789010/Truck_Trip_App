@@ -37,8 +37,7 @@
     <string name="source_place_">ସ୍ରୋତ ଜାଗା <font fgcolor='#FF0000'>*</font> :</string>
     <string name="dest_place_">ଗନ୍ତବ୍ୟ ଜାଗା <font fgcolor='#FF0000'>*</font> :</string>
     <string name="truck_number_">ଟ୍ରକ୍ ନମ୍ବର <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="trip_date">ଟ୍ରିପ୍ ଆରମ୍ଭ ତାରିଖ <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="trip_start_date">ଟ୍ରିପ୍ ଆରମ୍ଭ ତାରିଖ </string>
+    <string name="trip_date">ଟ୍ରିପ୍ ତାରିଖ <font fgcolor='#FF0000'>*</font> :</string>
     <string name="driver_s_income">ଡ୍ରାଇଭର୍ ଆୟ:</string>
     <string name="trip_payment">ଟ୍ରିପ୍ ପେମେଣ୍ଟ</string>
     <string name="total_days_10">ମୋଟ ଦିନ : 10</string>
@@ -54,10 +53,7 @@
     <string name="total_income_credit">ମୋଟ ଆୟ (କ୍ରେଡିଟ୍)</string>
     <string name="total_expense_debit">ମୋଟ ବ୍ୟୟ (ଡେବିଟ୍)</string>
     <string name="expense">ବ୍ୟୟ</string>
-    <string name="add_expense">ଖର୍ଚ୍ଚ ଯୋଗ କରନ୍ତୁ</string>
     <string name="income">ଆୟ</string>
-    <string name="add_income">ଆୟ ଯୋଗ କରନ୍ତୁ</string>
-    <string name="add_fuel">ଇନ୍ଧନ ଯୋଗ କରନ୍ତୁ</string>
     <string name="enter_text">ଟେକ୍ସଟ୍ ପ୍ରବେଶ କରନ୍ତୁ</string>
     <string name="amount">ରାଶି</string>
     <string name="enter_expenditure_name">ବ୍ୟୟର ନାମ ପ୍ରବେଶ କରନ୍ତୁ <font fgcolor='#FF0000'>*</font></string>
@@ -87,7 +83,7 @@
     <string name="no">ନାହିଁ</string>
     <string name="yes">ହଁ</string>
     <string name="something_issue_in_server_please_try_again_later">ଓହ୍, କିଛି ତ୍ରୁଟି ହୋଇଛି, ଦୟାକରି ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ!</string>
-    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">ଏଠାରେ ଟ୍ରିପ୍ ଆରମ୍ଭ ତାରିଖ ଦିଅନ୍ତୁ</string>
+    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">ଏଠାରେ ଟ୍ରିପ୍ ଆରମ୍ଭ ଓ ସମାପ୍ତ ତାରିଖ ଦିଅନ୍ତୁ</string>
     <string name="sarvat_no_place_nakho">ଆରମ୍ଭ ଅଂଶ ଦିଅନ୍ତୁ</string>
     <string name="end_no_place_nakho">ସମାପ୍ତ ଅଂଶ ଦିଅନ୍ତୁ</string>
     <string name="driver_ni_per_trip_aavak_nakho">ଡ୍ରାଇଭରଙ୍କର ପ୍ରତି ଟ୍ରିପ୍ ଆୟ ଦିଅନ୍ତୁ</string>
@@ -113,82 +109,4 @@
     <string name="if_you_want_to_logout_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">ଯଦି ଆପଣ ଲଗଆଉଟ୍ କରିବେ, ତେବେ ଆପଣଙ୍କର ଡ୍ରାଫ୍ଟ ଡାଟା ମାଇନ୍ ହେବ। ଆପଣ ଲଗଆଉଟ୍ କରିବାକୁ ଚାହାଁତି କି?</string>
     <string name="enter_income_name">ଆୟର ନାମ ଲିଖନ୍ତୁ <font fgcolor='#FF0000'>*</font></string>
     <string name="enter_income_amount">ଆୟର ରାଶି ଲିଖନ୍ତୁ</string>
-
-    <!-- Expense Bottom Sheet Strings -->
-    <string name="note_expense_hint">ନୋଟ୍ (ଖାଦ୍ୟ, ଟୋଲ୍, ପଙ୍କଚର୍, ଡ୍ରାଇଭର୍ ଖର୍ଚ୍ଚ, ଇତ୍ୟାଦି)</string>
-    <string name="place_city">ସ୍ଥାନ/ସହର</string>
-    <string name="select_expense_type">ଖର୍ଚ୍ଚ ପ୍ରକାର ବାଛନ୍ତୁ</string>
-    <string name="date">ତାରିଖ</string>
-
-    <!-- Income Bottom Sheet Strings -->
-    <string name="note_income_hint">ନୋଟ୍ (ପାର୍ଟିର ନାମ ଇତ୍ୟାଦି)</string>
-    <string name="total_income_bhada">ମୋଟ ଆୟ (ଭାଡ଼ା)</string>
-    <string name="advance_taken">ଅଗ୍ରିମ ନିଆଯାଇଥିବା</string>
-    <string name="balance">ବ୍ୟାଲାନ୍ସ</string>
-
-    <!-- Fuel Bottom Sheet Strings -->
-    <string name="diesel_liters">ଡିଜେଲ୍ ଲିଟର୍</string>
-    <string name="amount_required">ରାଶି</string>
-    <string name="km_reading_odometer">କିମି ରିଡିଂ (ଓଡୋମିଟର୍)</string>
-    <string name="place_pump">ସ୍ଥାନ / ପମ୍ପ୍</string>
-
-    <!-- Trip End Dialog -->
-    <string name="trip_end_date">ଟ୍ରିପ୍ ଶେଷ ତାରିଖ</string>
-    <string name="driver_income_for_trip">ଟ୍ରିପ୍ ପାଇଁ ଡ୍ରାଇଭର୍ ଆୟ</string>
-    <string name="complete_trip">ଟ୍ରିପ୍ ସମ୍ପୂର୍ଣ୍ଣ କରନ୍ତୁ</string>
-    <string name="cancel">ବାତିଲ୍ କରନ୍ତୁ</string>
-    <string name="submit">ଦାଖଲ୍ କରନ୍ତୁ</string>
-
-<!--    <string name="trip_help_text">-->
-<!--    ଏଠାରେ ଆପଣ ଆପଣଙ୍କ ସମସ୍ତ ଯାତ୍ରା ଦେଖିପାରିବେ।-->
-<!--    ଯାତ୍ରାକୁ ସେୟାର, ଡାଉନଲୋଡ୍, ସମ୍ପାଦନା କିମ୍ବା ବିଲୋପ କରିବା ପାଇଁ ବଟନ୍‌ଗୁଡ଼ିକ ବ୍ୟବହାର କରନ୍ତୁ।-->
-<!--    ନୂତନ ଯାତ୍ରା ଆରମ୍ଭ କରିବାକୁ “+ Add Trip” ଟ୍ୟାପ୍ କରନ୍ତୁ।-->
-<!--    ସେଭ୍ ହୋଇଥିବା ଡ୍ରାଫ୍ଟ ଖୋଲିବାକୁ ନୋଟିଫିକେସନ୍ ଆଇକନ୍ ଟ୍ୟାପ୍ କରନ୍ତୁ।-->
-<!--</string>-->
-<!--    <string name="trip_list_title">ଯାତ୍ରା ତାଲିକା ଏବଂ କାର୍ଯ୍ୟ</string>-->
-<!--    <string name="start_new_trip">ନୂଆ ଯାତ୍ରା ଆରମ୍ଭ କରନ୍ତୁ</string>-->
-<!--    <string name="add_trip_dec">-->
-<!--    ଆରମ୍ଭ ତାରିଖ, ଆରମ୍ഭ ସ୍ଥାନ, ଶେଷ ସ୍ଥାନ ଏବଂ ଟ୍ରକ୍ ନମ୍ବର ଦିଅନ୍ତୁ।-->
-<!--    ଆପଣ ମାଇକ୍ ବ୍ୟବହାର କରି କହି ମଧ୍ୟ ବିବରଣୀ ଭରିପାରିବେ।-->
-<!--    ଟ୍ରିପ୍ ଗଣନା ଆରମ୍ଭ କରିବାକୁ Add ଟାପ୍ କରନ୍ତୁ।-->
-<!--</string>-->
-<!--    <string name="manage_trip_title">ଟ୍ରିପ୍ ହିସାବ ପରିଚାଳନା</string>-->
-<!--    <string name="trip_transaction_dec">ଏଠାରୁ ସମସ୍ତ ଟ୍ରିପ୍ ରେକର୍ଡ ଯୋଗ କରନ୍ତୁ। ଖର୍ଚ୍ଚ ଯୋଗ କରିବାକୁ Add Expenditure, ଆୟ ଯୋଗ କରିବାକୁ Add Income ଏବଂ ଡିଜେଲ ବିବରଣୀ ପାଇଁ Add Fuel ବ୍ୟବହାର କରନ୍ତୁ। ସମସ୍ତ ଟ୍ରାନ୍ଜାକ୍ସନ୍ ତଳେ ତାଲିକାରେ ଦେଖାଯାଏ। ଉପରେ ନୀଳ ରଙ୍ଗରେ ମୋଟ ଲାଭ ଦେଖାଯାଇଛି।</string>-->
-<!--    <string name="add_expanse_tittle">ଖର୍ଚ୍ଚ ଯୋଡନ୍ତୁ</string>-->
-<!--    <string name="add_expense_dec">ଖର୍ଚ୍ଚ ରାଶି, ଟିପ୍ପଣୀ ଏବଂ ସ୍ଥାନ ଲେଖନ୍ତୁ। ଖର୍ଚ୍ଚ ପ୍ରକାର ଏବଂ ତାରିଖ ଚୟନ କରନ୍ତୁ। ମାଇକ୍ ବ୍ୟବହାର କରି କହି ବିବରଣୀ ଯୋଡ଼ି ପାରିବେ। ସେଭ୍ କଲେ ଖର୍ଚ୍ଚ ଟ୍ରିପ୍ ହିସାବ ତାଲିକାରେ ଦେଖାଯିବ।</string>-->
-<!--    <string name="add_income_tittle">ଆୟ ଯୋଡନ୍ତୁ (ଭଡା / ଅଗ୍ରିମ)</string>-->
-<!--    <string name="add_income_dec">ଆୟର ରାଶି ଲେଖନ୍ତୁ ଏବଂ ପାର୍ଟିର ନାମ କିମ୍ବା କାରଣ ପରି ଗୋଟିଏ ଟୀକା ଯୋଡନ୍ତୁ। ଆପଣ ମାଇକ୍ ବ୍ୟବହାର କରି କହି ବିବରଣୀ ଯୋଡ଼ି ପାରିବେ। ସେଭ୍ କଲେ ଆୟ ଟ୍ରିପ୍ ହିସାବ ଏବଂ ସମୁଦାୟ ଲାଭରେ ଯୋଡାଯିବ।</string>-->
-<!--    <string name="add_fuel_tittle">ଇନ୍ଧନ ବିବରଣୀ ଯୋଡନ୍ତୁ</string>-->
-<!--    <string name="add_fuel_dec">ଫୁଏଲ୍ ଖର୍ଚ୍ଚ ଯୋଡ଼ିବା ପାଇଁ ଡିଜେଲ୍ ଲିଟର୍ ଏବଂ ରାଶି ଲେଖନ୍ତୁ। ମାଇଲେଜ ଗଣନା ପାଇଁ କି.ମି. (ଓଡୋମିଟର୍) ରିଡିଂ ଭରନ୍ତୁ। ସ୍ଥାନ କିମ୍ବା ପମ୍ପ ନାମ ଯୋଡ଼ନ୍ତୁ ଏବଂ ତାରିଖ ଚୟନ କରନ୍ତୁ। ସେଭ୍ କଲେ ଫ୍ୟୁଏଲ୍ ଟ୍ରିପ୍ ହିସାବ ଏବଂ ସରାସରିରେ ଯୋଡାଯିବ।</string>-->
-<!--    <string name="complete_trip_tittle">ଟ୍ରିପ୍ ସମ୍ପୂର୍ଣ୍ଣ କରନ୍ତୁ</string>-->
-<!--    <string name="complete_trip_dec">ଟ୍ରିପ୍ ଶେଷ ତାରିଖ ଚୟନ କରନ୍ତୁ ଏବଂ ଡ୍ରାଇଭର ଆୟ ଦେଖାଇବା ପାଇଁ ରାଶି ଲେଖନ୍ତୁ। ଏହି ରାଶି କେବଳ ଦେଖାଇବା ପାଇଁ, ଗଣନାରେ ବ୍ୟବହାର କରାଯାଏ ନାହିଁ। ସବମିଟ୍ କଲେ ଟ୍ରିପ୍ ସମ୍ପୂର୍ଣ୍ଣ ହେବ ଏବଂ ସେୟାରିଂ ପାଇଁ PDF ଡାଉନଲୋଡ୍ ହେବ।</string>-->
-    <string name="trip_help_text"><![CDATA[
-यहाँ आप अपनी सभी यात्राएँ देख सकते हैं।
-किसी यात्रा को साझा करने, डाउनलोड करने, संपादित करने या हटाने के लिए बटनों का उपयोग करें।
-नई यात्रा शुरू करने के लिए “+ Add Trip” पर टैप करें।
-सहेजे गए ड्राफ्ट खोलने के लिए नोटिफिकेशन आइकन पर टैप करें।]]></string>
-
-    <string name="trip_list_title">ट्रिप सूची और क्रियाएँ</string>
-    <string name="start_new_trip">नई यात्रा शुरू करें</string>
-
-    <string name="add_trip_dec"><![CDATA[
-प्रारंभ तिथि, शुरू होने का स्थान, समाप्त होने का स्थान और ट्रक नंबर दर्ज करें।
-आप माइक्रोफोन का उपयोग करके बोलकर भी विवरण भर सकते हैं।
-ट्रिप की गणना शुरू करने के लिए Add पर टैप करें।]]></string>
-
-    <string name="manage_trip_title">ट्रिप हिसाब प्रबंधन</string>
-    <string name="trip_transaction_dec">यहाँ से सभी ट्रिप रिकॉर्ड जोड़ें। खर्च जोड़ने के लिए Add Expenditure, कमाई जोड़ने के लिए Add Income और डीज़ल विवरण भरने के लिए Add Fuel का उपयोग करें। सभी लेनदेन नीचे सूची में दिखते हैं। ऊपर नीले रंग में कुल लाभ दिखाया जाता है।</string>
-    <string name="add_expanse_tittle">खर्च जोड़ें</string>
-    <string name="add_expense_dec">खर्च की राशि, नोट और स्थान दर्ज करें। खर्च का प्रकार और तारीख चुनें। आप माइक्रोफ़ोन का उपयोग करके बोलकर भी विवरण जोड़ सकते हैं। सेव पर टैप करें और खर्च ट्रिप हिसाब सूची में दिखाई देगा।</string>
-    <string name="add_income_tittle">आय जोड़ें (भाड़ा / एडवांस)</string>
-    <string name="add_income_dec">आय की राशि दर्ज करें और नोट जोड़ें, जैसे पार्टी का नाम या कारण। आप माइक्रोफ़ोन का उपयोग करके बोलकर भी विवरण जोड़ सकते हैं। सेव पर टैप करें और आय ट्रिप हिसाब और कुल लाभ में जुड़ जाएगी।</string>
-    <string name="add_fuel_tittle">फ्यूल विवरण जोड़ें</string>
-    <string name="add_fuel_dec">फ्यूल खर्च जोड़ने के लिए डीज़ल के लीटर और राशि दर्ज करें। माइलेज निकालने के लिए किलोमीटर (ओडोमीटर) रीडिंग भरें। स्थान या पंप का नाम जोड़ें और तारीख चुनें। सेव पर टैप करें, फ्यूल ट्रिप हिसाब और औसत में जुड़ जाएगा।</string>
-    <string name="complete_trip_tittle">ट्रिप पूरा करें</string>
-    <string name="complete_trip_dec">ट्रिप की समाप्ति तिथि चुनें और ड्राइवर की आय दिखाने के लिए राशि दर्ज करें। यह राशि केवल ड्राइवर की आय दिखाने के लिए है, इसे गणना में उपयोग नहीं किया जाता। सबमिट पर टैप करें, ट्रिप पूरी होगी और शेयर करने के लिए PDF डाउनलोड हो जाएगा।</string>
-    <string name="how_to_use">କିପରି ବ୍ୟବହାର କରିବେ</string>
-    <string name="onboard_skip">ଏଡ଼ାଇଦିଅନ୍ତୁ</string>
-    <string name="onboard_back">ପଛକୁ</string>
-    <string name="no_trip_found">କୌଣସି ଟ୍ରିପ୍‌ ମିଳିଲା ନାହିଁ</string>
-
 </resources>

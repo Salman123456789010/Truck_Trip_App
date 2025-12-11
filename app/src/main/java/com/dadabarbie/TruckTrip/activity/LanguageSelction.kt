@@ -11,28 +11,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.View.OnClickListener
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnRepeat
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
-import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
-import com.dadabarbie.TruckTrip.Utils.Constants.creditList
-import com.dadabarbie.TruckTrip.Utils.Constants.debitList
-import com.dadabarbie.TruckTrip.Utils.Constants.dismissProgress
 import com.dadabarbie.TruckTrip.Utils.Constants.languageLocale
-import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.Utils.LocaleHelper
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.adapter.LanguageAdapter
 import com.dadabarbie.TruckTrip.auth.activity.LoginScreenActivity
-import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
 import com.dadabarbie.TruckTrip.databinding.ActivityLanguageSelctionBinding
 import com.dadabarbie.TruckTrip.languagemodel.Language
-import com.dadabarbie.TruckTrip.model.addTrip.Expense
-import com.dadabarbie.TruckTrip.model.addTrip.Income
-import com.vasyerp.freshvegetables.util.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
@@ -42,14 +31,12 @@ class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.O
     lateinit var binding: ActivityLanguageSelctionBinding
     private var languageList: ArrayList<Language> = arrayListOf()
     private lateinit var languageAdapter: LanguageAdapter
-    private  val  authViewModel: AuthViewModel by viewModels()
     private val MIN_CLICK_INTERVAL: Long = 1000  // 1 second
     private var lastClickTime: Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLanguageSelctionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        com.dadabarbie.TruckTrip.Utils.SystemUiUtils.setupStatusBar(this, R.color.green, false)
         initViews()
 
         languageList.add(Language(locale_code = "hi", label = "हिन्दी", english_label = "Hindi"))
@@ -85,7 +72,6 @@ class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.O
 
 
     private fun initViews() {
-        setObserver()
 //        authViewModel.getAllSupporetdLanguags()
     }
 
@@ -121,10 +107,9 @@ class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.O
                     if (languageLocale != "") {
                         LocaleHelper.setNewLocale(applicationContext, languageLocale)
                         if(intent.getStringExtra("languageFlag").equals("")){
-                            startActivity(Intent(this, HowToUseActivity::class.java))
-                            finish()
+                            startActivity(Intent(this, LoginScreenActivity::class.java))
                         }else{
-                            authViewModel.updateLanguage(languageLocale.toString())
+                            startActivity(Intent(this, DashBoardActivity::class.java))
                         }
 
                         Prefs[Constants.languageCode] = languageLocale.toString()
@@ -173,27 +158,6 @@ class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.O
         languageLocale = languageList[position].locale_code
         languageAdapter.submitList(languageList)
         languageAdapter.notifyDataSetChanged()
-    }
-
-    private fun setObserver() {
-
-
-        authViewModel.updateLangModel.observe(this) {
-            when (it){
-                is NetworkResult.Error<*> -> {
-
-                }
-                is NetworkResult.Loading<*> -> {
-
-                }
-                is NetworkResult.Success<*> -> {
-                    startActivity(Intent(this, DashBoardActivity::class.java))
-
-                }
-            }
-
-        }
-
     }
 
 

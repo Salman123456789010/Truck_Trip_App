@@ -169,5 +169,9 @@
     <string name="how_to_use">એપ્લિકેશનનો ઉપયોગ કેવી રીતે કરવો</string>
     <string name="onboard_skip">સ્કિપ</string>
     <string name="no_trip_found">કોઈ ટ્રિપ મળી નથી</string>
+    <string name="term_condition">શરત અને નિયમ</string>
+    <string name="privacy_policy">ગોપનીયતા નીતિ</string>
+    <string name="you_can_check_term_condition">તમે શરત અને નિયમ તપાસી શકો છો.</string>
+    <string name="you_can_check_privacy">તમે ગોપનીયતા નીતિ તપાસી શકો છો.</string>
 
 </resources>

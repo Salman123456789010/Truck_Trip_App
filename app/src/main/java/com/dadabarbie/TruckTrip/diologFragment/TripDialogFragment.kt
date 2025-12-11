@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.core.util.Pair
 import androidx.fragment.app.DialogFragment
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
@@ -32,8 +33,8 @@ class TripDialogFragment(val bothDate:String, val startingPlace:String, val endi
                          , val driverIncomeTrip:String, val truckNumber:String, val truckAvg:String, val totalDays:String,val update:String) : DialogFragment(), View.OnClickListener,TextToSpeech.OnInitListener {
     lateinit var binding: TripDialogFragmentBinding
     lateinit var avgDialogFragment: AvgDialogFragment
-    private lateinit var materialDateBuilder: MaterialDatePicker.Builder<Long>
-    private lateinit var materialDatePicker: MaterialDatePicker<Long>
+    private lateinit var materialDateBuilder: MaterialDatePicker.Builder<Pair<Long, Long>>
+    private lateinit var materialDatePicker: MaterialDatePicker<*>
     var startDate: String = ""
     var endDate: String = ""
     private val MIN_CLICK_INTERVAL: Long = 1000  // 1 second
@@ -190,19 +191,21 @@ class TripDialogFragment(val bothDate:String, val startingPlace:String, val endi
         binding.closeBtn.setOnClickListener(this)
 
 
-        materialDatePicker.addOnPositiveButtonClickListener { selection: Long ->
+        materialDatePicker.addOnPositiveButtonClickListener { selection: Any ->
+            val myDates = selection as Pair<Long, Long>
+
             val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val selectedCal = Calendar.getInstance()
-            selectedCal.timeInMillis = selection
-            val now = Calendar.getInstance()
-            selectedCal.set(Calendar.HOUR_OF_DAY, now.get(Calendar.HOUR_OF_DAY))
-            selectedCal.set(Calendar.MINUTE, now.get(Calendar.MINUTE))
-            val dateStart = simpleDateFormat.format(Date(selection))
+            val simpleDateFormatExport = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val dateStart = simpleDateFormat.format(Date(myDates.first))
+            val dateEnd = simpleDateFormat.format(Date(myDates.second))
             startDate = dateStart
-            endDate = dateStart
-            binding.date.text = formatDateWithTime(Date(selectedCal.timeInMillis))
-            binding.totalDays.text = getString(R.string.total_days)+": 1"
-            truckTrip = "1"
+            endDate = dateEnd
+            val dateStartExport = simpleDateFormatExport.format(Date(myDates.first))
+            val dateEndExport = simpleDateFormatExport.format(Date(myDates.second))
+            binding.date.text = "From:$dateStart To:$dateEnd"
+            binding.totalDays.text =
+                getString(R.string.total_days)+": ${printDifference(Date(myDates.first), Date(myDates.second))}"
+            truckTrip=printDifference(Date(myDates.first), Date(myDates.second))
         }
     }
 
@@ -255,21 +258,23 @@ class TripDialogFragment(val bothDate:String, val startingPlace:String, val endi
 
     private fun initDatePicker() {
 
-        materialDateBuilder = MaterialDatePicker.Builder.datePicker()
-            .setCalendarConstraints(
-                CalendarConstraints.Builder().setEnd(MaterialDatePicker.todayInUtcMilliseconds())
-                    .build()
-            )
-        materialDateBuilder.setTitleText("Select Date")
+        materialDateBuilder = MaterialDatePicker.Builder.dateRangePicker().setCalendarConstraints(
+            CalendarConstraints.Builder().setEnd(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+        )
         materialDatePicker = materialDateBuilder.build()
+        materialDateBuilder.setTitleText("Select Date")
         val date = getCurrentDateTime()
         val dateStart = date.toString(format = "yyyy-MM-dd")
+        val ateStartExport = date.toString(format = "yyyy-MM-dd")
+        val dateEnd = date.toString("yyyy-MM-dd")
+        val dateEndExport = date.toString(format = "yyyy-MM-dd")
         startDate = dateStart
-        endDate = dateStart
+        endDate = dateEnd
         if(bothDate==""){
-            binding.date.text = formatDateWithTime(date)
-            binding.totalDays.text = "Total Days : 1"
-            truckTrip = "1"
+            binding.date.text = "From:$dateStart To:$dateEnd"
+            binding.totalDays.text = "Total Days : ${printDifference(date, date)}"
+            truckTrip=printDifference(date, date)
         }
     }
     fun getOneYearFromNow(): Date {
@@ -291,11 +296,6 @@ class TripDialogFragment(val bothDate:String, val startingPlace:String, val endi
     fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
         val formatter = SimpleDateFormat(format, locale)
         return formatter.format(this)
-    }
-
-    private fun formatDateWithTime(date: Date): String {
-        val formatter = SimpleDateFormat("dd MMMM yyyy , HH:mm 'time'", Locale.getDefault())
-        return formatter.format(date)
     }
 
     fun printDifference(startDate: Date, endDate: Date): String {

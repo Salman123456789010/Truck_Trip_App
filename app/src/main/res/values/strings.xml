@@ -71,7 +71,12 @@
     <string name="contact_us">Contact Us</string>
     <string name="you_can_contact_us">You can contact us</string>
     <string name="rate_us">Rate Us</string>
+    <string name="term_condition">Term &amp; Condition</string>
+    <string name="privacy_policy">Privacy Policy</string>
     <string name="you_can_give_feedback_here">You can give feedback here</string>
+    <string name="you_can_check_term_condition">You can check Term &amp; Condition.</string>
+    <string name="you_can_give_feedback">You can give feedback here</string>
+    <string name="you_can_check_privacy">You can check Privacy Policy.</string>
     <string name="logout">Logout</string>
     <string name="delete_account">Delete Account</string>
     <string name="enter_your_total_diesel_in_liter">Enter Your Total Diesel in Liter</string>

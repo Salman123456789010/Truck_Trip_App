@@ -46,7 +46,6 @@ class DraftActivity : AppCompatActivity(), DraftAdapter.DraftEditListner,DraftAd
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        com.dadabarbie.TruckTrip.Utils.SystemUiUtils.setupStatusBar(this, R.color.green, false)
         MobileAds.initialize(this)
         setLanguage()
         setOnClickListner()

@@ -49,7 +49,7 @@ class AuthRepository @Inject constructor(private val apiService: ApiService) : B
 
     suspend fun updateLanguage(lang: String):Flow<NetworkResult<DeleteTripResponseModel>> {
         return flow {
-            emit(safeApiCall { apiService.updateLanguage(com.dadabarbie.TruckTrip.auth.authmodel.UpdateLanguageRequestModel(lang)) })
+            emit(safeApiCall { apiService.updateLanguage(lang) })
         }.flowOn(Dispatchers.IO)
     }
 

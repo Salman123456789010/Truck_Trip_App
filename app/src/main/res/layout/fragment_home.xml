@@ -195,36 +195,13 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 
-                <LinearLayout
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:id="@+id/noProductFound"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingTop="50dp"
-                    android:paddingBottom="50dp"
                     android:visibility="gone"
-                    android:layout_gravity="center">
-
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/noProductAnimation"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        app:lottie_rawRes="@raw/truck_speed"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        android:layout_marginBottom="5dp" />
-
-                    <TextView
-                        android:id="@+id/noProductText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/no_trip_found"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/roboto_medium"/>
-                </LinearLayout>
-
-
+                    android:src="@drawable/profile_icon"/>
             </LinearLayout>
 
 
@@ -241,10 +218,8 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:text="@string/add_trip"
             android:textColor="@color/white"
-            android:textAllCaps="false"
             android:fontFamily="@font/roboto_medium"
             android:backgroundTint="@color/green"
-            app:icon="@drawable/baseline_add_24"
             app:iconTint="@color/white"
             />
 

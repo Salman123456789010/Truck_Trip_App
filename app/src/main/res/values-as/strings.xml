@@ -37,8 +37,7 @@
     <string name="source_place_">আৰম্ভণি স্থান <font fgcolor='#FF0000'>*</font> :</string>
     <string name="dest_place_">গন্তব্য স্থান <font fgcolor='#FF0000'>*</font> :</string>
     <string name="truck_number_">ট্ৰাক নম্বৰ <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="trip_date">ভ্ৰমণৰ আৰম্ভণি তাৰিখ <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="trip_start_date">ভ্ৰমণৰ আৰম্ভণি তাৰিখ </string>
+    <string name="trip_date">ভ্ৰমণৰ তাৰিখ <font fgcolor='#FF0000'>*</font> :</string>
     <string name="driver_s_income">চালকৰ আয়:</string>
     <string name="trip_payment">ভ্ৰমণৰ পৰিশোধ</string>
     <string name="total_days_10">মুঠ দিন : 10</string>
@@ -54,10 +53,7 @@
     <string name="total_income_credit">মুঠ আয় (ক্রেডিট)</string>
     <string name="total_expense_debit">মুঠ ব্যয় (ডেবিট)</string>
     <string name="expense">ব্যয়</string>
-    <string name="add_expense">খৰচ যোগ কৰক</string>
     <string name="income">আয়</string>
-    <string name="add_income">আয় যোগ কৰক</string>
-    <string name="add_fuel">ইંધন যোগ কৰক</string>
     <string name="enter_text">পাঠ লিখক</string>
     <string name="amount">পৰিমাণ</string>
     <string name="enter_expenditure_name">ব্যয়ৰ নাম লিখক <font fgcolor='#FF0000'>*</font></string>
@@ -87,7 +83,7 @@
     <string name="no">নহয়</string>
     <string name="yes">হয়</string>
     <string name="something_issue_in_server_please_try_again_later">অ\'হ, কিছু ভুল হৈছে, দয়া কৰি পুনৰ চেষ্টা কৰক!</string>
-    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">ইয়াত ট্রিপৰ আৰম্ভণি তাৰিখ দিয়ক</string>
+    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">ইয়াত ট্রিপৰ আৰম্ভণি আৰু অন্তৰ তাৰিখ দিয়ক</string>
     <string name="sarvat_no_place_nakho">শুরু স্থান উল্লেখ কৰক</string>
     <string name="end_no_place_nakho">অন্তিম স্থান উল্লেখ কৰক</string>
     <string name="driver_ni_per_trip_aavak_nakho">ড্ৰাইভাৰৰ প্রতি ট্রিপৰ উপাৰ্জন উল্লেখ কৰক</string>
@@ -113,55 +109,4 @@
     <string name="if_you_want_to_logout_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">আপুনি লগ আউট কৰিব বিচাৰিলে, আপোনাৰ খচৰা তথ্য মচি পেলাব। আপুনি লগ আউট কৰিব বিচাৰেনে?</string>
     <string name="enter_income_name">আয়ৰ নাম প্ৰবিষ্ট কৰক <font fgcolor='#FF0000'>*</font></string>
     <string name="enter_income_amount">আয়ৰ পৰিমাণ প্ৰবিষ্ট কৰক</string>
-    <string name="note_expense_hint">টোকা (খাদ্য, টোল, পাংচাৰ, ড্ৰাইভাৰ খৰচ, আদি)</string>
-    <string name="place_city">স্থান/নগৰ</string>
-    <string name="select_expense_type">খৰচৰ প্ৰকাৰ নিৰ্বাচন কৰক</string>
-    <string name="date">তাৰিখ</string>
-    <string name="note_income_hint">টোকা (পাৰ্টিৰ নাম আদি)</string>
-    <string name="total_income_bhada">মুঠ আয় (ভাড়া)</string>
-    <string name="advance_taken">অগ্ৰিম লোৱা</string>
-    <string name="balance">ব্যালেন্স</string>
-    <string name="diesel_liters">ডিজেল লিটাৰ</string>
-    <string name="amount_required">পৰিমাণ</string>
-    <string name="km_reading_odometer">কিমি ৰিডিং (ওডোমিটাৰ)</string>
-    <string name="place_pump">স্থান / পাম্প</string>
-    <string name="trip_end_date">ট্ৰিপ সমাপ্তি তাৰিখ</string>
-    <string name="driver_income_for_trip">ট্ৰিপৰ বাবে ড্ৰাইভাৰ আয়</string>
-    <string name="complete_trip">ট্ৰিপ সম্পূৰ্ণ কৰক</string>
-    <string name="cancel">বাতিল কৰক</string>
-    <string name="submit">দাখিল কৰক</string>
-
-    <string name="how_to_use">কিদৰে ব্যৱহাৰ কৰিব</string>
-    <string name="onboard_skip">এৰি যাওক</string>
-    <string name="onboard_back">পূৰ্বৰ</string>
-    <string name="no_trip_found">কোনো যাত্ৰা পোৱা নগল</string>
-
-    <!--    <string name="trip_help_text">-->
-<!--    ইয়াত আপুনি নিজৰ সকলো ভ্ৰমণ চাব পাৰিব।-->
-<!--    ভ্ৰমণ শ্বেয়াৰ, ডাউনলোড, সম্পাদনা বা মচিবলৈ বুটামবোৰ ব্যৱহাৰ কৰক।-->
-<!--    নতুন ভ্ৰমণ আৰম্ভ কৰিবলৈ “+ Add Trip” টেপ কৰক।-->
-<!--    সংৰক্ষিত ড্ৰাফ্টবোৰ খুলিবলৈ নোটিফিকেশ্বন আইকন টেপ কৰক।-->
-<!--</string>-->
-<!--    <string name="trip_list_title">ভ্ৰমণ তালিকা আৰু কাৰ্যসমূহ</string>-->
-<!--    <string name="start_new_trip">নতুন ভ্ৰমণ আৰম্ভ কৰক</string>-->
-<!--    <string name="add_trip_dec">-->
-<!--    আৰম্ভণিৰ তাৰিখ, আৰম্ভণিৰ ঠাই, অন্তিম ঠাই আৰু ট্ৰাক নম্বৰ লিখক।-->
-<!--    আপুনি মাইক ব্যৱহাৰ কৰি কওক আৰু বিৱৰণ পূৰণ কৰিব পাৰে।-->
-<!--    ভ্ৰমণ গণনা আৰম্ভ কৰিবলৈ Add টেপ কৰক।-->
-<!--</string>-->
-<!--    <string name="manage_trip_title">ট্ৰিপ হিচাপ ব্যৱস্থাপনা</string>-->
-<!--    <string name="trip_transaction_dec">ইয়াৰ পৰা সকলো যাত্ৰাৰ ৰেকৰ্ড যোগ কৰক। খৰচ যোগ কৰিবলৈ Add Expenditure, উপাৰ্জন যোগ কৰিবলৈ Add Income আৰু ডিজেলৰ বিৱৰণ দিবলৈ Add Fuel ব্যৱহাৰ কৰক। সকলো লেনদেন তলত তালিকাত দেখা যায়। ওপৰত নীলা ৰঙত মুঠ লাভ দেখুওৱা হয়।</string>-->
-<!--    <string name="add_expanse_tittle">ব্যয় যোগ কৰক</string>-->
-<!--    <string name="add_fuel_tittle">ইন্ধনৰ বিৱৰণ যোগ কৰক</string>-->
-<!--    <string name="complete_trip_tittle">ভ্ৰমণ সম্পূৰ্ণ কৰক</string>-->
-<!--    <string name="add_expense_dec">ব্যয়ৰ পৰিমাণ, টোকা আৰু স্থান লিখক। ব্যয়ৰ ধৰণ আৰু তাৰিখ বাছনি কৰক। মাইক ব্যৱহাৰ কৰি কওক আৰু বিৱৰণ যোগ কৰিব পাৰিব। ছেভ টেপ কৰিলে ব্যয় ট্ৰিপ হিচাপ তালিকাত দেখা যাব।</string>-->
-<!--    <string name="add_income_tittle">আয় যোগ কৰক (ভাড়া / অগ্ৰিম)</string>-->
-
-<!--    <string name="add_income_dec">আয়ৰ পৰিমাণ লিখক আৰু দলৰ নাম বা কাৰণ যেনে এখন টোকা যোগ কৰক। মাইক ব্যৱহাৰ কৰি কওক আৰু বিৱৰণ যোগ কৰিব পাৰিব। ছেভ টেপ কৰিলে আয় ট্ৰিপ হিচাপ আৰু মুঠ লাভত যোগ হব।</string>-->
-
-<!--    <string name="add_fuel_dec">ফুৱেল ব্যয় যোগ কৰিবলৈ ডিজেল লিটাৰ আৰু মুঠ ৰাশি লিখক। মাইলेज গণনা কৰিবলৈ KM (অ’ডমিটাৰ) ৰিডিং দিয়ক। স্থান বা পাম্পৰ নাম যোগ কৰি তাৰিখ বাছনি কৰক। ছেভ টেপ কৰিলে ফুৱেল ট্ৰিপ হিচাপ আৰু গড়ত যোগ হব।</string>-->
-
-<!--    <string name="complete_trip_dec">ট্ৰিপৰ শেষ তাৰিখ বাছনি কৰক আৰু চালকৰ আয় দেখুৱাবলৈ প্ৰয়োজ্য পৰিমাণ লিখক। এই পৰিমাণ গণনাত ব্যৱহাৰ কৰা নহয়, কেৱল দেখুৱাবলৈ। সাবমিট টেপ করলে ট্ৰিপ সম্পূৰ্ণ হ&apos;ব আৰু ভাগ-বতৰা বাবে PDF ডাউনলোড হ&apos;ব।</string>-->
-
-
 </resources>

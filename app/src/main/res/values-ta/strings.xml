@@ -188,5 +188,10 @@
 <!--    <string name="complete_trip_tittle">பயணத்தை முடிக்கவும்</string>-->
 <!--    <string name="complete_trip_dec"><![CDATA[பயணத்தின் முடிவு தேதியைத் தேர்ந்தெடுத்து, டிரைவரின் வருமானத்தை காட்டுவதற்கான தொகையை உள்ளிடவும். இந்த தொகை கணக்குகளில் பயன்படுத்தப்படாது — காட்டுதலுக்காக மட்டுமே. Submit அல்லது சமர்ப்பிக்கவும் பொத்தானைப் புகுத்தினால் பயணம் முடிவு ஆகி பகிர்வதற்காக PDF பதிவிறக்கம் செய்யப்படும்.]]></string>-->
     <string name="no_trip_found">ஏதும் பயணம் கிடைக்கவில்லை</string>
+    <string name="term_condition">விதி &amp; நிபந்தனை</string>
+    <string name="privacy_policy">தனியுரிமைக் கொள்கை</string>
+    <string name="you_can_check_term_condition">நீங்கள் விதி &amp; நிபந்தனையை பார்க்கலாம்.</string>
+    <string name="you_can_check_privacy">நீங்கள் தனியுரிமைக் கொள்கையை பார்க்கலாம்.</string>
+
 
 </resources>

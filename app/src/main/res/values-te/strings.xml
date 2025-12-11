@@ -155,6 +155,10 @@
     <string name="complete_trip_tittle">Complete the Trip</string>
     <string name="complete_trip_dec" translatable="false">Select the trip end date and enter the driver income for display. This amount is only for showing driver income, it is not used in calculations. Tap Submit to complete the trip and download the PDF for sharing.</string>
     <string name="no_trip_found">ఏ ప్రయాణం కనబడలేదు</string>
+    <string name="term_condition">టర్మ్ &amp; కండిషన్</string>
+    <string name="privacy_policy">ప్రైవసీ పాలసీ</string>
+    <string name="you_can_check_term_condition">మీరు టర్మ్ &amp; కండిషన్ చూడవచ్చు.</string>
+    <string name="you_can_check_privacy">మీరు ప్రైవసీ పాలసీ చూడవచ్చు.</string>
 
     <string name="onboard_back">Back</string>
 </resources>

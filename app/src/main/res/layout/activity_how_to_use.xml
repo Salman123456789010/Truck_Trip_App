@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/roboto_medium"
-            android:text="@string/how_to_use"
+            android:text="How to Use"
             android:textColor="@color/white"
             android:textSize="@dimen/_15sdp" />
     </RelativeLayout>
@@ -82,7 +82,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/onboard_skip"
+            android:text="Skip"
             android:textAllCaps="false"
             android:textColor="@color/color_primary" />
 
@@ -96,7 +96,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/next"
+            android:text="Next"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:insetTop="@dimen/_6sdp"

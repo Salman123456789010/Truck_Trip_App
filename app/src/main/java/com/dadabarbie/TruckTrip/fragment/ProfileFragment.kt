@@ -81,7 +81,8 @@ class ProfileFragment : Fragment(),View.OnClickListener {
         binding.deleteLayout.setOnClickListener(this)
         binding.contactLayout.setOnClickListener(this)
         binding.howtouse.setOnClickListener(this)
-        binding.rateUs.setOnClickListener(this)
+        binding.privacyPolicy.setOnClickListener(this)
+        binding.term.setOnClickListener(this)
         binding.changeLanguageLayout.setOnClickListener(this)
     }
 
@@ -147,10 +148,21 @@ class ProfileFragment : Fragment(),View.OnClickListener {
             binding.changeLanguageLayout->{
                 startActivity(Intent(requireActivity(),LanguageSelction::class.java).putExtra("languageFlag","set"))
             }
-            binding.rateUs->{
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${requireActivity().applicationContext.packageName}"))
-                context?.startActivity(intent)
+            binding.privacyPolicy->{
+                val url = "https://truck-trip-hisab-portfolio.vercel.app/privacy.html"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+
             }
+            binding.term->{
+                val url = "https://truck-trip-hisab-portfolio.vercel.app/termAndCondition.html"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+            }
+//            binding.rateUs->{
+//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${requireActivity().applicationContext.packageName}"))
+//                context?.startActivity(intent)
+//            }
         }
     }
 

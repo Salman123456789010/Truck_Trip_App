@@ -166,4 +166,10 @@
     <string name="add_fuel_dec">फ्यूल खर्च जोड़ने के लिए डीज़ल के लीटर और राशि दर्ज करें। माइलेज निकालने के लिए किलोमीटर (ओडोमीटर) रीडिंग भरें। स्थान या पंप का नाम जोड़ें और तारीख चुनें। सेव पर टैप करें, फ्यूल ट्रिप हिसाब और औसत में जुड़ जाएगा।</string>
     <string name="complete_trip_tittle">ट्रिप पूरा करें</string>
     <string name="complete_trip_dec">ट्रिप की समाप्ति तिथि चुनें और ड्राइवर की आय दिखाने के लिए राशि दर्ज करें। यह राशि केवल ड्राइवर की आय दिखाने के लिए है, इसे गणना में उपयोग नहीं किया जाता। सबमिट पर टैप करें, ट्रिप पूरी होगी और शेयर करने के लिए PDF डाउनलोड हो जाएगा।</string>
+
+    <string name="term_condition">टर्म और कंडीशन</string>
+    <string name="privacy_policy">प्राइवेसी पॉलिसी</string>
+    <string name="you_can_check_term_condition">आप टर्म और कंडीशन देख सकते हैं।</string>
+    <string name="you_can_check_privacy">आप प्राइवेसी पॉलिसी देख सकते हैं।</string>
+
 </resources>

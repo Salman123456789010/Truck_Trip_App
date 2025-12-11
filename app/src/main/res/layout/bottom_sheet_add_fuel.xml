@@ -31,7 +31,7 @@
             android:id="@+id/etLiters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/diesel_liters"
+            android:hint="Diesel Liters *"
             android:inputType="numberDecimal"
             android:maxLength="9"
             android:textSize="@dimen/_14sdp" />
@@ -51,7 +51,7 @@
             android:id="@+id/etAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/amount_required"
+            android:hint="Amount *"
             android:inputType="number"
             android:maxLength="9"
             android:textSize="@dimen/_14sdp" />
@@ -71,7 +71,7 @@
             android:id="@+id/etKm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/km_reading_odometer"
+            android:hint="KM Reading (Odometer)"
             android:inputType="number"
             android:maxLength="9"
             android:textSize="@dimen/_14sdp" />
@@ -91,7 +91,7 @@
             android:id="@+id/etPlace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/place_pump"
+            android:hint="Place / Pump"
             android:inputType="text"
             android:textSize="@dimen/_14sdp" />
 
@@ -110,7 +110,7 @@
             android:id="@+id/etDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/date"
+            android:hint="Date"
             android:inputType="none"
             android:focusable="false"
             android:clickable="true"
