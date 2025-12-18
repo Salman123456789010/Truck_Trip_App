@@ -28,14 +28,15 @@
     <string name="news">News</string>
     <string name="profile">Profile</string>
     <string name="driver_s_gross_income">Driver\'s gross income:</string>
+    <string name="driver_s_gross_income_this_trip">Driver\'s Income This Trip:</string>
     <string name="owner_s_gross_income">Owner\'s Gross Income:</string>
     <string name="add_trip">Add Trip</string>
-    <string name="gross_income">Gross Income</string>
-    <string name="total_expenditure">Total Expenditure</string>
+    <string name="gross_income">💰 Gross Income</string>
+    <string name="total_expenditure">💸 Total Expenditure</string>
     <string name="add_trip_data">Add Trip Data</string>
-    <string name="source_place_">Starting Place <font fgcolor='#FF0000'>*</font> : </string>
-    <string name="dest_place_">Ending Place <font fgcolor='#FF0000'>*</font> : </string>
-    <string name="truck_number_">Truck Number <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="source_place_">📍Starting Place <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="dest_place_">🏁 Ending Place <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="truck_number_">🚚 Truck Number <font fgcolor='#FF0000'>*</font> : </string>
     <string name="trip_date">Start Trip Date <font fgcolor='#FF0000'>*</font> : </string>
     <string name="trip_start_date">Start Trip Date</string>
     <string name="driver_s_income">Driver\'s income:</string>
@@ -43,13 +44,15 @@
     <string name="total_days_10">Total Days : 10</string>
     <string name="start_trip">Start Trip :</string>
     <string name="end_trip">End Trip :</string>
+    <string name="end_trip_date">End Trip Date</string>
+    <string name="end_trip_date_">End Trip Date <font fgcolor='#FF0000'>*</font> :</string>
     <string name="get_average">Get Average :</string>
     <string name="click_here">Click here</string>
     <string name="truck_average">Fuel(Diesel) Average</string>
     <string name="add">Add</string>
     <string name="add_hissab">Add Hissab</string>
     <string name="save">Save</string>
-    <string name="total_profit">Total Profit</string>
+    <string name="total_profit">✅ Total Profit</string>
     <string name="total_income_credit">Total Income(Credit)</string>
     <string name="total_expense_debit">Total Expenditure(Debit)</string>
     <string name="expense">Expenditure</string>
@@ -140,7 +143,9 @@
     <!-- Trip End Dialog -->
     <string name="trip_end_date">Trip End Date</string>
     <string name="driver_income_for_trip">Driver Income for Trip</string>
+    <string name="driver_income_for_trip_">Driver Income for Trip <font fgcolor='#FF0000'>*</font> :</string>
     <string name="complete_trip">Complete Trip</string>
+    <string name="complete_trip_">Complete Trip <font fgcolor='#FF0000'>*</font> :</string>
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
 
@@ -165,9 +170,39 @@ Tap the notification icon to open saved drafts.
     <string name="complete_trip_tittle">Complete the Trip</string>
     <string name="complete_trip_dec" translatable="false">Select the trip end date and enter the driver income for display. This amount is only for showing driver income, it is not used in calculations. Tap Submit to complete the trip and download the PDF for sharing.</string>
 
-        <string name="onboard_skip">Skip</string>
-        <string name="onboard_back">Back</string>
+    <string name="onboard_skip">Skip</string>
+    <string name="onboard_back">Back</string>
     <string name="no_trip_found">No Trip Found</string>
+    <string name="driver_income">Driver Income</string>
+    <string name="date_range_to">To</string>
+    <string name="no_internet_connection">Right now net is off so you can\\\'t change language</string>
+
+
+    <!-- New strings for the updated layout -->
+    <string name="km_input_type">How do you want to track KM?</string>
+    <string name="odometer_reading">📅 5 din ka trip</string>
+    <string name="distance_traveled">Distance Traveled</string>
+    <string name="distance_traveled_km">Distance Traveled (KM)</string>
+    <string name="fuel_average">Fuel Average:</string>
+    <string name="select_date">Select Start Date and End Date</string>
+    <string name="select_date_">Select Date</string>
+    <string name="edit_trip_data">Edit Trip Data</string>
+    <string name="please_enter_diesel_liters">Please enter diesel liters</string>
+    <string name="please_enter_amount">Please enter amount</string>
+    <string name="please_enter_valid_km">Please enter valid KM</string>
+    <string name="please_enter_note">Please enter note</string>
+    <string name="enter_start_km">Add Start Odometer</string>
+    <string name="start_odometer_optional">Start Odometer (Optional)</string>
+    <string name="end_odometer_reading">Add End Odometer</string>
+    <string name="manual_km">Manual Total KM</string>
+    <string name="end_odometer">End Odometer\n</string>
+    <string name="end_km_input_type">Enter Total KM</string>
+    <string name="manual_km_traveled">Manual KM Traveld</string>
+    <string name="coach_mark_expense">Please add your expenses here like food, tolls, repairs etc.</string>
+    <string name="coach_mark_income">Add income received during the trip here</string>
+    <string name="coach_mark_fuel">Add fuel entries here with liters and odometer reading</string>
+
+
     <!--    <string name="onboard_title_1">All trips in one place</string>-->
     <!--    <string name="onboard_desc_1">See all your trips with status, truck number and route. Open any trip to view full hisab of income, expenses and profit.</string>-->
     <!--    <string name="onboard_title_2">Add a new trip</string>-->

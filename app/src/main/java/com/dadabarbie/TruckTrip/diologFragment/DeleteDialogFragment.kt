@@ -2,6 +2,7 @@ package com.dadabarbie.TruckTrip.diologFragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,7 @@ class DeleteDialogFragment(private var position: Int, private var flagTag:String
                    }else if(flagTag=="Credit"){
                        (requireActivity() as MainActivity).creditDeleteHissab(position)
                    }else{
+                       Log.d("issue", "onClick: 1")
                        Constants.emitDeleteTrip(Event(position))
 
                    }

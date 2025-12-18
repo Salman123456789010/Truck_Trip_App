@@ -4,6 +4,7 @@ import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.auth.authmodel.LoginUserRequestModel
 import com.dadabarbie.TruckTrip.auth.authmodel.LoginUserResponseModel
 import com.dadabarbie.TruckTrip.languagemodel.LanguageResponseModel
+import com.dadabarbie.TruckTrip.auth.authmodel.UpdateLanguageRequestModel
 import com.dadabarbie.TruckTrip.model.addTrip.AddTripRequestModel
 import com.dadabarbie.TruckTrip.model.deleteTrip.DeleteTripRequestModel
 import com.dadabarbie.TruckTrip.model.deleteTrip.DeleteTripResponseModel
@@ -32,9 +33,9 @@ interface ApiService {
     suspend fun getAllSupporetdLanguags(): Response<LanguageResponseModel>
 
 
-    @GET(Constants.updatedLanguage)
+    @POST(Constants.updatedLanguage)
     suspend fun updateLanguage(
-        @Body lang: String
+        @Body request: UpdateLanguageRequestModel
     ): Response<DeleteTripResponseModel>
 
     @GET(Constants.appVersion)

@@ -15,6 +15,7 @@ import com.dadabarbie.TruckTrip.Utils.Constants.languageLocale
 import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.Utils.LocaleHelper
 import com.dadabarbie.TruckTrip.Utils.Prefs
+import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
 import com.dadabarbie.TruckTrip.adapter.DraftAdapter
 import com.dadabarbie.TruckTrip.adapter.TripListAdapter
 import com.dadabarbie.TruckTrip.databinding.ActivityDraftBinding
@@ -46,6 +47,7 @@ class DraftActivity : AppCompatActivity(), DraftAdapter.DraftEditListner,DraftAd
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
         MobileAds.initialize(this)
         setLanguage()
         setOnClickListner()

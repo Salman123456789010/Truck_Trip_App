@@ -4,6 +4,9 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +26,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.PhoneAuthProvider
 
 object Constants {
+
+
+
+
+
     var creditList:ArrayList<com.dadabarbie.TruckTrip.model.addTrip.Income> = arrayListOf()
     var debitList:ArrayList<com.dadabarbie.TruckTrip.model.addTrip.Expense> = arrayListOf()
     var isLogin=""
@@ -92,7 +100,10 @@ object Constants {
     fun emitDebitEvent(event: Event<DebitModel>) {
         _debitevents.postValue(event)
     }
-
+    fun clearTripData() {
+        creditList.clear()
+        debitList.clear()
+    }
 
     private val _avg = MutableLiveData<Event<String>>()
     val avg: LiveData<Event<String>> = _avg
@@ -166,5 +177,21 @@ object Constants {
     }
     fun View.gone() {
         this.visibility = View.GONE
+    }
+}
+
+// Add to your Utils or create NetworkUtils.kt
+object NetworkUtils {
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+            return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        } else {
+            val networkInfo = connectivityManager.activeNetworkInfo
+            return networkInfo != null && networkInfo.isConnected
+        }
     }
 }

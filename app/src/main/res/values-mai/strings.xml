@@ -31,13 +31,14 @@
     <string name="driver_s_gross_income">चालकक कुल आय:</string>
     <string name="owner_s_gross_income">मालिकक कुल आय:</string>
     <string name="add_trip">ट्रिप जोड़ू</string>
-    <string name="gross_income">कुल आय</string>
-    <string name="total_expenditure">कुल खर्च</string>
+    <string name="gross_income">💰 कुल आय</string>
+    <string name="total_expenditure">💸 कुल खर्च</string>
     <string name="add_trip_data">ट्रिप डेटा जोड़ू</string>
-    <string name="source_place_">स्रोत स्थान <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="dest_place_">गंतव्य स्थान <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="truck_number_">ट्रक नंबर <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="source_place_">📍स्रोत स्थान <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="dest_place_">🏁 गंतव्य स्थान <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="truck_number_">🚚 ट्रक नंबर <font fgcolor='#FF0000'>*</font> :</string>
     <string name="trip_date">ट्रिप तिथि <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="trip_start_date">ट्रिप तिथि </string>
     <string name="driver_s_income">चालकक आय:</string>
     <string name="trip_payment">ट्रिप भुगतान</string>
     <string name="total_days_10">कुल दिन : 10</string>
@@ -49,11 +50,14 @@
     <string name="add">जोड़ू</string>
     <string name="add_hissab">हिसाब जोड़ू</string>
     <string name="save">सहेजू</string>
-    <string name="total_profit">कुल लाभ</string>
+    <string name="total_profit">✅ कुल लाभ</string>
     <string name="total_income_credit">कुल आय (क्रेडिट)</string>
     <string name="total_expense_debit">कुल खर्च (डेबिट)</string>
     <string name="expense">खर्च</string>
+    <string name="add_expense">खर्च जोड़ू</string>
     <string name="income">आय</string>
+    <string name="add_income">आय जोड़ू</string>
+    <string name="add_fuel">डीजल जोड़ू</string>
     <string name="enter_text">पाठ दर्ज करू</string>
     <string name="amount">राशि</string>
     <string name="enter_expenditure_name">खर्चक नाम दर्ज करू <font fgcolor='#FF0000'>*</font></string>
@@ -83,7 +87,7 @@
     <string name="no">नहि</string>
     <string name="yes">हँ</string>
     <string name="something_issue_in_server_please_try_again_later">ओह, किछु गलत भ\' गेल अछि, कृपया फेर सँ प्रयास करू!</string>
-    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">एहिठाम ट्रिपक आरंभ आ समाप्ति तिथि दर्ज करू</string>
+    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">एहिठाम ट्रिपक आरंभ तिथि दर्ज करू</string>
     <string name="sarvat_no_place_nakho">आरंभिक स्थान दर्ज करू</string>
     <string name="end_no_place_nakho">अंतिम स्थान दर्ज करू</string>
     <string name="driver_ni_per_trip_aavak_nakho">ड्राइवरक प्रति ट्रिप आय दर्ज करू</string>
@@ -109,4 +113,116 @@
     <string name="if_you_want_to_logout_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">यदि अहाँ लॉगआउट करब, त अहाँक ड्राफ्ट डाटा मेटा जायत। की अहाँ लॉगआउट करय चाहैत छी?</string>
     <string name="enter_income_name">आय केर नाम दर्ज करू <font fgcolor='#FF0000'>*</font></string>
     <string name="enter_income_amount">आय केर राशि दर्ज करू</string>
+
+    <!-- Expense Bottom Sheet Strings -->
+    <string name="note_expense_hint">नोट (खाना, टोल, पंक्चर, ड्राइवर खर्च, आदि)</string>
+    <string name="place_city">स्थान/शहर</string>
+    <string name="select_expense_type">खर्च प्रकार चुनू</string>
+    <string name="date">तारीख</string>
+
+    <!-- Income Bottom Sheet Strings -->
+    <string name="note_income_hint">नोट (पार्टी केर नाम आदि)</string>
+    <string name="total_income_bhada">कुल आय (भाडा)</string>
+    <string name="advance_taken">अग्रिम लेल गेल</string>
+    <string name="balance">बैलेंस</string>
+
+    <!-- Fuel Bottom Sheet Strings -->
+    <string name="diesel_liters">डीजल लीटर</string>
+    <string name="amount_required">राशि</string>
+    <string name="km_reading_odometer">किमी रीडिंग (ओडोमीटर)</string>
+    <string name="place_pump">स्थान / पंप</string>
+
+    <!-- Trip End Dialog -->
+    <string name="trip_end_date">ट्रिप समाप्ति तारीख</string>
+    <string name="driver_income_for_trip">ट्रिप लेल ड्राइवर आय</string>
+    <string name="driver_income_for_trip_">ट्रिप लेल ड्राइवर आय <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="complete_trip">ट्रिप पूर्ण करू</string>
+    <string name="complete_trip_">ट्रिप पूर्ण करू <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="cancel">रद्द करू</string>
+    <string name="submit">सबमिट करू</string>
+    <string name="trip_help_text"><![CDATA[
+एतय अहाँ अपन सभ यात्रा देख सकैत छी।
+यात्रा के साझा करबाक, डाउनलोड करबाक, संपादन करबाक वा हटाबैक लेल बटन के उपयोग करू।
+नव यात्रा शुरू करबाक लेल “+ Add Trip” पर टैप करू।
+सेव ड्राफ्ट देखबाक लेल नोटिफिकेशन आइकन पर टैप करू।
+]]></string>
+
+
+    <!-- wrap multiline/help text in CDATA to avoid parsing issues -->
+<!--    <string name="trip_help_text"><![CDATA[-->
+<!--एतय अहाँ अपन सभटा यात्रा देख सकैत छी।-->
+<!--यात्रा के शेयर, डाउनलोड, संपादन या डिलीट करबाक लेल बटनक प्रयोग करू।-->
+<!--नया यात्रा शुरू करबाक लेल “+ Add Trip” पर टैप करू।-->
+<!--सेव कएल गेल ड्राफ्ट खोलबाक लेल नोटिफिकेशन आइकन पर टैप करू।]]></string>-->
+
+<!--    <string name="trip_list_title">यात्रा सूची आ क्रियाकलाप</string>-->
+<!--    <string name="start_new_trip">नव यात्रा शुरू करू</string>-->
+
+<!--    <string name="add_trip_dec"><![CDATA[-->
+<!--शुरू तिथि, शुरू होए वाला स्थान, समाप्त स्थान आ ट्रक नंबर दर्ज करू।-->
+<!--अहाँ माइक्रोफोन सँ बोलिकऽ सेहो विवरण भरि सकैत छी।-->
+<!--यात्रा गणना शुरू करबाक लेल Add पर टैप करू।]]></string>-->
+
+<!--    <string name="manage_trip_title">ट्रिप हिसाब प्रबंधन</string>-->
+<!--    <string name="trip_transaction_dec">एतएसँ सभ ट्रिप रिकॉर्ड जोड़ू। खर्च जोड़बाक लेल Add Expenditure, कमाई जोड़बाक लेल Add Income आ डीजलक विवरण देबाक लेल Add Fuel उपयोग करू। सभ लेन-देन नीचाँ सूचीमे देखाइत अछि। उप्पर नीला रंगमे कुल नाफा देखाइत अछि।</string>-->
+<!--    <string name="add_expanse_tittle">खर्च जोड़ू</string>-->
+<!--    <string name="add_expense_dec">खर्च के राशि, नोट आ जगह दर्ज करू। खर्च के प्रकार आ तारीख चुनू। अहाँ माइक सँ बोलिकऽ विवरण जोड़ि सकैत छी। सेव पर टैप करब, खर्च ट्रिप हिसाब सूची में देखत।</string>-->
+<!--    <string name="add_income_tittle">आय जोड़ू (भाड़ा / एडवांस)</string>-->
+<!--    <string name="add_income_dec">आय के राशि दर्ज करू आ पार्टी नाम या कारण जइसकऽ नोट जोड़ू। अहाँ माइक सँ बोलिकऽ विवरण जोड़ि सकैत छी। सेव करब त आय ट्रिप हिसाब आ कुल लाभ में जोड़ल जायत।</string>-->
+<!--    <string name="add_fuel_tittle">इंधन विवरण जोड़ू</string>-->
+<!--    <string name="add_fuel_dec">फ्यूल खर्च जोड़बाक लेल डीजल लिटर आ राशि दर्ज करू। माइलेज निकलबाक लेल KM (ओडोमीटर) रीडिंग लिखू। जगह या पंपक नाम जोड़ू आ तारीख चुनू। सेव करब, फ्यूल ट्रिप हिसाब आ औसत में जुड़त।</string>-->
+<!--    <string name="complete_trip_tittle">ट्रिप पूरा करू</string>-->
+<!--    <string name="complete_trip_dec">ट्रिप खत्म होबाक तारीख चुनू आ ड्राइवर आय देखेबा लेल राशि दर्ज करू। ई राशि सिर्फ देखेबा लेल, हिसाब में इस्तेमाल नहि होइत अछि। सबमिट दबाबी, ट्रिप पूरा भ\'त आ शेयर करबा लेल PDF डाउनलोड भ'त।</string>-->
+    <string name="no_trip_found">कोनो ट्रिप नहि भेटल</string>
+    <string name="term_condition">टरम आओ कंडीशन</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="you_can_check_term_condition">अहाँ टरम आओ कंडीशन देख सकैत छी।</string>
+    <string name="driver_income">चालकक आय</string>
+    <string name="onboard_skip">Skip</string>
+    <string name="onboard_back">Back</string>
+    <string name="end_trip_date">ट्रिप समाप्ति तिथि</string>
+    <string name="end_trip_date_">ट्रिप समाप्ति तिथि <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="you_can_check_privacy">अहाँ गोपनीयता नीति देख सकैत छी.</string>
+    <string name="no_internet_connection">एहि बेर इंटरनेट बन अछि, तेँ अहाँ भाषा बदैल नहि सकैत छी।</string>
+    <string name="select_date">शुरुआती तारीख आ अंतिम तारीख चुनू</string>
+    <string name="km_input_type">अहाँ किलोमीटर केना ट्रैक करए चाहैत छी?</string>
+    <string name="odometer_reading">ओडोमीटर रीडिंग</string>
+    <string name="distance_traveled">तय कैल दूरी</string>
+    <string name="distance_traveled_km">तय कैल दूरी (कि.मी.)</string>
+    <string name="fuel_average">ईंधन औसत:</string>
+    <string name="select_date_">तारीख चुनू</string>
+    <string name="edit_trip_data">ट्रिप डेटा संपादित करू</string>
+
+    <string name="trip_list_title">यात्रा सूची आ कार्रवाई</string>
+    <string name="start_new_trip">नव यात्रा शुरू करू</string>
+    <string name="add_trip_dec">यात्रा शुरू तारीख, शुरू स्थान, अंत स्थान आ ट्रक नंबर दर्ज करू. माइक्रोफोन से बोलिके भी विवरण भर सकैत छी. जोड़ू दबा कऽ यात्रा हिसाब शुरू करू.</string>
+    <string name="manage_trip_title">यात्रा हिसाब प्रबंधन</string>
+    <string name="trip_transaction_dec">एतऽ सँ सभ यात्रा रिकॉर्ड जोड़ू. खर्च जोड़बाक लेल खर्च जोड़ू, कमाई जोड़बाक लेल आय जोड़ू आ डीजल विवरण लेल ईंधन जोड़ू. सभ लेन-देन नीचे सूची में देखाइत अछि. कुल मुनाफा ऊपर नीला रंग में देखाइत अछि.</string>
+    <string name="add_expanse_tittle">खर्च जोड़ू</string>
+    <string name="add_expense_dec">खर्च राशि, नोट आ स्थान दर्ज करू. खर्च प्रकार आ तारीख चुनू. माइक्रोफोन सँ बोलिके भी विवरण जोड़ सकैत छी. सहेजू दबा कऽ खर्च यात्रा हिसाब सूची में जुड़ जायत.</string>
+    <string name="add_income_tittle">आय जोड़ू (भाड़ा / एडवांस)</string>
+    <string name="add_income_dec">आय राशि दर्ज करू आ पार्टी नाम या कारण जेकाँ नोट जोड़ू. माइक्रोफोन सँ बोलिके भी विवरण जोड़ सकैत छी. सहेजू दबा कऽ आय यात्रा हिसाब आ कुल मुनाफा में जुड़ जायत.</string>
+    <string name="add_fuel_tittle">ईंधन विवरण जोड़ू</string>
+    <string name="add_fuel_dec">डीजल लीटर आ राशि दर्ज करू. माइलेज निकाले लेल KM रीडिंग (ओडोमीटर) दर्ज करू. स्थान या पंप नाम जोड़ू आ तारीख चुनू. सहेजू दबा कऽ ईंधन यात्रा हिसाब आ औसत में जुड़ जायत.</string>
+    <string name="complete_trip_tittle">यात्रा पूरा करू</string>
+    <string name="complete_trip_dec">यात्रा अंत तारीख चुनू आ ड्राइवर आय देखावे लेल राशि दर्ज करू. ई राशि गणना में उपयोग नहि होइत अछि, खाली देखावे लेल अछि. सबमिट दबा कऽ यात्रा पूरा करू आ PDF डाउनलोड कऽ साझा करू.</string>
+
+    <string name="please_enter_diesel_liters">कृपया डीजल के लीटर दर्ज करू</string>
+    <string name="please_enter_amount">कृपया राशि दर्ज करू</string>
+    <string name="please_enter_valid_km">कृपया सही किलोमीटर दर्ज करू</string>
+    <string name="please_enter_note">कृपया नोट दर्ज करू</string>
+    <string name="driver_s_gross_income_this_trip">एहि ट्रिप के ड्राइवर कमाई</string>
+
+    <!-- Maithili -->
+    <string name="enter_start_km">शुरू के ओडोमीटर डालू</string>
+    <string name="start_odometer_optional">शुरू के ओडोमीटर (जरूरी नहि)</string>
+    <string name="end_odometer_reading">अंत के ओडोमीटर डालू</string>
+    <string name="manual_km">कुल KM खुद डालू</string>
+    <string name="end_odometer">अंत के ओडोमीटर</string>
+    <string name="end_km_input_type">कुल KM डालू</string>
+    <string name="manual_km_traveled">खुद डलल KM</string>
+    <string name="coach_mark_expense">एतय खर्च डालू जइसे खाना, टोल, रिपेयर आदि</string>
+    <string name="coach_mark_income">ट्रिप दौरान मिलल कमाई एतय डालू</string>
+    <string name="coach_mark_fuel">एतय डीजल डालू (लीटर आ ओडोमीटर संग)</string>
+
 </resources>

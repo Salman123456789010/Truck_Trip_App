@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             delay(2000)
             if (Prefs[Constants.isLogin]) {
-                startActivity(Intent(this@SplashActivity, DashBoardActivity::class.java))
+                startActivity(Intent(this@SplashActivity, TruckNumberSpeechActivity::class.java))
                 finish()
             } else {
                  if(!Prefs[Constants.languageCode, ""].toString().isNullOrEmpty()){

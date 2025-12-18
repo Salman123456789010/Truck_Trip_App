@@ -4,7 +4,7 @@
     <color name="grey">#545454</color>
     <color name="light_grey">#80707070</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="color_primary">#2155FF</color>
+    <color name="color_primary">#2155FF</color>     <!--2155FF-->
     <color name="title_color">#D19155</color>
     <color name="intro_title_color">#394066</color>
     <color name="edittext_title_color">#060C29</color>
@@ -51,11 +51,11 @@
     <color name="telgu">#EEE7FD</color>
     <color name="telgu_txt">#5734AC</color>
     <color name="gujrati">#E9F5ED</color>
-    <color name="gujrati_txt">#4ca74c</color>
+    <color name="gujrati_txt">#03A327</color> <!--4ca74c-->   <!---->4CAF50
     <color name="punjabi">#FBE8F0</color>
     <color name="punjabi_txt">#C73061</color>
     <color name="tamil">#FCF8E0</color>
-    <color name="tamil_txt">#d74343</color>
+    <color name="tamil_txt">#CC1502</color>     <!--d74343-->
     <color name="marathi">#E4F8F9</color>
     <color name="marathi_txt">#39887C</color>
     <color name="bangla">#EBF0FE</color>

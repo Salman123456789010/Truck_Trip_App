@@ -115,14 +115,15 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"/>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="vertical"
                 android:layout_marginBottom="@dimen/_5sdp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -134,9 +135,19 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/gross_income"
-                        android:textColor="@color/black"
+                        android:textColor="@color/gujrati_txt"
+                        android:layout_alignParentStart="true"
                         android:textSize="@dimen/_12sdp"
                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text=":"
+                        android:textColor="@color/gujrati_txt"
+                        android:layout_centerInParent="true"
+                        android:textSize="@dimen/_12sdp"
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -144,17 +155,19 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="રૂ.2000"
                         android:id="@+id/totalAvak"
-                        android:textColor="@color/black"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/gujrati_txt"
                         android:textSize="@dimen/_12sdp"
                         />
 
-                </LinearLayout>
+                </RelativeLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="vertical">
 
                     <TextView
@@ -162,22 +175,78 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/total_expenditure"
-                        android:textColor="@color/black"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/tamil_txt"
                         android:textSize="@dimen/_12sdp" />
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text=":"
+                        android:textColor="@color/tamil_txt"
+                        android:layout_centerInParent="true"
+                        android:textSize="@dimen/_12sdp"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:text="રૂ.1000"
+                        android:layout_alignParentEnd="true"
                         android:id="@+id/totalJavak"
-                        android:textColor="@color/black"
+                        android:textColor="@color/tamil_txt"
                         android:textSize="@dimen/_12sdp"
                         />
 
-                </LinearLayout>
+                </RelativeLayout>
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/total_profit"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/color_primary"
+                        android:textSize="@dimen/_12sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text=":"
+                        android:textColor="@color/color_primary"
+                        android:layout_centerInParent="true"
+                        android:textSize="@dimen/_12sdp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="રૂ.1000"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/totalProfit"
+                        android:textColor="@color/color_primary"
+                        android:textSize="@dimen/_12sdp"
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DADADA"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,7 +259,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="@string/driver_s_gross_income"
+                    android:text="@string/driver_s_gross_income_this_trip"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
 
@@ -199,7 +268,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginEnd="@dimen/_10sdp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="રૂ.5000"
                     android:id="@+id/driverAvak"
@@ -216,7 +284,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_7sdp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/roboto_bold"
                 android:text="KA 01 QA 4243"
                 android:id="@+id/truckNumber"
                 android:textColor="@color/black"
@@ -241,12 +309,19 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/shareIcon"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:src="@drawable/baseline_share_24"
-                    app:tint="@color/color_primary" />
+                <FrameLayout
+                    android:layout_width="@dimen/_36sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_icon_circle_blue">
+
+                    <ImageView
+                        android:id="@+id/shareIcon"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/baseline_share_24"
+                        app:tint="@color/white" />
+                </FrameLayout>
             </LinearLayout>
 
             <!-- Download -->
@@ -256,13 +331,19 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/dowanloadIcon"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    app:tint="@color/color_primary"
-                    android:src="@drawable/baseline_arrow_downward_24"
-                    />
+                <FrameLayout
+                    android:layout_width="@dimen/_36sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_icon_circle_blue">
+
+                    <ImageView
+                        android:id="@+id/dowanloadIcon"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/baseline_arrow_downward_24"
+                        app:tint="@color/white" />
+                </FrameLayout>
             </LinearLayout>
 
             <!-- Edit -->
@@ -272,13 +353,19 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/editIcon"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    app:tint="@color/color_primary"
-                    android:src="@drawable/baseline_edit_24"
-                   />
+                <FrameLayout
+                    android:layout_width="@dimen/_36sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_icon_circle_blue">
+
+                    <ImageView
+                        android:id="@+id/editIcon"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/baseline_edit_24"
+                        app:tint="@color/white" />
+                </FrameLayout>
             </LinearLayout>
 
             <!-- Delete -->
@@ -288,12 +375,19 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/deleteIcon"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:src="@drawable/delete_20dp_000000_fill0_wght300_grad0_opsz20"
-                    app:tint="#F16060" />
+                <FrameLayout
+                    android:layout_width="@dimen/_36sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:background="@drawable/bg_icon_circle_blue">
+
+                    <ImageView
+                        android:id="@+id/deleteIcon"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/delete_20dp_000000_fill0_wght300_grad0_opsz20"
+                        app:tint="@color/white" />
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
             <com.google.android.ads.nativetemplates.TemplateView

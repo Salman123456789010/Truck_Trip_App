@@ -31,13 +31,14 @@
     <string name="driver_s_gross_income">ড্রাইভারের মোট আয়:</string>
     <string name="owner_s_gross_income">মালিকের মোট আয়:</string>
     <string name="add_trip">ভ্রমণ যোগাও</string>
-    <string name="gross_income">মোট আয়</string>
-    <string name="total_expenditure">মোট ব্যয়</string>
+    <string name="gross_income">💰 মোট আয়</string>
+    <string name="total_expenditure">💸 মোট ব্যয়</string>
     <string name="add_trip_data">ভ্রমণ তথ্য যোগাও</string>
-    <string name="source_place_">সূত্র স্থান <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="dest_place_">গন্তব্য স্থান <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="truck_number_">ট্রাক নম্বর <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="trip_date">ভ্রমণের তারিখ <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="source_place_">📍সূত্র স্থান <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="dest_place_">🏁 গন্তব্য স্থান <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="truck_number_">🚚 ট্রাক নম্বর <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="trip_date">ভ্রমণের শুরুর তারিখ <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="trip_start_date">ভ্রমণের শুরুর তারিখ </string>
     <string name="driver_s_income">ড্রাইভারের আয়:</string>
     <string name="trip_payment">ভ্রমণের পেমেন্ট</string>
     <string name="total_days_10">মুঠ দিন: 10</string>
@@ -49,11 +50,14 @@
     <string name="add">যোগাও</string>
     <string name="add_hissab">হিসাব যোগাও</string>
     <string name="save">সংরক্ষণ করো</string>
-    <string name="total_profit">মোট লাভ</string>
+    <string name="total_profit">✅ মোট লাভ</string>
     <string name="total_income_credit">মোট আয় (ক্রেডিট)</string>
     <string name="total_expense_debit">মোট ব্যয় (ডেবিট)</string>
     <string name="expense">ব্যয়</string>
+    <string name="add_expense">ꯆꯦꯜ ꯈꯨꯝꯗꯣꯛꯄꯤꯌꯣ</string>
     <string name="income">আয়</string>
+    <string name="add_income">ꯋꯥꯔꯨ ꯈꯨꯝꯗꯣꯛꯄꯤꯌꯣ</string>
+    <string name="add_fuel">ꯏꯟꯍꯅ ꯈꯨꯝꯗꯣꯛꯄꯤꯌꯣ</string>
     <string name="enter_text">পাঠ্য লিখো</string>
     <string name="amount">পরিমাণ</string>
     <string name="enter_expenditure_name">ব্যয়ের নাম লিখো <font fgcolor='#FF0000'>*</font></string>
@@ -83,7 +87,7 @@
     <string name="no">না</string>
     <string name="yes">হ্যাঁ</string>
     <string name="something_issue_in_server_please_try_again_later">ওহ, কিছু ভুল হয়েছে, দয়া করে আবার চেষ্টা করুন!</string>
-    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">এখানে ট্রিপের শুরু এবং শেষ তারিখ লিখুন</string>
+    <string name="ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho">এখানে ট্রিপের শুরুর তারিখ লিখুন</string>
     <string name="sarvat_no_place_nakho">শুরু করার স্থান লিখুন</string>
     <string name="end_no_place_nakho">শেষ স্থান লিখুন</string>
     <string name="driver_ni_per_trip_aavak_nakho">ড্রাইভারের প্রতি ট্রিপের আয় লিখুন</string>
@@ -109,4 +113,141 @@
     <string name="if_you_want_to_logout_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">অপুনা লগ আউট তৌবনে, অপুনগী ড্ৰাফ্ট ডাটা খালমিনখ্রে। লগ আউট তৌগনি?</string>
     <string name="enter_income_name">आमदनी को नाम लिखो <font fgcolor='#FF0000'>*</font></string>
     <string name="enter_income_amount">आमदनी को रकम लिखो</string>
+
+    <!-- Expense Bottom Sheet Strings -->
+    <string name="note_expense_hint">नोट (खाना, टोल, पंक्चर, ड्राइवर खर्च, आदि)</string>
+    <string name="place_city">स्थान/शहर</string>
+    <string name="select_expense_type">खर्च प्रकार चुनो</string>
+    <string name="date">तारीख</string>
+
+    <!-- Income Bottom Sheet Strings -->
+    <string name="note_income_hint">नोट (पार्टी को नाम आदि)</string>
+    <string name="total_income_bhada">कुल आमदनी (भाडा)</string>
+    <string name="advance_taken">अग्रिम लिया</string>
+    <string name="balance">बैलेंस</string>
+
+    <!-- Fuel Bottom Sheet Strings -->
+    <string name="diesel_liters">डीजल लीटर</string>
+    <string name="amount_required">रकम</string>
+    <string name="km_reading_odometer">किमी रीडिंग (ओडोमीटर)</string>
+    <string name="place_pump">स्थान / पंप</string>
+
+    <!-- Trip End Dialog -->
+    <string name="trip_end_date">ट्रिप समाप्ति तारीख</string>
+    <string name="driver_income_for_trip">ट्रिप लेई ड्राइवर आमदनी</string>
+    <string name="driver_income_for_trip_">ट्रिप लेई ड्राइवर आमदनी <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="complete_trip">ट्रिप पूर्ण करो</string>
+    <string name="complete_trip_">ट्रिप पूर्ण करो <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="cancel">रद्द करो</string>
+    <string name="submit">सबमिट करो</string>
+    <string name="trip_help_text"><![CDATA[
+মফম অসিদা নহাকপা নখোয়গী মাপুং ফামদা থোকপা ট্রিপ পুম্নমক উবগনি।
+ট্রিপ অমা শেয়ার তৌবা, ডাউনলোড তৌবা, এডিট তৌবা নত্ত্রগা দেলিট তৌবগীদমক বটনশিং অসি শিজিন্নৌ।
+নতুন ট্রিপ অমা হৌনবা “+ Add Trip” দা ট্যাপ তৌ।
+সেভ তৌরিবা ড্ৰাফ্টশিং হৌনবগীদমক নোটিফিকেশন আইকনদা ট্যাপ তৌ।
+]]></string>
+    <string name="please_enter_diesel_liters">চানবিদুনা ডিজেল লিটার ইন্সার্ট তৌ</string>
+    <string name="please_enter_amount">চানবিদুনা অমাউন্ট এণ্টার তৌবা</string>
+    <string name="please_enter_valid_km">চানবিদুনা অচুম্বা কিলোমিটার এন্ট্রি তৌবিয়ু</string>
+    <string name="please_enter_note">ꯑꯃꯨꯛ ꯅꯣꯠ ꯊꯝꯕꯤꯌꯨ</string>
+
+    <!--    <string name="trip_help_text">-->
+<!--    Ei-di nahakna nahakki tour pumnamak uba ngammi.-->
+<!--    Share, download, edit amasung delete tour tounaba buttons phangbiru.-->
+<!--    Anouba tour toubasingidamak “+ Add Trip” tap touru.-->
+<!--    Save touriba drafts puthoknaba notification icon tap touru.-->
+<!--    </string>-->
+<!--    <string name="trip_list_title">Tour List &amp;  Actions</string>-->
+
+<!--    <string name="start_new_trip">Anouba tour tounu</string>-->
+<!--    <string name="add_trip_dec">-->
+<!--    Start date, starting place, ending place amasung truck number thamjin-u.-->
+<!--    Mic phangba lai-na pukning details pumnamak chatrei.-->
+<!--    Trip calculation toubasingidamak Add tap touru.-->
+<!--    </string>-->
+<!--    <string name="manage_trip_title">Trip Hisab Manage touru</string>-->
+<!--    <string name="trip_transaction_dec">মসিগী এখানদা ট্রিপ অসিগী রেকর্ড পুম্নমক লোইবা। খরচ শিজিন্নবা Add Expenditure, উপাআশি শিজিন্নবা Add Income অমসুং ডিজেল মফম পিববা Add Fuel শিজিন্নু। লোয়বা লেনদেন পুম্নমক মথক্তা তালিকাদা উত্থরী। মথকখাক্তা নীলা মপানদা মোট লাব উত্থরি।</string>-->
+<!--    <string name="add_expanse_tittle">ꯄꯥꯡꯒꯤ ꯍꯥꯡꯗꯣꯛꯄꯥ ꯍꯥꯡꯗꯣꯛ</string>-->
+<!--    <string name="add_expense_dec">ꯄꯥꯡꯒꯤ ꯑꯣꯠꯇꯨꯡ, ꯅꯣꯠ ꯃꯇꯝ ꯄꯥꯡꯗꯣꯛꯅꯕꯥ. ꯄꯥꯡꯒꯤ ꯃꯇꯝ ꯑꯣꯝꯕ ꯃꯌꯥꯝ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ. ꯃꯥꯏꯛ ꯑꯃꯁꯤꯗ ꯍꯣꯡꯗꯣꯛꯇꯨꯅꯥ ꯅꯍꯥꯛꯄꯥ. ꯁꯦꯚ ꯇꯦꯞ ꯇꯧꯕꯥ ꯄꯥꯡꯒꯤ ꯍꯥꯡꯗꯣꯛ ꯇꯨꯡꯁꯤꯡ ꯇꯨꯡꯅ ꯊꯕꯤ꯫</string>-->
+<!--    <string name="add_income_tittle">ꯑꯣꯡꯗꯣꯟ ꯍꯥꯡꯗꯣꯛꯄꯥ (ꯚꯥꯗꯥ / ꯑꯗꯋꯥꯟꯁ)</string>-->
+<!--    <string name="add_income_dec">ꯑꯣꯡꯗꯣꯟ ꯑꯣꯠꯇꯨꯡ ꯍꯥꯡꯅꯣꯛꯅꯥ ꯃꯇꯝꯗ ꯄꯥꯔꯇꯤ ꯃꯃꯤ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ ꯅꯣꯠ ꯃꯇꯝ ꯍꯥꯡꯅꯣꯛꯄꯥ. ꯃꯥꯏꯛ ꯑꯃꯁꯤꯗ ꯍꯣꯡꯗꯣꯛꯇꯨꯅꯥ ꯅꯍꯥꯛꯄꯥ. ꯁꯦꯚ ꯇꯦꯞ ꯇꯧꯕꯥ ꯑꯣꯡꯗꯣꯟ ꯇ꯭ꯔꯤꯞ ꯍꯥꯡꯗꯣꯛ ꯑꯗꯨ ꯑꯃꯁꯤꯗ ꯊꯕꯤ꯫</string>-->
+<!--    <string name="add_fuel_tittle">ꯏꯟꯗꯣꯟ ꯗꯤꯖꯤꯂ ꯍꯥꯡꯗꯣꯛꯄꯥ</string>-->
+<!--    <string name="add_fuel_dec">ꯗꯤꯖꯤꯂ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ ꯍꯥꯡꯅꯣꯛꯅꯥ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ. ꯃꯥꯏꯂꯦꯖ ꯑꯃꯁꯤꯗ ꯀꯤꯃꯤ (ꯑꯣꯗꯣꯃꯤꯇꯔ) ꯂꯤꯇ ꯍꯥꯡꯅꯣꯛꯄꯥ. ꯆꯠꯂꯨꯝ ꯃꯇꯝ ꯄꯝꯄ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ, ꯃꯌꯥꯝ ꯑꯣꯠꯇꯨꯡ. ꯁꯦꯚ ꯇꯦꯞ ꯇꯧꯕꯥ, ꯏꯟꯗꯣꯟ ꯇ꯭ꯔꯤꯞ ꯍꯥꯡꯗꯣꯛ ꯑꯃꯁꯤꯗ ꯊꯕꯤ꯫</string>-->
+<!--    <string name="complete_trip_tittle">ꯇ꯭ꯔꯤꯞ ꯃꯨꯑꯣꯡꯗꯣꯛꯄꯥ</string>-->
+    <string name="no_trip_found">কোনো ট্রিপ লৈফবা নত্তে</string>
+
+    <string name="onboard_skip">স্কিপ তৌবিরে</string>
+    <string name="onboard_back">মখা চত্তবিরে</string>
+    <string name="term_condition">তরম অমসুং কণ্ডিশন</string>
+    <string name="privacy_policy">প্রাইভেসি পলিসি</string>
+    <string name="you_can_check_term_condition">অদুবু তরম অমসুং কণ্ডিশন চেক তৌবা ঙম্লি.</string>
+    <string name="you_can_check_privacy">অদুবু প্রাইভেসি পলিসি চেক তৌবা ঙম্লি.</string>
+    <string name="driver_income">দ্রাইভার ইনকাম</string>
+    <string name="end_trip_date">ট্রিপ লোইরকপা তারিখ</string>
+    <string name="end_trip_date_">ট্রিপ লোইরকপা তারিখ <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="no_internet_connection">মতম ইন্তরনেত অফ্‌নি, মারমশিং ভাষা হন্নবা ঙমদে।</string>
+    <string name="km_input_type">নহাক্না কিলোমিটার করম্না ত্র্যাক তৌবা পাম্বা?</string>
+    <string name="odometer_reading">ওডোমিটার রিডিং</string>
+    <string name="distance_traveled">চৎথরিবা দূরত্ব</string>
+    <string name="distance_traveled_km">চৎথরিবা দূরত্ব (কিমি)</string>
+    <string name="fuel_average">ইন্ধন এভরেজ:</string>
+    <string name="select_date">അഹৌബാ തাংദ്രും അമസുങ് ലോയ്ഷാങ് താംദ്രും ഖങ്ങദോക്പാ</string>
+    <string name="select_date_">ꯗꯦꯠ ꯈꯟꯗꯣꯛꯄꯥ</string>
+    <string name="edit_trip_data">ꯇ꯭ꯔꯤꯞ ꯗꯦꯇꯥ ꯁꯝꯄꯥꯗꯅ ꯇꯧ</string>
+
+
+
+    <string name="trip_list_title">ট্ৰিপ তালিকা আৰু কাৰ্যসমূহ</string>
+
+    <string name="start_new_trip">নতুন ট্ৰিপ আৰম্ভ কৰক</string>
+
+    <string name="add_trip_dec">
+ট্ৰিপ আৰম্ভ কৰাৰ তাৰিখ, আৰম্ভ ঠাই, শেষ ঠাই আৰু ট্ৰাক নম্বৰ লিখক।
+আপুনি মাইক ব্যৱহাৰ কৰি কথাও কৈ তথ্য ভৰাব পাৰে।
+ট্ৰিপ হিচাব আৰম্ভ কৰিবলৈ Add টেপ কৰক।
+</string>
+
+    <string name="manage_trip_title">ট্ৰিপ হিসাব ব্যৱস্থাপনা</string>
+
+    <string name="trip_transaction_dec">
+ইয়াত ট্ৰিপৰ সকলো ৰেকৰ্ড যোগ কৰক।
+খৰচ যোগ কৰিবলৈ Add Expense, আয় যোগ কৰিবলৈ Add Income আৰু ডিজেলৰ বাবে Add Fuel ব্যৱহাৰ কৰক।
+সকলো লেনদেন তলৰ তালিকাত দেখা যাব।
+মুঠ লাভ ওপৰত নীলা ৰঙত দেখুৱা হয়।
+</string>
+
+    <string name="add_expanse_tittle">খৰচ যোগ কৰক</string>
+
+    <string name="add_expense_dec">
+খৰচৰ পৰিমাণ, টীকা আৰু ঠাই লিখক।
+খৰচৰ ধৰণ আৰু তাৰিখ বাছনি কৰক।
+আপুনি মাইক ব্যৱহাৰ কৰি কথাও কৈ তথ্য যোগ কৰিব পাৰে।
+Save টেপ কৰিলে খৰচ ট্ৰিপ হিসাবত দেখা যাব।
+</string>
+
+    <string name="add_income_tittle">আয় যোগ কৰক (ভাড়া / এডভান্স)</string>
+
+    <string name="add_income_dec">
+আয়ৰ পৰিমাণ লিখক আৰু পাৰ্টীৰ নাম বা কাৰণ টীকা হিচাপে যোগ কৰক।
+আপুনি মাইক ব্যৱহাৰ কৰি কথাও কৈ তথ্য যোগ কৰিব পাৰে।
+Save টেপ কৰিলে আয় ট্ৰিপ হিসাব আৰু মুঠ লাভত যোগ হ’ব।
+</string>
+
+    <string name="add_fuel_tittle">ইন্ধনৰ তথ্য যোগ কৰক</string>
+
+    <string name="add_fuel_dec">
+ডিজেলৰ লিটাৰ আৰু পৰিমাণ লিখি ইন্ধনৰ খৰচ যোগ কৰক।
+মাইলেজ গণনা কৰিবলৈ KM ৰিডিং (অ’ডোমিটাৰ) লিখক।
+ঠাই বা পাম্পৰ নাম যোগ কৰক আৰু তাৰিখ বাছনি কৰক।
+Save টেপ কৰিলে ইন্ধন ট্ৰিপ হিসাব আৰু এভাৰেজত যোগ হ’ব।
+</string>
+
+    <string name="complete_trip_tittle">ট্ৰিপ সম্পূৰ্ণ কৰক</string>
+
+    <string name="complete_trip_dec">
+ট্ৰিপ শেষৰ তাৰিখ বাছনি কৰক আৰু দেখুৱাবৰ বাবে চালকৰ আয় লিখক।
+এই পৰিমাণ গণনাত ব্যৱহাৰ কৰা নহয়, কেৱল দেখুৱাবৰ বাবেই।
+Submit টেপ কৰিলে ট্ৰিপ সম্পূৰ্ণ হ’ব আৰু শ্বেয়াৰ কৰিবলৈ PDF ডাউনলোড হ’ব।
+</string>
+    <string name="driver_s_gross_income_this_trip">মসিগী ট্রিপতগী ড্রাইভার কামাই</string>
 </resources>

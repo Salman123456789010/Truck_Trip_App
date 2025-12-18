@@ -72,6 +72,27 @@ import java.util.Date
 import java.util.Locale
 import java.util.Random
 import kotlin.toString
+import android.view.ViewConfiguration
+import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
+import com.dadabarbie.TruckTrip.views.CoachMarkHelper
+import com.dadabarbie.TruckTrip.views.CoachMarkView
+
+// ----------------------
+// Extension: single-click to prevent rapid double taps
+// ----------------------
+// Place this top-level function in the file (already here).
+fun View.setOnSingleClickListener(delay: Long = 800L, onClick: (View) -> Unit) {
+    // disable view for short time to prevent multiple rapid clicks
+    this.setOnClickListener { v ->
+        if (!v.isEnabled) return@setOnClickListener
+        v.isEnabled = false
+        try {
+            onClick(v)
+        } finally {
+            v.postDelayed({ v.isEnabled = true }, delay)
+        }
+    }
+}
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), View.OnClickListener,
@@ -99,12 +120,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     var totalDebitAmount = 0
     var randomNumber = 0
     var showingFlag = 0
-    var startTripDate: String? =""
-    var truckNumberGiven: String? =""
+    var startTripDate: String? = ""
+    var truckNumberGiven: String? = ""
     var driverIncome = "0"
     var totalDaysTrip = "0"
     var id = "0"
 
+    var startOdometerReading: String = ""  // NEW: Start odometer from trip dialog
+    var endOdometerReading: String = ""    // NEW: End odometer from trip end dialog
+    var endManualKm: String = ""           // NEW: Manual KM from trip end dialog
+    var endKmIsOdometerMode: Boolean = true
+
+// In MainActivity.kt, add these variables at the top with other declarations:
+
+    var endTripDate: String? = ""           // Add this
+    var driverIncomeAmount: String? = "0"
     companion object {
         // Yaha apna Rewarded Ad Unit ID daalo (second ID)
         private const val REWARDED_AD_UNIT_ID =
@@ -117,16 +147,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
         setLanguage()
         initViews()
         setOnclickListner()
         setObserver()
         MobileAds.initialize(this) {}
-
-        // 2. Pehle se ek ad load kar lo
         loadRewardedAd()
-    }
 
+        // Show coach marks after a short delay to ensure all views are ready
+        binding.root.postDelayed({
+            showCoachMarksIfNeeded()
+        }, 500)
+    }
 
     private fun loadRewardedAd() {
         val adRequest = AdRequest.Builder().build()
@@ -182,33 +215,84 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
     private fun initViews() {
         showingFlag = intent.getIntExtra("flag", 1)
+
         if (showingFlag == 1) {
+            // New trip
             randomNumberGenerate()
             callDialog("", "", "", "", "", "", "", "")
         } else {
+            // Edit existing trip
             randomNumberGenerate()
+
             val truckNumber = intent.getStringExtra("truckNumber")
             val srcPlace = intent.getStringExtra("sourceName")
             val driverAvak = intent.getStringExtra("driverAvak")
             val destPlace = intent.getStringExtra("destinationName")
             val startDate = intent.getStringExtra("startingDate")
-            startTripDate=startDate
-            truckNumberGiven=truckNumber
+            startTripDate = startDate
+            truckNumberGiven = truckNumber
             val endDate = intent.getStringExtra("endingDate")
+            endTripDate = endDate
+            driverIncomeAmount = driverAvak
             id = intent.getStringExtra("id").toString()
-            Log.d("TAG1233", "initViews: $id")
-            binding.truckNumber.text =truckNumber.toString()
+
+            Log.d("MainActivity", "Editing trip ID: $id")
+
+            if (showingFlag == 2 && id.isNotEmpty()) {
+                randomNumber = id.toIntOrNull() ?: randomNumber
+                databaseAddFlag = true
+
+                // CRITICAL FIX: Only parse from Intent if Constants lists are empty
+                // This prevents overwriting the lists that were already populated in HomeFragment
+                if (Constants.creditList.isEmpty() && Constants.debitList.isEmpty()) {
+                    Log.d("MainActivity", "Lists empty, parsing from Intent JSON")
+
+                    intent.getStringExtra("incomeJson")?.let { json ->
+                        try {
+                            val parsed: List<Income> = Gson().fromJson(
+                                json,
+                                object : TypeToken<List<Income>>() {}.type
+                            )
+                            Constants.creditList.clear()
+                            Constants.creditList.addAll(parsed)
+                            Log.d("MainActivity", "Parsed ${parsed.size} income entries from JSON")
+                        } catch (e: Exception) {
+                            Log.e("MainActivity", "Error parsing income JSON: ${e.message}")
+                        }
+                    }
+
+                    intent.getStringExtra("expenseJson")?.let { json ->
+                        try {
+                            val parsed: List<Expense> = Gson().fromJson(
+                                json,
+                                object : TypeToken<List<Expense>>() {}.type
+                            )
+                            Constants.debitList.clear()
+                            Constants.debitList.addAll(parsed)
+                            Log.d("MainActivity", "Parsed ${parsed.size} expense entries from JSON")
+                        } catch (e: Exception) {
+                            Log.e("MainActivity", "Error parsing expense JSON: ${e.message}")
+                        }
+                    }
+                } else {
+                    Log.d("MainActivity", "Using existing lists - Income: ${Constants.creditList.size}, Expense: ${Constants.debitList.size}")
+                }
+            }
+
+            // Set UI values
+            binding.truckNumber.text = truckNumber.toString()
             binding.srcName.text = srcPlace.toString()
-//            binding.driverIncome.text = driverAvak.toString()
             binding.dest.text = destPlace.toString()
             binding.srcDate.text = startDate.toString()
-//            binding.destDate.text = endDate.toString()
-            if (creditList.size > 0) {
-                creditIncomeUpdate()
 
+            // Update adapters with loaded data
+            if (creditList.isNotEmpty()) {
+                Log.d("MainActivity", "Updating credit adapter with ${creditList.size} items")
+                creditIncomeUpdate()
             }
-            Log.d("debit", "initViews: ${Constants.debitList}")
-            if (debitList.size > 0) {
+
+            if (debitList.isNotEmpty()) {
+                Log.d("MainActivity", "Updating debit adapter with ${debitList.size} items")
                 debitIncomeUpdate()
             }
         }
@@ -244,25 +328,33 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         totalDays: String, update: String
     ) {
         databaseAddFlag = true
-        tripDialogFragment = TripDialogFragment(date, startingPlace, endingPlace, driverIncome, truckNumber, truckAvg, totalDays, update)
+        tripDialogFragment = TripDialogFragment(
+            date, startingPlace, endingPlace, driverIncome,
+            truckNumber, truckAvg, totalDays, update,
+            startOdometerReading  // NEW: Pass start odometer
+        )
         tripDialogFragment.show(supportFragmentManager, "")
         tripDialogFragment.isCancelable = false
     }
-
     fun getDataFill(
-        truckNumber: String, srcPlaceValue: String, destPlaceValue: String, startDate: String,
-        endDate: String, truckAvg: String = "", driverTripAvak: String, totalDays: String = "0"
+        truckNumber: String,
+        srcPlaceValue: String,
+        destPlaceValue: String,
+        startDate: String,
+        endDate: String,
+        truckAvg: String = "",
+        driverTripAvak: String,
+        totalDays: String = "0",
+        startOdometer: String = ""  // NEW: Add start odometer parameter
     ) {
         binding.truckNumber.text = truckNumber.toString()
         binding.srcName.text = srcPlaceValue
         binding.dest.text = destPlaceValue
         binding.srcDate.text = startDate
-        startTripDate=startDate
-        truckNumberGiven=truckNumber
-//        binding.destDate.text = endDate
-//        binding.truckAvg.text = truckAvg.toString()
-//        binding.driverIncome.text= driverTripAvak
+        startTripDate = startDate
+        truckNumberGiven = truckNumber
         totalDaysTrip = totalDays
+        startOdometerReading = startOdometer  // NEW: Store start odometer
     }
 
     private fun setObserver() {
@@ -273,9 +365,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                         val income = Income(
                             desc = it.desc,
                             amount = it.amount,
-                            totalIncome = it.totalIncome,
-                            advanceTaken = it.advanceTaken,
-                            balance = it.balance,
                             note = it.note,
                             place = it.place,
                             date = it.date
@@ -291,6 +380,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                         creditAdapter.submitList(creditList)
                         creditAdapter.notifyDataSetChanged()
                         creditIncomeUpdate()
+                        databaseAddFlag = false
                     }
                 }
             }
@@ -320,6 +410,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                         debitAdapter.submitList(debitList)
                         debitAdapter.notifyDataSetChanged()
                         debitIncomeUpdate()
+                        databaseAddFlag = false
                     }
                 }
 
@@ -372,60 +463,59 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     private fun setOnclickListner() {
-        binding.add.setOnClickListener(this)
-        binding.backBtn.setOnClickListener(this)
-        binding.done.setOnClickListener(this)
-        binding.editLayout.setOnClickListener(this)
-        binding.cardFood.setOnClickListener(this)
-        binding.cardToll.setOnClickListener(this)
-        binding.cardDiesel.setOnClickListener(this)
+        // Use single-click extension and also prevent opening the same dialog if already shown.
+        binding.add.setOnSingleClickListener {
+            if (::addTaskDialogFragment.isInitialized && addTaskDialogFragment.isAdded) return@setOnSingleClickListener
+            addTaskDialogFragment = AddTaskDialogFragment("", "", "", 0)
+            addTaskDialogFragment.show(supportFragmentManager, "")
+        }
+
+        binding.backBtn.setOnSingleClickListener {
+            onBackPressed()
+        }
+
+        binding.done.setOnSingleClickListener {
+            if (::tripEndDialogFragment.isInitialized && tripEndDialogFragment.isAdded) return@setOnSingleClickListener
+            tripName = binding.srcName.text.toString() + " TO " + binding.dest.text.toString()
+            showTripEndDialog()
+        }
+
+        binding.editLayout.setOnSingleClickListener {
+            if (::tripDialogFragment.isInitialized && tripDialogFragment.isAdded) return@setOnSingleClickListener
+
+            callDialog(
+                "${startTripDate}",
+                startingPlace = binding.srcName.text.toString(),
+                endingPlace = binding.dest.text.toString(),
+                driverIncome = "",
+                truckNumber = truckNumberGiven.toString(),
+                truckAvg = "",
+                totalDays = totalDaysTrip,
+                update = "yes"
+            )
+        }
+
+        binding.cardFood.setOnSingleClickListener {
+            if (::addExpenseBottomSheetFragment.isInitialized && addExpenseBottomSheetFragment.isAdded) return@setOnSingleClickListener
+            addExpenseBottomSheetFragment = AddExpenseBottomSheetFragment()
+            addExpenseBottomSheetFragment.show(supportFragmentManager, "AddExpenseBottomSheet")
+        }
+
+        binding.cardToll.setOnSingleClickListener {
+            if (::addIncomeBottomSheetFragment.isInitialized && addIncomeBottomSheetFragment.isAdded) return@setOnSingleClickListener
+            addIncomeBottomSheetFragment = AddIncomeBottomSheetFragment()
+            addIncomeBottomSheetFragment.show(supportFragmentManager, "AddIncomeBottomSheet")
+        }
+
+        binding.cardDiesel.setOnSingleClickListener {
+            if (::addFuelBottomSheetFragment.isInitialized && addFuelBottomSheetFragment.isAdded) return@setOnSingleClickListener
+            addFuelBottomSheetFragment = AddFuelBottomSheetFragment()
+            addFuelBottomSheetFragment.show(supportFragmentManager, "AddFuelBottomSheet")
+        }
     }
 
     override fun onClick(v: View?) {
-        when (v) {
-            binding.add -> {
-                addTaskDialogFragment = AddTaskDialogFragment("", "", "", 0)
-                addTaskDialogFragment.show(supportFragmentManager, "")
-            }
-
-            binding.cardFood -> {
-                addExpenseBottomSheetFragment = AddExpenseBottomSheetFragment()
-                addExpenseBottomSheetFragment.show(supportFragmentManager, "AddExpenseBottomSheet")
-            }
-
-            binding.cardToll -> {
-                addIncomeBottomSheetFragment = AddIncomeBottomSheetFragment()
-                addIncomeBottomSheetFragment.show(supportFragmentManager, "AddIncomeBottomSheet")
-            }
-
-            binding.cardDiesel -> {
-                addFuelBottomSheetFragment = AddFuelBottomSheetFragment()
-                addFuelBottomSheetFragment.show(supportFragmentManager, "AddFuelBottomSheet")
-            }
-
-            binding.editLayout -> {
-                callDialog(
-                    "${startTripDate} to ${startTripDate}",
-                    startingPlace = binding.srcName.text.toString(),
-                    endingPlace = binding.dest.text.toString(),
-                    driverIncome = "",
-                    truckNumber = truckNumberGiven.toString(),
-                    truckAvg = "",
-                    totalDays = totalDaysTrip, "yes"
-                )
-            }
-
-            binding.backBtn -> {
-                onBackPressed()
-            }
-
-            binding.done -> {
-                tripName = binding.srcName.text.toString() + " TO " + binding.dest.text.toString()
-                // Show dialog to collect Trip End Date and Driver Income
-                showTripEndDialog()
-            }
-
-        }
+        // kept for compatibility; main click handling moved to setOnclickListner()
     }
 
     private fun roundOffDecimal(number: Double): Double? {
@@ -443,6 +533,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     private fun setAllData() {
         var flag = false
         GlobalScope.launch {
+            val db = AppDatabase.getDatabase(applicationContext)
+            val draftDao = db.productsDao()
+            val currentModel = TripDataTestModel(
+                truckNumberGiven.toString(),
+                binding.srcName.text.toString(),
+                binding.dest.text.toString(),
+                startTripDate.toString(),
+                "",
+                "",
+                randomNumber.toString(),
+                "",
+                creditList as List<Income>,
+                debitList as List<Expense>
+            )
+            val existing = draftDao.getDraftById(randomNumber.toString())
+            if (existing != null) {
+                val existingModel = convertToModel(existing)
+                if (existingModel == currentModel) {
+                    return@launch
+                }
+            }
             if (!getAllData(applicationContext).contains(
                     TripDataTestModel(
                         truckNumberGiven.toString(),
@@ -506,7 +617,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                     val tripDataDao = db.productsDao()
                     tripDataEntities.forEach {
                         tripDataDao.update(
-                            it.randomNumber.toInt(),
+                            it.randomNumber,
                             it.truckNumber,
                             it.srcPlace,
                             it.destPlace,
@@ -517,6 +628,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                             it.modelList2
                         )
                     }
+                    Constants.refreshApiGet(Event(1))
                 } else {
                     testList.add(
                         TripDataTestModel(
@@ -552,6 +664,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                     val db = AppDatabase.getDatabase(applicationContext)
                     val tripDataDao = db.productsDao()
                     tripDataEntities.forEach { tripDataDao.insert(it) }
+                    Constants.refreshApiGet(Event(1))
                 }
             }
         }
@@ -606,12 +719,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     override fun clickCreditEditMethod(position: Int) {
         val income = creditList[position]
         addIncomeBottomSheetFragment = AddIncomeBottomSheetFragment(
-            incomeDesc = income.desc,
-            incomeAmount = income.amount,
-            totalIncome = income.totalIncome,
-            advanceTaken = income.advanceTaken,
-            balance = income.balance,
-            note = income.note,
+            incomeDesc = income.desc ?: "",
+            incomeAmount = income.amount ?: "",
+            note = income.note ?: "",
+            place = income.place ?: "",
+            date = income.date ?: "",
             position = position
         )
         addIncomeBottomSheetFragment.show(supportFragmentManager, "AddIncomeBottomSheet")
@@ -634,24 +746,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             addFuelBottomSheetFragment = AddFuelBottomSheetFragment(
                 fuelDesc = expense.desc,
                 fuelAmount = expense.amount,
-                fuelLiters = expense.liters,
-                fuelKm = expense.km,
-                fuelPlace = expense.place,
-                fuelDate = expense.date,
+                fuelLiters = expense.liters ?: "",
+                fuelKm = expense.km ?: "",
+                fuelPlace = expense.place ?: "",
+                fuelDate = expense.date ?: "",
                 position = position
             )
             addFuelBottomSheetFragment.show(supportFragmentManager, "AddFuelBottomSheet")
         } else {
             // Regular expense entry
             addExpenseBottomSheetFragment = AddExpenseBottomSheetFragment(
-                expenseDesc = expense.desc,
+                expenseDesc = expense.desc ?: "",
                 expenseAmount = expense.amount,
-                expenseNote = expense.note,
-                expensePlace = expense.place,
-                expenseDate = expense.date,
-                expenseType = expense.type,
+                expenseNote = expense.note ?: "",  // Handle null
+                expensePlace = expense.place ?: "",  // Handle null
+                expenseDate = expense.date ?: "",  // Handle null
+                expenseType = expense.type ?: "",  // Handle null
                 position = position
-        )
+            )
             addExpenseBottomSheetFragment.show(supportFragmentManager, "AddExpenseBottomSheet")
         }
     }
@@ -661,6 +773,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         debitAdapter.submitList(debitList)
         debitAdapter.notifyDataSetChanged()
         debitIncomeUpdate()
+        databaseAddFlag = false
     }
 
     fun creditDeleteHissab(position: Int) {
@@ -668,6 +781,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         creditAdapter.submitList(creditList)
         creditAdapter.notifyDataSetChanged()
         creditIncomeUpdate()
+        databaseAddFlag = false
     }
 
     fun debitDataUpdate() {
@@ -676,7 +790,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         debitAdapter.notifyDataSetChanged()
         debitIncomeUpdate()
         // Recalculate average when fuel entries are updated
-        calculateTripAverage()
+        calculateFinalTripAverage()
     }
 
     fun creditDataUpdate() {
@@ -701,66 +815,165 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         binding.totalProfit.text = "$total"
     }
 
+    private fun calculateTotalLitersFromFuelEntries(): Double {
+        return debitList
+            .filter { it.type == "Fuel" && it.liters.isNotEmpty() }
+            .sumOf { it.liters.toDoubleOrNull() ?: 0.0 }
+    }
     /**
      * Calculate trip average from fuel entries
      * Average = Total KM / Total Liters
      * For odometer readings: Total KM = (Max KM - Min KM) if multiple entries, or use KM if single entry
      * Returns average as string, or empty string if no valid fuel entries
      */
-    private fun calculateTripAverage(): String {
-        // Get all fuel entries with valid liters
-        val fuelEntries = debitList.filter { 
-            it.type == "Fuel" && it.liters.isNotEmpty() && it.liters.toDoubleOrNull() ?: 0.0 > 0
-        }
+    private fun calculateFinalTripAverage(): String {
+        try {
+            // SCENARIO 1: User provided both start and end odometer readings
+            if (startOdometerReading.isNotEmpty() && endOdometerReading.isNotEmpty()) {
+                val startOdo = startOdometerReading.toDoubleOrNull() ?: 0.0
+                val endOdo = endOdometerReading.toDoubleOrNull() ?: 0.0
 
-        if (fuelEntries.isEmpty()) {
+                if (endOdo > startOdo) {
+                    val totalKm = endOdo - startOdo
+                    val totalLiters = calculateTotalLitersFromFuelEntries()
+
+                    if (totalLiters > 0) {
+                        val average = totalKm / totalLiters
+                        return String.format("%.2f", average)
+                    }
+                }
+            }
+
+            // SCENARIO 2: User provided manual KM at trip end (not odometer mode)
+            if (!endKmIsOdometerMode && endManualKm.isNotEmpty()) {
+                val manualKm = endManualKm.toDoubleOrNull() ?: 0.0
+
+                if (manualKm > 0) {
+                    val totalLiters = calculateTotalLitersFromFuelEntries()
+
+                    if (totalLiters > 0) {
+                        val average = manualKm / totalLiters
+                        return String.format("%.2f", average)
+                    }
+                }
+            }
+
+            // SCENARIO 3: No start odometer provided, but we have fuel entries
+            // Calculate from fuel entry odometer readings
+            if (startOdometerReading.isEmpty()) {
+                // Get all fuel entries with valid odometer readings, sorted by date
+                val fuelEntriesWithOdometer = debitList
+                    .filter {
+                        it.type == "Fuel" &&
+                                it.isOdometerMode &&
+                                it.km.isNotEmpty() &&
+                                (it.km.toDoubleOrNull() ?: 0.0) > 0
+                    }
+                    .sortedBy { entry ->
+                        try {
+                            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(entry.date)?.time ?: 0L
+                        } catch (e: Exception) {
+                            0L
+                        }
+                    }
+
+                if (fuelEntriesWithOdometer.isNotEmpty()) {
+                    // Get first and last odometer readings from fuel entries
+                    val firstOdometer = fuelEntriesWithOdometer.first().km.toDoubleOrNull() ?: 0.0
+
+                    // If user provided end odometer, use that; otherwise use last fuel entry
+                    val lastOdometer = if (endOdometerReading.isNotEmpty()) {
+                        endOdometerReading.toDoubleOrNull() ?: fuelEntriesWithOdometer.last().km.toDoubleOrNull() ?: 0.0
+                    } else {
+                        fuelEntriesWithOdometer.last().km.toDoubleOrNull() ?: 0.0
+                    }
+
+                    if (lastOdometer > firstOdometer) {
+                        val totalKm = lastOdometer - firstOdometer
+                        val totalLiters = calculateTotalLitersFromFuelEntries()
+
+                        if (totalLiters > 0) {
+                            val average = totalKm / totalLiters
+                            return String.format("%.2f", average)
+                        }
+                    }
+                }
+            }
+
+            // SCENARIO 4: Calculate from individual fuel entry distances (non-odometer mode entries)
+            val fuelEntriesWithDistance = debitList
+                .filter {
+                    it.type == "Fuel" &&
+                            !it.isOdometerMode &&
+                            it.km.isNotEmpty() &&
+                            (it.km.toDoubleOrNull() ?: 0.0) > 0
+                }
+
+            if (fuelEntriesWithDistance.isNotEmpty()) {
+                val totalKm = fuelEntriesWithDistance.sumOf { it.km.toDoubleOrNull() ?: 0.0 }
+                val totalLiters = calculateTotalLitersFromFuelEntries()
+
+                if (totalKm > 0 && totalLiters > 0) {
+                    val average = totalKm / totalLiters
+                    return String.format("%.2f", average)
+                }
+            }
+
+            // No valid data to calculate average
+            return ""
+
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error calculating final trip average", e)
             return ""
         }
+    }
 
-        // Calculate total liters
-        var totalLiters = 0.0
-        val kmReadings = mutableListOf<Double>()
-
-        for (fuel in fuelEntries) {
-            val liters = fuel.liters.toDoubleOrNull() ?: 0.0
-            if (liters > 0) {
-                totalLiters += liters
-            }
-            
-            // Collect KM readings
-            val km = fuel.km.toDoubleOrNull()
-            if (km != null && km > 0) {
-                kmReadings.add(km)
-            }
+    private fun showCoachMarksIfNeeded() {
+        // Check if coach marks should be shown
+        if (!CoachMarkHelper.shouldShowCoachMark(this)) {
+            return
         }
 
-        if (totalLiters <= 0) {
-            return ""
-        }
+        // Wait for views to be laid out
+        binding.root.post {
+            val coachMarkTargets = mutableListOf<CoachMarkHelper.CoachMarkTarget>()
 
-        // Calculate total KM
-        var totalKm = 0.0
-        if (kmReadings.isNotEmpty()) {
-            if (kmReadings.size == 1) {
-                // Single entry: use the KM reading as total distance
-                totalKm = kmReadings[0]
-            } else {
-                // Multiple entries: use difference between max and min (trip distance)
-                val minKm = kmReadings.minOrNull() ?: 0.0
-                val maxKm = kmReadings.maxOrNull() ?: 0.0
-                totalKm = maxKm - minKm
-            }
-        }
+            // Add Expense coach mark
+            coachMarkTargets.add(
+                CoachMarkHelper.CoachMarkTarget(
+                    view = binding.cardFood,
+                    text = getString(R.string.coach_mark_expense), // Add this string resource
+                    direction = CoachMarkView.ArrowDirection.TOP
+                )
+            )
 
-        // Calculate average: KM per Liter
-        if (totalKm > 0 && totalLiters > 0) {
-            val average = totalKm / totalLiters
-            // Format to 2 decimal places
-            val formattedAverage = String.format("%.2f", average)
-            return formattedAverage
-        }
+            // Add Income coach mark
+            coachMarkTargets.add(
+                CoachMarkHelper.CoachMarkTarget(
+                    view = binding.cardToll,
+                    text = getString(R.string.coach_mark_income), // Add this string resource
+                    direction = CoachMarkView.ArrowDirection.TOP
+                )
+            )
 
-        return ""
+            // Add Fuel coach mark
+            coachMarkTargets.add(
+                CoachMarkHelper.CoachMarkTarget(
+                    view = binding.cardDiesel,
+                    text = getString(R.string.coach_mark_fuel), // Add this string resource
+                    direction = CoachMarkView.ArrowDirection.TOP
+                )
+            )
+
+            // Show coach marks
+            CoachMarkHelper.showCoachMarks(
+                activity = this,
+                targets = coachMarkTargets,
+                onDismiss = {
+                    // Optional: Do something after all coach marks are dismissed
+                }
+            )
+        }
     }
 
     private fun creditIncomeUpdate() {
@@ -791,12 +1004,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
      * After collecting data, show ads, then generate PDF
      */
     private fun showTripEndDialog() {
-        tripEndDialogFragment = TripEndDialogFragment { endDate, driverIncome ->
-            // Data collected, now show ads
-            showAdThen {
-                // After ads are closed, generate PDF with collected data
-                generateTripPdf(endDate, driverIncome)
-            }
+        if (::tripEndDialogFragment.isInitialized && tripEndDialogFragment.isAdded) return
+
+        tripEndDialogFragment = TripEndDialogFragment(
+            startDate = startTripDate ?: "",
+            existingEndDate = endTripDate ?: "",
+            existingDriverIncome = driverIncomeAmount ?: "",
+            existingEndOdometer = endOdometerReading,  // NEW: Pass existing end odometer
+            existingEndKm = endManualKm,               // NEW: Pass existing manual KM
+        ) { endDate, driverIncome, totalDays, endOdometer, endKm, isOdometerMode ->
+            // Update values
+            totalDaysTrip = totalDays
+            endTripDate = endDate
+            driverIncomeAmount = driverIncome
+            endOdometerReading = endOdometer  // NEW: Store end odometer
+            endManualKm = endKm               // NEW: Store manual KM
+            endKmIsOdometerMode = isOdometerMode  // NEW: Store mode
+
+            generateTripPdf(endDate, driverIncome)
         }
         tripEndDialogFragment.show(supportFragmentManager, "TripEndDialog")
         tripEndDialogFragment.isCancelable = false
@@ -806,16 +1031,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
      * Generate PDF with collected end date and driver income
      */
     private fun generateTripPdf(endDate: String, driverIncome: String) {
-        // Calculate average from fuel entries
-        val calculatedAverage = calculateTripAverage()
-        
+        // Calculate final comprehensive average
+        val calculatedAverage = calculateFinalTripAverage()
+
         // Generate PDF with collected data
         authViewModel.getTripPdf(
             AddTripRequestModel(
                 id,
                 binding.dest.text.toString(),
-                driverIncome, // Use collected driver income
-                endDate, // Use collected end date
+                driverIncome,
+                endDate,
                 debitList as List<Expense>,
                 creditList as List<Income>,
                 binding.totalProfit.text.toString(),
@@ -824,10 +1049,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                 totalDaysTrip,
                 binding.totalExpanseNew.text.toString(),
                 binding.totalIncomeNew.text.toString(),
-                calculatedAverage, // Use calculated average from fuel entries
+                calculatedAverage,  // Use calculated average
                 truckNumberGiven.toString()
             )
         )
         showProgress()
     }
+
+
+
 }

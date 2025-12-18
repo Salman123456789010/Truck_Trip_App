@@ -117,7 +117,9 @@ class OTPVerificationScreen : AppCompatActivity(), View.OnClickListener {
         authViewModel.res.observe(this) {
             when (it) {
                 is NetworkResult.Error -> {
-                    showSnackBar(binding.root, it.message.toString())
+//                    showSnackBar(binding.root, it.message.toString())
+                    Toast.makeText(applicationContext, it.message.toString(), Toast.LENGTH_SHORT)
+                        .show()
                     dismissProgress()
                 }
 
@@ -152,6 +154,10 @@ class OTPVerificationScreen : AppCompatActivity(), View.OnClickListener {
     }
 
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+         finishAffinity()
+    }
 
 
 //

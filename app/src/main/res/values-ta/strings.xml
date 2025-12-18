@@ -31,12 +31,12 @@
     <string name="driver_s_gross_income">ஓட்டுனரின் மொத்த வருமானம்:</string>
     <string name="owner_s_gross_income">அருகில் உள்ளவரின் மொத்த வருமானம்:</string>
     <string name="add_trip">பயணம் சேர்க்கவும்</string>
-    <string name="gross_income">மொத்த வருமானம்</string>
-    <string name="total_expenditure">மொத்த செலவுகள்</string>
+    <string name="gross_income">💰 மொத்த வருமானம்</string>
+    <string name="total_expenditure">💸 மொத்த செலவுகள்</string>
     <string name="add_trip_data">பயணம் தகவல் சேர்க்கவும்</string>
-    <string name="source_place_">மூல இடம் <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="dest_place_">இறுதிச் சந்தம் <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="truck_number_">டிரக் எண்ணை <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="source_place_">📍மூல இடம் <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="dest_place_">🏁 இறுதிச் சந்தம் <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="truck_number_">🚚 டிரக் எண்ணை <font fgcolor='#FF0000'>*</font> :</string>
     <string name="trip_date">பயணத்தின் தொடக்கத் தேதி <font fgcolor='#FF0000'>*</font> :</string>
     <string name="trip_start_date">பயணத்தின் தொடக்கத் தேதி </string>
     <string name="driver_s_income">ஓட்டுனரின் வருமானம்:</string>
@@ -50,7 +50,7 @@
     <string name="add">சேர்க்கவும்</string>
     <string name="add_hissab">ஹிசாப் சேர்க்கவும்</string>
     <string name="save">சேமிக்கவும்</string>
-    <string name="total_profit">மொத்த லாபம்</string>
+    <string name="total_profit">✅ மொத்த லாபம்</string>
     <string name="total_income_credit">மொத்த வருமானம் (கிரெடிட்)</string>
     <string name="total_expense_debit">மொத்த செலவுகள் (டெபிட்)</string>
     <string name="expense">செலவுகள்</string>
@@ -135,29 +135,28 @@
 
     <string name="trip_end_date">பயண முடிவு தேதி</string>
     <string name="driver_income_for_trip">பயணத்திற்கான டிரைவர் வருவாய்</string>
+    <string name="driver_income_for_trip_">பயணத்திற்கான டிரைவர் வருவாய் <font fgcolor='#FF0000'>*</font> :</string>
     <string name="complete_trip">பயணத்தை முடிக்கவும்</string>
+    <string name="complete_trip_">பயணத்தை முடிக்கவும் <font fgcolor='#FF0000'>*</font> :</string>
     <string name="cancel">ரத்துசெய்</string>
     <string name="submit">சமர்ப்பிக்கவும்</string>
 
-    <string name="trip_list_title">Trip List And Actions</string>
-    <string name="start_new_trip">Start a new trip</string>
-    <string name="add_trip_dec">Enter the start date, starting place, ending place and truck number. You can also use the mic to speak and fill details. Tap Add to start trip calculations.</string>
-    <string name="manage_trip_title">Manage Trip Hisab</string>
-    <string name="trip_transaction_dec">Add all trip records from here. Use Add Expenditure to add expenses, Add Income to add earnings, and Add Fuel to enter diesel details. All transactions appear in the list below. Total profit is shown at the top in blue.</string>
-    <string name="add_expanse_tittle">Add Expenses</string>
-    <string name="add_expense_dec">Enter the expense amount, note and place. Select the expense type and date. You can also use the mic to speak and add details. Tap Save and the expense will appear in the trip hisab list.</string>
-    <string name="add_income_tittle">Add income (bhada / advance)</string>
-    <string name="add_income_dec">Enter the income amount and add a note like party name or reason. You can also use the mic to speak and add details. Tap Save and the income will be added to the trip hisab and total profit.</string>
-    <string name="add_fuel_tittle">Add Fuel Details</string>
-    <string name="add_fuel_dec">Enter diesel liters and amount to add fuel expense. Enter the KM reading (odometer) to calculate mileage. Add the place or pump name and select the date. Tap Save to add fuel to trip hisab and average.</string>
-    <string name="complete_trip_tittle">Complete the Trip</string>
-    <string name="complete_trip_dec" translatable="false">Select the trip end date and enter the driver income for display. This amount is only for showing driver income, it is not used in calculations. Tap Submit to complete the trip and download the PDF for sharing.</string>
+    <string name="driver_income">டிரைவர் வருமானம்</string>
+    <string name="end_trip_date">பயணம் முடியும் தேதி</string>
+    <string name="end_trip_date_">பயணம் முடியும் தேதி <font fgcolor='#FF0000'>*</font> :</string>
 
-
-    <string name="onboard_back">Back</string>
-
-
-<!--    <string name="trip_help_text"><![CDATA[-->
+    <string name="select_date">தொடக்க தேதியும் முடிவு தேதியும் தேர்வு செய்யவும்</string>
+    <string name="select_date_">தேதியை தேர்ந்தெடுக்கவும்</string>
+    <string name="edit_trip_data">பயண தரவை திருத்தவும்</string>
+    <string name="trip_help_text"><![CDATA[
+இங்கே நீங்கள் உங்கள் அனைத்து பயணங்களையும் பார்க்கலாம்.
+பயணத்தை பகிர, பதிவிறக்கம் செய்ய, திருத்த அல்லது நீக்க பொத்தான்களை பயன்படுத்துங்கள்.
+புதிய பயணத்தை தொடங்க “+ Add Trip” என்பதை தட்டவும்.
+சேமிக்கப்பட்ட வரைவை திறக்க அறிவிப்பு ஐகானை தட்டவும்.
+]]></string>
+    <string name="please_enter_diesel_liters">தயவுசெய்து டீசல் லிட்டர்களை உள்ளிடுங்கள்</string>
+    <string name="please_enter_amount">தயவுசெய்து தொகையை உள்ளிடவும்</string>
+    <!--    <string name="trip_help_text"><![CDATA[-->
 <!--    இங்கே நீங்கள் உங்கள் அனைத்து பயணங்களையும் பார்க்கலாம்.-->
 <!--    பயணத்தை பகிர, பதிவிறக்க, திருத்த அல்லது நீக்க பொத்தான்களை பயன்படுத்தவும்.-->
 <!--    புதிய பயணத்தை தொடங்க “+ Add Trip” ஐ தட்டவும்.-->
@@ -192,6 +191,41 @@
     <string name="privacy_policy">தனியுரிமைக் கொள்கை</string>
     <string name="you_can_check_term_condition">நீங்கள் விதி &amp; நிபந்தனையை பார்க்கலாம்.</string>
     <string name="you_can_check_privacy">நீங்கள் தனியுரிமைக் கொள்கையை பார்க்கலாம்.</string>
+    <string name="onboard_back">பின்</string>
+    <string name="no_internet_connection">இப்போது இன்டர்நெட் ஆப் ஆக உள்ளது, அதனால் நீங்கள் மொழியை மாற்ற முடியாது.</string>
+    <string name="km_input_type">நீங்கள் கிலோமீட்டரை எவ்வாறு கணக்கிட விரும்புகிறீர்கள்?</string>
+    <string name="odometer_reading">ஒடோமீட்டர் வாசிப்பு</string>
+    <string name="distance_traveled">பயணித்த தூரம்</string>
+    <string name="distance_traveled_km">பயணித்த தூரம் (கி.மீ)</string>
+    <string name="fuel_average">எரிபொருள் சராசரி:</string>
 
 
+
+    <string name="trip_list_title">பயண பட்டியல் மற்றும் செயல்கள்</string>
+    <string name="start_new_trip">புதிய பயணத்தை தொடங்கவும்</string>
+    <string name="add_trip_dec">தொடக்க தேதி, தொடக்க இடம், முடிவு இடம் மற்றும் லாரி எண்ணை உள்ளிடவும். மைக்ரோஃபோனை பயன்படுத்தி பேசிக் கொண்டு விவரங்களை நிரப்பலாம். பயண கணக்கை தொடங்க Add ஐ தட்டவும்.</string>
+    <string name="manage_trip_title">பயண ஹிசாப் நிர்வகிக்கவும்</string>
+    <string name="trip_transaction_dec">இங்கிருந்து அனைத்து பயண பதிவுகளையும் சேர்க்கலாம். செலவுகளைச் சேர்க்க Add Expenses, வருமானம் சேர்க்க Add Income, டீசல் விவரங்களுக்கு Add Fuel பயன்படுத்தவும். அனைத்து பரிவர்த்தனைகளும் கீழே பட்டியலில் காணப்படும். மொத்த லாபம் மேலே நீல நிறத்தில் காட்டப்படும்.</string>
+    <string name="add_expanse_tittle">செலவுகளை சேர்க்கவும்</string>
+    <string name="add_expense_dec">செலவு தொகை, குறிப்பு மற்றும் இடத்தை உள்ளிடவும். செலவு வகை மற்றும் தேதியை தேர்வு செய்யவும். மைக்ரோஃபோன் மூலம் பேசிக் கொண்டு விவரங்களைச் சேர்க்கலாம். Save ஐ தட்டினால் செலவு பயண ஹிசாப் பட்டியலில் சேர்க்கப்படும்.</string>
+    <string name="add_income_tittle">வருமானம் சேர்க்கவும் (வாடகை / முன்பணம்)</string>
+    <string name="add_income_dec">வருமான தொகையை உள்ளிட்டு, கட்சி பெயர் அல்லது காரணம் போன்ற குறிப்பை சேர்க்கவும். மைக்ரோஃபோன் மூலம் பேசிக் கொண்டு விவரங்களைச் சேர்க்கலாம். Save ஐ தட்டினால் வருமானம் பயண ஹிசாப் மற்றும் மொத்த லாபத்தில் சேர்க்கப்படும்.</string>
+    <string name="add_fuel_tittle">எரிபொருள் விவரங்கள் சேர்க்கவும்</string>
+    <string name="add_fuel_dec">டீசல் லிட்டர் மற்றும் தொகையை உள்ளிட்டு எரிபொருள் செலவைச் சேர்க்கவும். மைலேஜ் கணக்கிட KM வாசிப்பு (ஓடோமீட்டர்) உள்ளிடவும். இடம் அல்லது பம்ப் பெயரைச் சேர்த்து தேதியைத் தேர்வு செய்யவும். Save ஐ தட்டினால் எரிபொருள் பயண ஹிசாப் மற்றும் சராசரியில் சேர்க்கப்படும்.</string>
+    <string name="complete_trip_tittle">பயணத்தை முடிக்கவும்</string>
+    <string name="complete_trip_dec">பயண முடிவு தேதியைத் தேர்வு செய்து, காட்டுவதற்காக ஓட்டுநர் வருமானத்தை உள்ளிடவும். இந்த தொகை கணக்கீட்டிற்கு பயன்படுத்தப்படாது, காட்டுவதற்காக மட்டுமே. Submit ஐ தட்டினால் பயணம் முடிந்து பகிர்வதற்கான PDF பதிவிறக்கம் செய்யப்படும்.</string>
+    <string name="please_enter_valid_km">தயவுசெய்து சரியான கிலோமீட்டரை உள்ளிடவும்</string>
+    <string name="please_enter_note">தயவுசெய்து குறிப்பை உள்ளிடவும்</string>
+    <string name="driver_s_gross_income_this_trip">இந்த பயணத்திற்கான டிரைவர் வருமானம்</string>
+
+    <string name="enter_start_km">தொடக்க ஓடோமீட்டர் பதிவு செய்யவும்</string>
+    <string name="start_odometer_optional">தொடக்க ஓடோமீட்டர் (விருப்பம்)</string>
+    <string name="end_odometer_reading">முடிவு ஓடோமீட்டர் பதிவு செய்யவும்</string>
+    <string name="manual_km">மொத்த KM கைமுறையாக பதிவு செய்யவும்</string>
+    <string name="end_odometer">முடிவு ஓடோமீட்டர்</string>
+    <string name="end_km_input_type">மொத்த KM பதிவு செய்யவும்</string>
+    <string name="manual_km_traveled">கைமுறையாக பதிவு செய்த KM</string>
+    <string name="coach_mark_expense">உணவு, டோல், ரிப்பேர் போன்ற செலவுகளை இங்கே சேர்க்கவும்</string>
+    <string name="coach_mark_income">இந்த பயணத்தில் கிடைத்த வருமானத்தை இங்கே சேர்க்கவும்</string>
+    <string name="coach_mark_fuel">லிட்டர் மற்றும் ஓடோமீட்டருடன் எரிபொருள் விவரம் சேர்க்கவும்</string>
 </resources>

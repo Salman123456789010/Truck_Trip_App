@@ -69,9 +69,12 @@ class TripListAdapter(val context: Context, val editTripDataListner: EditTripDat
         holder.binding.dest.text=item.destination
         holder.binding.srcDate.text=item.start_date
         holder.binding.destDate.text=item.end_date
-        holder.binding.totalAvak.text=item.total_income
-        holder.binding.totalJavak.text=item.total_expense
-        holder.binding.driverAvak.text=item.driver_income
+        holder.binding.totalAvak.text="₹" +item.total_income
+        holder.binding.totalJavak.text="₹" +item.total_expense
+        holder.binding.driverAvak.text="₹" +item.driver_income
+        val income = item.total_income?.toIntOrNull() ?: 0
+        val expense = item.total_expense?.toIntOrNull() ?: 0
+        holder.binding.totalProfit.text = "₹${income - expense}"
         holder.binding.truckNumber.text=item.truck_no
           holder.binding.shareIcon.setOnClickListener{
               shareTripDataListner.shareTripDataMethod(position)

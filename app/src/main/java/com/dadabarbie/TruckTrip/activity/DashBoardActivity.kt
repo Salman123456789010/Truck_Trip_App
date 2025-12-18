@@ -21,6 +21,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -31,6 +32,7 @@ import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Constants.usermobileNumber
 import com.dadabarbie.TruckTrip.Utils.Prefs
+import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
 import com.dadabarbie.TruckTrip.Utils.UpdateDialog
 import com.dadabarbie.TruckTrip.adapter.TripListAdapter
 import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
@@ -63,10 +65,13 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
     ) { isGranted: Boolean ->
 
     }
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
         appVersionNameCheck()
         setObserver()
     }
@@ -173,8 +178,19 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
             srcDate = entity.srcDate,
             destDate = entity.destDate,
             avg = entity.avg,
-            modelList1 = gson.fromJson(entity.modelList1, object : TypeToken<List<CreditModel>>() {}.type),
-            modelList2 = gson.fromJson(entity.modelList2, object : TypeToken<List<DebitModel>>() {}.type)
+            modelList1 = gson.fromJson(
+                entity.modelList1,
+                object : TypeToken<List<CreditModel>>() {}.type
+            ),
+            modelList2 = gson.fromJson(
+                entity.modelList2,
+                object : TypeToken<List<DebitModel>>() {}.type
+            ),
+            startOdometer = "",
+            endOdometer = "",
+            endTripKm = "",
+            randomNumber = 1.toString(),
+            driverIncome = 0.toString()
         )
     }
     private suspend fun getAllData(context: Context): List<TripDataTestModel> {

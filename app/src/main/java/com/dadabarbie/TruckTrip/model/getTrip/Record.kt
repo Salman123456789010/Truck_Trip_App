@@ -8,7 +8,7 @@ data class Record(
     val _id: String,
     val createdDate: String,
     val destination: String,
-    val driver_income: String,
+    val driver_income: String="0",
     val end_date: String,
     val expense: List<Expense>,
     val income: List<Income>,

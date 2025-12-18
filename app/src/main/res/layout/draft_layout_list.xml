@@ -110,6 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:visibility="gone"
                 android:layout_marginEnd="@dimen/_10sdp">
 
                 <TextView
@@ -150,6 +151,8 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp" />
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -157,7 +160,6 @@
                 android:layout_marginBottom="@dimen/_10sdp"
 
                 >
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -166,21 +168,43 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_centerInParent="true"
                     android:orientation="vertical">
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="#D9D9D9"
-                        app:cardCornerRadius="@dimen/_10sdp">
+
+                    <FrameLayout
+                        android:layout_width="@dimen/_36sdp"
+                        android:layout_height="@dimen/_36sdp"
+                        android:background="@drawable/bg_icon_circle_blue">
+
                         <ImageView
                             android:id="@+id/deleteIcon"
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:src="@drawable/delete_20dp_000000_fill0_wght300_grad0_opsz20" />
-                    </com.google.android.material.card.MaterialCardView>
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/delete_20dp_000000_fill0_wght300_grad0_opsz20"
+                            app:tint="@color/white" />
+                    </FrameLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
 
+                    <FrameLayout
+                        android:layout_width="@dimen/_36sdp"
+                        android:layout_height="@dimen/_36sdp"
+                        android:background="@drawable/bg_icon_circle_blue">
 
-
-
+                        <ImageView
+                            android:id="@+id/editIcon"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/baseline_edit_24"
+                            app:tint="@color/white" />
+                    </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -208,32 +232,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="#D9D9D9"
-                        app:cardCornerRadius="@dimen/_10sdp">
-                        <ImageView
-                            android:id="@+id/editIcon"
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:src="@drawable/edit_icon"
-                            android:textSize="@dimen/_15sdp"
-                            android:textStyle="bold" />
-                    </com.google.android.material.card.MaterialCardView>
-
-
-                </LinearLayout>
 
             </LinearLayout>
             <com.google.android.ads.nativetemplates.TemplateView

@@ -97,14 +97,14 @@ class AddTaskDialogFragment(var expanseText:String,var amount:String="",var flag
                             )
                         } else {
                             Log.d("TAG12", "onClick: ")
-                            Constants.emitDebitEvent(
-                                Event(
-                                    DebitModel(
-                                        desc = binding.addText.text.toString(),
-                                        amount = if (binding.amount.text.toString() != "") binding.amount.text.toString() else "0"
-                                    )
-                                )
-                            )
+//                            Constants.emitDebitEvent(
+//                                Event(
+//                                    DebitModel(
+//                                        desc = binding.addText.text.toString(),
+//                                        amount = if (binding.amount.text.toString() != "") binding.amount.text.toString() else "0"
+//                                    )
+//                                )
+//                            )
                         }
                         dialog?.dismiss()
                     } else {

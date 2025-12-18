@@ -19,4 +19,8 @@
     <style name="ThemeOverlay.App.BottomNavigationView" parent="">
 
     </style>
+    <style name="ThemeOverlay.MyDatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
 </resources>

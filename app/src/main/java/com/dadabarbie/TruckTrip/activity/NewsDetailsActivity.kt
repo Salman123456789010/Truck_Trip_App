@@ -29,6 +29,7 @@ class NewsDetailsActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        com.dadabarbie.TruckTrip.Utils.SystemUiUtils.setupStatusBar(this, R.color.green, false)
         setLanguage()
         setOnClickListner()
         binding.newsHeader.text = intent.getStringExtra("tittle")

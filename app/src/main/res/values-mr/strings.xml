@@ -31,12 +31,12 @@
     <string name="driver_s_gross_income">चालकाची एकूण कमाई:</string>
     <string name="owner_s_gross_income">मालकाची एकूण कमाई:</string>
     <string name="add_trip">प्रवास जोडा</string>
-    <string name="gross_income">एकूण उत्पन्न</string>
-    <string name="total_expenditure">एकूण खर्च</string>
+    <string name="gross_income">💰 एकूण उत्पन्न</string>
+    <string name="total_expenditure">💸 एकूण खर्च</string>
     <string name="add_trip_data">प्रवास डेटा जोडा</string>
-    <string name="source_place_">सुरुवातीचे ठिकाण <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="dest_place_">समाप्तीचे ठिकाण <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="truck_number_">ट्रक क्रमांक <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="source_place_">📍सुरुवातीचे ठिकाण <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="dest_place_">🏁 समाप्तीचे ठिकाण <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="truck_number_">🚚 ट्रक क्रमांक <font fgcolor='#FF0000'>*</font> :</string>
     <string name="trip_date">प्रवास सुरूवात तारीख <font fgcolor='#FF0000'>*</font> :</string>
     <string name="trip_start_date">प्रवास सुरूवात तारीख </string>
     <string name="driver_s_income">चालकाचे उत्पन्न:</string>
@@ -50,7 +50,7 @@
     <string name="add">जोडा</string>
     <string name="add_hissab">हिसाब जोडा</string>
     <string name="save">सेव्ह</string>
-    <string name="total_profit">एकूण नफा</string>
+    <string name="total_profit">✅ एकूण नफा</string>
     <string name="total_income_credit">एकूण उत्पन्न (क्रेडिट)</string>
     <string name="total_expense_debit">एकूण खर्च (डेबिट)</string>
     <string name="expense">खर्च</string>
@@ -137,7 +137,9 @@
     <!-- Trip End Dialog -->
     <string name="trip_end_date">प्रवास समाप्ती तारीख</string>
     <string name="driver_income_for_trip">प्रवासासाठी ड्रायव्हर उत्पन्न</string>
+    <string name="driver_income_for_trip_">प्रवासासाठी ड्रायव्हर उत्पन्न <font fgcolor='#FF0000'>*</font> :</string>
     <string name="complete_trip">प्रवास पूर्ण करा</string>
+    <string name="complete_trip_">प्रवास पूर्ण करा <font fgcolor='#FF0000'>*</font> :</string>
     <string name="cancel">रद्द करा</string>
     <string name="submit">सबमिट करा</string>
 
@@ -147,7 +149,7 @@
     नवीन ट्रिप सुरू करण्यासाठी “+ Add Trip” वर टॅप करा।
     सेव्ह केलेले ड्राफ्ट उघडण्यासाठी नोटिफिकेशन आयकॉनवर टॅप करा।
     </string>
-
+    <string name="please_enter_amount">कृपया रक्कम प्रविष्ट करा</string>
     <string name="trip_list_title">ट्रिप सूची आणि कृती</string>
     <string name="start_new_trip">नवीन ट्रिप सुरू करा</string>
 
@@ -172,5 +174,32 @@
     <string name="privacy_policy">गोपनीयता धोरण</string>
     <string name="you_can_check_term_condition">आप अटी आणि शर्थी पाहू शकता.</string>
     <string name="you_can_check_privacy">आप गोपनीयता धोरण पाहू शकता.</string>
+    <string name="onboard_back">मागे</string>
+    <string name="driver_income">ड्रायव्हरची कमाई</string>
+    <string name="end_trip_date">ट्रिप समाप्ती तारीख</string>
+    <string name="end_trip_date_">ट्रिप समाप्ती तारीख <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="no_internet_connection">सध्या इंटरनेट बंद आहे, त्यामुळे तुम्ही भाषा बदलू शकत नाही.</string>
+    <string name="km_input_type">तुम्हाला किलोमीटर कसे ट्रॅक करायचे आहे?</string>
+    <string name="odometer_reading">ओडोमीटर रीडिंग</string>
+    <string name="distance_traveled">प्रवास केलेले अंतर</string>
+    <string name="distance_traveled_km">प्रवास केलेले अंतर (कि.मी.)</string>
+    <string name="fuel_average">इंधन सरासरी:</string>
+    <string name="select_date">सुरुवातीची तारीख आणि शेवटची तारीख निवडा</string>
+    <string name="select_date_">तारीख निवडा</string>
+    <string name="edit_trip_data">ट्रिप डेटा संपादित करा</string>
+    <string name="please_enter_diesel_liters">कृपया डिझेलचे लिटर प्रविष्ट करा</string>
+    <string name="please_enter_valid_km">कृपया योग्य किलोमीटर टाका</string>
+    <string name="please_enter_note">कृपया नोंद प्रविष्ट करा</string>
+    <string name="driver_s_gross_income_this_trip">या ट्रिपची ड्रायव्हर कमाई</string>
+    <string name="enter_start_km">सुरुवातीचा ओडोमीटर टाका</string>
+    <string name="start_odometer_optional">सुरुवातीचा ओडोमीटर (ऐच्छिक)</string>
+    <string name="end_odometer_reading">शेवटचा ओडोमीटर टाका</string>
+    <string name="manual_km">एकूण KM स्वतः टाका</string>
+    <string name="end_odometer">शेवटचा ओडोमीटर</string>
+    <string name="end_km_input_type">एकूण KM टाका</string>
+    <string name="manual_km_traveled">स्वतः टाकलेली KM</string>
+    <string name="coach_mark_expense">इथे खर्च टाका जसे जेवण, टोल, दुरुस्ती इ.</string>
+    <string name="coach_mark_income">ट्रिप दरम्यान मिळालेली कमाई इथे टाका</string>
+    <string name="coach_mark_fuel">इथे डिझेलची नोंद करा (लीटर व ओडोमीटरसह)</string>
 
 </resources>

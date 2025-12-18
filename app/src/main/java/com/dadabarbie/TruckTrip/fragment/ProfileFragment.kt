@@ -82,6 +82,9 @@ class ProfileFragment : Fragment(),View.OnClickListener {
         binding.contactLayout.setOnClickListener(this)
         binding.howtouse.setOnClickListener(this)
         binding.privacyPolicy.setOnClickListener(this)
+        binding.facebookIcon.setOnClickListener(this)
+        binding.instagramIcon.setOnClickListener(this)
+        binding.youtubeIcon.setOnClickListener(this)
         binding.term.setOnClickListener(this)
         binding.changeLanguageLayout.setOnClickListener(this)
     }
@@ -143,19 +146,35 @@ class ProfileFragment : Fragment(),View.OnClickListener {
                 startActivity(Intent(requireActivity(), HowToUseActivity::class.java))
             }
             binding.contactLayout->{
-                sendGmail()
+                val url = "https://truckwallah.co.in/"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
             }
             binding.changeLanguageLayout->{
                 startActivity(Intent(requireActivity(),LanguageSelction::class.java).putExtra("languageFlag","set"))
             }
             binding.privacyPolicy->{
-                val url = "https://truck-trip-hisab-portfolio.vercel.app/privacy.html"
+                val url = "https://truckwallah.co.in/privacy-policy.html"
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(intent)
 
             }
+            binding.instagramIcon -> {
+                val url = "https://www.instagram.com/invites/contact/?igsh=1n6742y7lnou7&utm_content=108miyti"
+                openLink(url)
+            }
+            binding.youtubeIcon->{
+                val url = "https://www.youtube.com/@TruckWallah_TW"
+                openLink(url)
+            }
+
+// Facebook Click
+            binding.facebookIcon -> {
+                val url = "https://www.facebook.com/share/1D9T3eyGNF/"
+                openLink(url)
+            }
             binding.term->{
-                val url = "https://truck-trip-hisab-portfolio.vercel.app/termAndCondition.html"
+                val url = "https://truckwallah.co.in/terms-and-condition.html"
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(intent)
             }
@@ -165,6 +184,15 @@ class ProfileFragment : Fragment(),View.OnClickListener {
 //            }
         }
     }
+    private fun openLink(url: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "Unable to open link", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
 
 }

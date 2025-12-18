@@ -31,12 +31,12 @@
     <string name="driver_s_gross_income">ഡ്രൈവറുടെ മൊത്തം വരുമാനം:</string>
     <string name="owner_s_gross_income">മാലിക്കന്റെ മൊത്തം വരുമാനം:</string>
     <string name="add_trip">ട്രിപ്പ് ചേർക്കുക</string>
-    <string name="gross_income">മൊത്തം വരുമാനം</string>
-    <string name="total_expenditure">മൊത്തം ചെലവ്</string>
+    <string name="gross_income">💰 മൊത്തം വരുമാനം</string>
+    <string name="total_expenditure">💸 മൊത്തം ചെലവ്</string>
     <string name="add_trip_data">ട്രിപ്പ് ഡാറ്റ ചേർക്കുക</string>
-    <string name="source_place_">ആരംഭ സ്ഥലത്ത് <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="dest_place_">അവസാന സ്ഥലത്ത് <font fgcolor='#FF0000'>*</font> :</string>
-    <string name="truck_number_">ട്രക്ക് നമ്പർ <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="source_place_">📍ആരംഭ സ്ഥലത്ത് <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="dest_place_">🏁 അവസാന സ്ഥലത്ത് <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="truck_number_">🚚 ട്രക്ക് നമ്പർ <font fgcolor='#FF0000'>*</font> :</string>
     <string name="trip_date">ട്രിപ്പിന്റെ ആരംഭ തീയതി <font fgcolor='#FF0000'>*</font> :</string>
     <string name="trip_start_date">ട്രിപ്പിന്റെ ആരംഭ തീയതി </string>
     <string name="driver_s_income">ഡ്രൈവറുടെ വരുമാനം:</string>
@@ -50,7 +50,7 @@
     <string name="add">ചേർക്കുക</string>
     <string name="add_hissab">ഹിസാബ് ചേർക്കുക</string>
     <string name="save">സേവ്</string>
-    <string name="total_profit">മൊത്തം ലാഭം</string>
+    <string name="total_profit">✅ മൊത്തം ലാഭം</string>
     <string name="total_income_credit">മൊത്തം വരുമാനം (ക്രെഡിറ്റ്)</string>
     <string name="total_expense_debit">മൊത്തം ചെലവ് (ഡെബിറ്റ്)</string>
     <string name="expense">ചെലവ്</string>
@@ -137,9 +137,17 @@
     <!-- Trip End Dialog -->
     <string name="trip_end_date">ട്രിപ്പ് അവസാന തീയതി</string>
     <string name="driver_income_for_trip">ട്രിപ്പിനുള്ള ഡ്രൈവർ വരുമാനം</string>
+    <string name="driver_income_for_trip_">ട്രിപ്പിനുള്ള ഡ്രൈവർ വരുമാനം <font fgcolor='#FF0000'>*</font> :</string>
     <string name="complete_trip">ട്രിപ്പ് പൂർത്തിയാക്കുക</string>
+    <string name="complete_trip_">ട്രിപ്പ് പൂർത്തിയാക്കുക <font fgcolor='#FF0000'>*</font> :</string>
     <string name="cancel">റദ്ദാക്കുക</string>
     <string name="submit">സമർപ്പിക്കുക</string>
+    <string name="trip_help_text"><![CDATA[
+ഇവിടെ നിങ്ങൾക്ക് നിങ്ങളുടെ എല്ലാ യാത്രകളും കാണാം.
+യാത്ര പങ്കിടാനും ഡൗൺലോഡ് ചെയ്യാനും തിരുത്താനും ഇല്ലാതാക്കാനും ബട്ടണുകൾ ഉപയോഗിക്കുക.
+പുതിയ യാത്ര ആരംഭിക്കാൻ “+ Add Trip” ടാപ്പ് ചെയ്യുക.
+സേവ് ചെയ്ത ഡ്രാഫ്റ്റുകൾ തുറക്കാൻ നോട്ടിഫിക്കേഷൻ ഐക്കൺ ടാപ്പ് ചെയ്യുക.
+]]></string>
 
 <!--    <string name="trip_help_text">-->
 <!--    ഇവിടെ നിങ്ങൾക്ക് നിങ്ങളുടെ എല്ലാ യാത്രകളും കാണാം।-->
@@ -176,24 +184,93 @@
 <!--    <string name="complete_trip_tittle">ട്രിപ്പ് പൂർത്തിയാക്കുക</string>-->
 
 <!--    <string name="complete_trip_dec">ട്രിപ്പിന്റെ അവസാന തീയതി തിരഞ്ഞെടുക്കുക, ഡ്രൈവർ വരുമാനം പ്രദർശിപ്പിക്കാൻ തുക നൽകുക. ഈ തുക കണക്കുകളിൽ ഉപയോഗിക്കുന്നതല്ല, പ്രദർശനത്തിനായി മാത്രമാണ്. സബ്മിറ്റ് അമർത്തുക, ട്രിപ്പ് പൂർത്തിയാകും, പങ്കുവെക്കാൻ PDF ഡൗൺലോഡ് ചെയ്യപ്പെടും.</string>-->
-    <string name="trip_list_title">Trip List And Actions</string>
-    <string name="start_new_trip">Start a new trip</string>
-    <string name="add_trip_dec">Enter the start date, starting place, ending place and truck number. You can also use the mic to speak and fill details. Tap Add to start trip calculations.</string>
-    <string name="manage_trip_title">Manage Trip Hisab</string>
-    <string name="trip_transaction_dec">Add all trip records from here. Use Add Expenditure to add expenses, Add Income to add earnings, and Add Fuel to enter diesel details. All transactions appear in the list below. Total profit is shown at the top in blue.</string>
-    <string name="add_expanse_tittle">Add Expenses</string>
-    <string name="add_expense_dec">Enter the expense amount, note and place. Select the expense type and date. You can also use the mic to speak and add details. Tap Save and the expense will appear in the trip hisab list.</string>
-    <string name="add_income_tittle">Add income (bhada / advance)</string>
-    <string name="add_income_dec">Enter the income amount and add a note like party name or reason. You can also use the mic to speak and add details. Tap Save and the income will be added to the trip hisab and total profit.</string>
-    <string name="add_fuel_tittle">Add Fuel Details</string>
-    <string name="add_fuel_dec">Enter diesel liters and amount to add fuel expense. Enter the KM reading (odometer) to calculate mileage. Add the place or pump name and select the date. Tap Save to add fuel to trip hisab and average.</string>
-    <string name="complete_trip_tittle">Complete the Trip</string>
-    <string name="complete_trip_dec" translatable="false">Select the trip end date and enter the driver income for display. This amount is only for showing driver income, it is not used in calculations. Tap Submit to complete the trip and download the PDF for sharing.</string>
-    <string name="no_trip_found">ഒരു ട്രിപ്പും കണ്ടെത്താനായില്ല</string>
+     <string name="no_trip_found">ഒരു ട്രിപ്പും കണ്ടെത്താനായില്ല</string>
     <string name="term_condition">നിബന്ധനകളും വ്യവസ്ഥകളും</string>
     <string name="privacy_policy">സ്വകാര്യതാ നയം</string>
     <string name="you_can_check_term_condition">നിങ്ങൾ നിബന്ധനകളും വ്യവസ്ഥകളും പരിശോധിക്കാം.</string>
     <string name="you_can_check_privacy">നിങ്ങൾ സ്വകാര്യതാ നയം പരിശോധിക്കാം.</string>
+    <string name="onboard_back">തിരിച്ചു</string>
+    <string name="driver_income">ഡ്രൈവർ വരുമാനം</string>
+    <string name="end_trip_date">യാത്ര അവസാനിക്കുന്ന തീയതി</string>
+    <string name="end_trip_date_">യാത്ര അവസാനിക്കുന്ന തീയതി <font fgcolor='#FF0000'>*</font> :</string>
+    <string name="no_internet_connection">ഇപ്പോൾ ഇന്റർനെറ്റ് ഓഫ് ആണ്, അതിനാൽ നിങ്ങൾക്ക് ഭാഷ മാറ്റാൻ കഴിയില്ല.</string>
+    <string name="km_input_type">നിങ്ങൾ കിലോമീറ്റർ എങ്ങനെ ട്രാക്ക് ചെയ്യാൻ ആഗ്രഹിക്കുന്നു?</string>
+    <string name="odometer_reading">ഓഡോമീറ്റർ റീഡിംഗ്</string>
+    <string name="distance_traveled">യാത്ര ചെയ്ത ദൂരം</string>
+    <string name="distance_traveled_km">യാത്ര ചെയ്ത ദൂരം (കി.മി)</string>
+    <string name="fuel_average">ഇന്ധന ശരാശരി:</string>
+    <string name="select_date">ആരംഭ തീയതിയും അവസാന തീയതിയും തിരഞ്ഞെടുക്കുക</string>
+    <string name="select_date_">തീയതി തിരഞ്ഞെടുക്കുക</string>
+    <string name="edit_trip_data">ട്രിപ്പ് ഡാറ്റ എഡിറ്റ് ചെയ്യുക</string>
 
-    <string name="onboard_back">Back</string>
+
+    <string name="trip_list_title">യാത്രകളുടെ പട്ടികയും പ്രവർത്തനങ്ങളും</string>
+
+    <string name="start_new_trip">പുതിയ യാത്ര ആരംഭിക്കുക</string>
+
+    <string name="add_trip_dec">
+ആരംഭ തീയതി, ആരംഭ സ്ഥലം, അവസാന സ്ഥലം, ട്രക്ക് നമ്പർ എന്നിവ നൽകുക.
+വോയ്സ് ഉപയോഗിച്ച് വിവരങ്ങൾ ചേർക്കാനും കഴിയും.
+“Add” അമർത്തി യാത്ര കണക്കുകൾ ആരംഭിക്കുക.
+</string>
+
+    <string name="manage_trip_title">ട്രിപ്പ് ഹിസാബ് മാനേജ് ചെയ്യുക</string>
+
+    <string name="trip_transaction_dec">
+ഇവിടെ നിന്ന് യാത്രയുടെ എല്ലാ രേഖകളും ചേർക്കാം.
+ചെലവുകൾ ചേർക്കാൻ “Add Expenses”, വരുമാനം ചേർക്കാൻ “Add Income”,
+ഡീസൽ വിവരങ്ങൾ ചേർക്കാൻ “Add Fuel” ഉപയോഗിക്കുക.
+എല്ലാ ഇടപാടുകളും താഴെയുള്ള പട്ടികയിൽ കാണിക്കും.
+മൊത്തം ലാഭം മുകളിൽ നീല നിറത്തിൽ കാണിക്കും.
+</string>
+
+    <string name="add_expanse_tittle">ചെലവുകൾ ചേർക്കുക</string>
+
+    <string name="add_expense_dec">
+ചെലവിന്റെ തുക, കുറിപ്പ്, സ്ഥലം എന്നിവ നൽകുക.
+ചെലവിന്റെ തരംയും തീയതിയും തിരഞ്ഞെടുക്കുക.
+വോയ്സ് ഉപയോഗിച്ച് വിവരങ്ങൾ ചേർക്കാനും കഴിയും.
+“Save” അമർത്തിയാൽ ചെലവ് ട്രിപ്പ് ഹിസാബ് പട്ടികയിൽ കാണിക്കും.
+</string>
+
+    <string name="add_income_tittle">വരുമാനം ചേർക്കുക (ഭാഡ / അഡ്വാൻസ്)</string>
+
+    <string name="add_income_dec">
+വരുമാന തുക നൽകുക, പാർട്ടി പേര് അല്ലെങ്കിൽ കാരണം പോലുള്ള കുറിപ്പ് ചേർക്കുക.
+വോയ്സ് ഉപയോഗിച്ച് വിവരങ്ങൾ ചേർക്കാനും കഴിയും.
+“Save” അമർത്തിയാൽ വരുമാനം ട്രിപ്പ് ഹിസാബിലും മൊത്തം ലാഭത്തിലുമടങ്ങും.
+</string>
+
+    <string name="add_fuel_tittle">ഇന്ധന വിവരങ്ങൾ ചേർക്കുക</string>
+
+    <string name="add_fuel_dec">
+ഡീസൽ ലിറ്ററും തുകയും നൽകുക.
+മൈലേജ് കണക്കാക്കാൻ KM റീഡിംഗ് (ഓഡോമീറ്റർ) നൽകുക.
+സ്ഥലം അല്ലെങ്കിൽ പമ്പ് പേര് ചേർക്കുക, തീയതി തിരഞ്ഞെടുക്കുക.
+“Save” അമർത്തിയാൽ ഇന്ധനം ട്രിപ്പ് ഹിസാബിലും ശരാശരിയിലും ചേർക്കപ്പെടും.
+</string>
+
+    <string name="complete_trip_tittle">യാത്ര പൂർത്തിയാക്കുക</string>
+
+    <string name="complete_trip_dec" translatable="false">
+യാത്രയുടെ അവസാന തീയതി തിരഞ്ഞെടുക്കുക, ഡ്രൈവർ വരുമാനം കാണിക്കാൻ തുക നൽകുക.
+ഈ തുക കണക്കുകളിൽ ഉപയോഗിക്കുന്നില്ല, കാണിക്കാൻ മാത്രമാണ്.
+“Submit” അമർത്തിയാൽ യാത്ര പൂർത്തിയാകും, ഷെയർ ചെയ്യാൻ PDF ഡൗൺലോഡ് ചെയ്യാം.
+</string>
+    <string name="please_enter_diesel_liters">ദയവായി ഡീസൽ ലിറ്റർ നൽകുക</string>
+    <string name="please_enter_amount">ദയവായി തുക നൽകുക</string>
+    <string name="please_enter_valid_km">ദയവായി ശരിയായ കിലോമീറ്റർ നൽകുക</string>
+    <string name="please_enter_note">ദയവായി കുറിപ്പ് നൽകുക</string>
+    <string name="driver_s_gross_income_this_trip">ഈ ട്രിപ്പിലെ ഡ്രൈവറുടെ വരുമാനം</string>
+
+    <string name="enter_start_km">ആരംഭ ഓഡോമീറ്റർ നൽകുക</string>
+    <string name="start_odometer_optional">ആരംഭ ഓഡോമീറ്റർ (ഐച്ഛികം)</string>
+    <string name="end_odometer_reading">അവസാന ഓഡോമീറ്റർ നൽകുക</string>
+    <string name="manual_km">മൊത്തം KM കൈമാറി നൽകുക</string>
+    <string name="end_odometer">അവസാന ഓഡോമീറ്റർ</string>
+    <string name="end_km_input_type">മൊത്തം KM നൽകുക</string>
+    <string name="manual_km_traveled">കൈമാറി നൽകിയ KM</string>
+    <string name="coach_mark_expense">ഭക്ഷണം, ടോൾ, റിപ്പയർ മുതലായ ചെലവുകൾ ഇവിടെ ചേർക്കുക</string>
+    <string name="coach_mark_income">ട്രിപ്പിൽ ലഭിച്ച വരുമാനം ഇവിടെ ചേർക്കുക</string>
+    <string name="coach_mark_fuel">ലിറ്ററും ഓഡോമീറ്ററും ചേർത്ത് ഇന്ധന വിവരങ്ങൾ നൽകുക</string>
 </resources>

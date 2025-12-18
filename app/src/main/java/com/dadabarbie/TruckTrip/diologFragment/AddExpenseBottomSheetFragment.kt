@@ -44,7 +44,7 @@ class AddExpenseBottomSheetFragment(
         "Toll",
         "Puncture",
         "Driver Kharch",
-        "Gadi Related",
+        "Truck Related",
         "Other"
     )
 
@@ -59,13 +59,13 @@ class AddExpenseBottomSheetFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         setupExpenseTypeDropdown()
         setupDatePicker()
         setupSpeechToText()
         populateFields()
         setupSaveButton()
-        
+
         // Set dialog width
         val width = (resources.displayMetrics.widthPixels * 0.90).toInt()
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -117,25 +117,23 @@ class AddExpenseBottomSheetFragment(
             // Editing existing expense
             binding.etAmount.setText(expenseAmount)
             // Use note if available, otherwise use desc
-            binding.etNote.setText(if (expenseNote.isNotEmpty()) expenseNote else expenseDesc)
-            binding.etPlace.setText(expensePlace)
+            binding.etNote.setText(if (!expenseNote.isNullOrEmpty()) expenseNote else expenseDesc)
+            binding.etPlace.setText(expensePlace ?: "")
             // Set date if available, otherwise use today
-            if (expenseDate.isNotEmpty()) {
-                binding.etDate.setText(expenseDate)
-                // Parse the date to set calendar for date picker
-                try {
-                    val parsedDate = dateFormat.parse(expenseDate)
-                    if (parsedDate != null) {
-                        calendar.time = parsedDate
-                    }
-                } catch (e: Exception) {
-                    // If parsing fails, keep current date
+            val dateToUse = expenseDate?.takeIf { it.isNotEmpty() } ?: dateFormat.format(calendar.time)
+            binding.etDate.setText(dateToUse)
+
+            // Parse the date to set calendar for date picker
+            try {
+                val parsedDate = dateFormat.parse(dateToUse)
+                if (parsedDate != null) {
+                    calendar.time = parsedDate
                 }
-            } else {
-                val today = dateFormat.format(calendar.time)
-                binding.etDate.setText(today)
+            } catch (e: Exception) {
+                // If parsing fails, keep current date
             }
-            if (expenseType.isNotEmpty()) {
+
+            if (!expenseType.isNullOrEmpty()) {
                 binding.actvExpenseType.setText(expenseType, false)
             }
         }
@@ -179,22 +177,45 @@ class AddExpenseBottomSheetFragment(
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && data != null) {
-                val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                if (result != null && result.isNotEmpty()) {
-                    when (requestCode) {
-                        REQUEST_CODE_AMOUNT -> {
-                            // Extract number from speech
-                            val extractedAmount = processExtractedText(result[0])
-                            binding.etAmount.setText(extractedAmount.toString())
-                        }
-                        REQUEST_CODE_NOTE -> {
-                            binding.etNote.setText(result[0])
-                        }
-                        REQUEST_CODE_PLACE -> {
-                            binding.etPlace.setText(result[0])
+            val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            if (result != null && result.isNotEmpty()) {
+                when (requestCode) {
+                    REQUEST_CODE_AMOUNT -> {
+                        // Extract number from speech
+                        val extractedAmount = processExtractedText(result[0])
+                        binding.etAmount.setText(extractedAmount.toString())
+                    }
+                    REQUEST_CODE_NOTE -> {
+                        val spokenText = result[0]
+
+                        // Check if spoken text contains mathematical expression or number
+                        val calculatedAmount = extractAndCalculateMath(spokenText)
+                        if (calculatedAmount != null) {
+                            // Get current amount or 0
+                            val currentAmount = binding.etAmount.text.toString().toIntOrNull() ?: 0
+                            // Add the calculated amount to current amount
+                            val newAmount = currentAmount + calculatedAmount
+                            binding.etAmount.setText(newAmount.toString())
+
+                            // Remove the amount from spoken text and set only note
+                            val noteWithoutAmount = removeAmountFromText(spokenText)
+                            binding.etNote.setText(noteWithoutAmount)
+
+                            Toast.makeText(
+                                requireContext(),
+                                "Added ₹$calculatedAmount to amount",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            // No amount found, just set the note as is
+                            binding.etNote.setText(spokenText)
                         }
                     }
+                    REQUEST_CODE_PLACE -> {
+                        binding.etPlace.setText(result[0])
+                    }
                 }
+            }
         }
     }
 
@@ -208,6 +229,78 @@ class AddExpenseBottomSheetFragment(
         val regex = Regex("\\b\\d+\\b")
         val numbers = regex.findAll(text).map { it.value.toInt() }.toList()
         return if (numbers.isNotEmpty()) numbers[0] else 0
+    }
+
+    /**
+     * Extracts and calculates mathematical expressions from spoken text
+     * Supports basic operations: addition, subtraction, multiplication, division
+     */
+    private fun extractAndCalculateMath(text: String): Int? {
+        try {
+            // Convert spoken words to mathematical symbols
+            var mathExpression = text.lowercase()
+                .replace("plus", "+")
+                .replace("add", "+")
+                .replace("minus", "-")
+                .replace("subtract", "-")
+                .replace("times", "*")
+                .replace("multiply", "*")
+                .replace("multiplied by", "*")
+                .replace("into", "*")
+                .replace("divide", "/")
+                .replace("divided by", "/")
+                .replace("by", "/")
+
+            // Extract numbers and operators
+            val pattern = Regex("(\\d+)\\s*([+\\-*/])\\s*(\\d+)")
+            val matchResult = pattern.find(mathExpression)
+
+            if (matchResult != null) {
+                val num1 = matchResult.groupValues[1].toInt()
+                val operator = matchResult.groupValues[2]
+                val num2 = matchResult.groupValues[3].toInt()
+
+                val result = when (operator) {
+                    "+" -> num1 + num2
+                    "-" -> num1 - num2
+                    "*" -> num1 * num2
+                    "/" -> if (num2 != 0) num1 / num2 else null
+                    else -> null
+                }
+
+                return result
+            }
+
+            // If no mathematical expression found, try to extract single number
+            val singleNumberPattern = Regex("\\b(\\d+)\\b")
+            val singleMatch = singleNumberPattern.find(mathExpression)
+            if (singleMatch != null) {
+                return singleMatch.value.toInt()
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return null
+    }
+
+    /**
+     * Removes numbers and mathematical operators from text to keep only the description/note
+     */
+    private fun removeAmountFromText(text: String): String {
+        var cleanedText = text
+            // Remove mathematical words
+            .replace(Regex("\\b(plus|add|minus|subtract|times|multiply|multiplied by|into|divide|divided by|by)\\b", RegexOption.IGNORE_CASE), "")
+            // Remove numbers
+            .replace(Regex("\\d+"), "")
+            // Remove mathematical operators
+            .replace(Regex("[+\\-*/]"), "")
+            // Clean up extra spaces
+            .replace(Regex("\\s+"), " ")
+            .trim()
+
+        return cleanedText
     }
 
     companion object {
@@ -225,7 +318,7 @@ class AddExpenseBottomSheetFragment(
 
         // Validate amount
         if (amount.isEmpty()) {
-            Toast.makeText(requireContext(), "Please enter amount", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.enter_income_amount), Toast.LENGTH_SHORT).show()
             binding.etAmount.requestFocus()
             return
         }
@@ -234,19 +327,19 @@ class AddExpenseBottomSheetFragment(
         if (position != -1) {
             val expense = debitList[position]
             // Use note as desc if note is provided, otherwise keep existing desc
-            expense.desc = if (note.isNotEmpty()) note else expenseDesc
+            expense.desc = if (note.isNotEmpty()) note else (expenseDesc ?: "")
             expense.amount = amount
             expense.note = note
             expense.place = place
             expense.date = date
             expense.type = type
-            
+
             (requireActivity() as MainActivity).debitDataUpdate()
             dialog?.dismiss()
         } else {
             // Adding new expense
             if (note.isEmpty()) {
-                Toast.makeText(requireContext(), "Please enter note", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.please_enter_note), Toast.LENGTH_SHORT).show()
                 binding.etNote.requestFocus()
                 return
             }
@@ -254,7 +347,7 @@ class AddExpenseBottomSheetFragment(
             Constants.emitDebitEvent(
                 Event(
                     DebitModel(
-                        desc = note, // Use note as desc for new expenses
+                        desc = note,
                         amount = amount,
                         note = note,
                         place = place,
@@ -267,4 +360,3 @@ class AddExpenseBottomSheetFragment(
         }
     }
 }
-
