@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.DialogFragment
 import com.dadabarbie.TruckTrip.activity.DraftActivity
 import com.dadabarbie.TruckTrip.activity.MainActivity
+import com.dadabarbie.TruckTrip.activity.SimpleDraftActivity
 import com.dadabarbie.TruckTrip.databinding.DeleteDialogFragmentBinding
 
 class DeleteDraftDialogFragment(val position: Int) : DialogFragment(), View.OnClickListener {
@@ -22,7 +23,14 @@ class DeleteDraftDialogFragment(val position: Int) : DialogFragment(), View.OnCl
             }
 
             binding.btSignup -> {
-                (requireActivity() as DraftActivity).deleteFromDatabse(position)
+                try {
+                    (requireActivity() as DraftActivity).deleteFromDatabse(position)
+                }catch (e: Exception){}
+
+                try {
+                    (requireActivity() as SimpleDraftActivity).deleteFromDatabse(position)
+                }catch (e: Exception){}
+
                 dialog?.dismiss()
             }
         }

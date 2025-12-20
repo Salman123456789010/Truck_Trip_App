@@ -253,4 +253,121 @@ Submit ଉପରେ ଟାପ୍ କଲେ ଟ୍ରିପ୍ ସମାପ୍ତ
     <string name="please_enter_valid_km">ଦୟାକରି ସଠିକ କିଲୋମିଟର ଦିଅନ୍ତୁ</string>
     <string name="please_enter_note">ଦୟାକରି ଟିପ୍ପଣୀ ଦିଅନ୍ତୁ</string>
     <string name="driver_s_gross_income_this_trip">ଏହି ଟ୍ରିପ୍‌ର ଡ୍ରାଇଭର କମାଇ</string>
+    <string name="yaha_pe_truck_number_bolo">ଏଠାରେ ସମ୍ପୂର୍ଣ୍ଣ ଟ୍ରକ୍ ନମ୍ବର କହନ୍ତୁ</string>
+    <string name="truck_number_dale">ଟ୍ରକ୍ ନମ୍ବର ଦିଅନ୍ତୁ</string>
+    <string name="mic_ko_dabaye_aur_bolo">ମାଇକ୍ ଦବାନ୍ତୁ ଏବଂ କହନ୍ତୁ</string>
+    <string name="aapka_truck_number">ଆପଣଙ୍କ ଟ୍ରକ୍ ନମ୍ବର:</string>
+    <string name="dosri_screen">ଦ୍ୱିତୀୟ ସ୍କ୍ରିନ୍କୁ ଯାଆନ୍ତୁ</string>
+    <string name="trip_shuru_hone_ki_tareekh_chuno">ଯାତ୍ରା ଆରମ୍ଭ ତାରିଖ ବାଛନ୍ତୁ</string>
+    <string name="calendar_khulega">କ୍ୟାଲେଣ୍ଡର ଖୋଲିବ</string>
+    <string name="jagah_bolo">ସ୍ଥାନ କହନ୍ତୁ</string>
+    <string name="destination_bolo">କେଉଁଠି ଯିବେ କହନ୍ତୁ</string>
+    <string name="aage_badho">ଆଗକୁ ଯାଆନ୍ତୁ</string>
+    <string name="edit_continue_karein">ସଂଶୋଧନ କରି ଆଗକୁ ଯାଆନ୍ତୁ</string>
+    <string name="sari_fields_bharo">ସମସ୍ତ ସୂଚନା ଭରନ୍ତୁ</string>
+    <string name="trip_details_edit_karein_chahiye_to_change_karo">ଯାତ୍ରାର ସୂଚନା ଦେଖନ୍ତୁ, ଆବଶ୍ୟକ ହେଲେ ବଦଳାନ୍ତୁ</string>
+    <string name="tareekh_badal_sakte_ho">ତାରିଖ ବଦଳାଇ ପାରିବେ</string>
+    <string name="start_place_badal_sakte_ho">ଆରମ୍ଭ ସ୍ଥାନ ବଦଳାଇ ପାରିବେ</string>
+    <string name="kaha_se_shuru_ho_rahe_ho_bolo">କେଉଁଠାରୁ ଆରମ୍ଭ କରୁଛନ୍ତି କହନ୍ତୁ</string>
+    <string name="end_place_badal_sakte_ho">ଶେଷ ସ୍ଥାନ ବଦଳାଇ ପାରିବେ</string>
+    <string name="kaha_jaana_hai_bolo">କେଉଁଠି ଯିବାକୁ ଅଛି, କହନ୍ତୁ</string>
+    <string name="you_can_give_feedback">ଆପଣ ଏଠାରେ ନିଜର ମତ ଦେଇପାରିବେ</string>
+    <string name="date_range_to">ପର୍ଯ୍ୟନ୍ତ</string>
+
+    <string name="enter_start_km">ଆରମ୍ଭ ଓଡୋମିଟର ଯୋଡନ୍ତୁ</string>
+
+    <string name="start_odometer_optional">ଆରମ୍ଭ ଓଡୋମିଟର (ଇଚ୍ଛାନୁସାରେ)</string>
+
+    <string name="end_odometer_reading">ଶେଷ ଓଡୋମିଟର ଯୋଡନ୍ତୁ</string>
+
+    <string name="manual_km">ହାତେ ମୋଟ କିଲୋମିଟର</string>
+
+    <string name="end_odometer">ଶେଷ ଓଡୋମିଟର\n</string>
+
+    <string name="end_km_input_type">ମୋଟ କିଲୋମିଟର ଲେଖନ୍ତୁ</string>
+
+    <string name="manual_km_traveled">ହାତେ ଚାଲିଥିବା କିଲୋମିଟର</string>
+
+    <string name="coach_mark_expense">ଏଠାରେ ଆପଣଙ୍କ ଖର୍ଚ୍ଚ ଯୋଡନ୍ତୁ, ଯେପରିକି ଖାଦ୍ୟ, ଟୋଲ, ମରାମତି ଇତ୍ୟାଦି।</string>
+
+    <string name="coach_mark_income">ଯାତ୍ରା ସମୟରେ ମିଳିଥିବା ଆୟ ଏଠାରେ ଯୋଡନ୍ତୁ</string>
+
+    <string name="coach_mark_fuel">ଲିଟର ଓ ଓଡୋମିଟର ରିଡିଂ ସହିତ ଏଠାରେ ଡିଜେଲ ତଥ୍ୟ ଯୋଡନ୍ତୁ</string>
+    <string name="naya_truck_number_bolo_ya_same_rakho">ନୂଆ ଟ୍ରକ୍ ନମ୍ବର କହନ୍ତୁ କିମ୍ବା ସେଇଟା ରଖନ୍ତୁ</string>
+    <string name="truck_number_bolo">ଟ୍ରକ୍ ନମ୍ବର କହନ୍ତୁ</string>
+    <string name="yaha_kharcha_dalo">ଏଠାରେ ଖର୍ଚ୍ଚ ଯୋଡନ୍ତୁ</string>
+    <string name="kharcha_list">ଖର୍ଚ୍ଚ ତାଲିକା :</string>
+    <string name="abhi_koi_kharcha_nahi">ଏଯାଏଁ କୌଣସି ଖର୍ଚ୍ଚ ନାହିଁ</string>
+    <string name="yaha_aavak_dalo">ଏଠାରେ ଆୟ ଯୋଡନ୍ତୁ</string>
+    <string name="aavak_list">ଆୟ ତାଲିକା :</string>
+    <string name="abhi_koi_aavak_nahi">ଏଯାଏଁ କୌଣସି ଆୟ ନାହିଁ</string>
+
+    <string name="kharcha_aavak_edit_karein_chahiye_to_add_ya_delete_karo">ଖର୍ଚ୍ଚ କିମ୍ବା ଆୟ ବଦଳାଇ ପାରିବେ, ଚାହିଲେ ଯୋଡନ୍ତୁ କିମ୍ବା ହଟାନ୍ତୁ</string>
+    <string name="kharcha_aavak_edit_kar_sakte_ho">ଖର୍ଚ୍ଚ ଓ ଆୟ ଏଡିଟ୍ କରି ପାରିବେ</string>
+    <string name="kharcha_ya_aavak_dalo">ଖର୍ଚ୍ଚ କିମ୍ବା ଆୟ ଦିଅନ୍ତୁ</string>
+    <string name="kharcha_dalo">ଖର୍ଚ୍ଚ ଦିଅନ୍ତୁ</string>
+    <string name="aavak_dalo">ଆୟ ଦିଅନ୍ତୁ</string>
+    <string name="kharcha_bolo_jaise_khane_ke_500">ଖର୍ଚ୍ଚ କୁହନ୍ତୁ, ଯେମିତି ଖାଇବା 500</string>
+    <string name="aavak_bolo_jaise_kiraye_ke_5000">ଆୟ କୁହନ୍ତୁ, ଯେମିତି ଭଡା 5000</string>
+    <string name="ka_rupaye_jod_diya">%1$s ପାଇଁ ₹%2$d ଯୋଡାଗଲା</string>
+    <string name="samajh_nahi_aaya_dubara_bolo">ବୁଝି ପାରିଲୁ ନାହିଁ, ପୁଣି କୁହନ୍ତୁ</string>
+    <string name="update_ho_gaya">ଅପଡେଟ୍ ହେଲା!</string>
+    <string name="ka_rupaye_update_ho_gaya">%1$s ପାଇଁ ₹%2$d ଅପଡେଟ୍ ହେଲା</string>
+    <string name="delete_ho_gaya">ଡିଲିଟ୍ ହେଲା</string>
+    <string name="edit_karne_ke_liye_bolo">ଏଡିଟ୍ କରିବାକୁ କୁହନ୍ତୁ</string>
+    <string name="kuch_to_dalo_pehle">ପ୍ରଥମେ କିଛି ଦିଅନ୍ତୁ</string>
+    <string name="sab_save_ho_gaya">ସବୁ ସେଭ୍ ହେଲା!</string>
+    <string name="naya_bolo_jaise_diesel_3000">ନୂଆ କୁହନ୍ତୁ, ଡିଜେଲ 3000</string>
+    <string name="nuksan">କ୍ଷତି</string>
+    <string name="trip_complete">ଟ୍ରିପ୍ ସମ୍ପୂର୍ଣ୍ଣ</string>
+    <string name="ok">ଠିକ୍ ଅଛି</string>
+    <string name="end_date_chuno">ଶେଷ ତାରିଖ ବାଛନ୍ତୁ</string>
+    <string name="trip_khatam_ab_data_save_kar_rahe_hain">ଟ୍ରିପ୍ ଶେଷ, ଡାଟା ସେଭ୍ ହେଉଛି</string>
+    <string name="trip_khatam_hone_ki_tareekh">ଟ୍ରିପ୍ ଶେଷ ତାରିଖ</string>
+    <string name="data_save_ho_raha_hai">ଡାଟା ସେଭ୍ ହେଉଛି...</string>
+    <string name="trip_ka_report_tayar_ho_gaya">ଟ୍ରିପ୍ ରିପୋର୍ଟ୍ ପ୍ରସ୍ତୁତ</string>
+    <string name="trip_details">ଟ୍ରିପ୍ ବିବରଣୀ:\n\n</string>
+    <string name="truck">ଟ୍ରକ୍: %1$s\n</string>
+    <string name="start">ଆରମ୍ଭ: %1$s - %2$s\n</string>
+    <string name="end">ଶେଷ: %1$s - %2$s\n\n</string>
+    <string name="total_kharcha">ମୋଟ ଖର୍ଚ୍ଚ: ₹%1$d\n</string>
+    <string name="total_aavak">ମୋଟ ଆୟ: ₹%1$d\n</string>
+    <string name="munafa">ଲାଭ: ₹%1$d</string>
+    <string name="bolo_khane_ke_500">କହନ୍ତୁ: ଖାଇବା 500</string>
+    <string name="aapki_list">ଆପଣଙ୍କ ତାଲିକା:</string>
+    <string name="save_karo">ସେଭ୍ କରନ୍ତୁ</string>
+
+    <string name="kya_karna_hai">କଣ କରିବେ?</string>
+    <string name="edit_karo">ଏଡିଟ୍ କରନ୍ତୁ</string>
+    <string name="purani_details">ପୁରୁଣା ବିବରଣୀ:</string>
+    <string name="current_khana">ବର୍ତ୍ତମାନ: ଖାଦ୍ୟ</string>
+    <string name="current_500">ବର୍ତ୍ତମାନ: ₹500</string>
+    <string name="naya_bolo_diesel_3000">ନୂଆ କୁହନ୍ତୁ: ଡିଜେଲ 3000</string>
+    <string name="update">ଅପଡେଟ୍</string>
+    <string name="trip_edit_kar_rahe_hain">ଟ୍ରିପ୍ ଏଡିଟ୍ ହେଉଛି</string>
+    <string name="aage_badho_edit_karein">ଆଗକୁ ବଢନ୍ତୁ – ଏଡିଟ୍ କରନ୍ତୁ</string>
+    <string name="edit_mode_truck_number_badal_sakte_ho">ଏଡିଟ୍ ମୋଡ୍ – ଟ୍ରକ୍ ନମ୍ବର ବଦଳାଇ ପାରିବେ</string>
+    <string name="edit">✏️ ଏଡିଟ୍</string>
+    <string name="delete">🗑️ ଡିଲିଟ୍</string>
+    <string name="delete_confirmation">ଡିଲିଟ୍ ନିଶ୍ଚିତକରଣ</string>
+    <string name="kya_aap_ko_delete_karna_chahte_ho_amount">‘%1$s’ କୁ ଡିଲିଟ୍ କରିବାକୁ ଚାହୁଁଛନ୍ତି?\n\nରାଶି: ₹%2$d</string>
+    <string name="haan_delete_karo">ହଁ, ଡିଲିଟ୍ କରନ୍ତୁ</string>
+    <string name="nahi_cancel_karo">ନା, କ୍ୟାନସଲ୍ କରନ୍ତୁ</string>
+    <string name="ya_yaha_type_karo">ନହେଲେ ଏଠାରେ ଟାଇପ୍ କରନ୍ତୁ:</string>
+    <string name="note_diesel_khana_etc">ନୋଟ୍ (ଡିଜେଲ, ଖାଦ୍ୟ, ଇତ୍ୟାଦି)</string>
+    <string name="amount_rupees">ରାଶି (ରୁପିଆ)</string>
+    <string name="ya_voice_se_bolo">ନହେଲେ ଭଏସ୍‌ରେ କୁହନ୍ତୁ:</string>
+    <string name="trip_complete_karen">ଟ୍ରିପ୍ ସମ୍ପୂର୍ଣ୍ଣ କରିବେ?</string>
+    <string name="trip_ki_saari_details_check_karein">ଟ୍ରିପ୍‌ର ସମସ୍ତ ବିବରଣୀ ଯାଞ୍ଚ କରନ୍ତୁ</string>
+    <string name="truck_number_icon">🚛 ଟ୍ରକ୍ ନମ୍ବର:</string>
+    <string name="start_">📍 ଆରମ୍ଭ:</string>
+    <string name="end_">🏁 ଶେଷ:</string>
+    <string name="total_kharcha_">💸 ମୋଟ ଖର୍ଚ୍ଚ:</string>
+    <string name="total_aavak_">💰 ମୋଟ ଆୟ:</string>
+    <string name="total_munafa_">📊 ମୋଟ ଲାଭ:</string>
+    <string name="driver_ki_income">ଡ୍ରାଇଭର ଆୟ:</string>
+    <string name="driver_income_optional">ଡ୍ରାଇଭର ଆୟ (ଇଚ୍ଛାଧୀନ)</string>
+    <string name="confirm">କନଫର୍ମ</string>
+
+
 </resources>

@@ -58,7 +58,12 @@ class NewsFragment : Fragment(),NewsAdapter.ClickNews {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as DashBoardActivity).textChanges(3)
+        try {
+            (activity as DashBoardActivity).textChanges(3)
+        }catch (e: Exception){
+
+        }
+
 //        initViews()
 //        initAdapter()
 //        setObserver()

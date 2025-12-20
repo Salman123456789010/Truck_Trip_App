@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Karo"
+        android:text="@string/edit_karo"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#333333"
@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Purani Details:"
+                android:text="@string/purani_details"
                 android:textSize="14sp"
                 android:textColor="#666666"
                 android:layout_marginBottom="8dp" />
@@ -43,7 +43,7 @@
                 android:id="@+id/tvCurrentNote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Current: Khana"
+                android:text="@string/current_khana"
                 android:textSize="16sp"
                 android:textColor="#333333"
                 android:layout_marginBottom="4dp" />
@@ -52,32 +52,105 @@
                 android:id="@+id/tvCurrentAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Current: ₹500"
+                android:text="@string/current_500"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#FF6600" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Input Fields Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ya_yaha_type_karo"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Note Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeColor="@color/color_primary"
+        app:hintTextColor="@color/color_primary"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/note_diesel_khana_etc"
+            android:inputType="text"
+            android:textSize="16sp"
+            android:padding="16dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Amount Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeColor="@color/color_primary"
+        app:hintTextColor="@color/color_primary"
+        app:prefixText="₹ "
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/amount_rupees"
+            android:inputType="number"
+            android:textSize="16sp"
+            android:padding="16dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Voice Input Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ya_voice_se_bolo"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="12dp" />
+
     <!-- Mic Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabEditMic"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        app:fabCustomSize="120dp"
-        app:maxImageSize="60dp"
-        android:src="@android:drawable/ic_btn_speak_now"
-        app:tint="#FFFFFF"
-        app:backgroundTint="#FF6600"
-        app:elevation="6dp"
-        android:layout_marginBottom="16dp" />
+        app:fabCustomSize="100dp"
+        app:maxImageSize="50dp"
+        android:src="@drawable/mic_phone"
+        app:tint="@color/white"
+        app:backgroundTint="@color/tamil_txt"
+        android:layout_marginBottom="12dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Naya bolo: 'Diesel 3000'"
-        android:textSize="16sp"
+        android:text="@string/naya_bolo_diesel_3000"
+        android:textSize="14sp"
         android:textColor="#666666"
         android:layout_gravity="center"
         android:layout_marginBottom="24dp" />
@@ -95,10 +168,10 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textSize="16sp"
-            app:strokeColor="#FF6600"
-            android:textColor="#FF6600"
+            app:strokeColor="@color/color_primary"
+            android:textColor="@color/color_primary"
             android:layout_marginEnd="8dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -106,12 +179,11 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:text="Update"
+            android:text="@string/update"
             android:textSize="16sp"
-            app:backgroundTint="#FF6600"
+            app:backgroundTint="@color/color_primary"
             app:cornerRadius="12dp"
             android:textColor="#FFFFFF"
-            android:layout_marginStart="8dp"
-            android:visibility="gone" />
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 </LinearLayout>

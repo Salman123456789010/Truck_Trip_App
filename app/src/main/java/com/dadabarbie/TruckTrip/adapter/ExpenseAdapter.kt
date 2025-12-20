@@ -1,8 +1,11 @@
 package com.dadabarbie.TruckTrip.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.activity.ThirdExpenseScreen
 import com.dadabarbie.TruckTrip.databinding.ItemExpenseBinding
 
@@ -25,6 +28,20 @@ class ExpenseAdapter(
         holder.binding.tvNote.text = item.note
         holder.binding.tvAmount.text = "₹${item.amount}"
 
+        // ✅ CORRECT WAY - Direct enum comparison
+        when (item.type) {
+            ThirdExpenseScreen.ExpenseType.AAVAK -> {
+                // Green color for income (AAVAK)
+                holder.binding.tvAmount.setTextColor(Color.parseColor("#4CAF50"))
+                android.util.Log.d("ExpenseAdapter", "✅ Set GREEN for income: ${item.note}")
+            }
+            ThirdExpenseScreen.ExpenseType.KHARCHA -> {
+                // Red color for expense (KHARCHA)
+                holder.binding.tvAmount.setTextColor(Color.parseColor("#F44336"))
+                android.util.Log.d("ExpenseAdapter", "✅ Set RED for expense: ${item.note}")
+            }
+        }
+
         holder.binding.root.setOnClickListener {
             android.util.Log.d("ExpenseAdapter", "Item clicked: ${item.note}, type: ${item.type}")
             showActionDialog(holder.itemView.context, item)
@@ -38,57 +55,48 @@ class ExpenseAdapter(
     }
 
     private fun showActionDialog(context: android.content.Context, item: ThirdExpenseScreen.ExpenseItem) {
-        android.util.Log.d("ExpenseAdapter", "=== DIALOG START === Showing dialog for: ${item.note}, type: ${item.type}")
+        android.util.Log.d("ExpenseAdapter", "Showing action dialog for: ${item.note}")
 
-        try {
-            val options = arrayOf("Edit", "Delete")
-
-            val dialog = AlertDialog.Builder(context)
-                .setTitle("Kya karna hai?")
-                .setItems(options) { dialogInterface, which ->
-                    android.util.Log.d("ExpenseAdapter", "=== CLICK DETECTED === Position: $which for item: ${item.note}")
-
-                    // Post to main thread to ensure execution
-                    android.os.Handler(android.os.Looper.getMainLooper()).post {
-                        when (which) {
-                            0 -> {
-                                android.util.Log.d("ExpenseAdapter", "=== EDIT ACTION === Calling onAction for EDIT")
-                                try {
-                                    onAction(item, "EDIT")
-                                    android.util.Log.d("ExpenseAdapter", "=== EDIT SUCCESS === onAction called successfully")
-                                } catch (e: Exception) {
-                                    android.util.Log.e("ExpenseAdapter", "=== EDIT ERROR === ${e.message}")
-                                    e.printStackTrace()
-                                }
-                            }
-                            1 -> {
-                                android.util.Log.d("ExpenseAdapter", "=== DELETE ACTION === Calling onAction for DELETE")
-                                try {
-                                    onAction(item, "DELETE")
-                                    android.util.Log.d("ExpenseAdapter", "=== DELETE SUCCESS === onAction called successfully")
-                                } catch (e: Exception) {
-                                    android.util.Log.e("ExpenseAdapter", "=== DELETE ERROR === ${e.message}")
-                                    e.printStackTrace()
-                                }
-                            }
-                        }
-                    }
-
-                    dialogInterface.dismiss()
-                }
-                .setCancelable(true)
-                .setOnDismissListener {
-                    android.util.Log.d("ExpenseAdapter", "=== DIALOG DISMISSED ===")
-                }
-                .create()
-
-            dialog.show()
-            android.util.Log.d("ExpenseAdapter", "=== DIALOG SHOWN === Dialog is now visible")
-        } catch (e: Exception) {
-            android.util.Log.e("ExpenseAdapter", "=== DIALOG ERROR === ${e.message}")
-            e.printStackTrace()
-        }
+        AlertDialog.Builder(context)
+            .setTitle("${item.note} - ₹${item.amount}")
+            .setMessage(context.getString(R.string.kya_karna_hai))
+            .setPositiveButton(context.getString(R.string.edit)) { dialog, _ ->
+                dialog.dismiss()
+                android.util.Log.d("ExpenseAdapter", "Edit clicked for: ${item.note}")
+                onAction(item, "EDIT")
+            }
+            .setNegativeButton(context.getString(R.string.delete)) { dialog, _ ->
+                dialog.dismiss()
+                android.util.Log.d("ExpenseAdapter", "Delete clicked for: ${item.note}")
+                showDeleteConfirmation(context, item)
+            }
+            .setNeutralButton("❌"+context.getString(R.string.cancel)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setCancelable(true)
+            .show()
     }
+    private fun showDeleteConfirmation(context: android.content.Context, item: ThirdExpenseScreen.ExpenseItem) {
+        AlertDialog.Builder(context)
+            .setTitle(context.getString(R.string.delete_confirmation))
+            .setMessage(
+                context.getString(
+                    R.string.kya_aap_ko_delete_karna_chahte_ho_amount,
+                    item.note,
+                    item.amount
+                ))
+            .setPositiveButton(context.getString(R.string.haan_delete_karo)) { dialog, _ ->
+                dialog.dismiss()
+                android.util.Log.d("ExpenseAdapter", "Confirmed delete for: ${item.note}")
+                onAction(item, "DELETE")
+            }
+            .setNegativeButton(context.getString(R.string.nahi_cancel_karo)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setCancelable(true)
+            .show()
+    }
+
 
     override fun getItemCount() = items.size
 }

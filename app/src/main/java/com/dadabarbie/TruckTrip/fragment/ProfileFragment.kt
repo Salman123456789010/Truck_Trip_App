@@ -20,6 +20,7 @@ import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.activity.DashBoardActivity
 import com.dadabarbie.TruckTrip.activity.HowToUseActivity
 import com.dadabarbie.TruckTrip.activity.LanguageSelction
+import com.dadabarbie.TruckTrip.activity.NormalUserDashBoard
 import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
 import com.dadabarbie.TruckTrip.databinding.FragmentProfileBinding
 import com.dadabarbie.TruckTrip.diologFragment.DraftWarningDialogFragment
@@ -44,7 +45,16 @@ class ProfileFragment : Fragment(),View.OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as DashBoardActivity).textChanges(4)
+        try {
+            (activity as DashBoardActivity).textChanges(4)
+        }catch (e: Exception){
+
+        }
+
+        try {
+            (activity as NormalUserDashBoard).textChanges(4)
+        }catch (e: Exception){}
+
         // Inflate the layout for this fragment
        binding=FragmentProfileBinding.inflate(inflater,container,false)
         binding.driverNumber.text="${Constants.usermobileNumber}"

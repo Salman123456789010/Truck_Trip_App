@@ -4,45 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="#F5F7FA">
 
     <!-- Header -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="#FF6600">
+        android:layout_height="@dimen/_60sdp"
+        android:background="@color/green"
+        android:id="@+id/topBar">
 
         <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@android:drawable/ic_menu_revert"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="8dp"
-            app:tint="#FFFFFF"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerInParent="true"
+            android:id="@+id/backBtn"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/baseline_arrow_back_24" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kharcha-Aavak"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Truck Number Dale"
+            android:id="@+id/tittleText"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp" />
 
-        <ImageView
-            android:id="@+id/ivComplete"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@android:drawable/ic_menu_save"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="8dp"
-            app:tint="#FFFFFF"
+        <TextView
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_toEndOf="@+id/tittleText"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp" />
     </RelativeLayout>
 
     <ScrollView
@@ -63,8 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="8dp"
-                app:cardBackgroundColor="#FFF3E0">
+                app:cardBackgroundColor="@color/white">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -77,9 +81,8 @@
                         android:id="@+id/tvProfitLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Munafa (Profit)"
-                        android:textSize="18sp"
-                        android:textColor="#666666" />
+                        android:text="@string/total_profit"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/tvProfit"
@@ -88,7 +91,7 @@
                         android:text="₹0"
                         android:textSize="42sp"
                         android:textStyle="bold"
-                        android:textColor="#4CAF50"
+                        android:textColor="@color/color_primary"
                         android:layout_marginTop="8dp" />
 
                     <LinearLayout
@@ -107,7 +110,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Total Aavak"
+                                android:text="@string/total_income_credit"
                                 android:textSize="12sp"
                                 android:textColor="#666666" />
 
@@ -131,7 +134,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Total Kharcha"
+                                android:text="@string/total_expense_debit"
                                 android:textSize="12sp"
                                 android:textColor="#666666" />
 
@@ -142,7 +145,7 @@
                                 android:text="₹0"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
-                                android:textColor="#F44336" />
+                                android:textColor="@color/tamil_txt" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -155,7 +158,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
                 android:foreground="?attr/selectableItemBackground">
 
                 <LinearLayout
@@ -170,19 +172,19 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Yaha Kharcha Dalo"
+                        android:text="@string/yaha_kharcha_dalo"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="#F44336" />
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/tamil_txt" />
 
                     <ImageView
                         android:id="@+id/ivSpeakerKharcha"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@android:drawable/ic_lock_silent_mode_off"
+                        android:src="@drawable/loud_speaker"
                         android:padding="8dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        app:tint="#F44336" />
+                        app:tint="@color/tamil_txt" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -190,9 +192,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kharcha List:"
+                android:text="@string/kharcha_list"
                 android:textSize="16sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#333333"
                 android:layout_marginBottom="8dp" />
 
@@ -207,7 +209,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Abhi koi kharcha nahi"
+                    android:text="@string/abhi_koi_kharcha_nahi"
                     android:textColor="#999999" />
             </LinearLayout>
 
@@ -224,7 +226,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
                 android:foreground="?attr/selectableItemBackground">
 
                 <LinearLayout
@@ -239,16 +240,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Yaha Aavak Dalo"
+                        android:text="@string/yaha_aavak_dalo"
                         android:textSize="20sp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/roboto_medium"
                         android:textColor="#4CAF50" />
 
                     <ImageView
                         android:id="@+id/ivSpeakerAavak"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@android:drawable/ic_lock_silent_mode_off"
+                        android:src="@drawable/loud_speaker"
                         android:padding="8dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         app:tint="#4CAF50" />
@@ -259,9 +260,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Aavak List:"
+                android:text="@string/aavak_list"
                 android:textSize="16sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/roboto_medium"
                 android:textColor="#333333"
                 android:layout_marginBottom="8dp" />
 
@@ -276,7 +277,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Abhi koi aavak nahi"
+                    android:text="@string/abhi_koi_aavak_nahi"
                     android:textColor="#999999" />
             </LinearLayout>
 

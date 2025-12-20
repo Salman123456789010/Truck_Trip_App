@@ -250,4 +250,142 @@ Save টেপ কৰিলে ইন্ধন ট্ৰিপ হিসাব �
 Submit টেপ কৰিলে ট্ৰিপ সম্পূৰ্ণ হ’ব আৰু শ্বেয়াৰ কৰিবলৈ PDF ডাউনলোড হ’ব।
 </string>
     <string name="driver_s_gross_income_this_trip">মসিগী ট্রিপতগী ড্রাইভার কামাই</string>
+    <string name="yaha_pe_truck_number_bolo">ꯃꯐꯝꯗ ꯄꯨꯔꯥ ꯇ꯭ꯔꯛ ꯅꯝꯕꯔ ꯍꯥꯏꯕꯥ</string>
+    <string name="truck_number_dale">ꯇ꯭ꯔꯛ ꯅꯝꯕꯔ ꯄꯥꯏꯅꯕꯥ</string>
+    <string name="mic_ko_dabaye_aur_bolo">ꯃꯥꯏꯛ ꯅꯣꯛꯄꯥ ꯑꯃꯁꯨꯡ ꯍꯥꯏꯕꯥ</string>
+    <string name="aapka_truck_number">ꯅꯍꯥꯛꯀꯤ ꯇ꯭ꯔꯛ ꯅꯝꯕꯔ:</string>
+    <string name="dosri_screen">ꯑꯅꯤꯁꯨꯕ ꯁ꯭ꯀ꯭ꯔꯤꯟꯗ ꯆꯥꯡꯕꯥ</string>
+    <string name="trip_shuru_hone_ki_tareekh_chuno">ꯇ꯭ꯔꯤꯞ ꯑꯍꯧꯕꯥ ꯇꯥꯔꯤꯈ ꯈꯟꯕꯥ</string>
+    <string name="calendar_khulega">ꯀꯦꯂꯦꯟꯗꯔ ꯍꯧꯕꯥ</string>
+    <string name="jagah_bolo">ꯃꯐꯝ ꯍꯥꯏꯕꯥ</string>
+    <string name="destination_bolo">ꯀꯗꯥꯏꯗ ꯆꯥꯡꯒꯗꯕꯥ ꯍꯥꯏꯕꯥ</string>
+    <string name="aage_badho">ꯃꯉꯥꯡꯗ ꯆꯥꯡꯕꯥ</string>
+    <string name="edit_continue_karein">ꯑꯣꯟꯕꯥ ꯃꯤꯠꯄꯥ ꯃꯉꯥꯡꯗ ꯆꯥꯡꯕꯥ</string>
+    <string name="sari_fields_bharo">ꯂꯣꯏꯅꯥ ꯋꯥꯔꯤ ꯊꯝꯕꯥ</string>
+    <string name="trip_details_edit_karein_chahiye_to_change_karo">ꯇ꯭ꯔꯤꯞ ꯋꯥꯔꯤ ꯌꯦꯡꯕꯥ, ꯑꯋꯥ ꯌꯥꯝꯅꯕꯥ ꯃꯠꯄꯥ</string>
+    <string name="tareekh_badal_sakte_ho">ꯇꯥꯔꯤꯈ ꯑꯣꯟꯕꯥ ꯌꯥꯝꯅꯤ</string>
+    <string name="start_place_badal_sakte_ho">ꯑꯍꯧꯕ ꯂꯩꯐꯝ ꯑꯣꯟꯕꯥ ꯌꯥꯝꯅꯤ</string>
+    <string name="kaha_se_shuru_ho_rahe_ho_bolo">ꯀꯗꯥꯏꯗ ꯍꯧꯕ ꯍꯧꯔꯤꯕꯅꯣ ꯍꯥꯏꯕꯥ</string>
+    <string name="end_place_badal_sakte_ho">ꯂꯩꯐꯝ ꯂꯣꯏꯕ ꯑꯣꯟꯕꯥ ꯌꯥꯝꯅꯤ</string>
+    <string name="kaha_jaana_hai_bolo">ꯀꯗꯥꯏꯗ ꯆꯥꯡꯒꯗꯕꯥ, ꯍꯥꯏꯕꯥ</string>
+    <string name="how_to_use">ꯀꯥꯔꯤꯒꯤ ꯁꯤꯖꯤꯟ ꯍꯥꯏꯕꯒꯦ</string>
+    <string name="you_can_give_feedback">ꯅꯍꯥꯛꯅ ꯃꯐꯝꯗ ꯑꯄꯥꯝꯕ ꯋꯥꯍꯤ ꯄꯤꯕ ꯌꯥꯏ</string>
+    <string name="date_range_to">ꯐꯥꯎꯕ</string>
+
+    <string name="enter_start_km">ꯍꯧꯒꯠꯂꯕ ꯑꯣꯗꯣꯃꯤꯇꯔ ꯍꯥꯏꯕ</string>
+
+    <string name="start_odometer_optional">ꯍꯧꯒꯠꯂꯕ ꯑꯣꯗꯣꯃꯤꯇꯔ (ꯂꯥꯛꯄꯥ ꯃꯤꯇꯩ)</string>
+
+    <string name="end_odometer_reading">ꯂꯣꯏꯅꯥ ꯑꯣꯗꯣꯃꯤꯇꯔ ꯍꯥꯏꯕ</string>
+
+    <string name="manual_km">ꯃꯦꯅꯨꯑꯦꯜ ꯀꯤꯂꯣꯃꯤꯇꯔ</string>
+
+    <string name="end_odometer">ꯂꯣꯏꯅꯥ ꯑꯣꯗꯣꯃꯤꯇꯔ\n</string>
+
+    <string name="end_km_input_type">ꯀꯨꯂ ꯀꯤꯂꯣꯃꯤꯇꯔ ꯍꯥꯏꯕ</string>
+
+    <string name="manual_km_traveled">ꯃꯦꯅꯨꯑꯦꯜ ꯆꯠꯂꯕ ꯀꯤꯂꯣꯃꯤꯇꯔ</string>
+
+    <string name="coach_mark_expense">
+ꯆꯥꯟꯕꯤꯗ ꯅꯍꯥꯛꯅ ꯈꯔꯆ ꯍꯥꯏꯕ, ꯆꯥꯀ, ꯇꯣꯜ, ꯃꯔꯃꯠ ꯃꯥꯟꯅ
+</string>
+
+    <string name="coach_mark_income">
+ꯇ꯭ꯔꯤꯞ ꯃꯇꯝꯗ ꯐꯥꯎꯕ ꯀꯝꯥꯏ ꯍꯥꯏꯕ
+</string>
+
+    <string name="coach_mark_fuel">
+ꯗꯤꯖꯦꯜ ꯑꯦꯟꯇ꯭ꯔꯤ ꯍꯥꯏꯕ, ꯂꯤꯇꯔ ꯑꯃꯁꯨꯡ ꯑꯣꯗꯣꯃꯤꯇꯔ ꯔꯤꯗꯤꯡ ꯂꯣꯏꯅ
+</string>
+    <string name="naya_truck_number_bolo_ya_same_rakho">ꯑꯅꯧꯕ ꯇ꯭ꯔꯛ ꯅꯝꯕꯔ ꯍꯥꯏꯕ ꯑꯃꯁꯨꯡ ꯑꯗꯨ ꯂꯣꯏꯅ ꯈꯣꯠꯂꯨ</string>
+    <string name="truck_number_bolo">ꯇ꯭ꯔꯛ ꯅꯝꯕꯔ ꯍꯥꯏꯕ</string>
+    <string name="yaha_kharcha_dalo">ꯃꯐꯝꯗ ꯈꯔꯆ ꯍꯥꯏꯕ</string>
+    <string name="kharcha_list">ꯈꯔꯆ ꯂꯤꯁ꯭ꯇ :</string>
+    <string name="abhi_koi_kharcha_nahi">ꯑꯗꯨꯅꯥ ꯈꯔꯆ ꯅꯠꯇꯦ</string>
+    <string name="yaha_aavak_dalo">ꯃꯐꯝꯗ ꯑꯥꯃꯗꯥꯅꯤ ꯍꯥꯏꯕ</string>
+    <string name="aavak_list">ꯑꯥꯃꯗꯥꯅꯤ ꯂꯤꯁ꯭ꯇ :</string>
+    <string name="abhi_koi_aavak_nahi">ꯑꯗꯨꯅꯥ ꯑꯥꯃꯗꯥꯅꯤ ꯅꯠꯇꯦ</string>
+    <string name="kharcha_aavak_edit_karein_chahiye_to_add_ya_delete_karo">ꯈꯔꯆ ꯑꯃꯁꯨꯡ ꯑꯥꯃꯗꯥꯅꯤ ꯍꯥꯌꯤꯕ ꯑꯃꯁꯨꯡ ꯀꯥꯟꯅ ꯍꯧꯗꯣꯛꯄ ꯌꯥꯏ</string>
+    <string name="kharcha_aavak_edit_kar_sakte_ho">ꯈꯔꯆ ꯑꯃꯁꯨꯡ ꯑꯥꯃꯗꯥꯅꯤ ꯑꯦꯗꯤꯠ ꯇꯧꯕ ꯌꯥꯏ</string>
+    <string name="kharcha_ya_aavak_dalo">ꯈꯔꯆ ꯑꯃꯁꯨꯡ ꯑꯥꯃꯗꯥꯅꯤ ꯍꯥꯌꯕ</string>
+    <string name="kharcha_dalo">ꯈꯔꯆ ꯍꯥꯌꯕ</string>
+    <string name="aavak_dalo">ꯑꯥꯃꯗꯥꯅꯤ ꯍꯥꯌꯕ</string>
+    <string name="kharcha_bolo_jaise_khane_ke_500">ꯈꯔꯆ ꯍꯥꯏꯕ, ꯆꯥꯀ 500</string>
+    <string name="aavak_bolo_jaise_kiraye_ke_5000">ꯑꯥꯃꯗꯥꯅꯤ ꯍꯥꯏꯕ, ꯈꯔꯥꯏ 5000</string>
+    <string name="ka_rupaye_jod_diya">%1$s ꯒꯤ ₹%2$d ꯑꯃꯁꯨꯡ ꯍꯥꯌꯕ</string>
+    <string name="samajh_nahi_aaya_dubara_bolo">ꯍꯥꯏꯕ ꯑꯃꯁꯨꯡ ꯂꯣꯏꯅ ꯍꯥꯏꯕ</string>
+    <string name="update_ho_gaya">ꯑꯄꯗꯦꯠ ꯍꯣꯏꯔꯦ!</string>
+    <string name="delete_ho_gaya">ꯗꯤꯂꯤꯠ ꯍꯣꯏꯔꯦ</string>
+    <string name="trip_complete">ꯇ꯭ꯔꯤꯞ ꯃꯨꯠꯂꯦ</string>
+    <string name="ok">ꯑꯣꯀꯦ</string>
+    <string name="end_date_chuno">ꯂꯣꯏꯅꯥ ꯇꯥꯔꯤꯈ ꯈꯟꯕ</string>
+
+    <string name="trip_khatam_ab_data_save_kar_rahe_hain">ꯇ꯭ꯔꯤꯞ ꯂꯣꯏꯔꯦ, ꯑꯗꯨꯅꯥ ꯗꯥꯇꯥ ꯁꯦꯚ ꯍꯧꯔꯤ</string>
+
+    <string name="trip_khatam_hone_ki_tareekh">ꯇ꯭ꯔꯤꯞ ꯂꯣꯏꯅꯥ ꯇꯥꯔꯤꯈ</string>
+
+    <string name="data_save_ho_raha_hai">ꯗꯥꯇꯥ ꯁꯦꯚ ꯍꯧꯔꯤ...</string>
+
+    <string name="trip_ka_report_tayar_ho_gaya">ꯇ꯭ꯔꯤꯞ ꯔꯤꯄꯣꯔ꯭ꯇ ꯑꯃꯁꯨꯡ ꯍꯧꯔꯦ</string>
+
+    <string name="trip_details">ꯇ꯭ꯔꯤꯞ ꯋꯥꯔꯤ:\n\n</string>
+
+    <string name="truck">ꯇ꯭ꯔꯛ: %1$s\n</string>
+
+    <string name="start">ꯍꯧꯕꯥ: %1$s - %2$s\n</string>
+
+    <string name="end">ꯂꯣꯏꯅꯥ: %1$s - %2$s\n\n</string>
+
+    <string name="total_kharcha">ꯃꯣꯠ ꯈꯔꯆ: ₹%1$d\n</string>
+
+    <string name="total_aavak">ꯃꯣꯠ ꯑꯥꯃꯗꯥꯅꯤ: ₹%1$d\n</string>
+
+    <string name="munafa">ꯂꯥꯐꯥ: ₹%1$d</string>
+
+    <string name="ka_rupaye_update_ho_gaya">%1$s ꯒꯤ ₹%2$d ꯑꯄꯗꯦꯠ ꯍꯧꯔꯦ</string>
+
+    <string name="edit_karne_ke_liye_bolo">ꯑꯦꯗꯤꯠ ꯇꯧꯕ ꯍꯥꯏꯕ</string>
+
+    <string name="kuch_to_dalo_pehle">ꯍꯧꯕꯥ ꯀꯤꯆꯤꯛ ꯍꯥꯏꯕ</string>
+
+    <string name="sab_save_ho_gaya">ꯄꯨꯝꯅꯃꯛ ꯁꯦꯚ ꯍꯧꯔꯦ!</string>
+
+    <string name="naya_bolo_jaise_diesel_3000">ꯑꯅꯧꯕ ꯍꯥꯏꯕ, ꯗꯤꯖꯦꯜ 3000 ꯂꯥꯛꯄ</string>
+
+    <string name="nuksan">ꯂꯣꯏꯕ</string>
+    <string name="bolo_khane_ke_500">ꯍꯥꯏꯕ: ꯆꯥꯀ 500</string>
+    <string name="aapki_list">ꯅꯍꯥꯛꯀꯤ ꯂꯤꯁ꯭ꯇ:</string>
+    <string name="save_karo">ꯁꯦꯚ ꯇꯧꯕ</string>
+    <string name="kya_karna_hai">ꯀꯔꯤ ꯇꯧꯕ ꯌꯥꯏ?</string>
+    <string name="edit_karo">ꯑꯦꯗꯤꯠ ꯇꯧꯕ</string>
+    <string name="purani_details">ꯄꯨꯔꯥꯅꯤ ꯋꯥꯔꯤ:</string>
+    <string name="current_khana">ꯅꯧꯒꯤ: ꯆꯥꯀ</string>
+    <string name="current_500">ꯅꯧꯒꯤ: ₹500</string>
+    <string name="naya_bolo_diesel_3000">ꯑꯅꯧꯕ ꯍꯥꯏꯕ: ꯗꯤꯖꯦꯜ 3000</string>
+    <string name="update">ꯑꯄꯗꯦꯠ</string>
+    <string name="trip_edit_kar_rahe_hain">ꯇ꯭ꯔꯤꯞ ꯑꯦꯗꯤꯠ ꯇꯧꯔꯤ</string>
+    <string name="aage_badho_edit_karein">ꯑꯃꯥꯅꯥ ꯆꯠꯄꯥ – ꯑꯦꯗꯤꯠ ꯇꯧꯕ</string>
+    <string name="edit_mode_truck_number_badal_sakte_ho">ꯑꯦꯗꯤꯠ ꯃꯣꯗ – ꯇ꯭ꯔꯛ ꯅꯝꯕꯔ ꯍꯥꯌꯤꯕ ꯌꯥꯏ</string>
+    <string name="edit">✏️ ꯑꯦꯗꯤꯠ</string>
+    <string name="delete">🗑️ ꯗꯤꯂꯤꯠ</string>
+    <string name="delete_confirmation">ꯗꯤꯂꯤꯠ ꯈꯪꯗꯕ</string>
+    <string name="kya_aap_ko_delete_karna_chahte_ho_amount">‘%1$s’ ꯗꯤꯂꯤꯠ ꯇꯧꯕ ꯆꯥꯔꯤ?\n\n₹%2$d</string>
+    <string name="haan_delete_karo">ꯍꯣꯏ, ꯗꯤꯂꯤꯠ ꯇꯧꯕ</string>
+    <string name="nahi_cancel_karo">ꯅꯣꯏ, ꯀꯦꯟꯁꯦꯜ ꯇꯧꯕ</string>
+    <string name="ya_yaha_type_karo">ꯑꯃꯁꯨꯡ ꯃꯐꯝꯗ ꯇꯥꯏꯄ ꯇꯧꯕ:</string>
+    <string name="note_diesel_khana_etc">ꯅꯣꯠ (ꯗꯤꯖꯦꯜ, ꯆꯥꯀ, ꯑꯗꯤ)</string>
+    <string name="amount_rupees">ꯃꯣꯠ (ꯔꯨꯄꯤ)</string>
+    <string name="ya_voice_se_bolo">ꯑꯃꯁꯨꯡ ꯋꯣꯏꯁ ꯍꯥꯏꯕ:</string>
+    <string name="trip_complete_karen">ꯇ꯭ꯔꯤꯞ ꯂꯣꯏꯕ ꯇꯧꯕ?</string>
+    <string name="trip_ki_saari_details_check_karein">ꯇ꯭ꯔꯤꯞ ꯋꯥꯔꯤ ꯑꯃꯁꯨꯡ ꯈꯪꯗꯕ</string>
+    <string name="truck_number_icon">🚛 ꯇ꯭ꯔꯛ ꯅꯝꯕꯔ:</string>
+    <string name="start_">📍 ꯍꯧꯕꯥ:</string>
+    <string name="end_">🏁 ꯂꯣꯏꯅꯥ:</string>
+    <string name="total_kharcha_">💸 ꯃꯣꯠ ꯈꯔꯆ:</string>
+    <string name="total_aavak_">💰 ꯃꯣꯠ ꯑꯥꯃꯗꯥꯅꯤ:</string>
+    <string name="total_munafa_">📊 ꯃꯣꯠ ꯂꯥꯐꯥ:</string>
+    <string name="driver_ki_income">ꯗ꯭ꯔꯥꯏꯚꯔ ꯑꯥꯃꯗꯥꯅꯤ:</string>
+    <string name="driver_income_optional">ꯗ꯭ꯔꯥꯏꯚꯔ ꯑꯥꯃꯗꯥꯅꯤ (ꯑꯩꯆꯤꯛ)</string>
+    <string name="confirm">ꯀꯟꯐꯥꯔꯃ</string>
+
 </resources>

@@ -88,8 +88,8 @@ class TripListAdapter(val context: Context, val editTripDataListner: EditTripDat
        if(position%3==0){
            holder.binding.myTemplate.visible()
            GlobalScope.launch {
-
-               val adLoader = AdLoader.Builder(context, "ca-app-pub-8808039515208362/1007625609")
+//               ca-app-pub-8808039515208362/1007625609  main
+               val adLoader = AdLoader.Builder(context, "ca-app-pub-3940256099942544/6300978111")
                    .forNativeAd { nativeAd ->
                        holder.binding.myTemplate.setNativeAd(nativeAd)
                        holder.binding.myTemplate.visibility = View.VISIBLE

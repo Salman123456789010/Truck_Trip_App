@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.activity.DashBoardActivity
+import com.dadabarbie.TruckTrip.activity.NormalUserDashBoard
 import com.dadabarbie.TruckTrip.activity.VahanInfoDetailsActivity
 import com.dadabarbie.TruckTrip.databinding.FragmentVahanInfoBinding
 import com.google.android.gms.ads.AdLoader
@@ -23,7 +24,13 @@ class VahanInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        (activity as DashBoardActivity).textChanges(2)
+        try {
+            (activity as DashBoardActivity).textChanges(2)
+        }catch (e: Exception){}
+        try {
+            (activity as NormalUserDashBoard).textChanges(2)
+        }catch (e: Exception){}
+
         binding= FragmentVahanInfoBinding.inflate(inflater,container,false)
         setOnClickListner()
 //        MobileAds.initialize(requireActivity())

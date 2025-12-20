@@ -10,6 +10,7 @@ import com.dadabarbie.TruckTrip.Utils.Constants.languageLocale
 import com.dadabarbie.TruckTrip.Utils.LocaleHelper
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.auth.activity.LoginScreenActivity
+import com.dadabarbie.TruckTrip.databinding.ActivityNormalUserDashBoardBinding
 import com.dadabarbie.TruckTrip.databinding.ActivitySplashBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +29,8 @@ class SplashActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             delay(2000)
             if (Prefs[Constants.isLogin]) {
-                startActivity(Intent(this@SplashActivity, TruckNumberSpeechActivity::class.java))
+                startActivity(Intent(this@SplashActivity, NormalUserDashBoard::class.java)
+                    .putExtra("tripData",""))
                 finish()
             } else {
                  if(!Prefs[Constants.languageCode, ""].toString().isNullOrEmpty()){

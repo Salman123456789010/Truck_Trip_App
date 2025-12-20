@@ -1,10 +1,14 @@
 package com.dadabarbie.TruckTrip.activity
 
+import android.animation.Animator
+import android.animation.ValueAnimator
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,6 +17,8 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.dadabarbie.TruckTrip.R
+import com.dadabarbie.TruckTrip.Utils.Constants
+import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.databinding.ActivitySecondSpeechScreenBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -30,12 +36,15 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var ttsInitialized = false
     private var hasSpokenOnce = false
 
+    // EDIT MODE VARIABLES
+    private var isEditMode = false
+    private var tripId = ""
+
     private var currentField = FieldType.START_DATE
     private var selectedDate = ""
     private var startPlace = ""
     private var endPlace = ""
-
-
+    private var arrowAnimator: ValueAnimator? = null
     private val voiceRecognitionLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -48,16 +57,114 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
         }
     }
+
     enum class FieldType {
         START_DATE, START_PLACE, END_PLACE
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         textToSpeech = TextToSpeech(this, this)
 
+        // CHECK EDIT MODE
+        checkEditMode()
+
         setupViews()
         updateUI()
+        startArrowAnimation()
+
+        Constants.refreshApi.observe(this) {
+            it.getContentIfNotHandled()?.let { event ->
+                event.let {
+                    if (it < 0) {
+
+                    } else {
+                        Constants.refreshApiGet(Event(1))
+                        finish()
+                    }
+                }
+            }
+
+        }
+
+        binding.lottieMic.playAnimation()
+
+        binding.lottieMic.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {}
+
+            override fun onAnimationEnd(animation: Animator) {
+                // Hide animation
+                binding.lottieMic.visibility = View.GONE
+
+                // Show mic button
+                binding.fabMicrophone.visibility = View.VISIBLE
+                binding.lottieMic.alpha = 0f
+                binding.lottieMic.animate().alpha(1f).setDuration(300).start()
+            }
+
+            override fun onAnimationCancel(animation: Animator) {}
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
+    }
+
+    private fun startArrowAnimation() {
+        arrowAnimator = ValueAnimator.ofFloat(0f, 10f, 0f).apply {
+            duration = 1200
+            repeatCount = ValueAnimator.INFINITE
+            interpolator = android.view.animation.AccelerateDecelerateInterpolator()
+
+            addUpdateListener { animation ->
+                val value = animation.animatedValue as Float
+                binding.btnSubmit.translationX = value
+            }
+
+            start()
+        }
+        Log.d("Animation", "✅ Button animation started")
+    }
+    /**
+     * Check if opened in edit mode and pre-fill data
+     */
+    private fun checkEditMode() {
+        isEditMode = intent.getBooleanExtra("EDIT_MODE", false)
+
+        if (isEditMode) {
+            tripId = intent.getStringExtra("TRIP_ID") ?: ""
+
+            // Pre-fill start date
+            val startDate = intent.getStringExtra("START_DATE") ?: ""
+            if (startDate.isNotEmpty()) {
+                selectedDate = startDate
+                binding.tvStartDateValue.text = startDate
+                binding.cardStartDate.setCardBackgroundColor(getColor(R.color.white))
+            }
+
+            // Pre-fill start place
+            val startPlaceValue = intent.getStringExtra("START_PLACE") ?: ""
+            if (startPlaceValue.isNotEmpty()) {
+                startPlace = startPlaceValue
+                binding.tvStartPlaceValue.text = startPlace
+                binding.cardStartPlace.setCardBackgroundColor(getColor(R.color.white))
+            }
+
+            // Pre-fill end place
+            val endPlaceValue = intent.getStringExtra("END_PLACE") ?: ""
+            if (endPlaceValue.isNotEmpty()) {
+                endPlace = endPlaceValue
+                binding.tvEndPlaceValue.text = endPlace
+                binding.cardEndPlace.setCardBackgroundColor(getColor(R.color.white))
+            }
+
+            // Change button text
+            binding.btnSubmit.text = getString(R.string.edit_continue_karein)
+
+            // Change header text
+//            binding.tvTitle?.text = "Trip Details Edit Karein"
+
+            // Show edit indicator (if you have it in XML)
+            binding.tvInstruction?.visibility = View.VISIBLE
+        }
     }
 
     private fun setupViews() {
@@ -104,20 +211,38 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         // Submit button
         binding.btnSubmit.setOnClickListener {
             if (validateInputs()) {
-                if (validateInputs()) {
-                    val intent = Intent(this, ThirdExpenseScreen::class.java)
-                    intent.putExtra("truck_number", getIntent().getStringExtra("truck_number"))
-                    intent.putExtra("start_date", selectedDate)
-                    intent.putExtra("start_place", startPlace)
-                    intent.putExtra("end_place", endPlace)
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(this, "Sabhi fields bharo", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, ThirdExpenseScreen::class.java).apply {
+                    putExtra("TRUCK_NUMBER", getIntent().getStringExtra("TRUCK_NUMBER"))
+                    putExtra("START_DATE", selectedDate)
+                    putExtra("START_PLACE", startPlace)
+                    putExtra("END_PLACE", endPlace)
+                    putExtra("EDIT_MODE", isEditMode)
+                    putExtra("TRIP_ID", tripId)
+                    putExtra("id", tripId) // Pass tripId as "id" for ThirdExpenseScreen to identify draft
+
+                    // Pass additional edit data
+                    if (isEditMode) {
+                        putExtra("END_DATE", getIntent().getStringExtra("END_DATE"))
+                        putExtra("DRIVER_INCOME", getIntent().getStringExtra("DRIVER_INCOME"))
+                        putExtra("TOTAL_INCOME", getIntent().getStringExtra("TOTAL_INCOME"))
+                        putExtra("TOTAL_EXPENSE", getIntent().getStringExtra("TOTAL_EXPENSE"))
+
+                        // Forward ORIGINAL values
+                        putExtra("ORIGINAL_TRUCK_NUMBER", getIntent().getStringExtra("ORIGINAL_TRUCK_NUMBER"))
+                        putExtra("ORIGINAL_START_DATE", getIntent().getStringExtra("ORIGINAL_START_DATE"))
+                        putExtra("ORIGINAL_END_DATE", getIntent().getStringExtra("ORIGINAL_END_DATE"))
+                        putExtra("ORIGINAL_START_PLACE", getIntent().getStringExtra("ORIGINAL_START_PLACE"))
+                        putExtra("ORIGINAL_END_PLACE", getIntent().getStringExtra("ORIGINAL_END_PLACE"))
+                    }
                 }
-                Toast.makeText(this, "Trip details saved!", Toast.LENGTH_SHORT).show()
-                // Navigate to next screen or save data
+                startActivity(intent)
+
+                // Close in edit mode
+                if (isEditMode) {
+                    finish()
+                }
             } else {
-                Toast.makeText(this, "Sabhi fields bharo", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.sari_fields_bharo), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -126,13 +251,17 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         if (status == TextToSpeech.SUCCESS) {
             val result = textToSpeech.setLanguage(Locale("hi", "IN"))
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Toast.makeText(this, "Hindi language not supported", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "language not supported", Toast.LENGTH_SHORT).show()
             } else {
                 ttsInitialized = true
                 // Auto-speak on first load
                 if (!hasSpokenOnce) {
                     binding.root.postDelayed({
-                        speakCurrentInstruction()
+                        if (isEditMode) {
+                            speakText(getString(R.string.trip_details_edit_karein_chahiye_to_change_karo))
+                        } else {
+                            speakCurrentInstruction()
+                        }
                         hasSpokenOnce = true
                     }, 500)
                 }
@@ -142,15 +271,25 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun getCurrentInstruction(): String {
         return when (currentField) {
-            FieldType.START_DATE -> "Trip Shuru Hone Ki Tareekh Chuno"
-            FieldType.START_PLACE -> "Kaha Se Shuru Ho Rahe Ho, Bolo"
-            FieldType.END_PLACE -> "Kaha Jaana Hai, Bolo"
+            FieldType.START_DATE -> if (isEditMode) getString(R.string.tareekh_badal_sakte_ho) else getString(R.string.trip_shuru_hone_ki_tareekh_chuno)
+            FieldType.START_PLACE -> if (isEditMode) getString(R.string.start_place_badal_sakte_ho) else getString(
+                R.string.kaha_se_shuru_ho_rahe_ho_bolo
+            )
+            FieldType.END_PLACE -> if (isEditMode) getString(R.string.end_place_badal_sakte_ho) else getString(
+                R.string.kaha_jaana_hai_bolo
+            )
         }
     }
 
     private fun speakCurrentInstruction() {
         if (ttsInitialized) {
             textToSpeech.speak(getCurrentInstruction(), TextToSpeech.QUEUE_FLUSH, null, null)
+        }
+    }
+
+    private fun speakText(text: String) {
+        if (ttsInitialized) {
+            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
         }
     }
 
@@ -181,7 +320,7 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                 val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale("hi", "IN"))
                 selectedDate = dateFormat.format(calendar.time)
                 binding.tvStartDateValue.text = selectedDate
-                binding.cardStartDate.setCardBackgroundColor(getColor(android.R.color.holo_green_light))
+                binding.cardStartDate.setCardBackgroundColor(getColor(R.color.white))
 
                 // Move to next field
                 currentField = FieldType.START_PLACE
@@ -201,7 +340,7 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             FieldType.START_PLACE -> {
                 startPlace = spokenText
                 binding.tvStartPlaceValue.text = startPlace
-                binding.cardStartPlace.setCardBackgroundColor(getColor(android.R.color.holo_green_light))
+                binding.cardStartPlace.setCardBackgroundColor(getColor(R.color.white))
 
                 // Move to next field
                 currentField = FieldType.END_PLACE
@@ -211,9 +350,9 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             FieldType.END_PLACE -> {
                 endPlace = spokenText
                 binding.tvEndPlaceValue.text = endPlace
-                binding.cardEndPlace.setCardBackgroundColor(getColor(android.R.color.holo_green_light))
+                binding.cardEndPlace.setCardBackgroundColor(getColor(R.color.white))
 
-                Toast.makeText(this, "Sab details bhar gayi!", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Sab details bhar gayi!", Toast.LENGTH_SHORT).show()
             }
             else -> {}
         }
@@ -225,15 +364,15 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         // Update microphone icon based on field
         if (currentField == FieldType.START_DATE) {
-            binding.fabMicrophone.setImageResource(android.R.drawable.ic_menu_my_calendar)
+            binding.fabMicrophone.setImageResource(R.drawable.calendar)
         } else {
-            binding.fabMicrophone.setImageResource(android.R.drawable.ic_btn_speak_now)
+            binding.fabMicrophone.setImageResource(R.drawable.baseline_mic_24)
         }
 
         // Update status text
         binding.tvStatus.text = when (currentField) {
-            FieldType.START_DATE -> "Calendar khulega"
-            else -> "Mic ko dabaye aur bolo"
+            FieldType.START_DATE -> getString(R.string.calendar_khulega)
+            else -> getString(R.string.mic_ko_dabaye_aur_bolo)
         }
 
         // Highlight active card
@@ -261,5 +400,4 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             textToSpeech.shutdown()
         }
         super.onDestroy()
-    }
-}
+    }}

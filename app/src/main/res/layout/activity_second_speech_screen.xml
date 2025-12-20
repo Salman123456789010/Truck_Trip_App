@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#FFFFFF">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="@dimen/_60sdp"
+        android:background="@color/green">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/baseline_arrow_back_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Truck Number Dale"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F7FA">
+
 
         <!-- Header with Back Button -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:background="@color/green"
-            android:id="@+id/topBar">
 
-            <ImageView
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_alignParentStart="true"
-                android:layout_centerInParent="true"
-                android:id="@+id/backBtn"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:backgroundTint="@color/white"
-                android:src="@drawable/baseline_arrow_back_24" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Truck Number Dale"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14sdp" />
-        </RelativeLayout>
 
         <!-- Main Content -->
         <LinearLayout
@@ -49,56 +52,81 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvInstruction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Trip Shuru Hone Ki Tareekh Chuno"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:textColor="#333333"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:text="@string/trip_shuru_hone_ki_tareekh_chuno"
+                    android:textSize="@dimen/_14sdp"
+                    android:fontFamily="@font/roboto_medium" />
 
                 <ImageView
                     android:id="@+id/ivSpeaker"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@android:drawable/ic_lock_silent_mode_off"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="8dp"
+                    android:src="@drawable/loud_speaker"
                     app:tint="@color/color_primary" />
             </LinearLayout>
 
-            <!-- Big Action Button (Mic/Calendar) -->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabMicrophone"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
+            <FrameLayout
+                android:id="@+id/micContainer"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_gravity="center"
-                app:fabCustomSize="140dp"
-                app:maxImageSize="70dp"
-                android:src="@android:drawable/ic_menu_my_calendar"
-                app:tint="#FFFFFF"
-                app:backgroundTint="@color/color_primary"
-                app:elevation="8dp"
-                android:layout_marginBottom="16dp" />
+                android:background="@drawable/bg_mic_circle"
+                android:padding="20dp">
+
+
+                <!-- Lottie Mic Animation -->
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottieMic"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:lottie_rawRes="@raw/calender_animation"
+                    app:lottie_loop="false"
+                    android:backgroundTint="@color/white"
+                    app:lottie_autoPlay="false"
+                    android:visibility="visible" />
+
+                <!-- Mic Button -->
+                <ImageView
+                    android:id="@+id/fabMicrophone"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/calendar"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:tint="@color/white" />
+
+            </FrameLayout>
+
+            <!-- Big Action Button (Mic/Calendar) -->
+
+
 
             <!-- Status Text -->
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calendar khulega"
-                android:textSize="16sp"
-                android:textColor="#666666"
                 android:layout_gravity="center"
-                android:layout_marginBottom="32dp" />
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/calendar_khulega"
+                android:textSize="@dimen/_12sdp" />
 
             <!-- Start Date Card -->
             <com.google.android.material.card.MaterialCardView
@@ -106,11 +134,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/edittext_background_color"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-                app:strokeColor="#FF6600"
-                app:strokeWidth="0dp"
-                app:cardBackgroundColor="#FFF8F0">
+                app:strokeColor="@color/white"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -121,35 +149,34 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_my_calendar"
-                            app:tint="#FF6600" />
+                            android:src="@drawable/calendar"
+                            app:tint="@color/black" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
                             android:layout_weight="1"
-                            android:text="Trip Start Date"
+                            android:text="@string/trip_start_date"
                             android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="#333333"
-                            android:layout_marginStart="12dp" />
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvStartDateValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tareekh chunein"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="#FF6600"
-                        android:layout_marginTop="8dp" />
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="19 may 2024"
+                        android:textColor="@color/color_primary"
+                        android:textSize="20sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -159,11 +186,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/edittext_background_color"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-                app:strokeColor="#FF6600"
-                app:strokeWidth="0dp"
-                app:cardBackgroundColor="#FFF8F0">
+                app:strokeColor="@color/white"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -174,35 +201,34 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:src="@android:drawable/ic_dialog_map"
-                            app:tint="#4CAF50" />
+                            android:src="@drawable/map"
+                            app:tint="@color/black" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
                             android:layout_weight="1"
-                            android:text="Kaha Se (Start Place)"
+                            android:text="@string/sarvat_no_place_nakho"
                             android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="#333333"
-                            android:layout_marginStart="12dp" />
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvStartPlaceValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jagah bolo"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/jagah_bolo"
+                        android:textColor="@color/color_primary"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="#4CAF50"
-                        android:layout_marginTop="8dp" />
+                        android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -212,11 +238,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/edittext_background_color"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-                app:strokeColor="#FF6600"
-                app:strokeWidth="0dp"
-                app:cardBackgroundColor="#FFF8F0">
+                app:strokeColor="@color/white"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -227,50 +253,63 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:src="@android:drawable/ic_menu_compass"
-                            app:tint="#F44336" />
+                            android:src="@drawable/compass"
+                            app:tint="@color/black" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
                             android:layout_weight="1"
-                            android:text="Kaha Tak (End Place)"
+                            android:text="@string/end_no_place_nakho"
                             android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="#333333"
-                            android:layout_marginStart="12dp" />
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvEndPlaceValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Destination bolo"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/destination_bolo"
+                        android:textColor="@color/color_primary"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="#F44336"
-                        android:layout_marginTop="8dp" />
+                        android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Submit Button -->
-            <com.google.android.material.button.MaterialButton
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="Aage Badho"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:backgroundTint="@color/color_primary"
-                app:cornerRadius="12dp"
-                android:textColor="#FFFFFF"
-                android:layout_marginBottom="16dp" />
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="@string/aage_badho"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:fontFamily="@font/roboto_medium"
+                android:backgroundTint="@color/green"
+                app:icon="@drawable/ic_arrow_forward_animated"
+                app:iconTint="@color/white"
+                app:iconSize="@dimen/_20sdp"
+                app:iconGravity="end"
+                android:elevation="6dp"
+                />
+
+            <!-- Submit Button -->
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+
+    </ScrollView>
+
+</LinearLayout>

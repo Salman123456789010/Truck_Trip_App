@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:fitsSystemWindows="true"
+    android:background="#F5F7FA">
 
     <!-- Progress Bar -->
     <RelativeLayout
@@ -28,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/roboto_medium"
-            android:text="Truck Number Dale"
+            android:text="@string/truck_number_dale"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp" />
     </RelativeLayout>
@@ -64,11 +65,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Yaha pe Truck Number Bolo"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="#333333"
-                    android:gravity="center_vertical"
+                    android:text="@string/yaha_pe_truck_number_bolo"
+                    android:textSize="@dimen/_16sdp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
                     android:maxLines="1"
                     android:ellipsize="end" />
 
@@ -76,7 +76,7 @@
                     android:id="@+id/ivSpeaker"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@android:drawable/ic_lock_silent_mode_off"
+                    android:src="@drawable/loud_speaker"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="8dp"
                     android:layout_marginStart="12dp"
@@ -86,37 +86,66 @@
 
 
             <!-- Big Microphone FAB -->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabMicrophone"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+            <FrameLayout
+                android:id="@+id/micContainer"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_gravity="center"
-                app:fabCustomSize="160dp"
-                app:maxImageSize="80dp"
-                android:src="@android:drawable/ic_btn_speak_now"
-                app:tint="#FFFFFF"
-                app:backgroundTint="@color/color_primary"
-                app:elevation="8dp" />
+                android:background="@drawable/bg_mic_circle"
+                android:padding="20dp">
+
+
+            <!-- Lottie Mic Animation -->
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottieMic"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:lottie_rawRes="@raw/mic_animation"
+                    app:lottie_loop="false"
+                    app:lottie_autoPlay="false"
+                    android:visibility="visible" />
+
+                <!-- Mic Button -->
+                <ImageView
+                    android:id="@+id/ivMicrophone"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/mic_phone"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:visibility="gone"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:tint="@color/white" />
+
+            </FrameLayout>
+
 
             <!-- Status Text -->
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mic ko dabaye aur bolo"
-                android:textSize="18sp"
-                android:textColor="#666666"
+                android:text="@string/mic_ko_dabaye_aur_bolo"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/roboto_medium"
                 android:layout_marginTop="24dp" />
-
+            <ImageView
+                android:id="@+id/ivEditIndicator"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/edit_icon"
+                app:tint="@color/color_primary"
+                android:visibility="gone"
+                android:layout_marginStart="8dp" />
             <!-- Truck Number Display Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardTruckNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#FFF3E0"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardBackgroundColor="#FFFF"
                 android:visibility="gone">
 
                 <LinearLayout
@@ -129,9 +158,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Aapka Truck Number:"
-                        android:textSize="14sp"
-                        android:textColor="#666666"
+                        android:text="@string/aapka_truck_number"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/black"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
@@ -139,25 +168,46 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="GJ-11-1234"
-                        android:textSize="36sp"
+                        android:textSize="@dimen/_20sdp"
                         android:textStyle="bold"
-                        android:textColor="#FF6600"
+                        android:textColor="@color/black"
                         android:letterSpacing="0.1" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
 
         <!-- Bottom Button -->
-        <com.google.android.material.button.MaterialButton
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnNextScreen"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="56dp"-->
+<!--           -->
+<!--         -->
+<!--            android:textSize="18sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:backgroundTint="@color/color_primary"-->
+<!--            app:cornerRadius="12dp"-->
+<!--            android:textColor="#FFFFFF" />-->
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btnNextScreen"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:layout_alignParentBottom="true"
-            android:text="Dosri Screen"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:backgroundTint="@color/color_primary"
-            app:cornerRadius="12dp"
-            android:textColor="#FFFFFF" />
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="@string/dosri_screen"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:fontFamily="@font/roboto_medium"
+            android:backgroundTint="@color/green"
+            app:icon="@drawable/ic_arrow_forward_animated"
+            app:iconTint="@color/white"
+            app:iconSize="@dimen/_20sdp"
+            app:iconGravity="end"
+            android:elevation="6dp"
+            />
     </RelativeLayout>
 </LinearLayout>

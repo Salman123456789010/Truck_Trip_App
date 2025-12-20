@@ -11,15 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="@dimen/_10sdp">
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kharcha Dalo"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:text="@string/kharcha_dalo"
+            android:textSize="@dimen/_12sdp"
+           android:fontFamily="@font/roboto_medium"
             android:textColor="#333333"
             android:layout_marginBottom="20dp" />
 
@@ -31,16 +31,16 @@
             android:layout_gravity="center"
             app:fabCustomSize="120dp"
             app:maxImageSize="60dp"
-            android:src="@android:drawable/ic_btn_speak_now"
+            android:src="@drawable/mic_phone"
             app:tint="#FFFFFF"
-            app:backgroundTint="#FF6600"
-            app:elevation="6dp"
+            app:backgroundTint="@color/tamil_txt"
+
             android:layout_marginBottom="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bolo: 'Khane ke 500'"
+            android:text="@string/bolo_khane_ke_500"
             android:textSize="16sp"
             android:textColor="#666666"
             android:layout_gravity="center"
@@ -50,9 +50,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aapki List:"
+            android:text="@string/aapki_list"
             android:textSize="16sp"
-            android:textStyle="bold"
+          android:fontFamily="@font/roboto_medium"
             android:layout_marginBottom="12dp" />
     </LinearLayout>
 
@@ -81,10 +81,10 @@
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Save Karo"
+            android:text="@string/save_karo"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:backgroundTint="#FF6600"
+            app:backgroundTint="@color/color_primary"
             app:cornerRadius="12dp"
             android:textColor="#FFFFFF" />
     </LinearLayout>
