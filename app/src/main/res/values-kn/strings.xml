@@ -366,5 +366,18 @@ Submit ಒತ್ತಿದ ನಂತರ ಟ್ರಿಪ್ ಪೂರ್ಣಗೊ�
     <string name="driver_ki_income">ಡ್ರೈವರ್ ಆದಾಯ:</string>
     <string name="driver_income_optional">ಡ್ರೈವರ್ ಆದಾಯ (ಐಚ್ಛಿಕ)</string>
     <string name="confirm">ಕನ್ಫರ್ಮ್</string>
+    <string name="kaha_se">ಎಲ್ಲಿಂದ</string>
+    <string name="kaha_tak">ಎಲ್ಲಿವರೆಗೆ</string>
+    <string name="total_income">💰 ಒಟ್ಟು ಆದಾಯ</string>
+    <string name="total_expanse">💸 ಒಟ್ಟು ಖರ್ಚು</string>
+    <string name="truck_num">🚛 ಟ್ರಕ್ ನಂಬರ್</string>
+    <string name="share">ಶೇರ್</string>
+    <string name="down">ಡೌನ್‌ಲೋಡ್</string>
+    <string name="change_kare">ಬದಲಿಸಿ</string>
+    <string name="del">ಡಿಲೀಟ್</string>
+    <string name="note_khali_nahi_ho_sakta">ನೋಟ್ ಖಾಲಿಯಾಗಿರಬಾರದು</string>
+    <string name="amount_sahi_nahi_hai">ಮೊತ್ತ ಸರಿಯಿಲ್ಲ</string>
+    <string name="other_details_de">ಇತರೆ ಮಾಹಿತಿ ಹಾಕಿ</string>
+    <string name="trip_details_dale">ಟ್ರಿಪ್ ಮಾಹಿತಿ ಹಾಕಿ</string>
 
 </resources>

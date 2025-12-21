@@ -292,5 +292,18 @@
     <string name="driver_ki_income">డ్రైవర్ ఆదాయం:</string>
     <string name="driver_income_optional">డ్రైవర్ ఆదాయం (ఐచ్ఛికం)</string>
     <string name="confirm">కన్ఫర్మ్</string>
+    <string name="kaha_se">ఎక్కడి నుండి</string>
+    <string name="kaha_tak">ఎక్కడి వరకు</string>
+    <string name="total_income">💰 మొత్తం ఆదాయం</string>
+    <string name="total_expanse">💸 మొత్తం ఖర్చు</string>
+    <string name="truck_num">🚛 ట్రక్ నంబర్</string>
+    <string name="share">షేర్</string>
+    <string name="down">డౌన్‌లోడ్</string>
+    <string name="change_kare">మార్చండి</string>
+    <string name="del">డిలీట్</string>
+    <string name="note_khali_nahi_ho_sakta">నోట్ ఖాళీగా ఉండకూడదు</string>
+    <string name="amount_sahi_nahi_hai">మొత్తం సరైనది కాదు</string>
+    <string name="other_details_de">ఇతర సమాచారం చేర్చండి</string>
+    <string name="trip_details_dale">ట్రిప్ సమాచారం చేర్చండి</string>
 
 </resources>

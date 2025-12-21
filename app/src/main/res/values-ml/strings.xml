@@ -371,5 +371,18 @@
     <string name="driver_ki_income">ഡ്രൈവർ വരുമാനം:</string>
     <string name="driver_income_optional">ഡ്രൈവർ വരുമാനം (ഐച്ഛികം)</string>
     <string name="confirm">കൺഫേം</string>
+    <string name="kaha_se">എവിടെ നിന്ന്</string>
+    <string name="kaha_tak">എവിടെ വരെ</string>
+    <string name="total_income">💰 മൊത്തം വരുമാനം</string>
+    <string name="total_expanse">💸 മൊത്തം ചെലവ്</string>
+    <string name="truck_num">🚛 ട്രക്ക് നമ്പർ</string>
+    <string name="share">ഷെയർ</string>
+    <string name="down">ഡൗൺലോഡ്</string>
+    <string name="change_kare">മാറ്റുക</string>
+    <string name="del">ഡിലീറ്റ്</string>
+    <string name="note_khali_nahi_ho_sakta">കുറിപ്പ് ശൂന്യമാകരുത്</string>
+    <string name="amount_sahi_nahi_hai">തുക ശരിയല്ല</string>
+    <string name="other_details_de">മറ്റ് വിവരങ്ങൾ ചേർക്കൂ</string>
+    <string name="trip_details_dale">യാത്ര വിവരങ്ങൾ ചേർക്കൂ</string>
 
 </resources>

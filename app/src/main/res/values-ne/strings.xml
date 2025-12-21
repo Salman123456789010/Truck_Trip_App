@@ -357,6 +357,19 @@ Submit मा ट्याप गर्दा यात्रा सम्पन
     <string name="driver_ki_income">ड्राइभर आम्दानी:</string>
     <string name="driver_income_optional">ड्राइभर आम्दानी (ऐच्छिक)</string>
     <string name="confirm">कन्फर्म</string>
+    <string name="kaha_se">कहाँबाट</string>
+    <string name="kaha_tak">कहाँसम्म</string>
+    <string name="total_income">💰 कुल आम्दानी</string>
+    <string name="total_expanse">💸 कुल खर्च</string>
+    <string name="truck_num">🚛 ट्रक नम्बर</string>
+    <string name="share">सेयर</string>
+    <string name="down">डाउनलोड</string>
+    <string name="change_kare">परिवर्तन गर्नुहोस्</string>
+    <string name="del">डिलिट</string>
+    <string name="note_khali_nahi_ho_sakta">नोट खाली हुन सक्दैन</string>
+    <string name="amount_sahi_nahi_hai">रकम सही छैन</string>
+    <string name="other_details_de">अरू जानकारी हाल्नुहोस्</string>
+    <string name="trip_details_dale">यात्राको जानकारी हाल्नुहोस्</string>
 
 
 </resources>

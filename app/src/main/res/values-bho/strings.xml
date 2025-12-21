@@ -368,5 +368,18 @@ Submit पर टैप करीं, ट्रिप पूरा हो जा
     <string name="driver_ki_income">ड्राइवर के कमाई:</string>
     <string name="driver_income_optional">ड्राइवर के कमाई (वैकल्पिक)</string>
     <string name="confirm">कन्फर्म</string>
+    <string name="kaha_se">कहाँ से</string>
+    <string name="kaha_tak">कहाँ तक</string>
+    <string name="total_income">💰 कुल आवक</string>
+    <string name="total_expanse">💸 कुल खर्चा</string>
+    <string name="truck_num">🚛 ट्रक नंबर</string>
+    <string name="share">शेयर</string>
+    <string name="down">डाउनलोड</string>
+    <string name="change_kare">बदलऽ</string>
+    <string name="del">डिलीट</string>
+    <string name="note_khali_nahi_ho_sakta">नोट खाली ना हो सकेला</string>
+    <string name="amount_sahi_nahi_hai">रकम सही नइखे</string>
+    <string name="other_details_de">आउर जानकारी डाल दीं</string>
+    <string name="trip_details_dale">ट्रिप के जानकारी डाल दीं</string>
 
 </resources>

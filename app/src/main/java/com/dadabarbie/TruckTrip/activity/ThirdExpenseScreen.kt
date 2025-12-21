@@ -57,6 +57,8 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import com.dadabarbie.TruckTrip.Utils.Constants.dismissProgress
 import com.dadabarbie.TruckTrip.Utils.Constants.showProgress
+import com.dadabarbie.TruckTrip.Utils.Prefs
+import kotlinx.coroutines.Dispatchers
 import java.io.File
 
 
@@ -111,11 +113,13 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
         }
     }
     private var endDate = ""
+    var langCode=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        langCode = Prefs[Constants.languageCode] ?: "hi"
         val idString = intent.getStringExtra("id")
         if (!idString.isNullOrEmpty()) {
              tripId = idString
@@ -461,7 +465,7 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
 
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
-            textToSpeech.setLanguage(Locale("hi", "IN"))
+            textToSpeech.setLanguage(Locale(langCode))
 
             if (isEditMode) {
                 speakText(getString(R.string.kharcha_aavak_edit_kar_sakte_ho))
@@ -538,7 +542,7 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
 
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN")
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, langCode)
             putExtra(RecognizerIntent.EXTRA_PROMPT, instruction)
         }
 
@@ -656,7 +660,7 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
             Log.d("EditBottomSheet", "Mic button clicked")
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN")
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, langCode)
                 putExtra(RecognizerIntent.EXTRA_PROMPT, "Naya bolo, jaise 'Diesel 3000'")
             }
 
@@ -676,12 +680,12 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
             val newAmount = etAmount.text?.toString()?.trim()?.toIntOrNull() ?: 0
 
             if (newNote.isEmpty()) {
-                Toast.makeText(this, "Note khali nahi ho sakta", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.note_khali_nahi_ho_sakta), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (newAmount <= 0) {
-                Toast.makeText(this, "Amount sahi nahi hai", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.amount_sahi_nahi_hai), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -743,7 +747,7 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
 
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN")
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, langCode)
                 putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.naya_bolo_jaise_diesel_3000))
             }
 
@@ -764,12 +768,13 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
             val newAmount = etAmount.text?.toString()?.trim()?.toIntOrNull() ?: 0
 
             if (newNote.isEmpty()) {
-                Toast.makeText(this, "Note khali nahi ho sakta", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.note_khali_nahi_ho_sakta), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (newAmount <= 0) {
-                Toast.makeText(this, "Amount sahi nahi hai", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.amount_sahi_nahi_hai), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -1076,9 +1081,9 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
 
         // Set profit color
         if (profit >= 0) {
-            tvProfit.setTextColor(ContextCompat.getColor(this, R.color.greencolor))
+            tvProfit.setTextColor(ContextCompat.getColor(this, R.color.white))
         } else {
-            tvProfit.setTextColor(ContextCompat.getColor(this, R.color.tamil_txt))
+            tvProfit.setTextColor(ContextCompat.getColor(this, R.color.white))
         }
 
         // Create and show dialog
@@ -1191,7 +1196,7 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
                 calendar.set(selectedYear, selectedMonth, selectedDay)
 
                 // Format for display (Hindi locale)
-                val displayFormat = SimpleDateFormat("dd MMM yyyy", Locale("hi", "IN"))
+                val displayFormat = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
                 endDate = displayFormat.format(calendar.time)
 
                 speakText(getString(R.string.trip_khatam_ab_data_save_kar_rahe_hain))
@@ -1237,7 +1242,6 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
         // ✅ Convert dates to "yyyy-MM-dd" format for API
         val apiStartDate = convertToApiDateFormat(getStartDate())
         val apiEndDate = convertToApiDateFormat(endDate)
-
         showProgress()
 
         authViewModel.getTripPdf(
@@ -1264,7 +1268,7 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
     private fun convertToApiDateFormat(dateString: String): String {
         return try {
             // Parse from display format
-            val inputFormat = SimpleDateFormat("dd MMM yyyy", Locale("hi", "IN"))
+            val inputFormat = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
             val date = inputFormat.parse(dateString)
 
             // Convert to API format "yyyy-MM-dd"
@@ -1280,7 +1284,7 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
 
     private fun calculateTotalDays(start: String, end: String): String {
         return try {
-            val fmt = SimpleDateFormat("dd MMM yyyy", Locale("hi", "IN"))
+            val fmt = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
             val s = fmt.parse(start)
             val e = fmt.parse(end)
             if (s != null && e != null) {
@@ -1349,6 +1353,16 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
                                 R.string.munafa,
                                 incomeList.sumOf { it.amount } - expenseList.sumOf { it.amount }))
                 .setPositiveButton("OK") { _, _ ->
+                    // Delete draft from DB since trip is completed
+                    GlobalScope.launch(Dispatchers.IO) {
+                        try {
+                            val db = AppDatabase.getDatabase(applicationContext)
+                            db.productsDao().deleteDraftByTripId(tripId)
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+
                     isTripCompleted = true
                     finish()
                 }
@@ -1409,90 +1423,113 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
             }
 
             val currentModel = TripDataTestModel(
-                getTruckNumber(),
-                getStartPlace(),
-                getEndPlace(),
-                getStartDate(),
-                "",
-                "",
-                tripId,
-                "",
-                currentCreditList,
-                currentDebitList
+                truckNumber = getTruckNumber(),
+                srcPlace = getStartPlace(),
+                destPlace = getEndPlace(),
+                srcDate = getStartDate(),
+                destDate = "",
+                avg = "",
+                randomNumber = tripId,
+                driverIncome = "",
+                modelList1 = currentCreditList,
+                modelList2 = currentDebitList,
+                startOdometer = "",
+                endOdometer = "",
+                endTripKm = "",
+                id = ""
             )
             
             val existing = draftDao.getDraftById(tripId)
-            if (existing != null) {
-                val existingModel = convertToModel(existing)
-                if (existingModel == currentModel) {
-                    return@launch
-                }
-            } else if (isEditMode) {
-                 // Check against Original Data (Completed Trips)
-                 // Normalize Constants lists to match setAllData format for comparison
-                 val normalizedOriginalCreditList = Constants.creditList.map {
-                    Income(
-                        desc = it.note ?: "",
-                        amount = (it.amount?.toIntOrNull() ?: 0).toString(),
-                        note = it.note ?: "",
-                        place = "",
-                        date = ""
-                    )
-                 }
-                 
-                 val normalizedOriginalDebitList = Constants.debitList.map {
-                    Expense(
-                        desc = it.note ?: "",
-                        amount = (it.amount?.toIntOrNull() ?: 0).toString(),
-                        note = it.note ?: "",
-                        place = "",
-                        date = "",
-                        type = "Expense",
-                        liters = "",
-                        km = ""
-                    )
-                 }
-                 
-                 val originalModelToCheck = TripDataTestModel(
-                    originalTruckNumber ?: getTruckNumber(),
-                    originalStartPlace ?: getStartPlace(),
-                    originalEndPlace ?: getEndPlace(),
-                    originalStartDate ?: getStartDate(),
-                    "",
-                    "",
-                    tripId,
-                    "",
-                    normalizedOriginalCreditList,
-                    normalizedOriginalDebitList
-                 )
-                 
-                 if (currentModel == originalModelToCheck) {
-                     return@launch
-                 }
-            }
             
-            if (!getAllData(applicationContext).contains(currentModel)) {
-                testList.clear()
-                testList.add(currentModel)
-
-                val tripDataList: ArrayList<TripDataTestModel> = testList
-
-                val tripDataEntities = tripDataList.map {
-                    Products(
-                        truckNumber = it.truckNumber,
-                        srcPlace = it.srcPlace,
-                        destPlace = it.destPlace,
-                        srcDate = it.srcDate,
-                        destDate = it.destDate,
-                        avg = it.avg,
-                        randomNumber = tripId,
-                        modelList1 = Gson().toJson(it.modelList1),
-                        modelList2 = Gson().toJson(it.modelList2)
+            if (existing != null) {
+                // Check if data changed
+                val existingModel = convertToModel(existing)
+                
+                val isChanged = existingModel.truckNumber != currentModel.truckNumber ||
+                                existingModel.srcPlace != currentModel.srcPlace ||
+                                existingModel.destPlace != currentModel.destPlace ||
+                                existingModel.srcDate != currentModel.srcDate ||
+                                existingModel.modelList1 != currentModel.modelList1 ||
+                                existingModel.modelList2 != currentModel.modelList2
+                                
+                if (isChanged) {
+                    draftDao.update(
+                        tripId,
+                        currentModel.truckNumber,
+                        currentModel.srcPlace,
+                        currentModel.destPlace,
+                        currentModel.srcDate,
+                        currentModel.destDate,
+                        currentModel.avg,
+                        Gson().toJson(currentModel.modelList1),
+                        Gson().toJson(currentModel.modelList2)
                     )
+//                    Constants.refreshApiGet(Event(1))
                 }
-
-                tripDataEntities.forEach { draftDao.insert(it) }
-                Constants.refreshApiGet(Event(1))
+            } else {
+                 var shouldInsert = true
+                 if (isEditMode) {
+                     // Check against Original Data (Completed Trips)
+                     val normalizedOriginalCreditList = Constants.creditList.map {
+                        Income(
+                            desc = it.note ?: "",
+                            amount = (it.amount?.toIntOrNull() ?: 0).toString(),
+                            note = it.note ?: "",
+                            place = "",
+                            date = ""
+                        )
+                     }
+                     
+                     val normalizedOriginalDebitList = Constants.debitList.map {
+                        Expense(
+                            desc = it.note ?: "",
+                            amount = (it.amount?.toIntOrNull() ?: 0).toString(),
+                            note = it.note ?: "",
+                            place = "",
+                            date = "",
+                            type = "Expense",
+                            liters = "",
+                            km = ""
+                        )
+                     }
+                     
+                     val originalModelToCheck = TripDataTestModel(
+                        truckNumber = originalTruckNumber ?: getTruckNumber(),
+                        srcPlace = originalStartPlace ?: getStartPlace(),
+                        destPlace = originalEndPlace ?: getEndPlace(),
+                        srcDate = originalStartDate ?: getStartDate(),
+                        destDate = "",
+                        avg = "",
+                        randomNumber = tripId,
+                        driverIncome = "",
+                        modelList1 = normalizedOriginalCreditList,
+                        modelList2 = normalizedOriginalDebitList,
+                        startOdometer = "",
+                        endOdometer = "",
+                        endTripKm = "",
+                        id = ""
+                     )
+                     
+                     if (currentModel == originalModelToCheck) {
+                         shouldInsert = false
+                     }
+                 }
+                 
+                 if (shouldInsert) {
+                    val product = Products(
+                        truckNumber = currentModel.truckNumber,
+                        srcPlace = currentModel.srcPlace,
+                        destPlace = currentModel.destPlace,
+                        srcDate = currentModel.srcDate,
+                        destDate = currentModel.destDate,
+                        avg = currentModel.avg,
+                        randomNumber = tripId,
+                        modelList1 = Gson().toJson(currentModel.modelList1),
+                        modelList2 = Gson().toJson(currentModel.modelList2)
+                    )
+                    draftDao.insert(product)
+//                    Constants.refreshApiGet(Event(1))
+                 }
             }
         }
     }
@@ -1535,6 +1572,7 @@ class ThirdExpenseScreen : AppCompatActivity(),TextToSpeech.OnInitListener {
     
     override fun onBackPressed() {
         super.onBackPressed()
+        Constants.refreshApiGet(Event(-1))
     }
 
     override fun onDestroy() {

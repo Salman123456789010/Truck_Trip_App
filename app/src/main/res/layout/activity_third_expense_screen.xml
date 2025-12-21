@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/roboto_medium"
-            android:text="Truck Number Dale"
+            android:text="@string/trip_details_dale"
             android:id="@+id/tittleText"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp" />

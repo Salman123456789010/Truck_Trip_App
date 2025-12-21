@@ -63,14 +63,20 @@ class SimpleDraftActivity : AppCompatActivity(), NewDraftAdapter.DraftEditListne
 
         }
 
-        GlobalScope.launch {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadDrafts()
+    }
+
+    private fun loadDrafts() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val data = getAllData(applicationContext)
             withContext(Dispatchers.Main) {
-                // Update your UI here
-                initAdapter(getAllData(applicationContext))
+                initAdapter(data)
             }
-
         }
-
     }
 
     private fun setOnClickListner() {
@@ -129,25 +135,61 @@ class SimpleDraftActivity : AppCompatActivity(), NewDraftAdapter.DraftEditListne
     }
 
     override fun editMethod(position: Int) {
-        val draft = draftList[position]
-        Constants.creditList.clear()
-        Constants.debitList.clear()
-        Constants.creditList = draft.modelList1 as ArrayList<Income>
-        Constants.debitList = draft.modelList2 as ArrayList<Expense>
+//        lifecycleScope.launch(Dispatchers.IO){
+//            val draft = draftList[position]
+//            Constants.creditList.clear()
+//            Constants.debitList.clear()
+//            Constants.creditList = draft.modelList1 as ArrayList<Income>
+//            Constants.debitList = draft.modelList2 as ArrayList<Expense>
+//
+//            val intent = Intent(applicationContext, TruckNumberSpeechActivity::class.java).apply {
+//                putExtra("EDIT_MODE", true)
+//                putExtra("TRIP_ID", draft.randomNumber)
+//                putExtra("TRUCK_NUMBER", draft.truckNumber)
+//                putExtra("START_DATE", draft.srcDate)
+//                putExtra("END_DATE", draft.destDate)
+//                putExtra("START_PLACE", draft.srcPlace)
+//                putExtra("END_PLACE", draft.destPlace)
+//                putExtra("DRIVER_INCOME", draft.driverIncome)
+//                // Add any other fields if needed, but Products entity is limited
+//            }
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//            startActivity(intent)
+//        }
 
-        val intent = Intent(applicationContext, TruckNumberSpeechActivity::class.java).apply {
-            putExtra("EDIT_MODE", true)
-            putExtra("TRIP_ID", draft.randomNumber)
-            putExtra("TRUCK_NUMBER", draft.truckNumber)
-            putExtra("START_DATE", draft.srcDate)
-            putExtra("END_DATE", draft.destDate)
-            putExtra("START_PLACE", draft.srcPlace)
-            putExtra("END_PLACE", draft.destPlace)
-            putExtra("DRIVER_INCOME", draft.driverIncome)
-            // Add any other fields if needed, but Products entity is limited
+
+
+        lifecycleScope.launch(Dispatchers.IO){
+            getDelete(applicationContext,draftList[position].id.toInt())
+            val draft = draftList[position]
+            Constants.creditList.clear()
+            Constants.debitList.clear()
+            Constants.creditList = draft.modelList1 as ArrayList<Income>
+            Constants.debitList = draft.modelList2 as ArrayList<Expense>
+
+            withContext(Dispatchers.Main) {
+                val intent = Intent(applicationContext, TruckNumberSpeechActivity::class.java).apply {
+                    putExtra("EDIT_MODE", true)
+                    putExtra("TRIP_ID", draft.randomNumber)
+                    putExtra("TRUCK_NUMBER", draft.truckNumber)
+                    putExtra("START_DATE", draft.srcDate)
+                    putExtra("END_DATE", draft.destDate)
+                    putExtra("START_PLACE", draft.srcPlace)
+                    putExtra("END_PLACE", draft.destPlace)
+                    putExtra("DRIVER_INCOME", draft.driverIncome)
+                    // Add any other fields if needed, but Products entity is limited
+                }
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                Log.d("listsize", "editMethod: ${ draftList[position].modelList1 as ArrayList<Income>}")
+                finish()
+            }
+
         }
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
+
+
+
+
     }
 
     override fun deleteMethod(position: Int) {

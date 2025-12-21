@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Event
+import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.databinding.ActivitySecondSpeechScreenBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -61,7 +62,7 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     enum class FieldType {
         START_DATE, START_PLACE, END_PLACE
     }
-
+    var langCode=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -73,13 +74,14 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         setupViews()
         updateUI()
         startArrowAnimation()
-
+        langCode = Prefs[Constants.languageCode] ?: "hi"
         Constants.refreshApi.observe(this) {
             it.getContentIfNotHandled()?.let { event ->
                 event.let {
                     if (it < 0) {
-
+                        Log.d("its here", "onCreate: 1")
                     } else {
+                        Log.d("its here", "onCreate: 2")
                         Constants.refreshApiGet(Event(1))
                         finish()
                     }
@@ -249,7 +251,8 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
-            val result = textToSpeech.setLanguage(Locale("hi", "IN"))
+
+            val result = textToSpeech.setLanguage(Locale(langCode))
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Toast.makeText(this, "language not supported", Toast.LENGTH_SHORT).show()
             } else {
@@ -294,9 +297,10 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun startVoiceRecognition() {
+
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN")
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, langCode)
             putExtra(RecognizerIntent.EXTRA_PROMPT, getCurrentInstruction())
         }
 
@@ -392,6 +396,11 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun validateInputs(): Boolean {
         return selectedDate.isNotEmpty() && startPlace.isNotEmpty() && endPlace.isNotEmpty()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Constants.refreshApiGet(Event(-1))
     }
 
     override fun onDestroy() {

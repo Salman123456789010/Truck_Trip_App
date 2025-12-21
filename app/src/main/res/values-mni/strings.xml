@@ -387,5 +387,16 @@ Submit টেপ কৰিলে ট্ৰিপ সম্পূৰ্ণ হ’
     <string name="driver_ki_income">ꯗ꯭ꯔꯥꯏꯚꯔ ꯑꯥꯃꯗꯥꯅꯤ:</string>
     <string name="driver_income_optional">ꯗ꯭ꯔꯥꯏꯚꯔ ꯑꯥꯃꯗꯥꯅꯤ (ꯑꯩꯆꯤꯛ)</string>
     <string name="confirm">ꯀꯟꯐꯥꯔꯃ</string>
+    <string name="kaha_se">ꯀꯤꯊꯥ ꯐꯔꯣꯝ</string>
+    <string name="kaha_tak">ꯀꯤꯊꯥ ꯇꯧ</string>
+    <string name="total_income">💰 ꯃꯣꯠ ꯑꯥꯃꯗꯥꯅꯤ</string>
+    <string name="total_expanse">💸 ꯃꯣꯠ ꯈꯔꯆ</string>
+    <string name="truck_num">🚛 ꯇ꯭ꯔꯛ ꯅꯝꯕꯔ</string>
+    <string name="share">ꯁꯦꯌꯥꯔ</string>
+    <string name="down">ꯗꯥꯎꯟꯂꯣꯗ</string>
+    <string name="change_kare">ꯍꯥꯌꯤꯕ</string>
+    <string name="del">ꯗꯤꯂꯤꯠ</string>
+    <string name="note_khali_nahi_ho_sakta">ꯅꯣꯠ ꯈꯥꯂꯤ ꯍꯣꯏꯗ꯭ꯔꯤꯗꯕ ꯌꯥꯏꯗꯦ</string>
+    <string name="amount_sahi_nahi_hai">ꯃꯣꯠ ꯑꯆꯥꯅꯕ ꯅꯠꯇꯦ</string>
 
 </resources>

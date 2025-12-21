@@ -430,4 +430,18 @@ Save पर टैप करने से डीज़ल खर्च ट्र
     <string name="driver_income_optional">ड्राइवर की कमाई (वैकल्पिक)</string>
     <string name="confirm">कन्फर्म</string>
 
+    <string name="kaha_se">कहाँ से</string>
+    <string name="kaha_tak">कहाँ तक</string>
+    <string name="total_income">💰 कुल आवक</string>
+    <string name="total_expanse">💸 कुल खर्चा</string>
+    <string name="truck_num">🚛 ट्रक नंबर</string>
+    <string name="share">शेयर</string>
+    <string name="down">डाउनलोड</string>
+    <string name="change_kare">बदलें</string>
+    <string name="del">डिलीट</string>
+    <string name="note_khali_nahi_ho_sakta">नोट खाली नहीं हो सकता</string>
+    <string name="amount_sahi_nahi_hai">Amount sahi nahi hai</string>
+    <string name="other_details_de">और जानकारी डालो</string>
+    <string name="trip_details_dale">ट्रिप की जानकारी डालो</string>
+
 </resources>

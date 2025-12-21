@@ -360,6 +360,19 @@
     <string name="driver_ki_income">ড্ৰাইভাৰৰ আয়:</string>
     <string name="driver_income_optional">ড্ৰাইভাৰৰ আয় (ঐচ্ছিক)</string>
     <string name="confirm">কনফাৰ্ম</string>
+    <string name="kaha_se">ক\'ৰ পৰা</string>
+    <string name="kaha_tak">ক\'লৈকে</string>
+    <string name="total_income">💰 মুঠ আয়</string>
+    <string name="total_expanse">💸 মুঠ খৰচ</string>
+    <string name="truck_num">🚛 ট্ৰাক নম্বৰ</string>
+    <string name="share">শ্বেয়াৰ</string>
+    <string name="down">ডাউনলোড</string>
+    <string name="change_kare">সলনি কৰক</string>
+    <string name="del">ডিলিট</string>
+    <string name="note_khali_nahi_ho_sakta">নোট খালী হ’ব নোৱাৰে</string>
+    <string name="amount_sahi_nahi_hai">টকাৰ পৰিমাণ ঠিক নহয়</string>
+    <string name="other_details_de">আৰু তথ্য দিয়ক</string>
+    <string name="trip_details_dale">ভ্ৰমণৰ তথ্য দিয়ক</string>
 
 
 </resources>

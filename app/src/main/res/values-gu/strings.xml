@@ -301,6 +301,19 @@
     <string name="driver_ki_income">ડ્રાઇવર આવક:</string>
     <string name="driver_income_optional">ડ્રાઇવર આવક (વૈકલ્પિક)</string>
     <string name="confirm">કન્ફર્મ</string>
+    <string name="kaha_se">ક્યાંથી</string>
+    <string name="kaha_tak">ક્યાં સુધી</string>
+    <string name="total_income">💰 કુલ આવક</string>
+    <string name="total_expanse">💸 કુલ ખર્ચ</string>
+    <string name="truck_num">🚛 ટ્રક નંબર</string>
+    <string name="share">શેર કરો</string>
+    <string name="down">ડાઉનલોડ કરો</string>
+    <string name="change_kare">બદલો</string>
+    <string name="del">કાઢી નાખો</string>
+    <string name="note_khali_nahi_ho_sakta">નોંધ ખાલી હોઈ શકે નહીં</string>
+    <string name="amount_sahi_nahi_hai">રકમ સાચી નથી</string>
+    <string name="other_details_de">બીજી માહિતી નાખો</string>
+    <string name="trip_details_dale">ટ્રિપની માહિતી નાખો</string>
 
 
 

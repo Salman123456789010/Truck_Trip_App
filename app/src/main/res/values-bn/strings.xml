@@ -299,5 +299,18 @@
     <string name="driver_ki_income">ড্রাইভারের আয়:</string>
     <string name="driver_income_optional">ড্রাইভারের আয় (ঐচ্ছিক)</string>
     <string name="confirm">কনফার্ম</string>
+    <string name="kaha_se">কোথা থেকে</string>
+    <string name="kaha_tak">কোথা পর্যন্ত</string>
+    <string name="total_income">💰 মোট আয়</string>
+    <string name="total_expanse">💸 মোট খরচ</string>
+    <string name="truck_num">🚛 ট্রাক নম্বর</string>
+    <string name="share">শেয়ার</string>
+    <string name="down">ডাউনলোড</string>
+    <string name="change_kare">বদলান</string>
+    <string name="del">ডিলিট</string>
+    <string name="note_khali_nahi_ho_sakta">নোট খালি হতে পারে না</string>
+    <string name="amount_sahi_nahi_hai">পরিমাণ ঠিক নয়</string>
+    <string name="other_details_de">আরও তথ্য দিন</string>
+    <string name="trip_details_dale">যাত্রার তথ্য দিন</string>
 
 </resources>

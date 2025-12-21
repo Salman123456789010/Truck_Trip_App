@@ -48,7 +48,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="कहाँ से"
+                            android:text="@string/kaha_se"
                             android:textColor="#FFFFFF"
                             android:alpha="0.9"
                             android:textSize="@dimen/_9sdp" />
@@ -101,7 +101,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="कहाँ तक"
+                            android:text="@string/kaha_tak"
                             android:textColor="#FFFFFF"
                             android:alpha="0.9"
                             android:textSize="@dimen/_9sdp" />
@@ -161,8 +161,8 @@
 
                             <!-- Icon Circle -->
                             <LinearLayout
-                                android:layout_width="@dimen/_32sdp"
-                                android:layout_height="@dimen/_32sdp"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
                                 android:background="@drawable/bg_green_circle"
                                 android:gravity="center">
 
@@ -183,17 +183,11 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_bold"
-                                    android:text="💰 कुल आवक"
+                                    android:text="@string/total_income"
                                     android:textColor="#2E7D32"
-                                    android:textSize="@dimen/_11sdp" />
+                                    android:textSize="@dimen/_12sdp" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/roboto_regular"
-                                    android:text="(Total Income)"
-                                    android:textColor="#66BB6A"
-                                    android:textSize="@dimen/_9sdp" />
+
                             </LinearLayout>
                         </LinearLayout>
 
@@ -236,8 +230,8 @@
 
                             <!-- Icon Circle -->
                             <LinearLayout
-                                android:layout_width="@dimen/_32sdp"
-                                android:layout_height="@dimen/_32sdp"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
                                 android:background="@drawable/bg_red_circle"
                                 android:gravity="center">
 
@@ -258,17 +252,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_bold"
-                                    android:text="💸 कुल खर्चा"
+                                    android:text="@string/total_expanse"
                                     android:textColor="#C62828"
-                                    android:textSize="@dimen/_11sdp" />
+                                    android:textSize="@dimen/_12sdp" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/roboto_regular"
-                                    android:text="(Total Expense)"
-                                    android:textColor="#E57373"
-                                    android:textSize="@dimen/_9sdp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -311,8 +298,8 @@
 
                             <!-- Icon Circle -->
                             <LinearLayout
-                                android:layout_width="@dimen/_32sdp"
-                                android:layout_height="@dimen/_32sdp"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
                                 android:background="@drawable/bg_blue_circle"
                                 android:gravity="center">
 
@@ -333,17 +320,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_bold"
-                                    android:text="✅ कुल मुनाफा"
+                                    android:text="@string/total_profit"
                                     android:textColor="#1565C0"
-                                    android:textSize="@dimen/_11sdp" />
+                                    android:textSize="@dimen/_12sdp" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/roboto_regular"
-                                    android:text="(Total Profit)"
-                                    android:textColor="#42A5F5"
-                                    android:textSize="@dimen/_9sdp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -382,7 +362,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="🚛 ट्रक नंबर"
+                            android:text="@string/truck_num"
                             android:textColor="#616161"
                             android:textSize="@dimen/_9sdp" />
 
@@ -442,7 +422,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="शेयर"
+                        android:text="@string/share"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_9sdp" />
                 </LinearLayout>
@@ -474,7 +454,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="डाउनलोड"
+                        android:text="@string/down"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_9sdp" />
                 </LinearLayout>
@@ -506,7 +486,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="एडिट"
+                        android:text="@string/change_kare"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_9sdp" />
                 </LinearLayout>
@@ -538,7 +518,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="डिलीट"
+                        android:text="@string/del"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_9sdp" />
                 </LinearLayout>

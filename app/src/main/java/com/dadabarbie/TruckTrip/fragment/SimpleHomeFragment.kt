@@ -314,12 +314,34 @@ class SimpleHomeFragment : Fragment(),View.OnClickListener, TripNewListAdapter.E
         Constants.deleteTrip.observe(requireActivity()) {
             it.getContentIfNotHandled()?.let { event ->
                 event.let { position ->
-                    if (position >= 0) {
+                    // Use pendingDeleteRecordId if available, otherwise fallback to position
+                    if (pendingDeleteRecordId != null) {
+                        val index = tripList.indexOfFirst { it._id == pendingDeleteRecordId }
+                        if (index != -1) {
+                            val record = tripList[index]
+                            
+                            // Optimistically remove from UI list
+                            tripList.removeAt(index)
+                            tripListAdapter.submitList(tripList.toList())
+
+                            // Call delete API
+                            authViewModel.deleteTrip(record._id)
+                        } else {
+                            Log.e("DeleteTrip", "Record with ID $pendingDeleteRecordId not found in list")
+                            // Fallback to position if ID not found (unlikely)
+                            if (position >= 0 && position < tripList.size) {
+                                val record = tripList[position]
+                                tripList.removeAt(position)
+                                tripListAdapter.submitList(tripList.toList())
+                                authViewModel.deleteTrip(record._id)
+                            }
+                        }
+                        // Reset pending ID
+                        pendingDeleteRecordId = null
+                    } else if (position >= 0) {
+                         // Fallback logic for safety
                         val record = tripList.getOrNull(position)
                         if (record != null) {
-                            // Store the ID for later cache deletion
-                            pendingDeleteRecordId = record._id
-
                             // Optimistically remove from UI list
                             tripList.removeAt(position)
                             tripListAdapter.submitList(tripList.toList())
@@ -746,6 +768,9 @@ class SimpleHomeFragment : Fragment(),View.OnClickListener, TripNewListAdapter.E
 
     override fun deleteTripMethod(position: Int) {
         if (position >= 0 && position < tripList.size) {
+            // Store the ID of the record to be deleted
+            pendingDeleteRecordId = tripList[position]._id
+            
             deleteDialogFragment = DeleteDialogFragment(position, "")
             deleteDialogFragment.show(childFragmentManager, "DeleteDialog")
         } else {

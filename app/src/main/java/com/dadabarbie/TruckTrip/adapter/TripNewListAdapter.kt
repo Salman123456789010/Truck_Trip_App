@@ -57,7 +57,9 @@ class TripNewListAdapter(val context: Context, val editTripDataListner: EditTrip
     override fun onBindViewHolder(holder: TripNewListAdapter.ViewHolder, position: Int) {
         val item = differ.currentList[position]
         holder.binding.editIcon.setOnClickListener {
-            editTripDataListner.editTripDataMethod(position)
+            if (holder.bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                editTripDataListner.editTripDataMethod(holder.bindingAdapterPosition)
+            }
         }
         holder.binding.srcName.text=item.source
         holder.binding.dest.text=item.destination
@@ -71,13 +73,19 @@ class TripNewListAdapter(val context: Context, val editTripDataListner: EditTrip
         holder.binding.totalProfit.text = "₹${income - expense}"
         holder.binding.truckNumber.text=item.truck_no
         holder.binding.shareIcon.setOnClickListener{
-            shareTripDataListner.shareTripDataMethod(position)
+            if (holder.bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                shareTripDataListner.shareTripDataMethod(holder.bindingAdapterPosition)
+            }
         }
         holder.binding.deleteIcon.setOnClickListener {
-            deleteTripListner.deleteTripMethod(position)
+            if (holder.bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                deleteTripListner.deleteTripMethod(holder.bindingAdapterPosition)
+            }
         }
         holder.binding.dowanloadIcon.setOnClickListener{
-            dowanloadListner.dowanloadMethod(position)
+            if (holder.bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                dowanloadListner.dowanloadMethod(holder.bindingAdapterPosition)
+            }
         }
         if(position%3==0){
             holder.binding.myTemplate.visible()

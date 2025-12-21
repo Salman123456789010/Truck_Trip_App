@@ -189,7 +189,13 @@ class TruckNumberSpeechActivity : AppCompatActivity(),TextToSpeech.OnInitListene
 
         binding.backBtn.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Constants.refreshApiGet(Event(1))
     }
 
     override fun onInit(status: Int) {

@@ -360,6 +360,19 @@ Submit ‘ਤੇ ਟੈਪ ਕਰੋ ਤਾਂ ਜੋ ਟਰਿੱਪ ਪੂਰ�
     <string name="driver_ki_income">ਡਰਾਈਵਰ ਦੀ ਕਮਾਈ:</string>
     <string name="driver_income_optional">ਡਰਾਈਵਰ ਦੀ ਕਮਾਈ (ਵਿਕਲਪਿਕ)</string>
     <string name="confirm">ਕਨਫ਼ਰਮ</string>
+    <string name="kaha_se">कुठून</string>
+    <string name="kaha_tak">कुठेपर्यंत</string>
+    <string name="total_income">💰 एकूण उत्पन्न</string>
+    <string name="total_expanse">💸 एकूण खर्च</string>
+    <string name="truck_num">🚛 ट्रक नंबर</string>
+    <string name="share">शेअर</string>
+    <string name="down">डाउनलोड</string>
+    <string name="change_kare">बदला</string>
+    <string name="del">डिलीट</string>
+    <string name="note_khali_nahi_ho_sakta">ਨੋਟ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ</string>
+    <string name="amount_sahi_nahi_hai">ਰਕਮ ਸਹੀ ਨਹੀਂ ਹੈ</string>
+    <string name="other_details_de">ਹੋਰ ਜਾਣਕਾਰੀ ਪਾਓ</string>
+    <string name="trip_details_dale">ਟਰਿੱਪ ਦੀ ਜਾਣਕਾਰੀ ਪਾਓ</string>
 
 
 </resources>

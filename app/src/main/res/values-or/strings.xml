@@ -368,6 +368,19 @@ Submit ଉପରେ ଟାପ୍ କଲେ ଟ୍ରିପ୍ ସମାପ୍ତ
     <string name="driver_ki_income">ଡ୍ରାଇଭର ଆୟ:</string>
     <string name="driver_income_optional">ଡ୍ରାଇଭର ଆୟ (ଇଚ୍ଛାଧୀନ)</string>
     <string name="confirm">କନଫର୍ମ</string>
+    <string name="kaha_se">କେଉଁଠୁ</string>
+    <string name="kaha_tak">କେଉଁଠି ପର୍ଯ୍ୟନ୍ତ</string>
+    <string name="total_income">💰 ମୋଟ ଆୟ</string>
+    <string name="total_expanse">💸 ମୋଟ ଖର୍ଚ୍ଚ</string>
+    <string name="truck_num">🚛 ଟ୍ରକ୍ ନମ୍ବର</string>
+    <string name="share">ସେୟାର</string>
+    <string name="down">ଡାଉନଲୋଡ୍</string>
+    <string name="change_kare">ବଦଳାନ୍ତୁ</string>
+    <string name="del">ଡିଲିଟ୍</string>
+    <string name="note_khali_nahi_ho_sakta">ନୋଟ୍ ଖାଲି ହେବା ନୁହେଁ</string>
+    <string name="amount_sahi_nahi_hai">ରାଶି ସଠିକ୍ ନୁହେଁ</string>
+    <string name="other_details_de">ଅଧିକ ସୂଚନା ଦିଅନ୍ତୁ</string>
+    <string name="trip_details_dale">ଯାତ୍ରା ସୂଚନା ଦିଅନ୍ତୁ</string>
 
 
 </resources>

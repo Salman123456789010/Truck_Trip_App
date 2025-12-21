@@ -376,6 +376,17 @@
     <string name="driver_ki_income">ड्राइवर दी आमदनी:</string>
     <string name="driver_income_optional">ड्राइवर दी आमदनी (वैकल्पिक)</string>
     <string name="confirm">कन्फर्म</string>
+    <string name="kaha_se">किथ्थूं</string>
+    <string name="kaha_tak">किथ्थां ताईं</string>
+    <string name="total_income">💰 कुल आमदनी</string>
+    <string name="total_expanse">💸 कुल खर्चा</string>
+    <string name="truck_num">🚛 ट्रक नंबर</string>
+    <string name="share">शेयर</string>
+    <string name="down">डाउनलोड</string>
+    <string name="change_kare">बदलो</string>
+    <string name="del">डिलीट</string>
+    <string name="note_khali_nahi_ho_sakta">नोट खाली नहीं होई सकदा</string>
+    <string name="amount_sahi_nahi_hai">रकम ठीक नहीं ऐ</string>
 
 
 </resources>

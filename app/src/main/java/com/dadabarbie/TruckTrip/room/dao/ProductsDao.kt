@@ -39,6 +39,9 @@ interface ProductsDao {
     @Query("SELECT * FROM products WHERE randomNumber = :randomNumber LIMIT 1")
     suspend fun getDraftById(randomNumber: String): Products?
 
+    @Query("DELETE FROM products WHERE randomNumber = :tripId")
+    suspend fun deleteDraftByTripId(tripId: String)
+
     @Query("DELETE FROM products")
     suspend fun deleteAll()
 
