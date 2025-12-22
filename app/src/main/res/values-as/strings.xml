@@ -373,6 +373,88 @@
     <string name="amount_sahi_nahi_hai">টকাৰ পৰিমাণ ঠিক নহয়</string>
     <string name="other_details_de">আৰু তথ্য দিয়ক</string>
     <string name="trip_details_dale">ভ্ৰমণৰ তথ্য দিয়ক</string>
+    <string name="truck_number_khali_nahi_ho_sakta">ট্ৰাক নম্বৰ খালী হব নোৱাৰে</string>
+    <string name="sahi_truck_number_daliye">ঠিক ট্ৰাক নম্বৰ দিয়ক</string>
+    <string name="truck_number_badal_diya_gaya">ট্ৰাক নম্বৰ সলনি কৰা হৈছে</string>
+    <string name="truck_number_sudhariye">ট্ৰাক নম্বৰ ঠিক কৰক</string>
+    <string name="neeche_apna_sahi_truck_number_type_kariye">তলত আপোনাৰ ঠিক ট্ৰাক নম্বৰ লিখক</string>
+    <string name="truck_number_jaise_gj_01_ab_1234">ট্ৰাক নম্বৰ (যেনে: GJ-01-AB-1234)</string>
+    <string name="example_mh_12_ab_1234_dl_1234_pb_11_4567">📝 উদাহৰণ: MH-12-AB-1234, DL-1234, PB-11-4567</string>
+    <string name="cancel_kariye">বাতিল কৰক</string>
+    <string name="badal_dijiye">সলনি কৰক</string>
+    <string name="jagah_ka_naam">ঠাইৰ নাম</string>
+    <string name="jagah_save_ho_gayi">ঠাই সংৰক্ষণ কৰা হ’ল</string>
+    <string name="jagah_ka_naam_daalo">ঠাইৰ নাম লিখক</string>
+    <string name="pending_draft_hai">ড্ৰাফ্ট পেণ্ডিং আছে</string>
+    <string name="tumhara_pending_data_idhar_hai">আপোনাৰ পেণ্ডিং ডাটা ইয়াত আছে</string>
+    <string name="nahi_baad_me">নাই, পাছত</string>
+    <string name="haan_dekhte_hain">হʼয়, চাওঁ</string>
+    <string name="draft_complete_kar_lo">ড্ৰাফ্ট সম্পূৰ্ণ কৰক</string>
+
+    <string name="trip_kaise_bhejna_chahte_ho">আপুনি ট্ৰিপ কেনেকৈ পঠিয়াব খোজে?</string>
+    <string name="trip_mode_instruction">দুটা উপায় আছে ভায়া – এটা সহজ, এটা সম্পূৰ্ণ। যিটো ভাল লাগে তাক বাছক।</string>
+
+    <string name="sirf_bol_kar_trip">🎤 কেৱল কথা কৈ ট্ৰিপ</string>
+    <string name="simple_mode_description">লিখিবলৈ অসুবিধা হ’লে কেৱল কথা কৈ বেছিক এণ্ট্ৰি কৰক।</string>
+    <string name="simple_mode_selected">ছিম্পল মোড বাছনি কৰা হ’ল।</string>
+
+    <string name="puri_detail_ke_saath">📝 সম্পূৰ্ণ বিৱৰণৰ সৈতে</string>
+    <string name="full_mode_description">যদি লিখিব পাৰে আৰু সকলো বিৱৰণ লাগে, তেন্তে এইটো বাছক।</string>
+    <string name="full_mode_selected">ফুল মোড বাছনি কৰা হ’ল।</string>
+
+    <string name="speaker">স্পীকাৰ</string>
+    <string name="back">পিছলৈ</string>
+    <string name="trip_kaise_banana_chahte_ho">আপুনি ট্ৰিপ কেনেকৈ বনাব খোজে?</string>
+    <string name="neeche_se_koi_ek_chuno">তলৰ পৰা এটা বাছক</string>
+    <string name="likhna_mushkil_sirf_bol_kar_entry_karo">লিখা কঠিন? কেৱল কথা কৈ এণ্ট্ৰি কৰক</string>
+    <string name="bas_bol_kar_bhar_do">কেৱল কথা কৈ ভৰাওক</string>
+    <string name="kharcha_aavak_quickly">খৰচ-আয় দ্ৰুত</string>
+    <string name="owner_ko_turant_bhej_do">অ’নাৰলৈ তৎক্ষণাৎ পঠিয়াওক</string>
+    <string name="likh_sakte_ho_puri_details_ke_saath_report">লিখিব পাৰে? সম্পূৰ্ণ ৰিপোৰ্ট</string>
+    <string name="diesel_average_dikhe">ডিজেল এভাৰেজ দেখা যাব</string>
+    <string name="owner_driver_income_clear">অ’নাৰ-ড্ৰাইভাৰ আয় স্পষ্ট</string>
+    <string name="pdf_report_tayar_hogi">PDF ৰিপোৰ্ট প্ৰস্তুত হ’ব</string>
+
+    <string name="agar_likhna_nai_aata_to_ye_chune">✨ যদি লিখিব নাজানে তেন্তে এইটো বাছক</string>
+    <string name="easy_way_trip">সহজ ট্ৰিপ পদ্ধতি</string>
+    <string name="aap_bolo_ban_jayega_pdf_tayar">কওক, PDF সাজু হ’ব</string>
+    <string name="aapko_milega">আপুনি পাব:</string>
+    <string name="bas_bol_ke_bhar_do">কেৱল কওক</string>
+    <string name="kharcha_or_aavak_report">খৰচ আৰু আয় PDF</string>
+    <string name="this_choose">এইটো বাছক</string>
+    <string name="this_one">নথবা</string>
+    <string name="agar_likhna_aata_he_to_ye_chune">⭐ যদি লিখিব জানে তেন্তে এইটো বাছক</string>
+    <string name="medium_way_trip">মধ্যম ট্ৰিপ পদ্ধতি</string>
+    <string name="details_trip_driver_and_owner_income_trip_avg_owner_report">সকলো বিৱৰণ ভৰক</string>
+    <string name="milega_aapko">আপুনি পাব:</string>
+    <string name="trip_pdf">সম্পূৰ্ণ ট্ৰিপ PDF</string>
+    <string name="driver_income_clear">ড্ৰাইভাৰ আয় স্পষ্ট</string>
+    <string name="owner_income">অ’নাৰ আয়</string>
+    <string name="per_trip_average_diesel">প্ৰতি ট্ৰিপ এভাৰেজ আৰু ডিজেল</string>
+    <string name="this_to">এইটো বাছক</string>
+    <string name="you_can_change_app_mode">আপুনি এপৰ মোড সলনি কৰিব পাৰে</string>
+    <string name="app_flow_change">এপৰ পদ্ধতি সলনি কৰক</string>
+    <string name="trip_mood_choose">যাত্ৰা মোড বাছনি কৰক</string>
+    <string name="truck_no_speech">ইয়াত আপুনি কথা কৈ ট্ৰাক নম্বৰ ভৰ্তি কৰিব পাৰে।\nমাইকত টেপ কৰি সম্পূৰ্ণ নম্বৰ কওক।\nঠিক নহ’লে তলৰ নম্বৰটোত টেপ কৰি\nনিজে লিখিব পাৰে।</string>
+    <string name="truck_number_bol_ke">কথা কৈ ট্ৰাক নম্বৰ ভৰ্তি কৰক</string>
+    <string name="trip_other_details_tittile">যাত্ৰাৰ তথ্য যোগ কৰক</string>
+    <string name="trip_other_details_dec">ইয়াত যাত্ৰা আৰম্ভৰ তাৰিখ,\nআৰম্ভণিৰ স্থান আৰু গন্তব্য স্থান ভৰ্তি কৰক।\nকথা কৈ ক’ব পাৰে বা\nপেন্সিল আইকনত টেপ কৰি সংশোধন কৰিব পাৰে।</string>
+    <string name="trip_details_add_karo">যাত্ৰাৰ বিৱৰণ যোগ কৰক</string>
+    <string name="yahan_aap_trip_ka_kharcha_expense_aur_kamai_income_add_kar_sakte_ho_neeche_diye_gaye_buttons_par_click_karke_bolkar_ya_likhkar_entry_karo">ইয়াত যাত্ৰাৰ খৰচ আৰু উপাৰ্জন যোগ কৰিব পাৰে।\nতলৰ বুটামত টেপ কৰি কথা কৈ বা লিখি ভৰ্তি কৰক।</string>
+    <string name="bolkar_kharcha_income_add_karo">কথা কৈ খৰচ / উপাৰ্জন যোগ কৰক</string>
+    <string name="yahan_aap_saare_kharche_ya_income_ek_sath_bol_sakte_ho_mic_dabao_item_ka_naam_aur_amount_bolo_aur_sab_bolne_ke_baad_save_dabao">ইয়াত সকলো খৰচ বা উপাৰ্জন একেলগে ক’ব পাৰে।\nমাইক টিপি নাম আৰু পৰিমাণ কওক\nতাৰ পিছত সংৰক্ষণ কৰক।</string>
+    <string name="profile_top_card">প্ৰ’ফাইল তথ্য</string>
+    <string name="pehle_se_sun_rahe_hain">আগতেই শুনি আছো...</string>
+
+
+
+    <string name="language_badalni_ho_to_language_par_click_karo_app_seekhni_ho_to_how_to_use_par_click_karo_mode_badalna_ho_to_app_mode_par_click_karo">ভাষা সলনি কৰিবলৈ ভাষাত টেপ কৰক।\nএপ শিকিবলৈ ব্যৱহাৰ পদ্ধতিত টেপ কৰক।\nমোড সলনি কৰিবলৈ এপ মোডত টেপ কৰক।</string>
+    <string name="boliye">🎤 কওক...</string>
+    <string name="lang_change_dec">
+ভাষা সলনি কৰিবলৈ Language ত ক্লিক কৰক।
+App শিকিবলৈ How to Use ত ক্লিক কৰক।
+Mode সলনি কৰিবলৈ App Mode ত ক্লিক কৰক।
+</string>
 
 
 </resources>

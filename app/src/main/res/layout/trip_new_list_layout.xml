@@ -404,14 +404,14 @@
                     android:orientation="vertical">
 
                     <FrameLayout
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
                         android:background="@drawable/bg_gradient_green_circle">
 
                         <ImageView
                             android:id="@+id/shareIcon"
-                            android:layout_width="@dimen/_12sdp"
-                            android:layout_height="@dimen/_12sdp"
+                            android:layout_width="@dimen/_14sdp"
+                            android:layout_height="@dimen/_14sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/baseline_share_24"
                             app:tint="@color/white" />
@@ -436,14 +436,14 @@
                     android:orientation="vertical">
 
                     <FrameLayout
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
                         android:background="@drawable/bg_gradient_green_circle">
 
                         <ImageView
                             android:id="@+id/dowanloadIcon"
-                            android:layout_width="@dimen/_12sdp"
-                            android:layout_height="@dimen/_12sdp"
+                            android:layout_width="@dimen/_14sdp"
+                            android:layout_height="@dimen/_14sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/baseline_arrow_downward_24"
                             app:tint="@color/white" />
@@ -468,14 +468,14 @@
                     android:orientation="vertical">
 
                     <FrameLayout
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
                         android:background="@drawable/bg_gradient_green_circle">
 
                         <ImageView
                             android:id="@+id/editIcon"
-                            android:layout_width="@dimen/_12sdp"
-                            android:layout_height="@dimen/_12sdp"
+                            android:layout_width="@dimen/_14sdp"
+                            android:layout_height="@dimen/_14sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/baseline_edit_24"
                             app:tint="@color/white" />
@@ -500,14 +500,14 @@
                     android:orientation="vertical">
 
                     <FrameLayout
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_32sdp"
                         android:background="@drawable/bg_gradient_green_circle">
 
                         <ImageView
                             android:id="@+id/deleteIcon"
-                            android:layout_width="@dimen/_12sdp"
-                            android:layout_height="@dimen/_12sdp"
+                            android:layout_width="@dimen/_14sdp"
+                            android:layout_height="@dimen/_14sdp"
                             android:layout_gravity="center"
                             android:src="@drawable/delete_20dp_000000_fill0_wght300_grad0_opsz20"
                             app:tint="@color/white" />

@@ -180,7 +180,7 @@ Tap the notification icon to open saved drafts.
 
     <!-- New strings for the updated layout -->
     <string name="km_input_type">How do you want to track KM?</string>
-    <string name="odometer_reading">📅 5 din ka trip</string>
+    <string name="odometer_reading">Odometer Reading</string>
     <string name="distance_traveled">Distance Traveled</string>
     <string name="distance_traveled_km">Distance Traveled (KM)</string>
     <string name="fuel_average">Fuel Average:</string>
@@ -293,19 +293,122 @@ Tap the notification icon to open saved drafts.
     <string name="driver_ki_income">Driver Income:</string>
     <string name="driver_income_optional">Driver Income (Optional)</string>
     <string name="confirm">Confirm</string>
-    <string name="kaha_se">कहाँ से</string>
-    <string name="kaha_tak">कहाँ तक</string>
-    <string name="total_income">💰 कुल आवक</string>
-    <string name="total_expanse">💸 कुल खर्चा</string>
-    <string name="truck_num">🚛 ट्रक नंबर</string>
-    <string name="share">शेयर</string>
-    <string name="down">डाउनलोड</string>
-    <string name="change_kare">बदलें</string>
-    <string name="del">डिलीट</string>
-    <string name="note_khali_nahi_ho_sakta">नोट खाली नहीं हो सकता</string>
-    <string name="amount_sahi_nahi_hai">राशि सही नहीं है</string>
-    <string name="other_details_de">Other Details De</string>
-    <string name="trip_details_dale">Trip Details Dale</string>
+    <string name="kaha_se">From</string>
+    <string name="kaha_tak">To</string>
+    <string name="total_income">💰 Total Income</string>
+    <string name="total_expanse">💸 Total Expense</string>
+    <string name="truck_num">🚛 Truck Number</string>
+    <string name="share">Share</string>
+    <string name="down">Download</string>
+    <string name="change_kare">Change</string>
+    <string name="del">Delete</string>
+    <string name="note_khali_nahi_ho_sakta">Note cannot be empty</string>
+    <string name="amount_sahi_nahi_hai">Invalid amount</string>
+
+    <string name="other_details_de">Add Other Details</string>
+    <string name="trip_details_dale">Add Trip Details</string>
+    <string name="truck_number_khali_nahi_ho_sakta">Truck number cannot be empty</string>
+    <string name="sahi_truck_number_daliye">Enter a valid truck number</string>
+    <string name="truck_number_badal_diya_gaya">Truck number has been changed</string>
+    <string name="truck_number_sudhariye">Correct Truck Number</string>
+    <string name="neeche_apna_sahi_truck_number_type_kariye">Type your correct truck number below</string>
+    <string name="truck_number_jaise_gj_01_ab_1234">Truck Number (e.g. GJ-01-AB-1234)</string>
+    <string name="example_mh_12_ab_1234_dl_1234_pb_11_4567">📝 Example: MH-12-AB-1234, DL-1234, PB-11-4567</string>
+    <string name="cancel_kariye">Cancel</string>
+    <string name="badal_dijiye">Change</string>
+    <string name="jagah_ka_naam">Place Name</string>
+    <string name="jagah_save_ho_gayi">Place saved successfully</string>
+    <string name="jagah_ka_naam_daalo">Enter place name</string>
+    <string name="pending_draft_hai">Draft is pending</string>
+    <string name="tumhara_pending_data_idhar_hai">Your pending data is here</string>
+    <string name="nahi_baad_me">No, later</string>
+    <string name="haan_dekhte_hain">Yes, let’s check</string>
+    <string name="draft_complete_kar_lo">Complete the draft</string>
+
+
+    <string name="trip_kaise_bhejna_chahte_ho">How do you want to send the trip?</string>
+    <string name="trip_mode_instruction">There are two ways – simple or full detail. Choose what suits you.</string>
+
+    <string name="sirf_bol_kar_trip">🎤 Voice Only Trip</string>
+    <string name="simple_mode_description">If typing is difficult, just speak and add basic details – From, To, Date, Expense-Income. That’s it!</string>
+    <string name="simple_mode_selected">Simple mode selected. Send trip by voice!</string>
+
+    <string name="puri_detail_ke_saath">📝 Full Detail Mode</string>
+    <string name="full_mode_description">If you can type and want all details – diesel average, profit, owner-driver income, PDF report – choose this.</string>
+    <string name="full_mode_selected">Full mode selected. Create trip with full details.</string>
+
+    <string name="speaker">Speaker</string>
+    <string name="back">Back</string>
+    <string name="trip_kaise_banana_chahte_ho">How do you want to create the trip?</string>
+    <string name="neeche_se_koi_ek_chuno">Choose one below</string>
+    <string name="likhna_mushkil_sirf_bol_kar_entry_karo">Typing difficult? Use voice entry</string>
+    <string name="bas_bol_kar_bhar_do">Just speak and fill</string>
+    <string name="kharcha_aavak_quickly">Expense-Income quickly</string>
+    <string name="owner_ko_turant_bhej_do">Send to owner instantly</string>
+    <string name="likh_sakte_ho_puri_details_ke_saath_report">Can type? Full detailed report</string>
+    <string name="diesel_average_dikhe">See diesel average</string>
+    <string name="owner_driver_income_clear">Clear owner-driver income</string>
+    <string name="pdf_report_tayar_hogi">PDF report will be ready</string>
+    <string name="agar_likhna_nai_aata_to_ye_chune">✨ Choose this if you can’t write</string>
+    <string name="easy_way_trip">Easy Way Trip</string>
+    <string name="aap_bolo_ban_jayega_pdf_tayar">Just speak, PDF will be ready</string>
+    <string name="aapko_milega">You will get:</string>
+    <string name="bas_bol_ke_bhar_do">Just speak – no typing needed</string>
+    <string name="kharcha_or_aavak_report">Expense and income PDF report</string>
+    <string name="this_choose">Choose this</string>
+    <string name="this_one">OR</string>
+    <string name="agar_likhna_aata_he_to_ye_chune">⭐ Choose this if you can write</string>
+    <string name="medium_way_trip">Medium Way Trip</string>
+    <string name="details_trip_driver_and_owner_income_trip_avg_owner_report">Fill all details – trip, driver &amp; owner income, trip average, owner report</string>
+    <string name="milega_aapko">You will get:</string>
+    <string name="trip_pdf">Complete trip PDF report</string>
+    <string name="driver_income_clear">Clear driver income report</string>
+    <string name="owner_income">Owner income report</string>
+    <string name="per_trip_average_diesel">Per trip average  diesel report</string>
+    <string name="this_to">Choose this</string>
+    <string name="you_can_change_app_mode">You can change the app mode</string>
+
+    <string name="app_flow_change">Change app flow</string>
+
+    <string name="trip_mood_choose">Choose trip mode</string>
+
+    <string name="truck_no_speech">
+Here you can add the truck number by speaking.
+Tap the mic and say the full truck number.
+If it is not correct, tap on the truck number below
+and type it manually.
+</string>
+
+    <string name="truck_number_bol_ke">Add truck number by speaking</string>
+
+    <string name="trip_other_details_tittile">Add trip details</string>
+
+    <string name="trip_other_details_dec">
+Add the trip start date,
+starting place, and destination here.
+You can speak the details or
+edit them by tapping the pencil icon.
+</string>
+
+    <string name="trip_details_add_karo">Add trip details</string>
+
+    <string name="yahan_aap_trip_ka_kharcha_expense_aur_kamai_income_add_kar_sakte_ho_neeche_diye_gaye_buttons_par_click_karke_bolkar_ya_likhkar_entry_karo">
+Here you can add trip expenses and income.
+Tap the buttons below to add details by speaking or typing.
+</string>
+
+    <string name="bolkar_kharcha_income_add_karo">Add expense / income by speaking</string>
+
+    <string name="yahan_aap_saare_kharche_ya_income_ek_sath_bol_sakte_ho_mic_dabao_item_ka_naam_aur_amount_bolo_aur_sab_bolne_ke_baad_save_dabao">
+Here you can speak all expenses or income at once.
+Tap the mic, say the item name and amount,
+and tap Save when you are done.
+</string>
+
+    <string name="profile_top_card">Profile information</string>
+    <string name="pehle_se_sun_rahe_hain">Already listening...</string>
+    <string name="boliye">🎤 Boliye...</string>
+    <string name="lang_change_dec">Language badalni ho to Language par click karo. App seekhni ho to How to Use par click karo.\n Mode badalna ho to App Mode par click karo.</string>
 
 
     <!--    <string name="onboard_title_1">All trips in one place</string>-->

@@ -365,6 +365,118 @@
     <string name="del">डिलीट</string>
     <string name="note_khali_nahi_ho_sakta">नोट खाली कोनी हो सके</string>
     <string name="amount_sahi_nahi_hai">रकम सही कोनी है</string>
-    <string name="other_details_de">बीजी जानकारी डालजो</string>
-    <string name="trip_details_dale">ट्रिप री जानकारी डालजो</string>
+    <string name="truck_number_khali_nahi_ho_sakta">ट्रक नंबर खाली नीं हो सके</string>
+    <string name="sahi_truck_number_daliye">साचो ट्रक नंबर डालजो</string>
+    <string name="truck_number_badal_diya_gaya">ट्रक नंबर बदलियो गयो है</string>
+    <string name="truck_number_sudhariye">ट्रक नंबर सुधारजो</string>
+    <string name="neeche_apna_sahi_truck_number_type_kariye">नीचे आपरो साचो ट्रक नंबर लिखजो</string>
+    <string name="truck_number_jaise_gj_01_ab_1234">ट्रक नंबर (ज्यूं: GJ-01-AB-1234)</string>
+    <string name="example_mh_12_ab_1234_dl_1234_pb_11_4567">📝 उदाहरण: MH-12-AB-1234, DL-1234, PB-11-4567</string>
+    <string name="cancel_kariye">रद्द करो</string>
+    <string name="badal_dijiye">बदलजो</string>
+    <string name="other_details_de">बीजी जानकारी दीजो</string>
+    <string name="trip_details_dale">ट्रिप री जानकारी भरो</string>
+    <string name="jagah_ka_naam">जगह रो नाम</string>
+    <string name="jagah_save_ho_gayi">जगह सेव हो गई</string>
+    <string name="jagah_ka_naam_daalo">जगह रो नाम डालजो</string>
+    <string name="pending_draft_hai">ड्राफ्ट पेंडिंग है</string>
+    <string name="tumhara_pending_data_idhar_hai">आपरो पेंडिंग डेटा इथै है</string>
+    <string name="nahi_baad_me">ना, पाछूं</string>
+    <string name="haan_dekhte_hain">हां, देखां</string>
+    <string name="draft_complete_kar_lo">ड्राफ्ट पूरा करजो</string>
+
+    <string name="trip_kaise_bhejna_chahte_ho">ट्रिप कइंया भेजणी है?</string>
+    <string name="trip_mode_instruction">बे तरीका है – आसान अर पूरी.</string>
+    <string name="sirf_bol_kar_trip">🎤 बोल के ट्रिप</string>
+    <string name="simple_mode_description">लिखण मुश्किल हो तो बोल के भरो.</string>
+    <string name="simple_mode_selected">सिंपल मोड चुन्यो.</string>
+    <string name="puri_detail_ke_saath">📝 पूरी जानकारी साथ</string>
+    <string name="full_mode_description">सगळी डिटेल चाहिए तो ई चुनजो.</string>
+    <string name="full_mode_selected">फुल मोड चुन्यो.</string>
+    <string name="speaker">स्पीकर</string>
+    <string name="back">पाछूं</string>
+    <string name="trip_kaise_banana_chahte_ho">ट्रिप कइंया बनाणी?</string>
+    <string name="neeche_se_koi_ek_chuno">नीचे सूं एक चुनजो</string>
+    <string name="likhna_mushkil_sirf_bol_kar_entry_karo">लिखण मुश्किल? बोल के एंट्री</string>
+    <string name="bas_bol_kar_bhar_do">बस बोल के भरो</string>
+    <string name="kharcha_aavak_quickly">खर्चा-आवक जल्दी</string>
+    <string name="owner_ko_turant_bhej_do">ओनर नै तुरंत भेजजो</string>
+    <string name="likh_sakte_ho_puri_details_ke_saath_report">लिख सको? पूरी रिपोर्ट</string>
+    <string name="diesel_average_dikhe">डीजल एवरेज दिखे</string>
+    <string name="owner_driver_income_clear">ओनर-ड्राइवर इनकम साफ</string>
+    <string name="pdf_report_tayar_hogi">PDF रिपोर्ट तैयार होसी</string>
+
+    <string name="agar_likhna_nai_aata_to_ye_chune">✨ जँ लिखण नीं आवे त ई चुनजो</string>
+    <string name="easy_way_trip">आसान रीति ट्रिप</string>
+    <string name="aap_bolo_ban_jayega_pdf_tayar">बोलजो, PDF तैयार हो जासी</string>
+    <string name="aapko_milega">आपने मिलसी:</string>
+    <string name="bas_bol_ke_bhar_do">बस बोल के भरो</string>
+    <string name="kharcha_or_aavak_report">खर्चा अर आवक PDF</string>
+    <string name="this_choose">ई चुनजो</string>
+    <string name="this_one">या</string>
+    <string name="agar_likhna_aata_he_to_ye_chune">⭐ जँ लिखण आवे त ई चुनजो</string>
+    <string name="medium_way_trip">मध्यम रीति ट्रिप</string>
+    <string name="details_trip_driver_and_owner_income_trip_avg_owner_report">सगळी डिटेल भरो</string>
+    <string name="milega_aapko">आपने मिलसी:</string>
+    <string name="trip_pdf">ट्रिप री पूरी PDF</string>
+    <string name="driver_income_clear">ड्राइवर इनकम साफ</string>
+    <string name="owner_income">ओनर इनकम</string>
+    <string name="per_trip_average_diesel">हर ट्रिप एवरेज अर डीजल</string>
+    <string name="this_to">ई चुनजो</string>
+    <string name="you_can_change_app_mode">तूं ऐप रो मोड बदल सको है</string>
+
+    <string name="app_flow_change">ऐप रो तरीका बदलो</string>
+
+    <string name="trip_mood_choose">यात्रा मोड चुनो</string>
+
+    <string name="truck_no_speech">
+अहां बोल कर ट्रक नंबर दर्ज कर सको है।
+माइक पर टैप कर पूरा नंबर बोलजो।
+जद ठीक ना आवे तो नीचे ट्रक नंबर पर टैप कर
+खुद लिख सको है।
+</string>
+
+    <string name="truck_number_bol_ke">बोल कर ट्रक नंबर दर्ज करो</string>
+
+    <string name="trip_other_details_tittile">यात्रा री जानकारी जोड़ो</string>
+
+    <string name="trip_other_details_dec">
+अहां यात्रा शुरू होवां री तारीख,
+शुरुआत री जगह अर मंजिल दर्ज करो।
+अहां बोल कर भी बता सको है या
+पेंसिल आइकन पर टैप कर सुधार सको है।
+</string>
+
+    <string name="trip_details_add_karo">यात्रा रो विवरण जोड़ो</string>
+
+    <string name="yahan_aap_trip_ka_kharcha_expense_aur_kamai_income_add_kar_sakte_ho_neeche_diye_gaye_buttons_par_click_karke_bolkar_ya_likhkar_entry_karo">
+अहां यात्रा रो खर्च अर कमाई जोड़ सको है।
+नीचे दीया गया बटन पर टैप कर
+बोल कर या लिख कर दर्ज करो।
+</string>
+
+    <string name="bolkar_kharcha_income_add_karo">बोल कर खर्च / कमाई जोड़ो</string>
+
+    <string name="yahan_aap_saare_kharche_ya_income_ek_sath_bol_sakte_ho_mic_dabao_item_ka_naam_aur_amount_bolo_aur_sab_bolne_ke_baad_save_dabao">
+अहां सारा खर्च या कमाई एक साथ बोल सको है।
+माइक दबाओ, नाम अर रकम बोलो
+अर आखरी में सेव दबाओ।
+</string>
+
+    <string name="profile_top_card">प्रोफाइल री जानकारी</string>
+
+    <string name="language_badalni_ho_to_language_par_click_karo_app_seekhni_ho_to_how_to_use_par_click_karo_mode_badalna_ho_to_app_mode_par_click_karo">
+भाषा बदलणी होय तो Language पर टैप करो।
+ऐप सीखणी होय तो How to Use पर टैप करो।
+मोड बदलणो होय तो App Mode पर टैप करो।
+</string>
+
+    <string name="boliye">🎤 बोलजो...</string>
+    <string name="lang_change_dec">
+भाषा बदलणी होय तो Language पर क्लिक करजो।
+App सीखणी होय तो How to Use पर क्लिक करजो।
+Mode बदलणो होय तो App Mode पर क्लिक करजो।
+</string>
+    <string name="pehle_se_sun_rahe_hain">पहले सूं ही सांभळ रहे हैं...</string>
+
 </resources>

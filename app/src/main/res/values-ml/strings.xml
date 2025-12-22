@@ -382,7 +382,89 @@
     <string name="del">ഡിലീറ്റ്</string>
     <string name="note_khali_nahi_ho_sakta">കുറിപ്പ് ശൂന്യമാകരുത്</string>
     <string name="amount_sahi_nahi_hai">തുക ശരിയല്ല</string>
-    <string name="other_details_de">മറ്റ് വിവരങ്ങൾ ചേർക്കൂ</string>
-    <string name="trip_details_dale">യാത്ര വിവരങ്ങൾ ചേർക്കൂ</string>
+    <string name="truck_number_khali_nahi_ho_sakta">ട്രക്ക് നമ്പർ ഒഴിഞ്ഞിരിക്കരുത്</string>
+    <string name="sahi_truck_number_daliye">ശരിയായ ട്രക്ക് നമ്പർ നൽകുക</string>
+    <string name="truck_number_badal_diya_gaya">ട്രക്ക് നമ്പർ മാറ്റി</string>
+    <string name="truck_number_sudhariye">ട്രക്ക് നമ്പർ തിരുത്തുക</string>
+    <string name="neeche_apna_sahi_truck_number_type_kariye">താഴെ നിങ്ങളുടെ ശരിയായ ട്രക്ക് നമ്പർ ടൈപ്പ് ചെയ്യുക</string>
+    <string name="truck_number_jaise_gj_01_ab_1234">ട്രക്ക് നമ്പർ (ഉദാ: GJ-01-AB-1234)</string>
+    <string name="example_mh_12_ab_1234_dl_1234_pb_11_4567">📝 ഉദാഹരണം: MH-12-AB-1234, DL-1234, PB-11-4567</string>
+    <string name="cancel_kariye">റദ്ദാക്കുക</string>
+    <string name="badal_dijiye">മാറ്റുക</string>
+    <string name="other_details_de">മറ്റ് വിവരങ്ങൾ നൽകുക</string>
+    <string name="trip_details_dale">യാത്രയുടെ വിവരങ്ങൾ ചേർക്കുക</string>
+    <string name="jagah_ka_naam">സ്ഥലത്തിന്റെ പേര്</string>
+    <string name="jagah_save_ho_gayi">സ്ഥലം സേവ് ചെയ്തു</string>
+    <string name="jagah_ka_naam_daalo">സ്ഥലത്തിന്റെ പേര് നൽകുക</string>
+    <string name="pending_draft_hai">ഡ്രാഫ്റ്റ് ബാക്കി ഉണ്ട്</string>
+    <string name="tumhara_pending_data_idhar_hai">നിങ്ങളുടെ ബാക്കി ഡാറ്റ ഇവിടെ ഉണ്ട്</string>
+    <string name="nahi_baad_me">വേണ്ട, പിന്നെ</string>
+    <string name="haan_dekhte_hain">അതെ, നോക്കാം</string>
+    <string name="draft_complete_kar_lo">ഡ്രാഫ്റ്റ് പൂർത്തിയാക്കുക</string>
+
+    <string name="trip_kaise_bhejna_chahte_ho">യാത്ര എങ്ങനെ അയയ്ക്കണം?</string>
+    <string name="trip_mode_instruction">രണ്ട് വഴികളുണ്ട് – ലളിതം, പൂർണ്ണ വിശദാംശങ്ങൾ. നിങ്ങൾക്ക് ഇഷ്ടമുള്ളത് തിരഞ്ഞെടുക്കൂ.</string>
+
+    <string name="sirf_bol_kar_trip">🎤 സംസാരിച്ച് യാത്ര</string>
+    <string name="simple_mode_description">എഴുതാൻ ബുദ്ധിമുട്ടാണെങ്കിൽ സംസാരിച്ച് അടിസ്ഥാന വിവരങ്ങൾ നൽകുക.</string>
+    <string name="simple_mode_selected">ലളിത മോഡ് തിരഞ്ഞെടുത്തു.</string>
+
+    <string name="puri_detail_ke_saath">📝 പൂർണ്ണ വിശദാംശങ്ങളോടെ</string>
+    <string name="full_mode_description">എഴുതാൻ കഴിയുകയും എല്ലാ വിശദാംശങ്ങളും വേണമെങ്കിൽ ഇത് തിരഞ്ഞെടുക്കുക.</string>
+    <string name="full_mode_selected">ഫുൾ മോഡ് തിരഞ്ഞെടുത്തു.</string>
+
+    <string name="speaker">സ്പീക്കർ</string>
+    <string name="back">തിരികെ</string>
+    <string name="trip_kaise_banana_chahte_ho">യാത്ര എങ്ങനെ തയ്യാറാക്കണം?</string>
+    <string name="neeche_se_koi_ek_chuno">താഴെ ഒന്നെന്തെങ്കിലും തിരഞ്ഞെടുക്കൂ</string>
+    <string name="likhna_mushkil_sirf_bol_kar_entry_karo">എഴുതാൻ ബുദ്ധിമുട്ട്? സംസാരിച്ച് എൻട്രി</string>
+    <string name="bas_bol_kar_bhar_do">സംസാരിച്ചാൽ മതി</string>
+    <string name="kharcha_aavak_quickly">ചെലവ്-വരുമാനം വേഗം</string>
+    <string name="owner_ko_turant_bhej_do">ഉടമയ്ക്ക് ഉടൻ അയയ്ക്കുക</string>
+    <string name="likh_sakte_ho_puri_details_ke_saath_report">എഴുതാമോ? പൂർണ്ണ റിപ്പോർട്ട്</string>
+    <string name="diesel_average_dikhe">ഡീസൽ ശരാശരി കാണാം</string>
+    <string name="owner_driver_income_clear">ഉടമ-ഡ്രൈവർ വരുമാനം വ്യക്തം</string>
+    <string name="pdf_report_tayar_hogi">PDF റിപ്പോർട്ട് തയ്യാറാകും</string>
+
+    <string name="agar_likhna_nai_aata_to_ye_chune">✨ എഴുതാൻ അറിയില്ലെങ്കിൽ ഇത് തിരഞ്ഞെടുക്കുക</string>
+    <string name="easy_way_trip">എളുപ്പമുള്ള ട്രിപ്പ് മാർഗം</string>
+    <string name="aap_bolo_ban_jayega_pdf_tayar">സംസാരിച്ചാൽ PDF തയ്യാറാകും</string>
+    <string name="aapko_milega">നിങ്ങൾക്ക് ലഭിക്കും:</string>
+    <string name="bas_bol_ke_bhar_do">സംസാരിച്ചാൽ മതി</string>
+    <string name="kharcha_or_aavak_report">ചെലവ് &amp; വരുമാനം PDF</string>
+    <string name="this_choose">ഇത് തിരഞ്ഞെടുക്കുക</string>
+    <string name="this_one">അല്ലെങ്കിൽ</string>
+    <string name="agar_likhna_aata_he_to_ye_chune">⭐ എഴുതാൻ അറിയാമെങ്കിൽ ഇത് തിരഞ്ഞെടുക്കുക</string>
+    <string name="medium_way_trip">മധ്യമ ട്രിപ്പ് മാർഗം</string>
+    <string name="details_trip_driver_and_owner_income_trip_avg_owner_report">എല്ലാ വിവരങ്ങളും ചേർക്കുക</string>
+    <string name="milega_aapko">നിങ്ങൾക്ക് ലഭിക്കും:</string>
+    <string name="trip_pdf">പൂർണ്ണ ട്രിപ്പ് PDF</string>
+    <string name="driver_income_clear">ഡ്രൈവർ വരുമാനം വ്യക്തം</string>
+    <string name="owner_income">ഓണർ വരുമാനം</string>
+    <string name="per_trip_average_diesel">ഓരോ ട്രിപ്പിന്റെയും ശരാശരി &amp; ഡീസൽ</string>
+    <string name="this_to">ഇത് തിരഞ്ഞെടുക്കുക</string>
+    <string name="you_can_change_app_mode">നിങ്ങൾക്ക് ആപ്പ് മോഡ് മാറ്റാം</string>
+    <string name="app_flow_change">ആപ്പ് പ്രവർത്തനം മാറ്റുക</string>
+    <string name="trip_mood_choose">യാത്ര മോഡ് തിരഞ്ഞെടുക്കുക</string>
+    <string name="truck_no_speech">ഇവിടെ സംസാരിച്ച് ട്രക്ക് നമ്പർ നൽകാം.\nമൈക്ക് അമർത്തി മുഴുവൻ നമ്പർ പറയുക.\nശരിയായി വരില്ലെങ്കിൽ താഴെയുള്ള നമ്പറിൽ അമർത്തി\nസ്വയം നൽകാം.</string>
+    <string name="truck_number_bol_ke">സംസാരിച്ച് ട്രക്ക് നമ്പർ നൽകുക</string>
+    <string name="trip_other_details_tittile">യാത്ര വിവരങ്ങൾ ചേർക്കുക</string>
+    <string name="trip_other_details_dec">ഇവിടെ യാത്ര ആരംഭിച്ച തീയതി,\nആരംഭ സ്ഥലം, എത്തുന്ന സ്ഥലം എന്നിവ നൽകുക.\nസംസാരിക്കാം അല്ലെങ്കിൽ\nപെൻസിൽ ഐക്കൺ അമർത്തി തിരുത്താം.</string>
+    <string name="trip_details_add_karo">യാത്ര വിവരങ്ങൾ ചേർക്കുക</string>
+    <string name="yahan_aap_trip_ka_kharcha_expense_aur_kamai_income_add_kar_sakte_ho_neeche_diye_gaye_buttons_par_click_karke_bolkar_ya_likhkar_entry_karo">ഇവിടെ യാത്ര ചെലവും വരുമാനവും ചേർക്കാം.\nതാഴെയുള്ള ബട്ടൺ അമർത്തി സംസാരിച്ച് അല്ലെങ്കിൽ ടൈപ്പ് ചെയ്ത് നൽകാം.</string>
+    <string name="bolkar_kharcha_income_add_karo">സംസാരിച്ച് ചെലവ് / വരുമാനം ചേർക്കുക</string>
+    <string name="yahan_aap_saare_kharche_ya_income_ek_sath_bol_sakte_ho_mic_dabao_item_ka_naam_aur_amount_bolo_aur_sab_bolne_ke_baad_save_dabao">ഇവിടെ എല്ലാ ചെലവുകളും വരുമാനവും ഒരുമിച്ച് പറയാം.\nമൈക്ക് അമർത്തി പേര്‌, തുക പറയുക\nശേഷം സേവ് ചെയ്യുക.</string>
+    <string name="profile_top_card">പ്രൊഫൈൽ വിവരങ്ങൾ</string>
+    <string name="language_badalni_ho_to_language_par_click_karo_app_seekhni_ho_to_how_to_use_par_click_karo_mode_badalna_ho_to_app_mode_par_click_karo">ഭാഷ മാറ്റാൻ ഭാഷയിൽ അമർത്തുക.\nആപ്പ് പഠിക്കാൻ ഉപയോഗ മാർഗ്ഗനിർദ്ദേശം അമർത്തുക.\nമോഡ് മാറ്റാൻ ആപ്പ് മോഡ് അമർത്തുക.</string>
+    <string name="boliye">🎤 പറയൂ...</string>
+
+    <string name="pehle_se_sun_rahe_hain">ഇതിനകം കേൾക്കുകയാണ്...</string>
+
+    <string name="lang_change_dec">
+ഭാഷ മാറ്റാൻ Language ക്ലിക്ക് ചെയ്യുക।
+App ഉപയോഗിക്കാൻ പഠിക്കാൻ How to Use ക്ലിക്ക് ചെയ്യുക।
+Mode മാറ്റാൻ App Mode ക്ലിക്ക് ചെയ്യുക।
+</string>
+
 
 </resources>

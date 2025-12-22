@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- dialog_draft_confirmation.xml -->
+<!-- Save as: res/layout/dialog_draft_confirmation.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_draft_dialog"
+    android:layout_margin="@dimen/_10sdp"
+    android:padding="24dp">
+
+    <!-- Icon with Badge -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <!-- Main Icon Circle -->
+        <FrameLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/bg_draft_icon_circle">
+
+            <ImageView
+                android:id="@+id/ivDraftIcon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:src="@drawable/baseline_draft_24"
+                app:tint="@color/white" />
+        </FrameLayout>
+
+        <!-- Count Badge -->
+        <TextView
+            android:id="@+id/tvDraftCount"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="top|end"
+            android:background="@drawable/bg_count_badge"
+            android:gravity="center"
+            android:text="5"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto_bold" />
+    </FrameLayout>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvDraftTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/pending_draft_hai"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto_bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Message -->
+    <TextView
+        android:id="@+id/tvDraftMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/tumhara_pending_data_idhar_hai"
+        android:textSize="15sp"
+        android:textColor="#666666"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Decorative Divider -->
+    <View
+        android:layout_width="60dp"
+        android:layout_height="3dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_divider_gradient"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="2">
+
+        <!-- No Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDraftNo"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="@string/nahi_baad_me"
+            android:textColor="#666666"
+            android:textSize="15sp"
+            android:fontFamily="@font/roboto_bold"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="#CCCCCC"
+            app:strokeWidth="2dp"
+            app:cornerRadius="14dp"
+            app:iconTint="#666666"
+            app:iconGravity="textStart"
+            app:iconSize="20dp" />
+
+        <!-- Yes Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDraftYes"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="@string/haan_dekhte_hain"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:fontFamily="@font/roboto_bold"
+            android:backgroundTint="@color/green"
+            app:cornerRadius="14dp"
+            app:iconTint="@color/white"
+            app:iconGravity="textStart"
+            app:iconSize="22dp" />
+    </LinearLayout>
+
+    <!-- Bottom Hint -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:background="@drawable/bg_hint_box">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/baseline_info_24"
+            app:tint="@color/color_primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/draft_complete_kar_lo"
+            android:textSize="12sp"
+            android:textColor="@color/color_primary"
+            android:fontFamily="@font/roboto_medium" />
+    </LinearLayout>
+
+</LinearLayout>

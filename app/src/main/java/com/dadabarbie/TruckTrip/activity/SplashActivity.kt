@@ -29,8 +29,13 @@ class SplashActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             delay(2000)
             if (Prefs[Constants.isLogin]) {
-                startActivity(Intent(this@SplashActivity, NormalUserDashBoard::class.java)
-                    .putExtra("tripData",""))
+                 if(Prefs[Constants.appMode,""]=="A"){
+                     startActivity(Intent(this@SplashActivity, NormalUserDashBoard::class.java)
+                         .putExtra("tripData",""))
+                 }else{
+                     startActivity(Intent(this@SplashActivity, DashBoardActivity::class.java)
+                         .putExtra("tripData",""))
+                 }
                 finish()
             } else {
                  if(!Prefs[Constants.languageCode, ""].toString().isNullOrEmpty()){

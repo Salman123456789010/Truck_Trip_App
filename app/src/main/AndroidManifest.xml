@@ -23,12 +23,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.HowToUseNormalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.TripModeSelectionActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.SimpleDraftActivity"
             android:exported="false" />
         <activity
             android:name=".activity.NormalUserDashBoard"
-            android:launchMode="singleTop"
-            android:exported="true"/>
+            android:exported="true"
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.ThirdExpenseScreen"
             android:exported="false" />

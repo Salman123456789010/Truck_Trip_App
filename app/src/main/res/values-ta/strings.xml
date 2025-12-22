@@ -335,7 +335,87 @@
     <string name="del">நீக்கு</string>
     <string name="note_khali_nahi_ho_sakta">குறிப்பு காலியாக இருக்க முடியாது</string>
     <string name="amount_sahi_nahi_hai">தொகை சரியில்லை</string>
-    <string name="other_details_de">மற்ற தகவல்களை சேர்க்கவும்</string>
-    <string name="trip_details_dale">பயண தகவல்களை சேர்க்கவும்</string>
+    <string name="truck_number_khali_nahi_ho_sakta">லாரி எண் காலியாக இருக்க முடியாது</string>
+    <string name="sahi_truck_number_daliye">சரியான லாரி எண்ணை உள்ளிடவும்</string>
+    <string name="truck_number_badal_diya_gaya">லாரி எண் மாற்றப்பட்டது</string>
+    <string name="truck_number_sudhariye">லாரி எண்ணை திருத்தவும்</string>
+    <string name="neeche_apna_sahi_truck_number_type_kariye">கீழே உங்கள் சரியான லாரி எண்ணை உள்ளிடவும்</string>
+    <string name="truck_number_jaise_gj_01_ab_1234">லாரி எண் (எ.கா: GJ-01-AB-1234)</string>
+    <string name="example_mh_12_ab_1234_dl_1234_pb_11_4567">📝 உதாரணம்: MH-12-AB-1234, DL-1234, PB-11-4567</string>
+    <string name="cancel_kariye">ரத்து செய்யவும்</string>
+    <string name="badal_dijiye">மாற்றவும்</string>
+    <string name="other_details_de">மற்ற விவரங்களை சேர்க்கவும்</string>
+    <string name="trip_details_dale">பயண விவரங்களை சேர்க்கவும்</string>
+    <string name="jagah_ka_naam">இடத்தின் பெயர்</string>
+    <string name="jagah_save_ho_gayi">இடம் சேமிக்கப்பட்டது</string>
+    <string name="jagah_ka_naam_daalo">இடத்தின் பெயரை உள்ளிடவும்</string>
+    <string name="pending_draft_hai">வரைவு நிலுவையில் உள்ளது</string>
+    <string name="tumhara_pending_data_idhar_hai">உங்கள் நிலுவை தரவு இங்கே உள்ளது</string>
+    <string name="nahi_baad_me">இல்லை, பிறகு</string>
+    <string name="haan_dekhte_hain">ஆம், பார்க்கலாம்</string>
+    <string name="draft_complete_kar_lo">வரைவைக் முடிக்கவும்</string>
+
+    <string name="trip_kaise_bhejna_chahte_ho">பயணத்தை எப்படி அனுப்ப விரும்புகிறீர்கள்?</string>
+    <string name="trip_mode_instruction">இரண்டு வழிகள் உள்ளன – எளிது, முழு விவரம். உங்களுக்கு பொருத்தமானதை தேர்வு செய்யுங்கள்.</string>
+
+    <string name="sirf_bol_kar_trip">🎤 பேசிப் பயணம்</string>
+    <string name="simple_mode_description">எழுதுவது கடினமாக இருந்தால், பேசிப் அடிப்படை விவரங்களை மட்டும் சேர்க்கவும்.</string>
+    <string name="simple_mode_selected">எளிய முறை தேர்ந்தெடுக்கப்பட்டது.</string>
+
+    <string name="puri_detail_ke_saath">📝 முழு விவரங்களுடன்</string>
+    <string name="full_mode_description">எழுத முடிந்தால் மற்றும் எல்லா விவரங்களும் வேண்டுமெனில் இதை தேர்வு செய்யவும்.</string>
+    <string name="full_mode_selected">முழு முறை தேர்ந்தெடுக்கப்பட்டது.</string>
+
+    <string name="speaker">ஸ்பீக்கர்</string>
+    <string name="back">பின்னால்</string>
+    <string name="trip_kaise_banana_chahte_ho">பயணத்தை எப்படி உருவாக்க விரும்புகிறீர்கள்?</string>
+    <string name="neeche_se_koi_ek_chuno">கீழே ஒன்றை தேர்வு செய்யவும்</string>
+    <string name="likhna_mushkil_sirf_bol_kar_entry_karo">எழுத சிரமமா? பேசிப் பதிவு செய்யுங்கள்</string>
+    <string name="bas_bol_kar_bhar_do">பேசினால் போதும்</string>
+    <string name="kharcha_aavak_quickly">செலவு-வருமானம் விரைவாக</string>
+    <string name="owner_ko_turant_bhej_do">உரிமையாளருக்கு உடனே அனுப்பவும்</string>
+    <string name="likh_sakte_ho_puri_details_ke_saath_report">எழுதலாம்? முழு அறிக்கை</string>
+    <string name="diesel_average_dikhe">டீசல் சராசரி தெரியும்</string>
+    <string name="owner_driver_income_clear">உரிமையாளர்-டிரைவர் வருமானம் தெளிவு</string>
+    <string name="pdf_report_tayar_hogi">PDF அறிக்கை தயார்</string>
+
+    <string name="agar_likhna_nai_aata_to_ye_chune">✨ எழுத தெரியாவிட்டால் இதை தேர்வு செய்யவும்</string>
+    <string name="easy_way_trip">எளிய பயண முறை</string>
+    <string name="aap_bolo_ban_jayega_pdf_tayar">பேசுங்கள், PDF தயாராகும்</string>
+    <string name="aapko_milega">உங்களுக்கு கிடைக்கும்:</string>
+    <string name="bas_bol_ke_bhar_do">பேசினால் போதும் – எழுத தேவையில்லை</string>
+    <string name="kharcha_or_aavak_report">செலவு மற்றும் வருமான PDF</string>
+    <string name="this_choose">இதை தேர்வு செய்யவும்</string>
+    <string name="this_one">அல்லது</string>
+    <string name="agar_likhna_aata_he_to_ye_chune">⭐ எழுத தெரிந்தால் இதை தேர்வு செய்யவும்</string>
+    <string name="medium_way_trip">நடுத்தர பயண முறை</string>
+    <string name="details_trip_driver_and_owner_income_trip_avg_owner_report">அனைத்து விவரங்களையும் நிரப்பவும்</string>
+    <string name="milega_aapko">உங்களுக்கு கிடைக்கும்:</string>
+    <string name="trip_pdf">முழு பயண PDF</string>
+    <string name="driver_income_clear">டிரைவர் வருமானம் தெளிவு</string>
+    <string name="owner_income">உரிமையாளர் வருமானம்</string>
+    <string name="per_trip_average_diesel">ஒவ்வொரு பயண சராசரி &amp; டீசல்</string>
+    <string name="this_to">இதை தேர்வு செய்யவும்</string>
+
+    <string name="you_can_change_app_mode">நீங்கள் பயன்பாட்டு முறையை மாற்றலாம்</string>
+    <string name="app_flow_change">பயன்பாட்டு நடைமுறையை மாற்றவும்</string>
+    <string name="trip_mood_choose">பயண முறையை தேர்வு செய்யவும்</string>
+    <string name="truck_no_speech">இங்கே நீங்கள் பேசிக் கொண்டு லாரி எண்ணை உள்ளிடலாம்.\nமைக்ரோஃபோனைத் தட்டி முழு எண்ணையும் கூறுங்கள்.\nசரியாக வரவில்லை என்றால் கீழே உள்ள எண்ணைத் தட்டி\nநீங்களே உள்ளிடலாம்.</string>
+    <string name="truck_number_bol_ke">பேசிக் கொண்டு லாரி எண்ணை உள்ளிடவும்</string>
+    <string name="trip_other_details_tittile">பயண விவரங்களைச் சேர்க்கவும்</string>
+    <string name="trip_other_details_dec">இங்கே பயணத் தொடக்க தேதி,\nதொடக்க இடம் மற்றும் சென்றடையும் இடத்தை உள்ளிடவும்.\nபேசிக் கூறலாம் அல்லது\nபென்சில் குறியீட்டைத் தட்டி திருத்தலாம்.</string>
+    <string name="trip_details_add_karo">பயண விவரங்களைச் சேர்க்கவும்</string>
+    <string name="yahan_aap_trip_ka_kharcha_expense_aur_kamai_income_add_kar_sakte_ho_neeche_diye_gaye_buttons_par_click_karke_bolkar_ya_likhkar_entry_karo">இங்கே பயண செலவுகள் மற்றும் வருமானத்தைச் சேர்க்கலாம்.\nகீழே உள்ள பொத்தானைத் தட்டி பேசிக் கூறவோ அல்லது எழுதவோ செய்யலாம்.</string>
+    <string name="bolkar_kharcha_income_add_karo">பேசிக் கொண்டு செலவு / வருமானம் சேர்க்கவும்</string>
+    <string name="yahan_aap_saare_kharche_ya_income_ek_sath_bol_sakte_ho_mic_dabao_item_ka_naam_aur_amount_bolo_aur_sab_bolne_ke_baad_save_dabao">இங்கே அனைத்து செலவுகள் அல்லது வருமானத்தை ஒரே நேரத்தில் கூறலாம்.\nமைக்ரோஃபோனை அழுத்தி பெயரும் தொகையும் கூறி\nபின்னர் சேமிக்கவும்.</string>
+    <string name="profile_top_card">சுயவிவர தகவல்</string>
+    <string name="language_badalni_ho_to_language_par_click_karo_app_seekhni_ho_to_how_to_use_par_click_karo_mode_badalna_ho_to_app_mode_par_click_karo">மொழியை மாற்ற மொழி என்பதைக் கிளிக் செய்யவும்.\nபயன்பாட்டை கற்றுக்கொள்ள பயன்பாட்டு வழிமுறையைத் தட்டவும்.\nமுறையை மாற்ற பயன்பாட்டு முறையைத் தட்டவும்.</string>
+    <string name="boliye">🎤 பேசுங்கள்...</string>
+    <string name="lang_change_dec">
+மொழி மாற்ற Language-ஐ கிளிக் செய்யுங்கள்।
+App எப்படி பயன்படுத்துவது கற்க How to Use-ஐ கிளிக் செய்யுங்கள்।
+Mode மாற்ற App Mode-ஐ கிளிக் செய்யுங்கள்।
+</string>
+    <string name="pehle_se_sun_rahe_hain">ஏற்கனவே கேட்கிறோம்...</string>
 
 </resources>

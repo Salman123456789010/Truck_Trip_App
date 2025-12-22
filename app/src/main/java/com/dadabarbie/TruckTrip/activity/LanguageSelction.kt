@@ -137,7 +137,8 @@ class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.O
                     if (languageLocale != "") {
                         LocaleHelper.setNewLocale(applicationContext, languageLocale)
                         if(intent.getStringExtra("languageFlag").equals("")){
-                            startActivity(Intent(this, HowToUseActivity::class.java))
+                            startActivity(Intent(this, TripModeSelectionActivity::class.java)
+                                .putExtra("languageFlag",""))
                             finish()
                         }else{
                             authViewModel.updateLanguage(languageLocale.toString())
@@ -182,7 +183,15 @@ class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.O
 
                 }
                 is NetworkResult.Success<*> -> {
-                    startActivity(Intent(this, DashBoardActivity::class.java))
+                    if(Prefs[Constants.appMode,""]=="A"){
+                        val i = Intent(applicationContext, NormalUserDashBoard::class.java)
+                            .putExtra("tripData","")
+                        startActivity(i)
+                    }else{
+                        val i = Intent(applicationContext, DashBoardActivity::class.java)
+                        startActivity(i)
+                    }
+//                    startActivity(Intent(this, DashBoardActivity::class.java))
 
                 }
             }

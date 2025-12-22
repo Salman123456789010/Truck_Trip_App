@@ -83,6 +83,7 @@ object Constants {
     const val domainName = "domainName"
 
     const val authToken = "authToken"
+    const val appMode = "appMode"
 
     var usermobileNumber=""
 

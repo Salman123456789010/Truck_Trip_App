@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_desi_dialog"
+    android:layout_margin="@dimen/_10sdp"
+    android:padding="24dp">
+
+    <!-- Title with Icon -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/map"
+            android:padding="8dp"
+            android:background="@drawable/bg_icon_circle_blue"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tvDialogTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:text="@string/sarvat_no_place_nakho"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_bold" />
+    </LinearLayout>
+
+    <!-- Input Section with Border -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_input_container"
+        android:padding="16dp">
+
+        <!-- Input Hint -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/jagah_ka_naam"
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginBottom="8dp" />
+
+        <!-- EditText with Mic Icon -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_edit_text_desi"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+
+            <EditText
+                android:id="@+id/etPlaceInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/jagah_bolo"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="#999999"
+                android:fontFamily="@font/roboto_regular"
+                android:background="@null"
+                android:inputType="text"
+                android:maxLines="1" />
+
+            <!-- Mic Button -->
+            <FrameLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_mic_small_circle">
+
+                <ImageView
+                    android:id="@+id/btnDialogMic"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/baseline_mic_24"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:tint="@color/white" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- Helper Text -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/baseline_info_24"
+                app:tint="@color/color_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="@string/ya_yaha_type_karo"
+                android:textSize="11sp"
+                android:textColor="@color/color_primary"
+                android:fontFamily="@font/roboto_regular" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp"
+        android:gravity="end">
+
+        <!-- Cancel Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDialogCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="#CCCCCC"
+            app:strokeWidth="1dp"
+            app:cornerRadius="12dp"
+            android:layout_marginEnd="12dp" />
+
+        <!-- Save Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDialogSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_karo"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto_bold"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:backgroundTint="@color/green"
+            app:cornerRadius="12dp"
+            app:iconTint="@color/white"
+            app:iconGravity="start"
+            app:iconSize="20dp" />
+    </LinearLayout>
+
+</LinearLayout>

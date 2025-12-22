@@ -19,8 +19,10 @@ import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.activity.DashBoardActivity
 import com.dadabarbie.TruckTrip.activity.HowToUseActivity
+import com.dadabarbie.TruckTrip.activity.HowToUseNormalActivity
 import com.dadabarbie.TruckTrip.activity.LanguageSelction
 import com.dadabarbie.TruckTrip.activity.NormalUserDashBoard
+import com.dadabarbie.TruckTrip.activity.TripModeSelectionActivity
 import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
 import com.dadabarbie.TruckTrip.databinding.FragmentProfileBinding
 import com.dadabarbie.TruckTrip.diologFragment.DraftWarningDialogFragment
@@ -92,6 +94,7 @@ class ProfileFragment : Fragment(),View.OnClickListener {
         binding.contactLayout.setOnClickListener(this)
         binding.howtouse.setOnClickListener(this)
         binding.privacyPolicy.setOnClickListener(this)
+        binding.appMode.setOnClickListener(this)
         binding.facebookIcon.setOnClickListener(this)
         binding.instagramIcon.setOnClickListener(this)
         binding.youtubeIcon.setOnClickListener(this)
@@ -153,7 +156,15 @@ class ProfileFragment : Fragment(),View.OnClickListener {
                 logOutDialogFragment.show(childFragmentManager,"")
             }
             binding.howtouse->{
-                startActivity(Intent(requireActivity(), HowToUseActivity::class.java))
+                if(Prefs[Constants.appMode,""]=="A"){
+                    startActivity(Intent(requireActivity(), HowToUseNormalActivity::class.java))
+                }else{
+                    startActivity(Intent(requireActivity(), HowToUseActivity::class.java))
+
+                }
+            }
+            binding.appMode->{
+                startActivity(Intent(requireActivity(), TripModeSelectionActivity::class.java))
             }
             binding.contactLayout->{
                 val url = "https://truckwallah.co.in/"

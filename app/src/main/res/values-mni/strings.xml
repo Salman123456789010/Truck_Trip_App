@@ -398,5 +398,86 @@ Submit টেপ কৰিলে ট্ৰিপ সম্পূৰ্ণ হ’
     <string name="del">ꯗꯤꯂꯤꯠ</string>
     <string name="note_khali_nahi_ho_sakta">ꯅꯣꯠ ꯈꯥꯂꯤ ꯍꯣꯏꯗ꯭ꯔꯤꯗꯕ ꯌꯥꯏꯗꯦ</string>
     <string name="amount_sahi_nahi_hai">ꯃꯣꯠ ꯑꯆꯥꯅꯕ ꯅꯠꯇꯦ</string>
+    <string name="other_details_de">अतोपपा विवरण पिरक</string>
+    <string name="trip_details_dale">ट्रिप की विवरण पिरक</string>
+    <string name="truck_number_khali_nahi_ho_sakta">ट्रक नंबर खाङदना याईदे</string>
+    <string name="sahi_truck_number_daliye">अचुम्बा ट्रक नंबर पिरक</string>
+    <string name="truck_number_badal_diya_gaya">ट्रक नंबर होंबदोक्ले</string>
+    <string name="truck_number_sudhariye">ट्रक नंबर चाङदोक</string>
+    <string name="neeche_apna_sahi_truck_number_type_kariye">मखायदा नहाकी अचुम्बा ट्रक नंबर ताइप तो</string>
+    <string name="truck_number_jaise_gj_01_ab_1234">ट्रक नंबर (खुदोल: GJ-01-AB-1234)</string>
+    <string name="example_mh_12_ab_1234_dl_1234_pb_11_4567">📝 खुदोल: MH-12-AB-1234, DL-1234, PB-11-4567</string>
+    <string name="cancel_kariye">कान्सल तो</string>
+    <string name="badal_dijiye">होंबदोक तो</string>
+    <string name="jagah_ka_naam">মফমগী মমিং</string>
+    <string name="jagah_save_ho_gayi">মফম সেভ তৌরে</string>
+    <string name="jagah_ka_naam_daalo">মফমগী মমিং পিরক</string>
+    <string name="pending_draft_hai">ড্রাফ্ট পেন্ডিং লৈরে</string>
+    <string name="tumhara_pending_data_idhar_hai">নহাক্কী পেন্ডিং ডাটা মফমসিদা লৈরে</string>
+    <string name="nahi_baad_me">নত্তে, মতুংদা</string>
+    <string name="haan_dekhte_hain">হোই, যেংসি</string>
+    <string name="draft_complete_kar_lo">ড্রাফ্ট লোইশিন তো</string>
+    <string name="trip_kaise_bhejna_chahte_ho">নহাক্না ট্রিপ করিগুম্না থাবা পাম্বা?</string>
+    <string name="trip_mode_instruction">লম্বী উপাই অমা লৈরে – অমা সহজ, অমা মপুং। নহাক্না পাম্বা অদু খল্লো।</string>
+
+    <string name="sirf_bol_kar_trip">🎤 ৱারি থোক্না ট্রিপ</string>
+    <string name="simple_mode_description">ইশিং-ইশিং ইবনা নোঙাইবা লৈত্রবদি ৱারি থোক্না বেসিক এন্ট্রি তৌ।</string>
+    <string name="simple_mode_selected">সিম্পল মোড খল্লে।</string>
+
+    <string name="puri_detail_ke_saath">📝 মপুং ডিটেলগী সাথে</string>
+    <string name="full_mode_description">ইবা য়াবা অমসুং মপুং ডিটেল পাম্বদি মসিগী অদু খল্লো।</string>
+    <string name="full_mode_selected">ফুল মোড খল্লে।</string>
+
+    <string name="speaker">স্পীকার</string>
+    <string name="back">হান্থোকপা</string>
+    <string name="trip_kaise_banana_chahte_ho">নহাক্না ট্রিপ করিগুম্না শেম্বা পাম্বা?</string>
+    <string name="neeche_se_koi_ek_chuno">মখাদা অমা খল্লো</string>
+    <string name="likhna_mushkil_sirf_bol_kar_entry_karo">ইবা নোঙাইবা? ৱারি থোক্না এন্ট্রি তৌ</string>
+    <string name="bas_bol_kar_bhar_do">ৱারি থোক্না মথং তৌ</string>
+    <string name="kharcha_aavak_quickly">খরচ-আয় থাজাবা</string>
+    <string name="owner_ko_turant_bhej_do">ওনারদা থাজাবা থাবা</string>
+    <string name="likh_sakte_ho_puri_details_ke_saath_report">ইবা য়াবা? মপুং রিপোর্ট</string>
+    <string name="diesel_average_dikhe">ডিজেল এভাৰেজ উবা</string>
+    <string name="owner_driver_income_clear">ওনার-ড্রাইভার আয় মপুং</string>
+    <string name="pdf_report_tayar_hogi">PDF রিপোর্ট শেম্বা হৌগনি</string>
+
+    <string name="agar_likhna_nai_aata_to_ye_chune">✨ ইবা য়াদবা লৈত্রবদি মসি খল্লো</string>
+    <string name="easy_way_trip">সহজ ট্রিপ মওং</string>
+    <string name="aap_bolo_ban_jayega_pdf_tayar">ৱারি থোক্লে PDF শেম্বা হৌগনি</string>
+    <string name="aapko_milega">নহাক্না ফংগনি:</string>
+    <string name="bas_bol_ke_bhar_do">ৱারি থোক্লে মথং তৌ</string>
+    <string name="kharcha_or_aavak_report">খরচ অমসুং আয় PDF</string>
+    <string name="this_choose">মসি খল্লো</string>
+    <string name="this_one">নত্তে</string>
+    <string name="agar_likhna_aata_he_to_ye_chune">⭐ ইবা য়াদলে মসি খল্লো</string>
+    <string name="medium_way_trip">মধ্যম ট্রিপ মওং</string>
+    <string name="details_trip_driver_and_owner_income_trip_avg_owner_report">সব ডিটেল মথং তৌ</string>
+    <string name="milega_aapko">নহাক্না ফংগনি:</string>
+    <string name="trip_pdf">ট্রিপগী পূর্ণ PDF</string>
+    <string name="driver_income_clear">ড্রাইভার আয় মপুং</string>
+    <string name="owner_income">ওনর আয়</string>
+    <string name="per_trip_average_diesel">প্রতি ট্রিপ এভাৰেজ অমসুং ডিজেল</string>
+    <string name="this_to">মসি খল্লো</string>
+    <string name="you_can_change_app_mode">অদোম্না অ্যাপ মোদ হোংদোকপা য়াবা নত্তে</string>
+    <string name="app_flow_change">অ্যাপ থৌওং হোংদোকউ</string>
+    <string name="trip_mood_choose">যাত্রা মোদ খল্লু</string>
+    <string name="truck_no_speech">মফমসিদা অদোম্না ৱারী খংনা ট্রাক নম্বর হাপচিনবা য়াবা নত্তে।\nমাইকতা তাপ তৌনা মপুং ফমবা নম্বর হায়ু।\nচৎনবা নত্ত্রগা মখাগী নম্বরতা তাপ তৌনা\nঅদোম্না নিজা হাপচিনবা য়াবা নত্তে।</string>
+    <string name="truck_number_bol_ke">ৱারী খংনা ট্রাক নম্বর হাপচিনউ</string>
+    <string name="trip_other_details_tittile">যাত্রা মরোল হাপচিনউ</string>
+    <string name="trip_other_details_dec">মফমসিদা যাত্রা হৌজিক্কী তারিখ,\nহৌজিক্কী মফম অমসুং ফাংবা মফম হাপচিনউ।\nৱারী খংনা হায়বা য়াবা নত্তে অমসুং\nপেন্সিল আইকনতা তাপ তৌনা শেমদোকপা য়াবা নত্তে।</string>
+    <string name="trip_details_add_karo">যাত্রা মরোল হাপচিনউ</string>
+    <string name="yahan_aap_trip_ka_kharcha_expense_aur_kamai_income_add_kar_sakte_ho_neeche_diye_gaye_buttons_par_click_karke_bolkar_ya_likhkar_entry_karo">মফমসিদা যাত্রাগী খরচ অমসুং আয় হাপচিনবা য়াবা নত্তে।\nমখাগী বতনতা তাপ তৌনা ৱারী খংনা নত্ত্রগা ইশিংনা হাপচিনউ।</string>
+    <string name="bolkar_kharcha_income_add_karo">ৱারী খংনা খরচ / আয় হাপচিনউ</string>
+    <string name="yahan_aap_saare_kharche_ya_income_ek_sath_bol_sakte_ho_mic_dabao_item_ka_naam_aur_amount_bolo_aur_sab_bolne_ke_baad_save_dabao">মফমসিদা খরচ অমসুং আয় পুম্নমক অমত্তা ৱারী খংনা হায়বা য়াবা নত্তে।\nমাইক তৌনা মমিং অমসুং পরিমান হায়ু\nঅদুদগী মখা সেভ তৌ।</string>
+    <string name="profile_top_card">প্রোফাইল মরোল</string>
+    <string name="language_badalni_ho_to_language_par_click_karo_app_seekhni_ho_to_how_to_use_par_click_karo_mode_badalna_ho_to_app_mode_par_click_karo">ভাষা হোংদোকনবা ভাষাতা তাপ তৌ।\nঅ্যাপ শিখনবা ব্যবহার পদ্ধতিতা তাপ তৌ।\nমোদ হোংদোকনবা অ্যাপ মোদতা তাপ তৌ।</string>
+    <string name="boliye">🎤 খঙনবিয়ু...</string>
+
+    <string name="lang_change_dec">
+ভাষা হোংনবা লৈ Language দা ক্লিক তৌ।
+App শিখনবা লৈ How to Use দা ক্লিক তৌ।
+Mode হোংনবা লৈ App Mode দা ক্লিক তৌ।
+</string>
+    <string name="pehle_se_sun_rahe_hain">হান্না হান্না খঙজরি...</string>
 
 </resources>

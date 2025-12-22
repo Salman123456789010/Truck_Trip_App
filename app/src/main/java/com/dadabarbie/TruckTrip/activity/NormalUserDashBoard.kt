@@ -1,10 +1,13 @@
 package com.dadabarbie.TruckTrip.activity
 
 import android.Manifest
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -13,7 +16,11 @@ import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.webkit.MimeTypeMap
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -43,6 +50,7 @@ import com.dadabarbie.TruckTrip.model.CreditModel
 import com.dadabarbie.TruckTrip.model.DebitModel
 import com.dadabarbie.TruckTrip.room.AppDatabase
 import com.dadabarbie.TruckTrip.room.model.TripDataTestModel
+import com.google.android.material.button.MaterialButton
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import com.vasyerp.cafvd.room.model.Products
@@ -289,14 +297,53 @@ class NormalUserDashBoard : AppCompatActivity(),View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v) {
-            binding.notificationLayout.notificataionList->{
-                if(totalCount>0){
-                    startActivity(Intent(this, SimpleDraftActivity::class.java))
-                }else{
-                    Toast.makeText(applicationContext,"You Have No Any Draft",Toast.LENGTH_SHORT).show()
+            binding.notificationLayout.notificataionList -> {
+                if (totalCount > 0) {
+                    // Show desi confirmation dialog
+                    showDraftConfirmationDialog()
+                } else {
+                    Toast.makeText(applicationContext, "You Have No Any Draft", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+
+    /**
+     * Show Desi Style Draft Confirmation Dialog
+     */
+    private fun showDraftConfirmationDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_draft_confirmation)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+
+        // Find views
+        val ivIcon = dialog.findViewById<ImageView>(R.id.ivDraftIcon)
+        val tvTitle = dialog.findViewById<TextView>(R.id.tvDraftTitle)
+        val tvMessage = dialog.findViewById<TextView>(R.id.tvDraftMessage)
+        val tvCount = dialog.findViewById<TextView>(R.id.tvDraftCount)
+        val btnYes = dialog.findViewById<MaterialButton>(R.id.btnDraftYes)
+        val btnNo = dialog.findViewById<MaterialButton>(R.id.btnDraftNo)
+
+        // Set draft count
+        tvCount.text = "$totalCount"
+
+        // Yes button - Go to draft activity
+        btnYes.setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, SimpleDraftActivity::class.java))
+        }
+
+        // No button - Close dialog
+        btnNo.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     override fun onBackPressed() {

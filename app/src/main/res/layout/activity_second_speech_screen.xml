@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#F5F7FA">
 
+    <!-- Top Bar -->
     <RelativeLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -19,8 +20,8 @@
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
             android:layout_marginStart="@dimen/_10sdp"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/baseline_arrow_back_24" />
+            android:src="@drawable/baseline_arrow_back_24"
+            app:tint="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,76 +33,299 @@
             android:textSize="@dimen/_14sdp" />
     </RelativeLayout>
 
-    <ScrollView
+    <!-- Main Content -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F5F7FA">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="20dp">
 
-
-        <!-- Header with Back Button -->
-
-
-        <!-- Main Content -->
-        <LinearLayout
+        <!-- Top Section - Instruction + Cards -->
+        <ScrollView
+            android:id="@+id/scrollContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/bottomSection"
+            android:fillViewport="true">
 
-            <!-- Instruction Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="24dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvInstruction"
-                    android:layout_width="0dp"
+                <!-- Instruction with Speaker -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/trip_shuru_hone_ki_tareekh_chuno"
-                    android:textSize="@dimen/_14sdp"
-                    android:fontFamily="@font/roboto_medium" />
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_instruction_banner"
+                    android:padding="16dp">
 
-                <ImageView
-                    android:id="@+id/ivSpeaker"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="8dp"
-                    android:src="@drawable/loud_speaker"
-                    app:tint="@color/color_primary" />
+                    <TextView
+                        android:id="@+id/tvInstruction"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/trip_shuru_hone_ki_tareekh_chuno"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_medium" />
+
+                    <ImageView
+                        android:id="@+id/ivSpeaker"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:padding="8dp"
+                        android:src="@drawable/loud_speaker"
+                        app:tint="@color/color_primary" />
+                </LinearLayout>
+
+                <!-- 1. Start Date Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardStartDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="16dp"
+                    app:strokeColor="@color/green"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="20dp"
+                        android:gravity="center_vertical">
+
+                        <!-- Icon Circle -->
+                        <FrameLayout
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:background="@drawable/bg_icon_circle_green">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/calendar"
+                                app:tint="@color/white" />
+                        </FrameLayout>
+
+                        <!-- Text Content -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/trip_start_date"
+                                android:textSize="14sp"
+                                android:textColor="#666666"
+                                android:fontFamily="@font/roboto_regular" />
+
+                            <TextView
+                                android:id="@+id/tvStartDateValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="19 may 2024"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/roboto_bold" />
+                        </LinearLayout>
+
+                        <!-- Edit Icon -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:visibility="gone"
+                            android:src="@drawable/baseline_edit_24"
+                            app:tint="@color/color_primary" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 2. Start Place Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardStartPlace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="16dp"
+                    app:strokeColor="@color/green"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="20dp"
+                        android:gravity="center_vertical">
+
+                        <!-- Icon Circle -->
+                        <FrameLayout
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:background="@drawable/bg_icon_circle_blue">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/map"
+                                app:tint="@color/white" />
+                        </FrameLayout>
+
+                        <!-- Text Content -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/sarvat_no_place_nakho"
+                                android:textSize="14sp"
+                                android:textColor="#666666"
+                                android:fontFamily="@font/roboto_regular" />
+
+                            <TextView
+                                android:id="@+id/tvStartPlaceValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/jagah_bolo"
+                                android:textColor="@color/color_primary"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/roboto_bold" />
+                        </LinearLayout>
+
+                        <!-- Edit Icon -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/baseline_edit_24"
+                            app:tint="@color/color_primary" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 3. End Place Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardEndPlace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="16dp"
+                    app:strokeColor="@color/green"
+                    app:strokeWidth="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="20dp"
+                        android:gravity="center_vertical">
+
+                        <!-- Icon Circle -->
+                        <FrameLayout
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:background="@drawable/bg_icon_circle_blue">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/compass"
+                                app:tint="@color/white" />
+                        </FrameLayout>
+
+                        <!-- Text Content -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/end_no_place_nakho"
+                                android:textSize="14sp"
+                                android:textColor="#666666"
+                                android:fontFamily="@font/roboto_regular" />
+
+                            <TextView
+                                android:id="@+id/tvEndPlaceValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/destination_bolo"
+                                android:textColor="@color/color_primary"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/roboto_bold" />
+                        </LinearLayout>
+
+                        <!-- Edit Icon -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/baseline_edit_24"
+                            app:tint="@color/color_primary" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
             </LinearLayout>
+        </ScrollView>
 
+        <!-- Bottom Section - Mic + Button -->
+        <LinearLayout
+            android:id="@+id/bottomSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Big Microphone -->
             <FrameLayout
                 android:id="@+id/micContainer"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center"
                 android:background="@drawable/bg_mic_circle"
-                android:padding="20dp">
+                android:padding="16dp">
 
-
-                <!-- Lottie Mic Animation -->
+                <!-- Lottie Animation -->
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/lottieMic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:lottie_rawRes="@raw/calender_animation"
                     app:lottie_loop="false"
-                    android:backgroundTint="@color/white"
                     app:lottie_autoPlay="false"
                     android:visibility="visible" />
 
-                <!-- Mic Button -->
+                <!-- Mic/Calendar Button -->
                 <ImageView
                     android:id="@+id/fabMicrophone"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:src="@drawable/calendar"
                     android:layout_gravity="center"
                     android:clickable="true"
@@ -109,192 +333,25 @@
                     android:focusable="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     app:tint="@color/white" />
-
             </FrameLayout>
-
-            <!-- Big Action Button (Mic/Calendar) -->
-
-
 
             <!-- Status Text -->
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/calendar_khulega"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#666666" />
 
-            <!-- Start Date Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardStartDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/edittext_background_color"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                app:strokeColor="@color/white"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@drawable/calendar"
-                            app:tint="@color/black" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:layout_weight="1"
-                            android:text="@string/trip_start_date"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tvStartDateValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="19 may 2024"
-                        android:textColor="@color/color_primary"
-                        android:textSize="20sp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Start Place Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardStartPlace"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/edittext_background_color"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                app:strokeColor="@color/white"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@drawable/map"
-                            app:tint="@color/black" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:layout_weight="1"
-                            android:text="@string/sarvat_no_place_nakho"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tvStartPlaceValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/jagah_bolo"
-                        android:textColor="@color/color_primary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- End Place Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardEndPlace"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                app:cardBackgroundColor="@color/edittext_background_color"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                app:strokeColor="@color/white"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:src="@drawable/compass"
-                            app:tint="@color/black" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:layout_weight="1"
-                            android:text="@string/end_no_place_nakho"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tvEndPlaceValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/destination_bolo"
-                        android:textColor="@color/color_primary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-
+            <!-- Submit Button -->
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/_10sdp"
                 android:text="@string/aage_badho"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
@@ -304,12 +361,9 @@
                 app:iconTint="@color/white"
                 app:iconSize="@dimen/_20sdp"
                 app:iconGravity="end"
-                android:elevation="6dp"
-                />
-
-            <!-- Submit Button -->
+                android:elevation="6dp" />
         </LinearLayout>
 
-    </ScrollView>
+    </RelativeLayout>
 
 </LinearLayout>

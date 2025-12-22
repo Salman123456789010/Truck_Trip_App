@@ -3,36 +3,40 @@ package com.dadabarbie.TruckTrip.activity
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.databinding.ActivitySecondSpeechScreenBinding
+import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-
-import java.util.*
-
-
 
 class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     private val binding: ActivitySecondSpeechScreenBinding by lazy {
         ActivitySecondSpeechScreenBinding.inflate(layoutInflater)
     }
+
     private lateinit var textToSpeech: TextToSpeech
     private var ttsInitialized = false
     private var hasSpokenOnce = false
@@ -46,6 +50,10 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var startPlace = ""
     private var endPlace = ""
     private var arrowAnimator: ValueAnimator? = null
+
+    // Dialog field type
+    private var dialogFieldType = FieldType.START_PLACE
+
     private val voiceRecognitionLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -59,22 +67,38 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
+    private val dialogVoiceRecognitionLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val data = result.data
+            val results = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            if (!results.isNullOrEmpty()) {
+                val spokenText = results[0]
+                handleDialogVoiceInput(spokenText)
+            }
+        }
+    }
+
     enum class FieldType {
         START_DATE, START_PLACE, END_PLACE
     }
-    var langCode=""
+
+    var langCode = ""
+    private var currentDialog: Dialog? = null
+    private var dialogEditText: EditText? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         textToSpeech = TextToSpeech(this, this)
 
-        // CHECK EDIT MODE
         checkEditMode()
-
         setupViews()
         updateUI()
         startArrowAnimation()
         langCode = Prefs[Constants.languageCode] ?: "hi"
+
         Constants.refreshApi.observe(this) {
             it.getContentIfNotHandled()?.let { event ->
                 event.let {
@@ -87,24 +111,17 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                     }
                 }
             }
-
         }
 
         binding.lottieMic.playAnimation()
-
         binding.lottieMic.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {}
-
             override fun onAnimationEnd(animation: Animator) {
-                // Hide animation
                 binding.lottieMic.visibility = View.GONE
-
-                // Show mic button
                 binding.fabMicrophone.visibility = View.VISIBLE
                 binding.lottieMic.alpha = 0f
                 binding.lottieMic.animate().alpha(1f).setDuration(300).start()
             }
-
             override fun onAnimationCancel(animation: Animator) {}
             override fun onAnimationRepeat(animation: Animator) {}
         })
@@ -115,26 +132,20 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             duration = 1200
             repeatCount = ValueAnimator.INFINITE
             interpolator = android.view.animation.AccelerateDecelerateInterpolator()
-
             addUpdateListener { animation ->
                 val value = animation.animatedValue as Float
                 binding.btnSubmit.translationX = value
             }
-
             start()
         }
-        Log.d("Animation", "✅ Button animation started")
     }
-    /**
-     * Check if opened in edit mode and pre-fill data
-     */
+
     private fun checkEditMode() {
         isEditMode = intent.getBooleanExtra("EDIT_MODE", false)
 
         if (isEditMode) {
             tripId = intent.getStringExtra("TRIP_ID") ?: ""
 
-            // Pre-fill start date
             val startDate = intent.getStringExtra("START_DATE") ?: ""
             if (startDate.isNotEmpty()) {
                 selectedDate = startDate
@@ -142,7 +153,6 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding.cardStartDate.setCardBackgroundColor(getColor(R.color.white))
             }
 
-            // Pre-fill start place
             val startPlaceValue = intent.getStringExtra("START_PLACE") ?: ""
             if (startPlaceValue.isNotEmpty()) {
                 startPlace = startPlaceValue
@@ -150,7 +160,6 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding.cardStartPlace.setCardBackgroundColor(getColor(R.color.white))
             }
 
-            // Pre-fill end place
             val endPlaceValue = intent.getStringExtra("END_PLACE") ?: ""
             if (endPlaceValue.isNotEmpty()) {
                 endPlace = endPlaceValue
@@ -158,29 +167,20 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding.cardEndPlace.setCardBackgroundColor(getColor(R.color.white))
             }
 
-            // Change button text
             binding.btnSubmit.text = getString(R.string.edit_continue_karein)
-
-            // Change header text
-//            binding.tvTitle?.text = "Trip Details Edit Karein"
-
-            // Show edit indicator (if you have it in XML)
             binding.tvInstruction?.visibility = View.VISIBLE
         }
     }
 
     private fun setupViews() {
-        // Back button
         binding.backBtn.setOnClickListener {
             finish()
         }
 
-        // Speaker icon - speak current instruction
         binding.ivSpeaker.setOnClickListener {
             speakCurrentInstruction()
         }
 
-        // Big microphone - start voice recognition
         binding.fabMicrophone.setOnClickListener {
             if (currentField == FieldType.START_DATE) {
                 showDatePicker()
@@ -189,28 +189,22 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
         }
 
-        // Start Date Card
         binding.cardStartDate.setOnClickListener {
             currentField = FieldType.START_DATE
             updateUI()
             speakCurrentInstruction()
         }
 
-        // Start Place Card
         binding.cardStartPlace.setOnClickListener {
-            currentField = FieldType.START_PLACE
-            updateUI()
-            speakCurrentInstruction()
+            // Show desi dialog for start place
+            showDesiPlaceDialog(FieldType.START_PLACE)
         }
 
-        // End Place Card
         binding.cardEndPlace.setOnClickListener {
-            currentField = FieldType.END_PLACE
-            updateUI()
-            speakCurrentInstruction()
+            // Show desi dialog for end place
+            showDesiPlaceDialog(FieldType.END_PLACE)
         }
 
-        // Submit button
         binding.btnSubmit.setOnClickListener {
             if (validateInputs()) {
                 val intent = Intent(this, ThirdExpenseScreen::class.java).apply {
@@ -220,16 +214,13 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                     putExtra("END_PLACE", endPlace)
                     putExtra("EDIT_MODE", isEditMode)
                     putExtra("TRIP_ID", tripId)
-                    putExtra("id", tripId) // Pass tripId as "id" for ThirdExpenseScreen to identify draft
+                    putExtra("id", tripId)
 
-                    // Pass additional edit data
                     if (isEditMode) {
                         putExtra("END_DATE", getIntent().getStringExtra("END_DATE"))
                         putExtra("DRIVER_INCOME", getIntent().getStringExtra("DRIVER_INCOME"))
                         putExtra("TOTAL_INCOME", getIntent().getStringExtra("TOTAL_INCOME"))
                         putExtra("TOTAL_EXPENSE", getIntent().getStringExtra("TOTAL_EXPENSE"))
-
-                        // Forward ORIGINAL values
                         putExtra("ORIGINAL_TRUCK_NUMBER", getIntent().getStringExtra("ORIGINAL_TRUCK_NUMBER"))
                         putExtra("ORIGINAL_START_DATE", getIntent().getStringExtra("ORIGINAL_START_DATE"))
                         putExtra("ORIGINAL_END_DATE", getIntent().getStringExtra("ORIGINAL_END_DATE"))
@@ -238,26 +229,139 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                     }
                 }
                 startActivity(intent)
-
-                // Close in edit mode
-                if (isEditMode) {
-                    finish()
-                }
             } else {
                 Toast.makeText(this, getString(R.string.sari_fields_bharo), Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+    private fun showDesiPlaceDialog(fieldType: FieldType) {
+        dialogFieldType = fieldType
+
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_desi_place_input)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+
+        val tvTitle = dialog.findViewById<TextView>(R.id.tvDialogTitle)
+        val etPlace = dialog.findViewById<EditText>(R.id.etPlaceInput)
+        val btnMic = dialog.findViewById<ImageView>(R.id.btnDialogMic)
+        val btnSave = dialog.findViewById<MaterialButton>(R.id.btnDialogSave)
+        val btnCancel = dialog.findViewById<MaterialButton>(R.id.btnDialogCancel)
+
+        // Set title based on field type
+        tvTitle.text = if (fieldType == FieldType.START_PLACE) {
+            getString(R.string.sarvat_no_place_nakho)
+        } else {
+            getString(R.string.end_no_place_nakho)
+        }
+
+        // Pre-fill existing value
+        etPlace.setText(if (fieldType == FieldType.START_PLACE) startPlace else endPlace)
+
+        // Store reference for voice input
+        dialogEditText = etPlace
+        currentDialog = dialog
+
+        // Mic button click
+        btnMic.setOnClickListener {
+            startDialogVoiceRecognition()
+        }
+
+        // Save button
+        btnSave.setOnClickListener {
+            val inputText = etPlace.text.toString().trim()
+            if (inputText.isNotEmpty()) {
+                if (fieldType == FieldType.START_PLACE) {
+                    startPlace = inputText
+                    binding.tvStartPlaceValue.text = startPlace
+                    binding.cardStartPlace.setCardBackgroundColor(getColor(R.color.white))
+                } else {
+                    endPlace = inputText
+                    binding.tvEndPlaceValue.text = endPlace
+                    binding.cardEndPlace.setCardBackgroundColor(getColor(R.color.white))
+                }
+                dialog.dismiss()
+                Toast.makeText(this, getString(R.string.jagah_save_ho_gayi), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, getString(R.string.jagah_ka_naam_daalo), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Cancel button
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun startDialogVoiceRecognition() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, langCode)
+            putExtra(RecognizerIntent.EXTRA_PROMPT,
+                if (dialogFieldType == FieldType.START_PLACE)
+                    getString(R.string.kaha_se_shuru_ho_rahe_ho_bolo)
+                else
+                    getString(R.string.kaha_jaana_hai_bolo)
+            )
+        }
+
+        try {
+            dialogVoiceRecognitionLauncher.launch(intent)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Voice recognition not available", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun handleDialogVoiceInput(spokenText: String) {
+        dialogEditText?.setText(spokenText)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        saveDraft()
+    }
+
+    private fun saveDraft() {
+        if (tripId.isNotEmpty()) {
+            GlobalScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+                try {
+                    val db = com.dadabarbie.TruckTrip.room.AppDatabase.getDatabase(applicationContext)
+                    val dao = db.productsDao()
+                    val existing = dao.getDraftById(tripId)
+                    if (existing != null) {
+                        dao.update(
+                            tripId,
+                            existing.truckNumber,
+                            startPlace,
+                            endPlace,
+                            selectedDate,
+                            existing.destDate,
+                            existing.avg,
+                            existing.modelList1,
+                            existing.modelList2
+                        )
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
-
             val result = textToSpeech.setLanguage(Locale(langCode))
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Toast.makeText(this, "language not supported", Toast.LENGTH_SHORT).show()
             } else {
                 ttsInitialized = true
-                // Auto-speak on first load
                 if (!hasSpokenOnce) {
                     binding.root.postDelayed({
                         if (isEditMode) {
@@ -275,12 +379,8 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun getCurrentInstruction(): String {
         return when (currentField) {
             FieldType.START_DATE -> if (isEditMode) getString(R.string.tareekh_badal_sakte_ho) else getString(R.string.trip_shuru_hone_ki_tareekh_chuno)
-            FieldType.START_PLACE -> if (isEditMode) getString(R.string.start_place_badal_sakte_ho) else getString(
-                R.string.kaha_se_shuru_ho_rahe_ho_bolo
-            )
-            FieldType.END_PLACE -> if (isEditMode) getString(R.string.end_place_badal_sakte_ho) else getString(
-                R.string.kaha_jaana_hai_bolo
-            )
+            FieldType.START_PLACE -> if (isEditMode) getString(R.string.start_place_badal_sakte_ho) else getString(R.string.kaha_se_shuru_ho_rahe_ho_bolo)
+            FieldType.END_PLACE -> if (isEditMode) getString(R.string.end_place_badal_sakte_ho) else getString(R.string.kaha_jaana_hai_bolo)
         }
     }
 
@@ -297,7 +397,6 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun startVoiceRecognition() {
-
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
             putExtra(RecognizerIntent.EXTRA_LANGUAGE, langCode)
@@ -321,12 +420,11 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
                 calendar.set(selectedYear, selectedMonth, selectedDay)
-                val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale("hi", "IN"))
+                val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
                 selectedDate = dateFormat.format(calendar.time)
                 binding.tvStartDateValue.text = selectedDate
                 binding.cardStartDate.setCardBackgroundColor(getColor(R.color.white))
 
-                // Move to next field
                 currentField = FieldType.START_PLACE
                 updateUI()
                 speakCurrentInstruction()
@@ -334,7 +432,6 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             year, month, day
         )
 
-        // Make calendar dialog larger
         datePickerDialog.datePicker.calendarViewShown = true
         datePickerDialog.show()
     }
@@ -346,7 +443,6 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding.tvStartPlaceValue.text = startPlace
                 binding.cardStartPlace.setCardBackgroundColor(getColor(R.color.white))
 
-                // Move to next field
                 currentField = FieldType.END_PLACE
                 updateUI()
                 speakCurrentInstruction()
@@ -355,31 +451,25 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                 endPlace = spokenText
                 binding.tvEndPlaceValue.text = endPlace
                 binding.cardEndPlace.setCardBackgroundColor(getColor(R.color.white))
-
-//                Toast.makeText(this, "Sab details bhar gayi!", Toast.LENGTH_SHORT).show()
             }
             else -> {}
         }
     }
 
     private fun updateUI() {
-        // Update instruction text
         binding.tvInstruction.text = getCurrentInstruction()
 
-        // Update microphone icon based on field
         if (currentField == FieldType.START_DATE) {
             binding.fabMicrophone.setImageResource(R.drawable.calendar)
         } else {
             binding.fabMicrophone.setImageResource(R.drawable.baseline_mic_24)
         }
 
-        // Update status text
         binding.tvStatus.text = when (currentField) {
             FieldType.START_DATE -> getString(R.string.calendar_khulega)
             else -> getString(R.string.mic_ko_dabaye_aur_bolo)
         }
 
-        // Highlight active card
         resetCardColors()
         when (currentField) {
             FieldType.START_DATE -> binding.cardStartDate.strokeWidth = 4
@@ -408,5 +498,7 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             textToSpeech.stop()
             textToSpeech.shutdown()
         }
+        currentDialog?.dismiss()
         super.onDestroy()
-    }}
+    }
+}

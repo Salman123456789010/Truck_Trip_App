@@ -21,6 +21,7 @@ import com.dadabarbie.TruckTrip.Utils.Constants.showSnackBar
 import com.dadabarbie.TruckTrip.Utils.Constants.visible
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.activity.DashBoardActivity
+import com.dadabarbie.TruckTrip.activity.NormalUserDashBoard
 import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
 import com.dadabarbie.TruckTrip.databinding.ActivityOtpverificationScreenBinding
 import com.google.android.gms.tasks.OnCompleteListener
@@ -132,8 +133,16 @@ class OTPVerificationScreen : AppCompatActivity(), View.OnClickListener {
                         Prefs[Constants.isLogin] = true
                         Prefs[Constants.authToken] = it.data.data.token
                         Prefs[Constants.mobileNumber] =number.toString()
-                        val i = Intent(applicationContext, DashBoardActivity::class.java)
-                        startActivity(i)
+                        if(Prefs[Constants.appMode,""]=="A"){
+                            val i = Intent(applicationContext, NormalUserDashBoard::class.java)
+                                .putExtra("tripData","")
+                            startActivity(i)
+                        }else{
+                            val i = Intent(applicationContext, DashBoardActivity::class.java)
+                            startActivity(i)
+                        }
+
+
                         finish()
                     }
                 }
