@@ -397,5 +397,33 @@ App શીખવી હોય તો How to Use પર ક્લિક કરો
 Mode બદલવો હોય તો App Mode પર ક્લિક કરો।
 </string>
     <string name="pehle_se_sun_rahe_hain">પહેલેથી સાંભળી રહ્યા છીએ...</string>
+    <string name="pehle_truck_number_bolo">પહેલાં ટ્રક નંબર બોલો</string>
+    <string name="sabhi_fields_bharo">બધી માહિતી भरो</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+વચ્ચેનો રસ્તો ઉમેરો (વૈકલ્પિક)</string>
+    <string name="naya_bolo">નવું બોલો</string>
+    <string name="beech_mein_rasta_stop">વચ્ચેનો રસ્તો (સ્ટોપ)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">શરૂઆતની જગ્યા સેવ થઈ ગઈ!</string>
+    <string name="akhri_jagah_save_ho_gayi">છેલ્લી જગ્યા સેવ થઈ ગઈ!</string>
+    <string name="raste_ka_stop_add_ho_gaya">રસ્તાનો સ્ટોપ ઉમેરાયો!</string>
+    <string name="stop_hata_diya">સ્ટોપ કાઢી નાખ્યો!</string>
+    <string name="beech_ka_place_he_to_bolo">વચ્ચે કોઈ જગ્યા હોય તો બોલો</string>
+    <string name="jagah_ka_naam_bolo">જગ્યાનું નામ બોલો</string>
+    <string name="via">વાયા</string>
+    <string name="source">શરૂઆત</string>
+    <string name="destination">મંજિલ</string>
+    <string name="update_trip_data">ટ્રિપ ડેટા અપડેટ કરો</string>
+    <string name="please_enter_middle_place">વચ્ચેની જગ્યા નાખો</string>
+    <string name="please_add_source_destination_first">પહેલા શરૂઆત અને મંજિલ નાખો</string>
+    <string name="middle_place_added">વચ્ચેની જગ્યા ઉમેરાઈ</string>
+    <string name="select_trip_date">ટ્રિપ તારીખ પસંદ કરો</string>
+    <string name="speak_now">હવે બોલો</string>
+    <string name="speech_not_supported">બોલવાની સુવિધા નથી</string>
+    <string name="please_select_date">તારીખ પસંદ કરો</string>
+    <string name="please_enter_source">શરૂઆત નાખો</string>
+    <string name="please_enter_destination">મંજિલ નાખો</string>
+    <string name="please_enter_truck_number">ટ્રક નંબર નાખો</string>
+    <string name="enter_via_place">વાયા જગ્યા નાખો</string>
+    <string name="add_middle_place_optional">વચ્ચેની જગ્યા ઉમેરો (વૈકલ્પિક)</string>
+    <string name="trip_route">ટ્રિપનો રસ્તો</string>
 
 </resources>

@@ -479,5 +479,34 @@ App শিখনবা লৈ How to Use দা ক্লিক তৌ।
 Mode হোংনবা লৈ App Mode দা ক্লিক তৌ।
 </string>
     <string name="pehle_se_sun_rahe_hain">হান্না হান্না খঙজরি...</string>
+    <string name="pehle_truck_number_bolo">ꯍꯥꯏꯅꯥ ꯇ꯭ꯔꯛ ꯅꯝꯕꯔ ꯍꯥꯏꯌꯨ</string>
+    <string name="sabhi_fields_bharo">ꯃꯥꯏꯇꯝ ꯑꯃꯥ ꯄꯨꯔꯛꯎ</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+মাঝের পথ যোগ করুন (ঐচ্ছিক)</string>
+    <string name="naya_bolo">অনৌবা হাউ</string>
+    <string name="beech_mein_rasta_stop">মাঝের রাস্তানা (স্টপ)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">অহৌবা জায়গা সেভ তৌরে!</string>
+    <string name="akhri_jagah_save_ho_gayi">অরোইবা জায়গা সেভ তৌরে!</string>
+    <string name="raste_ka_stop_add_ho_gaya">রাস্তানা স্টপ হাপচিল্লে!</string>
+    <string name="stop_hata_diya">স্টপ লৌথোক্লে!</string>
+    <string name="beech_ka_place_he_to_bolo">মাঝেদা জায়গা লৈরবদি হাউ</string>
+    <string name="jagah_ka_naam_bolo">জায়গানা মিং হাউ</string>
+    <string name="via">ভিয়া</string>
+    <string name="source">অহৌবা</string>
+    <string name="destination">পৌনবা</string>
+    <string name="update_trip_data">ট্রিপ দাটা আপডেট তৌ</string>
+    <string name="please_enter_middle_place">মাঝেদা জায়গা থাউ</string>
+    <string name="please_add_source_destination_first">হান্না অহৌবা অমসুং পৌনবা থাউ</string>
+    <string name="middle_place_added">মাঝেদা জায়গা হাপচিল্লে</string>
+    <string name="select_trip_date">ট্রিপ তারিখ খল্লু</string>
+    <string name="speak_now">হৌজিক হাউ</string>
+    <string name="speech_not_supported">ভইস সাপোর্ট লৈতে</string>
+    <string name="please_select_date">তারিখ খল্লু</string>
+    <string name="please_enter_source">অহৌবা থাউ</string>
+    <string name="please_enter_destination">পৌনবা থাউ</string>
+    <string name="please_enter_truck_number">ট্রক নম্বর থাউ</string>
+    <string name="enter_via_place">ভিয়া জায়গা থাউ</string>
+    <string name="add_middle_place_optional">মাঝেদা জায়গা হাপচিনবা (চাইনা)</string>
+    <string name="trip_route">ট্রিপ রোড</string>
+
 
 </resources>

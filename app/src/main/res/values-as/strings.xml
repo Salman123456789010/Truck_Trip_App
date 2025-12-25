@@ -445,9 +445,6 @@
     <string name="yahan_aap_saare_kharche_ya_income_ek_sath_bol_sakte_ho_mic_dabao_item_ka_naam_aur_amount_bolo_aur_sab_bolne_ke_baad_save_dabao">ইয়াত সকলো খৰচ বা উপাৰ্জন একেলগে ক’ব পাৰে।\nমাইক টিপি নাম আৰু পৰিমাণ কওক\nতাৰ পিছত সংৰক্ষণ কৰক।</string>
     <string name="profile_top_card">প্ৰ’ফাইল তথ্য</string>
     <string name="pehle_se_sun_rahe_hain">আগতেই শুনি আছো...</string>
-
-
-
     <string name="language_badalni_ho_to_language_par_click_karo_app_seekhni_ho_to_how_to_use_par_click_karo_mode_badalna_ho_to_app_mode_par_click_karo">ভাষা সলনি কৰিবলৈ ভাষাত টেপ কৰক।\nএপ শিকিবলৈ ব্যৱহাৰ পদ্ধতিত টেপ কৰক।\nমোড সলনি কৰিবলৈ এপ মোডত টেপ কৰক।</string>
     <string name="boliye">🎤 কওক...</string>
     <string name="lang_change_dec">
@@ -455,6 +452,35 @@
 App শিকিবলৈ How to Use ত ক্লিক কৰক।
 Mode সলনি কৰিবলৈ App Mode ত ক্লিক কৰক।
 </string>
+    <string name="pehle_truck_number_bolo">প্ৰথমে ট্ৰাক নম্বৰ কওক</string>
+    <string name="sabhi_fields_bharo">সকলো তথ্য ভৰাওক</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+মাজৰ পথ যোগ কৰক (ঐচ্ছিক)</string>
+    <string name="naya_bolo">নতুন কওক</string>
+    <string name="beech_mein_rasta_stop">মাজৰ পথ (ষ্টপ)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">আৰম্ভণিৰ ঠাই সংৰক্ষিত!</string>
+    <string name="akhri_jagah_save_ho_gayi">শেষ ঠাই সংৰক্ষিত!</string>
+    <string name="raste_ka_stop_add_ho_gaya">পথৰ ষ্টপ যোগ হ\'ল!</string>
+    <string name="stop_hata_diya">ষ্টপ আঁতৰোৱা হ\'ল!</string>
+    <string name="beech_ka_place_he_to_bolo">মাজত ঠাই থাকিলে কওক</string>
+    <string name="jagah_ka_naam_bolo">ঠাইৰ নাম কওক</string>
+    <string name="via">ভিয়া</string>
+    <string name="source">আৰম্ভ</string>
+    <string name="destination">গন্তব্য</string>
+    <string name="update_trip_data">ট্ৰিপ ডাটা আপডেট কৰক</string>
+    <string name="please_enter_middle_place">মাজৰ ঠাই দিয়ক</string>
+    <string name="please_add_source_destination_first">প্ৰথমে আৰম্ভ আৰু গন্তব্য দিয়ক</string>
+    <string name="middle_place_added">মাজৰ ঠাই যোগ হ\'ল</string>
+    <string name="select_trip_date">ট্ৰিপৰ তাৰিখ বাছনি কৰক</string>
+    <string name="speak_now">এতিয়া কওক</string>
+    <string name="speech_not_supported">ভয়েছ সুবিধা নাই</string>
+    <string name="please_select_date">তাৰিখ বাছনি কৰক</string>
+    <string name="please_enter_source">আৰম্ভ ঠাই দিয়ক</string>
+    <string name="please_enter_destination">গন্তব্য ঠাই দিয়ক</string>
+    <string name="please_enter_truck_number">ট্ৰাক নম্বৰ দিয়ক</string>
+    <string name="enter_via_place">ভিয়া ঠাই দিয়ক</string>
+    <string name="add_middle_place_optional">মাজৰ ঠাই যোগ কৰক (ঐচ্ছিক)</string>
+    <string name="trip_route">ট্ৰিপৰ পথ</string>
+
 
 
 </resources>

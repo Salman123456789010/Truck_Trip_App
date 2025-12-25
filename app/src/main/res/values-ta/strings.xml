@@ -417,5 +417,34 @@ App எப்படி பயன்படுத்துவது கற்க H
 Mode மாற்ற App Mode-ஐ கிளிக் செய்யுங்கள்।
 </string>
     <string name="pehle_se_sun_rahe_hain">ஏற்கனவே கேட்கிறோம்...</string>
+    <string name="pehle_truck_number_bolo">முதலில் லாரி நம்பர் சொல்லுங்கள்</string>
+    <string name="sabhi_fields_bharo">அனைத்து விவரங்களையும் நிரப்புங்கள்</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+நடுவிலுள்ள பாதையை சேர்க்கவும் (விருப்பம்)</string>
+    <string name="naya_bolo">புதியதாக சொல்லு</string>
+    <string name="beech_mein_rasta_stop">நடுத்தர வழி (ஸ்டாப்)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">தொடக்க இடம் சேமிக்கப்பட்டது!</string>
+    <string name="akhri_jagah_save_ho_gayi">இறுதி இடம் சேமிக்கப்பட்டது!</string>
+    <string name="raste_ka_stop_add_ho_gaya">வழி ஸ்டாப் சேர்க்கப்பட்டது!</string>
+    <string name="stop_hata_diya">ஸ்டாப் நீக்கப்பட்டது!</string>
+    <string name="beech_ka_place_he_to_bolo">நடுத்தர இடம் இருந்தால் சொல்லு</string>
+    <string name="jagah_ka_naam_bolo">இடத்தின் பெயரை சொல்லு</string>
+    <string name="via">வாயா</string>
+    <string name="source">தொடக்கம்</string>
+    <string name="destination">இலக்கு</string>
+    <string name="update_trip_data">டிரிப் தகவலை புதுப்பி</string>
+    <string name="please_enter_middle_place">நடுத்தர இடத்தை இடு</string>
+    <string name="please_add_source_destination_first">முதலில் தொடக்கம் மற்றும் இலக்கை இடு</string>
+    <string name="middle_place_added">நடுத்தர இடம் சேர்க்கப்பட்டது</string>
+    <string name="select_trip_date">டிரிப் தேதியை தேர்வு செய்</string>
+    <string name="speak_now">இப்போது பேசு</string>
+    <string name="speech_not_supported">பேசும் வசதி இல்லை</string>
+    <string name="please_select_date">தேதியை தேர்வு செய்</string>
+    <string name="please_enter_source">தொடக்க இடத்தை இடு</string>
+    <string name="please_enter_destination">இலக்கு இடத்தை இடு</string>
+    <string name="please_enter_truck_number">டிரக் நம்பர் இடு</string>
+    <string name="enter_via_place">வாயா இடத்தை இடு</string>
+    <string name="add_middle_place_optional">நடுத்தர இடம் சேர்க்க (விருப்பம்)</string>
+    <string name="trip_route">பயண பாதை</string>
+
 
 </resources>

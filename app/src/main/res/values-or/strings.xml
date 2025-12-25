@@ -460,5 +460,34 @@ App ବ୍ୟବହାର ଶିଖିବାକୁ How to Use ଉପରେ କ�
 Mode ବଦଳାଇବାକୁ App Mode ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ।
 </string>
     <string name="pehle_se_sun_rahe_hain">ପୂର୍ବରୁ ଶୁଣୁଛୁ...</string>
+    <string name="pehle_truck_number_bolo">ପ୍ରଥମେ ଟ୍ରକ୍ ନମ୍ବର କହନ୍ତୁ</string>
+    <string name="sabhi_fields_bharo">ସମସ୍ତ ତଥ୍ୟ ଭରନ୍ତୁ</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+ମଝିରେ ରାସ୍ତା ଯୋଡନ୍ତୁ (ଇଚ୍ଛାଧୀନ)</string>
+    <string name="naya_bolo">ନୂଆ କୁହନ୍ତୁ</string>
+    <string name="beech_mein_rasta_stop">ମଧ୍ୟ ରାସ୍ତା (ଷ୍ଟପ୍)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">ଆରମ୍ଭ ଜାଗା ସେଭ୍ ହେଲା!</string>
+    <string name="akhri_jagah_save_ho_gayi">ଶେଷ ଜାଗା ସେଭ୍ ହେଲା!</string>
+    <string name="raste_ka_stop_add_ho_gaya">ରାସ୍ତାର ଷ୍ଟପ୍ ଯୋଡାଗଲା!</string>
+    <string name="stop_hata_diya">ଷ୍ଟପ୍ ହଟାଯାଇଛି!</string>
+    <string name="beech_ka_place_he_to_bolo">ମଧ୍ୟରେ ଜାଗା ଥିଲେ କୁହନ୍ତୁ</string>
+    <string name="jagah_ka_naam_bolo">ଜାଗାର ନାମ କୁହନ୍ତୁ</string>
+    <string name="via">ଭିଆ</string>
+    <string name="source">ଆରମ୍ଭ</string>
+    <string name="destination">ଗନ୍ତବ୍ୟ</string>
+    <string name="update_trip_data">ଟ୍ରିପ୍ ଡାଟା ଅପଡେଟ୍ କରନ୍ତୁ</string>
+    <string name="please_enter_middle_place">ମଧ୍ୟ ଜାଗା ଦିଅନ୍ତୁ</string>
+    <string name="please_add_source_destination_first">ପ୍ରଥମେ ଆରମ୍ଭ ଓ ଗନ୍ତବ୍ୟ ଦିଅନ୍ତୁ</string>
+    <string name="middle_place_added">ମଧ୍ୟ ଜାଗା ଯୋଡାଗଲା</string>
+    <string name="select_trip_date">ଟ୍ରିପ୍ ତାରିଖ ବାଛନ୍ତୁ</string>
+    <string name="speak_now">ଏବେ କୁହନ୍ତୁ</string>
+    <string name="speech_not_supported">ଭଏସ ସହଯୋଗ ନାହିଁ</string>
+    <string name="please_select_date">ତାରିଖ ବାଛନ୍ତୁ</string>
+    <string name="please_enter_source">ଆରମ୍ଭ ଦିଅନ୍ତୁ</string>
+    <string name="please_enter_destination">ଗନ୍ତବ୍ୟ ଦିଅନ୍ତୁ</string>
+    <string name="please_enter_truck_number">ଟ୍ରକ୍ ନମ୍ବର ଦିଅନ୍ତୁ</string>
+    <string name="enter_via_place">ଭିଆ ଜାଗା ଦିଅନ୍ତୁ</string>
+    <string name="add_middle_place_optional">ମଧ୍ୟ ଜାଗା ଯୋଡନ୍ତୁ (ଇଚ୍ଛାନୁସାରେ)</string>
+    <string name="trip_route">ଟ୍ରିପ୍ ରାସ୍ତା</string>
+
 
 </resources>

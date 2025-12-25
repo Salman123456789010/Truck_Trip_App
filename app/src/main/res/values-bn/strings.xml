@@ -385,6 +385,8 @@
     <string name="language_badalni_ho_to_language_par_click_karo_app_seekhni_ho_to_how_to_use_par_click_karo_mode_badalna_ho_to_app_mode_par_click_karo">ভাষা পরিবর্তন করতে ভাষায় চাপ দিন।\nঅ্যাপ শিখতে ব্যবহার নির্দেশিকায় চাপ দিন।\nমোড পরিবর্তন করতে অ্যাপ মোডে চাপ দিন।</string>
 
     <string name="pehle_se_sun_rahe_hain">আগেই শুনছি...</string>
+    <string name="pehle_truck_number_bolo">আগে ট্রাক নম্বর বলুন</string>
+    <string name="sabhi_fields_bharo">সব তথ্য পূরণ করুন</string>
 
     <string name="boliye">🎤 বলুন...</string>
     <string name="lang_change_dec">
@@ -392,5 +394,31 @@
 App শিখতে How to Use এ ক্লিক করুন।
 Mode বদলাতে App Mode এ ক্লিক করুন।
 </string>
+    <string name="beech_ke_rasta_add_karo_optinal">+মাঝের রাস্তা যোগ করুন (ঐচ্ছিক)</string>
+    <string name="naya_bolo">নতুন বলুন</string>
+    <string name="beech_mein_rasta_stop">মাঝের রাস্তা (স্টপ)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">শুরুর জায়গা সেভ হয়েছে!</string>
+    <string name="akhri_jagah_save_ho_gayi">শেষ জায়গা সেভ হয়েছে!</string>
+    <string name="raste_ka_stop_add_ho_gaya">রাস্তায় স্টপ যোগ হয়েছে!</string>
+    <string name="stop_hata_diya">স্টপ সরানো হয়েছে!</string>
+    <string name="beech_ka_place_he_to_bolo">মাঝে জায়গা থাকলে বলুন</string>
+    <string name="jagah_ka_naam_bolo">জায়গার নাম বলুন</string>
+    <string name="via">ভিয়া</string>
+    <string name="source">শুরু</string>
+    <string name="destination">গন্তব্য</string>
+    <string name="update_trip_data">ট্রিপ ডেটা আপডেট করুন</string>
+    <string name="please_enter_middle_place">মাঝের জায়গা দিন</string>
+    <string name="please_add_source_destination_first">আগে শুরু আর গন্তব্য দিন</string>
+    <string name="middle_place_added">মাঝের জায়গা যোগ হয়েছে</string>
+    <string name="select_trip_date">ট্রিপের তারিখ বাছুন</string>
+    <string name="speak_now">এখন বলুন</string>
+    <string name="speech_not_supported">ভয়েস সাপোর্ট নেই</string>
+    <string name="please_select_date">তারিখ বাছুন</string>
+    <string name="please_enter_source">শুরুর জায়গা দিন</string>
+    <string name="please_enter_destination">গন্তব্য দিন</string>
+    <string name="please_enter_truck_number">ট্রাক নম্বর দিন</string>
+    <string name="enter_via_place">ভিয়া জায়গা দিন</string>
+    <string name="add_middle_place_optional">মাঝের জায়গা যোগ করুন (ঐচ্ছিক)</string>
+    <string name="trip_route">ট্রিপের রাস্তা</string>
 
 </resources>

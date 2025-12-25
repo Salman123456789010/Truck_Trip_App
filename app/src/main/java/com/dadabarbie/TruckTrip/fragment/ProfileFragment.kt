@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Prefs
@@ -40,30 +41,33 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ProfileFragment : Fragment(),View.OnClickListener {
 
-    lateinit var binding:FragmentProfileBinding
+
+
+
+
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
+
     private val authViewModel: AuthViewModel by viewModels()
     lateinit var logOutDialogFragment: DraftWarningDialogFragment
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        try {
-            (activity as DashBoardActivity).textChanges(4)
-        }catch (e: Exception){
 
-        }
-
-        try {
-            (activity as NormalUserDashBoard).textChanges(4)
-        }catch (e: Exception){}
 
         // Inflate the layout for this fragment
-       binding=FragmentProfileBinding.inflate(inflater,container,false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         binding.driverNumber.text="${Constants.usermobileNumber}"
         authViewModel.page = 0
         binding.appVersion.text=getAppVersionName(requireContext())
         clickListner()
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
     fun getAppVersionName(context: Context): String {
         return try {
@@ -104,6 +108,15 @@ class ProfileFragment : Fragment(),View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        try {
+            (activity as DashBoardActivity).textChanges(4)
+        }catch (e: Exception){
+
+        }
+
+        try {
+            (activity as NormalUserDashBoard).textChanges(4)
+        }catch (e: Exception){}
         adsLoad()
     }
 
@@ -128,7 +141,7 @@ class ProfileFragment : Fragment(),View.OnClickListener {
     }
 
     private fun adsLoad() {
-        GlobalScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             MobileAds.initialize(requireContext())
             val adLoader = AdLoader.Builder(requireActivity(), "ca-app-pub-8808039515208362/1007625609")
                 .forNativeAd { nativeAd ->

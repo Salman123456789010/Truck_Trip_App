@@ -486,5 +486,34 @@ App ਸਿੱਖਣੀ ਹੋਵੇ ਤਾਂ How to Use ਤੇ ਕਲਿੱਕ 
 Mode ਬਦਲਣਾ ਹੋਵੇ ਤਾਂ App Mode ਤੇ ਕਲਿੱਕ ਕਰੋ।
 </string>
     <string name="pehle_se_sun_rahe_hain">ਪਹਿਲਾਂ ਹੀ ਸੁਣ ਰਹੇ ਹਾਂ...</string>
+    <string name="pehle_truck_number_bolo">ਪਹਿਲਾਂ ਟਰੱਕ ਨੰਬਰ ਦੱਸੋ</string>
+    <string name="sabhi_fields_bharo">ਸਾਰੀ ਜਾਣਕਾਰੀ ਭਰੋ</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+ਵਿਚਕਾਰ ਦਾ ਰਸਤਾ ਜੋੜੋ (ਚੋਣਵਾਂ)</string>
+    <string name="naya_bolo">ਨਵਾਂ ਬੋਲੋ</string>
+    <string name="beech_mein_rasta_stop">ਵਿੱਚਕਾਰਲਾ ਰਸਤਾ (ਸਟਾਪ)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">ਸ਼ੁਰੂਆਤੀ ਜਗ੍ਹਾ ਸੇਵ ਹੋ ਗਈ!</string>
+    <string name="akhri_jagah_save_ho_gayi">ਅਖੀਰਲੀ ਜਗ੍ਹਾ ਸੇਵ ਹੋ ਗਈ!</string>
+    <string name="raste_ka_stop_add_ho_gaya">ਰਸਤੇ ਦਾ ਸਟਾਪ ਜੋੜਿਆ!</string>
+    <string name="stop_hata_diya">ਸਟਾਪ ਹਟਾਇਆ!</string>
+    <string name="beech_ka_place_he_to_bolo">ਜੇ ਵਿਚਕਾਰ ਜਗ੍ਹਾ ਹੈ ਤਾਂ ਬੋਲੋ</string>
+    <string name="jagah_ka_naam_bolo">ਜਗ੍ਹਾ ਦਾ ਨਾਮ ਬੋਲੋ</string>
+    <string name="via">ਵਾਇਆ</string>
+    <string name="source">ਸ਼ੁਰੂਆਤ</string>
+    <string name="destination">ਮੰਜ਼ਿਲ</string>
+    <string name="update_trip_data">ਟ੍ਰਿਪ ਡਾਟਾ ਅਪਡੇਟ ਕਰੋ</string>
+    <string name="please_enter_middle_place">ਵਿੱਚਕਾਰ ਜਗ੍ਹਾ ਪਾਓ</string>
+    <string name="please_add_source_destination_first">ਪਹਿਲਾਂ ਸ਼ੁਰੂਆਤ ਅਤੇ ਮੰਜ਼ਿਲ ਪਾਓ</string>
+    <string name="middle_place_added">ਵਿੱਚਕਾਰ ਜਗ੍ਹਾ ਜੋੜੀ</string>
+    <string name="select_trip_date">ਟ੍ਰਿਪ ਦੀ ਤਾਰੀਖ ਚੁਣੋ</string>
+    <string name="speak_now">ਹੁਣ ਬੋਲੋ</string>
+    <string name="speech_not_supported">ਬੋਲਣ ਦੀ ਸਹੂਲਤ ਨਹੀਂ</string>
+    <string name="please_select_date">ਤਾਰੀਖ ਚੁਣੋ</string>
+    <string name="please_enter_source">ਸ਼ੁਰੂਆਤ ਪਾਓ</string>
+    <string name="please_enter_destination">ਮੰਜ਼ਿਲ ਪਾਓ</string>
+    <string name="please_enter_truck_number">ਟਰੱਕ ਨੰਬਰ ਪਾਓ</string>
+    <string name="enter_via_place">ਵਾਇਆ ਜਗ੍ਹਾ ਪਾਓ</string>
+    <string name="add_middle_place_optional">ਵਿੱਚਕਾਰ ਜਗ੍ਹਾ ਜੋੜੋ (ਚੋਣਵੀਂ)</string>
+    <string name="trip_route">ਟ੍ਰਿਪ ਦਾ ਰਸਤਾ</string>
+
 
 </resources>

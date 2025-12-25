@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -73,9 +75,12 @@ import java.util.Locale
 import java.util.Random
 import kotlin.toString
 import android.view.ViewConfiguration
+import com.dadabarbie.TruckTrip.Utils.RouteUtils
 import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
 import com.dadabarbie.TruckTrip.views.CoachMarkHelper
 import com.dadabarbie.TruckTrip.views.CoachMarkView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 // ----------------------
 // Extension: single-click to prevent rapid double taps
@@ -121,6 +126,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     var randomNumber = 0
     var showingFlag = 0
     var startTripDate: String? = ""
+    var routeArray: ArrayList<String> =arrayListOf()
     var truckNumberGiven: String? = ""
     var driverIncome = "0"
     var totalDaysTrip = "0"
@@ -224,29 +230,46 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             // Edit existing trip
             randomNumberGenerate()
 
-            val truckNumber = intent.getStringExtra("truckNumber")
-            val srcPlace = intent.getStringExtra("sourceName")
-            val driverAvak = intent.getStringExtra("driverAvak")
-            val destPlace = intent.getStringExtra("destinationName")
-            val startDate = intent.getStringExtra("startingDate")
+            val truckNumber = intent.getStringExtra("truckNumber") ?: ""
+            val srcPlace = intent.getStringExtra("sourceName") ?: ""
+            val driverAvak = intent.getStringExtra("driverAvak") ?: "0"
+            val destPlace = intent.getStringExtra("destinationName") ?: ""
+            val startDate = intent.getStringExtra("startingDate") ?: ""
+            val endDate = intent.getStringExtra("endingDate") ?: ""
+
+            // Safely get route array from intent
+            routeArray = intent.getStringArrayListExtra("ROUTE_ARRAY") ?: arrayListOf()
+
             startTripDate = startDate
             truckNumberGiven = truckNumber
-            val endDate = intent.getStringExtra("endingDate")
             endTripDate = endDate
             driverIncomeAmount = driverAvak
-            id = intent.getStringExtra("id").toString()
+            id = intent.getStringExtra("id") ?: "0"
 
-            Log.d("MainActivity", "Editing trip ID: $id")
+            // NEW: Parse route from Intent using RouteUtils
+            val routeJson = intent.getStringExtra("routeJson")
+            routeList = if (!routeJson.isNullOrEmpty()) {
+                RouteUtils.parseRouteFromJson(routeJson)
+            } else {
+                // Fallback: try ROUTE_ARRAY or create simple route
+                if (routeArray.isNotEmpty()) {
+                    ArrayList(routeArray)
+                } else {
+                    RouteUtils.createSimpleRoute(srcPlace, destPlace)
+                }
+            }
 
+            Log.d("MainActivity", "Editing trip ID: $id with ${routeList.size} route places")
+
+            // Handle income and expense data
             if (showingFlag == 2 && id.isNotEmpty()) {
                 randomNumber = id.toIntOrNull() ?: randomNumber
                 databaseAddFlag = true
 
-                // CRITICAL FIX: Only parse from Intent if Constants lists are empty
-                // This prevents overwriting the lists that were already populated in HomeFragment
                 if (Constants.creditList.isEmpty() && Constants.debitList.isEmpty()) {
                     Log.d("MainActivity", "Lists empty, parsing from Intent JSON")
 
+                    // Parse income
                     intent.getStringExtra("incomeJson")?.let { json ->
                         try {
                             val parsed: List<Income> = Gson().fromJson(
@@ -255,12 +278,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                             )
                             Constants.creditList.clear()
                             Constants.creditList.addAll(parsed)
-                            Log.d("MainActivity", "Parsed ${parsed.size} income entries from JSON")
+                            Log.d("MainActivity", "Parsed ${parsed.size} income entries")
                         } catch (e: Exception) {
-                            Log.e("MainActivity", "Error parsing income JSON: ${e.message}")
+                            Log.e("MainActivity", "Error parsing income JSON: ${e.message}", e)
                         }
                     }
 
+                    // Parse expense
                     intent.getStringExtra("expenseJson")?.let { json ->
                         try {
                             val parsed: List<Expense> = Gson().fromJson(
@@ -269,36 +293,43 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                             )
                             Constants.debitList.clear()
                             Constants.debitList.addAll(parsed)
-                            Log.d("MainActivity", "Parsed ${parsed.size} expense entries from JSON")
+                            Log.d("MainActivity", "Parsed ${parsed.size} expense entries")
                         } catch (e: Exception) {
-                            Log.e("MainActivity", "Error parsing expense JSON: ${e.message}")
+                            Log.e("MainActivity", "Error parsing expense JSON: ${e.message}", e)
                         }
                     }
-                } else {
-                    Log.d("MainActivity", "Using existing lists - Income: ${Constants.creditList.size}, Expense: ${Constants.debitList.size}")
                 }
             }
 
-            // Set UI values
-            binding.truckNumber.text = truckNumber.toString()
-            binding.srcName.text = srcPlace.toString()
-            binding.dest.text = destPlace.toString()
-            binding.srcDate.text = startDate.toString()
+            // Set UI values with safe route handling
+            binding.truckNumber.text = truckNumber
+
+            // Display route information
+            if (RouteUtils.isValidRoute(routeList)) {
+                binding.srcName.text = RouteUtils.getSourcePlace(routeList, srcPlace)
+                binding.dest.text = RouteUtils.getDestinationPlace(routeList, destPlace)
+            } else {
+                // Fallback to simple source/destination
+                binding.srcName.text = srcPlace
+                binding.dest.text = destPlace
+                routeList = RouteUtils.createSimpleRoute(srcPlace, destPlace)
+            }
+
+            binding.srcDate.text = startDate
 
             // Update adapters with loaded data
             if (creditList.isNotEmpty()) {
-                Log.d("MainActivity", "Updating credit adapter with ${creditList.size} items")
                 creditIncomeUpdate()
             }
 
             if (debitList.isNotEmpty()) {
-                Log.d("MainActivity", "Updating debit adapter with ${debitList.size} items")
                 debitIncomeUpdate()
             }
         }
 
         initAdapter()
     }
+
 
     private fun initAdapter() {
         creditAdapter = CreditAdapter(this, this, this)
@@ -322,6 +353,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         randomNumber = rand.nextInt(1000)
     }
 
+    var routeList: ArrayList<String> = arrayListOf()  // NEW: Store complete route
+
+    // Update the callDialog function to pass route:
     private fun callDialog(
         date: String, startingPlace: String, endingPlace: String,
         driverIncome: String, truckNumber: String, truckAvg: String,
@@ -331,11 +365,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         tripDialogFragment = TripDialogFragment(
             date, startingPlace, endingPlace, driverIncome,
             truckNumber, truckAvg, totalDays, update,
-            startOdometerReading  // NEW: Pass start odometer
+            startOdometerReading,  // Pass start odometer
+            routeList              // NEW: Pass existing route
         )
         tripDialogFragment.show(supportFragmentManager, "")
         tripDialogFragment.isCancelable = false
     }
+
+    // Update getDataFill function to accept route:
     fun getDataFill(
         truckNumber: String,
         srcPlaceValue: String,
@@ -345,18 +382,98 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         truckAvg: String = "",
         driverTripAvak: String,
         totalDays: String = "0",
-        startOdometer: String = ""  // NEW: Add start odometer parameter
+        startOdometer: String = "",
+        route: ArrayList<String> = arrayListOf()
     ) {
-        binding.truckNumber.text = truckNumber.toString()
-        binding.srcName.text = srcPlaceValue
-        binding.dest.text = destPlaceValue
-        binding.srcDate.text = startDate
-        startTripDate = startDate
-        truckNumberGiven = truckNumber
-        totalDaysTrip = totalDays
-        startOdometerReading = startOdometer  // NEW: Store start odometer
+        try {
+            // Check if data actually changed
+            val hasChanges = binding.truckNumber.text.toString() != truckNumber ||
+                    binding.srcName.text.toString() != srcPlaceValue ||
+                    binding.dest.text.toString() != destPlaceValue ||
+                    binding.srcDate.text.toString() != startDate ||
+                    startOdometerReading != startOdometer ||
+                    !RouteUtils.areRoutesEqual(routeList, route)
+
+            if (hasChanges) {
+                hasPendingChanges = true
+            }
+
+            binding.truckNumber.text = truckNumber
+
+            // Safe route handling
+            if (RouteUtils.isValidRoute(route)) {
+                routeList = ArrayList(route)
+                binding.srcName.text = RouteUtils.getSourcePlace(route, srcPlaceValue)
+                binding.dest.text = RouteUtils.getDestinationPlace(route, destPlaceValue)
+                Log.d("MainActivity", "Route set with ${route.size} places")
+            } else {
+                binding.srcName.text = srcPlaceValue
+                binding.dest.text = destPlaceValue
+                routeList = RouteUtils.createSimpleRoute(srcPlaceValue, destPlaceValue)
+                Log.d("MainActivity", "Created simple route")
+            }
+
+            binding.srcDate.text = startDate
+            startTripDate = startDate
+            truckNumberGiven = truckNumber
+            totalDaysTrip = totalDays
+            startOdometerReading = startOdometer
+
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error in getDataFill: ${e.message}", e)
+            binding.truckNumber.text = truckNumber
+            binding.srcName.text = srcPlaceValue
+            binding.dest.text = destPlaceValue
+            binding.srcDate.text = startDate
+            routeList = RouteUtils.createSimpleRoute(srcPlaceValue, destPlaceValue)
+        }
     }
 
+    // Update delete methods to mark changes
+    fun debitDeleteHissab(position: Int) {
+        debitList.removeAt(position)
+        debitAdapter.submitList(debitList)
+        debitAdapter.notifyDataSetChanged()
+        debitIncomeUpdate()
+        hasPendingChanges = true  // Mark as changed
+        databaseAddFlag = false
+    }
+
+    fun creditDeleteHissab(position: Int) {
+        creditList.removeAt(position)
+        creditAdapter.submitList(creditList)
+        creditAdapter.notifyDataSetChanged()
+        creditIncomeUpdate()
+        hasPendingChanges = true  // Mark as changed
+        databaseAddFlag = false
+    }
+
+    // Update edit methods to mark changes
+    fun debitDataUpdate() {
+        debitAdapter.submitList(debitList)
+        binding.debitAmount.adapter = debitAdapter
+        debitAdapter.notifyDataSetChanged()
+        debitIncomeUpdate()
+        calculateFinalTripAverage()
+        hasPendingChanges = true  // Mark as changed
+    }
+
+    fun creditDataUpdate() {
+        creditAdapter.submitList(creditList)
+        binding.creditAmount.adapter = creditAdapter
+        creditAdapter.notifyDataSetChanged()
+        creditIncomeUpdate()
+        hasPendingChanges = true  // Mark as changed
+    }
+
+
+
+
+    // Add these variables at the top of MainActivity class
+    private var hasPendingChanges = false  // Track if user made any changes
+    private var isPdfGenerating = false     // Track if PDF is being generated
+
+    // Update setObserver() method - Add change tracking
     private fun setObserver() {
         Constants.events.observe(this) { it ->
             it.getContentIfNotHandled()?.let { event ->
@@ -372,9 +489,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                         if (creditList.size > 0) {
                             if (!creditList.contains(income)) {
                                 creditList.add(income)
+                                hasPendingChanges = true  // Mark as changed
                             }
                         } else {
                             creditList.add(income)
+                            hasPendingChanges = true  // Mark as changed
                         }
                         binding.creditAmount.adapter = creditAdapter
                         creditAdapter.submitList(creditList)
@@ -385,6 +504,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                 }
             }
         }
+
         Constants.debitevents.observe(this) {
             it.getContentIfNotHandled()?.let { event ->
                 event.let {
@@ -402,9 +522,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                         if (debitList.size > 0) {
                             if (!debitList.contains(expense)) {
                                 debitList.add(expense)
+                                hasPendingChanges = true  // Mark as changed
                             }
                         } else {
                             debitList.add(expense)
+                            hasPendingChanges = true  // Mark as changed
                         }
                         binding.debitAmount.adapter = debitAdapter
                         debitAdapter.submitList(debitList)
@@ -413,28 +535,36 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                         databaseAddFlag = false
                     }
                 }
-
             }
         }
 
         authViewModel.downloadProgress.observe(this) {
-
             dismissProgress()
         }
 
-
         authViewModel.downloadCompleted.observe(this, Observer { data ->
-            // Update your UI with the streamed data
+            isPdfGenerating = false  // PDF generation complete
             databaseAddFlag = true
             dismissProgress()
             try {
                 openFile(data)
+
+                // Delete draft after successful PDF generation
+                GlobalScope.launch {
+                    try {
+                        val db = AppDatabase.getDatabase(applicationContext)
+                        db.productsDao().deleteById(randomNumber.toString())
+                        Log.d("MainActivity", "Draft deleted after PDF generation")
+                    } catch (e: Exception) {
+                        Log.e("MainActivity", "Error deleting draft: ${e.message}")
+                    }
+                }
+
                 Constants.refreshApiGet(Event(1))
                 finish()
             } catch (e: Exception) {
+                Log.e("MainActivity", "Error opening file: ${e.message}")
             }
-
-
         })
     }
 
@@ -526,149 +656,168 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onStop() {
         super.onStop()
-        if (!databaseAddFlag)
-            setAllData()
+        Log.d("MainActivity", "onStop: hasPendingChanges=$hasPendingChanges, isPdfGenerating=$isPdfGenerating")
+
+        // Save draft if:
+        // 1. User made changes
+        // 2. Not currently generating PDF
+        // 3. Has valid trip data
+        if (hasPendingChanges && !isPdfGenerating && hasValidTripData()) {
+            Log.d("MainActivity", "Saving draft on stop")
+            saveDraftSynchronously()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("MainActivity", "onPause: hasPendingChanges=$hasPendingChanges, isPdfGenerating=$isPdfGenerating")
+
+        if (hasPendingChanges && !isPdfGenerating && hasValidTripData()) {
+            Log.d("MainActivity", "Auto-saving draft on pause")
+            saveDraftSynchronously()
+        }
+    }
+
+    private fun saveDraftSynchronously() {
+        try {
+            val db = AppDatabase.getDatabase(applicationContext)
+            val draftDao = db.productsDao()
+
+            // Ensure route is valid
+            val validRoute = if (RouteUtils.isValidRoute(routeList)) {
+                routeList
+            } else {
+                RouteUtils.createSimpleRoute(
+                    binding.srcName.text.toString(),
+                    binding.dest.text.toString()
+                )
+            }
+
+            val routeJsonString = RouteUtils.routeToJson(validRoute)
+
+            val tripDataEntity = Products(
+                truckNumber = truckNumberGiven.toString(),
+                srcPlace = binding.srcName.text.toString(),
+                destPlace = binding.dest.text.toString(),
+                srcDate = startTripDate.toString(),
+                destDate = "",
+                avg = "",
+                randomNumber = randomNumber.toString(),
+                modelList1 = Gson().toJson(creditList),
+                modelList2 = Gson().toJson(debitList),
+                routeJson = routeJsonString
+            )
+
+            // Use runBlocking to ensure save completes before activity closes
+            kotlinx.coroutines.runBlocking {
+                try {
+                    val existing = draftDao.getDraftById(randomNumber.toString())
+
+                    if (existing != null) {
+                        // Update existing draft
+                        draftDao.update(
+                            tripDataEntity.randomNumber,
+                            tripDataEntity.truckNumber,
+                            tripDataEntity.srcPlace,
+                            tripDataEntity.destPlace,
+                            tripDataEntity.srcDate,
+                            tripDataEntity.destDate,
+                            tripDataEntity.avg,
+                            tripDataEntity.modelList1,
+                            tripDataEntity.modelList2,
+                            tripDataEntity.routeJson
+                        )
+                        Log.d("MainActivity", "Draft updated successfully")
+                    } else {
+                        // Insert new draft
+                        draftDao.insert(tripDataEntity)
+                        Log.d("MainActivity", "Draft inserted successfully")
+                    }
+
+                    // Reset pending changes flag after successful save
+                    hasPendingChanges = false
+
+                    // Notify UI on main thread
+                    withContext(Dispatchers.Main) {
+                        Constants.refreshApiGet(Event(1))
+                    }
+                } catch (e: Exception) {
+                    Log.e("MainActivity", "Error saving draft: ${e.message}", e)
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error in saveDraftSynchronously: ${e.message}", e)
+        }
     }
 
     private fun setAllData() {
-        var flag = false
+        if (!hasPendingChanges) {
+            Log.d("MainActivity", "No pending changes, skipping save")
+            return
+        }
+
         GlobalScope.launch {
-            val db = AppDatabase.getDatabase(applicationContext)
-            val draftDao = db.productsDao()
-            val currentModel = TripDataTestModel(
-                truckNumberGiven.toString(),
-                binding.srcName.text.toString(),
-                binding.dest.text.toString(),
-                startTripDate.toString(),
-                "",
-                "",
-                randomNumber.toString(),
-                "",
-                creditList as List<Income>,
-                debitList as List<Expense>
-            )
-            val existing = draftDao.getDraftById(randomNumber.toString())
-            if (existing != null) {
-                val existingModel = convertToModel(existing)
-                if (existingModel == currentModel) {
-                    return@launch
-                }
-            }
-            if (!getAllData(applicationContext).contains(
-                    TripDataTestModel(
-                        truckNumberGiven.toString(),
+            try {
+                val db = AppDatabase.getDatabase(applicationContext)
+                val draftDao = db.productsDao()
+
+                val validRoute = if (RouteUtils.isValidRoute(routeList)) {
+                    routeList
+                } else {
+                    RouteUtils.createSimpleRoute(
                         binding.srcName.text.toString(),
-                        binding.dest.text.toString(),
-                        startTripDate.toString(),
-                        /*binding.destDate.text.toString()*/"",
-                        /*binding.truckAvg.text.toString()*/"",
-                        /*binding.driverIncome.text.toString()*/"",
-                        randomNumber.toString(),
-                        creditList as List<Income>,
-                        debitList as List<Expense>
+                        binding.dest.text.toString()
                     )
+                }
+
+                val routeJsonString = RouteUtils.routeToJson(validRoute)
+
+                val tripDataEntity = Products(
+                    truckNumber = truckNumberGiven.toString(),
+                    srcPlace = binding.srcName.text.toString(),
+                    destPlace = binding.dest.text.toString(),
+                    srcDate = startTripDate.toString(),
+                    destDate = "",
+                    avg = "",
+                    randomNumber = randomNumber.toString(),
+                    modelList1 = Gson().toJson(creditList),
+                    modelList2 = Gson().toJson(debitList),
+                    routeJson = routeJsonString
                 )
-            ) {
-                if (getAllData(applicationContext).size == 0) {
-                    flag = false
+
+                val existing = draftDao.getDraftById(randomNumber.toString())
+
+                if (existing != null) {
+                    draftDao.update(
+                        tripDataEntity.randomNumber,
+                        tripDataEntity.truckNumber,
+                        tripDataEntity.srcPlace,
+                        tripDataEntity.destPlace,
+                        tripDataEntity.srcDate,
+                        tripDataEntity.destDate,
+                        tripDataEntity.avg,
+                        tripDataEntity.modelList1,
+                        tripDataEntity.modelList2,
+                        tripDataEntity.routeJson
+                    )
+                    Log.d("MainActivity", "Draft updated")
                 } else {
-                    for (item in getAllData(applicationContext)) {
-                        if (item.randomNumber == randomNumber.toString()) {
-                            flag = true
-                            break
-                        } else {
-                            flag = false
-                        }
-                    }
+                    draftDao.insert(tripDataEntity)
+                    Log.d("MainActivity", "New draft inserted")
                 }
-                if (flag) {
-                    testList.add(
-                        TripDataTestModel(
-                            truckNumberGiven.toString(),
-                            binding.srcName.text.toString(),
-                            binding.dest.text.toString(),
-                            startTripDate.toString(),
-                            /*binding.destDate.text.toString()*/"",
-                            /*binding.truckAvg.text.toString()*/"",
-                            randomNumber.toString(),
-                            /*binding.driverIncome.text.toString()*/"",
-                            creditList as List<Income>,
-                            debitList as List<Expense>
-                        )
-                    )
 
-                    val tripDataList: ArrayList<TripDataTestModel> = testList
+                hasPendingChanges = false  // Reset flag after save
 
-                    val tripDataEntities = tripDataList.map {
-                        Products(
-                            truckNumber = it.truckNumber,
-                            srcPlace = it.srcPlace,
-                            destPlace = it.destPlace,
-                            srcDate = it.srcDate,
-                            destDate = it.destDate,
-                            avg = it.avg,
-                            randomNumber = randomNumber.toString(),
-                            modelList1 = Gson().toJson(it.modelList1),
-                            modelList2 = Gson().toJson(it.modelList2)
-                        )
-                    }
-                    Log.d("flagVal", "setAllData: update")
-                    val db = AppDatabase.getDatabase(applicationContext)
-                    val tripDataDao = db.productsDao()
-                    tripDataEntities.forEach {
-                        tripDataDao.update(
-                            it.randomNumber,
-                            it.truckNumber,
-                            it.srcPlace,
-                            it.destPlace,
-                            it.srcDate,
-                            it.destDate,
-                            it.avg,
-                            it.modelList1,
-                            it.modelList2
-                        )
-                    }
-                    Constants.refreshApiGet(Event(1))
-                } else {
-                    testList.add(
-                        TripDataTestModel(
-                            truckNumberGiven.toString(),
-                            binding.srcName.text.toString(),
-                            binding.dest.text.toString(),
-                            startTripDate.toString(),
-                            /*binding.destDate.text.toString()*/"",
-                            /*binding.truckAvg.text.toString()*/"",
-                            randomNumber.toString(),
-                            /*binding.driverIncome.text.toString()*/"",
-                            creditList as List<Income>,
-                            debitList as List<Expense>
-                        )
-                    )
-
-                    val tripDataList: ArrayList<TripDataTestModel> = testList
-
-                    val tripDataEntities = tripDataList.map {
-                        Products(
-                            truckNumber = it.truckNumber,
-                            srcPlace = it.srcPlace,
-                            destPlace = it.destPlace,
-                            srcDate = it.srcDate,
-                            destDate = it.destDate,
-                            avg = it.avg,
-                            randomNumber = randomNumber.toString(),
-                            modelList1 = Gson().toJson(it.modelList1),
-                            modelList2 = Gson().toJson(it.modelList2)
-                        )
-                    }
-
-                    val db = AppDatabase.getDatabase(applicationContext)
-                    val tripDataDao = db.productsDao()
-                    tripDataEntities.forEach { tripDataDao.insert(it) }
+                withContext(Dispatchers.Main) {
                     Constants.refreshApiGet(Event(1))
                 }
+
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error in setAllData: ${e.message}", e)
             }
         }
     }
+
 
     private fun convertToModel(entity: Products): TripDataTestModel {
         val gson = Gson()
@@ -680,14 +829,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             destDate = entity.destDate,
             avg = entity.avg,
             randomNumber = entity.randomNumber,
-            modelList1 = gson.fromJson(
-                entity.modelList1,
-                object : TypeToken<List<CreditModel>>() {}.type
-            ),
-            modelList2 = gson.fromJson(
-                entity.modelList2,
-                object : TypeToken<List<DebitModel>>() {}.type
-            )
+            driverIncome = "",
+            modelList1 = try {
+                gson.fromJson(
+                    entity.modelList1,
+                    object : TypeToken<List<Income>>() {}.type
+                )
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error parsing modelList1: ${e.message}")
+                emptyList()
+            },
+            modelList2 = try {
+                gson.fromJson(
+                    entity.modelList2,
+                    object : TypeToken<List<Expense>>() {}.type
+                )
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error parsing modelList2: ${e.message}")
+                emptyList()
+            }
         )
     }
 
@@ -768,37 +928,37 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         }
     }
 
-    fun debitDeleteHissab(position: Int) {
-        debitList.removeAt(position)
-        debitAdapter.submitList(debitList)
-        debitAdapter.notifyDataSetChanged()
-        debitIncomeUpdate()
-        databaseAddFlag = false
-    }
-
-    fun creditDeleteHissab(position: Int) {
-        creditList.removeAt(position)
-        creditAdapter.submitList(creditList)
-        creditAdapter.notifyDataSetChanged()
-        creditIncomeUpdate()
-        databaseAddFlag = false
-    }
-
-    fun debitDataUpdate() {
-        debitAdapter.submitList(debitList)
-        binding.debitAmount.adapter = debitAdapter
-        debitAdapter.notifyDataSetChanged()
-        debitIncomeUpdate()
-        // Recalculate average when fuel entries are updated
-        calculateFinalTripAverage()
-    }
-
-    fun creditDataUpdate() {
-        creditAdapter.submitList(creditList)
-        binding.creditAmount.adapter = creditAdapter
-        creditAdapter.notifyDataSetChanged()
-        creditIncomeUpdate()
-    }
+//    fun debitDeleteHissab(position: Int) {
+//        debitList.removeAt(position)
+//        debitAdapter.submitList(debitList)
+//        debitAdapter.notifyDataSetChanged()
+//        debitIncomeUpdate()
+//        databaseAddFlag = false
+//    }
+//
+//    fun creditDeleteHissab(position: Int) {
+//        creditList.removeAt(position)
+//        creditAdapter.submitList(creditList)
+//        creditAdapter.notifyDataSetChanged()
+//        creditIncomeUpdate()
+//        databaseAddFlag = false
+//    }
+//
+//    fun debitDataUpdate() {
+//        debitAdapter.submitList(debitList)
+//        binding.debitAmount.adapter = debitAdapter
+//        debitAdapter.notifyDataSetChanged()
+//        debitIncomeUpdate()
+//        // Recalculate average when fuel entries are updated
+//        calculateFinalTripAverage()
+//    }
+//
+//    fun creditDataUpdate() {
+//        creditAdapter.submitList(creditList)
+//        binding.creditAmount.adapter = creditAdapter
+//        creditAdapter.notifyDataSetChanged()
+//        creditIncomeUpdate()
+//    }
 
     private fun debitIncomeUpdate() {
         totalDebitAmount = 0
@@ -1031,31 +1191,139 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
      * Generate PDF with collected end date and driver income
      */
     private fun generateTripPdf(endDate: String, driverIncome: String) {
-        // Calculate final comprehensive average
-        val calculatedAverage = calculateFinalTripAverage()
+        try {
+            isPdfGenerating = true  // Mark PDF generation started
 
-        // Generate PDF with collected data
-        authViewModel.getTripPdf(
-            AddTripRequestModel(
-                id,
-                binding.dest.text.toString(),
-                driverIncome,
-                endDate,
-                debitList as List<Expense>,
-                creditList as List<Income>,
-                binding.totalProfit.text.toString(),
-                binding.srcName.text.toString(),
-                startTripDate.toString(),
-                totalDaysTrip,
-                binding.totalExpanseNew.text.toString(),
-                binding.totalIncomeNew.text.toString(),
-                calculatedAverage,  // Use calculated average
-                truckNumberGiven.toString()
+            val calculatedAverage = calculateFinalTripAverage()
+
+            val validRoute = if (RouteUtils.isValidRoute(routeList)) {
+                routeList
+            } else {
+                RouteUtils.createSimpleRoute(
+                    binding.srcName.text.toString(),
+                    binding.dest.text.toString()
+                )
+            }
+
+            authViewModel.getTripPdf(
+                AddTripRequestModel(
+                    id,
+                    binding.dest.text.toString(),
+                    driverIncome,
+                    endDate,
+                    route = validRoute,
+                    debitList as List<Expense>,
+                    creditList as List<Income>,
+                    binding.totalProfit.text.toString(),
+                    binding.srcName.text.toString(),
+                    startTripDate.toString(),
+                    totalDaysTrip,
+                    binding.totalExpanseNew.text.toString(),
+                    binding.totalIncomeNew.text.toString(),
+                    calculatedAverage,
+                    truckNumberGiven.toString()
+                )
             )
-        )
-        showProgress()
+            showProgress()
+
+        } catch (e: Exception) {
+            isPdfGenerating = false
+            Log.e("MainActivity", "Error generating PDF: ${e.message}", e)
+            dismissProgress()
+            Toast.makeText(this, "Error generating PDF. Please try again.", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
+    override fun onBackPressed() {
+        Log.d("MainActivity", "onBackPressed: hasPendingChanges=$hasPendingChanges")
+
+        // Immediately close activity - save happens in background
+        if (hasPendingChanges && !isPdfGenerating && hasValidTripData()) {
+            Log.d("MainActivity", "Triggering background save and closing")
+            Constants.refreshApiGet(Event(1))
+            // Launch async save (don't wait for it)
+//            GlobalScope.launch(Dispatchers.IO) {
+//                try {
+//                    val db = AppDatabase.getDatabase(applicationContext)
+//                    val draftDao = db.productsDao()
+//
+//                    val validRoute = if (RouteUtils.isValidRoute(routeList)) {
+//                        routeList
+//                    } else {
+//                        RouteUtils.createSimpleRoute(
+//                            binding.srcName.text.toString(),
+//                            binding.dest.text.toString()
+//                        )
+//                    }
+//
+//                    val routeJsonString = RouteUtils.routeToJson(validRoute)
+//
+//                    val tripDataEntity = Products(
+//                        truckNumber = truckNumberGiven.toString(),
+//                        srcPlace = binding.srcName.text.toString(),
+//                        destPlace = binding.dest.text.toString(),
+//                        srcDate = startTripDate.toString(),
+//                        destDate = "",
+//                        avg = "",
+//                        randomNumber = randomNumber.toString(),
+//                        modelList1 = Gson().toJson(creditList),
+//                        modelList2 = Gson().toJson(debitList),
+//                        routeJson = routeJsonString
+//                    )
+//
+//                    val existing = draftDao.getDraftById(randomNumber.toString())
+//                    if (existing != null) {
+//                        draftDao.update(
+//                            tripDataEntity.randomNumber,
+//                            tripDataEntity.truckNumber,
+//                            tripDataEntity.srcPlace,
+//                            tripDataEntity.destPlace,
+//                            tripDataEntity.srcDate,
+//                            tripDataEntity.destDate,
+//                            tripDataEntity.avg,
+//                            tripDataEntity.modelList1,
+//                            tripDataEntity.modelList2,
+//                            tripDataEntity.routeJson
+//                        )
+//                    } else {
+//                        draftDao.insert(tripDataEntity)
+//                    }
+//
+//                    Log.d("MainActivity", "Background save completed")
+//
+//                    // Notify home screen on main thread
+//                    withContext(Dispatchers.Main) {
+//                        Constants.refreshApiGet(Event(1))
+//                    }
+//                } catch (e: Exception) {
+//                    Log.e("MainActivity", "Background save error: ${e.message}", e)
+//                }
+//            }
+        }
+
+        // Immediately finish activity
+        super.onBackPressed()
+    }
+
+    private fun hasValidTripData(): Boolean {
+        return try {
+            val hasTruckNumber = !truckNumberGiven.isNullOrEmpty()
+            val hasSource = binding.srcName.text.isNotEmpty()
+            val hasDestination = binding.dest.text.isNotEmpty()
+            val hasDate = !startTripDate.isNullOrEmpty()
+            val hasEntries = creditList.isNotEmpty() || debitList.isNotEmpty()
+
+            val isValid = (hasTruckNumber || (hasSource && hasDestination)) && (hasDate || hasEntries)
+
+            Log.d("MainActivity", "hasValidTripData: truck=$hasTruckNumber, src=$hasSource, " +
+                    "dest=$hasDestination, date=$hasDate, entries=$hasEntries, result=$isValid")
+
+            isValid
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error validating trip data: ${e.message}")
+            false
+        }
+    }
 
 }

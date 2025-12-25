@@ -19,6 +19,7 @@ data class Record(
     val total_days: String,
     val total_expense: String,
     val total_income: String,
+     val route: ArrayList<String> =arrayListOf("Mangrol,Jodhpur,Delhi,Ahemdabad"),
     val truck_average: String,
     val truck_no: String,
     val updatedDate: String

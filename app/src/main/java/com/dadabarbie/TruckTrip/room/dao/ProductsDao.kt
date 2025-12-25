@@ -12,32 +12,35 @@ import com.vasyerp.cafvd.room.model.Products
 
 @Dao
 interface ProductsDao {
-    @Query("SELECT * FROM products")
-    suspend fun getAllProducts(): List<Products>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(products: Products)
 
     @Query("DELETE FROM products WHERE id = :truckId")
     suspend fun deleteTruckById(truckId: Int)
 
-
-    @Query("UPDATE products SET truckNumber = :truckNumber, srcPlace = :srcPlace, destPlace = :destPlace, srcDate = :srcDate, destDate = :destDate, avg = :avg,modelList1=:modelList1,modelList2=:modelList2 WHERE randomNumber = :id")
+    @Query("UPDATE products SET truckNumber = :truckNumber, srcPlace = :srcPlace, destPlace = :destPlace, srcDate = :srcDate, destDate = :destDate, avg = :avg, modelList1 = :modelList1, modelList2 = :modelList2, routeJson = :routeJson WHERE randomNumber = :randomNumber")
     suspend fun update(
-        id: String,
+        randomNumber: String,
         truckNumber: String,
         srcPlace: String,
         destPlace: String,
         srcDate: String,
         destDate: String,
         avg: String,
-        modelList1: String, // We will store these lists as JSON strings
-        modelList2: String
-
+        modelList1: String,
+        modelList2: String,
+        routeJson: String = ""
     )
 
-    @Query("SELECT * FROM products WHERE randomNumber = :randomNumber LIMIT 1")
-    suspend fun getDraftById(randomNumber: String): Products?
+    @Query("SELECT * FROM products WHERE randomNumber = :id LIMIT 1")
+    suspend fun getDraftById(id: String): Products?
+
+    @Query("SELECT * FROM products ORDER BY srcDate DESC")
+    suspend fun getAllProducts(): List<Products>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(product: Products)
+
+    @Query("DELETE FROM products WHERE randomNumber = :id")
+    suspend fun deleteById(id: String)
 
     @Query("DELETE FROM products WHERE randomNumber = :tripId")
     suspend fun deleteDraftByTripId(tripId: String)

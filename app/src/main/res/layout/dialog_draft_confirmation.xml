@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:background="@drawable/bg_draft_dialog"
     android:layout_margin="@dimen/_10sdp"
+    android:fitsSystemWindows="true"
     android:padding="24dp">
 
     <!-- Icon with Badge -->

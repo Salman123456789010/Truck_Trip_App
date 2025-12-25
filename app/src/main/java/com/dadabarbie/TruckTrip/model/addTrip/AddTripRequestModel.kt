@@ -5,6 +5,7 @@ data class AddTripRequestModel(
     val destination: String,
     val driver_income: String,
     val end_date: String,
+    val route: ArrayList<String> = arrayListOf(),
     val expense: List<Expense>,
     val income: List<Income>,
     val owner_profit: String,

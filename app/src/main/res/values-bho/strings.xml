@@ -469,5 +469,34 @@ App सीखे खातिर How to Use पर क्लिक करीं�
 Mode बदले खातिर App Mode पर क्लिक करीं।
 </string>
     <string name="pehle_se_sun_rahe_hain">पहिले से सुन रहल बानी...</string>
+    <string name="pehle_truck_number_bolo">पहिले ट्रक नंबर बोलें</string>
+    <string name="sabhi_fields_bharo">सब जानकारी भरो</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+बीच के रास्ता जोड़ल जाव (ऐच्छिक)</string>
+    <string name="naya_bolo">नया बोलs</string>
+    <string name="beech_mein_rasta_stop">बीच वाला रास्ता (स्टॉप)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">शुरुआत जगह सेव हो गइल!</string>
+    <string name="akhri_jagah_save_ho_gayi">आखिरी जगह सेव हो गइल!</string>
+    <string name="raste_ka_stop_add_ho_gaya">रास्ता में स्टॉप जुड़ गइल!</string>
+    <string name="stop_hata_diya">स्टॉप हटा दिहल गइल!</string>
+    <string name="beech_ka_place_he_to_bolo">बीच में जगह हो त बोलs</string>
+    <string name="jagah_ka_naam_bolo">जगह के नाम बोलs</string>
+    <string name="via">वाया</string>
+    <string name="source">शुरुआत</string>
+    <string name="destination">मंजिल</string>
+    <string name="update_trip_data">ट्रिप डेटा अपडेट करs</string>
+    <string name="please_enter_middle_place">बीच के जगह डालs</string>
+    <string name="please_add_source_destination_first">पहिले शुरुआत आ मंजिल डालs</string>
+    <string name="middle_place_added">बीच के जगह जुड़ गइल</string>
+    <string name="select_trip_date">ट्रिप के तारीख चुनs</string>
+    <string name="speak_now">अब बोलs</string>
+    <string name="speech_not_supported">बोलई के सुविधा नाहीं बा</string>
+    <string name="please_select_date">तारीख चुनs</string>
+    <string name="please_enter_source">शुरुआत डालs</string>
+    <string name="please_enter_destination">मंजिल डालs</string>
+    <string name="please_enter_truck_number">ट्रक नंबर डालs</string>
+    <string name="enter_via_place">वाया जगह डालs</string>
+    <string name="add_middle_place_optional">बीच के जगह जोड़s (ऑप्शनल)</string>
+    <string name="trip_route">ट्रिप के रास्ता</string>
+
 
 </resources>

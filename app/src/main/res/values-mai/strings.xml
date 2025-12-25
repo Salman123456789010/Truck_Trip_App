@@ -407,14 +407,39 @@
     <string name="language_badalni_ho_to_language_par_click_karo_app_seekhni_ho_to_how_to_use_par_click_karo_mode_badalna_ho_to_app_mode_par_click_karo">भाषा बदलय लेल भाषा पर टैप करू।\nऐप सीखय लेल उपयोग विधि पर टैप करू।\nमोड बदलय लेल ऐप मोड पर टैप करू।</string>
     <string name="boliye">🎤 बोलू...</string>
     <string name="pehle_se_sun_rahe_hain">पहिने से सुन रहल छी...</string>
-
-
-
-
+    <string name="pehle_truck_number_bolo">पहिने ट्रक नंबर बोलू</string>
+    <string name="sabhi_fields_bharo">सभ जानकारी भरो</string>
     <string name="lang_change_dec">
 भाषा बदलए लेल Language पर क्लिक करू।
 App सीखए लेल How to Use पर क्लिक करू।
 Mode बदलए लेल App Mode पर क्लिक करू।
 </string>
+    <string name="beech_ke_rasta_add_karo_optinal">+बीच के रास्ता जोड़ू (वैकल्पिक)</string>
+    <string name="naya_bolo">नव बोलू</string>
+    <string name="beech_mein_rasta_stop">बीच केर रास्ता (स्टॉप)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">शुरुआत केर जगह सेव भ गेल!</string>
+    <string name="akhri_jagah_save_ho_gayi">आखिरी जगह सेव भ गेल!</string>
+    <string name="raste_ka_stop_add_ho_gaya">रास्ता केर स्टॉप जुड़ गेल!</string>
+    <string name="stop_hata_diya">स्टॉप हटा देल गेल!</string>
+    <string name="beech_ka_place_he_to_bolo">बीच में जगह हो त बोलू</string>
+    <string name="jagah_ka_naam_bolo">जगह केर नाम बोलू</string>
+    <string name="via">वाया</string>
+    <string name="source">शुरुआत</string>
+    <string name="destination">मंजिल</string>
+    <string name="update_trip_data">ट्रिप डेटा अपडेट करू</string>
+    <string name="please_enter_middle_place">बीच केर जगह डालू</string>
+    <string name="please_add_source_destination_first">पहिले शुरुआत आ मंजिल डालू</string>
+    <string name="middle_place_added">बीच केर जगह जुड़ गेल</string>
+    <string name="select_trip_date">ट्रिप केर तारीख चुनू</string>
+    <string name="speak_now">आब बोलू</string>
+    <string name="speech_not_supported">बोलय के सुविधा नहि अछि</string>
+    <string name="please_select_date">तारीख चुनू</string>
+    <string name="please_enter_source">शुरुआत डालू</string>
+    <string name="please_enter_destination">मंजिल डालू</string>
+    <string name="please_enter_truck_number">ट्रक नंबर डालू</string>
+    <string name="enter_via_place">वाया जगह डालू</string>
+    <string name="add_middle_place_optional">बीच केर जगह जोड़ू (ऑप्शनल)</string>
+    <string name="trip_route">ट्रिप केर रास्ता</string>
+
 
 </resources>

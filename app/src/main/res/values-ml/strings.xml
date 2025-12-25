@@ -459,12 +459,41 @@
     <string name="boliye">🎤 പറയൂ...</string>
 
     <string name="pehle_se_sun_rahe_hain">ഇതിനകം കേൾക്കുകയാണ്...</string>
+    <string name="pehle_truck_number_bolo">ആദ്യം ട്രക്ക് നമ്പർ പറയൂ</string>
+    <string name="sabhi_fields_bharo">എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കുക</string>
 
     <string name="lang_change_dec">
 ഭാഷ മാറ്റാൻ Language ക്ലിക്ക് ചെയ്യുക।
 App ഉപയോഗിക്കാൻ പഠിക്കാൻ How to Use ക്ലിക്ക് ചെയ്യുക।
 Mode മാറ്റാൻ App Mode ക്ലിക്ക് ചെയ്യുക।
 </string>
+
+    <string name="beech_ke_rasta_add_karo_optinal">+നടുവിലുള്ള വഴി ചേർക്കുക (ഐച്ഛികം)</string>
+    <string name="naya_bolo">പുതിയത് പറയൂ</string>
+    <string name="beech_mein_rasta_stop">നടുവിലെ വഴി (സ്റ്റോപ്പ്)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">തുടക്ക സ്ഥലം സേവ് ചെയ്തു!</string>
+    <string name="akhri_jagah_save_ho_gayi">അവസാന സ്ഥലം സേവ് ചെയ്തു!</string>
+    <string name="raste_ka_stop_add_ho_gaya">വഴിയിലെ സ്റ്റോപ്പ് ചേർത്തു!</string>
+    <string name="stop_hata_diya">സ്റ്റോപ്പ് നീക്കി!</string>
+    <string name="beech_ka_place_he_to_bolo">നടുവിൽ സ്ഥലം ഉണ്ടെങ്കിൽ പറയൂ</string>
+    <string name="jagah_ka_naam_bolo">സ്ഥലത്തിന്റെ പേര് പറയൂ</string>
+    <string name="via">വായാ</string>
+    <string name="source">തുടക്കം</string>
+    <string name="destination">ലക്ഷ്യം</string>
+    <string name="update_trip_data">ട്രിപ്പ് ഡാറ്റ അപ്‌ഡേറ്റ് ചെയ്യൂ</string>
+    <string name="please_enter_middle_place">നടുവിലെ സ്ഥലം നൽകൂ</string>
+    <string name="please_add_source_destination_first">ആദ്യം തുടക്കംയും ലക്ഷ്യവും നൽകൂ</string>
+    <string name="middle_place_added">നടുവിലെ സ്ഥലം ചേർത്തു</string>
+    <string name="select_trip_date">ട്രിപ്പ് തീയതി തിരഞ്ഞെടുക്കൂ</string>
+    <string name="speak_now">ഇപ്പോൾ സംസാരിക്കൂ</string>
+    <string name="speech_not_supported">വോയ്സ് സപ്പോർട്ട് ഇല്ല</string>
+    <string name="please_select_date">തീയതി തിരഞ്ഞെടുക്കൂ</string>
+    <string name="please_enter_source">തുടക്കം നൽകൂ</string>
+    <string name="please_enter_destination">ലക്ഷ്യം നൽകൂ</string>
+    <string name="please_enter_truck_number">ട്രക്ക് നമ്പർ നൽകൂ</string>
+    <string name="enter_via_place">വായാ സ്ഥലം നൽകൂ</string>
+    <string name="add_middle_place_optional">നടുവിലെ സ്ഥലം ചേർക്കൂ (ഐച്ഛികം)</string>
+    <string name="trip_route">ട്രിപ്പ് വഴി</string>
 
 
 </resources>

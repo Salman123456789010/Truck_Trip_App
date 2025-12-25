@@ -1,374 +1,368 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_12sdp"
     android:background="@color/white"
     android:elevation="@dimen/_6sdp"
-    app:cardCornerRadius="@dimen/_12sdp"
-    android:orientation="vertical">
+    app:cardCornerRadius="@dimen/_12sdp">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_12sdp"
-        android:orientation="vertical">
+        android:fillViewport="true">
 
-        <!-- Header row with centered title and circular close button -->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:layout_marginBottom="@dimen/_6sdp">
+            android:padding="@dimen/_16sdp"
+            android:orientation="vertical">
 
+            <!-- Header with Title and Close Button -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_16sdp">
+
+                <TextView
+                    android:id="@+id/addTripDataLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/add_trip_data"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp" />
+
+                <ImageView
+                    android:id="@+id/closeBtn"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/bg_blue_circle"
+                    android:padding="@dimen/_4sdp"
+                    android:src="@drawable/baseline_close_24"
+                    app:tint="@color/white" />
+            </RelativeLayout>
+
+            <!-- Trip Date Section -->
+            <TextView
+                android:id="@+id/dateLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/trip_date"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_6sdp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_12sdp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/green"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <LinearLayout
+                    android:id="@+id/datePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_12sdp">
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:hint="30/06/2022"
+                        android:textColorHint="@color/date_hint_color"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <ImageView
+                        android:id="@+id/speaker"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/baseline_speaker_24"
+                        app:tint="@color/color_primary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Source and Destination Places in One Row -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/roboto_bold"
-                android:text="@string/add_trip_data"
-                android:id="@+id/addTripDataLabel"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16sdp" />
-
-            <ImageView
-                android:id="@+id/closeBtn"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/bg_blue_circle"
-                android:padding="@dimen/_4sdp"
-                android:src="@drawable/baseline_close_24"
-                app:tint="@color/white" />
-        </RelativeLayout>
-
-        <!-- Trip Date label -->
-        <TextView
-            android:id="@+id/dateLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:text="@string/trip_date"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp" />
-
-        <!-- Date row (rounded like input) -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:padding="@dimen/_12sdp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:strokeColor="@color/green"
-            app:strokeWidth="@dimen/_1sdp">
-
-            <LinearLayout
-                android:id="@+id/datePicker"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:background="@drawable/rounded_input_bg"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/_12sdp"
-                android:paddingEnd="@dimen/_12sdp">
-
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="0dp"
-                    android:layout_weight="1.8"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="@dimen/_7sdp"
-                    android:hint="30/06/2022"
-                    android:textColorHint="@color/date_hint_color"
-                    android:textSize="@dimen/_12sdp" />
-
-                <ImageView
-                    android:id="@+id/speaker"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:src="@drawable/baseline_speaker_24"
-                    app:tint="@color/color_primary" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Source / Destination labels -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/srcLabel"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@string/source_place_"
+                android:text="@string/trip_route"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp" />
-
-            <TextView
-                android:id="@+id/destLabel"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/dest_place_"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp" />
-        </LinearLayout>
-
-        <!-- Source & Destination inputs (rounded cards) -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <!-- Source -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_12sdp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/_10sdp"
-                app:strokeColor="@color/green"
-                app:strokeWidth="@dimen/_1sdp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="@dimen/_4sdp"
-                    android:paddingEnd="@dimen/_4sdp">
-
-                    <ImageView
-                        android:id="@+id/speakLan"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.4"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_speaker_24"
-                        app:tint="@color/color_primary" />
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/srcPlaceValue"
-                        android:layout_width="0dp"
-                        android:layout_weight="1.2"
-                        android:layout_height="wrap_content"
-                        android:hint="Mangrol"
-                        android:padding="@dimen/_7sdp"
-                        android:textColorHint="@color/_78060c29"
-                        android:fontFamily="@font/roboto_medium"
-                        android:background="@null"
-                        android:textSize="@dimen/_12sdp"
-                        android:inputType="text" />
-
-                    <ImageView
-                        android:id="@+id/srcMic"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.4"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_mic_24" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Destination -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_8sdp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/_10sdp"
-                app:strokeColor="@color/green"
-                app:strokeWidth="@dimen/_1sdp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingStart="@dimen/_4sdp"
-                    android:paddingEnd="@dimen/_4sdp">
-
-                    <ImageView
-                        android:id="@+id/speakLandest"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.4"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_speaker_24"
-                        app:tint="@color/color_primary" />
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/destPlaceValue"
-                        android:layout_width="0dp"
-                        android:layout_weight="1.2"
-                        android:layout_height="wrap_content"
-                        android:hint="Jodhpur"
-                        android:textColorHint="@color/_78060c29"
-                        android:fontFamily="@font/roboto_medium"
-                        android:padding="@dimen/_7sdp"
-                        android:background="@null"
-                        android:textSize="@dimen/_12sdp"
-                        android:inputType="text" />
-
-                    <ImageView
-                        android:id="@+id/destMic"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.4"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_mic_24" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-
-        <!-- NEW: Start Odometer (Optional) -->
-        <TextView
-            android:id="@+id/startOdometerLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:text="@string/start_odometer_optional"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:padding="@dimen/_12sdp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:strokeColor="@color/green"
-            app:strokeWidth="@dimen/_1sdp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etStartOdometer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/enter_start_km"
-                android:padding="@dimen/_7sdp"
-                android:textColorHint="@color/_78060c29"
-                android:fontFamily="@font/roboto_medium"
-                android:background="@null"
                 android:textSize="@dimen/_12sdp"
-                android:inputType="number"
-                android:maxLength="9" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Driver income label (kept hidden as in original) -->
-        <TextView
-            android:id="@+id/driverAavakLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:text="@string/driver_s_income"
-            android:visibility="gone"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp" />
-
-        <!-- driverAvak (kept hidden) -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:padding="@dimen/_12sdp"
-            android:visibility="gone"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:strokeColor="@color/green"
-            app:strokeWidth="@dimen/_1sdp">
+                android:layout_marginBottom="@dimen/_6sdp" />
 
             <LinearLayout
-                android:id="@+id/driverAvak"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:weightSum="2"
-                android:orientation="horizontal">
+                android:layout_marginBottom="@dimen/_12sdp">
+
+                <!-- Source Place Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/source_place_"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_4sdp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:strokeColor="@color/green"
+                        app:strokeWidth="@dimen/_1sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_8sdp">
+
+                            <ImageView
+                                android:id="@+id/speakLan"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:src="@drawable/baseline_speaker_24"
+                                app:tint="@color/color_primary" />
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/srcPlaceValue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="Mangrol"
+                                android:padding="@dimen/_6sdp"
+                                android:textColorHint="@color/_78060c29"
+                                android:fontFamily="@font/roboto_medium"
+                                android:background="@null"
+                                android:textSize="@dimen/_11sdp"
+                                android:inputType="text" />
+
+                            <ImageView
+                                android:id="@+id/srcMic"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:src="@drawable/baseline_mic_24" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- Destination Place Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/dest_place_"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_4sdp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:strokeColor="@color/green"
+                        app:strokeWidth="@dimen/_1sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_8sdp">
+
+                            <ImageView
+                                android:id="@+id/speakLandest"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:src="@drawable/baseline_speaker_24"
+                                app:tint="@color/color_primary" />
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/destPlaceValue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="Jodhpur"
+                                android:padding="@dimen/_6sdp"
+                                android:textColorHint="@color/_78060c29"
+                                android:fontFamily="@font/roboto_medium"
+                                android:background="@null"
+                                android:textSize="@dimen/_11sdp"
+                                android:inputType="text" />
+
+                            <ImageView
+                                android:id="@+id/destMic"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:src="@drawable/baseline_mic_24" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Add Middle Place Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/add_middle_place_optional"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_6sdp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_12sdp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/green"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/_8sdp">
+
+                    <ImageView
+                        android:id="@+id/middlePlaceSpeaker"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/baseline_speaker_24"
+                        app:tint="@color/color_primary" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMiddlePlace"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_via_place"
+                        android:padding="@dimen/_8sdp"
+                        android:textColorHint="@color/_78060c29"
+                        android:fontFamily="@font/roboto_medium"
+                        android:background="@null"
+                        android:textSize="@dimen/_12sdp"
+                        android:inputType="text" />
+
+                    <ImageView
+                        android:id="@+id/middlePlaceMic"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:src="@drawable/baseline_mic_24"
+                        android:layout_marginStart="@dimen/_4sdp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAddMiddlePlace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add"
+                        android:textSize="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_12sdp"
+                        android:paddingEnd="@dimen/_12sdp"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingBottom="@dimen/_6sdp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        app:cornerRadius="@dimen/_8sdp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Route RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRoute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_12sdp"
+                tools:listitem="@layout/item_route"
+                android:visibility="gone" />
+
+            <!-- Start Odometer Section -->
+            <TextView
+                android:id="@+id/startOdometerLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/start_odometer_optional"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_6sdp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_12sdp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/green"
+                app:strokeWidth="@dimen/_1sdp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/driverTripAvak"
-                    android:layout_width="0dp"
-                    android:layout_weight="1.8"
+                    android:id="@+id/etStartOdometer"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/trip_payment"
+                    android:hint="@string/enter_start_km"
+                    android:padding="@dimen/_12sdp"
                     android:textColorHint="@color/_78060c29"
                     android:fontFamily="@font/roboto_medium"
                     android:background="@null"
-                    android:padding="@dimen/_7sdp"
                     android:textSize="@dimen/_12sdp"
                     android:inputType="number"
-                    android:maxLength="6" />
+                    android:maxLength="9" />
+            </com.google.android.material.card.MaterialCardView>
 
-                <ImageView
-                    android:id="@+id/driverAvakSpeaker"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.2"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_speaker_24"
-                    app:tint="@color/color_primary" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Truck number label -->
-        <TextView
-            android:id="@+id/truckNumberLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:text="@string/truck_number_"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp" />
-
-        <!-- Truck number + totalDays -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            <!-- Truck Number Section -->
+            <TextView
+                android:id="@+id/truckNumberLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/truck_number_"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_6sdp" />
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_16sdp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:strokeColor="@color/green"
@@ -377,164 +371,42 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="2"
                     android:gravity="center_vertical"
-                    android:paddingStart="@dimen/_4sdp"
-                    android:paddingEnd="@dimen/_4sdp">
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_12sdp">
 
                     <ImageView
                         android:id="@+id/truckSpeaker"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
                         android:src="@drawable/baseline_speaker_24"
+                        android:layout_marginEnd="@dimen/_8sdp"
                         app:tint="@color/color_primary" />
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/truckNumber"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.2"
+                        android:layout_weight="1"
                         android:hint="GJ 11 TT 8435"
-                        android:padding="@dimen/_7sdp"
                         android:textColorHint="@color/_78060c29"
                         android:fontFamily="@font/roboto_medium"
                         android:background="@null"
                         android:textSize="@dimen/_12sdp"
                         android:inputType="text" />
-
-                    <ImageView
-                        android:id="@+id/truckMic"
-                        android:layout_width="0dp"
-                        android:visibility="gone"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:src="@drawable/baseline_mic_24" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:id="@+id/totalDays"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:visibility="gone"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/total_days_10"
-                android:textSize="@dimen/_12sdp" />
-        </LinearLayout>
-
-        <!-- avg / add hissab (kept hidden as before) -->
-        <LinearLayout
-            android:id="@+id/avg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/avgText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/get_average"
-                android:textSize="@dimen/_12sdp" />
-
-            <TextView
-                android:id="@+id/avgValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text=""
-                android:textSize="@dimen/_12sdp"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/avgButton"
+            <!-- Submit Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/addHissab"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="@color/color_primary"
-                    app:cardCornerRadius="@dimen/_10sdp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_2sdp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:gravity="center"
-                            android:text="@string/click_here"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10sdp" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- truck avg block (kept as before) -->
-        <LinearLayout
-            android:id="@+id/truckAvgLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/truckAvgText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="@string/add"
+                android:textSize="@dimen/_14sdp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@string/truck_average"
-                android:textSize="@dimen/_12sdp" />
+                android:layout_marginTop="@dimen/_8sdp" />
 
-            <TextView
-                android:id="@+id/truckAvgValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text=": 10.00"
-                android:textSize="@dimen/_12sdp"
-                android:visibility="visible" />
         </LinearLayout>
-
-        <!-- Submit button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/add"
-            android:layout_marginStart="@dimen/_24sdp"
-            android:layout_marginEnd="@dimen/_24sdp"
-            android:textSize="@dimen/_14sdp"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginTop="@dimen/_18sdp" />
-
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.cardview.widget.CardView>

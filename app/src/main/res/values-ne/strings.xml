@@ -449,5 +449,33 @@ App सिक्न How to Use मा क्लिक गर्नुहोस�
 Mode बदल्न App Mode मा क्लिक गर्नुहोस्।
 </string>
     <string name="pehle_se_sun_rahe_hain">पहिले नै सुन्दै छौं...</string>
+    <string name="pehle_truck_number_bolo">पहिले ट्रक नम्बर भन्नुहोस्</string>
+    <string name="sabhi_fields_bharo">सबै जानकारी भर्नुहोस्</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+बीचको बाटो थप्नुहोस् (वैकल्पिक)</string>
+    <string name="naya_bolo">नयाँ भन्नुहोस्</string>
+    <string name="beech_mein_rasta_stop">बीचको बाटो (स्टप)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">सुरुको ठाउँ सेभ भयो!</string>
+    <string name="akhri_jagah_save_ho_gayi">अन्तिम ठाउँ सेभ भयो!</string>
+    <string name="raste_ka_stop_add_ho_gaya">बाटोको स्टप थपियो!</string>
+    <string name="stop_hata_diya">स्टप हटाइयो!</string>
+    <string name="beech_ka_place_he_to_bolo">बीचमा ठाउँ भए भन्नुहोस्</string>
+    <string name="jagah_ka_naam_bolo">ठाउँको नाम भन्नुहोस्</string>
+    <string name="via">भिया</string>
+    <string name="source">सुरु</string>
+    <string name="destination">गन्तव्य</string>
+    <string name="update_trip_data">ट्रिप डाटा अपडेट गर्नुहोस्</string>
+    <string name="please_enter_middle_place">बीचको ठाउँ राख्नुहोस्</string>
+    <string name="please_add_source_destination_first">पहिला सुरु र गन्तव्य राख्नुहोस्</string>
+    <string name="middle_place_added">बीचको ठाउँ थपियो</string>
+    <string name="select_trip_date">ट्रिप मिति छान्नुहोस्</string>
+    <string name="speak_now">अब बोल्नुहोस्</string>
+    <string name="speech_not_supported">भ्वाइस सपोर्ट छैन</string>
+    <string name="please_select_date">मिति छान्नुहोस्</string>
+    <string name="please_enter_source">सुरु राख्नुहोस्</string>
+    <string name="please_enter_destination">गन्तव्य राख्नुहोस्</string>
+    <string name="please_enter_truck_number">ट्रक नम्बर राख्नुहोस्</string>
+    <string name="enter_via_place">भिया ठाउँ राख्नुहोस्</string>
+    <string name="add_middle_place_optional">बीचको ठाउँ थप्नुहोस् (ऐच्छिक)</string>
+    <string name="trip_route">ट्रिपको बाटो</string>
 
 </resources>

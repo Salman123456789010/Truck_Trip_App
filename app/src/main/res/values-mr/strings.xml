@@ -390,5 +390,34 @@ App शिकायची असेल तर How to Use वर क्लिक 
 Mode बदलायचा असेल तर App Mode वर क्लिक करा।
 </string>
     <string name="pehle_se_sun_rahe_hain">आधीच ऐकत आहोत...</string>
+    <string name="pehle_truck_number_bolo">आधी ट्रक नंबर सांगा</string>
+    <string name="sabhi_fields_bharo">सगळी माहिती भरा</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+मधला रस्ता जोडा (पर्यायी)</string>
+    <string name="naya_bolo">नवीन बोला</string>
+    <string name="beech_mein_rasta_stop">मधला रस्ता (स्टॉप)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">सुरुवातीची जागा सेव झाली!</string>
+    <string name="akhri_jagah_save_ho_gayi">शेवटची जागा सेव झाली!</string>
+    <string name="raste_ka_stop_add_ho_gaya">रस्त्याचा स्टॉप जोडला!</string>
+    <string name="stop_hata_diya">स्टॉप काढला!</string>
+    <string name="beech_ka_place_he_to_bolo">मधली जागा असेल तर बोला</string>
+    <string name="jagah_ka_naam_bolo">जागेचं नाव बोला</string>
+    <string name="via">वाया</string>
+    <string name="source">सुरुवात</string>
+    <string name="destination">मंजिल</string>
+    <string name="update_trip_data">ट्रिप डेटा अपडेट करा</string>
+    <string name="please_enter_middle_place">मधली जागा टाका</string>
+    <string name="please_add_source_destination_first">आधी सुरुवात आणि मंजिल टाका</string>
+    <string name="middle_place_added">मधली जागा जोडली</string>
+    <string name="select_trip_date">ट्रिप तारीख निवडा</string>
+    <string name="speak_now">आता बोला</string>
+    <string name="speech_not_supported">बोलण्याची सुविधा नाही</string>
+    <string name="please_select_date">तारीख निवडा</string>
+    <string name="please_enter_source">सुरुवात टाका</string>
+    <string name="please_enter_destination">मंजिल टाका</string>
+    <string name="please_enter_truck_number">ट्रक नंबर टाका</string>
+    <string name="enter_via_place">वाया जागा टाका</string>
+    <string name="add_middle_place_optional">मधली जागा जोडा (ऐच्छिक)</string>
+    <string name="trip_route">ट्रिपचा रस्ता</string>
+
 
 </resources>

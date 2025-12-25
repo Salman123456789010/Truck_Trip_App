@@ -478,5 +478,34 @@ App सीखणी होय तो How to Use पर क्लिक करज
 Mode बदलणो होय तो App Mode पर क्लिक करजो।
 </string>
     <string name="pehle_se_sun_rahe_hain">पहले सूं ही सांभळ रहे हैं...</string>
+    <string name="pehle_truck_number_bolo">पहला ट्रक नंबर बोलो</string>
+    <string name="sabhi_fields_bharo">सगळी जानकारी भरो</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+बीच रो रास्तो जोड़ो (वैकल्पिक)</string>
+    <string name="naya_bolo">नवों बोलो</string>
+    <string name="beech_mein_rasta_stop">बीच रो रास्तो (स्टॉप)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">शुरुआत री जगह सेव हो गई!</string>
+    <string name="akhri_jagah_save_ho_gayi">आखरी जगह सेव हो गई!</string>
+    <string name="raste_ka_stop_add_ho_gaya">रास्ता रो स्टॉप जुड़ गयो!</string>
+    <string name="stop_hata_diya">स्टॉप हटा दियो!</string>
+    <string name="beech_ka_place_he_to_bolo">बीच में जगह हो तो बोलो</string>
+    <string name="jagah_ka_naam_bolo">जगह रो नाम बोलो</string>
+    <string name="via">वाया</string>
+    <string name="source">शुरुआत</string>
+    <string name="destination">मंजिल</string>
+    <string name="update_trip_data">ट्रिप डेटा अपडेट करो</string>
+    <string name="please_enter_middle_place">बीच री जगह डालो</string>
+    <string name="please_add_source_destination_first">पहले शुरुआत आ मंजिल डालो</string>
+    <string name="middle_place_added">बीच री जगह जुड़ गई</string>
+    <string name="select_trip_date">ट्रिप री तारीख चुनो</string>
+    <string name="speak_now">अब बोलो</string>
+    <string name="speech_not_supported">बोलण री सुविधा नाहीं</string>
+    <string name="please_select_date">तारीख चुनो</string>
+    <string name="please_enter_source">शुरुआत डालो</string>
+    <string name="please_enter_destination">मंजिल डालो</string>
+    <string name="please_enter_truck_number">ट्रक नंबर डालो</string>
+    <string name="enter_via_place">वाया जगह डालो</string>
+    <string name="add_middle_place_optional">बीच री जगह जोड़ो (ऑप्शनल)</string>
+    <string name="trip_route">ट्रिप रो रास्तो</string>
+
 
 </resources>

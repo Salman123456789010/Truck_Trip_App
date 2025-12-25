@@ -408,7 +408,35 @@ and tap Save when you are done.
     <string name="profile_top_card">Profile information</string>
     <string name="pehle_se_sun_rahe_hain">Already listening...</string>
     <string name="boliye">🎤 Boliye...</string>
-    <string name="lang_change_dec">Language badalni ho to Language par click karo. App seekhni ho to How to Use par click karo.\n Mode badalna ho to App Mode par click karo.</string>
+    <string name="lang_change_dec">Language badalni ho to Language par click karo. App seekhni ho to How to Use par click karo.\n Mode badalna ho to App Flow Change par click karo.</string>
+    <string name="pehle_truck_number_bolo">Say truck number first</string>
+    <string name="sabhi_fields_bharo">Fill all details</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+Add middle route (Optional)</string>
+    <string name="naya_bolo">Say new</string>
+    <string name="beech_mein_rasta_stop">Middle route (Stop)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">Start place saved!</string>
+    <string name="akhri_jagah_save_ho_gayi">End place saved!</string>
+    <string name="raste_ka_stop_add_ho_gaya">Route stop added!</string>
+    <string name="stop_hata_diya">Stop removed!</string>
+    <string name="beech_ka_place_he_to_bolo">If there is a middle place, say it</string>
+    <string name="jagah_ka_naam_bolo">Say the place name</string>
+    <string name="via">Via</string>
+    <string name="source">Source</string>
+    <string name="destination">Destination</string>
+    <string name="update_trip_data">Update trip data</string>
+    <string name="please_enter_middle_place">Please enter middle place</string>
+    <string name="please_add_source_destination_first">Please add source and destination first</string>
+    <string name="middle_place_added">Middle place added</string>
+    <string name="select_trip_date">Select trip date</string>
+    <string name="speak_now">Speak now</string>
+    <string name="speech_not_supported">Speech not supported</string>
+    <string name="please_select_date">Please select date</string>
+    <string name="please_enter_source">Please enter source</string>
+    <string name="please_enter_destination">Please enter destination</string>
+    <string name="please_enter_truck_number">Please enter truck number</string>
+    <string name="enter_via_place">Enter via place</string>
+    <string name="add_middle_place_optional">Add middle place (Optional)</string>
+    <string name="trip_route">Trip Route</string>
 
 
     <!--    <string name="onboard_title_1">All trips in one place</string>-->

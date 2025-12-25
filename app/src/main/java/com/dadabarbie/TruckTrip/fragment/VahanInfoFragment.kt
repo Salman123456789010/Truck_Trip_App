@@ -24,12 +24,7 @@ class VahanInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        try {
-            (activity as DashBoardActivity).textChanges(2)
-        }catch (e: Exception){}
-        try {
-            (activity as NormalUserDashBoard).textChanges(2)
-        }catch (e: Exception){}
+
 
         binding= FragmentVahanInfoBinding.inflate(inflater,container,false)
         setOnClickListner()
@@ -45,6 +40,16 @@ class VahanInfoFragment : Fragment() {
 //            adLoader.loadAd(AdRequest.Builder().build())
 //        }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        try {
+            (activity as DashBoardActivity).textChanges(2)
+        }catch (e: Exception){}
+        try {
+            (activity as NormalUserDashBoard).textChanges(2)
+        }catch (e: Exception){}
     }
 
     private fun setOnClickListner() {

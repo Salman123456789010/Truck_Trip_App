@@ -43,7 +43,10 @@
             android:exported="false" />
         <activity
             android:name=".activity.TruckNumberSpeechActivity"
-            android:exported="false" />
+            android:exported="false" >
+        </activity>
+
+
         <activity
             android:name=".activity.VahanInfoDetailsActivity"
             android:exported="false" />

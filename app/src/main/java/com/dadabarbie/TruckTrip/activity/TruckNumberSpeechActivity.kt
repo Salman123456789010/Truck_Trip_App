@@ -88,6 +88,7 @@ class TruckNumberSpeechActivity : AppCompatActivity(), TextToSpeech.OnInitListen
         binding.lottieMic.playAnimation()
         instructionText = getString(R.string.yaha_pe_truck_number_bolo)
 
+
         binding.lottieMic.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {}
 
@@ -131,7 +132,7 @@ class TruckNumberSpeechActivity : AppCompatActivity(), TextToSpeech.OnInitListen
             instructionText = getString(R.string.trip_edit_kar_rahe_hain)
             binding.tvInstruction.text = instructionText
             binding.btnNextScreen.text = getString(R.string.aage_badho_edit_karein)
-            binding.ivEditIndicator?.visibility = View.VISIBLE
+//            binding.ivEditIndicator?.visibility = View.VISIBLE
             binding.tvStatus.text = getString(R.string.edit_mode_truck_number_badal_sakte_ho)
         }
     }
@@ -194,6 +195,14 @@ class TruckNumberSpeechActivity : AppCompatActivity(), TextToSpeech.OnInitListen
                     putExtra("DRIVER_INCOME", getIntent().getStringExtra("DRIVER_INCOME"))
                     putExtra("TOTAL_INCOME", getIntent().getStringExtra("TOTAL_INCOME"))
                     putExtra("TOTAL_EXPENSE", getIntent().getStringExtra("TOTAL_EXPENSE"))
+
+                    // FIXED: Safely handle ROUTE_ARRAY
+                    val routeArray = getIntent().getStringArrayListExtra("ROUTE_ARRAY")
+                    if (routeArray != null) {
+                        putStringArrayListExtra("ROUTE_ARRAY", routeArray)
+                    }
+                    Log.d("ROUTE_ARRAY", "Complete Route: ${routeArray}")
+
                     putExtra("ORIGINAL_TRUCK_NUMBER", getIntent().getStringExtra("ORIGINAL_TRUCK_NUMBER"))
                     putExtra("ORIGINAL_START_DATE", getIntent().getStringExtra("ORIGINAL_START_DATE"))
                     putExtra("ORIGINAL_END_DATE", getIntent().getStringExtra("ORIGINAL_END_DATE"))

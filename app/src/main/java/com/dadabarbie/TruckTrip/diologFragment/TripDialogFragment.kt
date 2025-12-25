@@ -1,445 +1,444 @@
 package com.dadabarbie.TruckTrip.diologFragment
 
 import android.app.Activity
+import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dadabarbie.TruckTrip.R
-import com.dadabarbie.TruckTrip.Utils.Constants
-import com.dadabarbie.TruckTrip.Utils.Constants.gone
-import com.dadabarbie.TruckTrip.Utils.Constants.visible
-import com.dadabarbie.TruckTrip.Utils.Event
-import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.activity.MainActivity
+import com.dadabarbie.TruckTrip.adapter.RouteAdapter
 import com.dadabarbie.TruckTrip.databinding.TripDialogFragmentBinding
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.play.integrity.internal.ac
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 class TripDialogFragment(
-    val bothDate: String,
+    val date: String,
     val startingPlace: String,
     val endingPlace: String,
-    val driverIncomeTrip: String,
+    val driverIncome: String,
     val truckNumber: String,
     val truckAvg: String,
     val totalDays: String,
     val update: String,
-    val startOdometer: String = ""  // NEW: Add start odometer parameter
-) : DialogFragment(), View.OnClickListener, TextToSpeech.OnInitListener {
+    val startOdometer: String = "",
+    val existingRoute: ArrayList<String> = arrayListOf()
+) : DialogFragment() {
 
-    lateinit var binding: TripDialogFragmentBinding
-    lateinit var avgDialogFragment: AvgDialogFragment
-    private lateinit var materialDateBuilder: MaterialDatePicker.Builder<Long>
-    private lateinit var materialDatePicker: MaterialDatePicker<Long>
-    var startDate: String = ""
-    var endDate: String = ""
-    private val MIN_CLICK_INTERVAL: Long = 1000
-    private var lastClickTime: Long = 0
-    var truckTrip = "0"
-    private lateinit var tts: TextToSpeech
+    private var _binding: TripDialogFragmentBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onClick(v: View?) {
-        when (v) {
-            binding.date -> {
-                val currentTime = System.currentTimeMillis()
-                if (currentTime - lastClickTime > MIN_CLICK_INTERVAL) {
-                    lastClickTime = currentTime
-                    materialDatePicker.show(childFragmentManager, "MATERIAL_DATE_PICKER")
-                }
-            }
-            binding.speaker -> {
-                val textToSpeak = getString(R.string.ahi_trip_ni_saruaat_ni_ane_end_ni_date_nakho)
-                speakText(textToSpeak)
-            }
-            binding.speakLan -> {
-                val textToSpeak = getString(R.string.sarvat_no_place_nakho)
-                speakText(textToSpeak)
-            }
-            binding.speakLandest -> {
-                val textToSpeak = getString(R.string.end_no_place_nakho)
-                speakText(textToSpeak)
-            }
-            binding.driverAvakSpeaker -> {
-                val textToSpeak = getString(R.string.driver_ni_per_trip_aavak_nakho)
-                speakText(textToSpeak)
-            }
-            binding.truckSpeaker -> {
-                val textToSpeak = getString(R.string.truck_number_add_karo)
-                speakText(textToSpeak)
-            }
-            binding.closeBtn -> {
-                requireActivity().onBackPressed()
-            }
-            binding.submit -> {
-                if (validation()) {
-                    (context as MainActivity).getDataFill(
-                        binding.truckNumber.text.toString(),
-                        binding.srcPlaceValue.text.toString(),
-                        binding.destPlaceValue.text.toString(),
-                        startDate,
-                        endDate,
-                        binding.truckAvgValue.text.toString(),
-                        binding.driverTripAvak.text.toString(),
-                        truckTrip,
-                        binding.etStartOdometer.text.toString().trim()  // NEW: Pass start odometer
-                    )
-                    (context as MainActivity).databaseAddFlag = false
-                    if (update == "") {
-                        Constants.creditList.clear()
-                        Constants.debitList.clear()
-                    }
-                    dialog?.dismiss()
-                }
-            }
-            binding.avgButton -> {
-                avgDialogFragment = AvgDialogFragment()
-                avgDialogFragment.show(childFragmentManager, "")
-            }
-            binding.srcMic -> {
-                getTextToSpeech()
-            }
-            binding.destMic -> {
-                getTextToSpeechDest()
-            }
-        }
-    }
+    private lateinit var routeAdapter: RouteAdapter
+    private val routeList = ArrayList<String>()
+
+    private var selectedDate: String = ""
+    private var textToSpeech: TextToSpeech? = null
+
+    private val DATE_PICKER_REQUEST = 100
+    private val SRC_SPEECH_REQUEST = 101
+    private val DEST_SPEECH_REQUEST = 102
+    private val MIDDLE_SPEECH_REQUEST = 103
+    private val TRUCK_SPEECH_REQUEST = 104
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = TripDialogFragmentBinding.inflate(inflater, container, false)
-        Constants.emitAvg(Event(""))
-        tts = TextToSpeech(requireContext(), this)
-        setData()
-
-        binding.truckNumber.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) {
-                binding.srcPlaceValue.error = null
-                binding.destPlaceValue.error = null
-                binding.truckNumber.error = null
-            }
-        }
-        binding.destPlaceValue.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) {
-                binding.srcPlaceValue.error = null
-                binding.destPlaceValue.error = null
-                binding.truckNumber.error = null
-            }
-        }
-        binding.srcPlaceValue.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) {
-                binding.srcPlaceValue.error = null
-                binding.destPlaceValue.error = null
-                binding.truckNumber.error = null
-            }
-        }
-
-        initDatePicker()
-        setObserver()
-        setOnClickListner()
+        _binding = TripDialogFragmentBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    private fun setData() {
-        if (update == "yes") {
-            binding.closeBtn.visibility = View.GONE
-            binding.addTripDataLabel.text = getString(R.string.edit_trip_data)
-        } else {
-            binding.closeBtn.visibility = View.VISIBLE
-            binding.addTripDataLabel.text = getString(R.string.add_trip_data)
-        }
-        binding.date.text = "$bothDate"
-        startDate = bothDate
-        binding.srcPlaceValue.setText(startingPlace)
-        binding.destPlaceValue.setText(endingPlace)
-        binding.driverTripAvak.setText(driverIncomeTrip)
-        binding.truckNumber.setText(truckNumber)
-        binding.truckAvgValue.text = truckAvg
-
-        // NEW: Set start odometer if available
-        if (startOdometer.isNotEmpty()) {
-            binding.etStartOdometer.setText(startOdometer)
-        }
-    }
-
-    private fun setObserver() {
-        Constants.avg.observe(this) {
-            it.getContentIfNotHandled()?.let { event ->
-                event.let {
-                    if (it == "") {
-                        binding.truckAvgLayout.gone()
-                    } else {
-                        binding.truckAvgLayout.visible()
-                        binding.truckAvgValue.text = " : " + it
-                    }
-                }
-            }
-        }
-    }
-
-    private fun setOnClickListner() {
-        binding.date.setOnClickListener(this)
-        binding.submit.setOnClickListener(this)
-        binding.avgButton.setOnClickListener(this)
-        binding.srcMic.setOnClickListener(this)
-        binding.destMic.setOnClickListener(this)
-        binding.speaker.setOnClickListener(this)
-        binding.speakLan.setOnClickListener(this)
-        binding.truckSpeaker.setOnClickListener(this)
-        binding.speakLandest.setOnClickListener(this)
-        binding.driverAvakSpeaker.setOnClickListener(this)
-        binding.truckMic.setOnClickListener(this)
-        binding.closeBtn.setOnClickListener(this)
-
-        materialDatePicker.addOnPositiveButtonClickListener { selection: Long ->
-            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val selectedCal = Calendar.getInstance()
-            selectedCal.timeInMillis = selection
-            val now = Calendar.getInstance()
-            selectedCal.set(Calendar.HOUR_OF_DAY, now.get(Calendar.HOUR_OF_DAY))
-            selectedCal.set(Calendar.MINUTE, now.get(Calendar.MINUTE))
-            val dateStart = simpleDateFormat.format(Date(selection))
-            startDate = dateStart
-            endDate = dateStart
-            binding.date.text = formatDateWithTime(Date(selectedCal.timeInMillis))
-            binding.totalDays.text = getString(R.string.total_days) + ": 1"
-            truckTrip = "1"
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val width = (resources.displayMetrics.widthPixels * 0.90)
-        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        dialog!!.window!!.setLayout(width.toInt(), ActionBar.LayoutParams.WRAP_CONTENT)
+
+        initTextToSpeech()
+        setupRouteRecyclerView()
+        loadExistingData()
+        setupClickListeners()
     }
 
-    fun validation(): Boolean {
-        if (binding.truckNumber.text.toString().isNullOrEmpty() || binding.truckNumber.text.toString() == "") {
-            binding.truckNumber.requestFocus()
-            binding.truckNumber.error = getString(R.string.please_add_truck_number)
-            return false
-        } else {
-            binding.truckNumber.clearFocus()
-            binding.truckNumber.error = null
+    private fun initTextToSpeech() {
+        textToSpeech = TextToSpeech(requireContext()) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                textToSpeech?.language = Locale("hi", "IN")
+            }
         }
-        if (binding.srcPlaceValue.text.toString().isNullOrEmpty() || binding.srcPlaceValue.text.toString() == "") {
-            binding.srcPlaceValue.requestFocus()
-            binding.srcPlaceValue.error = getString(R.string.please_add_source_place)
-            return false
-        } else {
-            binding.srcPlaceValue.clearFocus()
-            binding.srcPlaceValue.error = null
-        }
-        if (binding.destPlaceValue.text.toString().isNullOrEmpty() || binding.destPlaceValue.text.toString() == "") {
-            binding.destPlaceValue.requestFocus()
-            binding.destPlaceValue.error = getString(R.string.please_add_destination_place)
-            return false
-        } else {
-            binding.destPlaceValue.clearFocus()
-            binding.destPlaceValue.error = null
-        }
+    }
 
-        if (binding.totalDays.text.toString() == "Total Days : 0") {
-            Toast.makeText(
-                requireActivity(),
-                "Please add Trip Starting Date & Ending Date",
-                Toast.LENGTH_SHORT
-            ).show()
-            binding.datePicker.requestFocus()
-            return false
-        }
-
-        // NEW: Validate start odometer if entered
-        val startOdo = binding.etStartOdometer.text.toString().trim()
-        if (startOdo.isNotEmpty()) {
-            val odoValue = startOdo.toDoubleOrNull()
-            if (odoValue == null || odoValue < 0) {
-                Toast.makeText(
-                    requireActivity(),
-                    "Please enter valid start odometer reading",
-                    Toast.LENGTH_SHORT
-                ).show()
-                binding.etStartOdometer.requestFocus()
-                return false
+    private fun setupRouteRecyclerView() {
+        routeAdapter = RouteAdapter(routeList) { position ->
+            // Delete middle place
+            if (position > 0 && position < routeList.size - 1) {
+                routeList.removeAt(position)
+                routeAdapter.notifyItemRemoved(position)
+                routeAdapter.notifyItemRangeChanged(position, routeList.size)
             }
         }
 
-        return true
-    }
-
-    private fun initDatePicker() {
-        materialDateBuilder = MaterialDatePicker.Builder.datePicker()
-            .setCalendarConstraints(
-                CalendarConstraints.Builder().setEnd(MaterialDatePicker.todayInUtcMilliseconds())
-                    .build()
-            )
-        materialDateBuilder.setTitleText(getString(R.string.select_date_))
-        materialDatePicker = materialDateBuilder.build()
-        val date = getCurrentDateTime()
-        val dateStart = date.toString(format = "yyyy-MM-dd")
-        if (update != "yes") {
-            startDate = dateStart
-            endDate = dateStart
-        }
-        if (bothDate == "") {
-            binding.date.text = formatDateWithTime(date)
-            binding.totalDays.text = "Total Days : 1"
-            truckTrip = "1"
+        binding.rvRoute.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = routeAdapter
         }
     }
 
-    fun getOneYearFromNow(): Date {
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.YEAR, 1)
-        return calendar.time
-    }
+    private fun loadExistingData() {
+        // Load date
+        if (date.isNotEmpty()) {
+            binding.date.text = date
+            selectedDate = date
+        }
 
-    private fun getCurrentDateTime(): Date {
-        return Calendar.getInstance().time
-    }
+        // Load route - priority order: existingRoute > individual places
+        if (existingRoute.isNotEmpty()) {
+            routeList.clear()
+            routeList.addAll(existingRoute)
 
-    fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
-        val formatter = SimpleDateFormat(format, locale)
-        return formatter.format(this)
-    }
-
-    private fun formatDateWithTime(date: Date): String {
-        val formatter = SimpleDateFormat("dd MMMM yyyy , HH:mm 'time'", Locale.getDefault())
-        return formatter.format(date)
-    }
-
-    fun printDifference(startDate: Date, endDate: Date): String {
-        var different = endDate.time - startDate.time
-        println("startDate : $startDate")
-        println("endDate : $endDate")
-        println("different : $different")
-        val secondsInMilli: Long = 1000
-        val minutesInMilli = secondsInMilli * 60
-        val hoursInMilli = minutesInMilli * 60
-        val daysInMilli = hoursInMilli * 24
-        val elapsedDays = different / daysInMilli
-        different = different % daysInMilli
-        val elapsedHours = different / hoursInMilli
-        different = different % hoursInMilli
-        val elapsedMinutes = different / minutesInMilli
-        different = different % minutesInMilli
-        val elapsedSeconds = different / secondsInMilli
-        return elapsedDays.toString()
-    }
-
-    private fun allCloseFocus() {
-        binding.truckNumber.clearFocus()
-        binding.srcPlaceValue.clearFocus()
-        binding.destPlaceValue.clearFocus()
-    }
-
-    fun getTextToSpeech() {
-        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intent.putExtra(
-            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-        )
-        Log.d("whatsanswer", "getTextToSpeech: ${Prefs[Constants.languageCode, ""].toString()}")
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Prefs[Constants.languageCode, ""].toString() + "-IN")
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak your language")
-
-        if (intent.resolveActivity(requireActivity().packageManager) != null) {
-            startActivityForResult(intent, 10)
+            // Set source and destination from route
+            if (routeList.size >= 2) {
+                binding.srcPlaceValue.setText(routeList[0])
+                binding.destPlaceValue.setText(routeList[routeList.size - 1])
+            }
         } else {
-            Toast.makeText(
-                requireActivity(),
-                "Your Device Don't Support Speech Input",
-                Toast.LENGTH_SHORT
-            ).show()
+            // Load from individual parameters (backward compatibility)
+            if (startingPlace.isNotEmpty()) {
+                routeList.add(startingPlace)
+                binding.srcPlaceValue.setText(startingPlace)
+            }
+            if (endingPlace.isNotEmpty()) {
+                if (routeList.isEmpty()) {
+                    routeList.add("") // Add empty source if missing
+                }
+                routeList.add(endingPlace)
+                binding.destPlaceValue.setText(endingPlace)
+            }
+        }
+
+        // Update RecyclerView
+        routeAdapter.notifyDataSetChanged()
+        binding.rvRoute.visibility = if (routeList.size > 2) View.VISIBLE else View.GONE
+
+        // Load truck number
+        if (truckNumber.isNotEmpty()) {
+            binding.truckNumber.setText(truckNumber)
+        }
+
+        // Load start odometer
+        if (startOdometer.isNotEmpty()) {
+            binding.etStartOdometer.setText(startOdometer)
+        }
+
+        // Set dialog title
+        if (update == "yes") {
+            binding.addTripDataLabel.text = getString(R.string.update_trip_data)
+            binding.submit.text = getString(R.string.update)
+            binding.closeBtn.visibility=View.GONE
+        }else{
+            binding.closeBtn.visibility=View.VISIBLE
         }
     }
 
-    private fun getTextToSpeechDest() {
-        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intent.putExtra(
-            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-        )
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Prefs[Constants.languageCode, ""].toString() + "-IN")
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak your language")
+    private fun setupClickListeners() {
+        // Close button
+        binding.closeBtn.setOnClickListener {
+            dismiss()
+            activity?.onBackPressedDispatcher!!.onBackPressed()
+        }
 
-        if (intent.resolveActivity(requireActivity().packageManager) != null) {
-            startActivityForResult(intent, 11)
-        } else {
-            Toast.makeText(
-                requireActivity(),
-                "Your Device Don't Support Speech Input",
-                Toast.LENGTH_SHORT
-            ).show()
+        // Date picker
+        binding.datePicker.setOnClickListener {
+            showDatePicker()
+        }
+
+        // Date speaker
+        binding.speaker.setOnClickListener {
+            speakText(binding.date.text.toString())
+        }
+
+        // Source place text changed
+        binding.srcPlaceValue.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                val text = s.toString().trim()
+                if (routeList.isEmpty()) {
+                    routeList.add(text)
+                } else {
+                    routeList[0] = text
+                }
+                routeAdapter.notifyItemChanged(0)
+            }
+        })
+
+        // Destination place text changed
+        binding.destPlaceValue.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                val text = s.toString().trim()
+
+                // Ensure we have at least source place
+                if (routeList.isEmpty()) {
+                    routeList.add("") // Add empty source
+                }
+
+                // Update or add destination
+                if (routeList.size == 1) {
+                    routeList.add(text)
+                } else {
+                    routeList[routeList.size - 1] = text
+                }
+                routeAdapter.notifyItemChanged(routeList.size - 1)
+            }
+        })
+
+        // Source place speaker
+        binding.speakLan.setOnClickListener {
+            speakText(binding.srcPlaceValue.text.toString())
+        }
+
+        // Source place mic
+        binding.srcMic.setOnClickListener {
+            startSpeechToText(SRC_SPEECH_REQUEST)
+        }
+
+        // Destination place speaker
+        binding.speakLandest.setOnClickListener {
+            speakText(binding.destPlaceValue.text.toString())
+        }
+
+        // Destination place mic
+        binding.destMic.setOnClickListener {
+            startSpeechToText(DEST_SPEECH_REQUEST)
+        }
+
+        // Add middle place button
+        binding.btnAddMiddlePlace.setOnClickListener {
+            val middlePlace = binding.etMiddlePlace.text.toString().trim()
+
+            if (middlePlace.isEmpty()) {
+                Toast.makeText(requireContext(), getString(R.string.please_enter_middle_place), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Ensure we have at least source and destination
+            if (routeList.size < 2) {
+                Toast.makeText(requireContext(), getString(R.string.please_add_source_destination_first), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Insert middle place before destination
+            val insertPosition = routeList.size - 1
+            routeList.add(insertPosition, middlePlace)
+            routeAdapter.notifyItemInserted(insertPosition)
+
+            // Clear input
+            binding.etMiddlePlace.setText("")
+
+            // Show RecyclerView if it was hidden
+            binding.rvRoute.visibility = View.VISIBLE
+
+            Toast.makeText(requireContext(), getString(R.string.middle_place_added), Toast.LENGTH_SHORT).show()
+        }
+
+        // Middle place mic
+        binding.middlePlaceMic.setOnClickListener {
+            startSpeechToText(MIDDLE_SPEECH_REQUEST)
+        }
+
+        // Middle place speaker
+        binding.middlePlaceSpeaker.setOnClickListener {
+            speakText(binding.etMiddlePlace.text.toString())
+        }
+
+        // Truck number speaker
+        binding.truckSpeaker.setOnClickListener {
+            speakText(binding.truckNumber.text.toString())
+        }
+
+        // Submit button
+        binding.submit.setOnClickListener {
+            validateAndSubmit()
+        }
+    }
+
+    private fun showDatePicker() {
+        val constraintsBuilder = CalendarConstraints.Builder()
+            .setValidator(DateValidatorPointBackward.now())
+
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText(getString(R.string.select_trip_date))
+            .setCalendarConstraints(constraintsBuilder.build())
+            .build()
+
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            selectedDate = sdf.format(Date(selection))
+            binding.date.text = selectedDate
+        }
+
+        datePicker.show(parentFragmentManager, "DATE_PICKER")
+    }
+
+    private fun startSpeechToText(requestCode: Int) {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN")
+            putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speak_now))
+        }
+
+        try {
+            startActivityForResult(intent, requestCode)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(requireContext(), getString(R.string.speech_not_supported), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun speakText(text: String) {
+        if (text.isNotEmpty()) {
+            textToSpeech?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (resultCode == Activity.RESULT_OK && data != null) {
-            if (requestCode == 10) {
-                val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                binding.srcPlaceValue.setText(result!![0].toString())
-                val amount = extractAmount(result[0].toString())
-            } else {
-                val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                binding.destPlaceValue.setText(result!![0].toString())
+            val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            val spokenText = result?.get(0) ?: ""
+
+            when (requestCode) {
+                SRC_SPEECH_REQUEST -> {
+                    binding.srcPlaceValue.setText(spokenText)
+                }
+                DEST_SPEECH_REQUEST -> {
+                    binding.destPlaceValue.setText(spokenText)
+                }
+                MIDDLE_SPEECH_REQUEST -> {
+                    binding.etMiddlePlace.setText(spokenText)
+                }
+                TRUCK_SPEECH_REQUEST -> {
+                    binding.truckNumber.setText(spokenText)
+                }
             }
         }
     }
 
-    fun extractAmount(text: String): Int {
-        val regex = Regex("(\\d+)|(hundred|thousand)")
-        var amount = 0
-        var multiplier = 1
+    private fun validateAndSubmit() {
+        val srcPlace = binding.srcPlaceValue.text.toString().trim()
+        val destPlace = binding.destPlaceValue.text.toString().trim()
+        val truckNo = binding.truckNumber.text.toString().trim()
+        val startOdo = binding.etStartOdometer.text.toString().trim()
 
-        regex.findAll(text).forEach { matchResult ->
-            val value = matchResult.value
-            when (value) {
-                "hundred" -> multiplier = 100
-                "thousand" -> multiplier = 1000
-                else -> amount += (value.toIntOrNull() ?: 0) * multiplier
-            }
+        // Validation
+        if (selectedDate.isEmpty()) {
+            Toast.makeText(requireContext(), getString(R.string.please_select_date), Toast.LENGTH_SHORT).show()
+            return
         }
-        return amount
-    }
 
-    override fun onInit(status: Int) {
-        if (status == TextToSpeech.SUCCESS) {
-            val result = tts.setLanguage(Locale("gu", "IN"))
-            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                // Handle language not supported error
-            }
+        if (srcPlace.isEmpty()) {
+            Toast.makeText(requireContext(), getString(R.string.please_enter_source), Toast.LENGTH_SHORT).show()
+            binding.srcPlaceValue.requestFocus()
+            return
+        }
+
+        if (destPlace.isEmpty()) {
+            Toast.makeText(requireContext(), getString(R.string.please_enter_destination), Toast.LENGTH_SHORT).show()
+            binding.destPlaceValue.requestFocus()
+            return
+        }
+
+        if (truckNo.isEmpty()) {
+            Toast.makeText(requireContext(), getString(R.string.please_enter_truck_number), Toast.LENGTH_SHORT).show()
+            binding.truckNumber.requestFocus()
+            return
+        }
+
+        // Update route list with final values
+        if (routeList.isEmpty()) {
+            routeList.add(srcPlace)
+            routeList.add(destPlace)
         } else {
-            // Initialization failed
+            routeList[0] = srcPlace
+            routeList[routeList.size - 1] = destPlace
+        }
+
+        // Pass data back to MainActivity
+        (activity as? MainActivity)?.getDataFill(
+            truckNumber = truckNo,
+            srcPlaceValue = srcPlace,
+            destPlaceValue = destPlace,
+            startDate = selectedDate,
+            endDate = "",
+            truckAvg = "",
+            driverTripAvak = "",
+            totalDays = "0",
+            startOdometer = startOdo,
+            route = ArrayList(routeList) // Pass the complete route
+        )
+
+        dismiss()
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+
+        // Set dialog to be full width with proper styling
+        dialog.window?.apply {
+            setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            setBackgroundDrawableResource(android.R.color.transparent)
+
+            // Add margins
+            attributes?.let { params ->
+                val margin = context.resources.getDimensionPixelSize(R.dimen._12sdp)
+                params.width = context.resources.displayMetrics.widthPixels - (margin * 2)
+                attributes = params
+            }
+        }
+
+        return dialog
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // Alternative: Set dialog width here if onCreateDialog doesn't work
+        dialog?.window?.apply {
+            setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            setBackgroundDrawableResource(android.R.color.transparent)
+
+            attributes?.let { params ->
+                val margin = context.resources.getDimensionPixelSize(R.dimen._12sdp)
+                params.width = context.resources.displayMetrics.widthPixels - (margin * 2)
+                attributes = params
+            }
         }
     }
 
-    private fun speakText(text: String) {
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
-    }
-
-    override fun onDestroy() {
-        if (tts != null) {
-            tts.stop()
-            tts.shutdown()
-        }
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        textToSpeech?.shutdown()
+        _binding = null
     }
 }

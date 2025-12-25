@@ -502,9 +502,6 @@ Save पर टैप करने से डीज़ल खर्च ट्र
     <string name="owner_income">ओनर की इनकम रिपोर्ट</string>
     <string name="per_trip_average_diesel">हर ट्रिप का एवरेज और डीज़ल रिपोर्ट</string>
     <string name="this_to">यह चुनें</string>
-
-
-
     <string name="you_can_change_app_mode">आप ऐप का मोड बदल सकते हैं</string>
     <string name="app_flow_change">ऐप का तरीका बदलें</string>
     <string name="trip_mood_choose">यात्रा मोड चुनें</string>
@@ -520,10 +517,44 @@ Save पर टैप करने से डीज़ल खर्च ट्र
     <string name="language_badalni_ho_to_language_par_click_karo_app_seekhni_ho_to_how_to_use_par_click_karo_mode_badalna_ho_to_app_mode_par_click_karo">भाषा बदलने के लिए भाषा पर टैप करें।\nऐप सीखने के लिए उपयोग विधि पर टैप करें।\nमोड बदलने के लिए ऐप मोड पर टैप करें।</string>
     <string name="pehle_se_sun_rahe_hain">पहले से सुन रहे हैं...</string>
     <string name="boliye">🎤 बोलिए...</string>
+    <string name="complete_trip_dec" translatable="false">
+ट्रिप की खत्म होने की तारीख चुनें और ड्राइवर की कमाई भरें।
+यह रकम सिर्फ ड्राइवर की कमाई दिखाने के लिए है, हिसाब में नहीं जुड़ती।
+ट्रिप पूरी करने और PDF डाउनलोड करने के लिए “Submit” पर टैप करें।
+</string>
     <string name="lang_change_dec">
 भाषा बदलनी हो तो Language पर क्लिक करो।
 App सीखनी हो तो How to Use पर क्लिक करो।
 Mode बदलना हो तो App Mode पर क्लिक करो।
 </string>
+    <string name="pehle_truck_number_bolo">पहले ट्रक नंबर बोलो</string>
+    <string name="sabhi_fields_bharo">सभी जानकारी भरो</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+बीच का रास्ता जोड़ो (वैकल्पिक)</string>
+    <string name="naya_bolo">नया बोलो</string>
+    <string name="beech_mein_rasta_stop">बीच में रास्ता (स्टॉप)</string>
+    <string name="shuru_ki_jagah_save_ho_gayi">शुरू की जगह सेव हो गई!</string>
+    <string name="akhri_jagah_save_ho_gayi">आख़िरी जगह सेव हो गई!</string>
+    <string name="raste_ka_stop_add_ho_gaya">रास्ते का स्टॉप जुड़ गया!</string>
+    <string name="stop_hata_diya">स्टॉप हटा दिया!</string>
+    <string name="beech_ka_place_he_to_bolo">बीच की जगह है तो बोलो</string>
+    <string name="jagah_ka_naam_bolo">जगह का नाम बोलो</string>
+
+    <string name="via">वाया</string>
+    <string name="source">शुरुआत</string>
+    <string name="destination">मंज़िल</string>
+    <string name="update_trip_data">ट्रिप का डेटा अपडेट करें</string>
+    <string name="please_enter_middle_place">बीच की जगह डालो</string>
+    <string name="please_add_source_destination_first">पहले शुरुआत और मंज़िल डालो</string>
+    <string name="middle_place_added">बीच की जगह जुड़ गई</string>
+    <string name="select_trip_date">ट्रिप की तारीख चुनो</string>
+    <string name="speak_now">अब बोलो</string>
+    <string name="speech_not_supported">बोलने की सुविधा नहीं है</string>
+    <string name="please_select_date">कृपया तारीख चुनो</string>
+    <string name="please_enter_source">शुरुआत की जगह डालो</string>
+    <string name="please_enter_destination">मंज़िल की जगह डालो</string>
+    <string name="please_enter_truck_number">ट्रक नंबर डालो</string>
+    <string name="enter_via_place">वाया जगह डालो</string>
+    <string name="add_middle_place_optional">बीच की जगह जोड़ो (ज़रूरी नहीं)</string>
+    <string name="trip_route">ट्रिप का रास्ता</string>
 
 </resources>

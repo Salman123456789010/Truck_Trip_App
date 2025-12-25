@@ -16,16 +16,19 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.databinding.ActivitySecondSpeechScreenBinding
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -51,8 +54,32 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var endPlace = ""
     private var arrowAnimator: ValueAnimator? = null
 
+    // Multiple stops list
+    private val middleStops = mutableListOf<String>()
+
+    // Complete route array for API
+    private fun getCompleteRouteArray(): ArrayList<String> {
+        val routeArray = ArrayList<String>()
+
+        // Add start place
+        if (startPlace.isNotEmpty()) {
+            routeArray.add(startPlace)
+        }
+
+        // Add all middle stops
+        routeArray.addAll(middleStops)
+
+        // Add end place
+        if (endPlace.isNotEmpty()) {
+            routeArray.add(endPlace)
+        }
+
+        return routeArray
+    }
+
     // Dialog field type
     private var dialogFieldType = FieldType.START_PLACE
+    private var editingStopIndex = -1
 
     private val voiceRecognitionLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -81,7 +108,7 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     enum class FieldType {
-        START_DATE, START_PLACE, END_PLACE
+        START_DATE, START_PLACE, END_PLACE, MIDDLE_STOP
     }
 
     var langCode = ""
@@ -146,25 +173,54 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         if (isEditMode) {
             tripId = intent.getStringExtra("TRIP_ID") ?: ""
 
+            // Get route array from intent
+            val routeArray = intent.getStringArrayListExtra("ROUTE_ARRAY")
+
+            if (routeArray != null && routeArray.isNotEmpty()) {
+                // First element is always start place
+                startPlace = routeArray[0]
+                binding.tvStartPlaceValue.text = startPlace
+                binding.cardStartPlace.setCardBackgroundColor(getColor(R.color.white))
+
+                // Last element is always end place
+                if (routeArray.size > 1) {
+                    endPlace = routeArray[routeArray.size - 1]
+                    binding.tvEndPlaceValue.text = endPlace
+                    binding.cardEndPlace.setCardBackgroundColor(getColor(R.color.white))
+                }
+
+                // Middle elements are stops (if more than 2 elements)
+                if (routeArray.size > 2) {
+                    middleStops.clear()
+                    for (i in 1 until routeArray.size - 1) {
+                        middleStops.add(routeArray[i])
+                    }
+                    // Refresh UI to show middle stops
+                    refreshMiddleStopsUI()
+                }
+            } else {
+                // Fallback to old method if ROUTE_ARRAY not available
+                val startPlaceValue = intent.getStringExtra("START_PLACE") ?: ""
+                if (startPlaceValue.isNotEmpty()) {
+                    startPlace = startPlaceValue
+                    binding.tvStartPlaceValue.text = startPlace
+                    binding.cardStartPlace.setCardBackgroundColor(getColor(R.color.white))
+                }
+
+                val endPlaceValue = intent.getStringExtra("END_PLACE") ?: ""
+                if (endPlaceValue.isNotEmpty()) {
+                    endPlace = endPlaceValue
+                    binding.tvEndPlaceValue.text = endPlace
+                    binding.cardEndPlace.setCardBackgroundColor(getColor(R.color.white))
+                }
+            }
+
+            // Handle start date
             val startDate = intent.getStringExtra("START_DATE") ?: ""
             if (startDate.isNotEmpty()) {
                 selectedDate = startDate
                 binding.tvStartDateValue.text = startDate
                 binding.cardStartDate.setCardBackgroundColor(getColor(R.color.white))
-            }
-
-            val startPlaceValue = intent.getStringExtra("START_PLACE") ?: ""
-            if (startPlaceValue.isNotEmpty()) {
-                startPlace = startPlaceValue
-                binding.tvStartPlaceValue.text = startPlace
-                binding.cardStartPlace.setCardBackgroundColor(getColor(R.color.white))
-            }
-
-            val endPlaceValue = intent.getStringExtra("END_PLACE") ?: ""
-            if (endPlaceValue.isNotEmpty()) {
-                endPlace = endPlaceValue
-                binding.tvEndPlaceValue.text = endPlace
-                binding.cardEndPlace.setCardBackgroundColor(getColor(R.color.white))
             }
 
             binding.btnSubmit.text = getString(R.string.edit_continue_karein)
@@ -196,22 +252,35 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         binding.cardStartPlace.setOnClickListener {
-            // Show desi dialog for start place
             showDesiPlaceDialog(FieldType.START_PLACE)
         }
 
         binding.cardEndPlace.setOnClickListener {
-            // Show desi dialog for end place
             showDesiPlaceDialog(FieldType.END_PLACE)
+        }
+
+        // Add stop button click
+        binding.btnAddStop?.setOnClickListener {
+            showDesiPlaceDialog(FieldType.MIDDLE_STOP)
         }
 
         binding.btnSubmit.setOnClickListener {
             if (validateInputs()) {
+                // Get complete route array
+                val completeRoute = getCompleteRouteArray()
+
                 val intent = Intent(this, ThirdExpenseScreen::class.java).apply {
                     putExtra("TRUCK_NUMBER", getIntent().getStringExtra("TRUCK_NUMBER"))
                     putExtra("START_DATE", selectedDate)
                     putExtra("START_PLACE", startPlace)
                     putExtra("END_PLACE", endPlace)
+
+                    // Pass complete route array
+                    putStringArrayListExtra("ROUTE_ARRAY", completeRoute)
+
+                    // Also pass as JSON string for easy API usage
+                    putExtra("ROUTE_JSON", com.google.gson.Gson().toJson(completeRoute))
+
                     putExtra("EDIT_MODE", isEditMode)
                     putExtra("TRIP_ID", tripId)
                     putExtra("id", tripId)
@@ -228,6 +297,10 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                         putExtra("ORIGINAL_END_PLACE", getIntent().getStringExtra("ORIGINAL_END_PLACE"))
                     }
                 }
+
+                // Log for debugging
+                Log.d("RouteArray", "Complete Route: ${completeRoute.joinToString(" -> ")}")
+
                 startActivity(intent)
             } else {
                 Toast.makeText(this, getString(R.string.sari_fields_bharo), Toast.LENGTH_SHORT).show()
@@ -254,14 +327,22 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         val btnCancel = dialog.findViewById<MaterialButton>(R.id.btnDialogCancel)
 
         // Set title based on field type
-        tvTitle.text = if (fieldType == FieldType.START_PLACE) {
-            getString(R.string.sarvat_no_place_nakho)
-        } else {
-            getString(R.string.end_no_place_nakho)
+        tvTitle.text = when (fieldType) {
+            FieldType.START_PLACE -> getString(R.string.sarvat_no_place_nakho)
+            FieldType.END_PLACE -> getString(R.string.end_no_place_nakho)
+            FieldType.MIDDLE_STOP -> getString(R.string.beech_mein_rasta_stop)
+            else -> ""
         }
 
         // Pre-fill existing value
-        etPlace.setText(if (fieldType == FieldType.START_PLACE) startPlace else endPlace)
+        etPlace.setText(
+            when (fieldType) {
+                FieldType.START_PLACE -> startPlace
+                FieldType.END_PLACE -> endPlace
+                FieldType.MIDDLE_STOP -> if (editingStopIndex >= 0) middleStops[editingStopIndex] else ""
+                else -> ""
+            }
+        )
 
         // Store reference for voice input
         dialogEditText = etPlace
@@ -276,17 +357,35 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         btnSave.setOnClickListener {
             val inputText = etPlace.text.toString().trim()
             if (inputText.isNotEmpty()) {
-                if (fieldType == FieldType.START_PLACE) {
-                    startPlace = inputText
-                    binding.tvStartPlaceValue.text = startPlace
-                    binding.cardStartPlace.setCardBackgroundColor(getColor(R.color.white))
-                } else {
-                    endPlace = inputText
-                    binding.tvEndPlaceValue.text = endPlace
-                    binding.cardEndPlace.setCardBackgroundColor(getColor(R.color.white))
+                when (fieldType) {
+                    FieldType.START_PLACE -> {
+                        startPlace = inputText
+                        binding.tvStartPlaceValue.text = startPlace
+                        binding.cardStartPlace.setCardBackgroundColor(getColor(R.color.white))
+                        Toast.makeText(this,
+                            getString(R.string.shuru_ki_jagah_save_ho_gayi), Toast.LENGTH_SHORT).show()
+                    }
+                    FieldType.END_PLACE -> {
+                        endPlace = inputText
+                        binding.tvEndPlaceValue.text = endPlace
+                        binding.cardEndPlace.setCardBackgroundColor(getColor(R.color.white))
+                        Toast.makeText(this,
+                            getString(R.string.akhri_jagah_save_ho_gayi), Toast.LENGTH_SHORT).show()
+                    }
+                    FieldType.MIDDLE_STOP -> {
+                        if (editingStopIndex >= 0) {
+                            middleStops[editingStopIndex] = inputText
+                            editingStopIndex = -1
+                        } else {
+                            middleStops.add(inputText)
+                        }
+                        refreshMiddleStopsUI()
+                        Toast.makeText(this,
+                            getString(R.string.raste_ka_stop_add_ho_gaya), Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {}
                 }
                 dialog.dismiss()
-                Toast.makeText(this, getString(R.string.jagah_save_ho_gayi), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, getString(R.string.jagah_ka_naam_daalo), Toast.LENGTH_SHORT).show()
             }
@@ -294,10 +393,121 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         // Cancel button
         btnCancel.setOnClickListener {
+            editingStopIndex = -1
             dialog.dismiss()
         }
 
         dialog.show()
+    }
+
+    private fun refreshMiddleStopsUI() {
+        binding.llMiddleStops?.removeAllViews()
+
+        middleStops.forEachIndexed { index, stop ->
+            val stopCard = createMiddleStopCard(stop, index)
+            binding.llMiddleStops?.addView(stopCard)
+        }
+    }
+
+    private fun createMiddleStopCard(stopName: String, index: Int): MaterialCardView {
+        val cardView = MaterialCardView(this).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                bottomMargin = 16.dpToPx()
+            }
+            radius = 16f.dpToPx()
+            cardElevation = 2f.dpToPx()
+            setCardBackgroundColor(Color.WHITE)
+        }
+
+        val mainLayout = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(20.dpToPx(), 20.dpToPx(), 20.dpToPx(), 20.dpToPx())
+            gravity = android.view.Gravity.CENTER_VERTICAL
+        }
+
+        // Icon circle
+        val iconFrame = android.widget.FrameLayout(this).apply {
+            layoutParams = LinearLayout.LayoutParams(56.dpToPx(), 56.dpToPx())
+            setBackgroundResource(R.drawable.bg_icon_circle_blue)
+        }
+
+        val iconView = ImageView(this).apply {
+            layoutParams = android.widget.FrameLayout.LayoutParams(32.dpToPx(), 32.dpToPx()).apply {
+                gravity = android.view.Gravity.CENTER
+            }
+            setImageResource(R.drawable.compass)
+            setColorFilter(ContextCompat.getColor(this@SecondSpeechScreen, R.color.white))
+        }
+        iconFrame.addView(iconView)
+
+        // Text content
+        val textLayout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+                marginStart = 16.dpToPx()
+            }
+        }
+
+        val labelText = TextView(this).apply {
+            text = "Beech ka rasta ${index + 1}"
+            textSize = 14f
+            setTextColor(Color.parseColor("#666666"))
+        }
+
+        val valueText = TextView(this).apply {
+            text = stopName
+            textSize = 18f
+            setTextColor(Color.BLACK)
+            setTypeface(null, android.graphics.Typeface.BOLD)
+        }
+
+        textLayout.addView(labelText)
+        textLayout.addView(valueText)
+
+        // Edit icon
+        val editIcon = ImageView(this).apply {
+            layoutParams = LinearLayout.LayoutParams(24.dpToPx(), 24.dpToPx()).apply {
+                marginEnd = 8.dpToPx()
+            }
+            setImageResource(R.drawable.baseline_edit_24)
+            setColorFilter(ContextCompat.getColor(this@SecondSpeechScreen, R.color.color_primary))
+            setOnClickListener {
+                editingStopIndex = index
+                showDesiPlaceDialog(FieldType.MIDDLE_STOP)
+            }
+        }
+
+        // Delete icon
+        val deleteIcon = ImageView(this).apply {
+            layoutParams = LinearLayout.LayoutParams(24.dpToPx(), 24.dpToPx())
+            setImageResource(android.R.drawable.ic_menu_delete)
+            setColorFilter(Color.RED)
+            setOnClickListener {
+                middleStops.removeAt(index)
+                refreshMiddleStopsUI()
+                Toast.makeText(this@SecondSpeechScreen,
+                    context.getString(R.string.stop_hata_diya), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        mainLayout.addView(iconFrame)
+        mainLayout.addView(textLayout)
+        mainLayout.addView(editIcon)
+        mainLayout.addView(deleteIcon)
+        cardView.addView(mainLayout)
+
+        return cardView
+    }
+
+    private fun Int.dpToPx(): Int {
+        return (this * resources.displayMetrics.density).toInt()
+    }
+
+    private fun Float.dpToPx(): Float {
+        return this * resources.displayMetrics.density
     }
 
     private fun startDialogVoiceRecognition() {
@@ -305,10 +515,12 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
             putExtra(RecognizerIntent.EXTRA_LANGUAGE, langCode)
             putExtra(RecognizerIntent.EXTRA_PROMPT,
-                if (dialogFieldType == FieldType.START_PLACE)
-                    getString(R.string.kaha_se_shuru_ho_rahe_ho_bolo)
-                else
-                    getString(R.string.kaha_jaana_hai_bolo)
+                when (dialogFieldType) {
+                    FieldType.START_PLACE -> getString(R.string.kaha_se_shuru_ho_rahe_ho_bolo)
+                    FieldType.END_PLACE -> getString(R.string.kaha_jaana_hai_bolo)
+                    FieldType.MIDDLE_STOP -> getString(R.string.beech_ka_place_he_to_bolo)
+                    else -> getString(R.string.jagah_ka_naam_bolo)
+                }
             )
         }
 
@@ -381,6 +593,7 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             FieldType.START_DATE -> if (isEditMode) getString(R.string.tareekh_badal_sakte_ho) else getString(R.string.trip_shuru_hone_ki_tareekh_chuno)
             FieldType.START_PLACE -> if (isEditMode) getString(R.string.start_place_badal_sakte_ho) else getString(R.string.kaha_se_shuru_ho_rahe_ho_bolo)
             FieldType.END_PLACE -> if (isEditMode) getString(R.string.end_place_badal_sakte_ho) else getString(R.string.kaha_jaana_hai_bolo)
+            FieldType.MIDDLE_STOP -> getString(R.string.beech_ka_place_he_to_bolo)
         }
     }
 
@@ -475,6 +688,7 @@ class SecondSpeechScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             FieldType.START_DATE -> binding.cardStartDate.strokeWidth = 4
             FieldType.START_PLACE -> binding.cardStartPlace.strokeWidth = 4
             FieldType.END_PLACE -> binding.cardEndPlace.strokeWidth = 4
+            else -> {}
         }
     }
 

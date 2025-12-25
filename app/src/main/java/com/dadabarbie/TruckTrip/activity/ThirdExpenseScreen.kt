@@ -89,7 +89,7 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var currentEditType: ExpenseType? = null
     private var endDate = ""
     var langCode = ""
-
+    var routeArray: ArrayList<String> =arrayListOf()
     private val voiceRecognitionLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -159,8 +159,9 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         setContentView(binding.root)
         langCode = Prefs[Constants.languageCode] ?: "hi"
         intent.getStringExtra("id")?.let { tripId = it }
+        routeArray = intent.getStringArrayListExtra("ROUTE_ARRAY")!!
         if (tripId.isEmpty()) generateTripId()
-
+        isEditMode = intent.getBooleanExtra("EDIT_MODE", false)
         if (isEditMode) {
             originalTruckNumber = intent.getStringExtra("ORIGINAL_TRUCK_NUMBER")
             originalStartDate = intent.getStringExtra("ORIGINAL_START_DATE")
@@ -169,6 +170,14 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             intent.getStringExtra("END_DATE")?.let { if (it.isNotEmpty()) endDate = it }
         }
 
+        // ✅ FIX: Properly retrieve end date with logging
+        val retrievedEndDate = intent.getStringExtra("END_DATE")
+        Log.d("EndDateDebug", "Retrieved END_DATE from intent: $retrievedEndDate")
+
+        if (!retrievedEndDate.isNullOrEmpty()) {
+            endDate = retrievedEndDate
+            Log.d("EndDateDebug", "Set endDate to: $endDate")
+        }
         textToSpeech = TextToSpeech(this, this)
         setupViews()
         updateMunafa()
@@ -392,14 +401,14 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         etAmount.setText(item.amount.toString())
 
         fabEditMic.setOnClickListener {
-            if (isVoiceListening) return@setOnClickListener Toast.makeText(this, "Pehle se sun rahe hain...", Toast.LENGTH_SHORT).show()
+            if (isVoiceListening) return@setOnClickListener Toast.makeText(this, getString(R.string.pehle_se_sun_rahe_hain), Toast.LENGTH_SHORT).show()
             if (ttsInitialized && textToSpeech.isSpeaking) textToSpeech.stop()
 
             Handler(Looper.getMainLooper()).postDelayed({
                 try {
                     currentEditItem = item
                     isVoiceListening = true
-                    editItemLauncher.launch(createVoiceIntent("Naya bolo"))
+                    editItemLauncher.launch(createVoiceIntent(getString(R.string.naya_bolo)))
                     editBottomSheet.dismiss()
                     isEditBottomSheetOpen = false
                 } catch (e: Exception) {
@@ -457,7 +466,7 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         etAmount.setText(item.amount.toString())
 
         fabEditMic.setOnClickListener {
-            if (isVoiceListening) return@setOnClickListener Toast.makeText(this, "Pehle se sun rahe hain...", Toast.LENGTH_SHORT).show()
+            if (isVoiceListening) return@setOnClickListener Toast.makeText(this, getString(R.string.pehle_se_sun_rahe_hain), Toast.LENGTH_SHORT).show()
             if (ttsInitialized && textToSpeech.isSpeaking) textToSpeech.stop()
 
             Handler(Looper.getMainLooper()).postDelayed({
@@ -791,22 +800,60 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun showEndDatePicker() {
         val calendar = Calendar.getInstance()
+        var dateWasSet = false
+
+        Log.d("EndDateDebug", "showEndDatePicker called - isEditMode: $isEditMode, endDate: '$endDate'")
+
+        // ✅ Try to parse and set the existing end date if in edit mode
+        if (isEditMode && endDate.isNotEmpty()) {
+            // Try multiple date formats
+            val formats = listOf(
+                SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH),      // API format first
+                SimpleDateFormat("dd MMM yyyy", Locale(langCode)),   // Display format
+                SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH),
+                SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+            )
+
+            for (format in formats) {
+                try {
+                    val existingDate = format.parse(endDate)
+                    if (existingDate != null) {
+                        calendar.time = existingDate
+                        dateWasSet = true
+                        Log.d("EndDateDebug", "Successfully parsed endDate '$endDate' with format: ${format.toPattern()}")
+                        break
+                    }
+                } catch (e: Exception) {
+                    // Continue to next format
+                    Log.d("EndDateDebug", "Failed to parse with ${format.toPattern()}: ${e.message}")
+                }
+            }
+
+            if (!dateWasSet) {
+                Log.e("EndDateDebug", "Failed to parse endDate: '$endDate' with all formats")
+            }
+        } else {
+            Log.d("EndDateDebug", "Not setting date - isEditMode: $isEditMode, endDate isEmpty: ${endDate.isEmpty()}")
+        }
+
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        Log.d("EndDateDebug", "DatePicker will show: $day/${month+1}/$year")
 
         val datePickerDialog = DatePickerDialog(
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
                 calendar.set(selectedYear, selectedMonth, selectedDay)
 
-                // Format for display (Hindi locale)
+                // Format for display
                 val displayFormat = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
                 endDate = displayFormat.format(calendar.time)
 
-                speakText(getString(R.string.trip_khatam_ab_data_save_kar_rahe_hain))
+                Log.d("EndDateDebug", "User selected new date: $endDate")
 
-                // Step 2: After date selected, show confirmation dialog
+                speakText(getString(R.string.trip_khatam_ab_data_save_kar_rahe_hain))
                 showCompleteDialog()
             },
             year, month, day
@@ -814,6 +861,40 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         datePickerDialog.setTitle(getString(R.string.trip_khatam_hone_ki_tareekh))
         datePickerDialog.datePicker.calendarViewShown = true
+
+        // ✅ Additional: Set min date to start date if available
+        try {
+            val startDateStr = getStartDate()
+            Log.d("EndDateDebug", "Attempting to set minDate from startDate: '$startDateStr'")
+
+            // Try multiple formats for start date too
+            val startFormats = listOf(
+                SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH),      // API format
+                SimpleDateFormat("dd MMM yyyy", Locale(langCode)),   // Display format
+                SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+            )
+
+            var startDate: Date? = null
+            for (format in startFormats) {
+                try {
+                    startDate = format.parse(startDateStr)
+                    if (startDate != null) {
+                        datePickerDialog.datePicker.minDate = startDate.time
+                        Log.d("EndDateDebug", "Successfully set minDate using format: ${format.toPattern()}")
+                        break
+                    }
+                } catch (e: Exception) {
+                    // Continue to next format
+                }
+            }
+
+            if (startDate == null) {
+                Log.w("EndDateDebug", "Could not parse start date with any format: '$startDateStr'")
+            }
+        } catch (e: Exception) {
+            Log.e("EndDateDebug", "Failed to set minDate", e)
+        }
+
         datePickerDialog.show()
     }
 
@@ -856,7 +937,8 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                 if (isEditMode) (intent.getStringExtra("TRIP_ID") ?: "") else "",
                 getEndPlace(),
                 driverIncome,
-                apiEndDate,  // ✅ Using converted format
+                apiEndDate,
+                route = routeArray,// ✅ Using converted format
                 expenseModels,
                 incomeModels,
                 ownerProfit,
