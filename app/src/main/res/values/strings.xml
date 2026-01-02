@@ -35,6 +35,9 @@
     <string name="total_expenditure">💸 Total Expenditure</string>
     <string name="add_trip_data">Add Trip Data</string>
     <string name="source_place_">📍Starting Place <font fgcolor='#FF0000'>*</font> : </string>
+    <string name="source_place_mic">Add Starting Place</string>
+    <string name="end_place_mic">End Starting Place</string>
+    <string name="truck_number_mic">Add Truck Number</string>
     <string name="dest_place_">🏁 Ending Place <font fgcolor='#FF0000'>*</font> : </string>
     <string name="truck_number_">🚚 Truck Number <font fgcolor='#FF0000'>*</font> : </string>
     <string name="trip_date">Start Trip Date <font fgcolor='#FF0000'>*</font> : </string>
@@ -411,7 +414,8 @@ and tap Save when you are done.
     <string name="lang_change_dec">Language badalni ho to Language par click karo. App seekhni ho to How to Use par click karo.\n Mode badalna ho to App Flow Change par click karo.</string>
     <string name="pehle_truck_number_bolo">Say truck number first</string>
     <string name="sabhi_fields_bharo">Fill all details</string>
-    <string name="beech_ke_rasta_add_karo_optinal">+Add middle route (Optional)</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+Add Other Place</string>
+
     <string name="naya_bolo">Say new</string>
     <string name="beech_mein_rasta_stop">Middle route (Stop)</string>
     <string name="shuru_ki_jagah_save_ho_gayi">Start place saved!</string>
@@ -434,9 +438,42 @@ and tap Save when you are done.
     <string name="please_enter_source">Please enter source</string>
     <string name="please_enter_destination">Please enter destination</string>
     <string name="please_enter_truck_number">Please enter truck number</string>
-    <string name="enter_via_place">Enter via place</string>
-    <string name="add_middle_place_optional">Add middle place (Optional)</string>
+    <string name="enter_via_place">Enter Another place</string>
+    <string name="add_middle_place_optional">Add if you went somewhere else</string>
+    <string name="add_middle_place_optional_">+Add if you went somewhere else</string>
     <string name="trip_route">Trip Route</string>
+    <string name="download_pdf">Download PDF</string>
+    <string name="no_expense_entries">No Expense</string>
+    <string name="expense_details">Expense Details</string>
+    <string name="no_income_entries">No Income</string>
+    <string name="income_details">Income Details</string>
+    <string name="owner_profit">Owner Profit</string>
+    <string name="total_expense">Total Expense</string>
+    <string name="financial_summary">Account Summary</string>
+    <string name="end_date">End Date</string>
+    <string name="start_date">Start Date</string>
+    <string name="trip_preview">Trip Preview</string>
+    <string name="total_income_">Total Income</string>
+    <string name="view">View</string>
+    <string name="please_verify">⚠ %1$s - Please verify</string>
+    <string name="truck_number_save_ho_gaya_ek_baar_check_kar_lijiye">Truck number %1$s is saved. Please check once</string>
+    <string name="kuch_sunai_nahi_diya_dobara_try_karein">Couldn’t hear anything, please try again</string>
+    <string name="cancelled_please_try_again">Cancelled - Please try again</string>
+    <string name="kuch_galat_ho_gaya_phir_se_try_karein">Something went wrong, please try again</string>
+    <string name="bol_rahe_hain">🎤 Listening...</string>
+    <string name="voice_recognition_nahi_khul_raha_please_check_permissions">Voice recognition is not opening, please check permissions</string>
+    <string name="pehle_date_select_karo">Pehle Date Select Karo</string>
+    <string name="pehle_start_place_dalo">Pehle Start Place Dalo</string>
+    <string name="pehle_end_place_dalo">Pehle End Place Dalo</string>
+    <string name="stop_update_ho_gaya">Stop Update Ho gaya</string>
+    <string name="beech_ka_rasta">Beech ka Route %1$d</string>
+    <string name="ka_rupaye_update_ho_gaya_he">%1$s ka %2$d rupaye update ho gaya he</string>
+    <string name="ka_rupaye_jod_diya_he">%1$s ka %2$d rupaye jod diya he</string>
+    <string name="language_badalni_ho_to_language_par_click_karo_app_seekhni_ho_to_how_to_use_par_click_karo_mode_badalna_ho_to_app_mode_par_click_karo">
+    To change the language, tap on Language.\n
+    To learn how to use the app, tap on How to Use.\n
+    To change the mode, tap on App Mode.
+</string>
 
 
     <!--    <string name="onboard_title_1">All trips in one place</string>-->

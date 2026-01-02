@@ -1,144 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- File: res/layout/dialog_edit_truck_number.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    android:background="@drawable/bg_dialog_rounded"
-    android:padding="24dp">
+    android:fillViewport="true">
 
-    <!-- Header with Close Button -->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp">
+        android:orientation="vertical"
+        android:background="@drawable/bg_dialog_rounded"
+        android:padding="@dimen/_20sdp"
+        android:minHeight="@dimen/_250sdp">
 
+        <!-- Header with Close Button -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_14sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/truck_number_sudhariye"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/roboto_medium" />
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:src="@drawable/baseline_close_24"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/_4sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/black" />
+        </RelativeLayout>
+
+        <!-- Instruction Text with Icon -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_instruction_box"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_16sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_info"
+                android:layout_marginEnd="@dimen/_6sdp"
+                app:tint="@color/color_primary" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/neeche_apna_sahi_truck_number_type_kariye"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/color_primary"
+                android:fontFamily="@font/roboto_regular" />
+        </LinearLayout>
+
+        <!-- Input Field -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/truck_number_jaise_gj_01_ab_1234"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/color_primary"
+            app:hintTextColor="@color/color_primary"
+            android:layout_marginBottom="@dimen/_12sdp"
+            app:boxCornerRadiusTopStart="@dimen/_10sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_10sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_10sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
+            app:startIconDrawable="@drawable/ic_truck"
+            app:startIconTint="@color/color_primary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTruckNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapCharacters"
+                android:maxLines="1"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/black"
+                android:paddingVertical="@dimen/_14sdp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Example Text -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/truck_number_sudhariye"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/roboto_medium" />
-
-        <ImageView
-            android:id="@+id/ivClose"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/baseline_close_24"
-            android:layout_alignParentEnd="true"
-            android:padding="4dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/black" />
-    </RelativeLayout>
-
-    <!-- Instruction Text with Icon -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="@drawable/bg_instruction_box"
-        android:padding="12dp"
-        android:layout_marginBottom="20dp">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_info"
-            android:layout_marginEnd="8dp"
-            app:tint="@color/color_primary" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/neeche_apna_sahi_truck_number_type_kariye"
-            android:textSize="14sp"
-            android:textColor="@color/color_primary"
+            android:text="@string/example_mh_12_ab_1234_dl_1234_pb_11_4567"
+            android:textSize="@dimen/_8sdp"
+            android:textColor="#666666"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:fontFamily="@font/roboto_regular" />
-    </LinearLayout>
 
-    <!-- Input Field -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/truck_number_jaise_gj_01_ab_1234"
-        app:boxBackgroundMode="outline"
-        app:boxStrokeColor="@color/color_primary"
-        app:hintTextColor="@color/color_primary"
-        android:layout_marginBottom="24dp"
-        app:boxCornerRadiusTopStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusBottomEnd="12dp"
-        app:startIconDrawable="@drawable/ic_truck"
-        app:startIconTint="@color/color_primary">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etTruckNumber"
+        <!-- Action Buttons -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapCharacters"
-            android:maxLines="1"
-            android:textSize="16sp"
-            android:fontFamily="@font/roboto_medium"
-            android:textColor="@color/black"
-            android:paddingVertical="16dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:gravity="center">
 
-    <!-- Example Text -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/example_mh_12_ab_1234_dl_1234_pb_11_4567"
-        android:textSize="12sp"
-        android:textColor="#666666"
-        android:layout_marginBottom="24dp"
-        android:fontFamily="@font/roboto_regular" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancel"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_48sdp"
+                android:layout_weight="1"
+                android:text="@string/cancel_kariye"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/color_primary"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:backgroundTint="@android:color/transparent"
+                app:strokeColor="@color/color_primary"
+                app:strokeWidth="2dp"
+                app:cornerRadius="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:fontFamily="@font/roboto_medium"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
-    <!-- Action Buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:gravity="center">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_48sdp"
+                android:layout_weight="1"
+                android:text="@string/badal_dijiye"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:backgroundTint="@color/green"
+                app:cornerRadius="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:fontFamily="@font/roboto_medium"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white" />
+        </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCancel"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:text="@string/cancel_kariye"
-            android:textSize="14sp"
-            android:textColor="@color/color_primary"
-            app:backgroundTint="@android:color/transparent"
-            app:strokeColor="@color/color_primary"
-            app:strokeWidth="2dp"
-            app:cornerRadius="12dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/roboto_medium"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSave"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:text="@string/badal_dijiye"
-            android:textSize="14sp"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/green"
-            app:cornerRadius="12dp"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/roboto_medium"
-            app:iconGravity="textStart"
-            app:iconTint="@color/white" />
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

@@ -10,10 +10,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.os.Handler
 import android.os.Looper
-import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.view.Window
@@ -26,12 +24,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -45,7 +41,6 @@ import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
 import com.dadabarbie.TruckTrip.Utils.UpdateDialog
 import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
 import com.dadabarbie.TruckTrip.databinding.ActivityNormalUserDashBoardBinding
-import com.dadabarbie.TruckTrip.databinding.ActivitySecondSpeechScreenBinding
 import com.dadabarbie.TruckTrip.model.CreditModel
 import com.dadabarbie.TruckTrip.model.DebitModel
 import com.dadabarbie.TruckTrip.room.AppDatabase
@@ -63,7 +58,7 @@ import java.util.Locale
 import kotlin.getValue
 
 @AndroidEntryPoint
-class NormalUserDashBoard : AppCompatActivity(),View.OnClickListener {
+class NormalUserDashBoard : BaseActivity(),View.OnClickListener {
     private val binding: ActivityNormalUserDashBoardBinding by lazy {
         ActivityNormalUserDashBoardBinding.inflate(layoutInflater)
     }
@@ -107,6 +102,13 @@ class NormalUserDashBoard : AppCompatActivity(),View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            enableEdgeToEdge()
+            // 35 (android - 15)
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+        }
         appVersionNameCheck()
         setObserver()
         checkAndOpenPdf(intent)
@@ -163,13 +165,17 @@ class NormalUserDashBoard : AppCompatActivity(),View.OnClickListener {
                 }
                 is NetworkResult.Success -> {
                     if(getAppVersionName(applicationContext)!="Unknown"){
-                        if(getAppVersionName(applicationContext)== it.data?.data?.version ?: ""){
+                        val serverVersion = it.data?.data?.version
+                        val appVersion = getAppVersionName(applicationContext)
+                        if (!serverVersion.isNullOrEmpty() &&
+                            isAppVersionValid(appVersion, serverVersion)
+                        ) {
                             initViews()
                             usermobileNumber= Prefs[Constants.mobileNumber,""].toString()
                             setOnClickListner()
                             getPermission()
                             askNotificationPermission()
-                        }else{
+                        } else {
                             UpdateDialog(this).show()
                         }
                     } else {
@@ -179,10 +185,27 @@ class NormalUserDashBoard : AppCompatActivity(),View.OnClickListener {
                         getPermission()
                         askNotificationPermission()
                     }
+
+
                 }
             }
         }
 
+    }
+    private fun isAppVersionValid(appVersion: String, serverVersion: String): Boolean {
+        val appParts = appVersion.split(".")
+        val serverParts = serverVersion.split(".")
+
+        val maxLength = maxOf(appParts.size, serverParts.size)
+
+        for (i in 0 until maxLength) {
+            val appPart = appParts.getOrNull(i)?.toIntOrNull() ?: 0
+            val serverPart = serverParts.getOrNull(i)?.toIntOrNull() ?: 0
+
+            if (appPart > serverPart) return true      // app > server ✅
+            if (appPart < serverPart) return false     // app < server ❌
+        }
+        return true // equal version ✅
     }
 
     private fun appVersionNameCheck() {
@@ -257,7 +280,10 @@ class NormalUserDashBoard : AppCompatActivity(),View.OnClickListener {
             endOdometer = "",
             endTripKm = "",
             randomNumber = 1.toString(),
-            driverIncome = 0.toString()
+            driverIncome = 0.toString(),
+            route = arrayListOf(),
+            id ="",
+            routeList = entity.routeJson
         )
     }
     private suspend fun getAllData(context: Context): List<TripDataTestModel> {
@@ -352,42 +378,27 @@ class NormalUserDashBoard : AppCompatActivity(),View.OnClickListener {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.R)
-    private fun getPermission(){
-        hasManageExternalStoragePermission()
-
-    }
-    @RequiresApi(Build.VERSION_CODES.R)
-    private fun hasManageExternalStoragePermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            if (Environment.isExternalStorageManager()) {
-
-                true
-            } else {
-                try {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                            Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                        } else {
-                            TODO("VERSION.SDK_INT < R")
-                        }
-                    }
-                    false
-                } catch (e: Exception) {
-                    true //if anything needs adjusting it would be this
-                }
-            }
+    private fun getPermission() {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            // Android 10 and below only
+            hasPermission()
         } else {
-            if (checkPermissions()) {
-                return true
-            } else {
-                requestPermissions()
-                return false
-            }
+            // Android 11+ → no permission needed
+            // use app-specific storage
         }
+    }
+
+
+    private fun hasPermission(): Boolean {
+        return if (checkPermissions()) {
+            return true
+        } else {
+            requestPermissions()
+            return false
+        }
+
         // assumed storage permissions granted
     }
-
     private fun checkPermissions(): Boolean {
         val result = ContextCompat.checkSelfPermission(
             applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE

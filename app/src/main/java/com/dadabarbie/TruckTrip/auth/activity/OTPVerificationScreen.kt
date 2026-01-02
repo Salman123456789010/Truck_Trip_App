@@ -3,13 +3,21 @@ package com.dadabarbie.TruckTrip.auth.activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewTreeObserver
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Constants.dismissProgress
@@ -20,6 +28,7 @@ import com.dadabarbie.TruckTrip.Utils.Constants.showProgress
 import com.dadabarbie.TruckTrip.Utils.Constants.showSnackBar
 import com.dadabarbie.TruckTrip.Utils.Constants.visible
 import com.dadabarbie.TruckTrip.Utils.Prefs
+import com.dadabarbie.TruckTrip.activity.BaseActivity
 import com.dadabarbie.TruckTrip.activity.DashBoardActivity
 import com.dadabarbie.TruckTrip.activity.NormalUserDashBoard
 import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
@@ -38,7 +47,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.log
 
 @AndroidEntryPoint
-class OTPVerificationScreen : AppCompatActivity(), View.OnClickListener {
+class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
     private val binding: ActivityOtpverificationScreenBinding by lazy {
         ActivityOtpverificationScreenBinding.inflate(layoutInflater)
     }
@@ -56,6 +65,14 @@ class OTPVerificationScreen : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            enableEdgeToEdge()
+            // 35 (android - 15)
+            WindowCompat.setDecorFitsSystemWindows(window, true)
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+        }
         mAuth = FirebaseAuth.getInstance()
         setOnClickListner()
         if (savedInstanceState == null) {
@@ -72,11 +89,70 @@ class OTPVerificationScreen : AppCompatActivity(), View.OnClickListener {
              token= intent.getStringExtra("token").toString()
              authViewModel.requestOTP(number,fcmToken,token,Prefs[Constants.languageCode, ""].toString())
         }
+        setupKeyboardHandling()
 //        spannableChanges()
 //        clickableChanges()
         setObserver()
 
     }
+
+    private fun setupKeyboardHandling() {
+        // Method 1: Window soft input mode
+        window.setSoftInputMode(
+            WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or
+                    WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN
+        )
+
+        // Method 2: Handle insets for Android 11+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            view.setPadding(
+                systemBarsInsets.left,
+                systemBarsInsets.top,
+                systemBarsInsets.right,
+                imeInsets.bottom
+            )
+
+            // Scroll to OTP field when keyboard appears
+            if (imeInsets.bottom > 0) {
+                binding.root.post {
+                    binding.root.smoothScrollTo(0, binding.etOtpVerify.bottom + 200)
+                }
+            }
+
+            insets
+        }
+
+        // Method 3: Global layout listener
+        binding.root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            private var wasKeyboardVisible = false
+
+            override fun onGlobalLayout() {
+                val heightDiff = binding.root.rootView.height - binding.root.height
+                val isKeyboardVisible = heightDiff > 200
+
+                if (isKeyboardVisible && !wasKeyboardVisible) {
+                    binding.root.post {
+                        binding.root.smoothScrollTo(0, binding.etOtpVerify.bottom + 200)
+                    }
+                }
+
+                wasKeyboardVisible = isKeyboardVisible
+            }
+        })
+
+        // Method 4: Focus listener on OTP EditText
+        binding.etOtpVerify.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.root.postDelayed({
+                    binding.root.smoothScrollTo(0, binding.etOtpVerify.bottom + 200)
+                }, 300)
+            }
+        }
+    }
+
 
     @SuppressLint("StringFormatInvalid")
     private fun otpCountDown() {
@@ -119,7 +195,7 @@ class OTPVerificationScreen : AppCompatActivity(), View.OnClickListener {
             when (it) {
                 is NetworkResult.Error -> {
 //                    showSnackBar(binding.root, it.message.toString())
-                    Toast.makeText(applicationContext, it.message.toString(), Toast.LENGTH_SHORT)
+                    Toast.makeText(applicationContext, getString(R.string.cancelled_please_try_again), Toast.LENGTH_SHORT)
                         .show()
                     dismissProgress()
                 }
@@ -211,6 +287,7 @@ class OTPVerificationScreen : AppCompatActivity(), View.OnClickListener {
 
 
                 } else {
+                    dismissProgress()
                     Toast.makeText(this, task.exception!!.message, Toast.LENGTH_LONG)
                         .show()
                 }

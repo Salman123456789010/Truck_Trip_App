@@ -2,27 +2,24 @@ package com.dadabarbie.TruckTrip.activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
-import com.dadabarbie.TruckTrip.Utils.Constants.languageLocale
-import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.Utils.LocaleHelper
 import com.dadabarbie.TruckTrip.Utils.Prefs
+import com.dadabarbie.TruckTrip.Utils.RouteUtils
 import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
 import com.dadabarbie.TruckTrip.adapter.DraftAdapter
-import com.dadabarbie.TruckTrip.adapter.TripListAdapter
 import com.dadabarbie.TruckTrip.databinding.ActivityDraftBinding
-import com.dadabarbie.TruckTrip.diologFragment.DeleteDialogFragment
 import com.dadabarbie.TruckTrip.diologFragment.DeleteDraftDialogFragment
-import com.dadabarbie.TruckTrip.model.CreditModel
-import com.dadabarbie.TruckTrip.model.DebitModel
 import com.dadabarbie.TruckTrip.model.addTrip.Expense
 import com.dadabarbie.TruckTrip.model.addTrip.Income
 import com.dadabarbie.TruckTrip.room.AppDatabase
@@ -32,12 +29,11 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.vasyerp.cafvd.room.model.Products
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
 
-class DraftActivity : AppCompatActivity(), DraftAdapter.DraftEditListner,DraftAdapter.DeleteListner,View.OnClickListener {
+class DraftActivity : BaseActivity(), DraftAdapter.DraftEditListner,DraftAdapter.DeleteListner,View.OnClickListener {
     private val binding: ActivityDraftBinding by lazy {
         ActivityDraftBinding.inflate(layoutInflater)
     }
@@ -48,11 +44,18 @@ class DraftActivity : AppCompatActivity(), DraftAdapter.DraftEditListner,DraftAd
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            enableEdgeToEdge()
+            // 35 (android - 15)
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+        }
         MobileAds.initialize(this)
         setLanguage()
         setOnClickListner()
 
-        GlobalScope.launch {
+        lifecycleScope.launch {
             withContext(Dispatchers.Main) {
                 // Update your UI here
                 initAdapter(getAllData(applicationContext))
@@ -114,45 +117,50 @@ class DraftActivity : AppCompatActivity(), DraftAdapter.DraftEditListner,DraftAd
                 entity.modelList2,
                 object : TypeToken<List<Expense>>() {}.type
             ),
-            id = entity.id.toString()
+            id = entity.id.toString(),
+            routeList = entity.routeJson,
+            driverIncome = "",
+            startOdometer = "",
+            endOdometer = "",
+            endTripKm = "",
+            route =  RouteUtils.parseRouteFromJson(entity.routeJson)
         )
     }
 
     override fun editMethod(position: Int) {
-        lifecycleScope.launch(Dispatchers.IO){
-            getDelete(applicationContext,draftList[position].id.toInt())
-            withContext(Dispatchers.Main) {
-                startActivity(
-                    Intent(applicationContext, MainActivity::class.java)
-                        .putExtra("sourceName", draftList[position].srcPlace)
-                        .putExtra("destinationName", draftList[position].destPlace)
-                        .putExtra("startingDate", draftList[position].srcDate)
-                        .putExtra("endingDate", draftList[position].destDate)
-                        .putExtra("truckNumber", draftList[position].truckNumber)
-                        .putExtra("driverAvak", draftList[position].driverIncome)
-                        .putExtra("flag", 3)
-                        .putExtra("id", 0)
-                )
-                Log.d("listsize", "editMethod: ${ draftList[position].modelList1 as ArrayList<Income>}")
-                Constants.creditList.clear()
-                Constants.debitList.clear()
-                Constants.creditList = draftList[position].modelList1 as ArrayList<Income>
-                Constants.debitList = draftList[position].modelList2 as ArrayList<Expense>
+        val item = draftList[position]
 
-                finish()
-            }
+        Constants.creditList.clear()
+        Constants.debitList.clear()
+        Constants.creditList.addAll(item.modelList1)
+        Constants.debitList.addAll(item.modelList2)
 
-        }
+        Log.d("DraftActivity", "Editing draft with ID: ${item.randomNumber}")
 
-
+        startActivity(
+            Intent(this, MainActivity::class.java)
+                .putExtra("flag", 3) // EDIT MODE
+                .putExtra("id", item.randomNumber) // This should be the draft ID
+                .putExtra("sourceName", item.srcPlace)
+                .putExtra("destinationName", item.destPlace)
+                .putExtra("startingDate", item.srcDate)
+                .putExtra("endingDate", item.destDate)
+                .putExtra("truckNumber", item.truckNumber)
+                .putExtra("driverAvak", item.driverIncome)
+                .putExtra("startOdometer", item.startOdometer)
+                .putExtra("routeJson", item.routeList) // Pass route as JSON
+                .putStringArrayListExtra("ROUTE_ARRAY", item.route)
+        )
+        finish()
     }
+
 
     override fun deleteMethod(position: Int) {
         deleteDraftDialogFragment= DeleteDraftDialogFragment(position)
         deleteDraftDialogFragment.show(supportFragmentManager,"")
     }
     fun deleteFromDatabse(position: Int){
-        GlobalScope.launch {
+        lifecycleScope.launch {
             getDelete(applicationContext,draftList[position].id.toInt())
             withContext(Dispatchers.Main) {
                 // Update your UI here
@@ -184,8 +192,22 @@ class DraftActivity : AppCompatActivity(), DraftAdapter.DraftEditListner,DraftAd
             }
         }
     }
-    fun setLanguage(){
-        LocaleHelper.setNewLocale(applicationContext,Prefs[Constants.languageCode,""])
+    private fun setLanguage() {
+        val savedLang = Prefs[Constants.languageCode, "en"]
+
+        if (savedLang.isNotEmpty()) {
+            val locale = Locale(savedLang)
+            Locale.setDefault(locale)
+
+            val config = resources.configuration
+            config.setLocale(locale)
+
+            resources.updateConfiguration(
+                config,
+                resources.displayMetrics
+            )
+        }
     }
+
 
 }

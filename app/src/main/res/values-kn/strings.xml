@@ -463,7 +463,7 @@ Mode ಬದಲಾಯಿಸಲು App Mode ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾ
     <string name="pehle_se_sun_rahe_hain">ಈಗಾಗಲೇ ಕೇಳುತ್ತಿದ್ದೇವೆ...</string>
     <string name="pehle_truck_number_bolo">ಮೊದಲು ಟ್ರಕ್ ನಂಬರ್ ಹೇಳಿ</string>
     <string name="sabhi_fields_bharo">ಎಲ್ಲಾ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ</string>
-    <string name="beech_ke_rasta_add_karo_optinal">+ಮಧ್ಯದ ದಾರಿಯನ್ನು ಸೇರಿಸಿ (ಐಚ್ಛಿಕ)</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+ಮತ್ತೊಂದು ಜಾಗ ಸೇರಿಸಿ</string>
     <string name="naya_bolo">ಹೊಸದು ಹೇಳಿ</string>
     <string name="beech_mein_rasta_stop">ಮಧ್ಯದ ದಾರಿ (ಸ್ಟಾಪ್)</string>
     <string name="shuru_ki_jagah_save_ho_gayi">ಪ್ರಾರಂಭದ ಜಾಗ ಉಳಿಸಲಾಗಿದೆ!</string>
@@ -478,7 +478,7 @@ Mode ಬದಲಾಯಿಸಲು App Mode ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾ
     <string name="update_trip_data">ಟ್ರಿಪ್ ಡೇಟಾ ಅಪ್‌ಡೇಟ್ ಮಾಡಿ</string>
     <string name="please_enter_middle_place">ಮಧ್ಯ ಜಾಗ ಹಾಕಿ</string>
     <string name="please_add_source_destination_first">ಮೊದಲು ಪ್ರಾರಂಭ ಮತ್ತು ಗಮ್ಯ ಹಾಕಿ</string>
-    <string name="middle_place_added">ಮಧ್ಯ ಜಾಗ ಸೇರಿಸಲಾಗಿದೆ</string>
+    <string name="middle_place_added">ಇನ್ನೊಂದು ಜಾಗ ಸೇರಿದೆ</string>
     <string name="select_trip_date">ಟ್ರಿಪ್ ದಿನಾಂಕ ಆಯ್ಕೆ ಮಾಡಿ</string>
     <string name="speak_now">ಈಗ ಮಾತನಾಡಿ</string>
     <string name="speech_not_supported">ಮಾತು ಬೆಂಬಲ ಇಲ್ಲ</string>
@@ -486,9 +486,43 @@ Mode ಬದಲಾಯಿಸಲು App Mode ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾ
     <string name="please_enter_source">ಪ್ರಾರಂಭ ಹಾಕಿ</string>
     <string name="please_enter_destination">ಗಮ್ಯ ಹಾಕಿ</string>
     <string name="please_enter_truck_number">ಟ್ರಕ್ ನಂಬರ್ ಹಾಕಿ</string>
-    <string name="enter_via_place">ವಾಯಾ ಜಾಗ ಹಾಕಿ</string>
-    <string name="add_middle_place_optional">ಮಧ್ಯ ಜಾಗ ಸೇರಿಸಿ (ಐಚ್ಛಿಕ)</string>
+    <string name="enter_via_place">ಇನ್ನೊಂದು ಜಾಗ ಹಾಕಿ</string>
+    <string name="add_middle_place_optional">ಇನ್ನೂ ಎಲ್ಲಾದರೂ ಹೋದ್ರೆ ಸೇರಿಸಿ</string>
+    <string name="add_middle_place_optional_">+ಇನ್ನೂ ಎಲ್ಲಾದರೂ ಹೋದ್ರೆ ಸೇರಿಸಿ</string>
     <string name="trip_route">ಟ್ರಿಪ್ ದಾರಿ</string>
+    <string name="download_pdf">PDF ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ</string>
+    <string name="no_expense_entries">ಖರ್ಚು ಇಲ್ಲ</string>
+    <string name="expense_details">ಖರ್ಚಿನ ವಿವರ</string>
+    <string name="no_income_entries">ಆದಾಯ ಇಲ್ಲ</string>
+    <string name="income_details">ಆದಾಯದ ವಿವರ</string>
+    <string name="owner_profit">ಮಾಲೀಕರ ಲಾಭ</string>
+    <string name="total_expense">ಒಟ್ಟು ಖರ್ಚು</string>
+    <string name="financial_summary">ಹಿಸಾಬಿನ ಸಾರಾಂಶ</string>
+    <string name="end_date">ಕೊನೆ ದಿನಾಂಕ</string>
+    <string name="start_date">ಪ್ರಾರಂಭ ದಿನಾಂಕ</string>
+    <string name="trip_preview">ಟ್ರಿಪ್ ಪ್ರಿವ್ಯೂ</string>
+    <string name="total_income_">ಒಟ್ಟು ಆದಾಯ</string>
 
+    <string name="view">ನೋಡಿ</string>
+    <string name="please_verify">⚠ %1$s - ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ</string>
+    <string name="truck_number_save_ho_gaya_ek_baar_check_kar_lijiye">ಟ್ರಕ್ ನಂಬರ್ %1$s ಉಳಿಸಲಾಗಿದೆ. ಒಮ್ಮೆ ಪರಿಶೀಲಿಸಿ</string>
+    <string name="kuch_sunai_nahi_diya_dobara_try_karein">ಏನೂ ಕೇಳಿಸಲಿಲ್ಲ, ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="cancelled_please_try_again">ರದ್ದುಗೊಂಡಿದೆ - ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="kuch_galat_ho_gaya_phir_se_try_karein">ಏನೋ ತಪ್ಪಾಗಿದೆ, ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="bol_rahe_hain">🎤 ಮಾತನಾಡಲಾಗುತ್ತಿದೆ...</string>
+    <string name="voice_recognition_nahi_khul_raha_please_check_permissions">ವಾಯ್ಸ್ ಗುರುತಿಸುವಿಕೆ ತೆರೆಯುತ್ತಿಲ್ಲ, ಅನುಮತಿ ಪರಿಶೀಲಿಸಿ</string>
+
+    <string name="pehle_date_select_karo">ಮೊದಲು ದಿನಾಂಕ ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="pehle_start_place_dalo">ಮೊದಲು ಆರಂಭದ ಜಾಗ ಹಾಕಿ</string>
+    <string name="pehle_end_place_dalo">ಮೊದಲು ಕೊನೆಯ ಜಾಗ ಹಾಕಿ</string>
+    <string name="stop_update_ho_gaya">ಮಧ್ಯದ ಜಾಗ ಬದಲಾಗಿದೆ</string>
+    <string name="beech_ka_rasta">ಮಧ್ಯದ ದಾರಿ %1$d</string>
+
+    <string name="ka_rupaye_update_ho_gaya_he">%1$s ಗೆ %2$d ರೂಪಾಯಿ ಅಪ್‌ಡೇಟ್ ಆಯಿತು</string>
+    <string name="ka_rupaye_jod_diya_he">%1$s ಗೆ %2$d ರೂಪಾಯಿ ಸೇರಿಸಲಾಯಿತು</string>
+
+    <string name="source_place_mic">ಪ್ರಾರಂಭದ ಸ್ಥಳ ಹಾಕಿ</string>
+    <string name="end_place_mic">ಕೊನೆಯ ಸ್ಥಳ ಹಾಕಿ</string>
+    <string name="truck_number_mic">ಟ್ರಕ್ ನಂಬರ್ ಹಾಕಿ</string>
 
 </resources>

@@ -506,7 +506,40 @@ Mode হোংনবা লৈ App Mode দা ক্লিক তৌ।
     <string name="please_enter_truck_number">ট্রক নম্বর থাউ</string>
     <string name="enter_via_place">ভিয়া জায়গা থাউ</string>
     <string name="add_middle_place_optional">মাঝেদা জায়গা হাপচিনবা (চাইনা)</string>
+    <string name="add_middle_place_optional_">+মাঝেদা জায়গা হাপচিনবা (চাইনা)</string>
     <string name="trip_route">ট্রিপ রোড</string>
 
+    <string name="download_pdf">PDF ডাউনলোড তৌ</string>
+    <string name="no_expense_entries">খরচা অমত্তা লৈতে</string>
+    <string name="expense_details">খরচাগী মচা-মচা</string>
+    <string name="no_income_entries">আয় অমত্তা লৈতে</string>
+    <string name="income_details">আয়গী মচা-মচা</string>
+    <string name="owner_profit">মালিক্কী লাভ</string>
+    <string name="total_expense">মপুং খরচা</string>
+    <string name="financial_summary">হিসাবগী সার</string>
+    <string name="end_date">লোইবা তারিখ</string>
+    <string name="start_date">হৌজিক তারিখ</string>
+    <string name="trip_preview">ট্রিপ প্রিভিউ</string>
+    <string name="total_income_">মপুং আয়</string>
+
+    <string name="view">উবদা</string>
+    <string name="please_verify">⚠ %1$s - চানবীগী চেক তৌ</string>
+    <string name="truck_number_save_ho_gaya_ek_baar_check_kar_lijiye">ট্রাক নম্বর %1$s সেভ তৌরে। অমুক হন্না চেক তৌ</string>
+    <string name="kuch_sunai_nahi_diya_dobara_try_karein">কান্না ফাওদে, অমুক হন্না তৌ</string>
+    <string name="cancelled_please_try_again">ক্যান্সেল তৌরে - অমুক হন্না তৌ</string>
+    <string name="kuch_galat_ho_gaya_phir_se_try_karein">খরাপ অমা তৌরে, অমুক হন্না তৌ</string>
+    <string name="bol_rahe_hain">🎤 খঙদৌরি...</string>
+    <string name="voice_recognition_nahi_khul_raha_please_check_permissions">ভয়েস রেকগনিশন হাংদে, পারমিশন চেক তৌ</string>
+    <string name="pehle_date_select_karo">হান্না তারিখ খল্লো</string>
+    <string name="pehle_start_place_dalo">হান্না আৰম্ভ জায়গা হাপচিন</string>
+    <string name="pehle_end_place_dalo">হান্না শেষ জায়গা হাপচিন</string>
+    <string name="stop_update_ho_gaya">লম্বী জায়গা হোংখ্রে</string>
+    <string name="beech_ka_rasta">মাঝের লম্বী %1$d</string>
+    <string name="ka_rupaye_update_ho_gaya_he">%1$s গী %2$d টাকা আপডেট অইখ্রে</string>
+    <string name="ka_rupaye_jod_diya_he">%1$s গী %2$d টাকা যোগ তৌখ্রে</string>
+
+    <string name="source_place_mic">অহৌবা থক্কী হাপচিনবা</string>
+    <string name="end_place_mic">লৌবা থক্কী হাপচিনবা</string>
+    <string name="truck_number_mic">ট্রক নম্বর হাপচিনবা</string>
 
 </resources>

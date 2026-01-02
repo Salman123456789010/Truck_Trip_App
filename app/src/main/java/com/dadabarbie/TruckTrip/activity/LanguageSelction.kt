@@ -4,17 +4,23 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnRepeat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.dadabarbie.TruckTrip.R
@@ -41,7 +47,7 @@ import java.util.Locale
 
 
 @AndroidEntryPoint
-class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.OnItemClick {
+class LanguageSelction : BaseActivity(), OnClickListener, LanguageAdapter.OnItemClick {
     lateinit var binding: ActivityLanguageSelctionBinding
     private var languageList: ArrayList<Language> = arrayListOf()
     private lateinit var languageAdapter: LanguageAdapter
@@ -53,7 +59,13 @@ class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.O
         binding = ActivityLanguageSelctionBinding.inflate(layoutInflater)
         setContentView(binding.root)
         SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            enableEdgeToEdge()
+            // 35 (android - 15)
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
+        }
 //        com.dadabarbie.TruckTrip.Utils.SystemUiUtils.setupStatusBar(this, R.color.green, false)
         initViews()
 
@@ -124,26 +136,68 @@ class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.O
                 if (currentTime - lastClickTime > MIN_CLICK_INTERVAL) {
                     lastClickTime = currentTime
 
-                    // Check internet connectivity
-//                    if (!NetworkUtils.isNetworkAvailable(this)) {
-//                        Toast.makeText(
-//                            this,
-//                            getString(R.string.no_internet_connection),
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                        return
-//                    }
+                    if (languageLocale.isNotEmpty()) {
+                        Log.d("LANG_DEBUG", "Saving language: $languageLocale")
 
-                    if (languageLocale != "") {
-                        LocaleHelper.setNewLocale(applicationContext, languageLocale)
-                        if(intent.getStringExtra("languageFlag").equals("")){
-                            startActivity(Intent(this, TripModeSelectionActivity::class.java)
-                                .putExtra("languageFlag",""))
-                            finish()
-                        }else{
-                            authViewModel.updateLanguage(languageLocale.toString())
+                        // Save language using Prefs
+                        Prefs[Constants.languageCode] = languageLocale
+
+                        // Also save directly to ensure it's written immediately
+                        val sp = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                        sp.edit().putString(Constants.languageCode, languageLocale).commit()
+
+                        // Update locale immediately
+                        val locale = Locale(languageLocale)
+                        Locale.setDefault(locale)
+                        val config = Configuration(resources.configuration)
+                        config.setLocale(locale)
+                        resources.updateConfiguration(config, resources.displayMetrics)
+
+                        Log.d("LANG_DEBUG", "Language saved and applied")
+
+                        // Check where to navigate based on app state
+                        val isLogin = Prefs[Constants.isLogin, false]
+                        val appModeSelected = Prefs[Constants.appMode, ""].isNotEmpty()
+
+                        when {
+                            // User is logged in - go back to their dashboard
+                            isLogin -> {
+                                Log.d("LANG_DEBUG", "User logged in, going to dashboard")
+                                val intent = if (Prefs[Constants.appMode, ""] == "A") {
+                                    Intent(this@LanguageSelction, NormalUserDashBoard::class.java)
+                                } else {
+                                    Intent(this@LanguageSelction, DashBoardActivity::class.java)
+                                }
+                                intent.flags =
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            // App mode selected but not logged in - go to login
+                            appModeSelected -> {
+                                Log.d("LANG_DEBUG", "App mode selected, going to login")
+                                val intent =
+                                    Intent(this@LanguageSelction, LoginScreenActivity::class.java)
+                                intent.flags =
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            // Fresh install - go to trip mode selection
+                            else -> {
+                                Log.d("LANG_DEBUG", "Fresh install, going to trip mode")
+                                val intent = Intent(
+                                    this@LanguageSelction,
+                                    TripModeSelectionActivity::class.java
+                                )
+                                intent.flags =
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
+                                finish()
+                            }
                         }
-                        Prefs[Constants.languageCode] = languageLocale.toString()
                     }
                 }
             }
@@ -152,6 +206,19 @@ class LanguageSelction : AppCompatActivity(), OnClickListener, LanguageAdapter.O
             }
         }
     }
+    private fun restartApp() {
+        val intent = packageManager
+            .getLaunchIntentForPackage(packageName)
+
+        intent?.addFlags(
+            Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                    Intent.FLAG_ACTIVITY_NEW_TASK
+        )
+
+        startActivity(intent)
+        Runtime.getRuntime().exit(0)
+    }
+
 
     override fun clickEvent(position: Int) {
         for (item in languageList) {

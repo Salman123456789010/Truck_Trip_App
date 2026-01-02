@@ -529,7 +529,7 @@ Mode बदलना हो तो App Mode पर क्लिक करो।
 </string>
     <string name="pehle_truck_number_bolo">पहले ट्रक नंबर बोलो</string>
     <string name="sabhi_fields_bharo">सभी जानकारी भरो</string>
-    <string name="beech_ke_rasta_add_karo_optinal">+बीच का रास्ता जोड़ो (वैकल्पिक)</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+और जगह जोड़ो</string>
     <string name="naya_bolo">नया बोलो</string>
     <string name="beech_mein_rasta_stop">बीच में रास्ता (स्टॉप)</string>
     <string name="shuru_ki_jagah_save_ho_gayi">शुरू की जगह सेव हो गई!</string>
@@ -545,7 +545,7 @@ Mode बदलना हो तो App Mode पर क्लिक करो।
     <string name="update_trip_data">ट्रिप का डेटा अपडेट करें</string>
     <string name="please_enter_middle_place">बीच की जगह डालो</string>
     <string name="please_add_source_destination_first">पहले शुरुआत और मंज़िल डालो</string>
-    <string name="middle_place_added">बीच की जगह जुड़ गई</string>
+    <string name="middle_place_added">और जगह जुड़ गई</string>
     <string name="select_trip_date">ट्रिप की तारीख चुनो</string>
     <string name="speak_now">अब बोलो</string>
     <string name="speech_not_supported">बोलने की सुविधा नहीं है</string>
@@ -553,8 +553,42 @@ Mode बदलना हो तो App Mode पर क्लिक करो।
     <string name="please_enter_source">शुरुआत की जगह डालो</string>
     <string name="please_enter_destination">मंज़िल की जगह डालो</string>
     <string name="please_enter_truck_number">ट्रक नंबर डालो</string>
-    <string name="enter_via_place">वाया जगह डालो</string>
-    <string name="add_middle_place_optional">बीच की जगह जोड़ो (ज़रूरी नहीं)</string>
     <string name="trip_route">ट्रिप का रास्ता</string>
+    <string name="download_pdf">PDF डाउनलोड करें</string>
+    <string name="no_expense_entries">कोई खर्चा नहीं</string>
+    <string name="expense_details">खर्चा की जानकारी</string>
+    <string name="no_income_entries">कोई आमदनी नहीं</string>
+    <string name="income_details">आमदनी की जानकारी</string>
+    <string name="owner_profit">मालिक का मुनाफा</string>
+    <string name="total_expense">कुल खर्चा</string>
+    <string name="financial_summary">हिसाब का सार</string>
+    <string name="end_date">अंत तारीख</string>
+    <string name="start_date">शुरू तारीख</string>
+    <string name="trip_preview">ट्रिप का प्रीव्यू</string>
+    <string name="total_income_">कुल आमदनी</string>
+
+    <string name="view">देखें</string>
+    <string name="please_verify">⚠ %1$s - कृपया जाँच करें</string>
+    <string name="truck_number_save_ho_gaya_ek_baar_check_kar_lijiye">ट्रक नंबर %1$s सेव हो गया है। एक बार जाँच कर लें</string>
+    <string name="kuch_sunai_nahi_diya_dobara_try_karein">कुछ सुनाई नहीं दिया, दोबारा कोशिश करें</string>
+    <string name="cancelled_please_try_again">रद्द किया गया - फिर से कोशिश करें</string>
+    <string name="kuch_galat_ho_gaya_phir_se_try_karein">कुछ गलत हो गया, फिर से कोशिश करें</string>
+    <string name="bol_rahe_hain">🎤 बोल रहे हैं...</string>
+    <string name="voice_recognition_nahi_khul_raha_please_check_permissions">वॉइस पहचान चालू नहीं हो रही, कृपया परमिशन जाँचें</string>
+
+    <string name="pehle_date_select_karo">पहले तारीख चुनो</string>
+    <string name="pehle_start_place_dalo">पहले शुरू की जगह डालो</string>
+    <string name="pehle_end_place_dalo">पहले आख़िरी जगह डालो</string>
+    <string name="stop_update_ho_gaya">रास्ते की जगह बदल गई</string>
+    <string name="beech_ka_rasta">बीच का रास्ता %1$d</string>
+    <string name="add_middle_place_optional">और कहीं गए हो तो जोड़ दो</string>
+    <string name="add_middle_place_optional_">+और कहीं गए हो तो जोड़ दो</string>
+    <string name="ka_rupaye_update_ho_gaya_he">%1$s के %2$d रुपये अपडेट हो गए</string>
+    <string name="ka_rupaye_jod_diya_he">%1$s के %2$d रुपये जोड़ दिए</string>
+    <string name="enter_via_place">और जगह डालो</string>
+
+    <string name="source_place_mic">शुरू की जगह डालो</string>
+    <string name="end_place_mic">अंत की जगह डालो</string>
+    <string name="truck_number_mic">ट्रक नंबर डालो</string>
 
 </resources>

@@ -307,6 +307,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/shareIcon"
                 android:gravity="center">
 
                 <FrameLayout
@@ -315,7 +316,7 @@
                     android:background="@drawable/bg_icon_circle_blue">
 
                     <ImageView
-                        android:id="@+id/shareIcon"
+
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="center"
@@ -341,7 +342,7 @@
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="center"
-                        android:src="@drawable/baseline_arrow_downward_24"
+                        android:src="@drawable/view"
                         app:tint="@color/white" />
                 </FrameLayout>
             </LinearLayout>
@@ -351,6 +352,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/editIcon"
                 android:gravity="center">
 
                 <FrameLayout
@@ -359,7 +361,6 @@
                     android:background="@drawable/bg_icon_circle_blue">
 
                     <ImageView
-                        android:id="@+id/editIcon"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="center"
@@ -373,6 +374,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/deleteIcon"
                 android:gravity="center">
 
                 <FrameLayout
@@ -381,7 +383,6 @@
                     android:background="@drawable/bg_icon_circle_blue">
 
                     <ImageView
-                        android:id="@+id/deleteIcon"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="center"

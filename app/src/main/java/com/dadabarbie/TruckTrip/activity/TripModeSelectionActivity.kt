@@ -11,18 +11,28 @@ import com.dadabarbie.TruckTrip.R
 
 import android.animation.ValueAnimator
 import android.content.Intent
+import android.os.Build
 
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Constants.languageLocale
 import com.dadabarbie.TruckTrip.Utils.Prefs
+import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
+import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
 import com.dadabarbie.TruckTrip.databinding.ActivityTripModeSelectionBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
+import kotlin.getValue
 
-class TripModeSelectionActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
+@AndroidEntryPoint
+class TripModeSelectionActivity : BaseActivity(), TextToSpeech.OnInitListener {
 
     private val binding: ActivityTripModeSelectionBinding by lazy {
         ActivityTripModeSelectionBinding.inflate(layoutInflater)
@@ -33,14 +43,24 @@ class TripModeSelectionActivity : AppCompatActivity(), TextToSpeech.OnInitListen
     private var hasSpokenOnce = false
     private var arrowAnimator: ValueAnimator? = null
     private var langCode = ""
+    private  val  authViewModel: AuthViewModel by viewModels()
+    private var languageFlag: String? =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            enableEdgeToEdge()
+            // 35 (android - 15)
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
+        }
         langCode = Prefs[Constants.languageCode] ?: "hi"
         textToSpeech = TextToSpeech(this, this)
-
+        languageFlag=intent.getStringExtra("languageFlag")
+        authViewModel.updateLanguage(languageLocale.toString())
         setupViews()
         startArrowAnimation()
         startArrowNewAnimation()
@@ -61,7 +81,7 @@ class TripModeSelectionActivity : AppCompatActivity(), TextToSpeech.OnInitListen
         binding.addTrip.setOnClickListener {
             Prefs[Constants.appMode] = "B"
             speakText(getString(R.string.full_mode_selected))
-            if(intent.getStringExtra("languageFlag").equals("")){
+            if(languageFlag.equals("") || languageFlag.isNullOrEmpty()){
                 startActivity(Intent(this, HowToUseActivity::class.java)
                     .putExtra("languageFlag",""))
             }else{
@@ -72,14 +92,13 @@ class TripModeSelectionActivity : AppCompatActivity(), TextToSpeech.OnInitListen
         binding.addFullDetailsTrip.setOnClickListener {
             Prefs[Constants.appMode] = "A"
             speakText(getString(R.string.simple_mode_selected))
-            if(intent.getStringExtra("languageFlag").equals("")){
+            if(languageFlag.equals("") || languageFlag.isNullOrEmpty()){
                 startActivity(Intent(this, HowToUseNormalActivity::class.java)
                     .putExtra("languageFlag",""))
             }else{
                 navigateToSimpleMode()
             }
 
-            finish()
         }
 
         // Full Mode Card - Complete Details
@@ -164,7 +183,6 @@ class TripModeSelectionActivity : AppCompatActivity(), TextToSpeech.OnInitListen
 
     private fun navigateToFullMode() {
         val intent = Intent(this, DashBoardActivity::class.java)
-
         intent.putExtra("MODE", "FULL")
         startActivity(intent)
     }

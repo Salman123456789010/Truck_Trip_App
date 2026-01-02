@@ -1,7 +1,5 @@
 package com.dadabarbie.TruckTrip.room.model
 
-import com.dadabarbie.TruckTrip.model.CreditModel
-import com.dadabarbie.TruckTrip.model.DebitModel
 import com.dadabarbie.TruckTrip.model.addTrip.Expense
 import com.dadabarbie.TruckTrip.model.addTrip.Income
 
@@ -16,8 +14,10 @@ data class TripDataTestModel(
     val driverIncome: String = "",
     val modelList1: List<Income>,
     val modelList2: List<Expense>,
-    val startOdometer: String = "",  // NEW: Start odometer reading
+    val route: ArrayList<String>,
+    val startOdometer: String? = "",  // NEW: Start odometer reading
     val endOdometer: String = "",    // NEW: End odometer reading
     val endTripKm: String = "",
-    val id: String=""// NEW: Manual KM if not using odometer
+    val id: String = "",// NEW: Manual KM if not using odometer
+    val routeList: String
 )

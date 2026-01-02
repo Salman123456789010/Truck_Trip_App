@@ -462,7 +462,6 @@ Mode ବଦଳାଇବାକୁ App Mode ଉପରେ କ୍ଲିକ୍ କର
     <string name="pehle_se_sun_rahe_hain">ପୂର୍ବରୁ ଶୁଣୁଛୁ...</string>
     <string name="pehle_truck_number_bolo">ପ୍ରଥମେ ଟ୍ରକ୍ ନମ୍ବର କହନ୍ତୁ</string>
     <string name="sabhi_fields_bharo">ସମସ୍ତ ତଥ୍ୟ ଭରନ୍ତୁ</string>
-    <string name="beech_ke_rasta_add_karo_optinal">+ମଝିରେ ରାସ୍ତା ଯୋଡନ୍ତୁ (ଇଚ୍ଛାଧୀନ)</string>
     <string name="naya_bolo">ନୂଆ କୁହନ୍ତୁ</string>
     <string name="beech_mein_rasta_stop">ମଧ୍ୟ ରାସ୍ତା (ଷ୍ଟପ୍)</string>
     <string name="shuru_ki_jagah_save_ho_gayi">ଆରମ୍ଭ ଜାଗା ସେଭ୍ ହେଲା!</string>
@@ -477,7 +476,7 @@ Mode ବଦଳାଇବାକୁ App Mode ଉପରେ କ୍ଲିକ୍ କର
     <string name="update_trip_data">ଟ୍ରିପ୍ ଡାଟା ଅପଡେଟ୍ କରନ୍ତୁ</string>
     <string name="please_enter_middle_place">ମଧ୍ୟ ଜାଗା ଦିଅନ୍ତୁ</string>
     <string name="please_add_source_destination_first">ପ୍ରଥମେ ଆରମ୍ଭ ଓ ଗନ୍ତବ୍ୟ ଦିଅନ୍ତୁ</string>
-    <string name="middle_place_added">ମଧ୍ୟ ଜାଗା ଯୋଡାଗଲା</string>
+    <string name="middle_place_added">ଆଉ ଏକ ଜଗା ଯୋଡାଗଲା</string>
     <string name="select_trip_date">ଟ୍ରିପ୍ ତାରିଖ ବାଛନ୍ତୁ</string>
     <string name="speak_now">ଏବେ କୁହନ୍ତୁ</string>
     <string name="speech_not_supported">ଭଏସ ସହଯୋଗ ନାହିଁ</string>
@@ -485,9 +484,44 @@ Mode ବଦଳାଇବାକୁ App Mode ଉପରେ କ୍ଲିକ୍ କର
     <string name="please_enter_source">ଆରମ୍ଭ ଦିଅନ୍ତୁ</string>
     <string name="please_enter_destination">ଗନ୍ତବ୍ୟ ଦିଅନ୍ତୁ</string>
     <string name="please_enter_truck_number">ଟ୍ରକ୍ ନମ୍ବର ଦିଅନ୍ତୁ</string>
-    <string name="enter_via_place">ଭିଆ ଜାଗା ଦିଅନ୍ତୁ</string>
-    <string name="add_middle_place_optional">ମଧ୍ୟ ଜାଗା ଯୋଡନ୍ତୁ (ଇଚ୍ଛାନୁସାରେ)</string>
+    <string name="enter_via_place">ଆଉ ଏକ ଜଗା ଦିଅ</string>
+    <string name="add_middle_place_optional">ଆଉ କେଉଁଠି ଯାଇଥିଲେ ଯୋଗ କର</string>
+    <string name="add_middle_place_optional_">+ଆଉ କେଉଁଠି ଯାଇଥିଲେ ଯୋଗ କର</string>
     <string name="trip_route">ଟ୍ରିପ୍ ରାସ୍ତା</string>
+    <string name="download_pdf">PDF ଡାଉନଲୋଡ୍ କରନ୍ତୁ</string>
+    <string name="no_expense_entries">କୌଣସି ଖର୍ଚ୍ଚ ନାହିଁ</string>
+    <string name="expense_details">ଖର୍ଚ୍ଚ ବିବରଣୀ</string>
+    <string name="no_income_entries">କୌଣସି ଆୟ ନାହିଁ</string>
+    <string name="income_details">ଆୟ ବିବରଣୀ</string>
+    <string name="owner_profit">ମାଲିକଙ୍କ ଲାଭ</string>
+    <string name="total_expense">ମୋଟ ଖର୍ଚ୍ଚ</string>
+    <string name="financial_summary">ହିସାବ ସାରାଂଶ</string>
+    <string name="end_date">ଶେଷ ତାରିଖ</string>
+    <string name="start_date">ଆରମ୍ଭ ତାରିଖ</string>
+    <string name="trip_preview">ଟ୍ରିପ୍ ପ୍ରିଭ୍ୟୁ</string>
+    <string name="total_income_">ମୋଟ ଆୟ</string>
 
+    <string name="view">ଦେଖନ୍ତୁ</string>
+    <string name="please_verify">⚠ %1$s - ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ</string>
+    <string name="truck_number_save_ho_gaya_ek_baar_check_kar_lijiye">ଟ୍ରକ୍ ନମ୍ବର %1$s ସେଭ୍ ହୋଇଛି। ଥରେ ଯାଞ୍ଚ କରନ୍ତୁ</string>
+    <string name="kuch_sunai_nahi_diya_dobara_try_karein">କିଛି ଶୁଣିବାକୁ ମିଳିଲା ନାହିଁ, ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ</string>
+    <string name="cancelled_please_try_again">ବାତିଲ ହେଲା - ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ</string>
+    <string name="kuch_galat_ho_gaya_phir_se_try_karein">କିଛି ଭୁଲ ହେଲା, ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ</string>
+    <string name="bol_rahe_hain">🎤 କହୁଛୁ...</string>
+    <string name="voice_recognition_nahi_khul_raha_please_check_permissions">ଭଏସ୍ ଚିହ୍ନଟ ଖୁଲୁନାହିଁ, ପରମିସନ୍ ଯାଞ୍ଚ କରନ୍ତୁ</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+ଆଉ ଏକ ଜାଗା ଯୋଡନ୍ତୁ</string>
+
+    <string name="pehle_date_select_karo">ପ୍ରଥମେ ତାରିଖ ବାଛନ୍ତୁ</string>
+    <string name="pehle_start_place_dalo">ପ୍ରଥମେ ଆରମ୍ଭ ଜାଗା ଦିଅନ୍ତୁ</string>
+    <string name="pehle_end_place_dalo">ପ୍ରଥମେ ଶେଷ ଜାଗା ଦିଅନ୍ତୁ</string>
+    <string name="stop_update_ho_gaya">ରାସ୍ତାର ଜାଗା ବଦଳିଗଲା</string>
+    <string name="beech_ka_rasta">ମଝିରାସ୍ତା %1$d</string>
+
+    <string name="ka_rupaye_update_ho_gaya_he">%1$s ର %2$d ଟଙ୍କା ଅପଡେଟ୍ ହୋଇଗଲା</string>
+    <string name="ka_rupaye_jod_diya_he">%1$s ର %2$d ଟଙ୍କା ଯୋଡାଗଲା</string>
+
+    <string name="source_place_mic">ଆରମ୍ଭ ଜଗା ଦିଅନ୍ତୁ</string>
+    <string name="end_place_mic">ଶେଷ ଜଗା ଦିଅନ୍ତୁ</string>
+    <string name="truck_number_mic">ଟ୍ରକ୍ ନମ୍ବର ଦିଅନ୍ତୁ</string>
 
 </resources>

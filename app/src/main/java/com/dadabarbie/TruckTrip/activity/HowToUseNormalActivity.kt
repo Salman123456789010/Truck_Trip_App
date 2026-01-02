@@ -1,15 +1,21 @@
 package com.dadabarbie.TruckTrip.activity
 
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
@@ -24,7 +30,7 @@ import com.dadabarbie.TruckTrip.model.OnboardingItem
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.Locale
 
-class HowToUseNormalActivity : AppCompatActivity(), OnboardingVoiceListener {
+class HowToUseNormalActivity : BaseActivity(), OnboardingVoiceListener {
     lateinit var binding: ActivityHowToUseNormalBinding
 
     private lateinit var adapter: OnboardingAdapter
@@ -42,7 +48,13 @@ class HowToUseNormalActivity : AppCompatActivity(), OnboardingVoiceListener {
         binding = ActivityHowToUseNormalBinding.inflate(layoutInflater)
         setContentView(binding.root)
         SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            enableEdgeToEdge()
+            // 35 (android - 15)
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
+        }
         initTts()
         initAdapter()
         setOnClickListeners()
@@ -205,6 +217,10 @@ class HowToUseNormalActivity : AppCompatActivity(), OnboardingVoiceListener {
     private fun setOnClickListeners() {
 
         binding.backBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.youtubeIcon.setOnClickListener {
+            val url = "https://www.youtube.com/@TruckWallah_TW"
+            openLink(url)
+        }
 
         binding.btnSkip.setOnClickListener {
             val pos = binding.viewPager.currentItem
@@ -294,7 +310,14 @@ class HowToUseNormalActivity : AppCompatActivity(), OnboardingVoiceListener {
         isPaused = false
         currentSentenceIndex = 0
     }
-
+    private fun openLink(url: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Unable to open link", Toast.LENGTH_SHORT).show()
+        }
+    }
     override fun onDestroy() {
         super.onDestroy()
         tts?.stop()

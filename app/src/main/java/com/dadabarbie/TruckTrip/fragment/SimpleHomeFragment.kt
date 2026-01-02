@@ -26,6 +26,7 @@ import com.dadabarbie.TruckTrip.Utils.Constants.visible
 import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.activity.NormalUserDashBoard
+import com.dadabarbie.TruckTrip.activity.TripPreviewActivity
 import com.dadabarbie.TruckTrip.activity.TruckNumberSpeechActivity
 import com.dadabarbie.TruckTrip.adapter.TripNewListAdapter
 import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
@@ -56,7 +57,7 @@ import java.util.Locale
 @AndroidEntryPoint
 class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.EditTripDataListner,
     TripNewListAdapter.ShareTripDataListner, TripNewListAdapter.DeleteTripListner,
-    TripNewListAdapter.DowanloadListner {
+    TripNewListAdapter.DowanloadListner,TripNewListAdapter.ViewTripDataListner {
 
     // Nullable binding to prevent memory leaks
     private var _binding: FragmentSimpleHomeBinding? = null
@@ -655,6 +656,7 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
             putExtra("ORIGINAL_END_DATE", trip.end_date)
             putExtra("ORIGINAL_START_PLACE", trip.source)
             putExtra("ORIGINAL_END_PLACE", trip.destination)
+            putStringArrayListExtra("ROUTE_ARRAY", ArrayList(trip.route ?: emptyList()))
         })
 
         Log.d("HomeFragment", "Starting edit for trip: ${trip._id}")
@@ -729,5 +731,47 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
         materialDatePicker = null
         deleteDialogFragment = null
         _binding = null
+    }
+
+    override fun viewTripDataMethod(position: Int) {
+        val trip = tripList[position]
+
+        // Calculate total days
+        val totalDays = try {
+            val startDate = apiDateFormat.parse(trip.start_date)
+            val endDate = apiDateFormat.parse(trip.end_date)
+            if (startDate != null && endDate != null) {
+                val diffInMillis = endDate.time - startDate.time
+                val days = (diffInMillis / (1000 * 60 * 60 * 24)).toInt()
+                days.toString()
+            } else "0"
+        } catch (e: Exception) { "0" }
+
+        val intent = Intent(requireActivity(), TripPreviewActivity::class.java).apply {
+            putExtra("TRIP_ID", trip._id)
+            putExtra("SOURCE", trip.source)
+            putExtra("DESTINATION", trip.destination)
+            putExtra("START_DATE", trip.start_date)
+            putExtra("END_DATE", trip.end_date)
+            putExtra("TRUCK_NO", trip.truck_no)
+            putExtra("DRIVER_INCOME", trip.driver_income)
+            putExtra("TOTAL_INCOME", trip.total_income)
+            putExtra("TOTAL_EXPENSE", trip.total_expense)
+            putExtra("OWNER_PROFIT", trip.owner_profit)
+            putExtra("TRUCK_AVERAGE", trip.truck_average)
+            putExtra("TOTAL_DAYS", totalDays)
+
+            // Pass route
+            val routeJson = if (trip.route != null && trip.route.isNotEmpty()) {
+                gson.toJson(trip.route)
+            } else ""
+            putExtra("ROUTE_JSON", routeJson)
+
+            // Pass income and expense
+            putExtra("INCOME_JSON", gson.toJson(trip.income))
+            putExtra("EXPENSE_JSON", gson.toJson(trip.expense))
+        }
+
+        startActivity(intent)
     }
 }

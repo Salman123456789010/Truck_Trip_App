@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 
 object Prefs {
 
-    private const val APP_PREFERENCES = "damacas_vendor"
+    private const val APP_PREFERENCES = "app_prefs"
     lateinit var preferences: SharedPreferences
 
     fun init(context: Context) {

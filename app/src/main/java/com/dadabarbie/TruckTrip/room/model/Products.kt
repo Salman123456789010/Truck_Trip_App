@@ -35,5 +35,8 @@ data class Products(
     val modelList2: String,
 
     @ColumnInfo(name = "routeJson")
-    val routeJson: String = ""  // Add this field
+    val routeJson: String = ""  ,// Add this field
+
+    @ColumnInfo(name = "updatedAt")
+    val updatedAt: Long = System.currentTimeMillis()
 )

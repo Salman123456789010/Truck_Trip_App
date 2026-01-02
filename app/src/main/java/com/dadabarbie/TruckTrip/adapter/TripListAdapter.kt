@@ -28,7 +28,8 @@ import kotlinx.coroutines.launch
 
 
 class TripListAdapter(val context: Context, val editTripDataListner: EditTripDataListner,val shareTripDataListner: ShareTripDataListner,
- val deleteTripListner: DeleteTripListner,val dowanloadListner: DowanloadListner) :
+ val deleteTripListner: DeleteTripListner,val dowanloadListner: DowanloadListner,
+    val viewTripDataListner: ViewTripDataListner) :
     RecyclerView.Adapter<TripListAdapter.ViewHolder>() {
 
     private val diffCallBack = object : DiffUtil.ItemCallback<Record>() {
@@ -63,7 +64,10 @@ class TripListAdapter(val context: Context, val editTripDataListner: EditTripDat
     override fun onBindViewHolder(holder: TripListAdapter.ViewHolder, position: Int) {
         val item = differ.currentList[position]
         holder.binding.editIcon.setOnClickListener {
-            editTripDataListner.editTripDataMethod(position)
+            editTripDataListner.editTripData(item)
+        }
+        holder.binding.dowanloadIcon.setOnClickListener {
+            viewTripDataListner.viewTripDataMethod(item)
         }
         holder.binding.srcName.text=item.source
         holder.binding.dest.text=item.destination
@@ -82,14 +86,14 @@ class TripListAdapter(val context: Context, val editTripDataListner: EditTripDat
         holder.binding.deleteIcon.setOnClickListener {
             deleteTripListner.deleteTripMethod(position)
         }
-        holder.binding.dowanloadIcon.setOnClickListener{
-            dowanloadListner.dowanloadMethod(position)
-        }
+//        holder.binding.dowanloadIcon.setOnClickListener{
+//            dowanloadListner.dowanloadMethod(position)
+//        }
        if(position%3==0){
            holder.binding.myTemplate.visible()
            GlobalScope.launch {
 //               ca-app-pub-8808039515208362/1007625609  main
-               val adLoader = AdLoader.Builder(context, "ca-app-pub-3940256099942544/6300978111")
+               val adLoader = AdLoader.Builder(context, "ca-app-pub-8808039515208362/1007625609")
                    .forNativeAd { nativeAd ->
                        holder.binding.myTemplate.setNativeAd(nativeAd)
                        holder.binding.myTemplate.visibility = View.VISIBLE
@@ -115,7 +119,10 @@ class TripListAdapter(val context: Context, val editTripDataListner: EditTripDat
     }
 
     interface EditTripDataListner {
-        fun editTripDataMethod(position: Int)
+        fun editTripData(trip: Record)
+    }
+    interface ViewTripDataListner {
+        fun viewTripDataMethod(trip: Record)  // Pass Record instead of position
     }
     interface ShareTripDataListner{
         fun shareTripDataMethod(position: Int)

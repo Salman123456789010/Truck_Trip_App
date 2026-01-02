@@ -18,7 +18,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Locale
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
     private val binding: ActivitySplashBinding by lazy {
         ActivitySplashBinding.inflate(layoutInflater)
     }
@@ -27,34 +27,56 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         CoroutineScope(Dispatchers.Main).launch {
-            delay(2000)
-            if (Prefs[Constants.isLogin]) {
-                 if(Prefs[Constants.appMode,""]=="A"){
-                     startActivity(Intent(this@SplashActivity, NormalUserDashBoard::class.java)
-                         .putExtra("tripData",""))
-                 }else{
-                     startActivity(Intent(this@SplashActivity, DashBoardActivity::class.java)
-                         .putExtra("tripData",""))
-                 }
-                finish()
-            } else {
-                 if(!Prefs[Constants.languageCode, ""].toString().isNullOrEmpty()){
-                     setLanguage()
-                     startActivity(Intent(this@SplashActivity, LoginScreenActivity::class.java))
-                     finish()
-                 }else{
-                     startActivity(Intent(this@SplashActivity, LanguageSelction::class.java).putExtra("languageFlag",""))
-                     finish()
-                 }
+            delay(1500)
+
+            val isLogin = Prefs[Constants.isLogin, false]
+            val langSelected = Prefs[Constants.languageCode, ""].isNotEmpty()
+            val appModeSelected = Prefs[Constants.appMode, ""].isNotEmpty()
+            applySavedLanguage()
+
+            val nextIntent = when {
+                // Language not selected
+                !langSelected -> {
+                    Intent(this@SplashActivity, LanguageSelction::class.java)
+                }
+
+                // Trip mode not selected
+                !appModeSelected -> {
+                    Intent(this@SplashActivity, TripModeSelectionActivity::class.java)
+                }
+
+                // Not logged in
+                !isLogin -> {
+                    Intent(this@SplashActivity, LoginScreenActivity::class.java)
+                }
+
+                // Logged in → dashboard
+                else -> {
+                    if (Prefs[Constants.appMode, ""] == "A") {
+                        Intent(this@SplashActivity, NormalUserDashBoard::class.java)
+                    } else {
+                        Intent(this@SplashActivity, DashBoardActivity::class.java)
+                    }
+                }
             }
 
+
+            nextIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(nextIntent)
+
+            finish()
         }
     }
-    private fun setLanguage() {
-        val languageCode = LocaleHelper.getSavedLanguage(applicationContext)
-        if (languageCode.isNotEmpty()) {
-            LocaleHelper.setNewLocale(applicationContext, languageCode)
+    private fun applySavedLanguage() {
+        val savedLang = Prefs[Constants.languageCode, ""]
+        if (savedLang.isNotEmpty()) {
+            val locale = Locale(savedLang)
+            Locale.setDefault(locale)
+            val config = Configuration(resources.configuration)
+            config.setLocale(locale)
+            resources.updateConfiguration(config, resources.displayMetrics)
         }
     }
+
 
 }

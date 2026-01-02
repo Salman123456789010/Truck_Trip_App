@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="@dimen/_10sdp"
     android:layout_marginEnd="@dimen/_10sdp"
     android:orientation="vertical">
@@ -31,7 +32,6 @@
                 android:background="@color/color_primary"
                 android:orientation="vertical"
                 android:padding="@dimen/_12sdp">
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -126,6 +126,16 @@
                             android:textSize="@dimen/_10sdp" />
                     </LinearLayout>
                 </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvRoute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textSize="13sp"
+                    android:textColor="#E3F2FD"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    tools:text="Mumbai → Pune → Nagpur → Delhi" />
             </LinearLayout>
 
             <!-- Financial Details Section -->
@@ -433,6 +443,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:id="@+id/dowanloadIcon"
                     android:orientation="vertical">
 
                     <FrameLayout
@@ -441,11 +452,10 @@
                         android:background="@drawable/bg_gradient_green_circle">
 
                         <ImageView
-                            android:id="@+id/dowanloadIcon"
                             android:layout_width="@dimen/_14sdp"
                             android:layout_height="@dimen/_14sdp"
                             android:layout_gravity="center"
-                            android:src="@drawable/baseline_arrow_downward_24"
+                            android:src="@drawable/view"
                             app:tint="@color/white" />
                     </FrameLayout>
 
@@ -454,7 +464,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="@string/down"
+                        android:text="@string/view"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_9sdp" />
                 </LinearLayout>

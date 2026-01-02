@@ -394,7 +394,6 @@
 App শিখতে How to Use এ ক্লিক করুন।
 Mode বদলাতে App Mode এ ক্লিক করুন।
 </string>
-    <string name="beech_ke_rasta_add_karo_optinal">+মাঝের রাস্তা যোগ করুন (ঐচ্ছিক)</string>
     <string name="naya_bolo">নতুন বলুন</string>
     <string name="beech_mein_rasta_stop">মাঝের রাস্তা (স্টপ)</string>
     <string name="shuru_ki_jagah_save_ho_gayi">শুরুর জায়গা সেভ হয়েছে!</string>
@@ -409,7 +408,7 @@ Mode বদলাতে App Mode এ ক্লিক করুন।
     <string name="update_trip_data">ট্রিপ ডেটা আপডেট করুন</string>
     <string name="please_enter_middle_place">মাঝের জায়গা দিন</string>
     <string name="please_add_source_destination_first">আগে শুরু আর গন্তব্য দিন</string>
-    <string name="middle_place_added">মাঝের জায়গা যোগ হয়েছে</string>
+    <string name="middle_place_added">আরেকটা জায়গা যোগ হলো</string>
     <string name="select_trip_date">ট্রিপের তারিখ বাছুন</string>
     <string name="speak_now">এখন বলুন</string>
     <string name="speech_not_supported">ভয়েস সাপোর্ট নেই</string>
@@ -417,8 +416,43 @@ Mode বদলাতে App Mode এ ক্লিক করুন।
     <string name="please_enter_source">শুরুর জায়গা দিন</string>
     <string name="please_enter_destination">গন্তব্য দিন</string>
     <string name="please_enter_truck_number">ট্রাক নম্বর দিন</string>
-    <string name="enter_via_place">ভিয়া জায়গা দিন</string>
-    <string name="add_middle_place_optional">মাঝের জায়গা যোগ করুন (ঐচ্ছিক)</string>
+    <string name="enter_via_place">আরেকটা জায়গা দাও</string>
+    <string name="add_middle_place_optional">আর কোথাও গেলে যোগ করে দাও</string>
+    <string name="add_middle_place_optional_">+আর কোথাও গেলে যোগ করে দাও</string>
     <string name="trip_route">ট্রিপের রাস্তা</string>
+    <string name="download_pdf">PDF ডাউনলোড করুন</string>
+    <string name="no_expense_entries">কোনো খরচ নেই</string>
+    <string name="expense_details">খরচের বিবরণ</string>
+    <string name="no_income_entries">কোনো আয় নেই</string>
+    <string name="income_details">আয়ের বিবরণ</string>
+    <string name="owner_profit">মালিকের লাভ</string>
+    <string name="total_expense">মোট খরচ</string>
+    <string name="financial_summary">হিসাবের সারাংশ</string>
+    <string name="end_date">শেষ তারিখ</string>
+    <string name="start_date">শুরু তারিখ</string>
+    <string name="trip_preview">ট্রিপ প্রিভিউ</string>
+    <string name="total_income_">মোট আয়</string>
+
+    <string name="view">দেখুন</string>
+    <string name="please_verify">⚠ %1$s - অনুগ্রহ করে যাচাই করুন</string>
+    <string name="truck_number_save_ho_gaya_ek_baar_check_kar_lijiye">ট্রাক নম্বর %1$s সেভ হয়েছে। একবার দেখে নিন</string>
+    <string name="kuch_sunai_nahi_diya_dobara_try_karein">কিছু শোনা যায়নি, আবার চেষ্টা করুন</string>
+    <string name="cancelled_please_try_again">বাতিল হয়েছে - আবার চেষ্টা করুন</string>
+    <string name="kuch_galat_ho_gaya_phir_se_try_karein">কিছু ভুল হয়েছে, আবার চেষ্টা করুন</string>
+    <string name="bol_rahe_hain">🎤 কথা বলা হচ্ছে...</string>
+    <string name="voice_recognition_nahi_khul_raha_please_check_permissions">ভয়েস শনাক্তকরণ খুলছে না, পারমিশন চেক করুন</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+আরেকটা জায়গা যোগ করুন</string>
+
+    <string name="pehle_date_select_karo">আগে তারিখ বেছে নিন</string>
+    <string name="pehle_start_place_dalo">আগে শুরু করার জায়গা দিন</string>
+    <string name="pehle_end_place_dalo">আগে শেষ জায়গা দিন</string>
+    <string name="stop_update_ho_gaya">পথের জায়গা বদলেছে</string>
+    <string name="beech_ka_rasta">মাঝের রাস্তা %1$d</string>
+    <string name="ka_rupaye_update_ho_gaya_he">%1$s এর %2$d টাকা আপডেট হয়ে গেছে</string>
+    <string name="ka_rupaye_jod_diya_he">%1$s এর %2$d টাকা যোগ করা হয়েছে</string>
+
+    <string name="source_place_mic">শুরুর জায়গা দিন</string>
+    <string name="end_place_mic">শেষের জায়গা দিন</string>
+    <string name="truck_number_mic">ট্রাক নম্বর দিন</string>
 
 </resources>

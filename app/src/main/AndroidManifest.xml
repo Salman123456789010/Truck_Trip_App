@@ -3,12 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
 
     <application
         android:name=".TruckTripApplication"
@@ -16,12 +14,16 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
+        android:localeConfig="@xml/locales_config"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestApplication"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.TripPreviewActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.HowToUseNormalActivity"
             android:exported="false" />
@@ -43,10 +45,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.TruckNumberSpeechActivity"
-            android:exported="false" >
-        </activity>
-
-
+            android:exported="false"></activity>
         <activity
             android:name=".activity.VahanInfoDetailsActivity"
             android:exported="false" />
@@ -70,6 +69,7 @@
             android:exported="false" />
         <activity
             android:name=".auth.activity.LoginScreenActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:exported="true" />
         <activity
             android:name=".activity.LanguageSelction"

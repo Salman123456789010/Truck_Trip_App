@@ -47,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:scrollbars="none"
             android:layout_above="@id/bottomSection"
             android:fillViewport="true">
 
@@ -222,34 +223,14 @@
                             app:tint="@color/color_primary" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
-                <!-- Middle Stops Container -->
                 <LinearLayout
                     android:id="@+id/llMiddleStops"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginBottom="8dp" />
-
-                <!-- Add Stop Button -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnAddStop"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/beech_ke_rasta_add_karo_optinal"
-                    android:textColor="@color/green"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_medium"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    app:strokeColor="@color/green"
-                    app:strokeWidth="2dp"
-                    app:cornerRadius="12dp"
-                    app:icon="@drawable/compass"
-                    app:iconTint="@color/green"
-                    app:iconGravity="start" />
-
-                <!-- 3. End Place Card -->
+                <!-- Middle Stops Container -->
+                    <!-- 3. End Place Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardEndPlace"
                     android:layout_width="match_parent"
@@ -316,6 +297,28 @@
                             app:tint="@color/color_primary" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
+
+
+
+                <!-- Add Stop Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddStop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/add_middle_place_optional_"
+                    android:textColor="@color/green"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto_medium"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    app:strokeColor="@color/green"
+                    app:strokeWidth="2dp"
+                    app:cornerRadius="12dp"
+                    app:icon="@drawable/compass"
+                    app:iconTint="@color/green"
+                    app:iconGravity="start" />
+
+
 
             </LinearLayout>
         </ScrollView>

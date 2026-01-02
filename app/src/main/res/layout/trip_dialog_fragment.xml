@@ -26,27 +26,39 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_16sdp">
 
-                <TextView
-                    android:id="@+id/addTripDataLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="@string/add_trip_data"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sdp" />
-
+                <!-- Close Button -->
                 <ImageView
                     android:id="@+id/closeBtn"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/bg_blue_circle"
                     android:padding="@dimen/_4sdp"
                     android:src="@drawable/baseline_close_24"
                     app:tint="@color/white" />
+
+                <!-- Title -->
+                <TextView
+                    android:id="@+id/addTripDataLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/closeBtn"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="@string/add_trip_data"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp" />
+
             </RelativeLayout>
+
 
             <!-- Trip Date Section -->
             <TextView
@@ -89,6 +101,7 @@
                     <ImageView
                         android:id="@+id/speaker"
                         android:layout_width="@dimen/_24sdp"
+                        android:visibility="gone"
                         android:layout_height="@dimen/_24sdp"
                         android:src="@drawable/baseline_speaker_24"
                         app:tint="@color/color_primary" />
@@ -126,6 +139,8 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/source_place_"
                         android:textColor="@color/black"
+                        android:maxLines="1"
+                        android:id="@+id/startingPlaceLabel"
                         android:textSize="@dimen/_10sdp"
                         android:layout_marginBottom="@dimen/_4sdp" />
 
@@ -187,6 +202,8 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/dest_place_"
                         android:textColor="@color/black"
+                        android:maxLines="1"
+                        android:id="@+id/endingPlaceLabel"
                         android:textSize="@dimen/_10sdp"
                         android:layout_marginBottom="@dimen/_4sdp" />
 
@@ -240,6 +257,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
+                android:id="@+id/middleSpaceLabel"
                 android:text="@string/add_middle_place_optional"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"

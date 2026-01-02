@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,16 +12,19 @@ import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.webkit.MimeTypeMap
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dadabarbie.TruckTrip.R
@@ -29,6 +33,8 @@ import com.dadabarbie.TruckTrip.Utils.Constants.dismissProgress
 import com.dadabarbie.TruckTrip.Utils.Constants.showProgress
 import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.Utils.Prefs
+import com.dadabarbie.TruckTrip.Utils.RouteUtils
+import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
 import com.dadabarbie.TruckTrip.Utils.TripEditManager
 import com.dadabarbie.TruckTrip.Utils.TripEditManager.isEditMode
 import com.dadabarbie.TruckTrip.Utils.VoiceExpenseParser
@@ -49,12 +55,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
+class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
     private val authViewModel: AuthViewModel by viewModels()
 
     data class ExpenseItem(
@@ -63,7 +70,7 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         var amount: Int,
         var type: ExpenseType
     )
-
+    private var originalRoute: ArrayList<String> = arrayListOf()
     enum class ExpenseType { KHARCHA, AAVAK }
 
     private val binding by lazy { ActivityThirdExpenseScreenBinding.inflate(layoutInflater) }
@@ -157,9 +164,17 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            enableEdgeToEdge()
+            // 35 (android - 15)
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+        }
         langCode = Prefs[Constants.languageCode] ?: "hi"
         intent.getStringExtra("id")?.let { tripId = it }
-        routeArray = intent.getStringArrayListExtra("ROUTE_ARRAY")!!
+        routeArray = intent.getStringArrayListExtra("ROUTE_ARRAY") ?: arrayListOf()
         if (tripId.isEmpty()) generateTripId()
         isEditMode = intent.getBooleanExtra("EDIT_MODE", false)
         if (isEditMode) {
@@ -167,6 +182,7 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
             originalStartDate = intent.getStringExtra("ORIGINAL_START_DATE")
             originalStartPlace = intent.getStringExtra("ORIGINAL_START_PLACE")
             originalEndPlace = intent.getStringExtra("ORIGINAL_END_PLACE")
+            originalRoute = ArrayList(routeArray)
             intent.getStringExtra("END_DATE")?.let { if (it.isNotEmpty()) endDate = it }
         }
 
@@ -355,7 +371,7 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         val item = ExpenseItem(note = note, amount = amount, type = currentBottomSheetType ?: ExpenseType.KHARCHA)
         tempBottomSheetList.add(item)
         currentBottomSheetAdapter?.notifyItemInserted(tempBottomSheetList.size - 1)
-        speakText("$note ka $amount rupaye jod diya")
+        speakText(getString(R.string.ka_rupaye_jod_diya, note, amount))
         Toast.makeText(this, "✓ $note - ₹$amount", Toast.LENGTH_SHORT).show()
     }
 
@@ -363,7 +379,7 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         item.note = note
         item.amount = amount
         currentBottomSheetAdapter?.notifyDataSetChanged()
-        speakText("$note ka $amount rupaye update ho gaya")
+        speakText(getString(R.string.ka_rupaye_update_ho_gaya, note, amount))
         Toast.makeText(this, "✓ ${getString(R.string.update_ho_gaya)}", Toast.LENGTH_SHORT).show()
     }
 
@@ -379,6 +395,10 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
+    // Add this at the top with other variables
+    private var currentBottomSheetExpenseType: ExpenseType? = null
+
+    // Update showEditDialogForBottomSheet method
     private fun showEditDialogForBottomSheet(item: ExpenseItem) {
         isEditBottomSheetOpen = true
         speakText(getString(R.string.edit_karne_ke_liye_bolo))
@@ -391,14 +411,43 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         val tvCurrentAmount = editView.findViewById<TextView>(R.id.tvCurrentAmount)
         val etNote = editView.findViewById<EditText>(R.id.etNote)
         val etAmount = editView.findViewById<EditText>(R.id.etAmount)
+        val mainLayout = editView.findViewById<androidx.cardview.widget.CardView>(R.id.mainLayout)
         val fabEditMic = editView.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fabEditMic)
         val btnCancel = editView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
         val btnUpdate = editView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnUpdate)
+
+        // ✅ NEW: Find TextInputLayouts for border color
+//        val tilNote = editView.findViewById<com.google.android.material.textfield.TextInputLayout>(R.id.tilNote)
+//        val tilAmount = editView.findViewById<com.google.android.material.textfield.TextInputLayout>(R.id.tilAmount)
 
         tvCurrentNote.text = "Current: ${item.note}"
         tvCurrentAmount.text = "Current: ₹${item.amount}"
         etNote.setText(item.note)
         etAmount.setText(item.amount.toString())
+
+        // ✅ NEW: Set colors based on current bottom sheet type
+        val itemType = currentBottomSheetType ?: item.type
+        val primaryColor: Int
+        val secondaryColor: Int
+
+        if (itemType == ExpenseType.AAVAK) {
+            // Green colors for Income
+            primaryColor = ContextCompat.getColor(this, R.color.greencolor)
+            secondaryColor = ContextCompat.getColor(this, R.color.green)
+        } else {
+            // Red/Tamil colors for Expense
+            primaryColor = ContextCompat.getColor(this, R.color.tamil_txt)
+            secondaryColor = ContextCompat.getColor(this, R.color.tamil_txt)
+        }
+
+        // Apply colors
+        fabEditMic.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        btnUpdate.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        mainLayout.backgroundTintList = ColorStateList.valueOf(primaryColor)
+//        tilNote.boxStrokeColor = primaryColor
+//        tilNote.hintTextColor = ColorStateList.valueOf(primaryColor)
+//        tilAmount.boxStrokeColor = primaryColor
+//        tilAmount.hintTextColor = ColorStateList.valueOf(primaryColor)
 
         fabEditMic.setOnClickListener {
             if (isVoiceListening) return@setOnClickListener Toast.makeText(this, getString(R.string.pehle_se_sun_rahe_hain), Toast.LENGTH_SHORT).show()
@@ -444,6 +493,7 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         editBottomSheet.show()
     }
 
+    // Update showEditDialogForMainList method
     private fun showEditDialogForMainList(item: ExpenseItem, type: ExpenseType) {
         isEditBottomSheetOpen = true
         speakText(getString(R.string.edit_karne_ke_liye_bolo))
@@ -454,16 +504,45 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         val tvCurrentNote = editView.findViewById<TextView>(R.id.tvCurrentNote)
         val tvCurrentAmount = editView.findViewById<TextView>(R.id.tvCurrentAmount)
+        val firstText = editView.findViewById<TextView>(R.id.firstText)
         val etNote = editView.findViewById<EditText>(R.id.etNote)
+        val mainLayout = editView.findViewById<androidx.cardview.widget.CardView>(R.id.mainLayout)
         val etAmount = editView.findViewById<EditText>(R.id.etAmount)
         val fabEditMic = editView.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fabEditMic)
         val btnCancel = editView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
         val btnUpdate = editView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnUpdate)
 
+        // ✅ NEW: Find TextInputLayouts
+//        val tilNote = editView.findViewById<com.google.android.material.textfield.TextInputLayout>(R.id.tilNote)
+//        val tilAmount = editView.findViewById<com.google.android.material.textfield.TextInputLayout>(R.id.tilAmount)
+
         tvCurrentNote.text = "Current: ${item.note}"
         tvCurrentAmount.text = "Current: ₹${item.amount}"
         etNote.setText(item.note)
         etAmount.setText(item.amount.toString())
+
+        // ✅ NEW: Set colors based on item type
+        val primaryColor: Int
+        val secondaryColor: Int
+
+        if (type == ExpenseType.AAVAK) {
+            // Green colors for Income
+            primaryColor = ContextCompat.getColor(this, R.color.greencolor)
+            secondaryColor = ContextCompat.getColor(this, R.color.green)
+        } else {
+            // Red/Tamil colors for Expense
+            primaryColor = ContextCompat.getColor(this, R.color.tamil_txt)
+            secondaryColor = ContextCompat.getColor(this, R.color.tamil_txt)
+        }
+
+        // Apply colors
+        fabEditMic.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        btnUpdate.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        mainLayout.backgroundTintList = ColorStateList.valueOf(primaryColor)
+//        tilNote.boxStrokeColor = primaryColor
+//        tilNote.hintTextColor = ColorStateList.valueOf(primaryColor)
+//        tilAmount.boxStrokeColor = primaryColor
+//        tilAmount.hintTextColor = ColorStateList.valueOf(primaryColor)
 
         fabEditMic.setOnClickListener {
             if (isVoiceListening) return@setOnClickListener Toast.makeText(this, getString(R.string.pehle_se_sun_rahe_hain), Toast.LENGTH_SHORT).show()
@@ -948,7 +1027,11 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                 totalExpense,
                 totalIncome,
                 "0",
-                getTruckNumber()
+                getTruckNumber(),
+                "",
+                "",
+                false,
+                ""
             )
         )
     }
@@ -1121,148 +1204,211 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         tripId = UUID.randomUUID().toString()
     }
 
-    private fun setAllData() {
-        if (isTripCompleted) return
-
-        GlobalScope.launch {
-            val db = AppDatabase.getDatabase(applicationContext)
-            val draftDao = db.productsDao()
-
-            // Prepare lists for checking/saving
-            val currentCreditList = incomeList.map {
-                Income(
-                    desc = it.note,
-                    amount = it.amount.toString(),
-                    note = it.note,
-                    place = "",
-                    date = ""
-                )
-            }
-
-            val currentDebitList = expenseList.map {
-                Expense(
-                    desc = it.note,
-                    amount = it.amount.toString(),
-                    note = it.note,
-                    place = "",
-                    date = "",
-                    type = "Expense",
-                    liters = "",
-                    km = ""
-                )
-            }
-
-            val currentModel = TripDataTestModel(
-                truckNumber = getTruckNumber(),
-                srcPlace = getStartPlace(),
-                destPlace = getEndPlace(),
-                srcDate = getStartDate(),
-                destDate = "",
-                avg = "",
-                randomNumber = tripId,
-                driverIncome = "",
-                modelList1 = currentCreditList,
-                modelList2 = currentDebitList,
-                startOdometer = "",
-                endOdometer = "",
-                endTripKm = "",
-                id = ""
-            )
-
-            val existing = draftDao.getDraftById(tripId)
-
-            if (existing != null) {
-                // Check if data changed
-                val existingModel = convertToModel(existing)
-
-                val isChanged = existingModel.truckNumber != currentModel.truckNumber ||
-                                existingModel.srcPlace != currentModel.srcPlace ||
-                                existingModel.destPlace != currentModel.destPlace ||
-                                existingModel.srcDate != currentModel.srcDate ||
-                                existingModel.modelList1 != currentModel.modelList1 ||
-                                existingModel.modelList2 != currentModel.modelList2
-
-                if (isChanged) {
-                    draftDao.update(
-                        tripId,
-                        currentModel.truckNumber,
-                        currentModel.srcPlace,
-                        currentModel.destPlace,
-                        currentModel.srcDate,
-                        currentModel.destDate,
-                        currentModel.avg,
-                        Gson().toJson(currentModel.modelList1),
-                        Gson().toJson(currentModel.modelList2)
-                    )
-//                    Constants.refreshApiGet(Event(1))
-                }
-            } else {
-                 var shouldInsert = true
-                 if (isEditMode) {
-                     // Check against Original Data (Completed Trips)
-                     val normalizedOriginalCreditList = Constants.creditList.map {
-                        Income(
-                            desc = it.note ?: "",
-                            amount = (it.amount?.toIntOrNull() ?: 0).toString(),
-                            note = it.note ?: "",
-                            place = "",
-                            date = ""
-                        )
-                     }
-
-                     val normalizedOriginalDebitList = Constants.debitList.map {
-                        Expense(
-                            desc = it.note ?: "",
-                            amount = (it.amount?.toIntOrNull() ?: 0).toString(),
-                            note = it.note ?: "",
-                            place = "",
-                            date = "",
-                            type = "Expense",
-                            liters = "",
-                            km = ""
-                        )
-                     }
-
-                     val originalModelToCheck = TripDataTestModel(
-                        truckNumber = originalTruckNumber ?: getTruckNumber(),
-                        srcPlace = originalStartPlace ?: getStartPlace(),
-                        destPlace = originalEndPlace ?: getEndPlace(),
-                        srcDate = originalStartDate ?: getStartDate(),
-                        destDate = "",
-                        avg = "",
-                        randomNumber = tripId,
-                        driverIncome = "",
-                        modelList1 = normalizedOriginalCreditList,
-                        modelList2 = normalizedOriginalDebitList,
-                        startOdometer = "",
-                        endOdometer = "",
-                        endTripKm = "",
-                        id = ""
-                     )
-
-                     if (currentModel == originalModelToCheck) {
-                         shouldInsert = false
-                     }
-                 }
-
-                 if (shouldInsert) {
-                    val product = Products(
-                        truckNumber = currentModel.truckNumber,
-                        srcPlace = currentModel.srcPlace,
-                        destPlace = currentModel.destPlace,
-                        srcDate = currentModel.srcDate,
-                        destDate = currentModel.destDate,
-                        avg = currentModel.avg,
-                        randomNumber = tripId,
-                        modelList1 = Gson().toJson(currentModel.modelList1),
-                        modelList2 = Gson().toJson(currentModel.modelList2)
-                    )
-                    draftDao.insert(product)
-//                    Constants.refreshApiGet(Event(1))
-                 }
-            }
-        }
-    }
+//    private fun setAllData() {
+//        if (isTripCompleted) {
+//            Log.d("DraftSave", "Trip completed, skipping draft save")
+//            return
+//        }
+//
+//        Log.d("DraftSave", "=== START setAllData ===")
+//        Log.d("DraftSave", "tripId: $tripId")
+//        Log.d("DraftSave", "isEditMode: $isEditMode")
+//        Log.d("DraftSave", "routeArray: $routeArray")
+//        Log.d("DraftSave", "routeArray size: ${routeArray.size}")
+//
+//        // ✅ ENSURE ROUTE IS VALID
+//        val validRoute = if (RouteUtils.isValidRoute(routeArray)) {
+//            routeArray
+//        } else {
+//            Log.w("DraftSave", "Invalid route detected, creating simple route")
+//            RouteUtils.createSimpleRoute(getStartPlace(), getEndPlace())
+//        }
+//
+//        val routeJsonString = RouteUtils.routeToJson(validRoute)
+//        Log.d("DraftSave", "Valid route: $validRoute")
+//        Log.d("DraftSave", "Route JSON to save: $routeJsonString")
+//
+//        GlobalScope.launch(Dispatchers.IO) {
+//            try {
+//                val db = AppDatabase.getDatabase(applicationContext)
+//                val draftDao = db.productsDao()
+//
+//                // Prepare current lists
+//                val currentCreditList = incomeList.map {
+//                    Income(
+//                        desc = it.note,
+//                        amount = it.amount.toString(),
+//                        note = it.note,
+//                        place = "",
+//                        date = ""
+//                    )
+//                }
+//
+//                val currentDebitList = expenseList.map {
+//                    Expense(
+//                        desc = it.note,
+//                        amount = it.amount.toString(),
+//                        note = it.note,
+//                        place = "",
+//                        date = "",
+//                        type = "Expense",
+//                        liters = "",
+//                        km = ""
+//                    )
+//                }
+//
+//                Log.d("DraftSave", "Credit list size: ${currentCreditList.size}")
+//                Log.d("DraftSave", "Debit list size: ${currentDebitList.size}")
+//
+//                val currentModel = TripDataTestModel(
+//                    truckNumber = getTruckNumber(),
+//                    srcPlace = getStartPlace(),
+//                    destPlace = getEndPlace(),
+//                    srcDate = getStartDate(),
+//                    destDate = "",
+//                    avg = "",
+//                    randomNumber = tripId,
+//                    driverIncome = "",
+//                    modelList1 = currentCreditList,
+//                    modelList2 = currentDebitList,
+//                    startOdometer = "",
+//                    endOdometer = "",
+//                    endTripKm = "",
+//                    id = "",
+//                    route = validRoute,
+//                    routeList = routeJsonString,
+//                )
+//
+//                val existing = draftDao.getDraftById(tripId)
+//
+//                if (existing != null) {
+//                    Log.d("DraftSave", "✅ Found existing draft, updating...")
+//
+//                    // Always update if draft exists
+//                    draftDao.update(
+//                        tripId,
+//                        currentModel.truckNumber,
+//                        currentModel.srcPlace,
+//                        currentModel.destPlace,
+//                        currentModel.srcDate,
+//                        currentModel.destDate,
+//                        currentModel.avg,
+//                        Gson().toJson(currentModel.modelList1),
+//                        Gson().toJson(currentModel.modelList2),
+//                        routeJsonString,
+//                        updatedAt = System.currentTimeMillis()
+//                    )
+//                    Log.d("DraftSave", "✅ Draft updated successfully")
+//                } else {
+//                    Log.d("DraftSave", "📝 No existing draft, creating new one...")
+//
+//                    // ✅ FIX: Only check if editing a COMPLETED trip
+//                    var shouldInsert = true
+//
+//                    if (isEditMode) {
+//                        Log.d("DraftSave", "Edit mode detected, checking if data changed from original...")
+//
+//                        // Get original data from Constants
+//                        val originalCreditList = Constants.creditList.map {
+//                            Income(
+//                                desc = it.note ?: "",
+//                                amount = (it.amount?.toIntOrNull() ?: 0).toString(),
+//                                note = it.note ?: "",
+//                                place = "",
+//                                date = ""
+//                            )
+//                        }
+//
+//                        val originalDebitList = Constants.debitList.map {
+//                            Expense(
+//                                desc = it.note ?: "",
+//                                amount = (it.amount?.toIntOrNull() ?: 0).toString(),
+//                                note = it.note ?: "",
+//                                place = "",
+//                                date = "",
+//                                type = "Expense",
+//                                liters = "",
+//                                km = ""
+//                            )
+//                        }
+//
+//                        Log.d("DraftSave", "Original credit size: ${originalCreditList.size}")
+//                        Log.d("DraftSave", "Original debit size: ${originalDebitList.size}")
+//                        Log.d("DraftSave", "Original route: $originalRoute")
+//                        Log.d("DraftSave", "Current route: $validRoute")
+//
+//                        // ✅ Check each field for changes
+//                        val truckChanged = currentModel.truckNumber != (originalTruckNumber ?: getTruckNumber())
+//                        val srcChanged = currentModel.srcPlace != (originalStartPlace ?: getStartPlace())
+//                        val destChanged = currentModel.destPlace != (originalEndPlace ?: getEndPlace())
+//                        val dateChanged = currentModel.srcDate != (originalStartDate ?: getStartDate())
+//                        val creditChanged = currentCreditList != originalCreditList
+//                        val debitChanged = currentDebitList != originalDebitList
+//                        val routeChanged = validRoute.toList() != originalRoute.toList()
+//
+//                        Log.d("DraftSave", "Change detection:")
+//                        Log.d("DraftSave", "  Truck changed: $truckChanged")
+//                        Log.d("DraftSave", "  Source changed: $srcChanged")
+//                        Log.d("DraftSave", "  Dest changed: $destChanged")
+//                        Log.d("DraftSave", "  Date changed: $dateChanged")
+//                        Log.d("DraftSave", "  Credit changed: $creditChanged")
+//                        Log.d("DraftSave", "  Debit changed: $debitChanged")
+//                        Log.d("DraftSave", "  Route changed: $routeChanged")
+//
+//                        // ✅ Only skip insert if NOTHING changed
+//                        if (!truckChanged && !srcChanged && !destChanged && !dateChanged &&
+//                            !creditChanged && !debitChanged && !routeChanged) {
+//                            shouldInsert = false
+//                            Log.d("DraftSave", "⏭️ No changes detected, skipping insert")
+//                        } else {
+//                            Log.d("DraftSave", "✅ Changes detected, will insert draft")
+//                        }
+//                    } else {
+//                        Log.d("DraftSave", "Not in edit mode, will insert draft")
+//                    }
+//
+//                    if (shouldInsert) {
+//                        Log.d("DraftSave", "📝 Inserting new draft...")
+//
+//                        val product = Products(
+//                            truckNumber = currentModel.truckNumber,
+//                            srcPlace = currentModel.srcPlace,
+//                            destPlace = currentModel.destPlace,
+//                            srcDate = currentModel.srcDate,
+//                            destDate = currentModel.destDate,
+//                            avg = currentModel.avg,
+//                            randomNumber = tripId,
+//                            modelList1 = Gson().toJson(currentModel.modelList1),
+//                            modelList2 = Gson().toJson(currentModel.modelList2),
+//                            routeJson = routeJsonString,
+//                            updatedAt = System.currentTimeMillis()
+//                        )
+//
+//                        draftDao.insert(product)
+//                        Log.d("DraftSave", "✅ Draft inserted successfully")
+//
+//                        // ✅ Verify immediately after insert
+//                        val inserted = draftDao.getDraftById(tripId)
+//                        if (inserted != null) {
+//                            Log.d("DraftSave", "✅ VERIFY: Draft confirmed in DB")
+//                            Log.d("DraftSave", "  - ID: ${inserted.id}")
+//                            Log.d("DraftSave", "  - Route JSON: ${inserted.routeJson}")
+//                        } else {
+//                            Log.e("DraftSave", "❌ VERIFY FAILED: Draft not found after insert!")
+//                        }
+//                    } else {
+//                        Log.d("DraftSave", "⏭️ Skipped insert (no changes)")
+//                    }
+//                }
+//
+//                Log.d("DraftSave", "=== END setAllData ===")
+//
+//            } catch (e: Exception) {
+//                Log.e("DraftSave", "❌ ERROR in setAllData: ${e.message}", e)
+//                e.printStackTrace()
+//            }
+//        }
+//    }
 
     private suspend fun getAllData(context: Context): List<TripDataTestModel> {
         val database = AppDatabase.getDatabase(context)
@@ -1273,8 +1419,240 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
+    // ✅ COMPLETE FIX FOR ThirdExpenseScreen.kt - Replace setAllData() method
+
+    private fun setAllData() {
+        if (isTripCompleted) {
+            Log.d("DraftSave", "Trip completed, skipping draft save")
+            return
+        }
+
+        Log.d("DraftSave", "=== START setAllData ===")
+        Log.d("DraftSave", "tripId: $tripId")
+        Log.d("DraftSave", "isEditMode: $isEditMode")
+        Log.d("DraftSave", "routeArray received: $routeArray")
+        Log.d("DraftSave", "routeArray size: ${routeArray.size}")
+
+        // ✅ ENSURE ROUTE IS VALID - with detailed logging
+        val validRoute = if (RouteUtils.isValidRoute(routeArray)) {
+            Log.d("DraftSave", "✅ routeArray is valid")
+            routeArray
+        } else {
+            Log.w("DraftSave", "⚠️ Invalid route detected, creating simple route")
+            RouteUtils.createSimpleRoute(getStartPlace(), getEndPlace())
+        }
+
+        val routeJsonString = RouteUtils.routeToJson(validRoute)
+        Log.d("DraftSave", "Valid route to save: $validRoute")
+        Log.d("DraftSave", "Route JSON string length: ${routeJsonString.length}")
+        Log.d("DraftSave", "Route JSON content: $routeJsonString")
+
+        // ✅ Verify JSON is not empty
+        if (routeJsonString.isEmpty() || routeJsonString == "[]") {
+            Log.e("DraftSave", "❌ ERROR: Route JSON is empty or just []")
+            return
+        }
+
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val db = AppDatabase.getDatabase(applicationContext)
+                val draftDao = db.productsDao()
+
+                // Prepare current lists
+                val currentCreditList = incomeList.map {
+                    Income(
+                        desc = it.note,
+                        amount = it.amount.toString(),
+                        note = it.note,
+                        place = "",
+                        date = ""
+                    )
+                }
+
+                val currentDebitList = expenseList.map {
+                    Expense(
+                        desc = it.note,
+                        amount = it.amount.toString(),
+                        note = it.note,
+                        place = "",
+                        date = "",
+                        type = "Expense",
+                        liters = "",
+                        km = ""
+                    )
+                }
+
+                Log.d("DraftSave", "Credit list size: ${currentCreditList.size}")
+                Log.d("DraftSave", "Debit list size: ${currentDebitList.size}")
+
+                val existing = draftDao.getDraftById(tripId)
+                Log.d("DraftSave", "Existing draft found: ${existing != null}")
+
+                if (existing != null) {
+                    Log.d("DraftSave", "📝 UPDATING existing draft...")
+                    Log.d("DraftSave", "Old route JSON: ${existing.routeJson}")
+                    Log.d("DraftSave", "New route JSON: $routeJsonString")
+
+                    // ✅ CRITICAL FIX: Ensure parameters match DAO method signature EXACTLY
+                    val updateResult = draftDao.update(
+                        randomNumber = tripId,  // ✅ Named parameters for clarity
+                        truckNumber = getTruckNumber(),
+                        srcPlace = getStartPlace(),
+                        destPlace = getEndPlace(),
+                        srcDate = getStartDate(),
+                        destDate = "",
+                        avg = "",
+                        modelList1 = Gson().toJson(currentCreditList),
+                        modelList2 = Gson().toJson(currentDebitList),
+                        routeJson = routeJsonString,  // ✅ This must NOT be empty
+                        updatedAt = System.currentTimeMillis()
+                    )
+
+                    Log.d("DraftSave", "✅ Update executed")
+
+                    // ✅ VERIFY immediately after update
+                    withContext(Dispatchers.Main) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            GlobalScope.launch(Dispatchers.IO) {
+                                val verified = draftDao.getDraftById(tripId)
+                                if (verified != null) {
+                                    Log.d("DraftSave", "✅ VERIFICATION: Draft updated successfully")
+                                    Log.d("DraftSave", "  - Saved route JSON: ${verified.routeJson}")
+                                    Log.d("DraftSave", "  - Route JSON length: ${verified.routeJson?.length}")
+
+                                    if (verified.routeJson == routeJsonString) {
+                                        Log.d("DraftSave", "✅✅✅ Route JSON MATCHES!")
+                                    } else {
+                                        Log.e("DraftSave", "❌ Route JSON MISMATCH!")
+                                        Log.e("DraftSave", "Expected: $routeJsonString")
+                                        Log.e("DraftSave", "Got: ${verified.routeJson}")
+                                    }
+                                } else {
+                                    Log.e("DraftSave", "❌ VERIFICATION FAILED: Draft not found!")
+                                }
+                            }
+                        }, 200)
+                    }
+                } else {
+                    Log.d("DraftSave", "📝 INSERTING new draft...")
+
+                    var shouldInsert = true
+
+                    if (isEditMode) {
+                        Log.d("DraftSave", "Edit mode: checking for changes...")
+
+                        val originalCreditList = Constants.creditList.map {
+                            Income(
+                                desc = it.note ?: "",
+                                amount = (it.amount?.toIntOrNull() ?: 0).toString(),
+                                note = it.note ?: "",
+                                place = "",
+                                date = ""
+                            )
+                        }
+
+                        val originalDebitList = Constants.debitList.map {
+                            Expense(
+                                desc = it.note ?: "",
+                                amount = (it.amount?.toIntOrNull() ?: 0).toString(),
+                                note = it.note ?: "",
+                                place = "",
+                                date = "",
+                                type = "Expense",
+                                liters = "",
+                                km = ""
+                            )
+                        }
+
+                        val truckChanged = getTruckNumber() != (originalTruckNumber ?: getTruckNumber())
+                        val srcChanged = getStartPlace() != (originalStartPlace ?: getStartPlace())
+                        val destChanged = getEndPlace() != (originalEndPlace ?: getEndPlace())
+                        val dateChanged = getStartDate() != (originalStartDate ?: getStartDate())
+                        val creditChanged = currentCreditList != originalCreditList
+                        val debitChanged = currentDebitList != originalDebitList
+                        val routeChanged = validRoute.toList() != originalRoute.toList()
+
+                        Log.d("DraftSave", "Changes: truck=$truckChanged, src=$srcChanged, dest=$destChanged, date=$dateChanged, credit=$creditChanged, debit=$debitChanged, route=$routeChanged")
+
+                        shouldInsert = truckChanged || srcChanged || destChanged || dateChanged || creditChanged || debitChanged || routeChanged
+                    }
+
+                    if (shouldInsert) {
+                        Log.d("DraftSave", "Inserting with route JSON: $routeJsonString")
+
+                        val product = Products(
+                            truckNumber = getTruckNumber(),
+                            srcPlace = getStartPlace(),
+                            destPlace = getEndPlace(),
+                            srcDate = getStartDate(),
+                            destDate = "",
+                            avg = "",
+                            randomNumber = tripId,
+                            modelList1 = Gson().toJson(currentCreditList),
+                            modelList2 = Gson().toJson(currentDebitList),
+                            routeJson = routeJsonString,  // ✅ Must not be empty
+                            updatedAt = System.currentTimeMillis()
+                        )
+
+                        draftDao.insert(product)
+                        Log.d("DraftSave", "✅ Insert executed")
+
+                        // ✅ Verify insert
+                        withContext(Dispatchers.Main) {
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                GlobalScope.launch(Dispatchers.IO) {
+                                    val inserted = draftDao.getDraftById(tripId)
+                                    if (inserted != null) {
+                                        Log.d("DraftSave", "✅ VERIFY: Insert successful")
+                                        Log.d("DraftSave", "  - Route JSON: ${inserted.routeJson}")
+                                    } else {
+                                        Log.e("DraftSave", "❌ VERIFY: Insert failed!")
+                                    }
+                                }
+                            }, 200)
+                        }
+                    } else {
+                        Log.d("DraftSave", "⏭️ Skipping insert (no changes)")
+                    }
+                }
+
+                Log.d("DraftSave", "=== END setAllData ===")
+
+            } catch (e: Exception) {
+                Log.e("DraftSave", "❌ EXCEPTION in setAllData", e)
+                e.printStackTrace()
+            }
+        }
+    }
+
+    // ✅ Also update convertToModel to ensure proper parsing
     private fun convertToModel(entity: Products): TripDataTestModel {
         val gson = Gson()
+
+        Log.d("DraftLoad", "=== convertToModel ===")
+        Log.d("DraftLoad", "Entity ID: ${entity.id}")
+        Log.d("DraftLoad", "Entity randomNumber: ${entity.randomNumber}")
+        Log.d("DraftLoad", "Entity routeJson: ${entity.routeJson}")
+
+        // ✅ PROPER ROUTE PARSING
+        val parsedRoute = try {
+            if (entity.routeJson.isNullOrEmpty()) {
+                Log.w("DraftLoad", "routeJson is null or empty, using empty list")
+                arrayListOf()
+            } else {
+                val parsed = RouteUtils.parseRouteFromJson(entity.routeJson)
+                Log.d("DraftLoad", "Successfully parsed route: $parsed")
+                ArrayList(parsed)
+            }
+        } catch (e: Exception) {
+            Log.e("DraftLoad", "Error parsing route from JSON: ${e.message}", e)
+            Log.e("DraftLoad", "RouteJson was: ${entity.routeJson}")
+            // Fallback: create simple route
+            arrayListOf(entity.srcPlace, entity.destPlace)
+        }
+
+        Log.d("DraftLoad", "Final parsed route: $parsedRoute")
+
         return TripDataTestModel(
             truckNumber = entity.truckNumber,
             srcPlace = entity.srcPlace,
@@ -1291,13 +1669,62 @@ class ThirdExpenseScreen : AppCompatActivity(), TextToSpeech.OnInitListener {
                 entity.modelList2,
                 object : TypeToken<List<Expense>>() {}.type
             ),
-            id = entity.id.toString()
+            id = entity.id.toString(),
+            routeList = entity.routeJson ?: "",
+            route = parsedRoute
         )
+    }
+    private fun verifyRouteSaved() {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val db = AppDatabase.getDatabase(applicationContext)
+                val draft = db.productsDao().getDraftById(tripId)
+
+                withContext(Dispatchers.Main) {
+                    Log.d("DraftVerify", "=== VERIFICATION ===")
+                    if (draft != null) {
+                        Log.d("DraftVerify", "✅ Draft found for tripId: $tripId")
+                        Log.d("DraftVerify", "Database ID: ${draft.id}")
+                        Log.d("DraftVerify", "Truck: ${draft.truckNumber}")
+                        Log.d("DraftVerify", "Saved route JSON: ${draft.routeJson}")
+
+                        val savedRoute = RouteUtils.parseRouteFromJson(draft.routeJson ?: "")
+                        Log.d("DraftVerify", "Parsed saved route: $savedRoute")
+                        Log.d("DraftVerify", "Current routeArray: $routeArray")
+
+                        if (savedRoute == routeArray.toList()) {
+                            Log.d("DraftVerify", "✅✅✅ Route saved CORRECTLY!")
+                        } else {
+                            Log.e("DraftVerify", "❌ Route MISMATCH!")
+                            Log.e("DraftVerify", "Expected: $routeArray")
+                            Log.e("DraftVerify", "Got: $savedRoute")
+                        }
+                    } else {
+                        Log.e("DraftVerify", "❌❌❌ No draft found for tripId: $tripId")
+
+                        // Check all drafts
+                        val allDrafts = db.productsDao().getAllProducts()
+                        Log.e("DraftVerify", "Total drafts in DB: ${allDrafts.size}")
+                        allDrafts.forEach {
+                            Log.d("DraftVerify", "  Draft: ${it.randomNumber} - ${it.truckNumber}")
+                        }
+                    }
+                    Log.d("DraftVerify", "=== END VERIFICATION ===")
+                }
+            } catch (e: Exception) {
+                Log.e("DraftVerify", "Error verifying route: ${e.message}", e)
+            }
+        }
     }
 
     override fun onStop() {
         super.onStop()
         setAllData()
+
+        // ✅ Verify route was saved (remove this after testing)
+        Handler(Looper.getMainLooper()).postDelayed({
+            verifyRouteSaved()
+        }, 500)
     }
     
     override fun onBackPressed() {

@@ -262,6 +262,7 @@
                     android:fontFamily="@font/roboto_medium"
                     android:padding="@dimen/_12sdp"
                     android:textColor="@color/white"
+                    android:maxLines="1"
                     android:text="@string/cancel"
                     android:gravity="center"
                     android:textSize="@dimen/_14sdp" />
@@ -283,6 +284,7 @@
                     android:padding="@dimen/_12sdp"
                     android:textColor="@color/white"
                     android:text="@string/submit"
+                    android:maxLines="1"
                     android:gravity="center"
                     android:textSize="@dimen/_14sdp" />
             </androidx.cardview.widget.CardView>

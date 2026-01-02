@@ -36,15 +36,12 @@ class TruckTripApplication:Application() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         Prefs.init(this)
-        setLanguage()
+
         appContext = applicationContext
     }
 
-    private fun setLanguage(){
-        if(!LocaleHelper.getSavedLanguage(applicationContext).isNullOrEmpty()){
-            LocaleHelper.setNewLocale(applicationContext,Prefs[Constants.languageCode,""])
-        }
-    }
+
+
 
 
 

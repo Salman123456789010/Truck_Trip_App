@@ -19,8 +19,12 @@ data class Record(
     val total_days: String,
     val total_expense: String,
     val total_income: String,
-     val route: ArrayList<String> =arrayListOf("Mangrol,Jodhpur,Delhi,Ahemdabad"),
+     val route: ArrayList<String> =arrayListOf(""),
     val truck_average: String,
     val truck_no: String,
-    val updatedDate: String
+    val updatedDate: String,
+    val startOdometer: String="",
+    val endOdometer: String="",
+    val isOdometer: Boolean=true,
+    val endKm: String="",
 )

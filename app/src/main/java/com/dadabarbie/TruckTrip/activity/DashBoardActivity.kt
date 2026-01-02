@@ -5,21 +5,18 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
@@ -34,12 +31,10 @@ import com.dadabarbie.TruckTrip.Utils.Constants.usermobileNumber
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
 import com.dadabarbie.TruckTrip.Utils.UpdateDialog
-import com.dadabarbie.TruckTrip.adapter.TripListAdapter
 import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
 import com.dadabarbie.TruckTrip.databinding.ActivityDashBoardBinding
 import com.dadabarbie.TruckTrip.model.CreditModel
 import com.dadabarbie.TruckTrip.model.DebitModel
-import com.dadabarbie.TruckTrip.model.TripListModel
 import com.dadabarbie.TruckTrip.room.AppDatabase
 import com.dadabarbie.TruckTrip.room.model.TripDataTestModel
 import com.google.gson.Gson
@@ -47,14 +42,11 @@ import com.google.gson.reflect.TypeToken
 import com.vasyerp.cafvd.room.model.Products
 import com.vasyerp.freshvegetables.util.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.Locale
 
 @AndroidEntryPoint
-class DashBoardActivity : AppCompatActivity(), OnClickListener {
+class DashBoardActivity : BaseActivity(), OnClickListener {
     lateinit var binding: ActivityDashBoardBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -72,6 +64,14 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
         SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            enableEdgeToEdge()
+            // 35 (android - 15)
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+        }
         appVersionNameCheck()
         setObserver()
     }
@@ -96,13 +96,20 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
                 }
                 is NetworkResult.Success -> {
                     if(getAppVersionName(applicationContext)!="Unknown"){
-                        if(getAppVersionName(applicationContext)== it.data?.data?.version ?: ""){
+                        val serverVersion = it.data?.data?.version
+                        val appVersion = getAppVersionName(applicationContext)
+
+                        Log.d("issueHappend", "setObserver: ${appVersion} ${serverVersion} ")
+                        Log.d("issueHappend", "setObserver: ${isAppVersionValid(appVersion, serverVersion?:"")}")
+                        if (!serverVersion.isNullOrEmpty() &&
+                            isAppVersionValid(appVersion, serverVersion)
+                        ) {
                             initViews()
                             usermobileNumber= Prefs[Constants.mobileNumber,""].toString()
                             setOnClickListner()
                             getPermission()
                             askNotificationPermission()
-                        }else{
+                        } else {
                             UpdateDialog(this).show()
                         }
                     } else {
@@ -117,6 +124,23 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
         }
 
     }
+
+    private fun isAppVersionValid(appVersion: String, serverVersion: String): Boolean {
+        val appParts = appVersion.split(".")
+        val serverParts = serverVersion.split(".")
+
+        val maxLength = maxOf(appParts.size, serverParts.size)
+
+        for (i in 0 until maxLength) {
+            val appPart = appParts.getOrNull(i)?.toIntOrNull() ?: 0
+            val serverPart = serverParts.getOrNull(i)?.toIntOrNull() ?: 0
+
+            if (appPart > serverPart) return true      // app > server ✅
+            if (appPart < serverPart) return false     // app < server ❌
+        }
+        return true // equal version ✅
+    }
+
 
     private fun appVersionNameCheck() {
         authViewModel.getVersionName()
@@ -163,12 +187,13 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
     }
     fun setData(){
         totalCount=0
-        GlobalScope.launch {
+        lifecycleScope.launch {
             totalCount=getAllData(applicationContext).size
             Log.d("call1", "onResume: ${totalCount}")
             binding.notificationLayout.notificationCount.text=""+totalCount.toString()
         }
     }
+
     private fun convertToModel(entity: Products): TripDataTestModel {
         val gson = Gson()
         return TripDataTestModel(
@@ -190,7 +215,10 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
             endOdometer = "",
             endTripKm = "",
             randomNumber = 1.toString(),
-            driverIncome = 0.toString()
+            driverIncome = 0.toString(),
+            route = arrayListOf(),
+            id ="",
+            routeList = entity.routeJson
         )
     }
     private suspend fun getAllData(context: Context): List<TripDataTestModel> {
@@ -200,6 +228,12 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
         return entities.map {
             convertToModel(it)
         }
+    }
+    private suspend fun getDraftCount(context: Context): Int {
+        val database = AppDatabase.getDatabase(context)
+        val tripDataDao = database.productsDao()
+        val entities = tripDataDao.getCount()
+        return entities
     }
     private fun initViews() {
         val navHostFragment = supportFragmentManager.findFragmentById(
@@ -246,39 +280,26 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.R)
-    private fun getPermission(){
-        hasManageExternalStoragePermission()
 
-    }
-    @RequiresApi(Build.VERSION_CODES.R)
-    private fun hasManageExternalStoragePermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            if (Environment.isExternalStorageManager()) {
-
-                true
-            } else {
-                try {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                            Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                        } else {
-                            TODO("VERSION.SDK_INT < R")
-                        }
-                    }
-                    false
-                } catch (e: Exception) {
-                    true //if anything needs adjusting it would be this
-                }
-            }
+    private fun getPermission() {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            // Android 10 and below only
+            hasPermission()
         } else {
-            if (checkPermissions()) {
+            // Android 11+ → no permission needed
+            // use app-specific storage
+        }
+    }
+
+
+    private fun hasPermission(): Boolean {
+        return if (checkPermissions()) {
                 return true
             } else {
                 requestPermissions()
                 return false
             }
-        }
+
         // assumed storage permissions granted
     }
 
@@ -307,7 +328,7 @@ class DashBoardActivity : AppCompatActivity(), OnClickListener {
         config.locale = locale
         resources.updateConfiguration(config, resources.displayMetrics)
         totalCount=0
-        GlobalScope.launch {
+        lifecycleScope.launch {
             totalCount=getAllData(applicationContext).size
             binding.notificationLayout.notificationCount.text=""+totalCount.toString()
         }

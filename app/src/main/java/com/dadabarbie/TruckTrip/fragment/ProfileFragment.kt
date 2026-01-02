@@ -41,10 +41,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ProfileFragment : Fragment(),View.OnClickListener {
 
-
-
-
-
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
@@ -65,10 +61,6 @@ class ProfileFragment : Fragment(),View.OnClickListener {
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
     fun getAppVersionName(context: Context): String {
         return try {
             val packageManager = context.packageManager
@@ -177,7 +169,8 @@ class ProfileFragment : Fragment(),View.OnClickListener {
                 }
             }
             binding.appMode->{
-                startActivity(Intent(requireActivity(), TripModeSelectionActivity::class.java))
+                startActivity(Intent(requireActivity(), TripModeSelectionActivity::class.java)
+                    .putExtra("languageFlag","t"))
             }
             binding.contactLayout->{
                 val url = "https://truckwallah.co.in/"

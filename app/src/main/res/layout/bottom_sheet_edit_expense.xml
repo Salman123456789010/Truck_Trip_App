@@ -4,58 +4,60 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp"
+    android:padding="@dimen/_20sdp"
     android:background="@android:color/white">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/edit_karo"
-        android:textSize="24sp"
+        android:textSize="@dimen/_16sdp"
         android:textStyle="bold"
         android:textColor="#333333"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="@dimen/_16sdp" />
 
     <!-- Current Values -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        android:id="@+id/mainLayout"
+        app:cardElevation="@dimen/_2sdp"
         app:cardBackgroundColor="#FFF3E0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/_14sdp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/purani_details"
-                android:textSize="14sp"
-                android:textColor="#666666"
-                android:layout_marginBottom="8dp" />
+                android:textSize="@dimen/_10sdp"
+                android:id="@+id/firstText"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/_6sdp" />
 
             <TextView
                 android:id="@+id/tvCurrentNote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/current_khana"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:layout_marginBottom="4dp" />
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/_4sdp" />
 
             <TextView
                 android:id="@+id/tvCurrentAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/current_500"
-                android:textSize="18sp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
-                android:textColor="#FF6600" />
+                android:textColor="@color/white" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -64,20 +66,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ya_yaha_type_karo"
-        android:textSize="16sp"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
         android:textColor="#333333"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="@dimen/_10sdp" />
 
     <!-- Note Input -->
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        app:boxCornerRadiusBottomEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusTopStart="12dp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_10sdp"
+        app:boxCornerRadiusTopEnd="@dimen/_10sdp"
+        app:boxCornerRadiusTopStart="@dimen/_10sdp"
         app:boxStrokeColor="@color/color_primary"
         app:hintTextColor="@color/color_primary"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
@@ -88,19 +91,20 @@
             android:layout_height="wrap_content"
             android:hint="@string/note_diesel_khana_etc"
             android:inputType="text"
-            android:textSize="16sp"
-            android:padding="16dp" />
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_14sdp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Amount Input -->
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        app:boxCornerRadiusBottomEnd="12dp"
-        app:boxCornerRadiusBottomStart="12dp"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusTopStart="12dp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_10sdp"
+        app:boxCornerRadiusTopEnd="@dimen/_10sdp"
+        app:boxCornerRadiusTopStart="@dimen/_10sdp"
         app:boxStrokeColor="@color/color_primary"
         app:hintTextColor="@color/color_primary"
         app:prefixText="₹ "
@@ -112,48 +116,48 @@
             android:layout_height="wrap_content"
             android:hint="@string/amount_rupees"
             android:inputType="number"
-            android:textSize="16sp"
-            android:padding="16dp" />
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_14sdp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Divider -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/_1sdp"
         android:background="#E0E0E0"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="@dimen/_16sdp" />
 
     <!-- Voice Input Section -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ya_voice_se_bolo"
-        android:textSize="16sp"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
         android:textColor="#333333"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="@dimen/_10sdp" />
 
     <!-- Mic Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabEditMic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
         android:layout_gravity="center"
-        app:fabCustomSize="100dp"
-        app:maxImageSize="50dp"
+        app:fabCustomSize="@dimen/_80sdp"
+        app:maxImageSize="@dimen/_40sdp"
         android:src="@drawable/mic_phone"
         app:tint="@color/white"
         app:backgroundTint="@color/tamil_txt"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="@dimen/_10sdp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/naya_bolo_diesel_3000"
-        android:textSize="14sp"
+        android:textSize="@dimen/_10sdp"
         android:textColor="#666666"
         android:layout_gravity="center"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="@dimen/_20sdp" />
 
     <!-- Buttons -->
     <LinearLayout
@@ -166,24 +170,25 @@
             android:id="@+id/btnCancel"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/_48sdp"
             android:layout_weight="1"
             android:text="@string/cancel"
-            android:textSize="16sp"
+            android:textSize="@dimen/_12sdp"
             app:strokeColor="@color/color_primary"
             android:textColor="@color/color_primary"
-            android:layout_marginEnd="8dp" />
+            app:cornerRadius="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_6sdp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnUpdate"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/_48sdp"
             android:layout_weight="1"
             android:text="@string/update"
-            android:textSize="16sp"
+            android:textSize="@dimen/_12sdp"
             app:backgroundTint="@color/color_primary"
-            app:cornerRadius="12dp"
+            app:cornerRadius="@dimen/_10sdp"
             android:textColor="#FFFFFF"
-            android:layout_marginStart="8dp" />
+            android:layout_marginStart="@dimen/_6sdp" />
     </LinearLayout>
 </LinearLayout>

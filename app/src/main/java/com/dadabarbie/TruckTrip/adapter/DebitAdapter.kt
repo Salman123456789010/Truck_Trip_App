@@ -48,18 +48,17 @@ class DebitAdapter(
 
     override fun onBindViewHolder(holder: DebitAdapter.ViewHolder, position: Int) {
         val item = differ.currentList[position]
-        val amountSafe = runCatching { item.amount }.getOrElse { "0" }
-        val descSafe = runCatching { item.desc }.getOrElse { "" }
-        holder.binding.amount.text = "-$amountSafe"
+        // Show amount with minus sign for debit
+        holder.binding.amount.text = "-${item.amount}"
         holder.binding.amount.setTextColor(context.getColor(android.R.color.holo_red_dark))
-        holder.binding.amountText.text = descSafe
+        holder.binding.amountText.text = item.desc
         holder.binding.mainCardLayout.setStrokeColor(ColorStateList.valueOf(context.getColor(R.color.tamil_txt)))
-        val placeSafe = runCatching { item.place?.trim() }.getOrNull().orEmpty()
-        val dateSafe  = runCatching { item.date?.trim()  }.getOrNull().orEmpty()
-        if (placeSafe.isNotEmpty() || dateSafe.isNotEmpty()) {
+        
+        // Show place and date if available
+        if (item.place.isNotEmpty() || item.date.isNotEmpty()) {
             holder.binding.placeDateLayout.visibility = android.view.View.VISIBLE
-            holder.binding.tvPlace.text = placeSafe
-            holder.binding.tvDate.text = dateSafe
+            holder.binding.tvPlace.text = item.place
+            holder.binding.tvDate.text = item.date
         } else {
             holder.binding.placeDateLayout.visibility = android.view.View.GONE
         }
@@ -73,10 +72,16 @@ class DebitAdapter(
                     when (item.itemId) {
                         R.id.delete -> {
                             deleteClickListner.clickDebitDeleteMethod(position)
+//                        sheetFlag = true
+//                        productSheetFormat = getString(R.string.xlsx)
+//                        productListViewModel.getProductFile(getString(R.string.file_type_excel))
                         }
 
                         R.id.edit -> {
                             editClickListner.clickDebitEditMethod(position)
+//                        sheetFlag = true
+//                        productSheetFormat = getString(R.string.pdf)
+//                        productListViewModel.getProductFile(getString(R.string.file_type_pdf))
                         }
                     }
                     return true

@@ -3,6 +3,7 @@ package com.dadabarbie.TruckTrip.diologFragment
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,6 +71,7 @@ class TripEndDialogFragment(
     private fun setupKmInputTypeToggle() {
         // Update UI based on current mode
         updateModeUI()
+        Log.d("TripEndDialogFragment", "setupKmInputTypeToggle: ${existingEndOdometer}")
 
         binding.rgEndKmInputType.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
@@ -96,6 +98,7 @@ class TripEndDialogFragment(
         if (currentIsOdometerMode) {
             binding.rbEndOdometer.isChecked = true
             binding.rbEndKm.isChecked = false
+
             // Update hint for odometer mode
             binding.etEndKm.hint = getString(R.string.end_odometer_reading)
         } else {

@@ -22,20 +22,22 @@ import kotlinx.coroutines.launch
 import kotlin.unaryMinus
 
 class TripNewListAdapter(val context: Context, val editTripDataListner: EditTripDataListner,val shareTripDataListner: ShareTripDataListner,
-                      val deleteTripListner: DeleteTripListner,val dowanloadListner: DowanloadListner) :
+                      val deleteTripListner: DeleteTripListner,
+                         val viewTripDataListner: TripNewListAdapter.ViewTripDataListner
+) :
     RecyclerView.Adapter<TripNewListAdapter.ViewHolder>() {
 
     private val diffCallBack = object : DiffUtil.ItemCallback<com.dadabarbie.TruckTrip.model.getTrip.Record>() {
         override fun areItemsTheSame(
-            oldItem: com.dadabarbie.TruckTrip.model.getTrip.Record,
-            newItem: com.dadabarbie.TruckTrip.model.getTrip.Record
+            oldItem: Record,
+            newItem: Record
         ): Boolean {
             return oldItem._id == newItem._id
         }
 
         override fun areContentsTheSame(
-            oldItem: com.dadabarbie.TruckTrip.model.getTrip.Record,
-            newItem: com.dadabarbie.TruckTrip.model.getTrip.Record
+            oldItem: Record,
+            newItem: Record
         ): Boolean {
             return oldItem._id == newItem._id
         }
@@ -44,17 +46,17 @@ class TripNewListAdapter(val context: Context, val editTripDataListner: EditTrip
     fun submitList(list: List<Record>) = differ.submitList(list)
     private val differ = AsyncListDiffer(this, diffCallBack)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TripNewListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: TripNewListLayoutBinding =
             TripNewListLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TripNewListAdapter.ViewHolder(binding)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
 
-    override fun onBindViewHolder(holder: TripNewListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = differ.currentList[position]
         holder.binding.editIcon.setOnClickListener {
             editTripDataListner.editTripDataMethod(position)
@@ -73,17 +75,35 @@ class TripNewListAdapter(val context: Context, val editTripDataListner: EditTrip
         holder.binding.shareIcon.setOnClickListener{
             shareTripDataListner.shareTripDataMethod(position)
         }
+        if (item.route.isNotEmpty()) {
+            holder.binding.tvRoute.visibility = View.VISIBLE
+
+            val routeText = buildString {
+                append(item.route[0])
+
+                item.route.drop(1).forEach { routeItem ->
+                    append(" → ")
+                    append(routeItem)
+                }
+            }
+
+            holder.binding.tvRoute.text = routeText
+        } else {
+            holder.binding.tvRoute.visibility = View.GONE
+        }
+
+
         holder.binding.deleteIcon.setOnClickListener {
             deleteTripListner.deleteTripMethod(position)
         }
         holder.binding.dowanloadIcon.setOnClickListener{
-            dowanloadListner.dowanloadMethod(position)
+            viewTripDataListner.viewTripDataMethod(position)
         }
         if(position%3==0){
             holder.binding.myTemplate.visible()
             GlobalScope.launch {
                 /*ca-app-pub-8808039515208362/1007625609*/
-                val adLoader = AdLoader.Builder(context, "ca-app-pub-3940256099942544/6300978111")
+                val adLoader = AdLoader.Builder(context, "ca-app-pub-8808039515208362/1007625609")
                     .forNativeAd { nativeAd ->
                         holder.binding.myTemplate.setNativeAd(nativeAd)
                         holder.binding.myTemplate.visibility = View.VISIBLE
@@ -120,5 +140,9 @@ class TripNewListAdapter(val context: Context, val editTripDataListner: EditTrip
 
     interface DowanloadListner{
         fun dowanloadMethod(position: Int)
+    }
+
+    interface  ViewTripDataListner{
+        fun viewTripDataMethod(position: Int)
     }
 }

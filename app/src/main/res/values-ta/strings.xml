@@ -419,7 +419,6 @@ Mode மாற்ற App Mode-ஐ கிளிக் செய்யுங்க
     <string name="pehle_se_sun_rahe_hain">ஏற்கனவே கேட்கிறோம்...</string>
     <string name="pehle_truck_number_bolo">முதலில் லாரி நம்பர் சொல்லுங்கள்</string>
     <string name="sabhi_fields_bharo">அனைத்து விவரங்களையும் நிரப்புங்கள்</string>
-    <string name="beech_ke_rasta_add_karo_optinal">+நடுவிலுள்ள பாதையை சேர்க்கவும் (விருப்பம்)</string>
     <string name="naya_bolo">புதியதாக சொல்லு</string>
     <string name="beech_mein_rasta_stop">நடுத்தர வழி (ஸ்டாப்)</string>
     <string name="shuru_ki_jagah_save_ho_gayi">தொடக்க இடம் சேமிக்கப்பட்டது!</string>
@@ -434,7 +433,7 @@ Mode மாற்ற App Mode-ஐ கிளிக் செய்யுங்க
     <string name="update_trip_data">டிரிப் தகவலை புதுப்பி</string>
     <string name="please_enter_middle_place">நடுத்தர இடத்தை இடு</string>
     <string name="please_add_source_destination_first">முதலில் தொடக்கம் மற்றும் இலக்கை இடு</string>
-    <string name="middle_place_added">நடுத்தர இடம் சேர்க்கப்பட்டது</string>
+    <string name="middle_place_added">வேற இடம் சேர்ந்தது</string>
     <string name="select_trip_date">டிரிப் தேதியை தேர்வு செய்</string>
     <string name="speak_now">இப்போது பேசு</string>
     <string name="speech_not_supported">பேசும் வசதி இல்லை</string>
@@ -442,9 +441,43 @@ Mode மாற்ற App Mode-ஐ கிளிக் செய்யுங்க
     <string name="please_enter_source">தொடக்க இடத்தை இடு</string>
     <string name="please_enter_destination">இலக்கு இடத்தை இடு</string>
     <string name="please_enter_truck_number">டிரக் நம்பர் இடு</string>
-    <string name="enter_via_place">வாயா இடத்தை இடு</string>
-    <string name="add_middle_place_optional">நடுத்தர இடம் சேர்க்க (விருப்பம்)</string>
+    <string name="enter_via_place">வேற இடம் போடு</string>
+    <string name="add_middle_place_optional">வேற எங்காவது போனீங்கனா சேருங்க</string>
+    <string name="add_middle_place_optional_">+வேற எங்காவது போனீங்கனா சேருங்க</string>
     <string name="trip_route">பயண பாதை</string>
 
+    <string name="download_pdf">PDF பதிவிறக்கு</string>
+    <string name="no_expense_entries">செலவு இல்லை</string>
+    <string name="expense_details">செலவு விவரம்</string>
+    <string name="no_income_entries">வருமானம் இல்லை</string>
+    <string name="income_details">வருமான விவரம்</string>
+    <string name="owner_profit">உரிமையாளர் லாபம்</string>
+    <string name="total_expense">மொத்த செலவு</string>
+    <string name="financial_summary">கணக்கு சுருக்கம்</string>
+    <string name="end_date">முடிவு தேதி</string>
+    <string name="start_date">தொடக்க தேதி</string>
+    <string name="trip_preview">பயண முன்னோட்டம்</string>
+    <string name="total_income_">மொத்த வருமானம்</string>
+    <string name="view">பார்க்க</string>
+    <string name="please_verify">⚠ %1$s - தயவுசெய்து சரிபார்க்கவும்</string>
+    <string name="truck_number_save_ho_gaya_ek_baar_check_kar_lijiye">லாரி எண் %1$s சேமிக்கப்பட்டது. ஒரு முறை சரிபார்க்கவும்</string>
+    <string name="kuch_sunai_nahi_diya_dobara_try_karein">எதுவும் கேட்கவில்லை, மீண்டும் முயற்சிக்கவும்</string>
+    <string name="cancelled_please_try_again">ரத்து செய்யப்பட்டது - மீண்டும் முயற்சிக்கவும்</string>
+    <string name="kuch_galat_ho_gaya_phir_se_try_karein">ஏதோ தவறு நடந்துள்ளது, மீண்டும் முயற்சிக்கவும்</string>
+    <string name="bol_rahe_hain">🎤 பேசிக் கொண்டிருக்கிறது...</string>
+    <string name="voice_recognition_nahi_khul_raha_please_check_permissions">குரல் அடையாளம் திறக்கவில்லை, அனுமதியை சரிபார்க்கவும்</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+இன்னொரு இடம் சேர்க்கவும்</string>
+    <string name="pehle_date_select_karo">முதலில் தேதியை தேர்வு செய்யுங்கள்</string>
+    <string name="pehle_start_place_dalo">முதலில் தொடங்கும் இடத்தை உள்ளிடுங்கள்</string>
+    <string name="pehle_end_place_dalo">முதலில் கடைசி இடத்தை உள்ளிடுங்கள்</string>
+    <string name="stop_update_ho_gaya">வழி இடம் மாற்றப்பட்டது</string>
+    <string name="beech_ka_rasta">நடுவிலுள்ள வழி %1$d</string>
+
+    <string name="ka_rupaye_update_ho_gaya_he">%1$s க்கு %2$d ரூபாய் புதுப்பிக்கப்பட்டது</string>
+    <string name="ka_rupaye_jod_diya_he">%1$s க்கு %2$d ரூபாய் சேர்க்கப்பட்டது</string>
+
+    <string name="source_place_mic">தொடக்க இடம் சேர்க்கவும்</string>
+    <string name="end_place_mic">முடிவு இடம் சேர்க்கவும்</string>
+    <string name="truck_number_mic">லாரி எண்ணை சேர்க்கவும்</string>
 
 </resources>

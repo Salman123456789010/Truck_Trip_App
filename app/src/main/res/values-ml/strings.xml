@@ -468,7 +468,7 @@ App ഉപയോഗിക്കാൻ പഠിക്കാൻ How to Use ക്
 Mode മാറ്റാൻ App Mode ക്ലിക്ക് ചെയ്യുക।
 </string>
 
-    <string name="beech_ke_rasta_add_karo_optinal">+നടുവിലുള്ള വഴി ചേർക്കുക (ഐച്ഛികം)</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+മറ്റൊരു സ്ഥലം ചേർക്കൂ</string>
     <string name="naya_bolo">പുതിയത് പറയൂ</string>
     <string name="beech_mein_rasta_stop">നടുവിലെ വഴി (സ്റ്റോപ്പ്)</string>
     <string name="shuru_ki_jagah_save_ho_gayi">തുടക്ക സ്ഥലം സേവ് ചെയ്തു!</string>
@@ -483,7 +483,7 @@ Mode മാറ്റാൻ App Mode ക്ലിക്ക് ചെയ്യു�
     <string name="update_trip_data">ട്രിപ്പ് ഡാറ്റ അപ്‌ഡേറ്റ് ചെയ്യൂ</string>
     <string name="please_enter_middle_place">നടുവിലെ സ്ഥലം നൽകൂ</string>
     <string name="please_add_source_destination_first">ആദ്യം തുടക്കംയും ലക്ഷ്യവും നൽകൂ</string>
-    <string name="middle_place_added">നടുവിലെ സ്ഥലം ചേർത്തു</string>
+    <string name="middle_place_added">വേറെ സ്ഥലം ചേർന്നു</string>
     <string name="select_trip_date">ട്രിപ്പ് തീയതി തിരഞ്ഞെടുക്കൂ</string>
     <string name="speak_now">ഇപ്പോൾ സംസാരിക്കൂ</string>
     <string name="speech_not_supported">വോയ്സ് സപ്പോർട്ട് ഇല്ല</string>
@@ -491,9 +491,40 @@ Mode മാറ്റാൻ App Mode ക്ലിക്ക് ചെയ്യു�
     <string name="please_enter_source">തുടക്കം നൽകൂ</string>
     <string name="please_enter_destination">ലക്ഷ്യം നൽകൂ</string>
     <string name="please_enter_truck_number">ട്രക്ക് നമ്പർ നൽകൂ</string>
-    <string name="enter_via_place">വായാ സ്ഥലം നൽകൂ</string>
-    <string name="add_middle_place_optional">നടുവിലെ സ്ഥലം ചേർക്കൂ (ഐച്ഛികം)</string>
+    <string name="enter_via_place">വേറെ സ്ഥലം ചേർക്കൂ</string>
+    <string name="add_middle_place_optional">വേറെ എവിടെയെങ്കിലും പോയിട്ടുണ്ടെങ്കിൽ ചേർക്കൂ</string>
+    <string name="add_middle_place_optional_">+വേറെ എവിടെയെങ്കിലും പോയിട്ടുണ്ടെങ്കിൽ ചേർക്കൂ</string>
     <string name="trip_route">ട്രിപ്പ് വഴി</string>
+    <string name="download_pdf">PDF ഡൗൺലോഡ് ചെയ്യുക</string>
+    <string name="no_expense_entries">ചിലവ് ഇല്ല</string>
+    <string name="expense_details">ചിലവ് വിവരങ്ങൾ</string>
+    <string name="no_income_entries">വരുമാനം ഇല്ല</string>
+    <string name="income_details">വരുമാന വിവരങ്ങൾ</string>
+    <string name="owner_profit">ഉടമയുടെ ലാഭം</string>
+    <string name="total_expense">മൊത്തം ചിലവ്</string>
+    <string name="financial_summary">കണക്കിന്റെ ചുരുക്കം</string>
+    <string name="end_date">അവസാന തീയതി</string>
+    <string name="start_date">ആരംഭ തീയതി</string>
+    <string name="trip_preview">ട്രിപ്പ് പ്രിവ്യൂ</string>
+    <string name="total_income_">മൊത്തം വരുമാനം</string>
+    <string name="view">കാണുക</string>
+    <string name="please_verify">⚠ %1$s - ദയവായി പരിശോധിക്കുക</string>
+    <string name="truck_number_save_ho_gaya_ek_baar_check_kar_lijiye">ട്രക്ക് നമ്പർ %1$s സേവ് ചെയ്തു. ഒരിക്കൽ പരിശോധിക്കുക</string>
+    <string name="kuch_sunai_nahi_diya_dobara_try_karein">ഒന്നും കേൾക്കാനായില്ല, വീണ്ടും ശ്രമിക്കുക</string>
+    <string name="cancelled_please_try_again">റദ്ദാക്കി - വീണ്ടും ശ്രമിക്കുക</string>
+    <string name="kuch_galat_ho_gaya_phir_se_try_karein">എന്തോ പിഴവ് സംഭവിച്ചു, വീണ്ടും ശ്രമിക്കുക</string>
+    <string name="bol_rahe_hain">🎤 സംസാരിക്കുന്നു...</string>
+    <string name="voice_recognition_nahi_khul_raha_please_check_permissions">വോയ്സ് തിരിച്ചറിയൽ തുറക്കുന്നില്ല, അനുമതി പരിശോധിക്കുക</string>
+    <string name="pehle_date_select_karo">ആദ്യം തീയതി തിരഞ്ഞെടുക്കൂ</string>
+    <string name="pehle_start_place_dalo">ആദ്യം തുടങ്ങുന്ന സ്ഥലം നൽകൂ</string>
+    <string name="pehle_end_place_dalo">ആദ്യം അവസാന സ്ഥലം നൽകൂ</string>
+    <string name="stop_update_ho_gaya">വഴിയിലെ സ്ഥലം മാറി</string>
+    <string name="beech_ka_rasta">ഇടയിലെ വഴി %1$d</string>
+    <string name="ka_rupaye_update_ho_gaya_he">%1$s ന് %2$d രൂപ അപ്ഡേറ്റ് ആയി</string>
+    <string name="ka_rupaye_jod_diya_he">%1$s ന് %2$d രൂപ ചേർത്തു</string>
 
+    <string name="source_place_mic">തുടങ്ങുന്ന സ്ഥലം ചേർക്കൂ</string>
+    <string name="end_place_mic">അവസാന സ്ഥലം ചേർക്കൂ</string>
+    <string name="truck_number_mic">ട്രക്ക് നമ്പർ ചേർക്കൂ</string>
 
 </resources>

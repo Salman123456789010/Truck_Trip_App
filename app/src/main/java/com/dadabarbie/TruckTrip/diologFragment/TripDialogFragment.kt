@@ -17,28 +17,16 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dadabarbie.TruckTrip.R
+import com.dadabarbie.TruckTrip.Utils.Constants
+import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.activity.MainActivity
 import com.dadabarbie.TruckTrip.adapter.RouteAdapter
 import com.dadabarbie.TruckTrip.databinding.TripDialogFragmentBinding
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.play.integrity.internal.ac
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TripDialogFragment(
-    val date: String,
-    val startingPlace: String,
-    val endingPlace: String,
-    val driverIncome: String,
-    val truckNumber: String,
-    val truckAvg: String,
-    val totalDays: String,
-    val update: String,
-    val startOdometer: String = "",
-    val existingRoute: ArrayList<String> = arrayListOf()
-) : DialogFragment() {
+class TripDialogFragment : DialogFragment() {
 
     private var _binding: TripDialogFragmentBinding? = null
     private val binding get() = _binding!!
@@ -54,6 +42,69 @@ class TripDialogFragment(
     private val DEST_SPEECH_REQUEST = 102
     private val MIDDLE_SPEECH_REQUEST = 103
     private val TRUCK_SPEECH_REQUEST = 104
+
+    companion object {
+        private const val ARG_DATE = "date"
+        private const val ARG_STARTING_PLACE = "startingPlace"
+        private const val ARG_ENDING_PLACE = "endingPlace"
+        private const val ARG_DRIVER_INCOME = "driverIncome"
+        private const val ARG_TRUCK_NUMBER = "truckNumber"
+        private const val ARG_TRUCK_AVG = "truckAvg"
+        private const val ARG_TOTAL_DAYS = "totalDays"
+        private const val ARG_UPDATE = "update"
+        private const val ARG_START_ODOMETER = "startOdometer"
+        private const val ARG_EXISTING_ROUTE = "existingRoute"
+
+        fun newInstance(
+            date: String = "",
+            startingPlace: String = "",
+            endingPlace: String = "",
+            driverIncome: String = "",
+            truckNumber: String = "",
+            truckAvg: String = "",
+            totalDays: String = "",
+            update: String = "",
+            startOdometer: String = "",
+            existingRoute: ArrayList<String> = arrayListOf()
+        ): TripDialogFragment {
+            return TripDialogFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_DATE, date)
+                    putString(ARG_STARTING_PLACE, startingPlace)
+                    putString(ARG_ENDING_PLACE, endingPlace)
+                    putString(ARG_DRIVER_INCOME, driverIncome)
+                    putString(ARG_TRUCK_NUMBER, truckNumber)
+                    putString(ARG_TRUCK_AVG, truckAvg)
+                    putString(ARG_TOTAL_DAYS, totalDays)
+                    putString(ARG_UPDATE, update)
+                    putString(ARG_START_ODOMETER, startOdometer)
+                    putStringArrayList(ARG_EXISTING_ROUTE, existingRoute)
+                }
+            }
+        }
+    }
+
+    // Retrieve arguments safely
+    private val date: String
+        get() = arguments?.getString(ARG_DATE, "") ?: ""
+    private val startingPlace: String
+        get() = arguments?.getString(ARG_STARTING_PLACE, "") ?: ""
+    private val endingPlace: String
+        get() = arguments?.getString(ARG_ENDING_PLACE, "") ?: ""
+    private val driverIncome: String
+        get() = arguments?.getString(ARG_DRIVER_INCOME, "") ?: ""
+    private val truckNumber: String
+        get() = arguments?.getString(ARG_TRUCK_NUMBER, "") ?: ""
+    private val truckAvg: String
+        get() = arguments?.getString(ARG_TRUCK_AVG, "") ?: ""
+    private val totalDays: String
+        get() = arguments?.getString(ARG_TOTAL_DAYS, "") ?: ""
+    private val update: String
+        get() = arguments?.getString(ARG_UPDATE, "") ?: ""
+    private val startOdometer: String
+        get() = arguments?.getString(ARG_START_ODOMETER, "") ?: ""
+    private val existingRoute: ArrayList<String>
+        get() = arguments?.getStringArrayList(ARG_EXISTING_ROUTE) ?: arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,7 +127,7 @@ class TripDialogFragment(
     private fun initTextToSpeech() {
         textToSpeech = TextToSpeech(requireContext()) { status ->
             if (status == TextToSpeech.SUCCESS) {
-                textToSpeech?.language = Locale("hi", "IN")
+                textToSpeech?.language = Locale(Prefs[Constants.languageCode, "en"])
             }
         }
     }
@@ -147,9 +198,9 @@ class TripDialogFragment(
         if (update == "yes") {
             binding.addTripDataLabel.text = getString(R.string.update_trip_data)
             binding.submit.text = getString(R.string.update)
-            binding.closeBtn.visibility=View.GONE
-        }else{
-            binding.closeBtn.visibility=View.VISIBLE
+            binding.closeBtn.visibility = View.GONE
+        } else {
+            binding.closeBtn.visibility = View.VISIBLE
         }
     }
 
@@ -167,7 +218,7 @@ class TripDialogFragment(
 
         // Date speaker
         binding.speaker.setOnClickListener {
-            speakText(binding.date.text.toString())
+            speakText(binding.dateLabel.text.toString())
         }
 
         // Source place text changed
@@ -209,7 +260,10 @@ class TripDialogFragment(
 
         // Source place speaker
         binding.speakLan.setOnClickListener {
-            speakText(binding.srcPlaceValue.text.toString())
+            speakText(getString(R.string.source_place_mic))
+        }
+        binding.middlePlaceMic.setOnClickListener {
+            speakText(binding.middleSpaceLabel.text.toString())
         }
 
         // Source place mic
@@ -219,7 +273,7 @@ class TripDialogFragment(
 
         // Destination place speaker
         binding.speakLandest.setOnClickListener {
-            speakText(binding.destPlaceValue.text.toString())
+            speakText(getString(R.string.end_place_mic))
         }
 
         // Destination place mic
@@ -242,10 +296,13 @@ class TripDialogFragment(
                 return@setOnClickListener
             }
 
-            // Insert middle place before destination
-            val insertPosition = routeList.size - 1
-            routeList.add(insertPosition, middlePlace)
-            routeAdapter.notifyItemInserted(insertPosition)
+            // Add the new place as destination (at the end)
+            routeList.add(middlePlace)
+
+            // Update the destination field to show the new destination
+            binding.destPlaceValue.setText(middlePlace)
+
+            routeAdapter.notifyItemInserted(routeList.size - 1)
 
             // Clear input
             binding.etMiddlePlace.setText("")
@@ -263,12 +320,12 @@ class TripDialogFragment(
 
         // Middle place speaker
         binding.middlePlaceSpeaker.setOnClickListener {
-            speakText(binding.etMiddlePlace.text.toString())
+            speakText(binding.middleSpaceLabel.text.toString())
         }
 
         // Truck number speaker
         binding.truckSpeaker.setOnClickListener {
-            speakText(binding.truckNumber.text.toString())
+            speakText(getString(R.string.truck_number_mic))
         }
 
         // Submit button
@@ -278,12 +335,9 @@ class TripDialogFragment(
     }
 
     private fun showDatePicker() {
-        val constraintsBuilder = CalendarConstraints.Builder()
-            .setValidator(DateValidatorPointBackward.now())
-
         val datePicker = MaterialDatePicker.Builder.datePicker()
             .setTitleText(getString(R.string.select_trip_date))
-            .setCalendarConstraints(constraintsBuilder.build())
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
             .build()
 
         datePicker.addOnPositiveButtonClickListener { selection ->
@@ -388,8 +442,8 @@ class TripDialogFragment(
             truckAvg = "",
             driverTripAvak = "",
             totalDays = "0",
-            startOdometer = startOdo,
-            route = ArrayList(routeList) // Pass the complete route
+            startOdometer_ = startOdo,
+            route = ArrayList(routeList)
         )
 
         dismiss()
@@ -398,7 +452,6 @@ class TripDialogFragment(
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
 
-        // Set dialog to be full width with proper styling
         dialog.window?.apply {
             setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -406,7 +459,6 @@ class TripDialogFragment(
             )
             setBackgroundDrawableResource(android.R.color.transparent)
 
-            // Add margins
             attributes?.let { params ->
                 val margin = context.resources.getDimensionPixelSize(R.dimen._12sdp)
                 params.width = context.resources.displayMetrics.widthPixels - (margin * 2)
@@ -420,7 +472,6 @@ class TripDialogFragment(
     override fun onStart() {
         super.onStart()
 
-        // Alternative: Set dialog width here if onCreateDialog doesn't work
         dialog?.window?.apply {
             setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,

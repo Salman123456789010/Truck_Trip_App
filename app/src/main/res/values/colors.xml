@@ -66,4 +66,5 @@
     <color name="cdc6c0c0">#CDC6C0C0</color>
     <color name="bgcolor_">#EEF7FF</color>
     <color name="greencolor">#008000</color>
+    <color name="transparent_color">#00000000</color>
 </resources>

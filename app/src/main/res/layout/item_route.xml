@@ -30,12 +30,27 @@
         app:layout_constraintTop_toBottomOf="@id/ivPlaceIcon"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <!-- Delete Button (only for middle places) -->
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/baseline_delete_24"
+        android:padding="@dimen/_4sdp"
+        android:background="@drawable/bg_red_circle"
+        app:tint="@color/white"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <!-- Content Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardPlace"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
         app:cardCornerRadius="@dimen/_8sdp"
         app:cardElevation="@dimen/_1sdp"
         app:strokeColor="@color/green"
@@ -67,23 +82,10 @@
                 android:textSize="@dimen/_8sdp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/roboto_bold"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:layout_marginTop="@dimen/_1sdp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
-    <!-- Delete Button (only for middle places) -->
-    <ImageView
-        android:id="@+id/btnDelete"
-        android:layout_width="@dimen/_18sdp"
-        android:layout_height="@dimen/_18sdp"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:src="@drawable/baseline_delete_24"
-        android:padding="@dimen/_5sdp"
-        android:background="@drawable/bg_red_circle"
-        app:tint="@color/white"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/cardPlace"
-        app:layout_constraintBottom_toBottomOf="@id/cardPlace" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

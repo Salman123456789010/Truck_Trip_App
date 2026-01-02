@@ -1,12 +1,17 @@
 package com.dadabarbie.TruckTrip.activity
 
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.view.WindowManager
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
@@ -20,7 +25,7 @@ import com.dadabarbie.TruckTrip.model.OnboardingItem
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.Locale
 
-class HowToUseActivity : AppCompatActivity(), OnboardingVoiceListener {
+class HowToUseActivity : BaseActivity(), OnboardingVoiceListener {
 
     lateinit var binding: ActivityHowToUseBinding
     private lateinit var adapter: OnboardingAdapter
@@ -31,15 +36,18 @@ class HowToUseActivity : AppCompatActivity(), OnboardingVoiceListener {
     private var isSpeaking = false
     private var isPaused = false
 
-    // Handler for posting back to main thread from UtteranceProgressListener
-    private val mainHandler = Handler(Looper.getMainLooper())
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHowToUseBinding.inflate(layoutInflater)
         setContentView(binding.root)
         SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            enableEdgeToEdge()
+            // 35 (android - 15)
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
+        }
         initTts()
         initAdapter()
         setOnClickListeners()
@@ -47,7 +55,8 @@ class HowToUseActivity : AppCompatActivity(), OnboardingVoiceListener {
 
     // ---------------------------
     // TEXT TO SPEECH SETUP
-    // ---------------------------
+    // --------------------
+    // -------
     private fun initTts() {
         val langCode = Prefs[Constants.languageCode] ?: "hi"   // default Hindi
 
@@ -67,78 +76,40 @@ class HowToUseActivity : AppCompatActivity(), OnboardingVoiceListener {
 
                 tts?.setPitch(1.0f)
                 tts?.setSpeechRate(0.85f)
-
-                // IMPORTANT: set UtteranceProgressListener once TTS initialized
-                tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
-                    override fun onStart(utteranceId: String?) {
-                        // nothing to do here
-                    }
-
-                    override fun onDone(utteranceId: String?) {
-                        // called on a background thread; post to main
-                        mainHandler.post {
-                            if (!isSpeaking || isPaused) return@post
-
-                            // advance to next sentence if any
-                            currentSentenceIndex++
-                            if (currentSentenceIndex < sentences.size) {
-                                speakSentence(currentSentenceIndex)
-                            } else {
-                                // finished all sentences
-                                isSpeaking = false
-                                isPaused = false
-                                currentSentenceIndex = 0
-                            }
-                        }
-                    }
-
-                    @Deprecated("Deprecated in Java")
-                    override fun onError(utteranceId: String?) {
-                        mainHandler.post {
-                            // stop speaking safely on error
-                            stopSpeaking()
-                        }
-                    }
-
-                    // API 23+ has onError(utteranceId, errorCode) but above is fine as fallback
-                })
             }
         }
     }
-
     private fun getLocaleFromCode(code: String): Locale {
         return when (code) {
             "hi" -> Locale("hi", "IN")  // Hindi
             "mr" -> Locale("mr", "IN")  // Marathi
             "gu" -> Locale("gu", "IN")  // Gujarati
-            "pa" -> Locale("pa", "IN")  // Punjabi (use pa)
+            "pa" -> Locale("hi", "IN")  // Punjabi
             "bn" -> Locale("bn", "IN")  // Bengali
-            "or" -> Locale("or", "IN")  // Odia
-            "ta" -> Locale("ta", "IN")  // Tamil
-            "te" -> Locale("te", "IN")  // Telugu
-            "kn" -> Locale("kn", "IN")  // Kannada
-            "ml" -> Locale("ml", "IN")  // Malayalam
-            "as" -> Locale("as", "IN")  // Assamese
-            "ne" -> Locale("ne", "NP")  // Nepali
+            "or" -> Locale("hi", "IN")  // Odia
+            "ta" -> Locale("en", "IN")  // Tamil
+            "te" -> Locale("en", "IN")  // Telugu
+            "kn" -> Locale("hi", "IN")  // Kannada
+            "ml" -> Locale("hi", "IN")  // Malayalam
+            "as" -> Locale("hi", "IN")  // Assamese
+            "ne" -> Locale("hi", "NP")  // Nepali
             "ur" -> Locale("ur", "IN")  // Urdu
             "en" -> Locale("en", "IN")  // English (India)
             else -> Locale("hi", "IN")  // default Hindi
         }
     }
 
+
+
+
     private fun speakSentence(index: Int) {
         if (index >= sentences.size) return
         val sentence = sentences[index]
 
-        // prepare utterance params
-        val params = Bundle().apply {
-            putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utt_$index")
-        }
+        val params = Bundle()
+        params.putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utt_$index")
 
-        // Ensure we call speak on main thread
-        mainHandler.post {
-            tts?.speak(sentence, TextToSpeech.QUEUE_FLUSH, params, "utt_$index")
-        }
+        tts?.speak(sentence, TextToSpeech.QUEUE_FLUSH, params, "utt_$index")
     }
 
     // ---------------------------
@@ -156,7 +127,7 @@ class HowToUseActivity : AppCompatActivity(), OnboardingVoiceListener {
             OnboardingItem(R.drawable.add_expenditure, getString(R.string.add_expanse_tittle), getString(R.string.add_expense_dec)),
             OnboardingItem(R.drawable.add_income, getString(R.string.add_income_tittle), getString(R.string.add_income_dec)),
             OnboardingItem(R.drawable.add_fuel, getString(R.string.add_fuel_tittle), getString(R.string.add_fuel_dec)),
-            OnboardingItem(R.drawable.complelte_trip, getString(R.string.complete_trip_tittle), getString(R.string.complete_trip_dec))
+            OnboardingItem(R.drawable.complelte_trip, getString(R.string.complete_trip_tittle), getString(R.string.complete_trip_dec)),
         )
 
         adapter.submitList(items)
@@ -168,11 +139,6 @@ class HowToUseActivity : AppCompatActivity(), OnboardingVoiceListener {
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 updateBottomButtons(position)
-
-                // STOP speaking automatically when user slides to another page
-                if (isSpeaking) {
-                    stopSpeaking()
-                }
             }
         })
     }
@@ -183,18 +149,23 @@ class HowToUseActivity : AppCompatActivity(), OnboardingVoiceListener {
     private fun setOnClickListeners() {
 
         binding.backBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.youtubeIcon.setOnClickListener {
+            val url = "https://www.youtube.com/@TruckWallah_TW"
+            openLink(url)
+        }
 
         binding.btnSkip.setOnClickListener {
             val pos = binding.viewPager.currentItem
             if (pos == 0) {
-                if (Prefs[Constants.isLogin]) {
+                if(!Prefs[Constants.languageCode, ""].toString().isNullOrEmpty()){
                     finish()
-                    onBackPressedDispatcher.onBackPressed()
+
                 }else{
                     startActivity(Intent(this, LoginScreenActivity::class.java))
                     finish()
-                }
+//                    startActivity(Intent(this@SplashActivity, LanguageSelction::class.java).putExtra("languageFlag",""))
 
+                }
             } else {
                 binding.viewPager.currentItem = pos - 1
             }
@@ -205,12 +176,12 @@ class HowToUseActivity : AppCompatActivity(), OnboardingVoiceListener {
             if (nextIndex < adapter.itemCount) {
                 binding.viewPager.currentItem = nextIndex
             } else {
-
-                if (Prefs[Constants.isLogin]) {
+                if(!Prefs[Constants.languageCode, ""].toString().isNullOrEmpty()){
                     finish()
-                    onBackPressedDispatcher.onBackPressed()
                 }else{
                     startActivity(Intent(this, LoginScreenActivity::class.java))
+
+//                    startActivity(Intent(this@SplashActivity, LanguageSelction::class.java).putExtra("languageFlag",""))
                     finish()
                 }
 
@@ -232,20 +203,14 @@ class HowToUseActivity : AppCompatActivity(), OnboardingVoiceListener {
 
         if (text.isBlank()) return
 
-        // If paused (user pressed stop previously), resume from current index
         if (isSpeaking && isPaused) {
             isPaused = false
-            // resume speaking current sentence (if index valid)
-            if (currentSentenceIndex < sentences.size) {
-                speakSentence(currentSentenceIndex)
-            }
+            speakSentence(currentSentenceIndex)
             return
         }
 
-        // If already speaking a different text, stop it first
         if (isSpeaking) stopSpeaking()
 
-        // split into sentences (keeps punctuation)
         sentences = text.split(Regex("(?<=[.!?])\\s+"))
             .map { it.trim() }
             .filter { it.isNotEmpty() }
@@ -261,9 +226,16 @@ class HowToUseActivity : AppCompatActivity(), OnboardingVoiceListener {
 
     override fun onRequestStop() {
         if (!isSpeaking) return
-        // pause (user tapped stop) — allow resume via speak button
         tts?.stop()
         isPaused = true
+    }
+    private fun openLink(url: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Unable to open link", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun stopSpeaking() {

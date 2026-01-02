@@ -7,7 +7,7 @@ import com.dadabarbie.TruckTrip.adapter.TripAdapter
 import com.dadabarbie.TruckTrip.databinding.ActivityTripListBinding
 
 
-class TripListActivity : AppCompatActivity() {
+class TripListActivity : BaseActivity() {
     lateinit var binding: ActivityTripListBinding
     lateinit var tripAdapter: TripAdapter
     private val tripList:ArrayList<String> = arrayListOf("Trip : Mangrol to Rajastan.pdf","Trip : Veraval to Kerla.pdf")

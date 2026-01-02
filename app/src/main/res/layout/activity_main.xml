@@ -179,7 +179,15 @@
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_14sdp" />
                         </LinearLayout>
-
+                        <TextView
+                            android:id="@+id/tvRoutes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:textSize="13sp"
+                            android:visibility="visible"
+                            android:gravity="center"
+                            tools:text="Mumbai → Pune → Nagpur → Delhi" />
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -307,6 +315,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
+                                android:gravity="center"
+                                android:padding="@dimen/_2sdp"
                                 android:text="@string/add_expense"
                                 android:textSize="12sp"
                                 android:textColor="@android:color/white" />
@@ -341,6 +351,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="@string/add_income"
+                                android:gravity="center"
+                                android:padding="@dimen/_2sdp"
                                 android:textSize="12sp"
                                 android:textColor="@android:color/white" />
                         </LinearLayout>
@@ -373,6 +385,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="@string/add_fuel"
+                                android:gravity="center"
+                                android:padding="@dimen/_2sdp"
                                 android:textSize="12sp"
                                 android:textColor="@android:color/white" />
                         </LinearLayout>

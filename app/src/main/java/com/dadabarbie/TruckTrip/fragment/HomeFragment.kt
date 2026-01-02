@@ -28,6 +28,7 @@ import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.activity.DashBoardActivity
 import com.dadabarbie.TruckTrip.activity.MainActivity
+import com.dadabarbie.TruckTrip.activity.TripPreviewActivity
 import com.dadabarbie.TruckTrip.adapter.TripListAdapter
 import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
 import com.dadabarbie.TruckTrip.databinding.FragmentHomeBinding
@@ -57,7 +58,7 @@ import java.util.Locale
 @AndroidEntryPoint
 class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripDataListner,
     TripListAdapter.ShareTripDataListner, TripListAdapter.DeleteTripListner,
-    TripListAdapter.DowanloadListner {
+    TripListAdapter.DowanloadListner,TripListAdapter.ViewTripDataListner {
 
     // Use lazy initialization to reduce initial memory footprint
     private var _binding: FragmentHomeBinding? = null
@@ -516,7 +517,7 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
     }
 
     private fun initAdapter() {
-        tripListAdapter = TripListAdapter(requireActivity(), this, this, this, this)
+        tripListAdapter = TripListAdapter(requireActivity(), this, this, this, this,this)
         binding.recycleList.adapter = tripListAdapter
 
         binding.recycleList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -554,58 +555,58 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
         }
     }
 
-    override fun editTripDataMethod(position: Int) {
-        Constants.clearTripData()
-        Constants.creditList.clear()
-        Constants.debitList.clear()
-
-        val trip = tripList[position]
-        val incomeJson = gson.toJson(trip.income)
-        val expenseJson = gson.toJson(trip.expense)
-
-        // Parse route safely
-        val routeArray = trip.route ?: arrayListOf()
-        val routeJson = if (routeArray.isNotEmpty()) {
-            gson.toJson(routeArray)
-        } else {
-            ""
-        }
-
-        try {
-            val incomeList: List<Income> = gson.fromJson(
-                incomeJson,
-                object : TypeToken<List<Income>>() {}.type
-            )
-            Constants.creditList.addAll(incomeList)
-        } catch (e: Exception) {
-            Log.e("HomeFragment", "Error parsing income: ${e.message}")
-        }
-
-        try {
-            val expenseList: List<Expense> = gson.fromJson(
-                expenseJson,
-                object : TypeToken<List<Expense>>() {}.type
-            )
-            Constants.debitList.addAll(expenseList)
-        } catch (e: Exception) {
-            Log.e("HomeFragment", "Error parsing expense: ${e.message}")
-        }
-
-        startActivity(Intent(requireActivity(), MainActivity::class.java).apply {
-            putExtra("sourceName", trip.source)
-            putExtra("destinationName", trip.destination)
-            putExtra("startingDate", trip.start_date)
-            putExtra("driverAvak", trip.driver_income)
-            putExtra("endingDate", trip.end_date)
-            putExtra("truckNumber", trip.truck_no)
-            putExtra("flag", 2)
-            putStringArrayListExtra("ROUTE_ARRAY", routeArray)
-            putExtra("routeJson", routeJson)  // ADD THIS
-            putExtra("id", trip._id)
-            putExtra("incomeJson", incomeJson)
-            putExtra("expenseJson", expenseJson)
-        })
-    }
+//    override fun editTripDataMethod(position: Int) {
+//        Constants.clearTripData()
+//        Constants.creditList.clear()
+//        Constants.debitList.clear()
+//
+//        val trip = tripList[position]
+//        val incomeJson = gson.toJson(trip.income)
+//        val expenseJson = gson.toJson(trip.expense)
+//
+//        // Parse route safely
+//        val routeArray = trip.route ?: arrayListOf()
+//        val routeJson = if (routeArray.isNotEmpty()) {
+//            gson.toJson(routeArray)
+//        } else {
+//            ""
+//        }
+//
+//        try {
+//            val incomeList: List<Income> = gson.fromJson(
+//                incomeJson,
+//                object : TypeToken<List<Income>>() {}.type
+//            )
+//            Constants.creditList.addAll(incomeList)
+//        } catch (e: Exception) {
+//            Log.e("HomeFragment", "Error parsing income: ${e.message}")
+//        }
+//
+//        try {
+//            val expenseList: List<Expense> = gson.fromJson(
+//                expenseJson,
+//                object : TypeToken<List<Expense>>() {}.type
+//            )
+//            Constants.debitList.addAll(expenseList)
+//        } catch (e: Exception) {
+//            Log.e("HomeFragment", "Error parsing expense: ${e.message}")
+//        }
+//
+//        startActivity(Intent(requireActivity(), MainActivity::class.java).apply {
+//            putExtra("sourceName", trip.source)
+//            putExtra("destinationName", trip.destination)
+//            putExtra("startingDate", trip.start_date)
+//            putExtra("driverAvak", trip.driver_income)
+//            putExtra("endingDate", trip.end_date)
+//            putExtra("truckNumber", trip.truck_no)
+//            putExtra("flag", 2)
+//            putStringArrayListExtra("ROUTE_ARRAY", routeArray)
+//            putExtra("routeJson", routeJson)  // ADD THIS
+//            putExtra("id", trip._id)
+//            putExtra("incomeJson", incomeJson)
+//            putExtra("expenseJson", expenseJson)
+//        })
+//    }
 
 
     private fun sharePdf(filePdf: String) {
@@ -659,4 +660,74 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
         deleteDialogFragment = null
         _binding = null
     }
+
+
+    override fun editTripData(trip: Record) {
+        Constants.clearTripData()
+        Constants.creditList.clear()
+        Constants.debitList.clear()
+
+        val incomeJson = gson.toJson(trip.income)
+        val expenseJson = gson.toJson(trip.expense)
+
+        startActivity(
+            Intent(requireActivity(), MainActivity::class.java).apply {
+                putExtra("sourceName", trip.source)
+                putExtra("destinationName", trip.destination)
+                putExtra("startingDate", trip.start_date)
+                putExtra("endingDate", trip.end_date)
+                putExtra("driverAvak", trip.driver_income)
+                putExtra("truckNumber", trip.truck_no)
+                putExtra("startOdometer", trip.startOdometer)
+                putExtra("endOdometer", trip.endOdometer)
+                putExtra("endKm", trip.endKm)
+                putExtra("isOdometer", trip.isOdometer)
+                putExtra("id", trip._id)
+                putExtra("flag", 2)
+                putExtra("incomeJson", incomeJson)
+                putExtra("expenseJson", expenseJson)
+                putStringArrayListExtra("ROUTE_ARRAY", ArrayList(trip.route ?: emptyList()))
+            }
+        )
+    }
+
+    override fun viewTripDataMethod(trip: Record) {
+        val totalDays = try {
+            val startDate = apiDateFormat.parse(trip.start_date)
+            val endDate = apiDateFormat.parse(trip.end_date)
+            if (startDate != null && endDate != null) {
+                val diffInMillis = endDate.time - startDate.time
+                val days = (diffInMillis / (1000 * 60 * 60 * 24)).toInt()
+                days.toString()
+            } else "0"
+        } catch (e: Exception) { "0" }
+
+        val intent = Intent(requireActivity(), TripPreviewActivity::class.java).apply {
+            putExtra("TRIP_ID", trip._id)
+            putExtra("SOURCE", trip.source)
+            putExtra("DESTINATION", trip.destination)
+            putExtra("START_DATE", trip.start_date)
+            putExtra("END_DATE", trip.end_date)
+            putExtra("TRUCK_NO", trip.truck_no)
+            putExtra("DRIVER_INCOME", trip.driver_income)
+            putExtra("TOTAL_INCOME", trip.total_income)
+            putExtra("TOTAL_EXPENSE", trip.total_expense)
+            putExtra("OWNER_PROFIT", trip.owner_profit)
+            putExtra("TRUCK_AVERAGE", trip.truck_average)
+            putExtra("TOTAL_DAYS", totalDays)
+
+            // Pass route
+            val routeJson = if (trip.route != null && trip.route.isNotEmpty()) {
+                gson.toJson(trip.route)
+            } else ""
+            putExtra("ROUTE_JSON", routeJson)
+
+            // Pass income and expense
+            putExtra("INCOME_JSON", gson.toJson(trip.income))
+            putExtra("EXPENSE_JSON", gson.toJson(trip.expense))
+        }
+
+        startActivity(intent)
+    }
+
 }

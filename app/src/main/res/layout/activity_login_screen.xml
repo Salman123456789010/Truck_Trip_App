@@ -1,129 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_screen_12"
-    android:orientation="vertical">
-
-
+    android:fillViewport="true">
     <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_screen_12"
         android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:src="@drawable/truck_just_logo" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:fontFamily="@font/roboto_bold"
-            android:gravity="bottom|center"
-            android:textColor="@color/white"
-            android:text="Truck Trip"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:textAllCaps="true"
-            android:textSize="@dimen/_20sdp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/enter_mobile_number"
-            android:textSize="@dimen/_20sdp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:fontFamily="@font/roboto_medium"
-            android:id="@+id/otpInfo"
-            android:gravity="center"
-            android:text="@string/we_will_send_otp"
-            android:textColor="@color/black" />
 
 
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_30sdp"
-            android:background="@color/white"
-            android:backgroundTint="@color/white"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:strokeColor="@color/grey"
-            app:strokeWidth="1dp">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/truck_just_logo" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="bottom|center"
+                android:textColor="@color/white"
+                android:text="Truck Trip"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold"/>
+        </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/llMobileNo"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/enter_mobile_number"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:id="@+id/otpInfo"
+                android:gravity="center"
+                android:text="@string/we_will_send_otp"
+                android:textColor="@color/black" />
+
+
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_3sdp">
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeColor="@color/grey"
+                app:strokeWidth="1dp">
 
-                <com.hbb20.CountryPickerView
-                    android:id="@+id/tvCountryCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:foreground="?attr/selectableItemBackground"
-                    app:cpDialog_allowClearSelection="false"
-                    app:cpList_preferredCountryCodes="IN"
-                    app:cp_initialSelectionMode="specificCountry"
-                    app:cp_initialSpecificCountry="IN" />
-
-                <EditText
-                    android:id="@+id/etPhone"
+                <LinearLayout
+                    android:id="@+id/llMobileNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:background="@null"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:hint="@string/enter_mobile_number"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:padding="@dimen/_10sdp"
-                    android:textSize="16sp" />
+                    android:padding="@dimen/_3sdp">
+
+                    <com.hbb20.CountryPickerView
+                        android:id="@+id/tvCountryCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cpDialog_allowClearSelection="false"
+                        app:cpList_preferredCountryCodes="IN"
+                        app:cp_initialSelectionMode="specificCountry"
+                        app:cp_initialSpecificCountry="IN" />
+
+                    <EditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:background="@null"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:hint="@string/enter_mobile_number"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:padding="@dimen/_10sdp"
+                        android:textSize="16sp" />
 
 
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btLogin"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_35sdp"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:layout_marginEnd="@dimen/_35sdp"
-            android:backgroundTint="@color/green"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/get_otp"
-            android:textSize="16sp"
-            app:cornerRadius="@dimen/_10sdp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btLogin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_35sdp"
+                android:backgroundTint="@color/green"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/get_otp"
+                android:textSize="16sp"
+                app:cornerRadius="@dimen/_10sdp" />
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>

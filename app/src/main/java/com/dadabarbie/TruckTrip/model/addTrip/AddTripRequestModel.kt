@@ -15,5 +15,10 @@ data class AddTripRequestModel(
     val total_expense: String,
     val total_income: String,
     val truck_average: String,
-    val truck_no: String
+    val truck_no: String,
+    val startOdometer: String,
+    val endOdometer: String,
+    val isOdometer: Boolean,
+    val endKm: String,
+
 )

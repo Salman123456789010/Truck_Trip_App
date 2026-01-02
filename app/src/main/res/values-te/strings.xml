@@ -387,7 +387,7 @@ Mode మార్చాలంటే App Mode పై క్లిక్ చేయ
     <string name="pehle_se_sun_rahe_hain">ఇప్పటికే వింటున్నాం...</string>
     <string name="pehle_truck_number_bolo">ముందుగా ట్రక్ నంబర్ చెప్పండి</string>
     <string name="sabhi_fields_bharo">అన్ని వివరాలు నింపండి</string>
-    <string name="beech_ke_rasta_add_karo_optinal">+మధ్యలోని మార్గాన్ని జోడించండి (ఐచ్ఛికం)</string>
+    <string name="beech_ke_rasta_add_karo_optinal">+ఇంకో చోటు జోడించండి</string>
     <string name="naya_bolo">కొత్తగా చెప్పు</string>
     <string name="beech_mein_rasta_stop">మధ్య దారి (స్టాప్)</string>
     <string name="shuru_ki_jagah_save_ho_gayi">ప్రారంభ స్థలం సేవ్ అయింది!</string>
@@ -402,7 +402,7 @@ Mode మార్చాలంటే App Mode పై క్లిక్ చేయ
     <string name="update_trip_data">ట్రిప్ డేటా అప్‌డేట్ చేయి</string>
     <string name="please_enter_middle_place">మధ్య స్థలం ఇవ్వు</string>
     <string name="please_add_source_destination_first">ముందు ప్రారంభం మరియు గమ్యం ఇవ్వు</string>
-    <string name="middle_place_added">మధ్య స్థలం జోడించబడింది</string>
+    <string name="middle_place_added">ఇంకో చోటు చేరింది</string>
     <string name="select_trip_date">ట్రిప్ తేదీ ఎంచుకో</string>
     <string name="speak_now">ఇప్పుడు మాట్లాడు</string>
     <string name="speech_not_supported">వాయిస్ సపోర్ట్ లేదు</string>
@@ -410,9 +410,42 @@ Mode మార్చాలంటే App Mode పై క్లిక్ చేయ
     <string name="please_enter_source">ప్రారంభం ఇవ్వు</string>
     <string name="please_enter_destination">గమ్యం ఇవ్వు</string>
     <string name="please_enter_truck_number">ట్రక్ నంబర్ ఇవ్వు</string>
-    <string name="enter_via_place">వాయా స్థలం ఇవ్వు</string>
-    <string name="add_middle_place_optional">మధ్య స్థలం జోడించు (ఐచ్చికం)</string>
+    <string name="enter_via_place">ఇంకో చోటు పెట్టండి</string>
+    <string name="add_middle_place_optional">ఇంకా ఎక్కడైనా వెళ్లుంటే జోడించండి</string>
+    <string name="add_middle_place_optional_">+ఇంకా ఎక్కడైనా వెళ్లుంటే జోడించండి</string>
     <string name="trip_route">ట్రిప్ దారి</string>
+    <string name="download_pdf">PDF డౌన్‌లోడ్ చేయండి</string>
+    <string name="no_expense_entries">ఖర్చు లేదు</string>
+    <string name="expense_details">ఖర్చు వివరాలు</string>
+    <string name="no_income_entries">ఆదాయం లేదు</string>
+    <string name="income_details">ఆదాయ వివరాలు</string>
+    <string name="owner_profit">యజమాని లాభం</string>
+    <string name="total_expense">మొత్తం ఖర్చు</string>
+    <string name="financial_summary">లెక్కల సారాంశం</string>
+    <string name="end_date">ముగింపు తేదీ</string>
+    <string name="start_date">ప్రారంభ తేదీ</string>
+    <string name="trip_preview">ట్రిప్ ప్రివ్యూ</string>
+    <string name="total_income_">మొత్తం ఆదాయం</string>
+    <string name="view">చూడండి</string>
+    <string name="please_verify">⚠ %1$s - దయచేసి తనిఖీ చేయండి</string>
+    <string name="truck_number_save_ho_gaya_ek_baar_check_kar_lijiye">ట్రక్ నంబర్ %1$s సేవ్ అయింది. ఒకసారి చెక్ చేయండి</string>
+    <string name="kuch_sunai_nahi_diya_dobara_try_karein">ఏమీ వినిపించలేదు, మళ్లీ ప్రయత్నించండి</string>
+    <string name="cancelled_please_try_again">రద్దు చేయబడింది - మళ్లీ ప్రయత్నించండి</string>
+    <string name="kuch_galat_ho_gaya_phir_se_try_karein">ఏదో తప్పు జరిగింది, మళ్లీ ప్రయత్నించండి</string>
+    <string name="bol_rahe_hain">🎤 మాట్లాడుతున్నారు...</string>
+    <string name="voice_recognition_nahi_khul_raha_please_check_permissions">వాయిస్ గుర్తింపు తెరుచుకోవడం లేదు, అనుమతులు చెక్ చేయండి</string>
 
+    <string name="pehle_date_select_karo">ముందుగా తేదీని ఎంచుకోండి</string>
+    <string name="pehle_start_place_dalo">ముందుగా ప్రారంభ స్థలం పెట్టండి</string>
+    <string name="pehle_end_place_dalo">ముందుగా చివరి స్థలం పెట్టండి</string>
+    <string name="stop_update_ho_gaya">మధ్య దారి మారింది</string>
+    <string name="beech_ka_rasta">మధ్య దారి %1$d</string>
+
+    <string name="ka_rupaye_update_ho_gaya_he">%1$s కి %2$d రూపాయలు అప్డేట్ అయ్యాయి</string>
+    <string name="ka_rupaye_jod_diya_he">%1$s కి %2$d రూపాయలు జోడించాం</string>
+
+    <string name="source_place_mic">ప్రారంభ స్థలం ఇవ్వండి</string>
+    <string name="end_place_mic">ముగింపు స్థలం ఇవ్వండి</string>
+    <string name="truck_number_mic">ట్రక్ నంబర్ ఇవ్వండి</string>
 
 </resources>
