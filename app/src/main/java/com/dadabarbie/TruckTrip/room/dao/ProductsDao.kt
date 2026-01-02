@@ -44,8 +44,7 @@ interface ProductsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(product: Products)
 
-    @Query("DELETE FROM products WHERE randomNumber = :id")
-    suspend fun deleteById(id: String)
+
 
     @Query("DELETE FROM products WHERE randomNumber = :tripId")
     suspend fun deleteDraftByTripId(tripId: String)
