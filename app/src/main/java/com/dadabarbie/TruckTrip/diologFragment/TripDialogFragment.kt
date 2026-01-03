@@ -282,6 +282,12 @@ class TripDialogFragment : DialogFragment() {
         }
 
         // Add middle place button
+        // Replace your btnAddMiddlePlace click listener with this fixed version:
+
+        // Replace your btnAddMiddlePlace click listener with this fixed version:
+
+        // Replace your btnAddMiddlePlace click listener with this fixed version:
+
         binding.btnAddMiddlePlace.setOnClickListener {
             val middlePlace = binding.etMiddlePlace.text.toString().trim()
 
@@ -296,13 +302,15 @@ class TripDialogFragment : DialogFragment() {
                 return@setOnClickListener
             }
 
-            // Add the new place as destination (at the end)
+            // Add the new place at the END (as new destination)
             routeList.add(middlePlace)
 
-            // Update the destination field to show the new destination
+            // Update the destination EditText to show the new destination
             binding.destPlaceValue.setText(middlePlace)
 
+            // Notify adapter about the new item
             routeAdapter.notifyItemInserted(routeList.size - 1)
+            routeAdapter.notifyItemChanged(routeList.size - 2) // Update the old destination (now middle place)
 
             // Clear input
             binding.etMiddlePlace.setText("")

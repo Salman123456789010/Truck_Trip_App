@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">টেষ্টঅ্য়াপ্লিকেশন</string>
     <string name="ruppe">₹</string>
     <string name="hello_blank_fragment">নমস্কাৰ যানৰ তথ্য</string>
@@ -516,5 +516,16 @@ Mode সলনি কৰিবলৈ App Mode ত ক্লিক কৰক।
     <string name="source_place_mic">আৰম্ভণি ঠাই দিয়ক</string>
     <string name="end_place_mic">শেষৰ ঠাই দিয়ক</string>
     <string name="truck_number_mic">ট্ৰাক নম্বৰ দিয়ক</string>
+    <string name="voice_all_expense_add_and_save" tools:ignore="ExtraTranslation">
+আপুনি সকলো খৰচ একেলগে কৈ ইয়াত যোগ কৰিব পাৰে, শেষত সেভ টিপিলে হʼব।
+</string>
+    <string name="voice_all_income_add_and_save">
+আপুনি সকলো আয় একেলগে কৈ ইয়াত যোগ কৰিব পাৰে, শেষত সেভ টিপিলে হʼব।
+</string>
+    <string name="delete_data">ডাটা ডিলিট কৰক</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+আপুনি ডিলিট কৰিলে সকলো ড্ৰাফ্ট ডাটা মচি যাব। আপুনি নিশ্চিতভাৱে ডিলিট কৰিব বিচাৰে নে?
+</string>
+
 
 </resources>

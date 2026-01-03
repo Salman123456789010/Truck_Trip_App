@@ -3,6 +3,7 @@ package com.dadabarbie.TruckTrip.fragment
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -62,14 +63,14 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
     // Nullable binding to prevent memory leaks
     private var _binding: FragmentSimpleHomeBinding? = null
     private val binding get() = _binding!!
-
+    private var isDeleting = false
+    private var pendingDeleteTripId: String? = null
     // Nullable adapter reference
     private var tripListAdapter: TripNewListAdapter? = null
     private val authViewModel: AuthViewModel by viewModels()
 
     // Use ArrayList with initial capacity
-    private val tripList: ArrayList<Record> = ArrayList(20)
-
+    private val tripMap: LinkedHashMap<String, Record> = LinkedHashMap()
     private var isLoading: Boolean = false
     private val pageSize: Int = 20
 
@@ -123,9 +124,9 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
     }
 
     private fun loadInitialData() {
-        Constants.emitDeleteTrip(Event(-1))
+//        Constants.emitDeleteTrip(Event(-1))
         Constants.refreshApiGet(Event(-1))
-        tripList.clear()
+        tripMap.clear()
         authViewModel.resetTripPagination()
         authViewModel.getAllTripData(startDate, endDate, size = pageSize)
     }
@@ -229,9 +230,14 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
         if (data?.status == 200) {
             binding.swipeToRefreshBasicDetails.isRefreshing = false
 
-            data.data.records.let { newRecords ->
+            data.data.records?.let { newRecords ->
                 if (newRecords.isNotEmpty()) {
-                    updateTripList(newRecords)
+                    // 🔥 FIX: Add to map with ID as key
+                    newRecords.forEach { record ->
+                        if (!record._id.isNullOrEmpty()) {
+                            tripMap[record._id] = record
+                        }
+                    }
 
                     // Cache in background
                     viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
@@ -241,13 +247,15 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
                     // Update UI
                     binding.drivertotalAavak.text = "₹${data.data.totalDriverIncome}"
                     binding.totalMalikAavak.text = "₹${data.data.totalOwnerIncome}"
-                    tripListAdapter?.submitList(tripList.toList())
+
+                    // 🔥 CRITICAL FIX: Always create NEW list instance
+                    updateAdapterList()
                 } else {
                     handleEmptyData()
                 }
             } ?: handleEmptyData()
         } else {
-            if (tripList.isEmpty()) {
+            if (tripMap.isEmpty()) {
                 showNoDataView()
             }
         }
@@ -255,14 +263,13 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
         isLoading = false
     }
 
-    private fun updateTripList(newRecords: List<Record>) {
-        if (tripList.isEmpty()) {
-            tripList.addAll(newRecords)
-        } else {
-            // Efficiently filter duplicates
-            val existingIds = tripList.mapTo(HashSet(tripList.size)) { it._id }
-            tripList.addAll(newRecords.filter { it._id !in existingIds })
-        }
+    private fun updateAdapterList() {
+        val newList = ArrayList(tripMap.values)
+
+
+        // Force adapter to recognize this as a completely new list
+        tripListAdapter?.submitList(null)
+        tripListAdapter?.submitList(newList)
     }
 
     private fun handleEmptyData() {
@@ -285,15 +292,20 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
     }
 
     private fun updateUIWithCachedData(cached: List<Record>) {
-        tripList.clear()
-        tripList.addAll(cached)
+        tripMap.clear()
+        cached.forEach { record ->
+            if (!record._id.isNullOrEmpty()) {
+                tripMap[record._id] = record
+            }
+        }
 
         val driverTotal = cached.sumOf { it.driver_income.toDoubleOrNullSafe() }.toLong()
         val ownerTotal = cached.sumOf { it.owner_profit.toDoubleOrNullSafe() }.toLong()
 
         binding.drivertotalAavak.text = "₹$driverTotal"
         binding.totalMalikAavak.text = "₹$ownerTotal"
-        tripListAdapter?.submitList(tripList.toList())
+
+        updateAdapterList()
         hideProgressBar()
     }
 
@@ -307,8 +319,12 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
         when (result) {
             is NetworkResult.Error -> {
                 dismissProgress()
+                isDeleting = false
                 Toast.makeText(requireContext(), "Failed to delete trip", Toast.LENGTH_SHORT).show()
-                pendingDeleteRecordId = null
+
+                // 🔥 FIX: Restore item on failure by refreshing
+                refreshData()
+                pendingDeleteTripId = null
             }
             is NetworkResult.Loading -> { /* Already handled */ }
             is NetworkResult.Success -> handleDeleteSuccess()
@@ -316,51 +332,93 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
     }
 
     private fun handleDeleteSuccess() {
-        pendingDeleteRecordId?.let { id ->
+        val deletedId = pendingDeleteTripId
+
+        if (deletedId != null) {
+
+
+            // Delete from cache
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
                 try {
-                    AppDatabase.getDatabase(requireContext()).tripRecordDao().deleteById(id)
+                    AppDatabase.getDatabase(requireContext()).tripRecordDao().deleteById(deletedId)
+
                 } catch (e: Exception) {
-                    Log.e("DeleteTrip", "Cache delete failed: ${e.message}")
-                } finally {
-                    pendingDeleteRecordId = null
+
                 }
             }
-        }
 
-        android.os.Handler(Looper.getMainLooper()).postDelayed({
-            refreshData()
-        }, 300)
+            // Clear pending state
+            pendingDeleteTripId = null
+            isDeleting = false
+
+            dismissProgress()
+            Toast.makeText(requireContext(), "Trip deleted successfully", Toast.LENGTH_SHORT).show()
+
+            // 🔥 CRITICAL: Refresh to get clean state from server
+            Handler(Looper.getMainLooper()).postDelayed({
+                refreshData()
+            }, 300)
+        } else {
+            dismissProgress()
+            isDeleting = false
+        }
     }
 
     private fun handleDeleteRequest(position: Int) {
-        if (pendingDeleteRecordId != null) {
-            val index = tripList.indexOfFirst { it._id == pendingDeleteRecordId }
-            if (index != -1) {
-                val record = tripList[index]
-                tripList.removeAt(index)
-                tripListAdapter?.submitList(tripList.toList())
-                authViewModel.deleteTrip(record._id)
-            } else {
-                handleFallbackDelete(position)
-            }
-            pendingDeleteRecordId = null
-        } else if (position >= 0) {
-            handleFallbackDelete(position)
+        // Prevent multiple simultaneous deletes
+        if (isDeleting) {
+            Toast.makeText(requireContext(), "Please wait...", Toast.LENGTH_SHORT).show()
+            return
         }
+
+        // Get current snapshot of list
+        val currentList = ArrayList(tripMap.values)
+
+        // Validate position
+        if (position < 0 || position >= currentList.size) {
+
+            Toast.makeText(
+                requireContext(),
+                "Invalid position. Please refresh.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        val trip = currentList[position]
+        val tripId = trip._id
+
+        if (tripId.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), "Invalid trip ID", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Set delete state
+        isDeleting = true
+        pendingDeleteTripId = tripId
+
+        // 🔥 CRITICAL: Remove from map IMMEDIATELY
+        tripMap.remove(tripId)
+
+        // 🔥 CRITICAL: Update adapter with new list immediately
+        updateAdapterList()
+
+        // Show progress and call API
+        context?.showProgress()
+        authViewModel.deleteTrip(tripId)
     }
 
-    private fun handleFallbackDelete(position: Int) {
-        tripList.getOrNull(position)?.let { record ->
-            pendingDeleteRecordId = record._id
-            tripList.removeAt(position)
-            tripListAdapter?.submitList(tripList.toList())
-            authViewModel.deleteTrip(record._id)
-        } ?: Log.e("DeleteTrip", "Invalid position: $position")
-    }
+//    private fun handleFallbackDelete(position: Int) {
+//        tripList.getOrNull(position)?.let { record ->
+//            pendingDeleteRecordId = record._id
+//            tripList.removeAt(position)
+//            tripListAdapter?.submitList(tripList.toList())
+//            authViewModel.deleteTrip(record._id)
+//        } ?: Log.e("DeleteTrip", "Invalid position: $position")
+//    }
 
     private fun refreshData() {
-        tripList.clear()
+        tripMap.clear()
         authViewModel.resetTripPagination()
         authViewModel.getAllTripData(fromDate = startDate, toDate = endDate, size = pageSize)
         (requireActivity() as? NormalUserDashBoard)?.setData()
@@ -475,7 +533,7 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
     }
 
     private fun setProgressBarVisibility() {
-        if (tripList.isEmpty()) {
+        if (tripMap.isEmpty()) {
             binding.progressbar.visible()
             binding.recycleList.gone()
         } else {
@@ -499,7 +557,7 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
 
             binding.date.text = formatDateForDisplay(dateStart, dateEnd)
 
-            tripList.clear()
+            tripMap.clear()
             authViewModel.resetTripPagination()
             authViewModel.getAllTripData(fromDate = startDate, toDate = endDate, size = pageSize)
         }
@@ -611,57 +669,7 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
         }
     }
 
-    override fun editTripDataMethod(position: Int) {
-        Constants.clearTripData()
-        Constants.creditList.clear()
-        Constants.debitList.clear()
 
-        val trip = tripList[position]
-
-        // Parse income and expense efficiently
-        try {
-            val incomeJson = gson.toJson(trip.income)
-            val expenseJson = gson.toJson(trip.expense)
-
-            val incomeList: List<Income> = gson.fromJson(
-                incomeJson,
-                object : TypeToken<List<Income>>() {}.type
-            )
-            Constants.creditList.addAll(incomeList)
-
-            val expenseList: List<Expense> = gson.fromJson(
-                expenseJson,
-                object : TypeToken<List<Expense>>() {}.type
-            )
-            Constants.debitList.addAll(expenseList)
-        } catch (e: Exception) {
-            Log.e("HomeFragment", "Error parsing income/expense: ${e.message}")
-        }
-        Log.d("ROUTE_ARRAY", "editTripDataMethod: ${trip.route}")
-        // Navigate to TruckNumberSpeechActivity with edit flag
-        startActivity(Intent(requireContext(), TruckNumberSpeechActivity::class.java).apply {
-            putExtra("EDIT_MODE", true)
-            putExtra("TRIP_ID", trip._id)
-            putExtra("TRUCK_NUMBER", trip.truck_no)
-            putExtra("START_DATE", trip.start_date)
-            putExtra("END_DATE", trip.end_date)
-            putExtra("START_PLACE", trip.source)
-            putExtra("END_PLACE", trip.destination)
-            putExtra("DRIVER_INCOME", trip.driver_income)
-            putExtra("TOTAL_INCOME", trip.total_income)
-            putStringArrayListExtra("ROUTE_ARRAY", trip.route)
-            putExtra("TOTAL_EXPENSE", trip.total_expense)
-            putExtra("ORIGINAL_TRUCK_NUMBER", trip.truck_no)
-            putExtra("ORIGINAL_START_DATE", trip.start_date)
-            putExtra("ORIGINAL_END_DATE", trip.end_date)
-            putExtra("ORIGINAL_START_PLACE", trip.source)
-            putExtra("ORIGINAL_END_PLACE", trip.destination)
-            putStringArrayListExtra("ROUTE_ARRAY", ArrayList(trip.route ?: emptyList()))
-        })
-
-        Log.d("HomeFragment", "Starting edit for trip: ${trip._id}")
-        Log.d("HomeFragment", "Income: ${Constants.creditList.size}, Expense: ${Constants.debitList.size}")
-    }
 
     private fun sharePdf(filePdf: String) {
         val pdfFile = File(filePdf)
@@ -680,33 +688,70 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
     }
 
     override fun shareTripDataMethod(position: Int) {
+        val currentList = ArrayList(tripMap.values)
+
+        if (position < 0 || position >= currentList.size) {
+            Toast.makeText(requireContext(), "Unable to share. Please refresh.", Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+
+        val trip = currentList[position]
+
+        if (trip._id.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), "Invalid trip", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         shareFlag = true
         clickFlag = true
         requireContext().showProgress()
 
-        val trip = tripList[position]
         tripName = "${trip.source} TO ${trip.destination}"
         authViewModel.getParticualrPdf(trip._id)
     }
 
     override fun deleteTripMethod(position: Int) {
-        if (position in tripList.indices) {
-            pendingDeleteRecordId = tripList[position]._id
-            deleteDialogFragment = DeleteDialogFragment(position, "")
-            if (!childFragmentManager.isStateSaved) {
-                deleteDialogFragment?.show(childFragmentManager, "DeleteDialog")
-            }
-        } else {
-            Toast.makeText(requireContext(), "Unable to delete. Please refresh.", Toast.LENGTH_SHORT).show()
+        val currentList = ArrayList(tripMap.values)
+
+        if (position < 0 || position >= currentList.size) {
+            Toast.makeText(
+                requireContext(),
+                "Unable to delete. Please refresh.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        deleteDialogFragment = DeleteDialogFragment(position, "")
+        if (!childFragmentManager.isStateSaved) {
+            deleteDialogFragment?.show(childFragmentManager, "DeleteDialog")
         }
     }
 
     override fun dowanloadMethod(position: Int) {
+        val currentList = ArrayList(tripMap.values)
+
+        if (position < 0 || position >= currentList.size) {
+            Toast.makeText(
+                requireContext(),
+                "Unable to download. Please refresh.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        val trip = currentList[position]
+
+        if (trip._id.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), "Invalid trip", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         shareFlag = false
         clickFlag = true
         requireContext().showProgress()
 
-        val trip = tripList[position]
         tripName = "${trip.source} TO ${trip.destination}"
         authViewModel.getParticualrPdf(trip._id)
     }
@@ -733,10 +778,12 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
         _binding = null
     }
 
-    override fun viewTripDataMethod(position: Int) {
-        val trip = tripList[position]
+    override fun viewTripDataMethod(trip: Record) {
+        if (trip._id.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), "Invalid trip", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        // Calculate total days
         val totalDays = try {
             val startDate = apiDateFormat.parse(trip.start_date)
             val endDate = apiDateFormat.parse(trip.end_date)
@@ -745,7 +792,9 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
                 val days = (diffInMillis / (1000 * 60 * 60 * 24)).toInt()
                 days.toString()
             } else "0"
-        } catch (e: Exception) { "0" }
+        } catch (e: Exception) {
+            "0"
+        }
 
         val intent = Intent(requireActivity(), TripPreviewActivity::class.java).apply {
             putExtra("TRIP_ID", trip._id)
@@ -761,17 +810,71 @@ class SimpleHomeFragment : Fragment(), View.OnClickListener, TripNewListAdapter.
             putExtra("TRUCK_AVERAGE", trip.truck_average)
             putExtra("TOTAL_DAYS", totalDays)
 
-            // Pass route
             val routeJson = if (trip.route != null && trip.route.isNotEmpty()) {
                 gson.toJson(trip.route)
             } else ""
             putExtra("ROUTE_JSON", routeJson)
 
-            // Pass income and expense
             putExtra("INCOME_JSON", gson.toJson(trip.income))
             putExtra("EXPENSE_JSON", gson.toJson(trip.expense))
         }
 
         startActivity(intent)
+    }
+
+    override fun editTripData(trip: Record) {
+        if (trip._id.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), "Invalid trip ID", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
+        Constants.clearTripData()
+        Constants.creditList.clear()
+        Constants.debitList.clear()
+
+        // Parse income and expense
+        try {
+            val incomeJson = gson.toJson(trip.income)
+            val expenseJson = gson.toJson(trip.expense)
+
+            val incomeList: List<Income> = gson.fromJson(
+                incomeJson,
+                object : TypeToken<List<Income>>() {}.type
+            )
+            Constants.creditList.addAll(incomeList)
+
+            val expenseList: List<Expense> = gson.fromJson(
+                expenseJson,
+                object : TypeToken<List<Expense>>() {}.type
+            )
+            Constants.debitList.addAll(expenseList)
+        } catch (e: Exception) {
+
+        }
+
+
+
+        startActivity(Intent(requireContext(), TruckNumberSpeechActivity::class.java).apply {
+            putExtra("EDIT_MODE", true)
+            putExtra("TRIP_ID", trip._id)
+            putExtra("TRUCK_NUMBER", trip.truck_no)
+            putExtra("START_DATE", trip.start_date)
+            putExtra("END_DATE", trip.end_date)
+            putExtra("START_PLACE", trip.source)
+            putExtra("END_PLACE", trip.destination)
+            putExtra("DRIVER_INCOME", trip.driver_income)
+            putExtra("TOTAL_INCOME", trip.total_income)
+            putExtra("TOTAL_EXPENSE", trip.total_expense)
+            putExtra("ORIGINAL_TRUCK_NUMBER", trip.truck_no)
+            putExtra("ORIGINAL_START_DATE", trip.start_date)
+            putExtra("ORIGINAL_END_DATE", trip.end_date)
+            putExtra("ORIGINAL_START_PLACE", trip.source)
+            putExtra("ORIGINAL_END_PLACE", trip.destination)
+            putStringArrayListExtra("ROUTE_ARRAY", ArrayList(trip.route ?: emptyList()))
+        })
+
+        Log.d("HomeFragment", "Starting edit for trip: ${trip._id}")
+        Log.d("HomeFragment", "Income: ${Constants.creditList.size}, Expense: ${Constants.debitList.size}")
     }
 }

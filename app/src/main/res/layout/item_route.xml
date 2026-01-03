@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_40sdp"
+    android:layout_height="wrap_content"
     android:paddingStart="@dimen/_8sdp"
     android:paddingEnd="@dimen/_8sdp"
     android:paddingTop="@dimen/_2sdp"
@@ -30,20 +30,6 @@
         app:layout_constraintTop_toBottomOf="@id/ivPlaceIcon"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <!-- Delete Button (only for middle places) -->
-    <ImageView
-        android:id="@+id/btnDelete"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:src="@drawable/baseline_delete_24"
-        android:padding="@dimen/_4sdp"
-        android:background="@drawable/bg_red_circle"
-        app:tint="@color/white"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
     <!-- Content Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardPlace"
@@ -57,7 +43,8 @@
         app:strokeWidth="@dimen/_1sdp"
         app:layout_constraintStart_toEndOf="@id/ivPlaceIcon"
         app:layout_constraintEnd_toStartOf="@id/btnDelete"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,5 +74,19 @@
                 android:layout_marginTop="@dimen/_1sdp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <!-- Delete Button (only for middle places) -->
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/baseline_delete_24"
+        android:padding="@dimen/_4sdp"
+        android:background="@drawable/bg_red_circle"
+        app:tint="@color/white"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cardPlace"
+        app:layout_constraintBottom_toBottomOf="@id/cardPlace" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

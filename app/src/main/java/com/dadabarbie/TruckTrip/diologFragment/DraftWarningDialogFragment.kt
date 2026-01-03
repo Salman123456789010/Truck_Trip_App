@@ -31,10 +31,18 @@ class DraftWarningDialogFragment (val flag:String) : DialogFragment(), View.OnCl
         logoutDialogFragmentBinding = LogoutDialogFragmentBinding.inflate(
             inflater, container, false
         )
-        logoutDialogFragmentBinding.title.text = getString(R.string.draft_data)
-        logoutDialogFragmentBinding.descreption.text =
-            getString(R.string.if_you_want_to_logout_so_your_draft_data_will_be_clear_so_are_you_want_to_logout)
-        setOnClickListner()
+        if (flag == "Logout") {
+            logoutDialogFragmentBinding.title.text = getString(R.string.draft_data)
+            logoutDialogFragmentBinding.descreption.text =
+                getString(R.string.if_you_want_to_logout_so_your_draft_data_will_be_clear_so_are_you_want_to_logout)
+
+        }else{
+            logoutDialogFragmentBinding.title.text = getString(R.string.delete_data)
+            logoutDialogFragmentBinding.descreption.text =
+                getString(R.string.if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout)
+
+        }
+            setOnClickListner()
         return logoutDialogFragmentBinding.root
     }
 

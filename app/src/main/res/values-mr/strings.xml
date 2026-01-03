@@ -452,5 +452,15 @@ Mode बदलायचा असेल तर App Mode वर क्लिक �
     <string name="source_place_mic">सुरुवातीची जागा टाका</string>
     <string name="end_place_mic">शेवटची जागा टाका</string>
     <string name="truck_number_mic">ट्रक नंबर टाका</string>
+    <string name="voice_all_expense_add_and_save">
+तुम्ही सगळा खर्च एकाच वेळी बोलून इथे टाकू शकता, शेवटी सेव दाबा आणि काम संपलं.
+</string>
+    <string name="voice_all_income_add_and_save">
+तुम्ही सगळी कमाई एकाच वेळी बोलून इथे टाकू शकता, शेवटी सेव दाबा आणि काम संपलं.
+</string>
+    <string name="delete_data">डेटा डिलीट करा</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+तुम्ही डिलीट केल्यास सगळा ड्राफ्ट डेटा साफ होईल. तुम्हाला नक्की डिलीट करायचा आहे का?
+</string>
 
 </resources>

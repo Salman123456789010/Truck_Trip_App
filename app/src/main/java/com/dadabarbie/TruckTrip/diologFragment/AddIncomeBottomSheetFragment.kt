@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.activity.MainActivity
 import com.dadabarbie.TruckTrip.databinding.BottomSheetAddIncomeBinding
 import com.dadabarbie.TruckTrip.model.CreditModel
+import com.dadabarbie.TruckTrip.model.addTrip.Income
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -339,8 +341,6 @@ class AddIncomeBottomSheetFragment(
 
     private fun saveIncome() {
         val totalIncomeValue = binding.etTotalIncome.text.toString().trim()
-        val advanceTakenValue = binding.etAdvanceTaken.text.toString().trim()
-        val balanceValue = binding.etBalance.text.toString().trim()
         val noteValue = binding.etNote.text.toString().trim()
         val placeValue = binding.etPlace.text.toString().trim()
         val dateValue = binding.etDate.text.toString().trim()
@@ -352,43 +352,66 @@ class AddIncomeBottomSheetFragment(
             return
         }
 
-        // If editing
-        if (position != -1) {
-            val income = creditList[position]
-            // Use note as desc if note is provided, otherwise keep existing desc
-            income.desc = if (noteValue.isNotEmpty()) noteValue else (incomeDesc ?: "")
-            income.amount = totalIncomeValue  // Update amount with totalIncome
-            income.note = noteValue
-            income.place = placeValue
-            income.date = dateValue
+        // Validate note
+        if (noteValue.isEmpty()) {
+            Toast.makeText(requireContext(), getString(R.string.please_enter_note), Toast.LENGTH_SHORT).show()
+            binding.etNote.requestFocus()
+            return
+        }
 
-            (requireActivity() as MainActivity).creditDataUpdate()
-            dialog?.dismiss()
-        } else {
-            // Adding new income
-            if (noteValue.isEmpty()) {
-                Toast.makeText(requireContext(),
-                    getString(R.string.please_enter_note), Toast.LENGTH_SHORT).show()
-                binding.etNote.requestFocus()
-                return
+        try {
+            if (position != -1) {
+                // ✅ EDITING MODE - Same as AddExpenseBottomSheetFragment
+                Log.d("AddIncome", "Editing income at position: $position")
+
+                // Validate position
+                if (position < 0 || position >= creditList.size) {
+                    Toast.makeText(requireContext(), "Invalid position", Toast.LENGTH_SHORT).show()
+                    return
+                }
+
+                // Create updated income object
+                val updatedIncome = Income(
+                    desc = noteValue,
+                    amount = totalIncomeValue,
+                    note = noteValue,
+                    place = placeValue,
+                    date = dateValue
+                )
+
+                // ✅ Call MainActivity's onIncomeEdited - same pattern as expense
+                (requireActivity() as MainActivity)
+                    .onIncomeEdited(position, updatedIncome)
+
+                Log.d("AddIncome", "Income edited successfully")
+                dialog?.dismiss()
+
+            } else {
+                // ✅ ADD MODE - Use Event System like AddExpenseBottomSheetFragment
+                Log.d("AddIncome", "Adding new income: $noteValue, amount: $totalIncomeValue")
+
+                // Create CreditModel for event
+                val creditModel = CreditModel(
+                    desc = noteValue,
+                    amount = totalIncomeValue,
+                    note = noteValue,
+                    place = placeValue,
+                    date = dateValue,
+
+                )
+
+                // ✅ Use event system - same as expense
+                Constants.emitEvent(Event(creditModel))
+
+                Log.d("AddIncome", "Income event posted")
+                dialog?.dismiss()
             }
 
-            Constants.emitEvent(
-                Event(
-                    CreditModel(
-                        desc = noteValue,
-                        amount = totalIncomeValue,  // Use totalIncome as amount
-                        totalIncome = totalIncomeValue,
-                        advanceTaken = advanceTakenValue,
-                        balance = balanceValue,
-                        note = noteValue,
-                        place = placeValue,
-                        date = dateValue
-                    )
-                )
-            )
-            dialog?.dismiss()
+        } catch (e: Exception) {
+            Log.e("AddIncome", "Error saving income: ${e.message}", e)
+            Toast.makeText(requireContext(), "Error saving income: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 }

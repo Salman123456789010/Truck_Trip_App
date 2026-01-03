@@ -18,21 +18,15 @@ class CreditAdapter(var context: Context,var editCreditClickListner: EditCreditC
     var deleteCreditClickLitsner: DeleteCreditClickLitsner): RecyclerView.Adapter<CreditAdapter.ViewHolder>() {
 
     private val diffCallBack = object : DiffUtil.ItemCallback<Income>() {
-        override fun areItemsTheSame(
-            oldItem: Income,
-            newItem: Income
-        ): Boolean {
-            return oldItem.amount == newItem.amount
+        override fun areItemsTheSame(oldItem: Income, newItem: Income): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(
-            oldItem: Income,
-            newItem: Income
-        ): Boolean {
-            return oldItem.amount == newItem.amount
+        override fun areContentsTheSame(oldItem: Income, newItem: Income): Boolean {
+            return oldItem == newItem
         }
     }
-    fun submitList(list: List<Income>) = differ.submitList(list)
+    fun submitList(list: List<Income>, function: () -> Unit) = differ.submitList(list)
     private val differ = AsyncListDiffer(this, diffCallBack)
 
 

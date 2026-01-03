@@ -19,6 +19,7 @@ import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.activity.MainActivity
 import com.dadabarbie.TruckTrip.databinding.BottomSheetAddExpenseBinding
 import com.dadabarbie.TruckTrip.model.DebitModel
+import com.dadabarbie.TruckTrip.model.addTrip.Expense
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -60,6 +61,13 @@ class AddExpenseBottomSheetFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (position >= 0) {
+            binding.etNote.setText(expenseDesc)
+            binding.etAmount.setText(expenseAmount)
+            binding.etNote.setText(expenseDesc)
+            binding.etPlace.setText(expensePlace)
+            binding.etDate.setText(expenseDate)
+        }
         setupExpenseTypeDropdown()
         setupDatePicker()
         setupSpeechToText()
@@ -325,17 +333,23 @@ class AddExpenseBottomSheetFragment(
 
         // If editing
         if (position != -1) {
-            val expense = debitList[position]
-            // Use note as desc if note is provided, otherwise keep existing desc
-            expense.desc = if (note.isNotEmpty()) note else (expenseDesc ?: "")
-            expense.amount = amount
-            expense.note = note
-            expense.place = place
-            expense.date = date
-            expense.type = type
+            val updatedExpense = Expense(
+                id = debitList[position].id,
+                desc = note,
+                amount = amount,
+                note = note,
+                place = place,
+                date = date,
+                type = type,
+                liters = debitList[position].liters,
+                km = debitList[position].km,
+                isOdometerMode = debitList[position].isOdometerMode
+            )
 
-            (requireActivity() as MainActivity).debitDataUpdate()
+            (requireActivity() as MainActivity)
+                .onExpenseEdited(position, updatedExpense)
             dialog?.dismiss()
+
         } else {
             // Adding new expense
             if (note.isEmpty()) {

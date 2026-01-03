@@ -297,8 +297,12 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v) {
             binding.btLogin -> {
-                showProgress()
-                verifyCode(binding.etOtpVerify.text.toString())
+                if(!binding.etOtpVerify.text.toString().isNullOrEmpty()){
+                    showProgress()
+                    verifyCode(binding.etOtpVerify.text.toString())
+                }else{
+                    showSnackBar(binding.root,getString(R.string.enter_otp))
+                }
             }
             binding.resend->{
                 showProgress()

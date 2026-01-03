@@ -527,4 +527,15 @@ Mode മാറ്റാൻ App Mode ക്ലിക്ക് ചെയ്യു�
     <string name="end_place_mic">അവസാന സ്ഥലം ചേർക്കൂ</string>
     <string name="truck_number_mic">ട്രക്ക് നമ്പർ ചേർക്കൂ</string>
 
+    <string name="voice_all_expense_add_and_save">
+നിങ്ങൾ എല്ലാ ചെലവുകളും ഒരുമിച്ച് പറഞ്ഞ് ഇവിടെ ചേർക്കാം, അവസാനം സേവ് അമർത്തിയാൽ തീരും.
+</string>
+    <string name="voice_all_income_add_and_save">
+നിങ്ങൾ എല്ലാ വരുമാനവും ഒരുമിച്ച് പറഞ്ഞ് ഇവിടെ ചേർക്കാം, അവസാനം സേവ് അമർത്തിയാൽ തീരും.
+</string>
+    <string name="delete_data">ഡാറ്റ ഇല്ലാതാക്കുക</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+ഇത് ഇല്ലാതാക്കിയാൽ നിങ്ങളുടെ എല്ലാ ഡ്രാഫ്റ്റ് ഡാറ്റയും മായും. തീർച്ചയായും ഇല്ലാതാക്കണോ?
+</string>
+
 </resources>

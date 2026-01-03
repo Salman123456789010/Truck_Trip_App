@@ -536,5 +536,16 @@ Mode बदलना होऐ तां App Mode पर क्लिक कर�
     <string name="source_place_mic">शुरू दी जगह पाओ</string>
     <string name="end_place_mic">आखरी जगह पाओ</string>
     <string name="truck_number_mic">ट्रक नंबर पाओ</string>
+    <string name="voice_all_expense_add_and_save">
+तुस सारा खर्च इकठ्ठा बोल के इत्थे पा सकदे ओ, आखिरी च सेव दबाओ ते होई गेआ।
+</string>
+    <string name="voice_all_income_add_and_save">
+तुस सारी आमदनी इकठ्ठा बोल के इत्थे पा सकदे ओ, आखिरी च सेव दबाओ ते होई गेआ।
+</string>
+    <string name="delete_data">डेटा मिटाओ</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+जे तुस मिटाओगे त सारा ड्राफ्ट डेटा साफ हो जावेगा। की तुस पक्का मिटाना चाहंदे ओ?
+</string>
+
 
 </resources>

@@ -459,6 +459,14 @@ Mode બદલવો હોય તો App Mode પર ક્લિક કરો�
     <string name="source_place_mic">શરૂ કરવાની જગ્યા નાખો</string>
     <string name="end_place_mic">પહોંચવાની જગ્યા નાખો</string>
     <string name="truck_number_mic">ટ્રક નંબર નાખો</string>
+    <string name="voice_all_expense_add_and_save">તમે બધો ખર્ચ એકસાથે બોલીને અહીં નાખી શકો, છેલ્લે સેવ દબાવો અને થઈ ગયું.</string>
+    <string name="voice_all_income_add_and_save">
+તમે બધી આવક એકસાથે બોલીને અહીં નાખી શકો, છેલ્લે સેવ દબાવો અને થઈ ગયું.
+</string>
+    <string name="delete_data">ડેટા ડિલીટ કરો</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+જો તમે ડિલીટ કરો તો તમારો બધો ડ્રાફ્ટ ડેટા સાફ થઈ જશે. શું તમે ખરેખર ડિલીટ કરવા માંગો છો?
+</string>
 
 
 </resources>

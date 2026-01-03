@@ -26,11 +26,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Constants.dismissProgress
 import com.dadabarbie.TruckTrip.Utils.Constants.showProgress
+import com.dadabarbie.TruckTrip.Utils.DateUtils
+import com.dadabarbie.TruckTrip.Utils.DraftIdManager
 import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.Utils.RouteUtils
@@ -94,6 +97,9 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
     private var isVoiceListening = false
     private var currentEditItem: ExpenseItem? = null
     private var currentEditType: ExpenseType? = null
+    @Volatile
+    private var isCompletingTrip = false
+
     private var endDate = ""
     var langCode = ""
     var routeArray: ArrayList<String> =arrayListOf()
@@ -173,9 +179,11 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
 
         }
         langCode = Prefs[Constants.languageCode] ?: "hi"
-        intent.getStringExtra("id")?.let { tripId = it }
+        intent.getStringExtra("TRIP_ID")?.let { tripId = it }
         routeArray = intent.getStringArrayListExtra("ROUTE_ARRAY") ?: arrayListOf()
-        if (tripId.isEmpty()) generateTripId()
+        if (tripId.isEmpty()) {
+            tripId = DraftIdManager.generate()
+        }
         isEditMode = intent.getBooleanExtra("EDIT_MODE", false)
         if (isEditMode) {
             originalTruckNumber = intent.getStringExtra("ORIGINAL_TRUCK_NUMBER")
@@ -210,6 +218,12 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
             } else {
                 try {
                     pdfFilePath = data
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        AppDatabase
+                            .getDatabase(applicationContext)
+                            .productsDao()
+                            .deleteByRandomNumber(tripId)
+                    }
                     openFile(pdfFilePath)
                     Handler(Looper.getMainLooper()).postDelayed({ navigateToDashboard(pdfFilePath) }, 1000)
                 } catch (e: Exception) {
@@ -273,11 +287,11 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
         binding.rvIncome.layoutManager = LinearLayoutManager(this)
         binding.rvIncome.adapter = incomeAdapter
         binding.cardKharcha.setOnClickListener {
-            speakText(getString(R.string.yaha_kharcha_dalo))
+            speakText(getString(R.string.yaha_kharcha_dalo) + getString(R.string.voice_all_expense_add_and_save))
             showExpenseBottomSheet(ExpenseType.KHARCHA)
         }
         binding.cardAavak.setOnClickListener {
-            speakText(getString(R.string.yaha_aavak_dalo))
+            speakText(getString(R.string.yaha_aavak_dalo) + getString(R.string.voice_all_income_add_and_save))
             showExpenseBottomSheet(ExpenseType.AAVAK)
         }
         binding.ivSpeakerKharcha.setOnClickListener { speakText(getString(R.string.yaha_kharcha_dalo)) }
@@ -779,25 +793,25 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
             // If in "yyyy-MM-dd" format, convert to display format
             if (dateString.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) {
                 val apiFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-                val displayFormat = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
+                val displayFormat = SimpleDateFormat("yyyy-MM-dd", Locale(langCode))
                 val date = apiFormat.parse(dateString)
                 return if (date != null) displayFormat.format(date) else dateString
             }
 
             // Try parsing with current language locale
             try {
-                val inputFormat = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale(langCode))
                 val date = inputFormat.parse(dateString)
                 if (date != null) {
-                    val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
+                    val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale(langCode))
                     return outputFormat.format(date)
                 }
             } catch (e: Exception) {
                 // Fallback to English locale
-                val inputFormatEn = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+                val inputFormatEn = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                 val date = inputFormatEn.parse(dateString)
                 if (date != null) {
-                    val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
+                    val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale(langCode))
                     return outputFormat.format(date)
                 }
             }
@@ -888,9 +902,9 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
             // Try multiple date formats
             val formats = listOf(
                 SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH),      // API format first
-                SimpleDateFormat("dd MMM yyyy", Locale(langCode)),   // Display format
-                SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH),
-                SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+                SimpleDateFormat("yyyy-MM-dd", Locale(langCode)),   // Display format
+                SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH),
+                SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             )
 
             for (format in formats) {
@@ -927,7 +941,7 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
                 calendar.set(selectedYear, selectedMonth, selectedDay)
 
                 // Format for display
-                val displayFormat = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
+                val displayFormat = SimpleDateFormat("yyyy-MM-dd", Locale(langCode))
                 endDate = displayFormat.format(calendar.time)
 
                 Log.d("EndDateDebug", "User selected new date: $endDate")
@@ -949,8 +963,8 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
             // Try multiple formats for start date too
             val startFormats = listOf(
                 SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH),      // API format
-                SimpleDateFormat("dd MMM yyyy", Locale(langCode)),   // Display format
-                SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+                SimpleDateFormat("yyyy-MM-dd", Locale(langCode)),   // Display format
+                SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             )
 
             var startDate: Date? = null
@@ -978,6 +992,8 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun callApiAndNavigate(endDate: String, driverIncome: String) {
+        isCompletingTrip = true
+        isTripCompleted = true
         val incomeModels = incomeList.map {
             Income(
                 desc = it.note,
@@ -1048,12 +1064,12 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
             var date: java.util.Date? = null
 
             try {
-                val inputFormat = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale(langCode))
                 date = inputFormat.parse(dateString)
             } catch (e: Exception) {
                 // Fallback to English locale if language-specific parsing fails
                 try {
-                    val inputFormatEn = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+                    val inputFormatEn = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                     date = inputFormatEn.parse(dateString)
                 } catch (e2: Exception) {
                     Log.e("DateConversion", "Failed to parse date: $dateString", e2)
@@ -1085,12 +1101,12 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
             var e: java.util.Date? = null
 
             try {
-                val fmt = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
+                val fmt = SimpleDateFormat("yyyy-MM-dd", Locale(langCode))
                 s = fmt.parse(start)
                 e = fmt.parse(end)
             } catch (ex: Exception) {
                 // Fallback to English if parsing fails
-                val fmtEn = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+                val fmtEn = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                 s = fmtEn.parse(start)
                 e = fmtEn.parse(end)
             }
@@ -1422,8 +1438,8 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
     // ✅ COMPLETE FIX FOR ThirdExpenseScreen.kt - Replace setAllData() method
 
     private fun setAllData() {
-        if (isTripCompleted) {
-            Log.d("DraftSave", "Trip completed, skipping draft save")
+        if (isCompletingTrip || isTripCompleted) {
+            Log.d("DraftSave", "Draft save blocked (trip completing)")
             return
         }
 
@@ -1499,8 +1515,8 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
                         truckNumber = getTruckNumber(),
                         srcPlace = getStartPlace(),
                         destPlace = getEndPlace(),
-                        srcDate = getStartDate(),
-                        destDate = "",
+                        srcDate = DateUtils.uiToDbDate(getStartDate(), langCode),
+                        destDate = DateUtils.uiToDbDate(endDate, langCode),
                         avg = "",
                         modelList1 = Gson().toJson(currentCreditList),
                         modelList2 = Gson().toJson(currentDebitList),

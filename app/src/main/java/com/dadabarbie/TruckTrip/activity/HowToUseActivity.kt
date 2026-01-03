@@ -176,11 +176,11 @@ class HowToUseActivity : BaseActivity(), OnboardingVoiceListener {
             if (nextIndex < adapter.itemCount) {
                 binding.viewPager.currentItem = nextIndex
             } else {
-                if(!Prefs[Constants.languageCode, ""].toString().isNullOrEmpty()){
+                if(Prefs[Constants.isLogin]){
                     finish()
+                    onBackPressedDispatcher.onBackPressed()
                 }else{
                     startActivity(Intent(this, LoginScreenActivity::class.java))
-
 //                    startActivity(Intent(this@SplashActivity, LanguageSelction::class.java).putExtra("languageFlag",""))
                     finish()
                 }

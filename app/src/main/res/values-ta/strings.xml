@@ -479,5 +479,15 @@ Mode மாற்ற App Mode-ஐ கிளிக் செய்யுங்க
     <string name="source_place_mic">தொடக்க இடம் சேர்க்கவும்</string>
     <string name="end_place_mic">முடிவு இடம் சேர்க்கவும்</string>
     <string name="truck_number_mic">லாரி எண்ணை சேர்க்கவும்</string>
+    <string name="voice_all_expense_add_and_save">
+நீங்கள் எல்லா செலவுகளையும் ஒரே முறையில் சொல்லி இங்கே சேர்க்கலாம், கடைசியில் சேவ் அழுத்தினால் முடியும்.
+</string>
+    <string name="voice_all_income_add_and_save">
+நீங்கள் எல்லா வருமானத்தையும் ஒரே முறையில் சொல்லி இங்கே சேர்க்கலாம், கடைசியில் சேவ் அழுத்தினால் முடியும்.
+</string>
+    <string name="delete_data">தரவை நீக்கு</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+நீக்கினால் உங்கள் அனைத்து டிராஃப்ட் தரவும் அழிக்கப்படும். நிச்சயமாக நீக்க வேண்டுமா?
+</string>
 
 </resources>

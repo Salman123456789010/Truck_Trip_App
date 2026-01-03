@@ -455,4 +455,15 @@ Mode বদলাতে App Mode এ ক্লিক করুন।
     <string name="end_place_mic">শেষের জায়গা দিন</string>
     <string name="truck_number_mic">ট্রাক নম্বর দিন</string>
 
+    <string name="voice_all_expense_add_and_save">
+আপনি সব খরচ একসাথে বলে এখানে যোগ করতে পারেন, শেষে সেভ চাপলেই হয়ে যাবে।
+</string>
+    <string name="voice_all_income_add_and_save">
+আপনি সব আয় একসাথে বলে এখানে যোগ করতে পারেন, শেষে সেভ চাপলেই হয়ে যাবে।
+</string>
+    <string name="delete_data">ডেটা মুছুন</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+আপনি মুছে ফেললে সব ড্রাফ্ট ডেটা পরিষ্কার হয়ে যাবে। আপনি কি নিশ্চিতভাবে মুছতে চান?
+</string>
+
 </resources>

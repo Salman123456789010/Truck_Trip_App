@@ -523,5 +523,15 @@ Mode ବଦଳାଇବାକୁ App Mode ଉପରେ କ୍ଲିକ୍ କର
     <string name="source_place_mic">ଆରମ୍ଭ ଜଗା ଦିଅନ୍ତୁ</string>
     <string name="end_place_mic">ଶେଷ ଜଗା ଦିଅନ୍ତୁ</string>
     <string name="truck_number_mic">ଟ୍ରକ୍ ନମ୍ବର ଦିଅନ୍ତୁ</string>
+    <string name="voice_all_expense_add_and_save">
+ଆପଣ ସମସ୍ତ ଖର୍ଚ୍ଚ ଏକସାଥିରେ କହି ଏଠାରେ ଯୋଡ଼ି ପାରିବେ, ଶେଷରେ ସେଭ୍ ଦବାଲେ ହେବ।
+</string>
+    <string name="voice_all_income_add_and_save">
+ଆପଣ ସମସ୍ତ ଆୟ ଏକସାଥିରେ କହି ଏଠାରେ ଯୋଡ଼ି ପାରିବେ, ଶେଷରେ ସେଭ୍ ଦବାଲେ ହେବ।
+</string>
+    <string name="delete_data">ଡାଟା ହଟାନ୍ତୁ</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+ଆପଣ ହଟାଇଲେ ସମସ୍ତ ଡ୍ରାଫ୍ଟ ଡାଟା ସାଫ୍ ହେବ। ଆପଣ ନିଶ୍ଚିତ ହଟାଇବାକୁ ଚାହୁଁଛନ୍ତି କି?
+</string>
 
 </resources>

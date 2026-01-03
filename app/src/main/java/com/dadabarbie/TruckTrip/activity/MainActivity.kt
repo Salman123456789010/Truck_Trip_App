@@ -1,6 +1,5 @@
 package com.dadabarbie.TruckTrip.activity
 
-import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Rect
@@ -16,7 +15,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.util.Pair
 import androidx.core.view.WindowCompat
@@ -74,7 +72,7 @@ import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
 import com.dadabarbie.TruckTrip.views.CoachMarkHelper
 import com.dadabarbie.TruckTrip.views.CoachMarkView
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.withContext
 
 // ----------------------
@@ -107,7 +105,7 @@ class MainActivity : BaseActivity(), View.OnClickListener,
     lateinit var tripDialogFragment: TripDialogFragment
     lateinit var tripEndDialogFragment: TripEndDialogFragment
     lateinit var creditAdapter: CreditAdapter
-
+    private var draftFlowClosed = false
     private var initialCreditSnapshot = ""
     private var initialDebitSnapshot = ""
     private val authViewModel: AuthViewModel by viewModels()
@@ -123,15 +121,17 @@ class MainActivity : BaseActivity(), View.OnClickListener,
     private var courseList: ArrayList<TripDataTestModel> = arrayListOf()
     lateinit var deleteDialogFragment: DeleteDialogFragment
     var totalDebitAmount = 0
-    var randomNumber = 0
+    var randomNumber = "0"
     var showingFlag = 0
     var startTripDate: String? = ""
     var routeArray: ArrayList<String> =arrayListOf()
     var truckNumberGiven: String? = ""
     var driverIncome = "0"
     var totalDaysTrip = "0"
+    private var isSavingDraft = false  // NEW: Prevent multiple saves
+    private var saveJob: Job? = null
     var id = "0"
-
+    private var isDraftDeletedAfterPdf = false
     var startOdometerReading: String = ""  // NEW: Start odometer from trip dialog
        // NEW: End odometer from trip end dialog
     var endManualKm: String = ""           // NEW: Manual KM from trip end dialog
@@ -254,6 +254,7 @@ class MainActivity : BaseActivity(), View.OnClickListener,
             val start_Odometer = intent.getStringExtra("startOdometer") ?: ""
             val edn_Odometer = intent.getStringExtra("endOdometer") ?: ""
             val end_Km = intent.getStringExtra("endKm") ?: ""
+            id = intent.getStringExtra("id") ?: "0"
             val is_Odometer = intent.getBooleanExtra("isOdometer",true) ?: true
 
             // Safely get route array from intent
@@ -269,21 +270,17 @@ class MainActivity : BaseActivity(), View.OnClickListener,
             endOdometer=edn_Odometer
             endManualKm=end_Km
             endKmIsOdometerMode=is_Odometer
-            id = intent.getStringExtra("id") ?: "0"
 
 
+            Log.d("randomNumberValue", "initViews: ${randomNumber}")
+            Log.d("randomNumberValue", "initViews: ${id}")
             if (id.isNotEmpty() && id != "0") {
-                randomNumber = if (id.matches(Regex("\\d+"))) {
-                    // Draft case (numeric ID) - USE THIS for deletion
-                    id.toInt()
-                } else {
-                    // Server trip case (Mongo ID) - generate new random number
-                    val rand = Random()
-                    rand.nextInt(1000)
-                }
+                Log.d("randomNumberValue", "initViews: ${id}")
+                randomNumber = id
             } else {
                 randomNumberGenerate()
             }
+            Log.d("randomNumberValue", "initViews: ${randomNumber}")
             // NEW: Parse route from Intent using RouteUtils
             val routeJson = intent.getStringExtra("routeJson")
             routeList = if (!routeJson.isNullOrEmpty()) {
@@ -301,7 +298,7 @@ class MainActivity : BaseActivity(), View.OnClickListener,
 
             // Handle income and expense data
             if (showingFlag == 2 && id.isNotEmpty()) {
-                randomNumber = id.toIntOrNull() ?: randomNumber
+                randomNumber = id ?: randomNumber
                 databaseAddFlag = true
 
                 if (creditList.isEmpty() && debitList.isEmpty()) {
@@ -393,26 +390,26 @@ class MainActivity : BaseActivity(), View.OnClickListener,
         initialCreditSnapshot = Gson().toJson(creditList)
         initialDebitSnapshot = Gson().toJson(debitList)
     }
-    private fun initAdapter() {
-        creditAdapter = CreditAdapter(this, this, this)
-        binding.creditAmount.adapter = creditAdapter
-        creditAdapter.submitList(creditList)
-        creditAdapter.notifyItemRangeChanged(0, creditList.size)
-
-        debitAdapter = DebitAdapter(this, this, this)
-        binding.debitAmount.adapter = debitAdapter
-        debitAdapter.submitList(debitList)
-        debitAdapter.notifyItemRangeChanged(0, debitList.size)
-
-        binding.totalIncome.text = getString(R.string.ruppe) + totalamount.toString()
-        binding.totalIncomeNew.text = totalamount.toString()
-        binding.totalExpanse.text = getString(R.string.ruppe) + totalDebitAmount.toString()
-        binding.totalExpanseNew.text = totalDebitAmount.toString()
-    }
+//    private fun initAdapter() {
+//        creditAdapter = CreditAdapter(this, this, this)
+//        binding.creditAmount.adapter = creditAdapter
+//        creditAdapter.submitList(creditList)
+//        creditAdapter.notifyItemRangeChanged(0, creditList.size)
+//
+//        debitAdapter = DebitAdapter(this, this, this)
+//        binding.debitAmount.adapter = debitAdapter
+//        debitAdapter.submitList(debitList)
+//        debitAdapter.notifyItemRangeChanged(0, debitList.size)
+//
+//        binding.totalIncome.text = getString(R.string.ruppe) + totalamount.toString()
+//        binding.totalIncomeNew.text = totalamount.toString()
+//        binding.totalExpanse.text = getString(R.string.ruppe) + totalDebitAmount.toString()
+//        binding.totalExpanseNew.text = totalDebitAmount.toString()
+//    }
 
     private fun randomNumberGenerate() {
         val rand = Random()
-        randomNumber = rand.nextInt(1000)
+        randomNumber = rand.nextInt(1000).toString()
     }
 
     var routeList: ArrayList<String> = arrayListOf()  // NEW: Store complete route
@@ -465,7 +462,7 @@ class MainActivity : BaseActivity(), View.OnClickListener,
         route: ArrayList<String> = arrayListOf()
     ) {
         try {
-            // Check if data actually changed
+            // Only mark as changed if data actually changed
             val hasChanges = binding.truckNumber.text.toString() != truckNumber ||
                     binding.srcName.text.toString() != srcPlaceValue ||
                     binding.dest.text.toString() != destPlaceValue ||
@@ -476,41 +473,34 @@ class MainActivity : BaseActivity(), View.OnClickListener,
             if (hasChanges) {
                 hasPendingChanges = true
                 databaseAddFlag = false
+                Log.d("MainActivity", "Data changed, marking for save")
             }
 
             binding.truckNumber.text = truckNumber
 
-            // Safe route handling
             if (RouteUtils.isValidRoute(route)) {
                 routeList = ArrayList(route)
                 binding.srcName.text = RouteUtils.getSourcePlace(route, srcPlaceValue)
                 binding.dest.text = RouteUtils.getDestinationPlace(route, destPlaceValue)
 
-                // ADD THIS: Display route in tvRoutes
                 if (routeList.isNotEmpty()) {
                     binding.tvRoutes.visibility = View.VISIBLE
-
                     val routeText = buildString {
                         append(routeList[0])
-
                         routeList.drop(1).forEach { routeItem ->
                             append(" → ")
                             append(routeItem)
                         }
                     }
-
                     binding.tvRoutes.text = routeText
                 } else {
                     binding.tvRoutes.visibility = View.GONE
                 }
-
-                Log.d("MainActivity", "Route set with ${route.size} places")
             } else {
                 binding.srcName.text = srcPlaceValue
                 binding.dest.text = destPlaceValue
                 routeList = RouteUtils.createSimpleRoute(srcPlaceValue, destPlaceValue)
-                binding.tvRoutes.visibility = View.GONE  // Hide if no valid route
-                Log.d("MainActivity", "Created simple route")
+                binding.tvRoutes.visibility = View.GONE
             }
 
             binding.srcDate.text = startDate
@@ -521,119 +511,202 @@ class MainActivity : BaseActivity(), View.OnClickListener,
 
         } catch (e: Exception) {
             Log.e("MainActivity", "Error in getDataFill: ${e.message}", e)
-            binding.truckNumber.text = truckNumber
-            binding.srcName.text = srcPlaceValue
-            binding.dest.text = destPlaceValue
-            binding.srcDate.text = startDate
-            routeList = RouteUtils.createSimpleRoute(srcPlaceValue, destPlaceValue)
-            binding.tvRoutes.visibility = View.GONE  // Hide on error
+        }
+    }
+
+
+    private var saveAttemptCount = 0
+
+    private fun debugSaveAttempt() {
+        saveAttemptCount++
+        Log.d("MainActivity", "===== Save Attempt #$saveAttemptCount =====")
+        Log.d("MainActivity", "isSavingDraft: $isSavingDraft")
+        Log.d("MainActivity", "hasPendingChanges: $hasPendingChanges")
+        Log.d("MainActivity", "draftFlowClosed: $draftFlowClosed")
+        Log.d("MainActivity", "isDraftDeletedAfterPdf: $isDraftDeletedAfterPdf")
+        Log.d("MainActivity", "randomNumber: $randomNumber")
+        Log.d("MainActivity", "Stack trace:")
+        Thread.currentThread().stackTrace.take(10).forEach {
+            Log.d("MainActivity", "  at ${it.className}.${it.methodName}(${it.fileName}:${it.lineNumber})")
         }
     }
 
     // Update delete methods to mark changes
-    fun debitDeleteHissab(position: Int) {
-        debitList.removeAt(position)
-        debitAdapter.submitList(debitList)
-        debitAdapter.notifyDataSetChanged()
-        debitIncomeUpdate()
-        hasPendingChanges = true  // Mark as changed
-        databaseAddFlag = false
-    }
+// ==========================================
+// FIXED DELETE AND UPDATE METHODS
+// ==========================================
 
     fun creditDeleteHissab(position: Int) {
+        if (position !in creditList.indices) return
+
         creditList.removeAt(position)
-        creditAdapter.submitList(creditList)
-//        creditAdapter.notifyDataSetChanged()
-        creditIncomeUpdate()
-        hasPendingChanges = true  // Mark as changed
-        databaseAddFlag = false
+
+        val newList = creditList.toList()
+        creditAdapter.submitList(newList) {
+            updateAllTotals()  // ✅ Use unified method
+        }
+
+        hasPendingChanges = true
     }
 
-    // Update edit methods to mark changes
-    fun debitDataUpdate() {
-        debitAdapter.submitList(debitList)
-        binding.debitAmount.adapter = debitAdapter
-//        debitAdapter.notifyDataSetChanged()
-        debitIncomeUpdate()
-        calculateFinalTripAverage()
-        hasPendingChanges = true  // Mark as changed
+
+    fun debitDeleteHissab(position: Int) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            try {
+                if (position < 0 || position >= debitList.size) {
+                    Log.e("MainActivity", "Invalid debit position: $position")
+                    return@launch
+                }
+
+                val removedItem = debitList.removeAt(position)
+                Log.d("MainActivity", "Removed debit: ${removedItem.desc}")
+
+                val newList = debitList.toMutableList()
+
+                debitAdapter.submitList(newList) {
+                    updateAllTotals()  // ✅ Use unified method
+                    calculateFinalTripAverage()
+                }
+
+                hasPendingChanges = true
+                databaseAddFlag = false
+
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error deleting debit: ${e.message}", e)
+            }
+        }
     }
+
 
     fun creditDataUpdate() {
-        creditAdapter.submitList(creditList)
-        binding.creditAmount.adapter = creditAdapter
-        creditAdapter.notifyDataSetChanged()
-        creditIncomeUpdate()
-        hasPendingChanges = true  // Mark as changed
+        lifecycleScope.launch(Dispatchers.Main) {
+            try {
+                Log.d("MainActivity", "creditDataUpdate called, list size: ${creditList.size}")
+
+                // Create new list reference for DiffUtil
+                val newList = ArrayList(creditList)
+
+                // Submit to adapter with callback
+                creditAdapter.submitList(newList) {
+                    Log.d("MainActivity", "Adapter list submitted")
+                    updateAllTotals()  // Update all totals after adapter updates
+                }
+
+                hasPendingChanges = true
+                databaseAddFlag = false
+
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error updating credit: ${e.message}", e)
+                Toast.makeText(this@MainActivity, "Error updating income list", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
+    fun debitDataUpdate() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            try {
+                val newList = debitList.toMutableList()
+                debitAdapter.submitList(newList) {
+                    updateAllTotals()  // ✅ Use unified method
+                    calculateFinalTripAverage()
+                }
+                hasPendingChanges = true
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error updating debit: ${e.message}", e)
+            }
+        }
+    }
 
+// ==========================================
+// 4. UPDATE setObserver() METHOD
+// ==========================================
 
-
-    // Add these variables at the top of MainActivity class
-    private var hasPendingChanges = false  // Track if user made any changes
-    private var isPdfGenerating = false     // Track if PDF is being generated
-
-    // Update setObserver() method - Add change tracking
     private fun setObserver() {
-        Constants.events.observe(this) { it ->
-            it.getContentIfNotHandled()?.let { event ->
-                event.let {
-                    if (it.amount.toInt() >= 0 && !it.desc.toString().isNullOrEmpty()) {
-                        val income = Income(
-                            desc = it.desc,
-                            amount = it.amount,
-                            note = it.note,
-                            place = it.place,
-                            date = it.date
-                        )
-                        if (creditList.size > 0) {
-                            if (!creditList.contains(income)) {
-                                creditList.add(income)
-                                hasPendingChanges = true  // Mark as changed
+        // In setObserver()
+        Constants.events.observe(this) { event ->
+            event.getContentIfNotHandled()?.let {
+                if (it.amount.toInt() >= 0 && !it.desc.isNullOrEmpty()) {
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        try {
+                            val income = Income(
+                                desc = it.desc,
+                                amount = it.amount,
+                                note = it.note,
+                                place = it.place,
+                                date = it.date
+                            )
+
+                            val isDuplicate = creditList.any { existing ->
+                                existing.desc == income.desc &&
+                                        existing.amount == income.amount &&
+                                        existing.date == income.date &&
+                                        existing.place == income.place
                             }
-                        } else {
-                            creditList.add(income)
-                            hasPendingChanges = true  // Mark as changed
+
+                            if (!isDuplicate) {
+                                creditList.add(income)
+                                Log.d("MainActivity", "Added income via observer: ${income.desc}")
+
+                                val newList = creditList.toMutableList()
+                                creditAdapter.submitList(newList) {
+                                    updateAllTotals()  // ✅ This updates profit
+                                }
+
+                                hasPendingChanges = true
+                                databaseAddFlag = false
+                            }
+
+                        } catch (e: Exception) {
+                            Log.e("MainActivity", "Error adding income: ${e.message}", e)
                         }
-                        binding.creditAmount.adapter = creditAdapter
-                        creditAdapter.submitList(creditList)
-                        creditAdapter.notifyDataSetChanged()
-                        creditIncomeUpdate()
-                        databaseAddFlag = false
                     }
                 }
             }
         }
 
-        Constants.debitevents.observe(this) {
-            it.getContentIfNotHandled()?.let { event ->
-                event.let {
-                    if (it.amount.toInt() >= 0 && !it.desc.toString().isNullOrEmpty()) {
-                        val expense = Expense(
-                            desc = it.desc,
-                            amount = it.amount,
-                            note = it.note,
-                            place = it.place,
-                            date = it.date,
-                            type = it.type,
-                            liters = it.liters,
-                            km = it.km
-                        )
-                        if (debitList.size > 0) {
-                            if (!debitList.contains(expense)) {
-                                debitList.add(expense)
-                                hasPendingChanges = true  // Mark as changed
+// ==========================================
+// 7. UPDATE setObserver() - Expense Section
+// ==========================================
+        Constants.debitevents.observe(this) { event ->
+            event.getContentIfNotHandled()?.let {
+                if (it.amount.toInt() >= 0 && !it.desc.isNullOrEmpty()) {
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        try {
+                            val expense = Expense(
+                                desc = it.desc,
+                                amount = it.amount,
+                                note = it.note,
+                                place = it.place,
+                                date = it.date,
+                                type = it.type,
+                                liters = it.liters,
+                                km = it.km
+                            )
+
+                            val isDuplicate = debitList.any { existing ->
+                                existing.desc == expense.desc &&
+                                        existing.amount == expense.amount &&
+                                        existing.date == expense.date &&
+                                        existing.place == expense.place
                             }
-                        } else {
-                            debitList.add(expense)
-                            hasPendingChanges = true  // Mark as changed
+
+                            if (!isDuplicate) {
+                                debitList.add(expense)
+                                Log.d("MainActivity", "Added expense: ${expense.desc}")
+
+                                val newList = debitList.toMutableList()
+                                debitAdapter.submitList(newList) {
+                                    updateAllTotals()  // ✅ Use unified method
+                                    calculateFinalTripAverage()
+                                }
+
+                                hasPendingChanges = true
+                                databaseAddFlag = false
+                            }
+
+                        } catch (e: Exception) {
+                            Log.e("MainActivity", "Error adding expense: ${e.message}", e)
                         }
-                        binding.debitAmount.adapter = debitAdapter
-                        debitAdapter.submitList(debitList)
-                        debitAdapter.notifyDataSetChanged()
-                        debitIncomeUpdate()
-                        databaseAddFlag = false
                     }
                 }
             }
@@ -650,35 +723,25 @@ class MainActivity : BaseActivity(), View.OnClickListener,
             dismissProgress()
 
             try {
-                openFile(data)
-
                 // Delete draft after successful PDF generation
                 lifecycleScope.launch(Dispatchers.IO) {
                     try {
-
-
-                        // Delete by randomNumber for draft trips
                         val db = AppDatabase.getDatabase(applicationContext)
                         val draftDao = db.productsDao()
 
-                        // Use deleteByRandomNumber since randomNumber is stored as String
-                        if (randomNumber > 0) {
+                        if (randomNumber != "0") {
                             val randomNumberStr = randomNumber.toString()
                             draftDao.deleteByRandomNumber(randomNumberStr)
-                            Log.d("MainActivity", "Draft deleted successfully: $randomNumberStr")
 
-                            // Verify deletion
                             val checkDraft = draftDao.getDraftById(randomNumberStr)
                             if (checkDraft == null) {
-                                Log.d("MainActivity", "Draft deletion confirmed")
-                            } else {
-                                Log.e("MainActivity", "Draft still exists after deletion!")
+                                Log.d("MainActivity", "Draft deleted successfully")
                             }
                         }
 
-                        // Refresh the draft list
                         withContext(Dispatchers.Main) {
                             Constants.refreshApiGet(Event(1))
+                            openFile(data)
                         }
                     } catch (e: Exception) {
                         Log.e("MainActivity", "Error deleting draft: ${e.message}", e)
@@ -691,6 +754,233 @@ class MainActivity : BaseActivity(), View.OnClickListener,
             }
         })
     }
+
+    // 5. IMPROVED DELETE DIALOG CALLBACKS
+    override fun clickCreditDeleteMethod(position: Int) {
+        try {
+            if (position < 0 || position >= creditList.size) {
+                Log.e("MainActivity", "Invalid credit position for delete dialog: $position")
+                return
+            }
+
+            deleteDialogFragment = DeleteDialogFragment(position, "Credit")
+            deleteDialogFragment.show(supportFragmentManager, "DeleteCreditDialog")
+
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error showing credit delete dialog: ${e.message}", e)
+        }
+    }
+
+    override fun clickDebitDeleteMethod(position: Int) {
+        try {
+            if (position < 0 || position >= debitList.size) {
+                Log.e("MainActivity", "Invalid debit position for delete dialog: $position")
+                return
+            }
+
+            deleteDialogFragment = DeleteDialogFragment(position, "Debit")
+            deleteDialogFragment.show(supportFragmentManager, "DeleteDebitDialog")
+
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error showing debit delete dialog: ${e.message}", e)
+        }
+    }
+
+    // ==========================================
+// ADAPTER INITIALIZATION - IMPROVED VERSION
+// ==========================================
+    private fun initAdapter() {
+        try {
+            // Credit Adapter
+            creditAdapter = CreditAdapter(this, this, this)
+            binding.creditAmount.adapter = creditAdapter
+            creditAdapter.submitList(ArrayList(creditList)) {
+                updateAllTotals()  // ✅ Use unified method after initial load
+            }
+
+            // Debit Adapter
+            debitAdapter = DebitAdapter(this, this, this)
+            binding.debitAmount.adapter = debitAdapter
+            debitAdapter.submitList(ArrayList(debitList)) {
+                updateAllTotals()  // ✅ Use unified method after initial load
+            }
+
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error initializing adapters: ${e.message}", e)
+        }
+    }
+
+    // Helper method to update credit totals
+    private fun updateCreditTotals() {
+        binding.totalIncome.text = getString(R.string.ruppe) + totalamount.toString()
+        binding.totalIncomeNew.text = totalamount.toString()
+        updateProfitDisplay()
+    }
+
+    private fun recalculateTotalsAndProfit() {
+        val income = creditList.sumOf { it.amount.toIntOrNull() ?: 0 }
+        val expense = debitList.sumOf { it.amount.toIntOrNull() ?: 0 }
+
+        binding.totalIncome.text = getString(R.string.ruppe) + income
+        binding.totalIncomeNew.text = income.toString()
+
+        binding.totalExpanse.text = getString(R.string.ruppe) + expense
+        binding.totalExpanseNew.text = expense.toString()
+
+        val profit = income - expense
+        binding.totalProfit.text = profit.toString()
+    }
+
+
+    // Helper method to update debit totals
+    private fun updateDebitTotals() {
+        binding.totalExpanse.text = getString(R.string.ruppe) + totalDebitAmount.toString()
+        binding.totalExpanseNew.text = totalDebitAmount.toString()
+        updateProfitDisplay()
+    }
+
+    // Helper method to update profit display
+    private fun updateProfitDisplay() {
+        try {
+            val income = binding.totalIncomeNew.text.toString().toDoubleOrNull() ?: 0.0
+            val expense = binding.totalExpanseNew.text.toString().toDoubleOrNull() ?: 0.0
+            val profit = income - expense
+            binding.totalProfit.text = String.format("%.2f", profit)
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error updating profit: ${e.message}", e)
+            binding.totalProfit.text = "0"
+        }
+    }
+
+
+
+
+    // Add these variables at the top of MainActivity class
+    private var hasPendingChanges = false  // Track if user made any changes
+    private var isPdfGenerating = false     // Track if PDF is being generated
+
+    // Update setObserver() method - Add change tracking
+//    private fun setObserver() {
+//        Constants.events.observe(this) { it ->
+//            it.getContentIfNotHandled()?.let { event ->
+//                event.let {
+//                    if (it.amount.toInt() >= 0 && !it.desc.toString().isNullOrEmpty()) {
+//                        val income = Income(
+//                            desc = it.desc,
+//                            amount = it.amount,
+//                            note = it.note,
+//                            place = it.place,
+//                            date = it.date
+//                        )
+//                        if (creditList.size > 0) {
+//                            if (!creditList.contains(income)) {
+//                                creditList.add(income)
+//                                hasPendingChanges = true  // Mark as changed
+//                            }
+//                        } else {
+//                            creditList.add(income)
+//                            hasPendingChanges = true  // Mark as changed
+//                        }
+//                        binding.creditAmount.adapter = creditAdapter
+//                        creditAdapter.submitList(creditList) {
+//                            // This callback runs after DiffUtil finishes
+//                            creditAdapter.notifyDataSetChanged()
+//                            creditIncomeUpdate()
+//                        }
+//                        creditAdapter.notifyDataSetChanged()
+//                        creditIncomeUpdate()
+//                        databaseAddFlag = false
+//                    }
+//                }
+//            }
+//        }
+//
+//        Constants.debitevents.observe(this) {
+//            it.getContentIfNotHandled()?.let { event ->
+//                event.let {
+//                    if (it.amount.toInt() >= 0 && !it.desc.toString().isNullOrEmpty()) {
+//                        val expense = Expense(
+//                            desc = it.desc,
+//                            amount = it.amount,
+//                            note = it.note,
+//                            place = it.place,
+//                            date = it.date,
+//                            type = it.type,
+//                            liters = it.liters,
+//                            km = it.km
+//                        )
+//                        if (debitList.size > 0) {
+//                            if (!debitList.contains(expense)) {
+//                                debitList.add(expense)
+//                                hasPendingChanges = true  // Mark as changed
+//                            }
+//                        } else {
+//                            debitList.add(expense)
+//                            hasPendingChanges = true  // Mark as changed
+//                        }
+//                        binding.debitAmount.adapter = debitAdapter
+//                        debitAdapter.submitList(debitList) {
+//                            debitAdapter.notifyDataSetChanged()
+//                            debitIncomeUpdate()
+//                        }
+//                        debitAdapter.notifyDataSetChanged()
+//                        debitIncomeUpdate()
+//                        databaseAddFlag = false
+//                    }
+//                }
+//            }
+//        }
+//
+//        authViewModel.downloadProgress.observe(this) {
+//            dismissProgress()
+//
+//        }
+//
+//        authViewModel.downloadCompleted.observe(this, Observer { data ->
+//            isPdfGenerating = false
+//            databaseAddFlagName = true
+//            databaseAddFlag = true
+//            dismissProgress()
+//
+//            try {
+//
+//
+//
+//                // Delete draft after successful PDF generation
+//                lifecycleScope.launch(Dispatchers.IO) {
+//                    try {
+//
+//
+//                        // Delete by randomNumber for draft trips
+//                        val db = AppDatabase.getDatabase(applicationContext)
+//                        val draftDao = db.productsDao()
+//
+//                        // Use deleteByRandomNumber since randomNumber is stored as String
+//                        if (randomNumber != "0") {
+//                            val randomNumberStr = randomNumber.toString()
+//                            draftDao.deleteByRandomNumber(randomNumberStr)
+//                            // Verify deletion
+//                            val checkDraft = draftDao.getDraftById(randomNumberStr)
+//                            if (checkDraft == null) {
+//                                openFile(data)
+//                            } else {
+//                            }
+//                        }
+//                        // Refresh the draft list
+//                        withContext(Dispatchers.Main) {
+//                            Constants.refreshApiGet(Event(1))
+//                        }
+//                    } catch (e: Exception) {
+//                        Log.e("MainActivity", "Error deleting draft: ${e.message}", e)
+//                    }
+//                }
+//
+//                finish()
+//            } catch (e: Exception) {
+//                Log.e("MainActivity", "Error opening file: ${e.message}")
+//            }
+//        })
+//    }
 
     private fun openFile(data: String) {
         try {
@@ -783,13 +1073,32 @@ class MainActivity : BaseActivity(), View.OnClickListener,
     override fun onPause() {
         super.onPause()
         Log.d("whathappend", "onPause: ${databaseAddFlagName}   ${databaseAddFlag}")
-        if(!databaseAddFlagName){
-            if (!databaseAddFlag || checkListChanged())
-                setAllData()
-        }else{
-            if (!databaseAddFlag)
-                setAllData()
+        Log.d("MainActivity", "onPause called")
+
+        // Check all skip conditions
+        if (draftFlowClosed) {
+            Log.d("MainActivity", "Draft flow closed – skipping save")
+            return
         }
+
+        if (isDraftDeletedAfterPdf) {
+            Log.d("MainActivity", "Draft already deleted, skipping save")
+            return
+        }
+
+        if (isSavingDraft) {
+            Log.d("MainActivity", "Already saving draft, skipping")
+            return
+        }
+
+        if (!hasPendingChanges) {
+            Log.d("MainActivity", "No pending changes, skipping save")
+            return
+        }
+
+        // Now save
+        setAllData()
+
 
 //        if(showingFlag==3 && !databaseAddFlag ||checkListChanged()){
 //            getDelete(this,id.toInt())
@@ -801,33 +1110,26 @@ class MainActivity : BaseActivity(), View.OnClickListener,
 
     }
 
-    private  fun getDelete(context: Context,position: Int) {
-        lifecycleScope.launch {
-            try {
-                val database = AppDatabase.getDatabase(context)
-                val tripDataDao = database.productsDao()
-                val entities = tripDataDao.deleteTruckById(position)
-            } catch (e: Exception) {
-                Log.e("MainActivity", "Error in saveDraftSynchronously: ${e.message}", e)
-
-            }
-        }
-
-
-    }
 
     private fun setAllData() {
-        if (!hasPendingChanges) {
-            Log.d("MainActivity", "No pending changes, skipping save")
+        // Prevent multiple simultaneous saves
+        if (isSavingDraft) {
+            Log.d("MainActivity", "Save already in progress, skipping")
             return
         }
 
-        lifecycleScope.launch {
+        // Cancel any existing save job
+        saveJob?.cancel()
+
+        isSavingDraft = true
+
+        saveJob = lifecycleScope.launch(Dispatchers.IO) {
             try {
+                Log.d("MainActivity", "Starting draft save...")
+
                 val db = AppDatabase.getDatabase(applicationContext)
                 val draftDao = db.productsDao()
 
-                Log.d("Changes what", "setAllData: ${routeList}")
                 val validRoute = if (RouteUtils.isValidRoute(routeList)) {
                     routeList
                 } else {
@@ -853,9 +1155,11 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                     updatedAt = System.currentTimeMillis()
                 )
 
+                // Check if draft exists
                 val existing = draftDao.getDraftById(randomNumber.toString())
 
-                if (showingFlag == 3) {
+                if (existing != null || showingFlag == 3) {
+                    // Update existing draft
                     draftDao.update(
                         tripDataEntity.randomNumber,
                         tripDataEntity.truckNumber,
@@ -869,20 +1173,27 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                         tripDataEntity.routeJson,
                         updatedAt = System.currentTimeMillis()
                     )
-                    Log.d("MainActivity", "Draft updated")
+                    Log.d("MainActivity", "Draft updated: $randomNumber")
                 } else {
+                    // Insert new draft
                     draftDao.insert(tripDataEntity)
-                    Log.d("MainActivity", "New draft inserted")
+                    Log.d("MainActivity", "New draft inserted: $randomNumber")
                 }
 
-                hasPendingChanges = false  // Reset flag after save
+                // Reset flags AFTER successful save
+                hasPendingChanges = false
 
                 withContext(Dispatchers.Main) {
-                    Constants.refreshApiGet(Event(1))
+                    // Only refresh if activity is not finishing
+                    if (!isFinishing) {
+                        Constants.refreshApiGet(Event(1))
+                    }
                 }
 
             } catch (e: Exception) {
-                Log.e("MainActivity", "Error in setAllData: ${e.message}", e)
+                Log.e("MainActivity", "Error saving draft: ${e.message}", e)
+            } finally {
+                isSavingDraft = false
             }
         }
     }
@@ -926,15 +1237,6 @@ class MainActivity : BaseActivity(), View.OnClickListener,
         )
     }
 
-    private suspend fun getAllData(context: Context): List<TripDataTestModel> {
-        val database = AppDatabase.getDatabase(context)
-        val tripDataDao = database.productsDao()
-        val entities = tripDataDao.getAllProducts()
-        return entities.map {
-            convertToModel(it)
-        }
-    }
-
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {
             val v: View = currentFocus ?: return super.dispatchTouchEvent(event)
@@ -951,58 +1253,41 @@ class MainActivity : BaseActivity(), View.OnClickListener,
         return super.dispatchTouchEvent(event)
     }
 
-    override fun clickCreditEditMethod(position: Int) {
-        val income = creditList[position]
-        addIncomeBottomSheetFragment = AddIncomeBottomSheetFragment(
-            incomeDesc = income.desc ?: "",
-            incomeAmount = income.amount ?: "",
-            note = income.note ?: "",
-            place = income.place ?: "",
-            date = income.date ?: "",
-            position = position
-        )
-        addIncomeBottomSheetFragment.show(supportFragmentManager, "AddIncomeBottomSheet")
-    }
+//    fun creditDataUpdate(position: Int = -1) {
+//        lifecycleScope.launch(Dispatchers.Main) {
+//            val newList = creditList.toList()
+//            creditAdapter.submitList(newList) {
+//                recalculateTotalsAndProfit()
+//            }
+//            hasPendingChanges = true
+//            databaseAddFlag = false
+//        }
+//    }
 
-    override fun clickCreditDeleteMethod(position: Int) {
-        deleteDialogFragment = DeleteDialogFragment(position, "Credit")
-        deleteDialogFragment.show(supportFragmentManager, "")
-    }
 
-    override fun clickDebitDeleteMethod(position: Int) {
-        deleteDialogFragment = DeleteDialogFragment(position, "Debit")
-        deleteDialogFragment.show(supportFragmentManager, "")
-    }
+    // Debit update with position
+    fun debitDataUpdate(position: Int = -1) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            try {
+                Log.d("MainActivity", "Updating debit list, position: $position")
 
-    override fun clickDebitEditMethod(position: Int) {
-        val expense = debitList[position]
-        // Check if it's a fuel entry
-        if (expense.type == "Fuel") {
-            addFuelBottomSheetFragment = AddFuelBottomSheetFragment(
-                fuelDesc = expense.desc,
-                fuelAmount = expense.amount,
-                fuelLiters = expense.liters ?: "",
-                fuelKm = expense.km ?: "",
-                fuelPlace = expense.place ?: "",
-                fuelDate = expense.date ?: "",
-                position = position
-            )
-            addFuelBottomSheetFragment.show(supportFragmentManager, "AddFuelBottomSheet")
-        } else {
-            // Regular expense entry
-            addExpenseBottomSheetFragment = AddExpenseBottomSheetFragment(
-                expenseDesc = expense.desc ?: "",
-                expenseAmount = expense.amount,
-                expenseNote = expense.note ?: "",  // Handle null
-                expensePlace = expense.place ?: "",  // Handle null
-                expenseDate = expense.date ?: "",  // Handle null
-                expenseType = expense.type ?: "",  // Handle null
-                position = position
-            )
-            addExpenseBottomSheetFragment.show(supportFragmentManager, "AddExpenseBottomSheet")
+                // Create new list with new reference
+                val newList = debitList.toList()  // Immutable copy
+
+                debitAdapter.submitList(newList) {
+                    debitIncomeUpdate()
+                    calculateFinalTripAverage()
+                    Log.d("MainActivity", "Debit adapter updated")
+                }
+                recalculateTotalsAndProfit()
+                hasPendingChanges = true
+                databaseAddFlag = false
+
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error updating debit: ${e.message}", e)
+            }
         }
     }
-
 //    fun debitDeleteHissab(position: Int) {
 //        debitList.removeAt(position)
 //        debitAdapter.submitList(debitList)
@@ -1034,6 +1319,60 @@ class MainActivity : BaseActivity(), View.OnClickListener,
 //        creditAdapter.notifyDataSetChanged()
 //        creditIncomeUpdate()
 //    }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (hasPendingChanges && !isSavingDraft) {
+            lifecycleScope.launch {
+                setAllData()
+                // Wait for save to complete
+                saveJob?.join()
+                // Then finish activity
+                withContext(Dispatchers.Main) {
+                    super.onBackPressed()
+                }
+            }
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    fun onExpenseEdited(position: Int, updatedExpense: Expense) {
+        if (position !in debitList.indices) return
+
+        val newList = debitList.toMutableList()
+        newList[position] = updatedExpense
+
+        debitList.clear()
+        debitList.addAll(newList)
+
+        debitAdapter.submitList(newList) {
+            updateAllTotals()  // ✅ Use unified method
+            calculateFinalTripAverage()
+        }
+
+        hasPendingChanges = true
+    }
+
+    // ==========================================
+// 5. UPDATE onIncomeEdited METHOD
+// ==========================================
+    fun onIncomeEdited(position: Int, updatedIncome: Income) {
+        if (position !in creditList.indices) return
+
+        val newList = creditList.toMutableList()
+        newList[position] = updatedIncome
+
+        creditList.clear()
+        creditList.addAll(newList)
+
+        creditAdapter.submitList(newList) {
+            updateAllTotals()  // ✅ This updates profit
+        }
+
+        hasPendingChanges = true
+    }
 
     private fun debitIncomeUpdate() {
         totalDebitAmount = 0
@@ -1212,18 +1551,31 @@ class MainActivity : BaseActivity(), View.OnClickListener,
     }
 
     private fun creditIncomeUpdate() {
-        totalamount = 0
-        for (item in creditList) {
-            totalamount += item.amount.toInt()
-        }
-        binding.totalIncome.text = getString(R.string.ruppe) + totalamount.toString()
-        binding.totalIncomeNew.text = totalamount.toString()
+        try {
+            Log.d("MainActivity", "creditIncomeUpdate called, list size: ${creditList.size}")
 
-        val total = binding.totalIncomeNew.text.toString()
-            .toDouble() - if (binding.totalExpanseNew.text.toString()
-                .isNullOrEmpty()
-        ) 0.0 else binding.totalExpanseNew.text.toString().toDouble()
-        binding.totalProfit.text = "$total"
+            // Calculate total
+            totalamount = 0
+            for (item in creditList) {
+                val amount = item.amount.toIntOrNull() ?: 0
+                totalamount += amount
+            }
+
+            Log.d("MainActivity", "Total income calculated: $totalamount")
+
+            // Update UI
+            binding.totalIncome.text = getString(R.string.ruppe) + totalamount.toString()
+            binding.totalIncomeNew.text = totalamount.toString()
+
+            // Update profit
+            val income = totalamount.toDouble()
+            val expense = binding.totalExpanseNew.text.toString().toDoubleOrNull() ?: 0.0
+            val profit = income - expense
+            binding.totalProfit.text = String.format("%.2f", profit)
+
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error in creditIncomeUpdate: ${e.message}", e)
+        }
     }
 
     fun setLanguage() {
@@ -1282,7 +1634,8 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                     binding.dest.text.toString()
                 )
             }
-
+            isDraftDeletedAfterPdf = true
+            draftFlowClosed = true
             authViewModel.getTripPdf(
                 AddTripRequestModel(
                     id,
@@ -1336,5 +1689,100 @@ class MainActivity : BaseActivity(), View.OnClickListener,
             false
         }
     }
+    private fun updateAllTotals() {
+        try {
+            // Calculate credit total
+            totalamount = creditList.sumOf { it.amount.toIntOrNull() ?: 0 }
+
+            // Calculate debit total
+            totalDebitAmount = debitList.sumOf { it.amount.toIntOrNull() ?: 0 }
+
+            // Update Income UI
+            binding.totalIncome.text = getString(R.string.ruppe) + totalamount.toString()
+            binding.totalIncomeNew.text = totalamount.toString()
+
+            // Update Expense UI
+            binding.totalExpanse.text = getString(R.string.ruppe) + totalDebitAmount.toString()
+            binding.totalExpanseNew.text = totalDebitAmount.toString()
+
+            // Calculate and update Profit
+            val profit = totalamount - totalDebitAmount
+            binding.totalProfit.text = profit.toString()
+
+            Log.d("MainActivity", "Totals updated - Income: $totalamount, Expense: $totalDebitAmount, Profit: $profit")
+
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error updating totals: ${e.message}", e)
+        }
+    }
+    override fun clickCreditEditMethod(position: Int) {
+        try {
+            if (position < 0 || position >= creditList.size) {
+                Log.e("MainActivity", "Invalid credit position: $position")
+                return
+            }
+
+            val income = creditList[position]
+            Log.d("MainActivity", "Editing credit at position $position: ${income.desc}")
+
+            addIncomeBottomSheetFragment = AddIncomeBottomSheetFragment(
+                incomeDesc = income.desc ?: "",
+                incomeAmount = income.amount ?: "",
+                totalIncome = income.amount ?: "",  // Pass as totalIncome
+                advanceTaken = "0",  // Default
+                balance = income.amount ?: "",  // Default to amount
+                note = income.note ?: income.desc ?: "",
+                place = income.place ?: "",
+                date = income.date ?: "",
+                position = position
+            )
+            addIncomeBottomSheetFragment.show(supportFragmentManager, "AddIncomeBottomSheet")
+
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error in credit edit: ${e.message}", e)
+        }
+    }
+
+    override fun clickDebitEditMethod(position: Int) {
+        try {
+            if (position < 0 || position >= debitList.size) {
+                Log.e("MainActivity", "Invalid debit position: $position")
+                return
+            }
+
+            val expense = debitList[position]
+            Log.d("MainActivity", "Editing debit at position $position: ${expense.desc}")
+
+            if (expense.type == "Fuel") {
+                addFuelBottomSheetFragment = AddFuelBottomSheetFragment(
+                    fuelDesc = expense.desc,
+                    fuelAmount = expense.amount,
+                    fuelLiters = expense.liters ?: "",
+                    fuelKm = expense.km ?: "",
+                    fuelPlace = expense.place ?: "",
+                    fuelDate = expense.date ?: "",
+                    isOdometerMode = expense.isOdometerMode,
+                    position = position  // Pass position
+                )
+                addFuelBottomSheetFragment.show(supportFragmentManager, "AddFuelBottomSheet")
+            } else {
+                addExpenseBottomSheetFragment = AddExpenseBottomSheetFragment(
+                    expenseDesc = expense.desc ?: "",
+                    expenseAmount = expense.amount,
+                    expenseNote = expense.note ?: "",
+                    expensePlace = expense.place ?: "",
+                    expenseDate = expense.date ?: "",
+                    expenseType = expense.type ?: "",
+                    position = position  // Pass position
+                )
+                addExpenseBottomSheetFragment.show(supportFragmentManager, "AddExpenseBottomSheet")
+            }
+
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error in debit edit: ${e.message}", e)
+        }
+    }
+
 
 }
+

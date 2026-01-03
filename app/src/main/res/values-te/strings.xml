@@ -448,4 +448,15 @@ Mode మార్చాలంటే App Mode పై క్లిక్ చేయ
     <string name="end_place_mic">ముగింపు స్థలం ఇవ్వండి</string>
     <string name="truck_number_mic">ట్రక్ నంబర్ ఇవ్వండి</string>
 
+    <string name="voice_all_expense_add_and_save">
+మీరు అన్ని ఖర్చులను ఒకేసారి చెప్పి ఇక్కడ జోడించవచ్చు, చివరలో సేవ్ నొక్కితే అయిపోతుంది.
+</string>
+    <string name="voice_all_income_add_and_save">
+మీరు అన్ని ఆదాయాలను ఒకేసారి చెప్పి ఇక్కడ జోడించవచ్చు, చివరలో సేవ్ నొక్కితే అయిపోతుంది.
+</string>
+    <string name="delete_data">డేటాను తొలగించండి</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+మీరు తొలగిస్తే మీ డ్రాఫ్ట్ డేటా మొత్తం క్లియర్ అవుతుంది. నిజంగా తొలగించాలనుకుంటున్నారా?
+</string>
+
 </resources>

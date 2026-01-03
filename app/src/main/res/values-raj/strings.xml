@@ -542,5 +542,16 @@ Mode बदलणो होय तो App Mode पर क्लिक करज�
     <string name="source_place_mic">शुरू रो ठिकाणो डालो</string>
     <string name="end_place_mic">आखरी ठिकाणो डालो</string>
     <string name="truck_number_mic">ट्रक नंबर डालो</string>
+    <string name="voice_all_expense_add_and_save">
+आप सगळो खर्च एक साथ बोल कै इथे डाल सको, आखर में सेव दबाओ ने काम पूरो।
+</string>
+    <string name="voice_all_income_add_and_save">
+आप सगळी आमदनी एक साथ बोल कै इथे डाल सको, आखर में सेव दबाओ ने काम पूरो।
+</string>
+    <string name="delete_data">डेटा मिटाओ</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+जद आप मिटावो तो सगळो ड्राफ्ट डेटा साफ हो जावेला। का आप पक्का मिटावो चाहो?
+</string>
+
 
 </resources>

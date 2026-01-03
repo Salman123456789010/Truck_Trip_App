@@ -84,7 +84,7 @@ class DraftActivity : BaseActivity(), DraftAdapter.DraftEditListner,DraftAdapter
     }
 
     private suspend fun getAllData(context: Context): List<TripDataTestModel> {
-        val database = AppDatabase.getDatabase(context)
+        val database = AppDatabase.getDatabase(applicationContext)
         val tripDataDao = database.productsDao()
         val entities = tripDataDao.getAllProducts()
         return entities.map {
@@ -93,7 +93,7 @@ class DraftActivity : BaseActivity(), DraftAdapter.DraftEditListner,DraftAdapter
 
     }
     private suspend fun getDelete(context: Context,position: Int) {
-        val database = AppDatabase.getDatabase(context)
+        val database = AppDatabase.getDatabase(applicationContext)
         val tripDataDao = database.productsDao()
         val entities = tripDataDao.deleteTruckById(position)
 

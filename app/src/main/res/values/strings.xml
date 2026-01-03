@@ -474,7 +474,17 @@ and tap Save when you are done.
     To learn how to use the app, tap on How to Use.\n
     To change the mode, tap on App Mode.
 </string>
+    <string name="voice_all_expense_add_and_save">
+You can say all expenses together here, tap save at the end and you’re done.
+</string>
+    <string name="voice_all_income_add_and_save">
+You can say all income together here, tap save at the end and you\'re done.
+</string>
 
+    <string name="delete_data">Delete Data</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+If you delete this, all your draft data will be cleared. Are you sure you want to delete?
+</string>
 
     <!--    <string name="onboard_title_1">All trips in one place</string>-->
     <!--    <string name="onboard_desc_1">See all your trips with status, truck number and route. Open any trip to view full hisab of income, expenses and profit.</string>-->

@@ -27,6 +27,7 @@ class AddFuelBottomSheetFragment(
     private var fuelAmount: String = "",
     private var fuelLiters: String = "",
     private var fuelKm: String = "",
+
     private var fuelPlace: String = "",
     private var fuelDate: String = "",
     private var isOdometerMode: Boolean = true,  // This is passed from caller
@@ -51,6 +52,7 @@ class AddFuelBottomSheetFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
 
         // Get last odometer reading from database/list
         getLastOdometerReading()

@@ -525,4 +525,15 @@ Mode ಬದಲಾಯಿಸಲು App Mode ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾ
     <string name="end_place_mic">ಕೊನೆಯ ಸ್ಥಳ ಹಾಕಿ</string>
     <string name="truck_number_mic">ಟ್ರಕ್ ನಂಬರ್ ಹಾಕಿ</string>
 
+    <string name="voice_all_expense_add_and_save">
+ನೀವು ಎಲ್ಲಾ ಖರ್ಚುಗಳನ್ನು ಒಂದೇ ಬಾರಿ ಹೇಳಿ ಇಲ್ಲಿ ಸೇರಿಸಬಹುದು, ಕೊನೆಯಲ್ಲಿ ಸೇವ್ ಒತ್ತಿದರೆ ಮುಗಿಯುತ್ತದೆ.
+</string>
+    <string name="voice_all_income_add_and_save">
+ನೀವು ಎಲ್ಲಾ ಆದಾಯವನ್ನು ಒಂದೇ ಬಾರಿ ಹೇಳಿ ಇಲ್ಲಿ ಸೇರಿಸಬಹುದು, ಕೊನೆಯಲ್ಲಿ ಸೇವ್ ಒತ್ತಿದರೆ ಮುಗಿಯುತ್ತದೆ.
+</string>
+    <string name="delete_data">ಡೇಟಾ ಅಳಿಸಿ</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+ನೀವು ಅಳಿಸಿದರೆ ಎಲ್ಲಾ ಡ್ರಾಫ್ಟ್ ಡೇಟಾ ಕ್ಲಿಯರ್ ಆಗುತ್ತದೆ. ನಿಜವಾಗಿಯೂ ಅಳಿಸಲು ಬಯಸುವಿರಾ?
+</string>
+
 </resources>

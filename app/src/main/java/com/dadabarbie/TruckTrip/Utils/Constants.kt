@@ -24,6 +24,9 @@ import com.dadabarbie.TruckTrip.model.getTrip.Income
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.PhoneAuthProvider
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.UUID
 
 object Constants {
 
@@ -178,6 +181,43 @@ object Constants {
     }
     fun View.gone() {
         this.visibility = View.GONE
+    }
+}
+object DraftIdManager {
+    fun generate(): String = UUID.randomUUID().toString()
+}
+
+object DateUtils {
+
+    fun uiToDbDate(
+        uiDate: String,
+        langCode: String = "en"
+    ): String {
+        if (uiDate.isBlank()) return ""
+
+        val inputFormats = listOf(
+            SimpleDateFormat("dd MMM yyyy", Locale(langCode)),
+            SimpleDateFormat("dd MMMM yyyy", Locale(langCode)), // July
+            SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH),
+            SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH)
+        )
+
+        for (format in inputFormats) {
+            try {
+                val date = format.parse(uiDate)
+                if (date != null) {
+                    return SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(date)
+                }
+            } catch (_: Exception) { }
+        }
+
+        // If already DB format, return as is
+        if (uiDate.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) {
+            return uiDate
+        }
+
+        // Fallback (safe)
+        return ""
     }
 }
 

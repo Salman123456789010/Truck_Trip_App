@@ -175,7 +175,7 @@ class SecondSpeechScreen : BaseActivity(), TextToSpeech.OnInitListener {
     // ✅ NEW: Set today's date by default
     private fun setTodayDateByDefault() {
         val calendar = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale("hi"))
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale("hi"))
         selectedDate = dateFormat.format(calendar.time)
         binding.tvStartDateValue.text = selectedDate
         binding.cardStartDate.setCardBackgroundColor(getColor(R.color.white))
@@ -754,7 +754,7 @@ class SecondSpeechScreen : BaseActivity(), TextToSpeech.OnInitListener {
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
                 calendar.set(selectedYear, selectedMonth, selectedDay)
-                val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale(langCode))
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale(langCode))
                 selectedDate = dateFormat.format(calendar.time)
                 binding.tvStartDateValue.text = selectedDate
                 binding.cardStartDate.setCardBackgroundColor(getColor(R.color.white))

@@ -2,6 +2,8 @@ package com.dadabarbie.TruckTrip.api
 
 import android.content.Intent
 import com.dadabarbie.TruckTrip.TruckTripApplication
+import com.dadabarbie.TruckTrip.Utils.Constants
+import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.auth.activity.LoginScreenActivity
 import okhttp3.Interceptor
 
@@ -14,6 +16,7 @@ class SecurityInterceptor() : Interceptor {
         val request: okhttp3.Request = chain.request()
         val response: okhttp3.Response = chain.proceed(request)
         if (response.code == 401) {
+            Prefs[Constants.isLogin] = false
             context.startActivity(
                 Intent(context, LoginScreenActivity::class.java).addFlags(
                     Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

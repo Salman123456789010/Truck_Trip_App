@@ -27,24 +27,48 @@ class TripNewListAdapter(val context: Context, val editTripDataListner: EditTrip
 ) :
     RecyclerView.Adapter<TripNewListAdapter.ViewHolder>() {
 
-    private val diffCallBack = object : DiffUtil.ItemCallback<com.dadabarbie.TruckTrip.model.getTrip.Record>() {
-        override fun areItemsTheSame(
-            oldItem: Record,
-            newItem: Record
-        ): Boolean {
+    companion object {
+        private const val TAG = "TripListAdapter"
+    }
+
+    // 🔥 CRITICAL FIX: Proper DiffUtil implementation
+    private val diffCallBack = object : DiffUtil.ItemCallback<Record>() {
+        override fun areItemsTheSame(oldItem: Record, newItem: Record): Boolean {
+            // Items are same if they have same ID
             return oldItem._id == newItem._id
         }
 
-        override fun areContentsTheSame(
-            oldItem: Record,
-            newItem: Record
-        ): Boolean {
-            return oldItem._id == newItem._id
+        override fun areContentsTheSame(oldItem: Record, newItem: Record): Boolean {
+            // Check if content is actually the same
+            return oldItem._id == newItem._id &&
+                    oldItem.source == newItem.source &&
+                    oldItem.destination == newItem.destination &&
+                    oldItem.start_date == newItem.start_date &&
+                    oldItem.end_date == newItem.end_date &&
+                    oldItem.total_income == newItem.total_income &&
+                    oldItem.total_expense == newItem.total_expense &&
+                    oldItem.driver_income == newItem.driver_income &&
+                    oldItem.truck_no == newItem.truck_no
         }
     }
 
-    fun submitList(list: List<Record>) = differ.submitList(list)
     private val differ = AsyncListDiffer(this, diffCallBack)
+
+    // 🔥 CRITICAL FIX: Proper list submission
+    fun submitList(list: List<Record>?) {
+        Log.d(TAG, "submitList called with ${list?.size ?: 0} items")
+
+        if (list == null) {
+            differ.submitList(null)
+            return
+        }
+
+        // Create a new list instance to ensure DiffUtil detects changes
+        val newList = ArrayList(list)
+        differ.submitList(newList)
+
+        Log.d(TAG, "List submitted. Current size: ${differ.currentList.size}")
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: TripNewListLayoutBinding =
@@ -55,11 +79,18 @@ class TripNewListAdapter(val context: Context, val editTripDataListner: EditTrip
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+    // 🔥 IMPROVED: Return current list for debugging
+    fun getCurrentList(): List<Record> = differ.currentList
+
+    // 🔥 NEW: Get item by ID
+    fun getItemById(id: String): Record? {
+        return differ.currentList.find { it._id == id }
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = differ.currentList[position]
         holder.binding.editIcon.setOnClickListener {
-            editTripDataListner.editTripDataMethod(position)
+            editTripDataListner.editTripData(item)
         }
         holder.binding.srcName.text=item.source
         holder.binding.dest.text=item.destination
@@ -97,7 +128,7 @@ class TripNewListAdapter(val context: Context, val editTripDataListner: EditTrip
             deleteTripListner.deleteTripMethod(position)
         }
         holder.binding.dowanloadIcon.setOnClickListener{
-            viewTripDataListner.viewTripDataMethod(position)
+            viewTripDataListner.viewTripDataMethod(item)
         }
         if(position%3==0){
             holder.binding.myTemplate.visible()
@@ -129,20 +160,22 @@ class TripNewListAdapter(val context: Context, val editTripDataListner: EditTrip
     }
 
     interface EditTripDataListner {
-        fun editTripDataMethod(position: Int)
+        fun editTripData(trip: Record)
     }
-    interface ShareTripDataListner{
+
+    interface ViewTripDataListner {
+        fun viewTripDataMethod(trip: Record)
+    }
+
+    interface ShareTripDataListner {
         fun shareTripDataMethod(position: Int)
     }
-    interface DeleteTripListner{
+
+    interface DeleteTripListner {
         fun deleteTripMethod(position: Int)
     }
 
-    interface DowanloadListner{
+    interface DowanloadListner {
         fun dowanloadMethod(position: Int)
-    }
-
-    interface  ViewTripDataListner{
-        fun viewTripDataMethod(position: Int)
     }
 }

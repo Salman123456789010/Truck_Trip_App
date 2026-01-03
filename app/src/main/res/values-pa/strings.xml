@@ -550,4 +550,15 @@ Mode ਬਦਲਣਾ ਹੋਵੇ ਤਾਂ App Mode ਤੇ ਕਲਿੱਕ ਕ�
     <string name="end_place_mic">ਅਖੀਰ ਦੀ ਜਗ੍ਹਾ ਪਾਓ</string>
     <string name="truck_number_mic">ਟਰੱਕ ਨੰਬਰ ਪਾਓ</string>
 
+    <string name="voice_all_expense_add_and_save">
+ਤੁਸੀਂ ਸਾਰਾ ਖਰਚਾ ਇਕੱਠੇ ਬੋਲ ਕੇ ਇੱਥੇ ਪਾ ਸਕਦੇ ਹੋ, ਆਖਿਰ ਵਿੱਚ ਸੇਵ ਦਬਾਓ ਤੇ ਹੋ ਗਿਆ।
+</string>
+    <string name="voice_all_income_add_and_save">
+ਤੁਸੀਂ ਸਾਰੀ ਆਮਦਨ ਇਕੱਠੇ ਬੋਲ ਕੇ ਇੱਥੇ ਪਾ ਸਕਦੇ ਹੋ, ਆਖਿਰ ਵਿੱਚ ਸੇਵ ਦਬਾਓ ਤੇ ਹੋ ਗਿਆ।
+</string>
+    <string name="delete_data">ਡਾਟਾ ਮਿਟਾਓ</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+ਜੇ ਤੁਸੀਂ ਮਿਟਾਉਂਦੇ ਹੋ ਤਾਂ ਸਾਰਾ ਡਰਾਫਟ ਡਾਟਾ ਸਾਫ਼ ਹੋ ਜਾਵੇਗਾ। ਕੀ ਤੁਸੀਂ ਪੱਕਾ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+</string>
+
 </resources>

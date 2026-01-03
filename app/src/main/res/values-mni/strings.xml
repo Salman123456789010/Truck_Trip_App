@@ -152,28 +152,28 @@
     <string name="please_enter_note">ꯑꯃꯨꯛ ꯅꯣꯠ ꯊꯝꯕꯤꯌꯨ</string>
 
     <!--    <string name="trip_help_text">-->
-<!--    Ei-di nahakna nahakki tour pumnamak uba ngammi.-->
-<!--    Share, download, edit amasung delete tour tounaba buttons phangbiru.-->
-<!--    Anouba tour toubasingidamak “+ Add Trip” tap touru.-->
-<!--    Save touriba drafts puthoknaba notification icon tap touru.-->
-<!--    </string>-->
-<!--    <string name="trip_list_title">Tour List &amp;  Actions</string>-->
+    <!--    Ei-di nahakna nahakki tour pumnamak uba ngammi.-->
+    <!--    Share, download, edit amasung delete tour tounaba buttons phangbiru.-->
+    <!--    Anouba tour toubasingidamak “+ Add Trip” tap touru.-->
+    <!--    Save touriba drafts puthoknaba notification icon tap touru.-->
+    <!--    </string>-->
+    <!--    <string name="trip_list_title">Tour List &amp;  Actions</string>-->
 
-<!--    <string name="start_new_trip">Anouba tour tounu</string>-->
-<!--    <string name="add_trip_dec">-->
-<!--    Start date, starting place, ending place amasung truck number thamjin-u.-->
-<!--    Mic phangba lai-na pukning details pumnamak chatrei.-->
-<!--    Trip calculation toubasingidamak Add tap touru.-->
-<!--    </string>-->
-<!--    <string name="manage_trip_title">Trip Hisab Manage touru</string>-->
-<!--    <string name="trip_transaction_dec">মসিগী এখানদা ট্রিপ অসিগী রেকর্ড পুম্নমক লোইবা। খরচ শিজিন্নবা Add Expenditure, উপাআশি শিজিন্নবা Add Income অমসুং ডিজেল মফম পিববা Add Fuel শিজিন্নু। লোয়বা লেনদেন পুম্নমক মথক্তা তালিকাদা উত্থরী। মথকখাক্তা নীলা মপানদা মোট লাব উত্থরি।</string>-->
-<!--    <string name="add_expanse_tittle">ꯄꯥꯡꯒꯤ ꯍꯥꯡꯗꯣꯛꯄꯥ ꯍꯥꯡꯗꯣꯛ</string>-->
-<!--    <string name="add_expense_dec">ꯄꯥꯡꯒꯤ ꯑꯣꯠꯇꯨꯡ, ꯅꯣꯠ ꯃꯇꯝ ꯄꯥꯡꯗꯣꯛꯅꯕꯥ. ꯄꯥꯡꯒꯤ ꯃꯇꯝ ꯑꯣꯝꯕ ꯃꯌꯥꯝ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ. ꯃꯥꯏꯛ ꯑꯃꯁꯤꯗ ꯍꯣꯡꯗꯣꯛꯇꯨꯅꯥ ꯅꯍꯥꯛꯄꯥ. ꯁꯦꯚ ꯇꯦꯞ ꯇꯧꯕꯥ ꯄꯥꯡꯒꯤ ꯍꯥꯡꯗꯣꯛ ꯇꯨꯡꯁꯤꯡ ꯇꯨꯡꯅ ꯊꯕꯤ꯫</string>-->
-<!--    <string name="add_income_tittle">ꯑꯣꯡꯗꯣꯟ ꯍꯥꯡꯗꯣꯛꯄꯥ (ꯚꯥꯗꯥ / ꯑꯗꯋꯥꯟꯁ)</string>-->
-<!--    <string name="add_income_dec">ꯑꯣꯡꯗꯣꯟ ꯑꯣꯠꯇꯨꯡ ꯍꯥꯡꯅꯣꯛꯅꯥ ꯃꯇꯝꯗ ꯄꯥꯔꯇꯤ ꯃꯃꯤ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ ꯅꯣꯠ ꯃꯇꯝ ꯍꯥꯡꯅꯣꯛꯄꯥ. ꯃꯥꯏꯛ ꯑꯃꯁꯤꯗ ꯍꯣꯡꯗꯣꯛꯇꯨꯅꯥ ꯅꯍꯥꯛꯄꯥ. ꯁꯦꯚ ꯇꯦꯞ ꯇꯧꯕꯥ ꯑꯣꯡꯗꯣꯟ ꯇ꯭ꯔꯤꯞ ꯍꯥꯡꯗꯣꯛ ꯑꯗꯨ ꯑꯃꯁꯤꯗ ꯊꯕꯤ꯫</string>-->
-<!--    <string name="add_fuel_tittle">ꯏꯟꯗꯣꯟ ꯗꯤꯖꯤꯂ ꯍꯥꯡꯗꯣꯛꯄꯥ</string>-->
-<!--    <string name="add_fuel_dec">ꯗꯤꯖꯤꯂ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ ꯍꯥꯡꯅꯣꯛꯅꯥ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ. ꯃꯥꯏꯂꯦꯖ ꯑꯃꯁꯤꯗ ꯀꯤꯃꯤ (ꯑꯣꯗꯣꯃꯤꯇꯔ) ꯂꯤꯇ ꯍꯥꯡꯅꯣꯛꯄꯥ. ꯆꯠꯂꯨꯝ ꯃꯇꯝ ꯄꯝꯄ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ, ꯃꯌꯥꯝ ꯑꯣꯠꯇꯨꯡ. ꯁꯦꯚ ꯇꯦꯞ ꯇꯧꯕꯥ, ꯏꯟꯗꯣꯟ ꯇ꯭ꯔꯤꯞ ꯍꯥꯡꯗꯣꯛ ꯑꯃꯁꯤꯗ ꯊꯕꯤ꯫</string>-->
-<!--    <string name="complete_trip_tittle">ꯇ꯭ꯔꯤꯞ ꯃꯨꯑꯣꯡꯗꯣꯛꯄꯥ</string>-->
+    <!--    <string name="start_new_trip">Anouba tour tounu</string>-->
+    <!--    <string name="add_trip_dec">-->
+    <!--    Start date, starting place, ending place amasung truck number thamjin-u.-->
+    <!--    Mic phangba lai-na pukning details pumnamak chatrei.-->
+    <!--    Trip calculation toubasingidamak Add tap touru.-->
+    <!--    </string>-->
+    <!--    <string name="manage_trip_title">Trip Hisab Manage touru</string>-->
+    <!--    <string name="trip_transaction_dec">মসিগী এখানদা ট্রিপ অসিগী রেকর্ড পুম্নমক লোইবা। খরচ শিজিন্নবা Add Expenditure, উপাআশি শিজিন্নবা Add Income অমসুং ডিজেল মফম পিববা Add Fuel শিজিন্নু। লোয়বা লেনদেন পুম্নমক মথক্তা তালিকাদা উত্থরী। মথকখাক্তা নীলা মপানদা মোট লাব উত্থরি।</string>-->
+    <!--    <string name="add_expanse_tittle">ꯄꯥꯡꯒꯤ ꯍꯥꯡꯗꯣꯛꯄꯥ ꯍꯥꯡꯗꯣꯛ</string>-->
+    <!--    <string name="add_expense_dec">ꯄꯥꯡꯒꯤ ꯑꯣꯠꯇꯨꯡ, ꯅꯣꯠ ꯃꯇꯝ ꯄꯥꯡꯗꯣꯛꯅꯕꯥ. ꯄꯥꯡꯒꯤ ꯃꯇꯝ ꯑꯣꯝꯕ ꯃꯌꯥꯝ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ. ꯃꯥꯏꯛ ꯑꯃꯁꯤꯗ ꯍꯣꯡꯗꯣꯛꯇꯨꯅꯥ ꯅꯍꯥꯛꯄꯥ. ꯁꯦꯚ ꯇꯦꯞ ꯇꯧꯕꯥ ꯄꯥꯡꯒꯤ ꯍꯥꯡꯗꯣꯛ ꯇꯨꯡꯁꯤꯡ ꯇꯨꯡꯅ ꯊꯕꯤ꯫</string>-->
+    <!--    <string name="add_income_tittle">ꯑꯣꯡꯗꯣꯟ ꯍꯥꯡꯗꯣꯛꯄꯥ (ꯚꯥꯗꯥ / ꯑꯗꯋꯥꯟꯁ)</string>-->
+    <!--    <string name="add_income_dec">ꯑꯣꯡꯗꯣꯟ ꯑꯣꯠꯇꯨꯡ ꯍꯥꯡꯅꯣꯛꯅꯥ ꯃꯇꯝꯗ ꯄꯥꯔꯇꯤ ꯃꯃꯤ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ ꯅꯣꯠ ꯃꯇꯝ ꯍꯥꯡꯅꯣꯛꯄꯥ. ꯃꯥꯏꯛ ꯑꯃꯁꯤꯗ ꯍꯣꯡꯗꯣꯛꯇꯨꯅꯥ ꯅꯍꯥꯛꯄꯥ. ꯁꯦꯚ ꯇꯦꯞ ꯇꯧꯕꯥ ꯑꯣꯡꯗꯣꯟ ꯇ꯭ꯔꯤꯞ ꯍꯥꯡꯗꯣꯛ ꯑꯗꯨ ꯑꯃꯁꯤꯗ ꯊꯕꯤ꯫</string>-->
+    <!--    <string name="add_fuel_tittle">ꯏꯟꯗꯣꯟ ꯗꯤꯖꯤꯂ ꯍꯥꯡꯗꯣꯛꯄꯥ</string>-->
+    <!--    <string name="add_fuel_dec">ꯗꯤꯖꯤꯂ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ ꯍꯥꯡꯅꯣꯛꯅꯥ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ. ꯃꯥꯏꯂꯦꯖ ꯑꯃꯁꯤꯗ ꯀꯤꯃꯤ (ꯑꯣꯗꯣꯃꯤꯇꯔ) ꯂꯤꯇ ꯍꯥꯡꯅꯣꯛꯄꯥ. ꯆꯠꯂꯨꯝ ꯃꯇꯝ ꯄꯝꯄ ꯃꯇꯝ ꯑꯣꯠꯇꯨꯡ, ꯃꯌꯥꯝ ꯑꯣꯠꯇꯨꯡ. ꯁꯦꯚ ꯇꯦꯞ ꯇꯧꯕꯥ, ꯏꯟꯗꯣꯟ ꯇ꯭ꯔꯤꯞ ꯍꯥꯡꯗꯣꯛ ꯑꯃꯁꯤꯗ ꯊꯕꯤ꯫</string>-->
+    <!--    <string name="complete_trip_tittle">ꯇ꯭ꯔꯤꯞ ꯃꯨꯑꯣꯡꯗꯣꯛꯄꯥ</string>-->
     <string name="no_trip_found">কোনো ট্রিপ লৈফবা নত্তে</string>
 
     <string name="onboard_skip">স্কিপ তৌবিরে</string>
@@ -194,7 +194,6 @@
     <string name="select_date">അഹৌബാ തাংദ്രും അമസുങ് ലോയ്ഷാങ് താംദ്രും ഖങ്ങദോക്പാ</string>
     <string name="select_date_">ꯗꯦꯠ ꯈꯟꯗꯣꯛꯄꯥ</string>
     <string name="edit_trip_data">ꯇ꯭ꯔꯤꯞ ꯗꯦꯇꯥ ꯁꯝꯄꯥꯗꯅ ꯇꯧ</string>
-
 
 
     <string name="trip_list_title">ট্ৰিপ তালিকা আৰু কাৰ্যসমূহ</string>
@@ -541,5 +540,16 @@ Mode হোংনবা লৈ App Mode দা ক্লিক তৌ।
     <string name="source_place_mic">অহৌবা থক্কী হাপচিনবা</string>
     <string name="end_place_mic">লৌবা থক্কী হাপচিনবা</string>
     <string name="truck_number_mic">ট্রক নম্বর হাপচিনবা</string>
+
+    <string name="voice_all_expense_add_and_save">
+নহাক্না খর্চাসিং পুম্নমক অমুক্তা হাইবগী অদু ইয়াওদা থদোকপা যাই, অরো লাষ্টতা সেভ তবা খুদোংচবা।
+</string>
+    <string name="voice_all_income_add_and_save">
+নহাক্না ইনকমসিং পুম্নমক অমুক্তা হাইবগী অদু ইয়াওদা থদোকপা যাই, অরো লাষ্টতা সেভ তবা খুদোংচবা।
+</string>
+    <string name="delete_data">ডাটা মুত্থোকপা</string>
+    <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
+নহাক্না মুত্থোক্লবদি ড্ৰাফ্ট ডাটা পুম্নমক মাংখ্রগনি। নহাক্না চৎনবা মুত্থোকপা পাম্ব্রা?
+</string>
 
 </resources>

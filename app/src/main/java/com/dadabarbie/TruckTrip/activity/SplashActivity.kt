@@ -46,7 +46,7 @@ class SplashActivity : BaseActivity() {
                 }
 
                 // Not logged in
-                !isLogin -> {
+                !isLogin  -> {
                     Intent(this@SplashActivity, LoginScreenActivity::class.java)
                 }
 
