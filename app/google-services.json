@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1082416777901",
+    "project_id": "truck-trip-5473e",
+    "storage_bucket": "truck-trip-5473e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082416777901:android:519e359c065601e0591424",
+        "android_client_info": {
+          "package_name": "com.dadabarbie.TruckTrip"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpYP-8Rc0Zqvo3U_CXtLKYHHeHZZj0rlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

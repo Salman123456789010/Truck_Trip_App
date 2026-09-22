@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_app_bg"
+    android:orientation="vertical"
+    tools:context=".activity.TripEstimatorActivity">
+
+    <!-- Top Action Bar / Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/brand_primary"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="14dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:tint="@color/white"
+            android:contentDescription="Back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/font_plus_jakarta_sans"
+            android:textStyle="bold"
+            android:text="@string/trip_mileage_amp_profit_estimator"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:paddingHorizontal="12dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Input Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:text="@string/enter_trip_parameters"
+                        android:textColor="@color/brand_primary"
+                        android:textSize="15sp" />
+
+                    <!-- One-Way Distance -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:text="@string/total_one_way_distance_km"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/etDistance"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_rounded_edittext"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:hint="@string/e_g_850"
+                        android:inputType="numberDecimal"
+                        android:paddingHorizontal="12dp"
+                        android:textSize="14sp" />
+
+                    <!-- Return Distance -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:text="@string/return_distance_km_if_applicable"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/etReturnDistance"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_rounded_edittext"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:hint="@string/e_g_850_or_leave_0_for_one_way"
+                        android:inputType="numberDecimal"
+                        android:paddingHorizontal="12dp"
+                        android:textSize="14sp" />
+
+                    <!-- Truck Mileage -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:text="@string/truck_mileage_average_km_per_liter"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/etMileage"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_rounded_edittext"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:hint="@string/e_g_3_8"
+                        android:inputType="numberDecimal"
+                        android:paddingHorizontal="12dp"
+                        android:textSize="14sp" />
+
+                    <!-- Diesel Fuel Price -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:text="@string/fuel_diesel_price_per_liter"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/etFuelPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_rounded_edittext"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:hint="@string/e_g_92_5"
+                        android:inputType="numberDecimal"
+                        android:paddingHorizontal="12dp"
+                        android:textSize="14sp" />
+
+                    <!-- Other Expenses -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:text="@string/other_expenses_tolls_driver_maintenance"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/etOtherExpenses"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_rounded_edittext"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:hint="@string/e_g_3500"
+                        android:inputType="numberDecimal"
+                        android:paddingHorizontal="12dp"
+                        android:textSize="14sp" />
+
+                    <!-- Outbound Freight -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:text="@string/offered_freight_amount"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/etFreightOffered"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_rounded_edittext"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:hint="@string/e_g_28000"
+                        android:inputType="numberDecimal"
+                        android:paddingHorizontal="12dp"
+                        android:textSize="14sp" />
+
+                    <!-- Return Freight Amount -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:text="@string/return_freight_amount"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/etReturnFreight"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_rounded_edittext"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:hint="@string/e_g_18000"
+                        android:inputType="numberDecimal"
+                        android:paddingHorizontal="12dp"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCalculate"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/brand_primary"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:text="@string/calculate_estimate_amp_profit"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textAllCaps="false"
+                        app:cornerRadius="12dp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Output Result Card: Prioritizing Primary Profit Hero -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/resultCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="1dp"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:text="@string/trip_estimate_summary"
+                        android:textColor="@color/brand_primary"
+                        android:textSize="15sp" />
+
+                    <!-- Top Hero Profit Banner -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_metric_card"
+                        android:padding="14dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/font_plus_jakarta_sans"
+                            android:text="@string/estimated_net_profit"
+                            android:textColor="@color/text_muted"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvNetProfit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/font_plus_jakarta_sans"
+                            android:textStyle="bold"
+                            android:textColor="@color/state_success"
+                            android:textSize="24sp"
+                            tools:text="+ ₹ 5,780.00" />
+                    </LinearLayout>
+
+                    <!-- Key Financials 3-Column Strip -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false"
+                        android:weightSum="3">
+
+                        <!-- Total Revenue -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:background="@drawable/bg_metric_card"
+                            android:padding="8dp"
+                            android:layout_marginEnd="3dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/font_plus_jakarta_sans"
+                                android:text="@string/total_freight_amount"
+                                android:textColor="@color/text_muted"
+                                android:textSize="10sp"
+                                android:singleLine="true"
+                                android:ellipsize="end" />
+
+                            <TextView
+                                android:id="@+id/tvTotalFreight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/font_plus_jakarta_sans"
+                                android:textStyle="bold"
+                                android:textColor="@color/text_main"
+                                android:textSize="12sp"
+                                android:singleLine="true"
+                                tools:text="₹ 46,000" />
+                        </LinearLayout>
+
+                        <!-- Total Cost -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:background="@drawable/bg_metric_card"
+                            android:padding="8dp"
+                            android:layout_marginHorizontal="3dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/font_plus_jakarta_sans"
+                                android:text="@string/total_estimated_expenses"
+                                android:textColor="@color/text_muted"
+                                android:textSize="10sp"
+                                android:singleLine="true"
+                                android:ellipsize="end" />
+
+                            <TextView
+                                android:id="@+id/tvTotalExpenses"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/font_plus_jakarta_sans"
+                                android:textStyle="bold"
+                                android:textColor="@color/state_error"
+                                android:textSize="12sp"
+                                android:singleLine="true"
+                                tools:text="₹ 22,220" />
+                        </LinearLayout>
+
+                        <!-- Min Freight -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:background="@drawable/bg_metric_card"
+                            android:padding="8dp"
+                            android:layout_marginStart="3dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/font_plus_jakarta_sans"
+                                android:text="@string/suggested_min_freight_rate"
+                                android:textColor="@color/text_muted"
+                                android:textSize="10sp"
+                                android:singleLine="true"
+                                android:ellipsize="end" />
+
+                            <TextView
+                                android:id="@+id/tvMinFreight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/font_plus_jakarta_sans"
+                                android:textStyle="bold"
+                                android:textColor="@color/brand_primary"
+                                android:textSize="12sp"
+                                android:singleLine="true"
+                                tools:text="₹ 26,664" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="12dp"
+                        android:background="@color/border_subtle" />
+
+                    <!-- Secondary Operational Details -->
+                    <!-- Total Distance -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/font_plus_jakarta_sans"
+                            android:text="@string/total_trip_distance"
+                            android:textColor="@color/text_main"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvTotalDistance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/font_plus_jakarta_sans"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_main"
+                            android:textSize="13sp"
+                            tools:text="1,600 km" />
+                    </LinearLayout>
+
+                    <!-- Fuel Needed -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/font_plus_jakarta_sans"
+                            android:text="@string/required_fuel"
+                            android:textColor="@color/text_main"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvFuelNeeded"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/font_plus_jakarta_sans"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_main"
+                            android:textSize="13sp"
+                            tools:text="202.4 Liters" />
+                    </LinearLayout>
+
+                    <!-- Fuel Cost -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/font_plus_jakarta_sans"
+                            android:text="@string/estimated_fuel_cost"
+                            android:textColor="@color/text_main"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvFuelCost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/font_plus_jakarta_sans"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_main"
+                            android:textSize="13sp"
+                            tools:text="₹ 18,720.00" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

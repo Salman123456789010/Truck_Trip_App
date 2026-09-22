@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/_4sdp"
+    android:layout_marginVertical="@dimen/_5sdp"
+    app:cardBackgroundColor="@color/bgcolor_"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_1sdp"
+    app:strokeColor="#8EC5FF"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+
+        <!-- Header: Sequence and Truck Friendly badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvStopTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/plusjakartasans_bold"
+                android:textColor="@color/color_primary"
+                android:textSize="@dimen/_13sdp"
+                tools:text="@string/fuel_stop_1" />
+
+            <TextView
+                android:id="@+id/tvTruckFriendlyBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_badge_background"
+                android:backgroundTint="#E7F5EC"
+                android:paddingHorizontal="@dimen/_6sdp"
+                android:paddingVertical="@dimen/_2sdp"
+                android:text="@string/truck_friendly"
+                android:textColor="#0E8A37"
+                android:textSize="@dimen/_9sdp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Distance stats row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvDistanceFromStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/new_black"
+                android:textSize="@dimen/_11sdp"
+                tools:text="At: 350.0 km" />
+
+            <TextView
+                android:id="@+id/tvLegDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/details_text_color"
+                android:textSize="@dimen/_10sdp"
+                tools:text="(+350 km from prev)" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/_6sdp"
+            android:background="#D2E4FF" />
+
+        <!-- Fuel Remaining and Recommended Fuel Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fuel_remaining"
+                    android:textColor="@color/details_text_color"
+                    android:textSize="@dimen/_9sdp" />
+
+                <TextView
+                    android:id="@+id/tvFuelBeforeStop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/plusjakartasans_bold"
+                    android:textColor="@color/english_txt"
+                    android:textSize="@dimen/_12sdp"
+                    tools:text="~17.0 L" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recommended_refuel"
+                    android:textColor="@color/details_text_color"
+                    android:textSize="@dimen/_9sdp" />
+
+                <TextView
+                    android:id="@+id/tvRecommendedFuel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/plusjakartasans_bold"
+                    android:textColor="@color/color_primary"
+                    android:textSize="@dimen/_12sdp"
+                    tools:text="~130.0 L" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Cost and remaining trip distance -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvEstimatedCost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="#0E8A37"
+                android:textSize="@dimen/_11sdp"
+                tools:text="Est. Cost: ₹12,350" />
+
+            <TextView
+                android:id="@+id/tvRemainingDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/details_text_color"
+                android:textSize="@dimen/_10sdp"
+                tools:text="Remaining: 175 km" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

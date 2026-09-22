@@ -1,0 +1,204 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "9a9cf54aad125ddad304ba7b6eb472eb",
+    "entities": [
+      {
+        "tableName": "products",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `truckNumber` TEXT NOT NULL, `srcPlace` TEXT NOT NULL, `destPlace` TEXT NOT NULL, `srcDate` TEXT NOT NULL, `destDate` TEXT NOT NULL, `avg` TEXT NOT NULL, `randomNumber` TEXT NOT NULL, `modelList1` TEXT NOT NULL, `modelList2` TEXT NOT NULL, `routeJson` TEXT NOT NULL, `updatedAt` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "truckNumber",
+            "columnName": "truckNumber",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "srcPlace",
+            "columnName": "srcPlace",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "destPlace",
+            "columnName": "destPlace",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "srcDate",
+            "columnName": "srcDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "destDate",
+            "columnName": "destDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avg",
+            "columnName": "avg",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "randomNumber",
+            "columnName": "randomNumber",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "modelList1",
+            "columnName": "modelList1",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "modelList2",
+            "columnName": "modelList2",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "routeJson",
+            "columnName": "routeJson",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "trip_records",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `source` TEXT NOT NULL, `destination` TEXT NOT NULL, `start_date` TEXT NOT NULL, `end_date` TEXT NOT NULL, `total_income` TEXT NOT NULL, `total_expense` TEXT NOT NULL, `driver_income` TEXT NOT NULL, `owner_profit` TEXT NOT NULL, `truck_average` TEXT NOT NULL, `truck_no` TEXT NOT NULL, `createdDate` TEXT NOT NULL, `updatedDate` TEXT NOT NULL, `incomeJson` TEXT NOT NULL, `expenseJson` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "source",
+            "columnName": "source",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "destination",
+            "columnName": "destination",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "start_date",
+            "columnName": "start_date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "end_date",
+            "columnName": "end_date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_income",
+            "columnName": "total_income",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_expense",
+            "columnName": "total_expense",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "driver_income",
+            "columnName": "driver_income",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "owner_profit",
+            "columnName": "owner_profit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "truck_average",
+            "columnName": "truck_average",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "truck_no",
+            "columnName": "truck_no",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdDate",
+            "columnName": "createdDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedDate",
+            "columnName": "updatedDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "incomeJson",
+            "columnName": "incomeJson",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expenseJson",
+            "columnName": "expenseJson",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9a9cf54aad125ddad304ba7b6eb472eb')"
+    ]
+  }
+}
