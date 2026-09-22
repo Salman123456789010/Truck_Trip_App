@@ -12,6 +12,12 @@ interface TripRecordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertAll(trips: List<TripRecordEntity>)
 
+    @Query("SELECT * FROM trip_records ORDER BY start_date DESC")
+    suspend fun getAll(): List<TripRecordEntity>
+
+    @Query("SELECT COUNT(*) FROM trip_records")
+    suspend fun getCount(): Int
+
     @Query("SELECT * FROM trip_records WHERE start_date >= :fromDate AND end_date <= :toDate ORDER BY start_date DESC")
     suspend fun getTripsInRange(fromDate: String, toDate: String): List<TripRecordEntity>
 

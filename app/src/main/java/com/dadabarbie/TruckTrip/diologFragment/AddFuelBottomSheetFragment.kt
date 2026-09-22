@@ -2,6 +2,7 @@ package com.dadabarbie.TruckTrip.diologFragment
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -32,13 +33,15 @@ class AddFuelBottomSheetFragment(
     private var fuelDate: String = "",
     private var isOdometerMode: Boolean = true,  // This is passed from caller
     private var position: Int = -1
-) : BottomSheetDialogFragment() {
+) : BottomSheetDialogFragment(),TextToSpeech.OnInitListener {
 
     private lateinit var binding: BottomSheetAddFuelBinding
     private val calendar = Calendar.getInstance()
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     private var lastOdometerReading = 0.0
     private var currentIsOdometerMode = true
+    private var textToSpeech: TextToSpeech? = null
+    private var isTtsInitialized = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,8 +55,7 @@ class AddFuelBottomSheetFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
-
+        textToSpeech = TextToSpeech(requireActivity(), this)
         // Get last odometer reading from database/list
         getLastOdometerReading()
 
@@ -163,8 +165,30 @@ class AddFuelBottomSheetFragment(
         binding.etDate.setOnClickListener {
             showDatePicker()
         }
+        binding.micTitleInstruction.setOnClickListener {
+            speakFeedbackMessage()
+        }
     }
 
+    private fun speakFeedbackMessage() {
+        if (!isTtsInitialized) {
+            return
+        }
+
+        // Stop any ongoing speech
+        textToSpeech?.stop()
+
+        // The message to speak
+        val message = getString(R.string.add_fuel_info)
+
+        // Speak the message
+        textToSpeech?.speak(message, TextToSpeech.QUEUE_FLUSH, null, "feedback_message")
+
+
+
+        // Visual feedback - animate the speaker button
+
+    }
     private fun showDatePicker() {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
@@ -319,7 +343,7 @@ class AddFuelBottomSheetFragment(
         }
 
         // Calculate distance and average for description
-        var desc = "Fuel - ${liters}L"
+        var desc = getString(R.string.fuel_l, liters)
         var calculatedAverage = ""
 
         if (km.isNotEmpty()) {
@@ -356,8 +380,8 @@ class AddFuelBottomSheetFragment(
             expense.km = km
             expense.place = place
             expense.date = date
-            expense.type = "Fuel"
-            expense.note = "Fuel"
+            expense.type = getString(R.string.fuel)
+            expense.note = getString(R.string.fuel)
             expense.isOdometerMode = currentIsOdometerMode // Store the mode
 
             (requireActivity() as MainActivity).debitDataUpdate()
@@ -370,10 +394,10 @@ class AddFuelBottomSheetFragment(
                     DebitModel(
                         desc = desc,
                         amount = amount,
-                        note = "Fuel",
+                        note = getString(R.string.fuel),
                         place = place,
                         date = date,
-                        type = "Fuel",
+                        type = getString(R.string.fuel),
                         liters = liters,
                         km = km,
                         isOdometerMode = currentIsOdometerMode // Store the mode
@@ -381,6 +405,30 @@ class AddFuelBottomSheetFragment(
                 )
             )
             dialog?.dismiss()
+        }
+    }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            // Set language to Hindi
+            val result = textToSpeech?.setLanguage(Locale("hi", "IN"))
+
+            if (result == TextToSpeech.LANG_MISSING_DATA ||
+                result == TextToSpeech.LANG_NOT_SUPPORTED) {
+
+                // Fallback to English
+                textToSpeech?.setLanguage(Locale.US)
+            }
+
+            isTtsInitialized = true
+
+            // Set speech rate (0.5 to 2.0, 1.0 is normal)
+            textToSpeech?.setSpeechRate(0.85f)
+
+            // Set pitch (0.5 to 2.0, 1.0 is normal)
+            textToSpeech?.setPitch(1.0f)
+        } else {
+
         }
     }
 }

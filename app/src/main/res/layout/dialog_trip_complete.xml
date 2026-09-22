@@ -67,7 +67,7 @@
                         android:id="@+id/tvTruckNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GJ-11-1234"
+                        android:text=""
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="#333333" />

@@ -159,45 +159,23 @@ class LanguageSelction : BaseActivity(), OnClickListener, LanguageAdapter.OnItem
                         val isLogin = Prefs[Constants.isLogin, false]
                         val appModeSelected = Prefs[Constants.appMode, ""].isNotEmpty()
 
-                        when {
+                        val destinationIntent = when {
                             // User is logged in - go back to their dashboard
                             isLogin -> {
-                                Log.d("LANG_DEBUG", "User logged in, going to dashboard")
-                                val intent = if (Prefs[Constants.appMode, ""] == "A") {
-                                    Intent(this@LanguageSelction, NormalUserDashBoard::class.java)
+                                if (Prefs[Constants.appMode, ""] == "A") {
+                                    Intent(this@LanguageSelction, NormalUserDashBoard::class.java).putExtra("tripData", "")
                                 } else {
                                     Intent(this@LanguageSelction, DashBoardActivity::class.java)
                                 }
-                                intent.flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(intent)
-                                finish()
                             }
-
-                            // App mode selected but not logged in - go to login
-                            appModeSelected -> {
-                                Log.d("LANG_DEBUG", "App mode selected, going to login")
-                                val intent =
-                                    Intent(this@LanguageSelction, LoginScreenActivity::class.java)
-                                intent.flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(intent)
-                                finish()
-                            }
-
-                            // Fresh install - go to trip mode selection
                             else -> {
-                                Log.d("LANG_DEBUG", "Fresh install, going to trip mode")
-                                val intent = Intent(
-                                    this@LanguageSelction,
-                                    TripModeSelectionActivity::class.java
-                                )
-                                intent.flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                startActivity(intent)
-                                finish()
+                                Intent(this@LanguageSelction, LoginScreenActivity::class.java)
                             }
                         }
+                        destinationIntent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(destinationIntent)
+                        finish()
                     }
                 }
             }
@@ -250,14 +228,10 @@ class LanguageSelction : BaseActivity(), OnClickListener, LanguageAdapter.OnItem
 
                 }
                 is NetworkResult.Success<*> -> {
-                    if(Prefs[Constants.appMode,""]=="A"){
-                        val i = Intent(applicationContext, NormalUserDashBoard::class.java)
-                            .putExtra("tripData","")
-                        startActivity(i)
-                    }else{
+
                         val i = Intent(applicationContext, DashBoardActivity::class.java)
                         startActivity(i)
-                    }
+
 //                    startActivity(Intent(this, DashBoardActivity::class.java))
 
                 }

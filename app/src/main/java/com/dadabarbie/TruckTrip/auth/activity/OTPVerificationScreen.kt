@@ -56,11 +56,11 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
 
     private var number = ""
     private var otp = ""
-    var fcmToken=""
-    var flag:Boolean=false
-    var token:String=""
+    var fcmToken = ""
+    var flag: Boolean = false
+    var token: String = ""
     private var mAuth: FirebaseAuth? = null
-     var verificationId1: String? = null
+    var verificationId1: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,19 +79,25 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
             authViewModel.otpVerificationTimer()
             authViewModel.otpVerificationTimer?.start()
         }
-        getFcmToken()
         otpCountDown()
         number = intent.getStringExtra("number").toString()
-        flag=intent.getBooleanExtra("flag",false)
-        if(flag){
+        flag = intent.getBooleanExtra("flag", false)
+        if (flag) {
             verificationId1 = intent.getStringExtra("otp").toString()
-        }else{
-             token= intent.getStringExtra("token").toString()
-             authViewModel.requestOTP(number,fcmToken,token,Prefs[Constants.languageCode, ""].toString())
+            getFcmToken()
+        } else {
+            token = intent.getStringExtra("token").toString()
+            showProgress()
+            getFcmToken { validFcm ->
+                authViewModel.requestOTP(
+                    number,
+                    validFcm,
+                    token,
+                    Prefs[Constants.languageCode, ""].toString()
+                )
+            }
         }
         setupKeyboardHandling()
-//        spannableChanges()
-//        clickableChanges()
         setObserver()
 
     }
@@ -126,7 +132,8 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
         }
 
         // Method 3: Global layout listener
-        binding.root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        binding.root.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
             private var wasKeyboardVisible = false
 
             override fun onGlobalLayout() {
@@ -159,17 +166,18 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
         authViewModel.timerTick.observe(this) { millisUntilFinished ->
             millisUntilFinished?.let {
                 if ((((millisUntilFinished) / 1000)) != 0L) {
-                    binding.resendOtp.text =  getString(R.string.resend_otp_in_s)+" ${(millisUntilFinished) / 1000}s"
+                    binding.resendOtp.text =
+                        getString(R.string.resend_otp_in_s) + " ${(millisUntilFinished) / 1000}s"
 
                 } else {
                     if (authViewModel.attemptForResendOtp == 0) {
-                        binding.resendOtp.text =getString(R.string.resend_otp)
+                        binding.resendOtp.text = getString(R.string.resend_otp)
                     } else {
-                         binding.resendOtp.gone()
-                         binding.resend.visible()
+                        binding.resendOtp.gone()
+                        binding.resend.visible()
                         binding.resendOtp.isClickable = true
                         binding.btLogin.isEnabled = true
-                        binding.resendOtp.text =getString(R.string.resend_otp)
+                        binding.resendOtp.text = getString(R.string.resend_otp)
                     }
 
                 }
@@ -189,37 +197,47 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
     }
 
 
-
     private fun setObserver() {
         authViewModel.res.observe(this) {
             when (it) {
                 is NetworkResult.Error -> {
-//                    showSnackBar(binding.root, it.message.toString())
-                    Toast.makeText(applicationContext, getString(R.string.cancelled_please_try_again), Toast.LENGTH_SHORT)
-                        .show()
                     dismissProgress()
+                    val errorMsg = it.message ?: getString(R.string.cancelled_please_try_again)
+                    Toast.makeText(
+                        applicationContext,
+                        errorMsg,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
                 is NetworkResult.Loading -> {
                 }
 
                 is NetworkResult.Success -> {
-                    if (it.data?.message == "User login successfully") {
+                    dismissProgress()
+                    val authToken = it.data?.data?.token
+                    if (!authToken.isNullOrEmpty()) {
                         subscribeToTopic(loginUser)
                         Prefs[Constants.isLogin] = true
-                        Prefs[Constants.authToken] = it.data.data.token
-                        Prefs[Constants.mobileNumber] =number.toString()
-                        if(Prefs[Constants.appMode,""]=="A"){
-                            val i = Intent(applicationContext, NormalUserDashBoard::class.java)
-                                .putExtra("tripData","")
-                            startActivity(i)
-                        }else{
-                            val i = Intent(applicationContext, DashBoardActivity::class.java)
-                            startActivity(i)
+                        Prefs[Constants.authToken] = authToken
+                        Prefs[Constants.mobileNumber] = number
+
+                        val i = if (Prefs[Constants.appMode, ""] == "A") {
+                            Intent(applicationContext, NormalUserDashBoard::class.java).putExtra("tripData", "")
+                        } else {
+                            Intent(applicationContext, DashBoardActivity::class.java)
+                        }.apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         }
-
-
+                        startActivity(i)
                         finish()
+                    } else {
+                        val msg = it.data?.message ?: getString(R.string.cancelled_please_try_again)
+                        Toast.makeText(
+                            applicationContext,
+                            msg,
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
 
@@ -227,11 +245,12 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
             }
         }
     }
-     private fun subscribeToTopic(topic:String){
-        FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener { task->
-            if(task.isSuccessful){
+
+    private fun subscribeToTopic(topic: String) {
+        FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
                 Log.d("TAG123", "subscribeToTopic: ")
-            }else{
+            } else {
 
             }
 
@@ -241,7 +260,7 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
 
     override fun onBackPressed() {
         super.onBackPressed()
-         finishAffinity()
+        finishAffinity()
     }
 
 
@@ -271,24 +290,45 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
     }
 
     private fun signInWithCredential(credential: PhoneAuthCredential) {
+        if (mAuth == null) {
+            mAuth = FirebaseAuth.getInstance()
+        }
         mAuth!!.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    mAuth!!.currentUser?.getIdToken(true)?.addOnCompleteListener {
-                        if(it.isSuccessful){
-                            it.result?.token?.let { it1 ->
-                                authViewModel.requestOTP(number,
-                                  fcmToken,it1,Prefs[Constants.languageCode, ""].toString()
-                                )
+                    mAuth!!.currentUser?.getIdToken(true)?.addOnCompleteListener { tokenTask ->
+                        if (tokenTask.isSuccessful) {
+                            val idTokenStr = tokenTask.result?.token
+                            if (!idTokenStr.isNullOrEmpty()) {
+                                if (fcmToken.isEmpty()) {
+                                    getFcmToken { validFcm ->
+                                        authViewModel.requestOTP(
+                                            number,
+                                            validFcm,
+                                            idTokenStr,
+                                            Prefs[Constants.languageCode, ""].toString()
+                                        )
+                                    }
+                                } else {
+                                    authViewModel.requestOTP(
+                                        number,
+                                        fcmToken,
+                                        idTokenStr,
+                                        Prefs[Constants.languageCode, ""].toString()
+                                    )
+                                }
+                            } else {
+                                dismissProgress()
+                                Toast.makeText(this, getString(R.string.cancelled_please_try_again), Toast.LENGTH_SHORT).show()
                             }
-
+                        } else {
+                            dismissProgress()
+                            Toast.makeText(this, tokenTask.exception?.message ?: getString(R.string.cancelled_please_try_again), Toast.LENGTH_LONG).show()
                         }
                     }
-
-
                 } else {
                     dismissProgress()
-                    Toast.makeText(this, task.exception!!.message, Toast.LENGTH_LONG)
+                    Toast.makeText(this, task.exception?.message ?: getString(R.string.cancelled_please_try_again), Toast.LENGTH_LONG)
                         .show()
                 }
             }
@@ -297,14 +337,15 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v) {
             binding.btLogin -> {
-                if(!binding.etOtpVerify.text.toString().isNullOrEmpty()){
+                if (!binding.etOtpVerify.text.toString().isNullOrEmpty()) {
                     showProgress()
                     verifyCode(binding.etOtpVerify.text.toString())
-                }else{
-                    showSnackBar(binding.root,getString(R.string.enter_otp))
+                } else {
+                    showSnackBar(binding.root, getString(R.string.enter_otp))
                 }
             }
-            binding.resend->{
+
+            binding.resend -> {
                 showProgress()
                 if (authViewModel.attemptForResendOtp >= 0) {
                     resendToken?.let { resendVerificationCode(number) }
@@ -356,13 +397,14 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
                 Toast.makeText(this@OTPVerificationScreen, e.message, Toast.LENGTH_LONG).show()
             }
         }
-    private fun getFcmToken() {
+
+    private fun getFcmToken(onComplete: ((String) -> Unit)? = null) {
         FirebaseMessaging.getInstance().token
             .addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    return@OnCompleteListener
+                if (task.isSuccessful) {
+                    fcmToken = task.result ?: ""
                 }
-                fcmToken=task.result
+                onComplete?.invoke(fcmToken)
             })
     }
 
@@ -379,10 +421,14 @@ class OTPVerificationScreen : BaseActivity(), View.OnClickListener {
 
                         override fun onVerificationFailed(e: FirebaseException) {
                             Constants.dismissProgress()
-                              Toast.makeText(applicationContext,"${e.message}",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, "${e.message}", Toast.LENGTH_SHORT)
+                                .show()
                         }
 
-                        override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+                        override fun onCodeSent(
+                            verificationId: String,
+                            token: PhoneAuthProvider.ForceResendingToken
+                        ) {
                             verificationId1 = verificationId
                             binding.resendOtp.visible()
                             binding.resend.gone()

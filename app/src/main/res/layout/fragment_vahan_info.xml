@@ -1,96 +1,502 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:fillViewport="true"
+    android:background="@color/surface_app_bg"
     tools:context=".fragment.VahanInfoFragment">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stay_tuned_we_re_working_on_this_feature"
-        android:textSize="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:gravity="center"
-        android:fontFamily="@font/plusjakartasans_bold"
-        android:textStyle="italic"
-        android:textColor="@color/greencolor"
-        android:layout_gravity="center"/>
 
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="@dimen/_10sdp"-->
-<!--        android:gravity="center"-->
-<!--        android:layout_marginStart="@dimen/_5sdp"-->
-<!--        android:layout_marginEnd="@dimen/_5sdp"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:weightSum="2">-->
-
-<!--        <com.google.android.material.card.MaterialCardView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1.4"-->
-<!--            app:cardBackgroundColor="@color/white"-->
-<!--            app:cardCornerRadius="@dimen/_10sdp">-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_margin="@dimen/_5sdp"-->
-<!--                android:orientation="horizontal">-->
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="1.5"-->
-<!--                    android:gravity="center"-->
-<!--                    android:weightSum="2">-->
-
-<!--                    <com.google.android.material.textfield.TextInputEditText-->
-<!--                        android:id="@+id/number"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="@dimen/_10sdp"-->
-<!--                        android:layout_weight="1.8"-->
-<!--                        android:background="@null"-->
-<!--                        android:hint="GJ 11 B 2345" />-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/closeBtn"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginEnd="@dimen/_5sdp"-->
-<!--                        android:layout_weight="0.2"-->
-<!--                        android:src="@drawable/baseline_close_24" />-->
-
-<!--                </LinearLayout>-->
-<!--            </LinearLayout>-->
-
-<!--        </com.google.android.material.card.MaterialCardView>-->
-
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="0.6"-->
-<!--            android:layout_marginStart="@dimen/_5sdp"-->
-<!--            android:text="Search"-->
-<!--            android:id="@+id/searchBtn"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="@dimen/_10sdp" />-->
-<!--    </LinearLayout>-->
-
-
-    <com.google.android.ads.nativetemplates.TemplateView
-        android:id="@+id/my_template"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:gnt_template_type="@layout/gnt_medium_template_view" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="24dp">
 
-</LinearLayout>
+        <!-- Category 1: Trip Planning & Estimation -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/category_trip_planning"
+            android:textColor="@color/brand_primary"
+            android:textSize="14sp"
+            android:fontFamily="@font/font_plus_jakarta_sans"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/categoryPlanningRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:weightSum="2">
+
+            <!-- Card: Mileage & Trip Estimator -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/tripEstimator"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="14dp">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_tool_icon_container">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="🚛"
+                            android:textSize="20sp" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/mileage_amp_estimator"
+                        android:textColor="@color/text_main"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:gravity="center"
+                        android:text="@string/desc_trip_estimator"
+                        android:textColor="@color/text_muted"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textSize="11sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card: Return Load / Backhaul Calculator -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/backhaulCalculator"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="14dp">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_tool_icon_container">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="🔄"
+                            android:textSize="20sp" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/backhaul_calculator_short"
+                        android:textColor="@color/text_main"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:gravity="center"
+                        android:text="@string/desc_backhaul_calc"
+                        android:textColor="@color/text_muted"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textSize="11sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- Category 2: Fuel & Route Management -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/category_fuel_mgmt"
+            android:textColor="@color/brand_primary"
+            android:textSize="14sp"
+            android:fontFamily="@font/font_plus_jakarta_sans"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/categoryFuelRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:weightSum="2">
+
+            <!-- Card: Fuel Stop Planner -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fuelStopPlanner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="14dp">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_tool_icon_container">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="🛣️⛽"
+                            android:textSize="18sp" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/fuel_stop_planner"
+                        android:textColor="@color/text_main"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:gravity="center"
+                        android:text="@string/desc_fuel_planner"
+                        android:textColor="@color/text_muted"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textSize="11sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card: Diesel Prices -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/dieselInfo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="14dp">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_tool_icon_container">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="⛽"
+                            android:textSize="20sp" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/diesel_prices"
+                        android:textColor="@color/text_main"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:gravity="center"
+                        android:text="@string/desc_diesel_info"
+                        android:textColor="@color/text_muted"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textSize="11sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- Category 3: Cargo & Advanced Reports -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/category_cargo_reports"
+            android:textColor="@color/brand_primary"
+            android:textSize="14sp"
+            android:fontFamily="@font/font_plus_jakarta_sans"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/categoryCargoRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:weightSum="2">
+
+            <!-- Card: Load Capacity Calculator -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/loadCapacityCalculator"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="14dp">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_tool_icon_container">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="⚖️"
+                            android:textSize="20sp" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/load_capacity_calculator"
+                        android:textColor="@color/text_main"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:gravity="center"
+                        android:text="@string/desc_load_capacity"
+                        android:textColor="@color/text_muted"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textSize="11sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card: Detailed Trip Report -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/tripReport"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/surface_card"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="14dp">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_tool_icon_container">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="📊"
+                            android:textSize="20sp" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/detailed_trip_report"
+                        android:textColor="@color/text_main"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:gravity="center"
+                        android:text="@string/desc_trip_report"
+                        android:textColor="@color/text_muted"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textSize="11sp"
+                        android:minLines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- AdMob Native Ad Template (guaranteed clean separation below cards) -->
+        <com.google.android.ads.nativetemplates.TemplateView
+            android:id="@+id/my_template"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone"
+            app:gnt_template_type="@layout/gnt_medium_template_view" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

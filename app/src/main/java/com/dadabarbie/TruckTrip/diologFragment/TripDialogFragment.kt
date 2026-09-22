@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -117,6 +118,9 @@ class TripDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set dialog to adjust when keyboard appears
+        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         initTextToSpeech()
         setupRouteRecyclerView()
@@ -282,12 +286,6 @@ class TripDialogFragment : DialogFragment() {
         }
 
         // Add middle place button
-        // Replace your btnAddMiddlePlace click listener with this fixed version:
-
-        // Replace your btnAddMiddlePlace click listener with this fixed version:
-
-        // Replace your btnAddMiddlePlace click listener with this fixed version:
-
         binding.btnAddMiddlePlace.setOnClickListener {
             val middlePlace = binding.etMiddlePlace.text.toString().trim()
 
@@ -310,7 +308,7 @@ class TripDialogFragment : DialogFragment() {
 
             // Notify adapter about the new item
             routeAdapter.notifyItemInserted(routeList.size - 1)
-            routeAdapter.notifyItemChanged(routeList.size - 2) // Update the old destination (now middle place)
+            routeAdapter.notifyItemRangeChanged(routeList.size - 2, 2)
 
             // Clear input
             binding.etMiddlePlace.setText("")
@@ -335,6 +333,11 @@ class TripDialogFragment : DialogFragment() {
         binding.truckSpeaker.setOnClickListener {
             speakText(getString(R.string.truck_number_mic))
         }
+
+        // Truck number mic (if you want to add it)
+        // binding.truckMic.setOnClickListener {
+        //     startSpeechToText(TRUCK_SPEECH_REQUEST)
+        // }
 
         // Submit button
         binding.submit.setOnClickListener {
@@ -467,6 +470,9 @@ class TripDialogFragment : DialogFragment() {
             )
             setBackgroundDrawableResource(android.R.color.transparent)
 
+            // IMPORTANT: This makes dialog adjust when keyboard appears
+            setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
             attributes?.let { params ->
                 val margin = context.resources.getDimensionPixelSize(R.dimen._12sdp)
                 params.width = context.resources.displayMetrics.widthPixels - (margin * 2)
@@ -486,6 +492,9 @@ class TripDialogFragment : DialogFragment() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             setBackgroundDrawableResource(android.R.color.transparent)
+
+            // Ensure soft input mode is set
+            setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
             attributes?.let { params ->
                 val margin = context.resources.getDimensionPixelSize(R.dimen._12sdp)

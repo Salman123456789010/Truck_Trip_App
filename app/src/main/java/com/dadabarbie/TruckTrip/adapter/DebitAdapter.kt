@@ -5,14 +5,17 @@ package com.dadabarbie.TruckTrip.adapter
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dadabarbie.TruckTrip.R
+import com.dadabarbie.TruckTrip.Utils.Constants.getExpenseText
 import com.dadabarbie.TruckTrip.databinding.CreditLayoutBinding
 import com.dadabarbie.TruckTrip.model.addTrip.Expense
 
@@ -50,7 +53,16 @@ class DebitAdapter(
 
         holder.binding.amount.text = "-${item.amount}"
         holder.binding.amount.setTextColor(context.getColor(android.R.color.holo_red_dark))
-        holder.binding.amountText.text = item.desc
+        Log.d("whatscome", "onBindViewHolder: ${item.desc}")
+        holder.binding.amountText.text =item.desc
+
+
+        if (item.note.isNotEmpty()){
+            holder.binding.noteLayout.visibility= View.VISIBLE
+        }else{
+            holder.binding.noteLayout.visibility= View.GONE
+        }
+        holder.binding.noteLayoutText.text = item.note
         holder.binding.mainCardLayout.setStrokeColor(
             ColorStateList.valueOf(context.getColor(R.color.tamil_txt))
         )

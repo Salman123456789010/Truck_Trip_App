@@ -218,7 +218,7 @@ class HowToUseNormalActivity : BaseActivity(), OnboardingVoiceListener {
 
         binding.backBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         binding.youtubeIcon.setOnClickListener {
-            val url = "https://www.youtube.com/@TruckWallah_TW"
+            val url = "https://youtu.be/vV81Y4E_Vt8?si=IuazXKYqB8eMWlqb"
             openLink(url)
         }
 

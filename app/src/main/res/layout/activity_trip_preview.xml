@@ -4,394 +4,454 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="#F5F5F5">
+    android:background="#F8FAFC"
+    android:fitsSystemWindows="true">
 
+    <!-- Top Bar -->
     <RelativeLayout
         android:id="@+id/topBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_height="@dimen/_56sdp"
         android:background="@color/color_primary"
-        android:elevation="6dp">
+        android:elevation="4dp"
+        android:paddingHorizontal="@dimen/_12sdp">
 
         <ImageView
             android:id="@+id/backBtn"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_12sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/baseline_arrow_back_24"
-            android:tint="@android:color/white" />
+            app:tint="@android:color/white" />
 
         <TextView
             android:id="@+id/tittleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/add_hissab"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/trip_preview_title"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:textSize="@dimen/_15sdp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/btnDownloadTop"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:visibility="gone"
-            android:text="@string/save"
-            android:textColor="@android:color/white"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/outline_arrow_downward_24"
+            app:tint="@android:color/white" />
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_56sdp"
+        android:clipToPadding="false"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:paddingBottom="@dimen/_75sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/_10sdp">
 
-            <!-- Trip Header Card -->
+            <!-- Vehicle & Route Header Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@android:color/white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Trip Title Header -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/color_primary"
-                        android:padding="16dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvTripTitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/white"
-                            android:gravity="center"
-                            tools:text="Mumbai TO Delhi" />
-
-                        <TextView
-                            android:id="@+id/tvRoute"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:textSize="13sp"
-                            android:textColor="#E3F2FD"
-                            android:gravity="center"
-                            android:visibility="gone"
-                            tools:visibility="visible"
-                            tools:text="Mumbai → Pune → Nagpur → Delhi" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <!-- Truck Number -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingVertical="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/truck_number"
-                                android:textSize="15sp"
-                                android:textColor="#757575" />
-
-                            <TextView
-                                android:id="@+id/tvTruckNumber"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                android:textColor="#1565C0"
-                                tools:text="MH 12 AB 1234" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#E0E0E0" />
-
-                        <!-- Start Date -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingVertical="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/start_date"
-                                android:textSize="15sp"
-                                android:textColor="#757575" />
-
-                            <TextView
-                                android:id="@+id/tvStartDate"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                android:textColor="#1565C0"
-                                tools:text="12 Dec 2025" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#E0E0E0" />
-
-                        <!-- End Date -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingVertical="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/end_date"
-                                android:textSize="15sp"
-                                android:textColor="#757575" />
-
-                            <TextView
-                                android:id="@+id/tvEndDate"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                android:textColor="#1565C0"
-                                tools:text="25 Dec 2025" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#E0E0E0" />
-
-                        <!-- Total Days -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingVertical="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/total_days"
-                                android:textSize="15sp"
-                                android:textColor="#757575" />
-
-                            <TextView
-                                android:id="@+id/tvTotalDays"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                android:textColor="#1565C0"
-                                tools:text="13 Days" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#E0E0E0" />
-
-                        <!-- Truck Average -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingVertical="10dp">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/truck_average"
-                                android:textSize="15sp"
-                                android:textColor="#757575" />
-
-                            <TextView
-                                android:id="@+id/tvTruckAverage"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                android:textColor="#1565C0"
-                                tools:text="6.5 km/l" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Financial Summary Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@android:color/white">
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="@dimen/_12sdp"
+                app:cardElevation="@dimen/_3sdp"
+                app:strokeColor="#E2E8F0"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="@dimen/_12sdp">
+
+                    <!-- Truck Number Badge -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvTruckNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_rounded_edittext"
+                            android:backgroundTint="#EFF6FF"
+                            android:fontFamily="@font/roboto_bold"
+                            android:paddingHorizontal="@dimen/_10sdp"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:textColor="#1D4ED8"
+                            android:textSize="@dimen/_13sdp"
+                            tools:text="🚛  MH 12 AB 1234" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/tvTotalDays"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_chip_selected"
+                            android:backgroundTint="#F1F5F9"
+                            android:paddingHorizontal="@dimen/_8sdp"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:textColor="#475569"
+                            android:textSize="@dimen/_11sdp"
+                            android:textStyle="bold"
+                            tools:text="13 Days" />
+                    </LinearLayout>
+
+                    <!-- Route Title & Timeline -->
+                    <TextView
+                        android:id="@+id/tvTripTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textColor="#0F172A"
+                        android:textSize="@dimen/_16sdp"
+                        tools:text="Mumbai ➔ Delhi" />
+
+                    <TextView
+                        android:id="@+id/tvRoute"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="#64748B"
+                        android:textSize="@dimen/_11sdp"
+                        android:visibility="gone"
+                        tools:text="Mumbai → Pune → Nagpur → Delhi"
+                        tools:visibility="visible" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="@dimen/_10sdp"
+                        android:background="#F1F5F9" />
+
+                    <!-- Dates & Truck Average Grid -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/start_date"
+                                android:textColor="#94A3B8"
+                                android:textSize="@dimen/_10sdp" />
+
+                            <TextView
+                                android:id="@+id/tvStartDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="#1E293B"
+                                android:textSize="@dimen/_11sdp"
+                                tools:text="12 Dec 2025" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/end_date"
+                                android:textColor="#94A3B8"
+                                android:textSize="@dimen/_10sdp" />
+
+                            <TextView
+                                android:id="@+id/tvEndDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="#1E293B"
+                                android:textSize="@dimen/_11sdp"
+                                tools:text="25 Dec 2025" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/truck_avg"
+                                android:textColor="#94A3B8"
+                                android:textSize="@dimen/_10sdp" />
+
+                            <TextView
+                                android:id="@+id/tvTruckAverage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textColor="#1E293B"
+                                android:textSize="@dimen/_11sdp"
+                                tools:text="6.5 km/l" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Financial Summary Cards Grid -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="@dimen/_12sdp"
+                app:cardElevation="@dimen/_3sdp"
+                app:strokeColor="#E2E8F0"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_12sdp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
                         android:text="@string/financial_summary"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/color_primary"
-                        android:paddingBottom="16dp" />
+                        android:textColor="#0F172A"
+                        android:textSize="@dimen/_14sdp" />
 
-                    <!-- Total Income -->
+                    <!-- Row 1: Total Freight & Total Expense -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:background="@drawable/income_background"
-                        android:padding="16dp"
-                        android:layout_marginBottom="10dp">
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="horizontal">
 
-                        <TextView
+                        <!-- Freight / Income -->
+                        <com.google.android.material.card.MaterialCardView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_4sdp"
                             android:layout_weight="1"
-                            android:text="@string/total_income_"
-                            android:textSize="15sp"
-                            android:textColor="@android:color/white" />
+                            app:cardBackgroundColor="#F0FDF4"
+                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#BBF7D0"
+                            app:strokeWidth="1dp">
 
-                        <TextView
-                            android:id="@+id/tvTotalIncome"
-                            android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_10sdp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📥"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:text="@string/total_income_label"
+                                    android:textColor="#166534"
+                                    android:textSize="@dimen/_10sdp" />
+
+                                <TextView
+                                    android:id="@+id/tvTotalIncome"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:textColor="#15803D"
+                                    android:textSize="@dimen/_14sdp"
+                                    tools:text="₹ 50,000" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Expense -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textSize="19sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/white"
-                            tools:text="₹50000" />
+                            android:layout_marginStart="@dimen/_4sdp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#FEF2F2"
+                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#FECACA"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_10sdp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📤"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:text="@string/total_expense_label"
+                                    android:textColor="#991B1B"
+                                    android:textSize="@dimen/_10sdp" />
+
+                                <TextView
+                                    android:id="@+id/tvTotalExpense"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:textColor="#DC2626"
+                                    android:textSize="@dimen/_14sdp"
+                                    tools:text="₹ 30,000" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
                     </LinearLayout>
 
-                    <!-- Total Expense -->
+                    <!-- Row 2: Driver Income & Net Owner Profit -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:background="@drawable/expense_background"
-                        android:padding="16dp"
-                        android:layout_marginBottom="10dp">
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:orientation="horizontal">
 
-                        <TextView
+                        <!-- Driver Income -->
+                        <com.google.android.material.card.MaterialCardView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_4sdp"
                             android:layout_weight="1"
-                            android:text="@string/total_expense"
-                            android:textSize="15sp"
-                            android:textColor="@android:color/white" />
+                            app:cardBackgroundColor="#EFF6FF"
+                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#BFDBFE"
+                            app:strokeWidth="1dp">
 
-                        <TextView
-                            android:id="@+id/tvTotalExpense"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="19sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/white"
-                            tools:text="₹30000" />
-                    </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_10sdp">
 
-                    <!-- Driver Income -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:background="@drawable/driver_income_background"
-                        android:padding="16dp"
-                        android:layout_marginBottom="10dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="👨‍✈️"
+                                    android:textSize="@dimen/_14sdp" />
 
-                        <TextView
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:text="@string/driver_income"
+                                    android:textColor="#1E40AF"
+                                    android:textSize="@dimen/_10sdp" />
+
+                                <TextView
+                                    android:id="@+id/tvDriverIncome"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:textColor="#2563EB"
+                                    android:textSize="@dimen/_14sdp"
+                                    tools:text="₹ 8,000" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Net Profit -->
+                        <com.google.android.material.card.MaterialCardView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_4sdp"
                             android:layout_weight="1"
-                            android:text="@string/driver_income"
-                            android:textSize="15sp"
-                            android:textColor="@android:color/white" />
+                            app:cardBackgroundColor="#F8FAFC"
+                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#CBD5E1"
+                            app:strokeWidth="1dp">
 
-                        <TextView
-                            android:id="@+id/tvDriverIncome"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="19sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/white"
-                            tools:text="₹8000" />
-                    </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_10sdp">
 
-                    <!-- Owner Profit -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:background="@drawable/profit_background"
-                        android:padding="16dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🏆"
+                                    android:textSize="@dimen/_14sdp" />
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/owner_profit"
-                            android:textSize="15sp"
-                            android:textColor="@android:color/white" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:text="@string/owner_profit"
+                                    android:textColor="#0F172A"
+                                    android:textSize="@dimen/_10sdp" />
 
-                        <TextView
-                            android:id="@+id/tvOwnerProfit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="21sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/white"
-                            tools:text="₹12000" />
+                                <TextView
+                                    android:id="@+id/tvOwnerProfit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:textColor="#166534"
+                                    android:textSize="@dimen/_14sdp"
+                                    tools:text="₹ 12,000" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -401,43 +461,46 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@android:color/white">
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="@dimen/_12sdp"
+                app:cardElevation="@dimen/_3sdp"
+                app:strokeColor="#E2E8F0"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="@dimen/_12sdp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
                         android:text="@string/income_details"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#1565C0"
-                        android:paddingBottom="12dp" />
+                        android:textColor="#166534"
+                        android:textSize="@dimen/_14sdp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvIncome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_6sdp"
                         android:nestedScrollingEnabled="false"
-                        tools:itemCount="3"
                         tools:listitem="@layout/item_preview_income" />
 
                     <TextView
                         android:id="@+id/tvNoIncome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/no_income_entries"
-                        android:textSize="14sp"
-                        android:textColor="#9E9E9E"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:fontFamily="@font/roboto_regular"
                         android:gravity="center"
-                        android:padding="24dp"
+                        android:padding="@dimen/_12sdp"
+                        android:text="@string/no_income_entries"
+                        android:textColor="#94A3B8"
+                        android:textSize="@dimen/_12sdp"
                         android:visibility="gone" />
 
                 </LinearLayout>
@@ -447,72 +510,256 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="80dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@android:color/white">
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="@dimen/_12sdp"
+                app:cardElevation="@dimen/_3sdp"
+                app:strokeColor="#E2E8F0"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="@dimen/_12sdp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
                         android:text="@string/expense_details"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#C62828"
-                        android:paddingBottom="12dp" />
+                        android:textColor="#991B1B"
+                        android:textSize="@dimen/_14sdp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvExpense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_6sdp"
                         android:nestedScrollingEnabled="false"
-                        tools:itemCount="5"
                         tools:listitem="@layout/item_preview_expense" />
 
                     <TextView
                         android:id="@+id/tvNoExpense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/no_expense_entries"
-                        android:textSize="14sp"
-                        android:textColor="#9E9E9E"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:fontFamily="@font/roboto_regular"
                         android:gravity="center"
-                        android:padding="24dp"
+                        android:padding="@dimen/_12sdp"
+                        android:text="@string/no_expense_entries"
+                        android:textColor="#94A3B8"
+                        android:textSize="@dimen/_12sdp"
                         android:visibility="gone" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Fuel Stop Planner Action Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardFuelStopPlanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#F0F9FF"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="0dp"
+                app:strokeColor="#BAE6FD"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_12sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⛽"
+                        android:textSize="@dimen/_18sdp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/plan_fuel_stops"
+                            android:textColor="#0369A1"
+                            android:textSize="@dimen/_13sdp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="@string/fuel_planner_subtitle"
+                            android:textColor="#64748B"
+                            android:textSize="@dimen/_10sdp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:src="@drawable/baseline_arrow_forward_ios_24"
+                        app:tint="#0369A1" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Plan Return Load / Backhaul Action Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardBackhaulPlanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#FAF5FF"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="0dp"
+                app:strokeColor="#E9D5FF"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_12sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔄"
+                        android:textSize="@dimen/_18sdp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/plan_backhaul_return"
+                            android:textColor="#6B21A8"
+                            android:textSize="@dimen/_13sdp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="@string/plan_backhaul_return_desc"
+                            android:textColor="#64748B"
+                            android:textSize="@dimen/_10sdp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:src="@drawable/baseline_arrow_forward_ios_24"
+                        app:tint="#6B21A8" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Repeat Trip Action Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardRepeatTrip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_16sdp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#F0FDF4"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="0dp"
+                app:strokeColor="#BBF7D0"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_12sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📋"
+                        android:textSize="@dimen/_18sdp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/repeat_trip"
+                            android:textColor="#15803D"
+                            android:textSize="@dimen/_13sdp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="@string/repeat_trip_desc"
+                            android:textColor="#64748B"
+                            android:textSize="@dimen/_10sdp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:src="@drawable/baseline_arrow_forward_ios_24"
+                        app:tint="#15803D" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
-        <!-- YOUR EXISTING CONTENT GOES HERE -->
-        <!-- (All cards, RecyclerViews, etc. remain unchanged) -->
 
     </androidx.core.widget.NestedScrollView>
 
-
-
-    <!-- Download Button (Fixed at bottom) -->
+    <!-- Download PDF Button (Fixed at Bottom) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnDownload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/_12sdp"
+        android:elevation="6dp"
+        android:fontFamily="@font/roboto_medium"
+        android:paddingVertical="@dimen/_12sdp"
         android:text="@string/download_pdf"
-        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_14sdp"
         android:textStyle="bold"
-        android:paddingVertical="16dp"
+        app:backgroundTint="@color/color_primary"
+        app:cornerRadius="@dimen/_10sdp"
         app:icon="@drawable/outline_arrow_downward_24"
         app:iconGravity="textStart"
-        app:cornerRadius="12dp"
-        app:backgroundTint="@color/color_primary"
-        android:textColor="@android:color/white"
-        android:elevation="8dp" />
+        app:iconTint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

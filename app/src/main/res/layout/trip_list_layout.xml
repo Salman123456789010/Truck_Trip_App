@@ -1,403 +1,404 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/_10sdp"
-    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="6dp"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/tripListLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:cardElevation="@dimen/_3sdp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        >
+        app:cardBackgroundColor="@color/surface_card"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="2dp"
+        app:strokeColor="@color/border_subtle"
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RelativeLayout
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <!-- Top Header: Truck Plate Badge & Driver Info -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerInParent="true"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🚛 "
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/truckNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_main"
+                        android:textSize="12sp"
+                        tools:text="MH 12 AB 1234" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <!-- Hidden driverAvak view preserved for programmatic access -->
+                <TextView
+                    android:id="@+id/driverAvak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="₹0" />
+            </LinearLayout>
+
+            <!-- Route Section: Origin ➔ Destination -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Source Info -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Mumbai"
                         android:id="@+id/srcName"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14sdp"
-                       />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_main"
+                        android:textSize="15sp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        tools:text="Mumbai" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="27 jun 2000"
                         android:id="@+id/srcDate"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp"
-                       />
-
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textColor="@color/text_muted"
+                        android:textSize="11sp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        tools:text="27 Jun 2024" />
                 </LinearLayout>
 
+                <!-- Center Route Arrow Indicator -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:src="@drawable/trip_icon"
-                        android:textSize="@dimen/_15sdp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="➔"
+                        android:textColor="@color/brand_primary"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
-
                 </LinearLayout>
 
+                <!-- Destination Info -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
+                    android:layout_weight="1"
+                    android:gravity="end"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Kerla"
-                        android:gravity="end"
-                        android:textColor="@color/black"
                         android:id="@+id/dest"
-                        android:textSize="@dimen/_14sdp"
-                         />
-
-                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="30 jun 2000"
-                        android:id="@+id/destDate"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
                         android:gravity="end"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp"
-                       />
+                        android:textColor="@color/text_main"
+                        android:textSize="15sp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        tools:text="Delhi" />
 
+                    <TextView
+                        android:id="@+id/destDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:gravity="end"
+                        android:textColor="@color/text_muted"
+                        android:textSize="11sp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        tools:text="30 Jun 2024" />
                 </LinearLayout>
-            </RelativeLayout>
+
+            </LinearLayout>
+
+            <!-- Divider -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#DADADA"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp"/>
+                android:background="@color/border_subtle"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
 
+            <!-- Financial Metrics: 3-Column Strip -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:orientation="vertical"
-                android:layout_marginBottom="@dimen/_5sdp">
+                android:background="@drawable/bg_metric_card"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="4dp"
+                android:weightSum="3">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <!-- Revenue -->
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerInParent="true"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_regular"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
                         android:text="@string/gross_income"
-                        android:textColor="@color/gujrati_txt"
-                        android:layout_alignParentStart="true"
-                        android:textSize="@dimen/_12sdp"
-                       />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text=":"
-                        android:textColor="@color/gujrati_txt"
-                        android:layout_centerInParent="true"
-                        android:textSize="@dimen/_12sdp"
-                        />
+                        android:textColor="@color/text_muted"
+                        android:textSize="11sp"
+                        android:singleLine="true"
+                        android:ellipsize="end" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="રૂ.2000"
                         android:id="@+id/totalAvak"
-                        android:layout_alignParentEnd="true"
-                        android:textColor="@color/gujrati_txt"
-                        android:textSize="@dimen/_12sdp"
-                        />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:textColor="@color/state_success"
+                        android:textSize="13sp"
+                        android:singleLine="true"
+                        tools:text="₹ 45,000" />
+                </LinearLayout>
 
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <!-- Expenses -->
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_regular"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
                         android:text="@string/total_expenditure"
-                        android:layout_alignParentStart="true"
-                        android:textColor="@color/tamil_txt"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textColor="@color/text_muted"
+                        android:textSize="11sp"
+                        android:singleLine="true"
+                        android:ellipsize="end" />
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text=":"
-                        android:textColor="@color/tamil_txt"
-                        android:layout_centerInParent="true"
-                        android:textSize="@dimen/_12sdp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="રૂ.1000"
-                        android:layout_alignParentEnd="true"
                         android:id="@+id/totalJavak"
-                        android:textColor="@color/tamil_txt"
-                        android:textSize="@dimen/_12sdp"
-                        />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:textColor="@color/state_error"
+                        android:textSize="13sp"
+                        android:singleLine="true"
+                        tools:text="₹ 28,500" />
+                </LinearLayout>
 
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <!-- Profit -->
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_regular"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
                         android:text="@string/total_profit"
-                        android:layout_alignParentStart="true"
-                        android:textColor="@color/color_primary"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textColor="@color/text_muted"
+                        android:textSize="11sp"
+                        android:singleLine="true"
+                        android:ellipsize="end" />
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text=":"
-                        android:textColor="@color/color_primary"
-                        android:layout_centerInParent="true"
-                        android:textSize="@dimen/_12sdp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="રૂ.1000"
-                        android:layout_alignParentEnd="true"
                         android:id="@+id/totalProfit"
-                        android:textColor="@color/color_primary"
-                        android:textSize="@dimen/_12sdp"
-                        />
-
-                </RelativeLayout>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
+                        android:textStyle="bold"
+                        android:textColor="@color/brand_primary"
+                        android:textSize="13sp"
+                        android:singleLine="true"
+                        tools:text="₹ 16,500" />
+                </LinearLayout>
 
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#DADADA"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp"/>
-            <RelativeLayout
+
+            <!-- Bottom Actions Row -->
+            <LinearLayout
+                android:id="@+id/actionsRow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Share -->
+                <LinearLayout
+                    android:id="@+id/shareIcon"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/driver_s_gross_income_this_trip"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <FrameLayout
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:background="@drawable/bg_action_btn_subtle">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/baseline_share_24"
+                            app:tint="@color/brand_primary" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <!-- View / Download -->
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="રૂ.5000"
-                    android:id="@+id/driverAvak"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                   />
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless">
 
-            </RelativeLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_7sdp"
-                android:fontFamily="@font/roboto_bold"
-                android:text="KA 01 QA 4243"
-                android:id="@+id/truckNumber"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"
-               />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#DADADA" />
-        <LinearLayout
-            android:id="@+id/actionsRow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/_6sdp"
-            android:paddingBottom="@dimen/_6sdp">
+                    <FrameLayout
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:background="@drawable/bg_action_btn_subtle">
 
-            <!-- Share -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/shareIcon"
-                android:gravity="center">
+                        <ImageView
+                            android:id="@+id/dowanloadIcon"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/view"
+                            app:tint="@color/brand_primary" />
+                    </FrameLayout>
+                </LinearLayout>
 
-                <FrameLayout
-                    android:layout_width="@dimen/_36sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:background="@drawable/bg_icon_circle_blue">
+                <!-- Edit -->
+                <LinearLayout
+                    android:id="@+id/editIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless">
 
-                    <ImageView
+                    <FrameLayout
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:background="@drawable/bg_action_btn_subtle">
 
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_share_24"
-                        app:tint="@color/white" />
-                </FrameLayout>
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/baseline_edit_24"
+                            app:tint="@color/brand_primary" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <!-- Delete -->
+                <LinearLayout
+                    android:id="@+id/deleteIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless">
+
+                    <FrameLayout
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:background="@drawable/bg_action_btn_danger">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/delete_20dp_000000_fill0_wght300_grad0_opsz20"
+                            app:tint="@color/state_error" />
+                    </FrameLayout>
+                </LinearLayout>
+
             </LinearLayout>
 
-            <!-- Download -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="@dimen/_36sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:background="@drawable/bg_icon_circle_blue">
-
-                    <ImageView
-                        android:id="@+id/dowanloadIcon"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/view"
-                        app:tint="@color/white" />
-                </FrameLayout>
-            </LinearLayout>
-
-            <!-- Edit -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/editIcon"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="@dimen/_36sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:background="@drawable/bg_icon_circle_blue">
-
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_edit_24"
-                        app:tint="@color/white" />
-                </FrameLayout>
-            </LinearLayout>
-
-            <!-- Delete -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/deleteIcon"
-                android:gravity="center">
-
-                <FrameLayout
-                    android:layout_width="@dimen/_36sdp"
-                    android:layout_height="@dimen/_36sdp"
-                    android:background="@drawable/bg_icon_circle_blue">
-
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/delete_20dp_000000_fill0_wght300_grad0_opsz20"
-                        app:tint="@color/white" />
-                </FrameLayout>
-            </LinearLayout>
-        </LinearLayout>
+            <!-- Native Ad Container -->
             <com.google.android.ads.nativetemplates.TemplateView
                 android:id="@+id/my_template"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:layout_height="match_parent"
                 app:gnt_template_type="@layout/gnt_small_template_view" />
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
 </LinearLayout>

@@ -39,4 +39,16 @@
         android:id="@+id/draftList"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/trip_list_layout"/>
+
+    <TextView
+        android:id="@+id/noProductFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="No pending drafts available"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:visibility="gone" />
 </LinearLayout>

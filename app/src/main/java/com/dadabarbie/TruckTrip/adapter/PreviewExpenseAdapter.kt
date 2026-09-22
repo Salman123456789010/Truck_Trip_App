@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dadabarbie.TruckTrip.databinding.ItemPreviewExpenseBinding
 import com.dadabarbie.TruckTrip.model.addTrip.Expense
 
+import android.content.Context
+import com.dadabarbie.TruckTrip.R
+import java.util.Locale
+
 class PreviewExpenseAdapter : ListAdapter<Expense, PreviewExpenseAdapter.ViewHolder>(ExpenseDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,28 +32,33 @@ class PreviewExpenseAdapter : ListAdapter<Expense, PreviewExpenseAdapter.ViewHol
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(expense: Expense) {
+            val context = binding.root.context
             binding.apply {
-                tvExpenseDesc.text = expense.desc
+                tvExpenseDesc.text = getLocalizedExpenseDesc(context, expense.desc)
                 tvExpenseAmount.text = "₹${expense.amount}"
-                if(expense.place==""){
-                    tvExpensePlace.visibility= View.GONE
-                }else{
-                    tvExpensePlace.visibility= View.VISIBLE
+                if (expense.place.isNullOrEmpty()) {
+                    tvExpensePlace.visibility = View.GONE
+                } else {
+                    tvExpensePlace.visibility = View.VISIBLE
+                    tvExpensePlace.text = expense.place
                 }
-                if(expense.date==""){
-                    tvExpenseDate.visibility= View.GONE
-                }else{
-                    tvExpenseDate.visibility= View.VISIBLE
+                if (expense.date.isNullOrEmpty()) {
+                    tvExpenseDate.visibility = View.GONE
+                } else {
+                    tvExpenseDate.visibility = View.VISIBLE
+                    tvExpenseDate.text = expense.date
                 }
-                tvExpensePlace.text = expense.place
-                tvExpenseDate.text = expense.date
-                tvExpenseType.text = expense.type ?: "Expense"
+                tvExpenseType.text = context.getString(R.string.expense_label)
 
                 // Show fuel details if it's a fuel expense
-                if (expense.type == "Fuel") {
+                val isFuel = (expense.type ?: "").equals("Fuel", ignoreCase = true) ||
+                             (expense.desc ?: "").lowercase(Locale.ENGLISH).contains("diesel") ||
+                             (expense.desc ?: "").lowercase(Locale.ENGLISH).contains("fuel")
+
+                if (isFuel && (!expense.liters.isNullOrEmpty() || !expense.km.isNullOrEmpty())) {
                     layoutFuelDetails.visibility = View.VISIBLE
-                    tvFuelLiters.text = "${expense.liters} L"
-                    tvFuelKm.text = "${expense.km} km"
+                    tvFuelLiters.text = if (!expense.liters.isNullOrEmpty()) "${expense.liters} L" else ""
+                    tvFuelKm.text = if (!expense.km.isNullOrEmpty()) "${expense.km} km" else ""
                 } else {
                     layoutFuelDetails.visibility = View.GONE
                 }
@@ -63,7 +72,20 @@ class PreviewExpenseAdapter : ListAdapter<Expense, PreviewExpenseAdapter.ViewHol
                 }
             }
         }
+
+        private fun getLocalizedExpenseDesc(context: Context, rawDesc: String?): String {
+            if (rawDesc.isNullOrEmpty()) return context.getString(R.string.other_expenses_label)
+            return when (rawDesc.trim().lowercase(Locale.ENGLISH)) {
+                "diesel", "fuel", "diesel / fuel", "fuel cost" -> context.getString(R.string.diesel_charges_label)
+                "toll", "toll / fasttag", "toll charges" -> context.getString(R.string.toll_charges_label)
+                "bhatta", "driver bhatta" -> context.getString(R.string.driver_bhatta_label)
+                "hamali", "hamali / loading", "loading" -> context.getString(R.string.hamali_loading_label)
+                "other expense", "other" -> context.getString(R.string.other_expenses_label)
+                else -> rawDesc
+            }
+        }
     }
+
 
     class ExpenseDiffCallback : DiffUtil.ItemCallback<Expense>() {
         override fun areItemsTheSame(oldItem: Expense, newItem: Expense): Boolean {

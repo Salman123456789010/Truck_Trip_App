@@ -8,13 +8,11 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Event
-import com.dadabarbie.TruckTrip.Utils.LocaleHelper
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.Utils.RouteUtils
 import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
@@ -25,12 +23,10 @@ import com.dadabarbie.TruckTrip.model.addTrip.Expense
 import com.dadabarbie.TruckTrip.model.addTrip.Income
 import com.dadabarbie.TruckTrip.room.AppDatabase
 import com.dadabarbie.TruckTrip.room.model.TripDataTestModel
-import com.google.android.gms.ads.MobileAds
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.vasyerp.cafvd.room.model.Products
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
@@ -49,24 +45,17 @@ class SimpleDraftActivity : BaseActivity(), NewDraftAdapter.DraftEditListner, Ne
         SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             enableEdgeToEdge()
-            // 35 (android - 15)
             WindowCompat.setDecorFitsSystemWindows(window, false)
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
         }
-        MobileAds.initialize(this)
         setLanguage()
         setOnClickListner()
 
-        Constants.refreshApi.observe(this) {
-            it.getContentIfNotHandled()?.let { event ->
-                event.let {
-                    if (it < 0) {
-                        // Do nothing
-                    } else {
-                        Constants.refreshApiGet(Event(1))
-                        finish()
-                    }
+        Constants.refreshApi.observe(this) { eventWrapper ->
+            eventWrapper.getContentIfNotHandled()?.let { event ->
+                if (event >= 0) {
+                    Constants.refreshApiGet(Event(1))
+                    finish()
                 }
             }
         }
@@ -91,19 +80,22 @@ class SimpleDraftActivity : BaseActivity(), NewDraftAdapter.DraftEditListner, Ne
     }
 
     private fun initAdapter(tripList: List<TripDataTestModel>) {
-        if (tripList.isNullOrEmpty()) {
-            onBackPressed()
+        draftList = ArrayList(tripList)
+        if (draftList.isEmpty()) {
+            binding.draftList.visibility = View.GONE
+            binding.noProductFound.visibility = View.VISIBLE
         } else {
-            draftList = tripList as ArrayList<TripDataTestModel>
+            binding.draftList.visibility = View.VISIBLE
+            binding.noProductFound.visibility = View.GONE
             draftAdapter = NewDraftAdapter(this, this, this)
-            draftAdapter.submitList(tripList)
+            draftAdapter.submitList(draftList)
             binding.draftList.adapter = draftAdapter
             draftAdapter.notifyDataSetChanged()
         }
     }
 
     private suspend fun getAllData(context: Context): List<TripDataTestModel> {
-        val database = AppDatabase.getDatabase(applicationContext)
+        val database = AppDatabase.getDatabase(context)
         val tripDataDao = database.productsDao()
         val entities = tripDataDao.getAllProducts()
         return entities.map {
@@ -111,30 +103,32 @@ class SimpleDraftActivity : BaseActivity(), NewDraftAdapter.DraftEditListner, Ne
         }
     }
 
-    private suspend fun getDelete(context: Context, position: Int) {
-        val database = AppDatabase.getDatabase(applicationContext)
+    private suspend fun deleteDraftFromDb(context: Context, item: TripDataTestModel) {
+        val database = AppDatabase.getDatabase(context)
         val tripDataDao = database.productsDao()
-        tripDataDao.deleteTruckById(position)
+        try {
+            if (!item.randomNumber.isNullOrEmpty()) {
+                tripDataDao.deleteByRandomNumber(item.randomNumber)
+            }
+            val idInt = item.id.toIntOrNull()
+            if (idInt != null) {
+                tripDataDao.deleteTruckById(idInt)
+            }
+        } catch (e: Exception) {
+            Log.e("SimpleDraftActivity", "Error deleting draft: ${e.message}", e)
+        }
     }
 
-    // ✅ FIXED: Properly parse route from routeJson
     private fun convertToModel(entity: Products): TripDataTestModel {
         val gson = Gson()
-
-        // ✅ Parse route from JSON string
         val parsedRoute = try {
             if (entity.routeJson.isNullOrEmpty()) {
-                Log.w("DraftRoute1", "Empty routeJson for draft ${entity.randomNumber}")
                 arrayListOf()
             } else {
                 val route = RouteUtils.parseRouteFromJson(entity.routeJson)
-                Log.d("DraftRoute1", "Parsed route for ${entity.randomNumber}: $route")
                 ArrayList(route)
             }
         } catch (e: Exception) {
-            Log.e("DraftRoute", "Error parsing route from JSON: ${e.message}", e)
-            Log.e("DraftRoute", "RouteJson was: ${entity.routeJson}")
-            // Fallback: try to create simple route
             try {
                 arrayListOf(entity.srcPlace, entity.destPlace)
             } catch (e2: Exception) {
@@ -142,25 +136,37 @@ class SimpleDraftActivity : BaseActivity(), NewDraftAdapter.DraftEditListner, Ne
             }
         }
 
+        val creditList: List<Income> = try {
+            if (!entity.modelList1.isNullOrEmpty()) {
+                gson.fromJson(entity.modelList1, object : TypeToken<List<Income>>() {}.type) ?: emptyList()
+            } else emptyList()
+        } catch (e: Exception) {
+            Log.e("SimpleDraftActivity", "Error parsing modelList1: ${e.message}")
+            emptyList()
+        }
+
+        val debitList: List<Expense> = try {
+            if (!entity.modelList2.isNullOrEmpty()) {
+                gson.fromJson(entity.modelList2, object : TypeToken<List<Expense>>() {}.type) ?: emptyList()
+            } else emptyList()
+        } catch (e: Exception) {
+            Log.e("SimpleDraftActivity", "Error parsing modelList2: ${e.message}")
+            emptyList()
+        }
+
         return TripDataTestModel(
-            truckNumber = entity.truckNumber,
-            srcPlace = entity.srcPlace,
-            destPlace = entity.destPlace,
-            srcDate = entity.srcDate,
-            destDate = entity.destDate,
-            avg = entity.avg,
-            randomNumber = entity.randomNumber,
-            modelList1 = gson.fromJson(
-                entity.modelList1,
-                object : TypeToken<List<Income>>() {}.type
-            ),
-            modelList2 = gson.fromJson(
-                entity.modelList2,
-                object : TypeToken<List<Expense>>() {}.type
-            ),
+            truckNumber = entity.truckNumber ?: "",
+            srcPlace = entity.srcPlace ?: "",
+            destPlace = entity.destPlace ?: "",
+            srcDate = entity.srcDate ?: "",
+            destDate = entity.destDate ?: "",
+            avg = entity.avg ?: "",
+            randomNumber = entity.randomNumber ?: "",
+            modelList1 = creditList,
+            modelList2 = debitList,
             id = entity.id.toString(),
-            routeList = entity.routeJson ?: "",  // Keep original JSON
-            route = parsedRoute,  // ✅ Use properly parsed route ArrayList
+            routeList = entity.routeJson ?: "",
+            route = parsedRoute,
             driverIncome = "",
             startOdometer = "",
             endOdometer = "",
@@ -169,91 +175,64 @@ class SimpleDraftActivity : BaseActivity(), NewDraftAdapter.DraftEditListner, Ne
     }
 
     override fun editMethod(position: Int) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val draft = draftList[position]
+        if (position < 0 || position >= draftList.size) return
+        val draft = draftList[position]
 
-            // ✅ Log route before deletion
-            Log.d("DraftRoute", "=== EDIT DRAFT START ===")
-            Log.d("DraftRoute", "Draft position: $position")
-            Log.d("DraftRoute", "Draft ID: ${draft.id}")
-            Log.d("DraftRoute", "Draft randomNumber: ${draft.randomNumber}")
-            Log.d("DraftRoute", "Route ArrayList: ${draft.route}")
-            Log.d("DraftRoute", "Route size: ${draft.route?.size ?: 0}")
-            Log.d("DraftRoute", "RouteJson string: ${draft.routeList}")
+        Constants.creditList.clear()
+        Constants.debitList.clear()
+        Constants.creditList = draft.modelList1 as ArrayList<Income>
+        Constants.debitList = draft.modelList2 as ArrayList<Expense>
 
-            // Delete draft from database
-//            getDelete(applicationContext, draft.id.toInt())
+        val routeToPass = draft.route ?: arrayListOf()
 
-            // Clear and set lists
-            Constants.creditList.clear()
-            Constants.debitList.clear()
-            Constants.creditList = draft.modelList1 as ArrayList<Income>
-            Constants.debitList = draft.modelList2 as ArrayList<Expense>
-
-            withContext(Dispatchers.Main) {
-                // ✅ Ensure route is not null before passing
-                val routeToPass = draft.route ?: arrayListOf()
-
-                Log.d("DraftRoute", "Route to pass to intent: $routeToPass")
-
-                val intent = Intent(applicationContext, TruckNumberSpeechActivity::class.java).apply {
-                    putExtra("EDIT_MODE", true)
-                    putExtra("TRIP_ID", draft.randomNumber)
-                    putExtra("TRUCK_NUMBER", draft.truckNumber)
-                    putExtra("START_DATE", draft.srcDate)
-                    putExtra("END_DATE", draft.destDate)
-                    putExtra("START_PLACE", draft.srcPlace)
-                    putExtra("END_PLACE", draft.destPlace)
-                    putExtra("DRIVER_INCOME", draft.driverIncome)
-                    putStringArrayListExtra("ROUTE_ARRAY", routeToPass)  // ✅ Pass the route
-                }
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-
-                Log.d("DraftRoute", "=== EDIT DRAFT END - Activity Started ===")
-                finish()
-            }
+        val intent = Intent(applicationContext, CreateTripActivity::class.java).apply {
+            putExtra("EDIT_MODE", true)
+            putExtra("TRIP_ID", draft.randomNumber)
+            putExtra("TRUCK_NUMBER", draft.truckNumber)
+            putExtra("START_DATE", draft.srcDate)
+            putExtra("END_DATE", draft.destDate)
+            putExtra("START_PLACE", draft.srcPlace)
+            putExtra("END_PLACE", draft.destPlace)
+            putExtra("DRIVER_INCOME", draft.driverIncome)
+            putStringArrayListExtra("ROUTE_ARRAY", routeToPass)
         }
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 
     override fun deleteMethod(position: Int) {
+        if (position < 0 || position >= draftList.size) return
         deleteDraftDialogFragment = DeleteDraftDialogFragment(position)
         deleteDraftDialogFragment.show(supportFragmentManager, "")
     }
 
     fun deleteFromDatabse(position: Int) {
-        GlobalScope.launch {
-            getDelete(applicationContext, draftList[position].id.toInt())
+        if (position < 0 || position >= draftList.size) return
+        val item = draftList[position]
+        lifecycleScope.launch {
+            deleteDraftFromDb(applicationContext, item)
+            val updatedData = getAllData(applicationContext)
             withContext(Dispatchers.Main) {
-                // Update your UI here
-                initAdapter(getAllData(applicationContext))
+                initAdapter(updatedData)
             }
         }
     }
 
     override fun onClick(v: View?) {
         when (v) {
-            binding.backBtn -> {
-                onBackPressed()
-            }
+            binding.backBtn -> finish()
         }
     }
 
     private fun setLanguage() {
         val savedLang = Prefs[Constants.languageCode, "en"]
-
         if (savedLang.isNotEmpty()) {
             val locale = Locale(savedLang)
             Locale.setDefault(locale)
-
             val config = resources.configuration
             config.setLocale(locale)
-
-            resources.updateConfiguration(
-                config,
-                resources.displayMetrics
-            )
+            resources.updateConfiguration(config, resources.displayMetrics)
         }
     }
-
 }

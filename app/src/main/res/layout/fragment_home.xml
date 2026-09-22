@@ -11,41 +11,62 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/datePickerLayout"
-        android:visibility="visible"
-        android:weightSum="1">
+        android:visibility="visible">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:padding="@dimen/_20sdp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:strokeColor="@color/divider_color"
-            app:strokeWidth="@dimen/_1sdp">
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/surface_card"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp"
+            app:strokeColor="@color/border_subtle"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:id="@+id/datePicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/date"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:padding="@dimen/_7sdp"
+                    android:text="📅 "
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/font_plus_jakarta_sans"
                     android:gravity="center"
                     android:text="2024-01-28 To: 2025-01-28"
-                    android:textColor="@color/_060c29"
-                    android:textSize="15sp" />
+                    android:textColor="@color/text_main"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
+
+    <!-- Auto-scroll banner below date filter (hidden to maximize trip list screen space) -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/bannerViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/bannerDots"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,103 +75,94 @@
         android:layout_below="@+id/datePickerLayout"
         android:visibility="visible"
         android:id="@+id/totalAavakMainLayout"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="6dp"
+        android:baselineAligned="false"
         android:weightSum="2">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:padding="@dimen/_20sdp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:strokeColor="@color/divider_color"
-            app:strokeWidth="@dimen/_1sdp">
+            android:layout_marginEnd="4dp"
+            app:cardBackgroundColor="@color/surface_card"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp"
+            app:strokeColor="@color/border_subtle"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:id="@+id/totalAavakLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="10dp">
+
                 <TextView
                     android:id="@+id/totalAavakText"
                     android:layout_width="wrap_content"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:paddingEnd="@dimen/_10sdp"
-                    android:paddingTop="@dimen/_10sdp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:fontFamily="@font/font_plus_jakarta_sans"
                     android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="@string/driver_s_gross_income"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp" />
+
                 <TextView
                     android:id="@+id/drivertotalAavak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:paddingEnd="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_10sdp"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/font_plus_jakarta_sans"
                     android:text="₹ 0"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_main"
                     android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="16sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:padding="@dimen/_20sdp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:strokeColor="@color/divider_color"
-            app:strokeWidth="@dimen/_1sdp">
+            android:layout_marginStart="4dp"
+            app:cardBackgroundColor="@color/surface_card"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp"
+            app:strokeColor="@color/border_subtle"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:id="@+id/totalMalikAavakLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="10dp">
 
                 <TextView
                     android:id="@+id/totalMalikAavakText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:paddingEnd="@dimen/_10sdp"
-                    android:paddingTop="@dimen/_10sdp"
+                    android:fontFamily="@font/font_plus_jakarta_sans"
                     android:maxLines="1"
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:ellipsize="end"
                     android:text="@string/owner_s_gross_income"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp" />
+
                 <TextView
                     android:id="@+id/totalMalikAavak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:paddingEnd="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_10sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/font_plus_jakarta_sans"
                     android:text="₹ 0"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_main"
                     android:textStyle="bold"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="16sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
@@ -158,24 +170,35 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_below="@+id/totalAavakMainLayout"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_above="@+id/adBannerContainer"
+        android:layout_marginTop="6dp"
         android:visibility="visible"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeToRefreshBasicDetails"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="@dimen/_5sdp"
-          >
+            android:layout_marginBottom="@dimen/_5sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/shimmerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <include layout="@layout/shimmer_item_placeholder" />
+                    <include layout="@layout/shimmer_item_placeholder" />
+                    <include layout="@layout/shimmer_item_placeholder" />
+                </LinearLayout>
 
                 <ProgressBar
                     android:id="@+id/progressbar"
@@ -185,16 +208,417 @@
                     android:progressBackgroundTint="@color/white"
                     android:visibility="gone" />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <!-- Active Draft Card (Visible when drafts exist in Room DB) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardContinueDraft"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="#FFB74D"
+                    app:strokeWidth="1.5dp"
+                    app:cardBackgroundColor="#FFF8E1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📝"
+                            android:textSize="22sp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvDraftTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/continue_draft_title"
+                                android:textColor="#E65100"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvDraftDetails"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:textColor="#5D4037"
+                                android:textSize="12sp"
+                                tools:text="MH 12 AB 1234 • Mumbai → Delhi" />
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnResumeDraft"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="0dp"
+                            android:text="@string/resume_draft"
+                            android:textSize="12sp"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            app:backgroundTint="#F57C00"
+                            app:cornerRadius="8dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Quick Tools Horizontal Strip (hidden to maximize trip list visibility) -->
+                <LinearLayout
+                    android:id="@+id/layoutQuickTools"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_6sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/quick_tools_title"
+                        android:textColor="@color/color_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_8sdp"
+                        android:clipToPadding="false">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <!-- Fuel Planner Button -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/btnQuickFuelPlanner"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="6dp"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="1dp"
+                                app:strokeColor="#B0BEC5"
+                                app:strokeWidth="1dp"
+                                app:cardBackgroundColor="@color/white"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="6dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="⛽"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="6dp"
+                                        android:text="@string/plan_fuel_stops"
+                                        android:textColor="#37474F"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Backhaul Calculator Button -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/btnQuickBackhaul"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="6dp"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="1dp"
+                                app:strokeColor="#B0BEC5"
+                                app:strokeWidth="1dp"
+                                app:cardBackgroundColor="@color/white"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="6dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="🔄"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="6dp"
+                                        android:text="@string/backhaul_calculator_short"
+                                        android:textColor="#37474F"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Diesel Prices Button -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/btnQuickDiesel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="6dp"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="1dp"
+                                app:strokeColor="#B0BEC5"
+                                app:strokeWidth="1dp"
+                                app:cardBackgroundColor="@color/white"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="6dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="📈"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="6dp"
+                                        android:text="@string/diesel_prices"
+                                        android:textColor="#37474F"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Load Capacity Button -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/btnQuickLoadCapacity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="6dp"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="1dp"
+                                app:strokeColor="#B0BEC5"
+                                app:strokeWidth="1dp"
+                                app:cardBackgroundColor="@color/white"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="6dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="⚖️"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="6dp"
+                                        android:text="@string/load_capacity_calculator"
+                                        android:textColor="#37474F"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <!-- Estimator Button -->
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/btnQuickEstimator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="6dp"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="1dp"
+                                app:strokeColor="#B0BEC5"
+                                app:strokeWidth="1dp"
+                                app:cardBackgroundColor="@color/white"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="6dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="🚛"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="6dp"
+                                        android:text="@string/mileage_amp_estimator"
+                                        android:textColor="#37474F"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <!-- Search & Filters Container -->
+                <LinearLayout
+                    android:id="@+id/layoutSearchFilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="6dp">
+
+                    <!-- Search Input Box -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/search_trips_hint"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:boxStrokeColor="@color/color_primary"
+                        app:endIconMode="clear_text"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etSearchTrips"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionSearch"
+                            android:textSize="13sp"
+                            android:singleLine="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Filter Chips Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="6dp">
+
+                        <TextView
+                            android:id="@+id/chipFilterAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:gravity="center"
+                            android:paddingHorizontal="12dp"
+                            android:background="@drawable/bg_chip_selected"
+                            android:text="@string/filter_all"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:clickable="true"
+                            android:focusable="true" />
+
+                        <TextView
+                            android:id="@+id/chipFilterProfitable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:gravity="center"
+                            android:layout_marginStart="6dp"
+                            android:paddingHorizontal="10dp"
+                            android:background="@drawable/bg_chip_unselected"
+                            android:text="@string/filter_profitable"
+                            android:textColor="#37474F"
+                            android:textSize="12sp"
+                            android:clickable="true"
+                            android:focusable="true" />
+
+                        <TextView
+                            android:id="@+id/chipFilterLoss"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:gravity="center"
+                            android:layout_marginStart="6dp"
+                            android:paddingHorizontal="10dp"
+                            android:background="@drawable/bg_chip_unselected"
+                            android:text="@string/filter_loss"
+                            android:textColor="#37474F"
+                            android:textSize="12sp"
+                            android:clickable="true"
+                            android:focusable="true" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1" />
+
+                        <!-- Filtered count summary -->
+                        <TextView
+                            android:id="@+id/tvFilterStats"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#757575"
+                            android:visibility="gone"
+                            android:textSize="11sp"
+                            tools:text="Showing 12 trips" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleList"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     tools:listitem="@layout/trip_list_layout"
                     android:visibility="visible"
-                    android:paddingBottom="@dimen/_50sdp"
+                    android:paddingBottom="84dp"
                     android:clipToPadding="false"
-                    android:id="@+id/recycleList"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
 
                 <LinearLayout
                     android:id="@+id/noProductFound"
@@ -222,12 +646,11 @@
                         android:layout_height="wrap_content"
                         android:text="@string/no_trip_found"
                         android:textSize="15sp"
-                        android:fontFamily="@font/roboto_medium"/>
+                        android:textColor="@color/text_muted"
+                        android:fontFamily="@font/font_plus_jakarta_sans"/>
                 </LinearLayout>
 
-
             </LinearLayout>
-
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -237,17 +660,25 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/add_trip"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            android:fontFamily="@font/roboto_medium"
-            android:backgroundTint="@color/green"
+            android:fontFamily="@font/font_plus_jakarta_sans"
+            android:textStyle="bold"
+            android:backgroundTint="@color/brand_primary"
             app:icon="@drawable/baseline_add_24"
             app:iconTint="@color/white"
-            />
+            app:elevation="4dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/adBannerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

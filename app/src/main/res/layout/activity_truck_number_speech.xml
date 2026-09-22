@@ -39,175 +39,175 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="24dp">
+        android:padding="20dp">
 
-        <!-- Top Section -->
-        <LinearLayout
-            android:id="@+id/topSection"
+        <!-- Scrollable Top Section -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            android:layout_above="@id/btnNextScreen"
+            android:layout_marginBottom="16dp"
+            android:fillViewport="true"
+            android:scrollbars="none">
 
-            <!-- Instruction Text with Speaker -->
             <LinearLayout
+                android:id="@+id/topSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="48dp"
-                android:paddingHorizontal="16dp">
+                android:orientation="vertical"
+                android:gravity="center">
 
-                <TextView
-                    android:id="@+id/tvInstruction"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/yaha_pe_truck_number_bolo"
-                    android:textSize="@dimen/_16sdp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:ellipsize="end" />
-
-                <ImageView
-                    android:id="@+id/ivSpeaker"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/loud_speaker"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="8dp"
-                    android:layout_marginStart="12dp"
-                    app:tint="@color/color_primary" />
-
-            </LinearLayout>
-
-
-            <!-- Big Microphone FAB -->
-            <FrameLayout
-                android:id="@+id/micContainer"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:layout_gravity="center"
-                android:background="@drawable/bg_mic_circle"
-                android:padding="20dp">
-
-
-            <!-- Lottie Mic Animation -->
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lottieMic"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:lottie_rawRes="@raw/mic_animation"
-                    app:lottie_loop="false"
-                    app:lottie_autoPlay="false"
-                    android:visibility="visible" />
-
-                <!-- Mic Button -->
-                <ImageView
-                    android:id="@+id/ivMicrophone"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/mic_phone"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:visibility="gone"
-                    android:focusable="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    app:tint="@color/white" />
-
-            </FrameLayout>
-
-
-            <!-- Status Text -->
-            <TextView
-                android:id="@+id/tvStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mic_ko_dabaye_aur_bolo"
-                android:textSize="@dimen/_12sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:layout_marginTop="24dp" />
-            <ImageView
-                android:id="@+id/ivEditIndicator"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/edit_icon"
-                app:tint="@color/color_primary"
-                android:visibility="gone"
-                android:layout_marginStart="8dp" />
-            <!-- Truck Number Display Card -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardTruckNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                app:cardCornerRadius="@dimen/_5sdp"
-                app:cardBackgroundColor="#FFFF"
-                android:visibility="gone">
-
+                <!-- Instruction Text with Speaker -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp"
-                    android:gravity="center">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/bg_instruction_banner"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvInstruction"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/aapka_truck_number"
-                        android:textSize="@dimen/_14sdp"
-                        android:textColor="@color/black"
-                        android:layout_marginBottom="8dp" />
-
-                    <TextView
-                        android:id="@+id/tvTruckNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="GJ-11-1234"
-                        android:textSize="@dimen/_20sdp"
+                        android:layout_weight="1"
+                        android:text="@string/yaha_pe_truck_number_bolo"
+                        android:textSize="17sp"
+                        android:textColor="@color/text_main"
+                        android:fontFamily="@font/font_plus_jakarta_sans"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:letterSpacing="0.1" />
+                        android:gravity="start|center_vertical"
+                        android:maxLines="2"
+                        android:ellipsize="end" />
+
+                    <ImageView
+                        android:id="@+id/ivSpeaker"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:src="@drawable/loud_speaker"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:padding="8dp"
+                        android:layout_marginStart="12dp"
+                        app:tint="@color/brand_primary" />
+
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+
+                <!-- Big Microphone FAB -->
+                <FrameLayout
+                    android:id="@+id/micContainer"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_mic_circle"
+                    android:padding="20dp">
+
+                    <!-- Lottie Mic Animation -->
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lottieMic"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:lottie_rawRes="@raw/mic_animation"
+                        app:lottie_loop="false"
+                        app:lottie_autoPlay="false"
+                        android:visibility="visible" />
+
+                    <!-- Mic Button -->
+                    <ImageView
+                        android:id="@+id/ivMicrophone"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/mic_phone"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:visibility="gone"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        app:tint="@color/white" />
+
+                </FrameLayout>
+
+                <!-- Status Text -->
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mic_ko_dabaye_aur_bolo"
+                    android:textSize="15sp"
+                    android:textColor="@color/text_muted"
+                    android:fontFamily="@font/font_plus_jakarta_sans"
+                    android:layout_marginTop="20dp" />
+
+                <ImageView
+                    android:id="@+id/ivEditIndicator"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/edit_icon"
+                    app:tint="@color/brand_primary"
+                    android:visibility="gone"
+                    android:layout_marginStart="8dp" />
+
+                <!-- Truck Number Display Card -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardTruckNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface_card"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/aapka_truck_number"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/font_plus_jakarta_sans"
+                            android:textColor="@color/text_muted"
+                            android:layout_marginBottom="6dp" />
+
+                        <TextView
+                            android:id="@+id/tvTruckNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/font_plus_jakarta_sans"
+                            android:textColor="@color/text_main"
+                            android:letterSpacing="0.08" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </ScrollView>
 
         <!-- Bottom Button -->
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/btnNextScreen"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="56dp"-->
-<!--           -->
-<!--         -->
-<!--            android:textSize="18sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:backgroundTint="@color/color_primary"-->
-<!--            app:cornerRadius="12dp"-->
-<!--            android:textColor="#FFFFFF" />-->
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btnNextScreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
+            android:minHeight="52dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:text="@string/dosri_screen"
             android:textColor="@color/white"
             android:textAllCaps="false"
-            android:fontFamily="@font/roboto_medium"
-            android:backgroundTint="@color/green"
+            android:textSize="16sp"
+            android:fontFamily="@font/font_plus_jakarta_sans"
+            android:backgroundTint="@color/brand_primary"
             app:icon="@drawable/ic_arrow_forward_animated"
             app:iconTint="@color/white"
-            app:iconSize="@dimen/_20sdp"
+            app:iconSize="22dp"
             app:iconGravity="end"
-            android:elevation="6dp"
-            />
+            app:elevation="4dp" />
     </RelativeLayout>
 </LinearLayout>

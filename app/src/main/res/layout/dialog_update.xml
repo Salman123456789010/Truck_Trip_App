@@ -1,121 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_update_dialog_card"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    android:background="#F5F7FA"
     android:padding="24dp">
 
-    <!-- Decorative top border -->
-    <View
-        android:layout_width="80dp"
-        android:layout_height="4dp"
-        android:background="#FF9933"
-        android:layout_marginBottom="8dp"/>
+    <!-- Top Badge Icon -->
+    <FrameLayout
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:background="@drawable/bg_update_icon_badge">
 
-    <View
-        android:layout_width="80dp"
-        android:layout_height="4dp"
-        android:background="#138808"
-        android:layout_marginBottom="24dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="🚀"
+            android:textSize="32sp" />
+    </FrameLayout>
 
-    <!-- Icon placeholder with desi touch -->
+    <!-- Dialog Title -->
     <TextView
+        android:id="@+id/tvUpdateTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="🪔"
-        android:textSize="48sp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/font_plus_jakarta_sans"
+        android:text="@string/app_update_available"
+        android:textColor="@color/text_main"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
+    <!-- Message Description -->
     <TextView
         android:id="@+id/tvUpdateMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/a_new_version_of_the_app_is_available_please_update_to_continue"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:fontFamily="@font/plusjakartasans_bold"
-        android:gravity="center"
-        android:padding="16dp"
-        android:lineSpacingExtra="4dp"/>
-
-    <!-- Decorative dots -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
+        android:fontFamily="@font/font_plus_jakarta_sans"
+        android:gravity="center"
+        android:lineSpacingExtra="3dp"
+        android:text="@string/a_new_version_of_the_app_is_available_please_update_to_continue"
+        android:textColor="@color/text_muted"
+        android:textSize="13sp" />
 
-        <View
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="#FF9933"
-            android:layout_margin="4dp"/>
+    <!-- Feature Highlights Card -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_summary_badge"
+        android:orientation="vertical"
+        android:padding="14dp">
 
-        <View
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="#FFFFFF"
-            android:layout_margin="4dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <View
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="#138808"
-            android:layout_margin="4dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚡"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_plus_jakarta_sans"
+                android:text="@string/update_feature_performance"
+                android:textColor="@color/text_main"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📊"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_plus_jakarta_sans"
+                android:text="@string/update_feature_reports"
+                android:textColor="@color/text_main"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🛠️"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_plus_jakarta_sans"
+                android:text="@string/update_feature_stability"
+                android:textColor="@color/text_main"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
+    <!-- Update Action Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Update Now"
-        app:cornerRadius="@dimen/_6sdp"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:padding="12dp"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:elevation="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
         android:layout_marginTop="20dp"
-        app:backgroundTint="@color/color_primary"
-        app:strokeColor="@color/grey"
-        app:strokeWidth="2dp"/>
-
-    <!-- Decorative bottom pattern -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="24dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="✦"
-            android:textSize="20sp"
-            android:textColor="#FF9933"
-            android:layout_margin="8dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="✦"
-            android:textSize="20sp"
-            android:textColor="#138808"
-            android:layout_margin="8dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="✦"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:layout_margin="8dp"/>
-    </LinearLayout>
+        android:backgroundTint="@color/brand_primary"
+        android:fontFamily="@font/font_plus_jakarta_sans"
+        android:text="@string/update_now"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="14dp"
+        app:elevation="3dp"
+        app:icon="@drawable/outline_arrow_downward_24"
+        app:iconGravity="textStart"
+        app:iconSize="20dp"
+        app:iconTint="@color/white" />
 
 </LinearLayout>

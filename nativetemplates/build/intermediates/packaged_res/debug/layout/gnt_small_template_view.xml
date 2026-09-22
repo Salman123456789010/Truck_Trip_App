@@ -6,6 +6,7 @@
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
       android:layout_centerInParent="true"
+      android:visibility="gone"
       android:id="@+id/native_ad_view"
       >
 

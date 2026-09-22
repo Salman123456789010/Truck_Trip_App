@@ -5,21 +5,30 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Constants.debitList
+import com.dadabarbie.TruckTrip.Utils.Constants.getExpenseKeyFromText
+import com.dadabarbie.TruckTrip.Utils.Constants.getExpenseText
 import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.activity.MainActivity
 import com.dadabarbie.TruckTrip.databinding.BottomSheetAddExpenseBinding
 import com.dadabarbie.TruckTrip.model.DebitModel
 import com.dadabarbie.TruckTrip.model.addTrip.Expense
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -33,21 +42,103 @@ class AddExpenseBottomSheetFragment(
     private var expenseDate: String = "",
     private var expenseType: String = "",
     private var position: Int = -1
-) : BottomSheetDialogFragment() {
+) : BottomSheetDialogFragment(), TextToSpeech.OnInitListener {
 
     private lateinit var binding: BottomSheetAddExpenseBinding
     private val calendar = Calendar.getInstance()
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-    // Expense type options
-    private val expenseTypes = arrayOf(
-        "Food",
-        "Toll",
-        "Puncture",
-        "Driver Kharch",
-        "Truck Related",
-        "Other"
+    private var textToSpeech: TextToSpeech? = null
+    private var isTtsInitialized = false
+
+    // Comprehensive Expense type options covering all truck-related expenses
+
+
+    private val expenseTypes = listOf(
+
+        ExpenseTypeUi("Food" ,"🍽️ Food/Meals"),
+        ExpenseTypeUi("Toll/Highway Charges", "🛣️ Toll/Highway Charges"),
+        ExpenseTypeUi("Puncture/Tire Repair", "⚙️ Puncture/Tire Repair"),
+        ExpenseTypeUi("Driver Expanse(Kharcha)", "👨‍✈️Driver Payment (Trip Wise)"),
+        ExpenseTypeUi("Truck Maintenance", "🔧 Truck Maintenance"),
+
+        ExpenseTypeUi("Loading Charges", "📦 Loading Charges (Bharne ka)"),
+        ExpenseTypeUi("Unloading Charges", "📤 Unloading Charges (Khali karne ka)"),
+        ExpenseTypeUi("Parking Charges", "🅿️ Parking Charges"),
+
+        ExpenseTypeUi("Police/RTO Fine", "👮 Police/RTO Fine"),
+        ExpenseTypeUi("Documents/Papers", "📄 Documents/Papers"),
+        ExpenseTypeUi("Broker/Commission", "💰 Broker/Commission"),
+
+        ExpenseTypeUi("Engine Oil/Lubricants", "🛢️ Engine Oil/Lubricants"),
+        ExpenseTypeUi("Truck Cleaning/Washing", "🧼 Truck Cleaning/Washing (Service)"),
+        ExpenseTypeUi("Phone/Communication", "📱 Phone/Communication (Recharge)"),
+        ExpenseTypeUi("Tea", "☕ Tea/Snacks/Chai"),
+
+        ExpenseTypeUi("Hotel/Accommodation", "🏨 Hotel/Accommodation"),
+        ExpenseTypeUi("Permit/Entry Tax", "🎫 Permit/Entry Tax (Border Entry)"),
+        ExpenseTypeUi("Weighbridge Charges", "⚖️ Weighbridge Charges"),
+
+        ExpenseTypeUi("Spare Parts", "🔩 Spare Parts"),
+        ExpenseTypeUi("Driver Bath/Facilities", "🚿 Driver Bath/Facilities"),
+        ExpenseTypeUi("Bulb/Electrical Items", "💡 Bulb/Electrical Items"),
+        ExpenseTypeUi("Mechanic Charges", "🪛 Mechanic Charges"),
+
+        ExpenseTypeUi("Road Repair Contribution", "🚧 Road Repair Contribution"),
+        ExpenseTypeUi("Tools/Equipment", "🧰 Tools/Equipment"),
+        ExpenseTypeUi("Medicine/First Aid", "💊 Medicine/First Aid"),
+
+        ExpenseTypeUi("Challan/Fine", "📋 Challan/Fine"),
+        ExpenseTypeUi("Truck Insurance", "🚛 Truck Insurance"),
+        ExpenseTypeUi("Registration/Fitness", "📝 Registration/Fitness"),
+        ExpenseTypeUi("Market Fee/Mandi Charges", "🏪 Market Fee/Mandi Charges"),
+
+        ExpenseTypeUi("OTHER", "🎯 Other Expenses")
     )
+
+    private val expenseTypesnewTypes = listOf(
+
+        ExpenseTypeUi("🍽️ Food / Meals", "Food"),
+        ExpenseTypeUi("🛣️ Toll / Highway Charges", "Toll/Highway Charges"),
+        ExpenseTypeUi("⚙️ Puncture / Tire Repair", "Puncture/Tire Repair"),
+        ExpenseTypeUi("👨‍✈️ Driver Payment (Trip Wise)", "Driver Expanse(Kharcha)"),
+        ExpenseTypeUi("🔧 Truck Maintenance", "Truck Maintenance"),
+
+        ExpenseTypeUi("📦 Loading Charges (Bharne ka)", "Loading Charges"),
+        ExpenseTypeUi("📤 Unloading Charges (Khali karne ka)", "Unloading Charges"),
+        ExpenseTypeUi("🅿️ Parking Charges", "Parking Charges"),
+
+        ExpenseTypeUi("👮 Police / RTO Fine", "Police/RTO Fine"),
+        ExpenseTypeUi("📄 Documents / Papers", "Documents/Papers"),
+        ExpenseTypeUi("💰 Broker / Commission", "Broker/Commission"),
+
+        ExpenseTypeUi("🛢️ Engine Oil / Lubricants", "Engine Oil/Lubricants"),
+        ExpenseTypeUi("🧼 Truck Cleaning / Washing (Service)", "Truck Cleaning/Washing"),
+        ExpenseTypeUi("📱 Phone / Communication (Recharge)", "Phone/Communication"),
+        ExpenseTypeUi("☕ Tea / Snacks / Chai", "Tea"),
+
+        ExpenseTypeUi("🏨 Hotel / Accommodation", "Hotel/Accommodation"),
+        ExpenseTypeUi("🎫 Permit / Entry Tax (Border Entry)", "Permit/Entry Tax"),
+        ExpenseTypeUi("⚖️ Weighbridge Charges", "Weighbridge Charges"),
+
+        ExpenseTypeUi("🔩 Spare Parts", "Spare Parts"),
+        ExpenseTypeUi("🚿 Driver Bath / Facilities", "Driver Bath/Facilities"),
+        ExpenseTypeUi("💡 Bulb / Electrical Items", "Bulb/Electrical Items"),
+        ExpenseTypeUi("🪛 Mechanic Charges", "Mechanic Charges"),
+
+        ExpenseTypeUi("🚧 Road Repair Contribution", "Road Repair Contribution"),
+        ExpenseTypeUi("🧰 Tools / Equipment", "Tools/Equipment"),
+        ExpenseTypeUi("💊 Medicine / First Aid", "Medicine/First Aid"),
+
+        ExpenseTypeUi("📋 Challan / Fine", "Challan/Fine"),
+        ExpenseTypeUi("🚛 Truck Insurance", "Truck Insurance"),
+        ExpenseTypeUi("📝 Registration / Fitness", "Registration/Fitness"),
+        ExpenseTypeUi("🏪 Market Fee / Mandi Charges", "Market Fee/Mandi Charges"),
+
+        ExpenseTypeUi("🎯 Other Expenses", "OTHER")
+    )
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,30 +152,86 @@ class AddExpenseBottomSheetFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (position >= 0) {
-            binding.etNote.setText(expenseDesc)
-            binding.etAmount.setText(expenseAmount)
-            binding.etNote.setText(expenseDesc)
-            binding.etPlace.setText(expensePlace)
-            binding.etDate.setText(expenseDate)
+        // Set soft input mode to resize and expand bottom sheet
+        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+        // Expand bottom sheet to show full content
+        dialog?.setOnShowListener { dialogInterface ->
+//            val bottomSheetDialog = dialogInterface as BottomSheetDialog
+            val bottomSheet = dialog?.findViewById<FrameLayout>(R.id.design_bottom_sheet)
+
+            bottomSheet?.let {
+                val behavior = BottomSheetBehavior.from(it)
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                behavior.skipCollapsed = true
+                behavior.peekHeight = 0
+
+                // Set proper height for bottom sheet
+                val layoutParams = it.layoutParams
+                layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+                it.layoutParams = layoutParams
+            }
         }
+
+        textToSpeech = TextToSpeech(requireActivity(), this)
+
         setupExpenseTypeDropdown()
+        setupFieldNavigation()
         setupDatePicker()
         setupSpeechToText()
         populateFields()
-        setupSaveButton()
+        setupButtons()
 
         // Set dialog width
-        val width = (resources.displayMetrics.widthPixels * 0.90).toInt()
+        val width = (resources.displayMetrics.widthPixels * 0.95).toInt()
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        dialog?.window?.setLayout(width, ActionBar.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setLayout(width, ActionBar.LayoutParams.MATCH_PARENT)
+    }
+
+    private fun setupFieldNavigation() {
+        // Setup IME actions for smooth field navigation
+        binding.etAmount.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                binding.etNote.requestFocus()
+                true
+            } else false
+        }
+
+        binding.etNote.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                binding.etPlace.requestFocus()
+                true
+            } else false
+        }
+
+        binding.etPlace.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                binding.etDate.performClick()
+                true
+            } else false
+        }
+    }
+
+    private fun speakFeedbackMessage() {
+        if (!isTtsInitialized) {
+            return
+        }
+
+        // Stop any ongoing speech
+        textToSpeech?.stop()
+
+        // The message to speak
+        val message = getString(R.string.add_expanse_info)
+
+        // Speak the message
+        textToSpeech?.speak(message, TextToSpeech.QUEUE_FLUSH, null, "feedback_message")
     }
 
     private fun setupExpenseTypeDropdown() {
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_dropdown_item_1line,
-            expenseTypes
+            expenseTypes.map { it.label }   // 👈 ONLY UI TEXT
         )
         binding.actvExpenseType.setAdapter(adapter)
     }
@@ -92,11 +239,15 @@ class AddExpenseBottomSheetFragment(
     private fun setupDatePicker() {
         // Set default date to today if adding new expense (not editing)
         if (position == -1 && expenseDate.isEmpty()) {
-            val today = dateFormat.format(calendar.time)
-            binding.etDate.setText(today)
+//            val today = dateFormat.format(calendar.time)
+//            binding.etDate.setText(today)
         }
 
         binding.etDate.setOnClickListener {
+            showDatePicker()
+        }
+
+        binding.dateLayout.setOnClickListener {
             showDatePicker()
         }
     }
@@ -124,9 +275,10 @@ class AddExpenseBottomSheetFragment(
         if (position != -1) {
             // Editing existing expense
             binding.etAmount.setText(expenseAmount)
-            // Use note if available, otherwise use desc
-            binding.etNote.setText(if (!expenseNote.isNullOrEmpty()) expenseNote else expenseDesc)
+            // Note field remains separate - populate with actual note
+            binding.etNote.setText(expenseNote ?: "")
             binding.etPlace.setText(expensePlace ?: "")
+
             // Set date if available, otherwise use today
             val dateToUse = expenseDate?.takeIf { it.isNotEmpty() } ?: dateFormat.format(calendar.time)
             binding.etDate.setText(dateToUse)
@@ -141,9 +293,21 @@ class AddExpenseBottomSheetFragment(
                 // If parsing fails, keep current date
             }
 
-            if (!expenseType.isNullOrEmpty()) {
-                binding.actvExpenseType.setText(expenseType, false)
+            // Set expense type from dropdown
+            Log.d("DataName", "populateFields:1 ${expenseType} ${expenseType}")
+            val selectedLabel = context?.getExpenseKeyFromText(expenseType) ?: ""
+            Log.d("DataName", "populateFields:2 ${selectedLabel} ${selectedLabel}")
+
+            val expenseKey = expenseTypesnewTypes
+                .firstOrNull { it.label == selectedLabel }
+                ?.key ?: "OTHER"
+            val type = expenseKey
+            if (expenseTypesnewTypes.isNotEmpty()) {
+                binding.actvExpenseType.setText(type ?: "", false)
             }
+
+            // Update title for editing mode
+            binding.title.text = getString(R.string.edit_expense)
         }
     }
 
@@ -153,6 +317,9 @@ class AddExpenseBottomSheetFragment(
         }
         binding.micNote.setOnClickListener {
             startSpeechToText(REQUEST_CODE_NOTE)
+        }
+        binding.btnClose.setOnClickListener {
+            speakFeedbackMessage()
         }
         binding.micPlace.setOnClickListener {
             startSpeechToText(REQUEST_CODE_PLACE)
@@ -227,9 +394,13 @@ class AddExpenseBottomSheetFragment(
         }
     }
 
-    private fun setupSaveButton() {
+    private fun setupButtons() {
         binding.btnSave.setOnClickListener {
             saveExpense()
+        }
+
+        binding.btnCancel.setOnClickListener {
+            dialog?.dismiss()
         }
     }
 
@@ -322,12 +493,27 @@ class AddExpenseBottomSheetFragment(
         val note = binding.etNote.text.toString().trim()
         val place = binding.etPlace.text.toString().trim()
         val date = binding.etDate.text.toString().trim()
-        val type = binding.actvExpenseType.text.toString().trim()
 
+        val selectedLabel = binding.actvExpenseType.text.toString()
+        Log.d("NewData", "saveExpense:1 ${selectedLabel}")
+        val expenseKey = expenseTypes
+            .firstOrNull { it.label == selectedLabel }
+            ?.key ?: "OTHER"
+        val type = context?.getExpenseText(expenseKey) ?: ""
+        Log.d("NewData", "saveExpense:2 ${type}")
         // Validate amount
         if (amount.isEmpty()) {
             Toast.makeText(requireContext(), getString(R.string.enter_income_amount), Toast.LENGTH_SHORT).show()
             binding.etAmount.requestFocus()
+            return
+        }
+        Log.d("keyDAta", "saveExpense: ${type}")
+
+        // Validate expense type
+        if (type.isEmpty()) {
+            Toast.makeText(requireContext(),
+                getString(R.string.please_select_expense_type), Toast.LENGTH_SHORT).show()
+            binding.actvExpenseType.requestFocus()
             return
         }
 
@@ -335,12 +521,12 @@ class AddExpenseBottomSheetFragment(
         if (position != -1) {
             val updatedExpense = Expense(
                 id = debitList[position].id,
-                desc = note,
+                desc = type,  // Use type from dropdown as description
                 amount = amount,
-                note = note,
+                note = note,  // Keep note separate
                 place = place,
                 date = date,
-                type = type,
+                type = type,  // Type from dropdown
                 liters = debitList[position].liters,
                 km = debitList[position].km,
                 isOdometerMode = debitList[position].isOdometerMode
@@ -348,29 +534,59 @@ class AddExpenseBottomSheetFragment(
 
             (requireActivity() as MainActivity)
                 .onExpenseEdited(position, updatedExpense)
+
+            Toast.makeText(requireContext(),
+                getString(R.string.expense_updated_successfully), Toast.LENGTH_SHORT).show()
             dialog?.dismiss()
 
         } else {
             // Adding new expense
-            if (note.isEmpty()) {
-                Toast.makeText(requireContext(), getString(R.string.please_enter_note), Toast.LENGTH_SHORT).show()
-                binding.etNote.requestFocus()
-                return
-            }
-
             Constants.emitDebitEvent(
                 Event(
                     DebitModel(
-                        desc = note,
+                        desc = type,  // Use type from dropdown as description
                         amount = amount,
-                        note = note,
+                        note = note,  // Keep note separate
                         place = place,
                         date = date,
-                        type = type
+                        type = type   // Type from dropdown
                     )
                 )
             )
+
+            Toast.makeText(requireContext(),
+                getString(R.string.expense_added_successfully), Toast.LENGTH_SHORT).show()
             dialog?.dismiss()
         }
+    }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            // Set language to Hindi
+            val result = textToSpeech?.setLanguage(Locale("hi", "IN"))
+
+            if (result == TextToSpeech.LANG_MISSING_DATA ||
+                result == TextToSpeech.LANG_NOT_SUPPORTED
+            ) {
+                // Fallback to English
+                textToSpeech?.setLanguage(Locale.US)
+            }
+
+            isTtsInitialized = true
+
+            // Set speech rate (0.5 to 2.0, 1.0 is normal)
+            textToSpeech?.setSpeechRate(0.85f)
+
+            // Set pitch (0.5 to 2.0, 1.0 is normal)
+            textToSpeech?.setPitch(1.0f)
+        }
+    }
+
+    override fun onDestroy() {
+        if (textToSpeech != null) {
+            textToSpeech?.stop()
+            textToSpeech?.shutdown()
+        }
+        super.onDestroy()
     }
 }

@@ -12,7 +12,9 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,15 +49,16 @@
                     android:layout_centerVertical="true"
                     android:layout_toStartOf="@id/closeBtn"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginEnd="@dimen/_12sdp"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:fontFamily="@font/roboto_bold"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/font_plus_jakarta_sans"
                     android:gravity="center"
-                    android:maxLines="1"
+                    android:maxLines="2"
                     android:ellipsize="end"
                     android:text="@string/add_trip_data"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textColor="@color/text_main"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -329,6 +332,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_12sdp"
+                android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_route"
                 android:visibility="gone" />
 
@@ -411,7 +415,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:background="@null"
                         android:textSize="@dimen/_12sdp"
-                        android:inputType="text" />
+                        android:inputType="textCapCharacters" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -419,11 +423,16 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/submit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:text="@string/add"
-                android:textSize="@dimen/_14sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:layout_marginTop="@dimen/_8sdp" />
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:fontFamily="@font/font_plus_jakarta_sans"
+                app:backgroundTint="@color/brand_primary"
+                app:cornerRadius="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

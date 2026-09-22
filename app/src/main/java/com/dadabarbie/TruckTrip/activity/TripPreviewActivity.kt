@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Constants.showProgress
+import com.dadabarbie.TruckTrip.Utils.Prefs
 import com.dadabarbie.TruckTrip.Utils.SystemUiUtils
 import com.dadabarbie.TruckTrip.adapter.PreviewIncomeAdapter
 import com.dadabarbie.TruckTrip.adapter.PreviewExpenseAdapter
@@ -40,6 +41,16 @@ class TripPreviewActivity : BaseActivity() {
     private val authViewModel: AuthViewModel by viewModels()
     private var tripId: String = ""
     private var tripName: String = ""
+    private var source: String = ""
+    private var destination: String = ""
+    private var truckNo: String = ""
+    private var truckAverage: String = ""
+    private var totalIncome: String = "0"
+    private var totalExpense: String = "0"
+    private var routeJsonString: String? = null
+    private var fuelCostTotal: Double = 0.0
+    private var tollCostTotal: Double = 0.0
+    private var otherCostTotal: Double = 0.0
 
     private lateinit var incomeAdapter: PreviewIncomeAdapter
     private lateinit var expenseAdapter: PreviewExpenseAdapter
@@ -71,19 +82,20 @@ class TripPreviewActivity : BaseActivity() {
     private fun getTripDataFromIntent() {
         tripId = intent.getStringExtra("TRIP_ID") ?: ""
 
-        val source = intent.getStringExtra("SOURCE") ?: ""
-        val destination = intent.getStringExtra("DESTINATION") ?: ""
+        source = intent.getStringExtra("SOURCE") ?: ""
+        destination = intent.getStringExtra("DESTINATION") ?: ""
         val startDate = intent.getStringExtra("START_DATE") ?: ""
         val endDate = intent.getStringExtra("END_DATE") ?: ""
-        val truckNo = intent.getStringExtra("TRUCK_NO") ?: ""
+        truckNo = intent.getStringExtra("TRUCK_NO") ?: ""
         val driverIncome = intent.getStringExtra("DRIVER_INCOME") ?: "0"
-        val totalIncome = intent.getStringExtra("TOTAL_INCOME") ?: "0"
-        val totalExpense = intent.getStringExtra("TOTAL_EXPENSE") ?: "0"
+        totalIncome = intent.getStringExtra("TOTAL_INCOME") ?: "0"
+        totalExpense = intent.getStringExtra("TOTAL_EXPENSE") ?: "0"
         val ownerProfit = intent.getStringExtra("OWNER_PROFIT") ?: "0"
-        val truckAverage = intent.getStringExtra("TRUCK_AVERAGE") ?: "0"
+        truckAverage = intent.getStringExtra("TRUCK_AVERAGE") ?: "0"
         val totalDays = intent.getStringExtra("TOTAL_DAYS") ?: "0"
 
         val routeJson = intent.getStringExtra("ROUTE_JSON")
+        routeJsonString = routeJson
         val incomeJson = intent.getStringExtra("INCOME_JSON")
         val expenseJson = intent.getStringExtra("EXPENSE_JSON")
 
@@ -165,6 +177,27 @@ class TripPreviewActivity : BaseActivity() {
                 )
                 expenseAdapter.submitList(expenseList)
 
+                fuelCostTotal = 0.0
+                tollCostTotal = 0.0
+                otherCostTotal = 0.0
+
+                for (expense in expenseList) {
+                    val amt = expense.amount.toDoubleOrNull() ?: 0.0
+                    val type = (expense.type ?: "").lowercase(Locale.getDefault())
+                    val desc = (expense.desc ?: "").lowercase(Locale.getDefault())
+                    when {
+                        type.contains("fuel") || type.contains("diesel") || desc.contains("fuel") || desc.contains("diesel") -> {
+                            fuelCostTotal += amt
+                        }
+                        type.contains("toll") || desc.contains("toll") -> {
+                            tollCostTotal += amt
+                        }
+                        else -> {
+                            otherCostTotal += amt
+                        }
+                    }
+                }
+
                 if (expenseList.isEmpty()) {
                     binding.tvNoExpense.visibility = View.VISIBLE
                     binding.rvExpense.visibility = View.GONE
@@ -203,6 +236,64 @@ class TripPreviewActivity : BaseActivity() {
     private fun setClickListeners() {
         binding.btnDownload.setOnClickListener {
             downloadPdf()
+        }
+
+        binding.cardFuelStopPlanner.setOnClickListener {
+            val intent = Intent(this, FuelStopPlannerActivity::class.java).apply {
+                putExtra("SOURCE", source)
+                putExtra("DESTINATION", destination)
+                putExtra("TRUCK_NO", truckNo)
+                putExtra("TRUCK_AVERAGE", truckAverage)
+            }
+            startActivity(intent)
+        }
+
+        binding.cardBackhaulPlanner.setOnClickListener {
+            val intent = Intent(this, BackhaulCalculatorActivity::class.java).apply {
+                putExtra("SOURCE", source)
+                putExtra("DESTINATION", destination)
+                putExtra("REVENUE", totalIncome)
+                putExtra("TRIP_ID", tripId)
+                putExtra("TRUCK_NO", truckNo)
+                putExtra("TRUCK_AVERAGE", truckAverage)
+                if (fuelCostTotal > 0) putExtra("FUEL_COST", fuelCostTotal.toString())
+                if (tollCostTotal > 0) putExtra("TOLL_COST", tollCostTotal.toString())
+                if (otherCostTotal > 0) putExtra("OTHER_COST", otherCostTotal.toString())
+            }
+            startActivity(intent)
+        }
+
+        binding.cardRepeatTrip.setOnClickListener {
+            val isSimpleMode = Prefs[Constants.appMode, ""] == "A"
+            if (isSimpleMode) {
+                Constants.creditList.clear()
+                Constants.debitList.clear()
+                val intent = Intent(this, TruckNumberSpeechActivity::class.java).apply {
+                    putExtra("flag", 1)
+                }
+                startActivity(intent)
+            } else {
+                Constants.creditList.clear()
+                Constants.debitList.clear()
+                val routeList: ArrayList<String> = try {
+                    if (!routeJsonString.isNullOrEmpty()) {
+                        Gson().fromJson(routeJsonString, object : TypeToken<ArrayList<String>>() {}.type) ?: arrayListOf()
+                    } else arrayListOf()
+                } catch (e: Exception) {
+                    arrayListOf()
+                }
+
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("flag", 1)
+                    putExtra("truckNumber", truckNo)
+                    putExtra("sourceName", source)
+                    putExtra("destinationName", destination)
+                    putExtra("truckAverage", truckAverage)
+                    putExtra("routeJson", routeJsonString)
+                    putStringArrayListExtra("ROUTE_ARRAY", routeList)
+                }
+                startActivity(intent)
+            }
         }
     }
 

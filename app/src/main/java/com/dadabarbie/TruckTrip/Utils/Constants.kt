@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -32,13 +33,96 @@ object Constants {
 
 
 
+    fun Context.getExpenseText(typeKey: String): String {
+        return when (typeKey) {
+            "Food" -> getString(R.string.food)
+            "Toll/Highway Charges" -> getString(R.string.toll_tax)
+            "Puncture/Tire Repair" -> getString(R.string.puncture_tire)
+            "Driver Expanse(Kharcha)" -> getString(R.string.driver_kharch)
+            "Truck Maintenance" -> getString(R.string.maintenance)
+            "Loading Charges" -> getString(R.string.loading_charge)
+            "Unloading Charges" -> getString(R.string.unloading_charge)
+            "Parking Charges" -> getString(R.string.parking_charge)
+            "Police/RTO Fine" -> getString(R.string.police_rto_fine)
+            "Documents/Papers" -> getString(R.string.document_paper_kharcha)
+            "Broker/Commission" -> getString(R.string.broker_commission)
+            "Engine Oil/Lubricants" -> getString(R.string.engine_oil_lubricants)
+            "Truck Cleaning/Washing" -> getString(R.string.truck_service)
+            "Phone/Communication" -> getString(R.string.phone_recharge)
+            "Tea" -> getString(R.string.tea_snacks)
+            "Hotel/Accommodation" -> getString(R.string.hotel_stay)
+            "Permit/Entry Tax" -> getString(R.string.border_entry)
+            "Weighbridge Charges" -> getString(R.string.weighbridge_charges)
+            "Spare Parts" -> getString(R.string.spare_parts)
+            "Driver Bath/Facilities" -> getString(R.string.driver_personal_kharcha)
+            "Bulb/Electrical Items" -> getString(R.string.truck_electrical_items)
+            "Mechanic Charges" -> getString(R.string.mechanic_charges)
+            "Road Repair Contribution" -> getString(R.string.road_repair_contribution)
+            "Tools/Equipment" -> getString(R.string.truck_tools_equipment)
+            "Medicine/First Aid" -> getString(R.string.medicine_first_aid)
+            "Challan/Fine" -> getString(R.string.challan_fine)
+            "Truck Insurance" -> getString(R.string.truck_insurance)
+            "Registration/Fitness" -> getString(R.string.registration_fitness)
+            "Market Fee/Mandi Charges" -> getString(R.string.mandi_charges)
+            "OTHER" -> getString(R.string.other_expenses)
+            else -> getString(R.string.other_expenses)
+        }
+    }
+
+    fun Context.getExpenseKeyFromText(text: String): String {
+        return when (text.trim()) {
+
+            getString(R.string.food) -> "Food"
+            getString(R.string.toll_tax) -> "Toll/Highway Charges"
+            getString(R.string.puncture_tire) -> "Puncture/Tire Repair"
+            getString(R.string.driver_kharch) -> "Driver Expanse(Kharcha)"
+            getString(R.string.maintenance) -> "Truck Maintenance"
+
+            getString(R.string.loading_charge) -> "Loading Charges"
+            getString(R.string.unloading_charge) -> "Unloading Charges"
+            getString(R.string.parking_charge) -> "Parking Charges"
+
+            getString(R.string.police_rto_fine) -> "Police/RTO Fine"
+            getString(R.string.document_paper_kharcha) -> "Documents/Papers"
+            getString(R.string.broker_commission) -> "Broker/Commission"
+
+            getString(R.string.engine_oil_lubricants) -> "Engine Oil/Lubricants"
+            getString(R.string.truck_service) -> "Truck Cleaning/Washing"
+            getString(R.string.phone_recharge) -> "Phone/Communication"
+            getString(R.string.tea_snacks) -> "Tea"
+
+            getString(R.string.hotel_stay) -> "Hotel/Accommodation"
+            getString(R.string.border_entry) -> "Permit/Entry Tax"
+            getString(R.string.weighbridge_charges) -> "Weighbridge Charges"
+
+            getString(R.string.spare_parts) -> "Spare Parts"
+            getString(R.string.driver_personal_kharcha) -> "Driver Bath/Facilities"
+            getString(R.string.truck_electrical_items) -> "Bulb/Electrical Items"
+            getString(R.string.mechanic_charges) -> "Mechanic Charges"
+
+            getString(R.string.road_repair_contribution) -> "Road Repair Contribution"
+            getString(R.string.truck_tools_equipment) -> "Tools/Equipment"
+            getString(R.string.medicine_first_aid) -> "Medicine/First Aid"
+
+            getString(R.string.challan_fine) -> "Challan/Fine"
+            getString(R.string.truck_insurance) -> "Truck Insurance"
+            getString(R.string.registration_fitness) -> "Registration/Fitness"
+            getString(R.string.mandi_charges) -> "Market Fee/Mandi Charges"
+
+            getString(R.string.other_expenses) -> "OTHER"
+
+            else -> "OTHER"
+        }
+    }
+
+
 
 
     var creditList:ArrayList<com.dadabarbie.TruckTrip.model.addTrip.Income> = arrayListOf()
     var debitList:ArrayList<com.dadabarbie.TruckTrip.model.addTrip.Expense> = arrayListOf()
-    var isLogin=""
-    var countryCode="+91"
-    var mobileNumber="+91 9106695725"
+    const val isLogin = "isLogin"
+    const val countryCode = "+91"
+    const val mobileNumber = "mobileNumber"
     var tripName=""
     var resendToken: PhoneAuthProvider.ForceResendingToken?=null
     private var dialog: Dialog? = null
@@ -53,6 +137,7 @@ object Constants {
 
     const val login=MIDDLEWARE_HISSAB+"auth/login"
     const val appVersion=MIDDLEWARE_HISSAB+"util/app/version"
+    const val userFeedback=MIDDLEWARE_HISSAB+"util/user/feedback"
     const val supportedLanguages=MIDDLEWARE_HISSAB+"util/supported/languages"
     const val getTripPdf=MIDDLEWARE_HISSAB+"trip/add"
     const val updatedLanguage=MIDDLEWARE_HISSAB+"auth/user/lang"
@@ -62,6 +147,21 @@ object Constants {
     const val tripDelete=MIDDLEWARE_HISSAB+"trip/delete"
     const val logOut=MIDDLEWARE_HISSAB+"auth/logout"
     const val deleteAccount=MIDDLEWARE_HISSAB+"auth/user/delete"
+    const val citywiseFuelPrice = MIDDLEWARE_HISSAB + "util/citywise/fuelprice"
+    const val getTripsReport = MIDDLEWARE_HISSAB + "trip/report"
+    const val exportTripsReport = MIDDLEWARE_HISSAB + "trip/report/export"
+    const val subscriptionVerify = MIDDLEWARE_HISSAB + "subscription/verify"
+    const val subscriptionStatus = MIDDLEWARE_HISSAB + "subscription/status"
+
+    // Subscription & Billing Constants
+    const val PRODUCT_ID_PREMIUM = "truck_trip_premium"
+    const val BASE_PLAN_MONTHLY = "monthly"
+    const val PREF_IS_PREMIUM = "is_premium_user"
+    const val PREF_PREMIUM_EXPIRY = "premium_expiry_date"
+    const val PREF_PREMIUM_AUTO_RENEW = "premium_auto_renew"
+    const val PREF_BONUS_TRIPS = "bonus_trips_reward_count"
+    const val FREE_TRIP_LIMIT = 10
+    const val BONUS_TRIPS_PER_AD = 5
 
     const val loginUser="LOGIN_USERS"
     var languageLocale=""
@@ -132,19 +232,25 @@ object Constants {
         _refreshApi.postValue(event)
     }
 
-    fun Context.showProgress() {
-        dialog = getProgressView(this,true)
+    fun Context.showProgress(message: String? = null) {
+        dialog = getProgressView(this, message)
         if (dialog?.isShowing == true) {
             dialog?.dismiss()
         }
         dialog?.show()
     }
-    private fun getProgressView(context: Context?, isWhiteBackground: Boolean): Dialog? {
-        val dialog = Dialog(context!!)
+
+    private fun getProgressView(context: Context?, message: String? = null): Dialog? {
+        if (context == null) return null
+        val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.itemview_loading)
-        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        if (!message.isNullOrEmpty()) {
+            val tvMsg = dialog.findViewById<TextView>(R.id.tvLoadingMessage)
+            tvMsg?.text = message
+        }
         dialog.show()
         return dialog
     }

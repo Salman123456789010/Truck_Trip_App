@@ -235,7 +235,9 @@ class LoginScreenActivity : BaseActivity(), View.OnClickListener {
                     }
 
                     !(binding.etPhone.text?.trim().isNullOrEmpty()) -> {
-                        phone = countryCode + binding.etPhone.text.toString()
+                        val cleanPhone = binding.etPhone.text.toString().trim()
+                        val codePrefix = if (selectedPhoneCode.startsWith("+")) selectedPhoneCode else "+$selectedPhoneCode"
+                        phone = "$codePrefix$cleanPhone"
                         showProgress()
                         sendVerificationCode(phone)
                     }
@@ -246,6 +248,9 @@ class LoginScreenActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun sendVerificationCode(number: String) {
+        if (mAuth == null) {
+            mAuth = FirebaseAuth.getInstance()
+        }
         val options = PhoneAuthOptions.newBuilder(mAuth!!)
             .setPhoneNumber(number)       // Phone number to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
@@ -260,35 +265,38 @@ class LoginScreenActivity : BaseActivity(), View.OnClickListener {
             override fun onCodeSent(s: String, forceResendingToken: ForceResendingToken) {
                 super.onCodeSent(s, forceResendingToken)
                 verificationId = s
-                resendToken=forceResendingToken
+                resendToken = forceResendingToken
 
-                val i = Intent(applicationContext, OTPVerificationScreen::class.java).putExtra("number", phone).putExtra("otp", s)
-                    .putExtra("flag",true)
+                val i = Intent(applicationContext, OTPVerificationScreen::class.java)
+                    .putExtra("number", phone)
+                    .putExtra("otp", s)
+                    .putExtra("flag", true)
                 startActivity(i)
                 finish()
-                resendToken=forceResendingToken
                 dismissProgress()
-
             }
 
             override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
-                mAuth!!.signInWithCredential(phoneAuthCredential).addOnCompleteListener {
-                    if(it.isSuccessful){
-                        mAuth!!.currentUser?.getIdToken(true)?.addOnCompleteListener {
-                            if(it.isSuccessful){
-                                it.result?.token?.let { it1 ->
-                                    val i = Intent(applicationContext, OTPVerificationScreen::class.java).putExtra("number", phone).putExtra("token", it1).putExtra("flag",false)
+                if (mAuth == null) {
+                    mAuth = FirebaseAuth.getInstance()
+                }
+                mAuth!!.signInWithCredential(phoneAuthCredential).addOnCompleteListener { authTask ->
+                    if (authTask.isSuccessful) {
+                        mAuth!!.currentUser?.getIdToken(true)?.addOnCompleteListener { tokenTask ->
+                            if (tokenTask.isSuccessful) {
+                                tokenTask.result?.token?.let { idToken ->
+                                    val i = Intent(applicationContext, OTPVerificationScreen::class.java)
+                                        .putExtra("number", phone)
+                                        .putExtra("token", idToken)
+                                        .putExtra("flag", false)
                                     startActivity(i)
+                                    finish()
                                 }
-
                             }
                         }
                     }
-
                 }
                 dismissProgress()
-
-
             }
 
             override fun onVerificationFailed(e: FirebaseException) {

@@ -20,5 +20,5 @@ data class AddTripRequestModel(
     val endOdometer: String,
     val isOdometer: Boolean,
     val endKm: String,
-
+    val lang: String = "en"
 )

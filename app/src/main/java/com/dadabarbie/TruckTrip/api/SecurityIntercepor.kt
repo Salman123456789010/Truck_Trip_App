@@ -16,12 +16,26 @@ class SecurityInterceptor() : Interceptor {
         val request: okhttp3.Request = chain.request()
         val response: okhttp3.Response = chain.proceed(request)
         if (response.code == 401) {
-            Prefs[Constants.isLogin] = false
-            context.startActivity(
-                Intent(context, LoginScreenActivity::class.java).addFlags(
-                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                )
-            )
+            val urlPath = request.url.encodedPath
+            val isPublicOrAuthEndpoint = urlPath.contains("auth/login") ||
+                    urlPath.contains("util/app/version") ||
+                    urlPath.contains("util/supported/languages") ||
+                    urlPath.contains("subscription/status")
+
+            val isUserLoggedIn: Boolean = try {
+                Prefs[Constants.isLogin, false]
+            } catch (_: Exception) {
+                false
+            }
+
+            if (!isPublicOrAuthEndpoint && isUserLoggedIn) {
+                Prefs[Constants.isLogin] = false
+                Prefs[Constants.authToken] = ""
+                val intent = Intent(context, LoginScreenActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                }
+                context.startActivity(intent)
+            }
         }
         return response
     }

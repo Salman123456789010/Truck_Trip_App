@@ -4,8 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.hilt.work.HiltWorkerFactory
-import androidx.work.Configuration
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Constants.languageLocale
 import com.dadabarbie.TruckTrip.Utils.LocaleHelper
@@ -14,13 +12,9 @@ import com.google.gson.GsonBuilder
 import com.google.gson.LongSerializationPolicy
 import dagger.hilt.android.HiltAndroidApp
 import java.util.Locale
-import javax.inject.Inject
 
 @HiltAndroidApp
 class TruckTripApplication:Application() {
-
-    @Inject
-    lateinit var workerFactory: HiltWorkerFactory
 
     companion object{
         /*val gson = GsonBuilder().setLongSerializationPolicy(LongSerializationPolicy.STRING)
@@ -38,6 +32,10 @@ class TruckTripApplication:Application() {
         Prefs.init(this)
 
         appContext = applicationContext
+        
+        // Initialize AdMob and Google Play Billing centrally
+        com.dadabarbie.TruckTrip.ads.AdMobManager.init(this)
+//        com.dadabarbie.TruckTrip.billing.BillingManager.getInstance(this).startConnection()
     }
 
 

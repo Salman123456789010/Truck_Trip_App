@@ -12,13 +12,6 @@ import com.dadabarbie.TruckTrip.Utils.Constants.gone
 import com.dadabarbie.TruckTrip.Utils.Constants.visible
 import com.dadabarbie.TruckTrip.databinding.TripListLayoutBinding
 import com.dadabarbie.TruckTrip.model.getTrip.Record
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdLoader
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class TripListAdapter(
     val context: Context,
@@ -122,6 +115,11 @@ class TripListAdapter(
             val expense = item.total_expense?.toIntOrNull() ?: 0
             binding.totalProfit.text = "₹${income - expense}"
 
+            binding.root.setOnClickListener {
+                Log.d(TAG, "Item root clicked - Position: $position, ID: ${item._id}")
+                viewTripDataListner.viewTripDataMethod(item)
+            }
+
             // 🔥 CRITICAL FIX: Pass Record object instead of position for edit/view
             binding.editIcon.setOnClickListener {
                 Log.d(TAG, "Edit clicked - Position: $position, ID: ${item._id}")
@@ -132,6 +130,7 @@ class TripListAdapter(
                 Log.d(TAG, "View clicked - Position: $position, ID: ${item._id}")
                 viewTripDataListner.viewTripDataMethod(item)
             }
+
 
             // 🔥 CRITICAL FIX: Pass position for share (needs current position)
             binding.shareIcon.setOnClickListener {
@@ -155,42 +154,7 @@ class TripListAdapter(
                 }
             }
 
-            // Handle ads every 3rd item
-            handleAdDisplay(position)
-        }
-
-        private fun handleAdDisplay(position: Int) {
-            if (position % 3 == 0) {
-                binding.myTemplate.visible()
-
-                // Use proper coroutine scope instead of GlobalScope
-                CoroutineScope(Dispatchers.Main).launch {
-                    try {
-                        val adLoader = AdLoader.Builder(
-                            context,
-                            "ca-app-pub-8808039515208362/1007625609"
-                        )
-                            .forNativeAd { nativeAd ->
-                                binding.myTemplate.setNativeAd(nativeAd)
-                                binding.myTemplate.visibility = View.VISIBLE
-                            }
-                            .withAdListener(object : AdListener() {
-                                override fun onAdFailedToLoad(error: LoadAdError) {
-                                    Log.e(TAG, "Ad failed to load: ${error.message}")
-                                    binding.myTemplate.gone()
-                                }
-                            })
-                            .build()
-
-                        adLoader.loadAd(AdRequest.Builder().build())
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Error loading ad: ${e.message}")
-                        binding.myTemplate.gone()
-                    }
-                }
-            } else {
-                binding.myTemplate.gone()
-            }
+            binding.myTemplate.gone()
         }
     }
 

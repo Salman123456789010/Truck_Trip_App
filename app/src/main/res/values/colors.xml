@@ -67,4 +67,29 @@
     <color name="bgcolor_">#EEF7FF</color>
     <color name="greencolor">#008000</color>
     <color name="transparent_color">#00000000</color>
+
+    <!-- Professional Modern Theme Tokens -->
+    <color name="surface_app_bg">#F8FAFC</color>
+    <color name="surface_card">#FFFFFF</color>
+    <color name="surface_subtle">#F1F5F9</color>
+    <color name="border_subtle">#E2E8F0</color>
+    <color name="border_divider">#CBD5E1</color>
+    <color name="brand_primary">#2155FF</color>
+    <color name="brand_primary_dark">#1844D6</color>
+    <color name="brand_primary_subtle">#EFF6FF</color>
+    <color name="brand_primary_tint">#DBEAFE</color>
+    <color name="text_main">#0F172A</color>
+    <color name="text_muted">#64748B</color>
+    <color name="text_light">#94A3B8</color>
+    <color name="text_inverse">#FFFFFF</color>
+    <color name="state_success">#16A34A</color>
+    <color name="state_success_bg">#F0FDF4</color>
+    <color name="state_success_border">#BBF7D0</color>
+    <color name="state_error">#DC2626</color>
+    <color name="state_error_bg">#FEF2F2</color>
+    <color name="state_error_border">#FECACA</color>
+    <color name="state_warning">#D97706</color>
+    <color name="state_warning_bg">#FFFBEB</color>
+    <color name="state_warning_border">#FDE68A</color>
+    <color name="badge_neutral_bg">#F1F5F9</color>
 </resources>

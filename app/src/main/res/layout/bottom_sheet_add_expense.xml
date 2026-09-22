@@ -1,382 +1,404 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/_16sdp"
-    android:background="@color/white">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:id="@+id/design_bottom_expanse_sheet"
+    android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_expense"
-        android:textSize="@dimen/_18sdp"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:paddingBottom="@dimen/_10sdp"
-        android:fontFamily="@font/roboto_medium" />
+        android:orientation="vertical"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_16sdp"
+        android:background="@color/white">
 
-    <!-- Amount Field -->
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="@dimen/_10sdp"-->
-<!--        app:boxStrokeColor="@color/color_primary"-->
-<!--        app:hintEnabled="true"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/etAmount"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="40dp"-->
-<!--                android:hint="@string/enter_expenditure_amount"-->
-<!--                android:inputType="number"-->
-<!--                android:maxLength="9"-->
-<!--                android:textSize="@dimen/_14sdp" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/micAmount"-->
-<!--                android:layout_width="@dimen/_20sdp"-->
-<!--                android:layout_height="@dimen/_20sdp"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:layout_marginEnd="@dimen/_10sdp"-->
-<!--                android:contentDescription="Microphone"-->
-<!--                android:src="@drawable/baseline_mic_24"-->
-<!--                app:tint="@color/color_primary" />-->
-
-<!--        </RelativeLayout>-->
-
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
-
-
-
-<!--    &lt;!&ndash; Note Field &ndash;&gt;-->
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="@dimen/_10sdp"-->
-<!--        app:boxStrokeColor="@color/color_primary"-->
-<!--        app:hintEnabled="true"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/etNote"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="40dp"-->
-<!--                android:hint="@string/note_expense_hint"-->
-<!--                android:inputType="textMultiLine"-->
-<!--                android:maxLines="3"-->
-<!--                android:textSize="@dimen/_14sdp" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/micNote"-->
-<!--                android:layout_width="@dimen/_20sdp"-->
-<!--                android:layout_height="@dimen/_20sdp"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:layout_marginEnd="@dimen/_10sdp"-->
-<!--                android:contentDescription="Microphone"-->
-<!--                android:src="@drawable/baseline_mic_24"-->
-<!--                app:tint="@color/color_primary" />-->
-
-<!--        </RelativeLayout>-->
-
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_5sdp"
-        app:strokeColor="@color/black"
-        >
-
-        <LinearLayout
-            android:id="@+id/datePicker"
+        <!-- Header Section - Compact -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:paddingBottom="@dimen/_6sdp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etNote"
-                android:layout_width="0dp"
-                android:layout_weight="1.8"
-                android:hint="@string/note_expense_hint"
-                android:inputType="textMultiLine"
-                android:maxLines="3"
-                android:textSize="@dimen/_14sdp"
-                android:paddingHorizontal="@dimen/_5sdp"
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="@dimen/_10sdp"
+                android:text="@string/add_expense"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
-                />
+                android:fontFamily="@font/roboto_medium"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
+
             <ImageView
-                android:id="@+id/micNote"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:id="@+id/btnClose"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
                 android:layout_alignParentEnd="true"
-                android:layout_gravity="center"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:contentDescription="Microphone"
-                android:src="@drawable/baseline_mic_24"
+                android:src="@drawable/loud_speaker"
+                android:contentDescription="Voice Instruction"
                 app:tint="@color/color_primary" />
 
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_5sdp"
-        app:strokeColor="@color/black"
-        >
-
+        </RelativeLayout>
+        <!-- Fuel Info Note -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_6sdp"
+            android:background="@drawable/bg_info_light">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etAmount"
-                android:layout_width="0dp"
-                android:layout_weight="1.8"
-                android:hint="@string/enter_expenditure_amount"
-                android:inputType="number"
-                android:maxLength="9"
-                android:textSize="@dimen/_14sdp"
-                android:paddingHorizontal="@dimen/_5sdp"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="@dimen/_10sdp"
-                android:textColor="@color/black"
-                />
             <ImageView
-                android:id="@+id/micAmount"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center"
-                android:visibility="gone"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:contentDescription="Microphone"
-                android:src="@drawable/baseline_mic_24"
-                app:tint="@color/color_primary" />
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:src="@drawable/ic_info"
+                app:tint="@color/color_primary"
+                android:layout_marginEnd="@dimen/_6sdp" />
 
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-<!--    &lt;!&ndash; Place/City Field &ndash;&gt;-->
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="@dimen/_10sdp"-->
-<!--        app:boxStrokeColor="@color/color_primary"-->
-<!--        app:hintEnabled="true"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/etPlace"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="40dp"-->
-<!--                android:hint="@string/place_city"-->
-<!--                android:inputType="text"-->
-<!--                android:textSize="@dimen/_14sdp" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/micPlace"-->
-<!--                android:layout_width="@dimen/_20sdp"-->
-<!--                android:layout_height="@dimen/_20sdp"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:layout_marginEnd="@dimen/_10sdp"-->
-<!--                android:contentDescription="Microphone"-->
-<!--                android:src="@drawable/baseline_mic_24"-->
-<!--                app:tint="@color/color_primary" />-->
-
-<!--        </RelativeLayout>-->
-
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_5sdp"
-        app:strokeColor="@color/black"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPlace"
+            <TextView
+                android:id="@+id/tvFuelNote"
                 android:layout_width="0dp"
-                android:layout_weight="1.8"
-                android:maxLines="3"
-                android:hint="@string/place_city"
-                android:inputType="text"
-                android:textSize="@dimen/_14sdp"
-                android:paddingHorizontal="@dimen/_5sdp"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="@dimen/_10sdp"
-                android:textColor="@color/black"
-                />
-            <ImageView
-                android:id="@+id/micPlace"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:contentDescription="Microphone"
-                android:src="@drawable/baseline_mic_24"
-                app:tint="@color/color_primary" />
-
+                android:layout_weight="1"
+                android:text="@string/fuel_add_note"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/color_primary"
+                android:fontFamily="sans-serif-medium" />
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
 
-    <!-- Expense Type Dropdown -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilExpenseType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:layout_marginStart="@dimen/_5sdp"
-        app:boxStrokeColor="@color/color_primary"
-        android:visibility="gone"
-        app:hintEnabled="true"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-
-        <AutoCompleteTextView
-            android:id="@+id/actvExpenseType"
+        <!-- Expense Type Dropdown - Compact -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/select_expense_type"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:strokeColor="@color/color_primary"
+            app:strokeWidth="@dimen/_1sdp"
+            app:cardElevation="0dp">
 
-            android:inputType="none"
-            android:textSize="@dimen/_14sdp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Date Field -->
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="@dimen/_10sdp"-->
-<!--        app:boxStrokeColor="@color/color_primary"-->
-<!--        app:hintEnabled="true"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/etDate"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="@string/date"-->
-<!--            android:inputType="none"-->
-<!--            android:focusable="false"-->
-<!--            android:clickable="true"-->
-<!--            android:textSize="@dimen/_14sdp" />-->
-
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_5sdp"
-        app:strokeColor="@color/grey"
-        app:strokeWidth="@dimen/_1sdp">
-
-        <LinearLayout
-            android:id="@+id/amountLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etDate"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="@dimen/_10sdp"
-                android:hint="@string/date"
-                android:inputType="none"
-                android:focusable="false"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/_2sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:src="@drawable/ic_category"
+                    app:tint="@color/grey"
+                    android:contentDescription="Category Icon" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilExpenseType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintEnabled="true"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:background="@android:color/transparent">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/actvExpenseType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/select_expense_type"
+                        android:inputType="none"
+                        android:textSize="@dimen/_13sdp"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Amount Field - Compact -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:strokeColor="@color/grey"
+            app:strokeWidth="@dimen/_1sdp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹"
+                    android:textSize="@dimen/_16sdp"
+                    android:textColor="@color/grey"
+                    android:fontFamily="sans-serif-bold"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_2sdp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAmount"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:hint="@string/enter_expenditure_amount"
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:imeOptions="actionNext"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:id="@+id/micAmount"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:contentDescription="Microphone"
+                    android:src="@drawable/baseline_mic_24"
+                    android:visibility="gone"
+                    app:tint="@color/color_primary" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Note Field - Compact -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:strokeColor="@color/grey"
+            app:strokeWidth="@dimen/_1sdp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/ic_note"
+                    app:tint="@color/grey"
+                    android:contentDescription="Note Icon" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNote"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:hint="@string/note_expense_hint"
+                    android:inputType="textCapSentences"
+                    android:maxLines="2"
+                    android:minLines="1"
+                    android:imeOptions="actionNext"
+                    android:gravity="start"
+                    android:textSize="@dimen/_13sdp"
+                    android:paddingHorizontal="@dimen/_6sdp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:id="@+id/micNote"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:contentDescription="Microphone"
+                    android:src="@drawable/baseline_mic_24"
+                    app:tint="@color/color_primary" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Place/City Field - Compact -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:strokeColor="@color/grey"
+            app:strokeWidth="@dimen/_1sdp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/ic_loaction"
+                    app:tint="@color/grey"
+                    android:contentDescription="Location Icon" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPlace"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:hint="@string/place_city"
+                    android:inputType="textCapWords"
+                    android:maxLines="1"
+                    android:imeOptions="actionDone"
+                    android:textSize="@dimen/_13sdp"
+                    android:paddingHorizontal="@dimen/_6sdp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:id="@+id/micPlace"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:contentDescription="Microphone"
+                    android:src="@drawable/baseline_mic_24"
+                    app:tint="@color/color_primary" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Date Field - Compact -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:strokeColor="@color/grey"
+            app:strokeWidth="@dimen/_1sdp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:id="@+id/dateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:clickable="true"
-                android:textSize="@dimen/_14sdp" />
+                android:focusable="true"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/ic_calander"
+                    app:tint="@color/grey"
+                    android:contentDescription="Calendar Icon" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="@dimen/_8sdp"
+                    android:paddingStart="@dimen/_6sdp"
+                    android:hint="@string/date"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:textSize="@dimen/_13sdp"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Action Buttons - Compact -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnCancel"
+                android:layout_width="0dp"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_6sdp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_8sdp"
+                app:strokeColor="@color/color_primary"
+                app:strokeWidth="@dimen/_1sdp"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:padding="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:textColor="@color/color_primary"
+                    android:text="@string/cancel"
+                    android:textSize="@dimen/_14sdp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnSave"
+                android:layout_width="0dp"
+                android:layout_weight="1.1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                app:cardBackgroundColor="@color/color_primary"
+                app:cardCornerRadius="@dimen/_8sdp"
+                app:cardElevation="@dimen/_2sdp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:padding="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="@string/save"
+                    android:textSize="@dimen/_14sdp" />
+
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
-    <!-- Save Button -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/color_primary"
-        app:cardCornerRadius="@dimen/_10sdp">
-
-        <TextView
-            android:id="@+id/btnSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:padding="@dimen/_12sdp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:text="@string/save"
-            android:textSize="@dimen/_16sdp" />
-
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
-
+</androidx.core.widget.NestedScrollView>

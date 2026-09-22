@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -43,7 +44,9 @@ class CreditAdapter(var context: Context,var editCreditClickListner: EditCreditC
         holder.binding.amount.setTextColor(context.getColor(R.color.greencolor))
         holder.binding.amountText.text = item.desc
         holder.binding.mainCardLayout.setStrokeColor(ColorStateList.valueOf(context.getColor(R.color.gujrati_txt)))
-        
+
+
+
         // Show place and date if available
         if (item.place.isNotEmpty() || item.date.isNotEmpty()) {
             holder.binding.placeDateLayout.visibility = android.view.View.VISIBLE
@@ -52,6 +55,12 @@ class CreditAdapter(var context: Context,var editCreditClickListner: EditCreditC
         } else {
             holder.binding.placeDateLayout.visibility = android.view.View.GONE
         }
+        if (item.note.isNotEmpty()){
+            holder.binding.noteLayout.visibility= View.VISIBLE
+        }else{
+            holder.binding.noteLayout.visibility= View.GONE
+        }
+        holder.binding.noteLayoutText.text = item.note
         
         holder.binding.productMenu.setOnClickListener{
             val popupMenu = PopupMenu(context,  holder.binding.productMenu)

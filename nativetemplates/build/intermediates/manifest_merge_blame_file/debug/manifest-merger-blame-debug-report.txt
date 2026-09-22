@@ -5,8 +5,8 @@
 5    <uses-sdk android:minSdkVersion="21" />
 6
 7    <application android:supportsRtl="true" >
-7-->C:\Users\salmankhanbelim\AndroidStudioProjects\TestApplication\nativetemplates\src\main\AndroidManifest.xml:3:3-5:17
-7-->C:\Users\salmankhanbelim\AndroidStudioProjects\TestApplication\nativetemplates\src\main\AndroidManifest.xml:3:16-42
+7-->C:\Users\salmankhanbelim\AndroidStudioProjects\TestApplication\nativetemplates\src\main\AndroidManifest.xml:2:3-4:17
+7-->C:\Users\salmankhanbelim\AndroidStudioProjects\TestApplication\nativetemplates\src\main\AndroidManifest.xml:2:16-42
 8    </application>
 9
 10</manifest>

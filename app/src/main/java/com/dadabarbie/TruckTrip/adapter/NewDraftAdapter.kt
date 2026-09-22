@@ -62,25 +62,7 @@ class NewDraftAdapter(val context: Context,val draftEditListner: DraftEditListne
             deleteListner.deleteMethod(position)
         }
 
-        if(position%3==0){
-            holder.binding.myTemplate.visible()
-            GlobalScope.launch {
-                val adLoader = AdLoader.Builder(context, "ca-app-pub-8808039515208362/1007625609")
-                    .forNativeAd { nativeAd ->
-                        holder.binding.myTemplate.setNativeAd(nativeAd)
-                    }
-                    .withAdListener(object : AdListener() {
-                        override fun onAdFailedToLoad(error: LoadAdError) {
-                            Log.e("AdMob", "Ad failed to load: ${error.message}")
-                        }
-                    })
-                    .build()
-
-                adLoader.loadAd(AdRequest.Builder().build())
-            }
-        }else{
-            holder.binding.myTemplate.gone()
-        }
+        holder.binding.myTemplate.gone()
 
 
     }

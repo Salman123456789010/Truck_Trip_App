@@ -20,11 +20,13 @@ import androidx.core.util.Pair
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Constants.creditList
 import com.dadabarbie.TruckTrip.Utils.Constants.debitList
 import com.dadabarbie.TruckTrip.Utils.Constants.dismissProgress
+import com.dadabarbie.TruckTrip.Utils.Constants.getExpenseText
 import com.dadabarbie.TruckTrip.Utils.Constants.showProgress
 import com.dadabarbie.TruckTrip.Utils.Constants.tripName
 import com.dadabarbie.TruckTrip.Utils.Event
@@ -46,13 +48,6 @@ import com.dadabarbie.TruckTrip.model.addTrip.Expense
 import com.dadabarbie.TruckTrip.model.addTrip.Income
 import com.dadabarbie.TruckTrip.room.AppDatabase
 import com.dadabarbie.TruckTrip.room.model.TripDataTestModel
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -110,7 +105,7 @@ class MainActivity : BaseActivity(), View.OnClickListener,
     private var initialDebitSnapshot = ""
     private val authViewModel: AuthViewModel by viewModels()
     lateinit var debitAdapter: DebitAdapter
-    private var totalamount = 0
+
     var draftFlag = false
     var databaseAddFlag = false
     var databaseAddFlagName = false
@@ -120,9 +115,12 @@ class MainActivity : BaseActivity(), View.OnClickListener,
     private val testList: ArrayList<TripDataTestModel> = arrayListOf()
     private var courseList: ArrayList<TripDataTestModel> = arrayListOf()
     lateinit var deleteDialogFragment: DeleteDialogFragment
-    var totalDebitAmount = 0
+//    var totalDebitAmount = 0
+//    private var totalamount = 0
     var randomNumber = "0"
-    var showingFlag = 0
+//    var showingFlag = 0
+
+    private val uiTotals = UiTotals()
     var startTripDate: String? = ""
     var routeArray: ArrayList<String> =arrayListOf()
     var truckNumberGiven: String? = ""
@@ -145,13 +143,6 @@ class MainActivity : BaseActivity(), View.OnClickListener,
     var endOdometer: String? = "0"
     var endKM: String? = "0"
     var isOdometer: Boolean? = true
-    companion object {
-        // Yaha apna Rewarded Ad Unit ID daalo (second ID)
-        private const val REWARDED_AD_UNIT_ID =
-            "ca-app-pub-8808039515208362/3557131853"
-    }
-
-    private var rewardedAd: RewardedAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -170,31 +161,11 @@ class MainActivity : BaseActivity(), View.OnClickListener,
         initViews()
         setOnclickListner()
         setObserver()
-        MobileAds.initialize(this) {}
-        loadRewardedAd()
 
         // Show coach marks after a short delay to ensure all views are ready
 
     }
 
-    private fun loadRewardedAd() {
-        val adRequest = AdRequest.Builder().build()
-
-        RewardedAd.load(
-            this,
-            REWARDED_AD_UNIT_ID,
-            adRequest,
-            object : RewardedAdLoadCallback() {
-                override fun onAdLoaded(ad: RewardedAd) {
-                    rewardedAd = ad
-                }
-
-                override fun onAdFailedToLoad(error: LoadAdError) {
-                    rewardedAd = null
-                }
-            }
-        )
-    }
     private fun checkListChanged(): Boolean {
         val currentCredit = Gson().toJson(creditList)
         val currentDebit = Gson().toJson(debitList)
@@ -203,46 +174,27 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                 currentDebit != initialDebitSnapshot
     }
 
-    private fun showAdThen(onFinished: () -> Unit) {
-        val ad = rewardedAd
-
-        if (ad == null) {
-            // Ad ready nahi hai → direct PDF open kar do
-            onFinished()
-            // background me next ad load kar lo
-            loadRewardedAd()
-            return
-        }
-
-        ad.fullScreenContentCallback = object : FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-                // user ne cross/close kiya
-                rewardedAd = null
-                loadRewardedAd()      // agla ad ready karo
-                onFinished()          // ab PDF open karo
-            }
-
-            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                rewardedAd = null
-                loadRewardedAd()
-                onFinished()          // fail ho gaya → fir bhi PDF dikha do
-            }
-        }
-
-        ad.show(this) { rewardItem ->
-            // Agar tum reward logic use karna chaho to yaha amount etc milega
-            // val amount = rewardItem.amount
-            // val type = rewardItem.type
-        }
-    }
 
     private fun initViews() {
-        showingFlag = intent.getIntExtra("flag", 1)
+        uiTotals.showingFlag = intent.getIntExtra("flag", 1)
 
-        if (showingFlag == 1) {
+        if (uiTotals.showingFlag == 1) {
             // New trip
             randomNumberGenerate()
-            callDialog("", "", "", "", "", "", "", "","")
+            val initialTruck = intent.getStringExtra("truckNumber") ?: ""
+            val initialSrc = intent.getStringExtra("sourceName") ?: ""
+            val initialDest = intent.getStringExtra("destinationName") ?: ""
+            val initialAvg = intent.getStringExtra("truckAverage") ?: ""
+            val routeJson = intent.getStringExtra("routeJson")
+            if (!routeJson.isNullOrEmpty()) {
+                routeList = RouteUtils.parseRouteFromJson(routeJson)
+            } else {
+                val array = intent.getStringArrayListExtra("ROUTE_ARRAY")
+                if (!array.isNullOrEmpty()) {
+                    routeList = ArrayList(array)
+                }
+            }
+            callDialog("", initialSrc, initialDest, "", initialTruck, initialAvg, "", "", "")
         } else {
             // Edit existing trip
             val truckNumber = intent.getStringExtra("truckNumber") ?: ""
@@ -297,7 +249,7 @@ class MainActivity : BaseActivity(), View.OnClickListener,
             Log.d("MainActivityList", "Editing trip ID: $id with ${routeList.size} route places")
 
             // Handle income and expense data
-            if (showingFlag == 2 && id.isNotEmpty()) {
+            if (uiTotals.showingFlag == 2 && id.isNotEmpty()) {
                 randomNumber = id ?: randomNumber
                 databaseAddFlag = true
 
@@ -335,7 +287,7 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                     }
                 }
             }
-            if (showingFlag == 3 && id.isNotEmpty()) {
+            if (uiTotals.showingFlag == 3 && id.isNotEmpty()) {
                 shouldDeleteDraftOnComplete = true // Mark for deletion after completion
                 // ... rest of your code
             }
@@ -375,11 +327,11 @@ class MainActivity : BaseActivity(), View.OnClickListener,
 
             // Update adapters with loaded data
             if (creditList.isNotEmpty()) {
-                creditIncomeUpdate()
+                updateAllTotals()
             }
 
             if (debitList.isNotEmpty()) {
-                debitIncomeUpdate()
+                updateAllTotals()
             }
         }
         takeInitialListSnapshot();
@@ -408,8 +360,7 @@ class MainActivity : BaseActivity(), View.OnClickListener,
 //    }
 
     private fun randomNumberGenerate() {
-        val rand = Random()
-        randomNumber = rand.nextInt(1000).toString()
+        randomNumber = "draft_${System.currentTimeMillis()}_${java.util.UUID.randomUUID().toString().substring(0, 8)}"
     }
 
     var routeList: ArrayList<String> = arrayListOf()  // NEW: Store complete route
@@ -540,10 +491,15 @@ class MainActivity : BaseActivity(), View.OnClickListener,
         if (position !in creditList.indices) return
 
         creditList.removeAt(position)
+        
+        // Update totals immediately
+        updateAllTotals()
 
         val newList = creditList.toList()
         creditAdapter.submitList(newList) {
-            updateAllTotals()  // ✅ Use unified method
+            if (newList.isNotEmpty()) {
+                scrollToLastDebit()
+            }
         }
 
         hasPendingChanges = true
@@ -560,12 +516,16 @@ class MainActivity : BaseActivity(), View.OnClickListener,
 
                 val removedItem = debitList.removeAt(position)
                 Log.d("MainActivity", "Removed debit: ${removedItem.desc}")
+                
+                // Update totals immediately
+                updateAllTotals()
 
                 val newList = debitList.toMutableList()
 
                 debitAdapter.submitList(newList) {
-                    updateAllTotals()  // ✅ Use unified method
-                    calculateFinalTripAverage()
+                    if (newList.isNotEmpty()) {
+                        scrollToLastDebit()
+                    }
                 }
 
                 hasPendingChanges = true
@@ -586,10 +546,12 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                 // Create new list reference for DiffUtil
                 val newList = ArrayList(creditList)
 
+                // Update totals immediately
+                updateAllTotals()
+
                 // Submit to adapter with callback
                 creditAdapter.submitList(newList) {
                     Log.d("MainActivity", "Adapter list submitted")
-                    updateAllTotals()  // Update all totals after adapter updates
                 }
 
                 hasPendingChanges = true
@@ -605,9 +567,11 @@ class MainActivity : BaseActivity(), View.OnClickListener,
     fun debitDataUpdate() {
         lifecycleScope.launch(Dispatchers.Main) {
             try {
+                // Update totals immediately
+                updateAllTotals()
+
                 val newList = debitList.toMutableList()
                 debitAdapter.submitList(newList) {
-                    updateAllTotals()  // ✅ Use unified method
                     calculateFinalTripAverage()
                 }
                 hasPendingChanges = true
@@ -642,19 +606,23 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                                         existing.date == income.date &&
                                         existing.place == income.place
                             }
+                            creditList.add(income)
+                            Log.d("MainActivity", "Added income via observer: ${income.desc}")
 
-                            if (!isDuplicate) {
-                                creditList.add(income)
-                                Log.d("MainActivity", "Added income via observer: ${income.desc}")
+                            // Update totals immediately
+                            updateAllTotals()
 
-                                val newList = creditList.toMutableList()
-                                creditAdapter.submitList(newList) {
-                                    updateAllTotals()  // ✅ This updates profit
-                                }
-
-                                hasPendingChanges = true
-                                databaseAddFlag = false
+                            val newList = creditList.toMutableList()
+                            creditAdapter.submitList(newList) {
+                                scrollToLastCredit()
                             }
+
+                            hasPendingChanges = true
+                            databaseAddFlag = false
+
+//                            if (!isDuplicate) {
+//
+//                            }
 
                         } catch (e: Exception) {
                             Log.e("MainActivity", "Error adding income: ${e.message}", e)
@@ -664,6 +632,9 @@ class MainActivity : BaseActivity(), View.OnClickListener,
             }
         }
 
+
+
+
 // ==========================================
 // 7. UPDATE setObserver() - Expense Section
 // ==========================================
@@ -671,9 +642,10 @@ class MainActivity : BaseActivity(), View.OnClickListener,
             event.getContentIfNotHandled()?.let {
                 if (it.amount.toInt() >= 0 && !it.desc.isNullOrEmpty()) {
                     lifecycleScope.launch(Dispatchers.Main) {
+                        Log.d("ChangesData", "setObserver: ${it.type}  ${getExpenseText(it.type)}" )
                         try {
                             val expense = Expense(
-                                desc = it.desc,
+                                desc = it.type,
                                 amount = it.amount,
                                 note = it.note,
                                 place = it.place,
@@ -683,26 +655,30 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                                 km = it.km
                             )
 
-                            val isDuplicate = debitList.any { existing ->
-                                existing.desc == expense.desc &&
-                                        existing.amount == expense.amount &&
-                                        existing.date == expense.date &&
-                                        existing.place == expense.place
+//                            val isDuplicate = debitList.any { existing ->
+//                                existing.desc == expense.desc &&
+//                                        existing.amount == expense.amount &&
+//                                        existing.date == expense.date &&
+//                                        existing.place == expense.place
+//                            }
+                            debitList.add(expense)
+                            Log.d("MainActivity", "Added expense: ${expense.desc}")
+
+                            // Update totals immediately
+                            updateAllTotals()
+
+                            val newList = debitList.toMutableList()
+
+                            debitAdapter.submitList(newList) {
+                                scrollToLastDebit()
+                                calculateFinalTripAverage()
                             }
 
-                            if (!isDuplicate) {
-                                debitList.add(expense)
-                                Log.d("MainActivity", "Added expense: ${expense.desc}")
-
-                                val newList = debitList.toMutableList()
-                                debitAdapter.submitList(newList) {
-                                    updateAllTotals()  // ✅ Use unified method
-                                    calculateFinalTripAverage()
-                                }
-
-                                hasPendingChanges = true
-                                databaseAddFlag = false
-                            }
+                            hasPendingChanges = true
+                            databaseAddFlag = false
+//                            if (!isDuplicate) {
+//
+//                            }
 
                         } catch (e: Exception) {
                             Log.e("MainActivity", "Error adding expense: ${e.message}", e)
@@ -740,17 +716,22 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                         }
 
                         withContext(Dispatchers.Main) {
-                            Constants.refreshApiGet(Event(1))
                             openFile(data)
+                            Constants.refreshApiGet(Event(1))
+                            finish()
                         }
                     } catch (e: Exception) {
                         Log.e("MainActivity", "Error deleting draft: ${e.message}", e)
+                        withContext(Dispatchers.Main) {
+                            Constants.refreshApiGet(Event(1))
+                            finish()
+                        }
                     }
                 }
-
-                finish()
             } catch (e: Exception) {
                 Log.e("MainActivity", "Error opening file: ${e.message}")
+                Constants.refreshApiGet(Event(1))
+                finish()
             }
         })
     }
@@ -789,53 +770,78 @@ class MainActivity : BaseActivity(), View.OnClickListener,
     // ==========================================
 // ADAPTER INITIALIZATION - IMPROVED VERSION
 // ==========================================
+    private lateinit var creditLayoutManager: LinearLayoutManager
+    private lateinit var debitLayoutManager: LinearLayoutManager
+
     private fun initAdapter() {
         try {
-            // Credit Adapter
+            // Credit
+            creditLayoutManager = LinearLayoutManager(this)
             creditAdapter = CreditAdapter(this, this, this)
+            binding.creditAmount.layoutManager = creditLayoutManager
             binding.creditAmount.adapter = creditAdapter
             creditAdapter.submitList(ArrayList(creditList)) {
-                updateAllTotals()  // ✅ Use unified method after initial load
+                scrollToLastCredit()
+                updateAllTotals()
             }
 
-            // Debit Adapter
+            // Debit
+            debitLayoutManager = LinearLayoutManager(this)
             debitAdapter = DebitAdapter(this, this, this)
+            binding.debitAmount.layoutManager = debitLayoutManager
             binding.debitAmount.adapter = debitAdapter
             debitAdapter.submitList(ArrayList(debitList)) {
-                updateAllTotals()  // ✅ Use unified method after initial load
+                scrollToLastDebit()
+                updateAllTotals()
             }
 
         } catch (e: Exception) {
             Log.e("MainActivity", "Error initializing adapters: ${e.message}", e)
         }
     }
+    private fun scrollToLastCredit() {
+        if (creditList.isNotEmpty()) {
+            binding.mainScrollview.post {
+                creditLayoutManager.scrollToPosition(creditList.size - 1)
+            }
+        }
+    }
+
+    private fun scrollToLastDebit() {
+        if (debitList.isNotEmpty()) {
+            binding.mainScrollview.post {
+                debitLayoutManager.scrollToPosition(debitList.size - 1)
+            }
+        }
+    }
+
 
     // Helper method to update credit totals
-    private fun updateCreditTotals() {
-        binding.totalIncome.text = getString(R.string.ruppe) + totalamount.toString()
-        binding.totalIncomeNew.text = totalamount.toString()
-        updateProfitDisplay()
-    }
+//    private fun updateCreditTotals() {
+//        binding.totalIncome.text = getString(R.string.ruppe) + totalamount.toString()
+//        binding.totalIncomeNew.text = totalamount.toString()
+//        updateProfitDisplay()
+//    }
 
-    private fun recalculateTotalsAndProfit() {
-        val income = creditList.sumOf { it.amount.toIntOrNull() ?: 0 }
-        val expense = debitList.sumOf { it.amount.toIntOrNull() ?: 0 }
-
-        binding.totalIncome.text = getString(R.string.ruppe) + income
-        binding.totalIncomeNew.text = income.toString()
-
-        binding.totalExpanse.text = getString(R.string.ruppe) + expense
-        binding.totalExpanseNew.text = expense.toString()
-
-        val profit = income - expense
-        binding.totalProfit.text = profit.toString()
-    }
+//    private fun recalculateTotalsAndProfit() {
+//        val income = creditList.sumOf { it.amount.toIntOrNull() ?: 0 }
+//        val expense = debitList.sumOf { it.amount.toIntOrNull() ?: 0 }
+//
+//        binding.totalIncome.text = getString(R.string.ruppe) + income
+//        binding.totalIncomeNew.text = income.toString()
+//
+//        binding.totalExpanse.text = getString(R.string.ruppe) + expense
+//        binding.totalExpanseNew.text = expense.toString()
+//
+//        val profit = income - expense
+//        binding.totalProfit.text = profit.toString()
+//    }
 
 
     // Helper method to update debit totals
     private fun updateDebitTotals() {
-        binding.totalExpanse.text = getString(R.string.ruppe) + totalDebitAmount.toString()
-        binding.totalExpanseNew.text = totalDebitAmount.toString()
+        binding.totalExpanse.text = getString(R.string.ruppe) + uiTotals.totalDebitAmount.toString()
+        binding.totalExpanseNew.text = uiTotals.totalDebitAmount.toString()
         updateProfitDisplay()
     }
 
@@ -1130,12 +1136,24 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                 val db = AppDatabase.getDatabase(applicationContext)
                 val draftDao = db.productsDao()
 
+                val truck = truckNumberGiven.toString().trim()
+                val src = binding.srcName.text.toString().trim()
+                val dest = binding.dest.text.toString().trim()
+                val hasContent = truck.isNotEmpty() || src.isNotEmpty() || dest.isNotEmpty() || creditList.isNotEmpty() || debitList.isNotEmpty()
+
+                if (!hasContent) {
+                    Log.d("MainActivity", "No trip data entered, skipping empty draft save")
+                    hasPendingChanges = false
+                    isSavingDraft = false
+                    return@launch
+                }
+
                 val validRoute = if (RouteUtils.isValidRoute(routeList)) {
                     routeList
                 } else {
                     RouteUtils.createSimpleRoute(
-                        binding.srcName.text.toString(),
-                        binding.dest.text.toString()
+                        src,
+                        dest
                     )
                 }
 
@@ -1158,7 +1176,7 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                 // Check if draft exists
                 val existing = draftDao.getDraftById(randomNumber.toString())
 
-                if (existing != null || showingFlag == 3) {
+                if (existing != null || uiTotals.showingFlag == 3) {
                     // Update existing draft
                     draftDao.update(
                         tripDataEntity.randomNumber,
@@ -1271,15 +1289,16 @@ class MainActivity : BaseActivity(), View.OnClickListener,
             try {
                 Log.d("MainActivity", "Updating debit list, position: $position")
 
+                // Update totals immediately
+                updateAllTotals()
+
                 // Create new list with new reference
                 val newList = debitList.toList()  // Immutable copy
 
                 debitAdapter.submitList(newList) {
-                    debitIncomeUpdate()
                     calculateFinalTripAverage()
                     Log.d("MainActivity", "Debit adapter updated")
                 }
-                recalculateTotalsAndProfit()
                 hasPendingChanges = true
                 databaseAddFlag = false
 
@@ -1347,8 +1366,11 @@ class MainActivity : BaseActivity(), View.OnClickListener,
         debitList.clear()
         debitList.addAll(newList)
 
+        // Update totals immediately
+        updateAllTotals()
+
         debitAdapter.submitList(newList) {
-            updateAllTotals()  // ✅ Use unified method
+            scrollToLastDebit()
             calculateFinalTripAverage()
         }
 
@@ -1367,27 +1389,30 @@ class MainActivity : BaseActivity(), View.OnClickListener,
         creditList.clear()
         creditList.addAll(newList)
 
+        // Update totals immediately
+        updateAllTotals()
+
         creditAdapter.submitList(newList) {
-            updateAllTotals()  // ✅ This updates profit
+            scrollToLastCredit()
         }
 
         hasPendingChanges = true
     }
 
-    private fun debitIncomeUpdate() {
-        totalDebitAmount = 0
-        for (item in debitList) {
-            totalDebitAmount += item.amount.toInt()
-        }
-        binding.totalExpanse.text = getString(R.string.ruppe) + totalDebitAmount.toString()
-        binding.totalExpanseNew.text = totalDebitAmount.toString()
-
-        val total = binding.totalIncomeNew.text.toString()
-            .toDouble() - if (binding.totalExpanseNew.text.toString()
-                .isNullOrEmpty()
-        ) 0.0 else binding.totalExpanseNew.text.toString().toDouble()
-        binding.totalProfit.text = "$total"
-    }
+//    private fun debitIncomeUpdate() {
+//        totalDebitAmount = 0
+//        for (item in debitList) {
+//            totalDebitAmount += item.amount.toInt()
+//        }
+//        binding.totalExpanse.text = getString(R.string.ruppe) + totalDebitAmount.toString()
+//        binding.totalExpanseNew.text = totalDebitAmount.toString()
+//
+//        val total = binding.totalIncomeNew.text.toString()
+//            .toDouble() - if (binding.totalExpanseNew.text.toString()
+//                .isNullOrEmpty()
+//        ) 0.0 else binding.totalExpanseNew.text.toString().toDouble()
+//        binding.totalProfit.text = "$total"
+//    }
 
     private fun calculateTotalLitersFromFuelEntries(): Double {
         return debitList
@@ -1550,33 +1575,33 @@ class MainActivity : BaseActivity(), View.OnClickListener,
         }
     }
 
-    private fun creditIncomeUpdate() {
-        try {
-            Log.d("MainActivity", "creditIncomeUpdate called, list size: ${creditList.size}")
-
-            // Calculate total
-            totalamount = 0
-            for (item in creditList) {
-                val amount = item.amount.toIntOrNull() ?: 0
-                totalamount += amount
-            }
-
-            Log.d("MainActivity", "Total income calculated: $totalamount")
-
-            // Update UI
-            binding.totalIncome.text = getString(R.string.ruppe) + totalamount.toString()
-            binding.totalIncomeNew.text = totalamount.toString()
-
-            // Update profit
-            val income = totalamount.toDouble()
-            val expense = binding.totalExpanseNew.text.toString().toDoubleOrNull() ?: 0.0
-            val profit = income - expense
-            binding.totalProfit.text = String.format("%.2f", profit)
-
-        } catch (e: Exception) {
-            Log.e("MainActivity", "Error in creditIncomeUpdate: ${e.message}", e)
-        }
-    }
+//    private fun creditIncomeUpdate() {
+//        try {
+//            Log.d("MainActivity", "creditIncomeUpdate called, list size: ${creditList.size}")
+//
+//            // Calculate total
+//            totalamount = 0
+//            for (item in creditList) {
+//                val amount = item.amount.toIntOrNull() ?: 0
+//                totalamount += amount
+//            }
+//
+//            Log.d("MainActivity", "Total income calculated: $totalamount")
+//
+//            // Update UI
+//            binding.totalIncome.text = getString(R.string.ruppe) + totalamount.toString()
+//            binding.totalIncomeNew.text = totalamount.toString()
+//
+//            // Update profit
+//            val income = totalamount.toDouble()
+//            val expense = binding.totalExpanseNew.text.toString().toDoubleOrNull() ?: 0.0
+//            val profit = income - expense
+//            binding.totalProfit.text = String.format("%.2f", profit)
+//
+//        } catch (e: Exception) {
+//            Log.e("MainActivity", "Error in creditIncomeUpdate: ${e.message}", e)
+//        }
+//    }
 
     fun setLanguage() {
         val locale = Locale(Prefs[Constants.languageCode, ""])
@@ -1657,7 +1682,8 @@ class MainActivity : BaseActivity(), View.OnClickListener,
 
                     endOdometer,
                     isOdometerMode,
-                    endKm
+                    endKm,
+                    lang = com.dadabarbie.TruckTrip.Utils.Prefs[Constants.languageCode, "en"]
                 )
             )
             showProgress()
@@ -1691,25 +1717,27 @@ class MainActivity : BaseActivity(), View.OnClickListener,
     }
     private fun updateAllTotals() {
         try {
-            // Calculate credit total
-            totalamount = creditList.sumOf { it.amount.toIntOrNull() ?: 0 }
+            // Calculate credit total - use toDoubleOrNull to handle "100.0" strings safely
+            val creditSum = creditList.sumOf { it.amount.toDoubleOrNull() ?: 0.0 }
+            uiTotals.totalamount = creditSum.toInt()
 
             // Calculate debit total
-            totalDebitAmount = debitList.sumOf { it.amount.toIntOrNull() ?: 0 }
+            val debitSum = debitList.sumOf { it.amount.toDoubleOrNull() ?: 0.0 }
+            uiTotals.totalDebitAmount = debitSum.toInt()
 
             // Update Income UI
-            binding.totalIncome.text = getString(R.string.ruppe) + totalamount.toString()
-            binding.totalIncomeNew.text = totalamount.toString()
+            binding.totalIncome.text = getString(R.string.ruppe) + uiTotals.totalamount.toString()
+            binding.totalIncomeNew.text = uiTotals.totalamount.toString()
 
             // Update Expense UI
-            binding.totalExpanse.text = getString(R.string.ruppe) + totalDebitAmount.toString()
-            binding.totalExpanseNew.text = totalDebitAmount.toString()
+            binding.totalExpanse.text = getString(R.string.ruppe) + uiTotals.totalDebitAmount.toString()
+            binding.totalExpanseNew.text = uiTotals.totalDebitAmount.toString()
 
             // Calculate and update Profit
-            val profit = totalamount - totalDebitAmount
+            val profit = uiTotals.totalamount - uiTotals.totalDebitAmount
             binding.totalProfit.text = profit.toString()
 
-            Log.d("MainActivity", "Totals updated - Income: $totalamount, Expense: $totalDebitAmount, Profit: $profit")
+
 
         } catch (e: Exception) {
             Log.e("MainActivity", "Error updating totals: ${e.message}", e)
@@ -1766,6 +1794,7 @@ class MainActivity : BaseActivity(), View.OnClickListener,
                 )
                 addFuelBottomSheetFragment.show(supportFragmentManager, "AddFuelBottomSheet")
             } else {
+                Log.d("bottomdata", "clickDebitEditMethod: ${expense.desc}  ${expense.type} ${expense.note}")
                 addExpenseBottomSheetFragment = AddExpenseBottomSheetFragment(
                     expenseDesc = expense.desc ?: "",
                     expenseAmount = expense.amount,
@@ -1785,4 +1814,9 @@ class MainActivity : BaseActivity(), View.OnClickListener,
 
 
 }
+data class UiTotals(
+    var totalamount: Int = 0,
+    var showingFlag: Int = 0,
+    var totalDebitAmount: Int = 0
+)
 

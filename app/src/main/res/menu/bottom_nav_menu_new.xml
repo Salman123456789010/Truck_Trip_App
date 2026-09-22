@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/homeNormalFragment"
-        android:icon="@drawable/home_icon"
+        android:icon="@drawable/home"
         android:title="@string/home" />
     <item
         android:id="@+id/vahanInfoFragment"
-        android:icon="@drawable/vahan_info"
+        android:icon="@drawable/settings"
         android:title="@string/vahan_info" />
     <item
         android:id="@+id/profileFragment"

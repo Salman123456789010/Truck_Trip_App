@@ -18,13 +18,16 @@ class UpdateDialog(private val context: Context) {
 
     fun show() {
         val binding = DialogUpdateBinding.inflate(LayoutInflater.from(context))
-        dialog = Dialog(context, android.R.style.Theme_Black_NoTitleBar_Fullscreen).apply {
+        dialog = Dialog(context).apply {
+            requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
             setContentView(binding.root)
-            setCancelable(false)  // Prevents user from dismissing the dialog
-            setCanceledOnTouchOutside(false)  // Prevents dismissal by touching outside
+            window?.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
+            val width = (context.resources.displayMetrics.widthPixels * 0.90).toInt()
+            window?.setLayout(width, android.view.ViewGroup.LayoutParams.WRAP_CONTENT)
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
         }
 
-        // Set Click Listener for "Update" button
         binding.btnUpdate.setOnClickListener {
             openPlayStore()
         }

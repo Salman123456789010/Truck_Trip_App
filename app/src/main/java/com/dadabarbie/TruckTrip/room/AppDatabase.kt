@@ -13,7 +13,7 @@ import com.vasyerp.cafvd.room.model.TripRecordEntity
 
 @Database(
     entities = [Products::class, TripRecordEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -26,6 +26,16 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Example: new column add kar rahe ho
+                // database.execSQL("ALTER TABLE TripRecordEntity ADD COLUMN newField TEXT")
+
+                // Agar schema same hai aur sirf version bump chahiye:
+                // to yahan kuch bhi likhne ki zarurat nahi
+            }
+        }
+
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
@@ -33,13 +43,13 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "truck_trip_db"
                 )
-                    .fallbackToDestructiveMigration()
+                    .addMigrations(MIGRATION_1_2)
                     .build()
                     .also { INSTANCE = it }
-
             }
         }
     }
 }
+
 
 

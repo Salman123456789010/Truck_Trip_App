@@ -55,10 +55,15 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.Locale
-import kotlin.getValue
+import com.dadabarbie.TruckTrip.Utils.ServerWarmupManager
+import com.dadabarbie.TruckTrip.api.ApiService
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NormalUserDashBoard : BaseActivity(),View.OnClickListener {
+    @Inject
+    lateinit var apiService: ApiService
+
     private val binding: ActivityNormalUserDashBoardBinding by lazy {
         ActivityNormalUserDashBoardBinding.inflate(layoutInflater)
     }
@@ -100,7 +105,9 @@ class NormalUserDashBoard : BaseActivity(),View.OnClickListener {
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ServerWarmupManager.warmupServer(apiService)
         setContentView(binding.root)
+
         SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             enableEdgeToEdge()
@@ -445,5 +452,10 @@ class NormalUserDashBoard : BaseActivity(),View.OnClickListener {
                 binding.tittle.text = getString(R.string.profile)
             }
         }
+    }
+
+    override fun onDestroy() {
+        com.dadabarbie.TruckTrip.ads.AdMobManager.destroyBanner()
+        super.onDestroy()
     }
 }

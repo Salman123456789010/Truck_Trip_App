@@ -14,6 +14,7 @@ import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.databinding.DialogTripEndBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
@@ -204,6 +205,27 @@ class TripEndDialogFragment(
         }
     }
 
+    private fun parseDateSafely(dateStr: String): Date? {
+        if (dateStr.isBlank()) return null
+        val formats = listOf(
+            "yyyy-MM-dd",
+            "dd-MM-yyyy",
+            "dd/MM/yyyy",
+            "yyyy/MM/dd",
+            "dd MMM yyyy",
+            "d MMM yyyy"
+        )
+        for (pattern in formats) {
+            try {
+                val sdf = SimpleDateFormat(pattern, Locale.getDefault()).apply { isLenient = false }
+                val parsed = sdf.parse(dateStr.trim())
+                if (parsed != null) return parsed
+            } catch (_: Exception) {
+            }
+        }
+        return null
+    }
+
     private fun showDatePicker() {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
@@ -212,7 +234,7 @@ class TripEndDialogFragment(
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             { _, selectedYear, selectedMonth, selectedDay ->
-                calendar.set(selectedYear, selectedMonth, selectedDay)
+                calendar.set(selectedYear, selectedMonth, selectedDay, 0, 0, 0)
                 val selectedDate = dateFormat.format(calendar.time)
                 binding.etEndDate.setText(selectedDate)
             },
@@ -220,6 +242,19 @@ class TripEndDialogFragment(
             month,
             day
         )
+
+        // Allow same date: set minDate to start date at midnight
+        parseDateSafely(startDate)?.let { sDate ->
+            val startCal = Calendar.getInstance().apply {
+                time = sDate
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+            datePickerDialog.datePicker.minDate = startCal.timeInMillis
+        }
+
         datePickerDialog.show()
     }
 
@@ -235,19 +270,32 @@ class TripEndDialogFragment(
 
     private fun calculateTotalDays(startDateStr: String, endDateStr: String): String {
         return try {
-            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val start = sdf.parse(startDateStr)
-            val end = sdf.parse(endDateStr)
+            val start = parseDateSafely(startDateStr)
+            val end = parseDateSafely(endDateStr)
 
             if (start != null && end != null) {
-                val diffInMillis = end.time - start.time
+                val startCal = Calendar.getInstance().apply {
+                    time = start
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }
+                val endCal = Calendar.getInstance().apply {
+                    time = end
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }
+                val diffInMillis = endCal.timeInMillis - startCal.timeInMillis
                 val days = TimeUnit.MILLISECONDS.toDays(diffInMillis) + 1
-                days.toString()
+                maxOf(1L, days).toString()
             } else {
-                "0"
+                "1"
             }
         } catch (e: Exception) {
-            "0"
+            "1"
         }
     }
 
@@ -258,21 +306,24 @@ class TripEndDialogFragment(
 
         // Validate end date
         if (endDate.isEmpty()) {
-            Toast.makeText(requireContext(), "Please select trip end date", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                getString(R.string.please_select_trip_end_date), Toast.LENGTH_SHORT).show()
             binding.etEndDate.requestFocus()
             return
         }
 
         // Validate driver income
         if (driverIncome.isEmpty()) {
-            Toast.makeText(requireContext(), "Please enter driver income", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                getString(R.string.please_enter_driver_income), Toast.LENGTH_SHORT).show()
             binding.etDriverIncome.requestFocus()
             return
         }
 
         // Validate driver income is a valid number
         if (driverIncome.toDoubleOrNull() == null) {
-            Toast.makeText(requireContext(), "Please enter valid driver income amount", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                getString(R.string.please_enter_valid_driver_income_amount), Toast.LENGTH_SHORT).show()
             binding.etDriverIncome.requestFocus()
             return
         }
@@ -283,7 +334,7 @@ class TripEndDialogFragment(
             if (kmVal == null || kmVal <= 0) {
                 Toast.makeText(
                     requireContext(),
-                    if (currentIsOdometerMode) "Please enter valid odometer reading" else "Please enter valid KM",
+                    if (currentIsOdometerMode) getString(R.string.please_enter_valid_odometer_reading) else "Please enter valid KM",
                     Toast.LENGTH_SHORT
                 ).show()
                 binding.etEndKm.requestFocus()
@@ -291,23 +342,34 @@ class TripEndDialogFragment(
             }
         }
 
-        // Validate end date is not before start date
-        try {
-            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val start = sdf.parse(startDate)
-            val end = sdf.parse(endDate)
+        // Validate end date is not strictly before start date (same date IS allowed)
+        val startParsed = parseDateSafely(startDate)
+        val endParsed = parseDateSafely(endDate)
+        if (startParsed != null && endParsed != null) {
+            val startCal = Calendar.getInstance().apply {
+                time = startParsed
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+            val endCal = Calendar.getInstance().apply {
+                time = endParsed
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
 
-            if (start != null && end != null && end.before(start)) {
-                Toast.makeText(requireContext(), "End date cannot be before start date", Toast.LENGTH_SHORT).show()
+            if (endCal.before(startCal)) {
+                Toast.makeText(requireContext(),
+                    getString(R.string.end_date_cannot_be_before_start_date), Toast.LENGTH_SHORT).show()
                 binding.etEndDate.requestFocus()
                 return
             }
-        } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Invalid date format", Toast.LENGTH_SHORT).show()
-            return
         }
 
-        // Calculate total days
+        // Calculate total days (same day = 1 day)
         val totalDays = calculateTotalDays(startDate, endDate)
 
         // NEW: Separate endOdometer and endKm based on mode

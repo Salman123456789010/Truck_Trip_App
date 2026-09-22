@@ -56,7 +56,28 @@
                 android:src="@drawable/ic_baseline_more_vert_24"
                 app:tint="@color/color_primary" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/noteLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:visibility="gone">
 
+            <TextView
+                android:id="@+id/noteLayoutText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/grey"
+                android:fontFamily="sans-serif-condensed"
+                android:text="" />
+
+
+        </LinearLayout>
         <!-- Place and Date Row -->
         <LinearLayout
             android:id="@+id/placeDateLayout"
@@ -88,6 +109,7 @@
                 android:text="" />
 
         </LinearLayout>
+
 
     </LinearLayout>
 

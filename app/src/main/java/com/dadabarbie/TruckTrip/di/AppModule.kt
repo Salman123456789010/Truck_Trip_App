@@ -12,7 +12,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,38 +28,40 @@ object AppModule {
     @Singleton
     @Provides
     @ProviderRetrofitQualifier
-    fun provideOkHttpClient() = OkHttpClient.Builder().addInterceptor { chain ->
-        //return response
-        chain.proceed(
-            //create request
-            chain.request().newBuilder()
-                //add headers to the request builder
-                .also {
-                    it.addHeader("api-key", BuildConfig.X_API_KEY)
-                    it.addHeader("X-API-KEY", BuildConfig.X_API_KEY)
-                    it.addHeader("AgentName", BuildConfig.AgentName)
-//                    it.addHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBYmhpc2hlazIiLCJpYXQiOjE2OTg4Mzk1MDksImV4cCI6MTY5ODkyNTkwOX0.fYcSukNNAXhUMFg6unhjx9bEQvj-dWTCcnmeFy8EC7mNX7LjCIrGjXJyY57-MVubXFOnwBCFjJm0VjTXjFf8KA")
-                    if (Prefs[Constants.domainName, ""].toString().isNotEmpty()) {
-                        it.addHeader("DOMAINNAME", Prefs[Constants.domainName])
-                    }
-                    if (Prefs[Constants.authToken, ""].toString().isNotEmpty()) {
-                        it.addHeader("Authorization", "Bearer ${Prefs[Constants.authToken, ""]}")
-                    }
-                }.build()
-        )
-    }.also { okHttpClient ->
-        //log if in debugging phase
-        okHttpClient.readTimeout(60, TimeUnit.SECONDS)
-        okHttpClient.connectTimeout(60, TimeUnit.SECONDS)
+    fun provideOkHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .addInterceptor { chain ->
+                val requestBuilder = chain.request().newBuilder()
+                    .addHeader("api-key", BuildConfig.X_API_KEY)
+                    .addHeader("X-API-KEY", BuildConfig.X_API_KEY)
+                    .addHeader("x-api-key", BuildConfig.X_API_KEY)
+                    .addHeader("AgentName", BuildConfig.AgentName)
 
-        if (BuildConfig.DEBUG) {
-            val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
+                val domain = Prefs[Constants.domainName, ""].toString()
+                if (domain.isNotEmpty()) {
+                    requestBuilder.addHeader("DOMAINNAME", domain)
+                }
+
+                val token = Prefs[Constants.authToken, ""].toString()
+                if (token.isNotEmpty()) {
+                    requestBuilder.addHeader("Authorization", "Bearer $token")
+                }
+
+                chain.proceed(requestBuilder.build())
             }
-            okHttpClient.addInterceptor(httpLoggingInterceptor)
-        }
-        okHttpClient.addInterceptor(SecurityInterceptor())
-    }.build()
+            .also { okHttpClient ->
+                if (BuildConfig.DEBUG) {
+                    val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BODY
+                    }
+                    okHttpClient.addInterceptor(httpLoggingInterceptor)
+                }
+                okHttpClient.addInterceptor(SecurityInterceptor())
+            }
+            .build()
+    }
 
 
     var gson = GsonBuilder()
@@ -68,15 +72,10 @@ object AppModule {
     @Provides
     @ProviderGstRetrofitQualifier
     fun provideGSTOkHttpClient() = OkHttpClient.Builder().addInterceptor { chain ->
-        //return response
         chain.proceed(
-            //create request
-            chain.request().newBuilder()
-                //add headers to the request builder
-                .build()
+            chain.request().newBuilder().build()
         )
     }.also { okHttpClient ->
-        //log if in debugging phase
         okHttpClient.readTimeout(30, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(30, TimeUnit.SECONDS)
         if (BuildConfig.DEBUG) {
@@ -99,6 +98,5 @@ object AppModule {
     @Provides
     fun provideApiService(@ProviderRetrofitQualifier retrofit: Retrofit): ApiService =
         retrofit.create(ApiService::class.java)
-
 
 }

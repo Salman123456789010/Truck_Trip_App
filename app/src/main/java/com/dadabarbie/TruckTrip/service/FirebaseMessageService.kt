@@ -42,7 +42,7 @@ class FirebaseMessageService : FirebaseMessagingService() {
 //            Log.e("MessageReceiver", "onMessageReceived: ${remoteMessage.data["isLogout"]}")
             val title = remoteMessage.notification?.title
             val body = remoteMessage.notification?.body
-            sendNotification(title, body, remoteMessage.data["image"], null, remoteMessage.data["channelId"], DashBoardActivity::class.java, 0)
+//            sendNotification(title, body, remoteMessage.data["image"], null, remoteMessage.data["channelId"], DashBoardActivity::class.java, 0)
 
             if (remoteMessage.data["isLogout"]?.toInt() == 1) {
 
@@ -71,13 +71,22 @@ class FirebaseMessageService : FirebaseMessagingService() {
         val channelId = mChannel
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder =
-            NotificationCompat.Builder(this, channelId ?: "DEFAULT_CHANNEL").setSmallIcon(R.drawable.truck_new_logo).setContentTitle(title).setContentText(messageBody).setVibrate(longArrayOf(1000, 1000, 1000, 1000)).setAutoCancel(true).setSound(defaultSoundUri)
-                .setPriority(Notification.PRIORITY_HIGH).setCategory(Notification.CATEGORY_MESSAGE).setVisibility(
-                    NotificationCompat.VISIBILITY_PUBLIC
-                ).setFullScreenIntent(resultPendingIntent, true).setContentIntent(resultPendingIntent).setOnlyAlertOnce(false).setWhen(System.currentTimeMillis()).setShowWhen(true)
+         val notificationBuilder =
+             NotificationCompat.Builder(this, channelId ?: "DEFAULT_CHANNEL")
+                 .setSmallIcon(R.drawable.truck_new_logo)
+                 .setContentTitle(title)
+                 .setContentText(messageBody)
+                 .setAutoCancel(true)
+                 .setSound(defaultSoundUri)
+                 .setVibrate(longArrayOf(0, 300, 200, 300))
+                 .setPriority(NotificationCompat.PRIORITY_HIGH)
+                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                 .setContentIntent(resultPendingIntent)
+                 .setWhen(System.currentTimeMillis())
+                 .setShowWhen(true)
 
-        if (!banner.isNullOrEmpty()) {
+         if (!banner.isNullOrEmpty()) {
             val imageBitmap = getBitmapFromUrl(banner)
             notificationBuilder.setStyle(NotificationCompat.BigPictureStyle().bigPicture(imageBitmap))
         } else {
@@ -95,12 +104,18 @@ class FirebaseMessageService : FirebaseMessagingService() {
         ).build()
 
         //   Since android Oreo notification channel is needed.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId ?: "DEFAULT_CHANNEL", channelId ?: "CHANNEL_NAME", NotificationManager.IMPORTANCE_HIGH)
-            channel.setSound(alarmSound, audioAttributes)
-            notificationManager.createNotificationChannel(channel)
-        }
-        if (ActivityCompat.checkSelfPermission(
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+             val channel = NotificationChannel(
+                 channelId ?: "DEFAULT_CHANNEL",
+                 channelId ?: "CHANNEL_NAME",
+                 NotificationManager.IMPORTANCE_HIGH
+             )
+             channel.enableVibration(true)
+             channel.setSound(alarmSound, audioAttributes)
+             notificationManager.createNotificationChannel(channel)
+         }
+
+         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.POST_NOTIFICATIONS
             ) != PackageManager.PERMISSION_GRANTED

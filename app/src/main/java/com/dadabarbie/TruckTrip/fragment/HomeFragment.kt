@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.MimeTypeMap
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.util.Pair
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.dadabarbie.TruckTrip.R
 import com.dadabarbie.TruckTrip.Utils.Constants
 import com.dadabarbie.TruckTrip.Utils.Constants.dismissProgress
@@ -26,10 +28,13 @@ import com.dadabarbie.TruckTrip.Utils.Constants.tripName
 import com.dadabarbie.TruckTrip.Utils.Constants.visible
 import com.dadabarbie.TruckTrip.Utils.Event
 import com.dadabarbie.TruckTrip.Utils.Prefs
+import com.dadabarbie.TruckTrip.activity.CreateTripActivity
 import com.dadabarbie.TruckTrip.activity.DashBoardActivity
 import com.dadabarbie.TruckTrip.activity.MainActivity
 import com.dadabarbie.TruckTrip.activity.TripPreviewActivity
 import com.dadabarbie.TruckTrip.adapter.TripListAdapter
+import com.dadabarbie.TruckTrip.adapter.BannerAdapter
+import com.dadabarbie.TruckTrip.adapter.BannerItem
 import com.dadabarbie.TruckTrip.auth.viewmodel.AuthViewModel
 import com.dadabarbie.TruckTrip.databinding.FragmentHomeBinding
 import com.dadabarbie.TruckTrip.diologFragment.DeleteDialogFragment
@@ -43,6 +48,15 @@ import com.dadabarbie.TruckTrip.room.AppDatabase
 import com.dadabarbie.TruckTrip.model.addTrip.Income
 import com.dadabarbie.TruckTrip.model.addTrip.Expense
 import com.dadabarbie.TruckTrip.model.getTrip.TripGetResponseModel
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.core.content.ContextCompat
+import com.dadabarbie.TruckTrip.activity.BackhaulCalculatorActivity
+import com.dadabarbie.TruckTrip.activity.DraftActivity
+import com.dadabarbie.TruckTrip.activity.FuelStopPlannerActivity
+import com.dadabarbie.TruckTrip.activity.LoadCapacityCalculatorActivity
+import com.dadabarbie.TruckTrip.activity.TripEstimatorActivity
+import com.dadabarbie.TruckTrip.activity.VahanInfoDetailsActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
@@ -69,6 +83,10 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
     // 🔥 CRITICAL FIX: Use LinkedHashMap to maintain order and allow ID-based operations
     private val tripMap: LinkedHashMap<String, Record> = LinkedHashMap()
 
+    enum class TripFilterMode { ALL, PROFITABLE, LOSS }
+    private var searchQuery: String = ""
+    private var filterMode: TripFilterMode = TripFilterMode.ALL
+
     private var isLoading: Boolean = false
     private val pageSize: Int = 20
 
@@ -87,8 +105,14 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
     private val MIN_CLICK_INTERVAL: Long = 1000
     private var lastClickTime: Long = 0
 
+    private var bannerHandler: Handler? = null
+    private var bannerRunnable: Runnable? = null
+    private var currentBannerPage = 0
+
     private val apiDateFormat by lazy { SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH) }
     private val gson by lazy { Gson() }
+
+    private var bannerAdView: com.google.android.gms.ads.AdView? = null
 
     companion object {
         private const val TAG = "HomeFragment"
@@ -107,14 +131,15 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
         super.onViewCreated(view, savedInstanceState)
         (activity as? DashBoardActivity)?.textChanges(1)
 
-        if (savedInstanceState == null) {
-            MobileAds.initialize(requireActivity())
-        }
+        bannerAdView = com.dadabarbie.TruckTrip.ads.AdMobManager.attachHomeBanner(requireActivity(), binding.adBannerContainer)
 
         initDatePicker()
         setOnClickListner()
         initAdapter()
         setObserver()
+        setupBanner()
+        setupQuickTools()
+        setupSearchAndFilters()
 
         if (savedInstanceState == null) {
             loadInitialData()
@@ -123,8 +148,62 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
         (requireActivity() as? DashBoardActivity)?.setData()
     }
 
+    private fun setupBanner() {
+        binding.bannerViewPager.visibility = View.GONE
+        binding.bannerDots.visibility = View.GONE
+    }
+
+    private fun updateBannerDots(selected: Int, total: Int) {
+        binding.bannerDots.removeAllViews()
+        val dotSizePx = (8 * resources.displayMetrics.density).toInt()
+        for (i in 0 until total) {
+            val dot = ImageView(requireContext())
+            val params = android.widget.LinearLayout.LayoutParams(dotSizePx, dotSizePx)
+            params.setMargins(6, 0, 6, 0)
+            dot.layoutParams = params
+            dot.setImageResource(if (i == selected) R.drawable.dot_selected else R.drawable.dot_unselected)
+            binding.bannerDots.addView(dot)
+        }
+    }
+
+    private fun showPrintTypeDialog(onConfirm: (printType: String) -> Unit) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_print_type_selection, null)
+        val dialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setCancelable(true)
+            .create()
+
+        val radioGroup = dialogView.findViewById<android.widget.RadioGroup>(R.id.radioGroupPrintType)
+        val btnCancel = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
+        val btnConfirm = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnConfirm)
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnConfirm.setOnClickListener {
+            val printType = when (radioGroup.checkedRadioButtonId) {
+                R.id.radioPrintLetterHead -> "letterHead"
+                R.id.radioPrintBlankHiddenGST -> "blankHiddenGST"
+                R.id.radioPrintBlank -> "blank"
+                else -> ""
+            }
+            dialog.dismiss()
+            onConfirm(printType)
+        }
+
+        dialog.show()
+    }
+
     private fun loadInitialData() {
-        tripMap.clear()
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            val cached = loadCachedTripRecords(startDate, endDate)
+            withContext(Dispatchers.Main) {
+                if (_binding != null && cached.isNotEmpty()) {
+                    updateUIWithCachedData(cached)
+                }
+            }
+        }
         authViewModel.resetTripPagination()
         authViewModel.getAllTripData(startDate, endDate, size = pageSize)
     }
@@ -182,10 +261,16 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
 
     private fun handleLoading() {
         isLoading = true
-        setProgressBarVisibility()
+        if (tripMap.isEmpty()) {
+            binding.shimmerLayout.visibility = View.VISIBLE
+            com.dadabarbie.TruckTrip.Utils.ShimmerUtils.applyShimmer(binding.shimmerLayout)
+            binding.recycleList.visibility = View.GONE
+        }
     }
 
     private fun handleSuccess(result: NetworkResult.Success<*>) {
+        com.dadabarbie.TruckTrip.Utils.ShimmerUtils.stopShimmer(binding.shimmerLayout)
+        binding.shimmerLayout.visibility = View.GONE
         binding.recycleList.visible()
         binding.progressbar.gone()
         binding.noProductFound.gone()
@@ -228,14 +313,57 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
         isLoading = false
     }
 
-    // 🔥 NEW METHOD: Update adapter with fresh list
+    // 🔥 ENHANCED METHOD: Update adapter with fresh list, search & profit filters
     private fun updateAdapterList() {
-        val newList = ArrayList(tripMap.values)
-        Log.d(TAG, "Updating adapter with ${newList.size} items")
+        var list = tripMap.values.toList()
 
-        // Force adapter to recognize this as a completely new list
-        tripListAdapter?.submitList(null)
+        // 1. Filter by search query (truck number, source, destination)
+        if (searchQuery.isNotEmpty()) {
+            val q = searchQuery.lowercase(Locale.getDefault())
+            list = list.filter { record ->
+                val truck = (record.truck_no ?: "").lowercase(Locale.getDefault())
+                val src = (record.source ?: "").lowercase(Locale.getDefault())
+                val dest = (record.destination ?: "").lowercase(Locale.getDefault())
+                truck.contains(q) || src.contains(q) || dest.contains(q)
+            }
+        }
+
+        // 2. Filter by profit status
+        when (filterMode) {
+            TripFilterMode.PROFITABLE -> {
+                list = list.filter { record ->
+                    val profit = record.owner_profit?.toDoubleOrNull() ?: 0.0
+                    profit > 0
+                }
+            }
+            TripFilterMode.LOSS -> {
+                list = list.filter { record ->
+                    val profit = record.owner_profit?.toDoubleOrNull() ?: 0.0
+                    profit < 0
+                }
+            }
+            TripFilterMode.ALL -> {}
+        }
+
+        val newList = ArrayList(list)
+        Log.d(TAG, "Updating adapter with ${newList.size} items (from ${tripMap.size})")
         tripListAdapter?.submitList(newList)
+
+        // Update stats
+        binding.tvFilterStats.text = "Showing ${newList.size} of ${tripMap.size} trips"
+
+        if (newList.isEmpty()) {
+            binding.noProductFound.visible()
+            if (tripMap.isNotEmpty()) {
+                binding.noProductText.text = getString(R.string.no_trips_matching_search)
+            } else {
+                binding.noProductText.text = getString(R.string.no_trip_found)
+            }
+            binding.recycleList.gone()
+        } else {
+            binding.noProductFound.gone()
+            binding.recycleList.visible()
+        }
     }
 
     private fun handleEmptyData() {
@@ -276,6 +404,8 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
     }
 
     private fun hideProgressBar() {
+        com.dadabarbie.TruckTrip.Utils.ShimmerUtils.stopShimmer(binding.shimmerLayout)
+        binding.shimmerLayout.visibility = View.GONE
         binding.progressbar.gone()
         binding.recycleList.visible()
         binding.swipeToRefreshBasicDetails.isRefreshing = false
@@ -388,7 +518,14 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
 
     private fun refreshData() {
         Log.d(TAG, "Refreshing trip data")
-        tripMap.clear()
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            val cached = loadCachedTripRecords(startDate, endDate)
+            withContext(Dispatchers.Main) {
+                if (_binding != null && cached.isNotEmpty()) {
+                    updateUIWithCachedData(cached)
+                }
+            }
+        }
         authViewModel.resetTripPagination()
         authViewModel.getAllTripData(fromDate = startDate, toDate = endDate, size = pageSize)
         (requireActivity() as? DashBoardActivity)?.setData()
@@ -529,7 +666,14 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
 
             binding.date.text = formatDateForDisplay(dateStart, dateEnd)
 
-            tripMap.clear()
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                val cached = loadCachedTripRecords(startDate, endDate)
+                withContext(Dispatchers.Main) {
+                    if (_binding != null && cached.isNotEmpty()) {
+                        updateUIWithCachedData(cached)
+                    }
+                }
+            }
             authViewModel.resetTripPagination()
             authViewModel.getAllTripData(fromDate = startDate, toDate = endDate, size = pageSize)
         }
@@ -630,14 +774,25 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
     override fun onClick(v: View?) {
         when (v) {
             binding.addTrip -> {
-                Constants.creditList.clear()
-                Constants.debitList.clear()
-                startActivity(
-                    Intent(requireActivity(), MainActivity::class.java).putExtra(
-                        "flag",
-                        1
+                val currentCount = tripMap.size
+                if (!com.dadabarbie.TruckTrip.billing.SubscriptionManager.canSaveTrip(currentCount)) {
+                    com.dadabarbie.TruckTrip.dialog.PremiumPaywallDialog.show(
+                        requireActivity(),
+                        com.dadabarbie.TruckTrip.billing.SubscriptionManager.PremiumFeature.UNLIMITED_TRIPS
+                    ) {
+                        Constants.creditList.clear()
+                        Constants.debitList.clear()
+                        startActivity(
+                            Intent(requireActivity(), CreateTripActivity::class.java)
+                        )
+                    }
+                } else {
+                    Constants.creditList.clear()
+                    Constants.debitList.clear()
+                    startActivity(
+                        Intent(requireActivity(), CreateTripActivity::class.java)
                     )
-                )
+                }
             }
 
             binding.datePickerLayout -> {
@@ -681,10 +836,12 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
 
         shareFlag = true
         clickFlag = true
-        requireContext().showProgress()
 
         tripName = "${trip.source} TO ${trip.destination}"
-        authViewModel.getParticualrPdf(trip._id)
+        showPrintTypeDialog { printType ->
+            requireContext().showProgress()
+            authViewModel.getParticualrPdf(trip._id, printType)
+        }
     }
 
     override fun deleteTripMethod(position: Int) {
@@ -726,10 +883,12 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
 
         shareFlag = false
         clickFlag = true
-        requireContext().showProgress()
 
         tripName = "${trip.source} TO ${trip.destination}"
-        authViewModel.getParticualrPdf(trip._id)
+        showPrintTypeDialog { printType ->
+            requireContext().showProgress()
+            authViewModel.getParticualrPdf(trip._id, printType)
+        }
     }
 
     override fun editTripData(trip: Record) {
@@ -812,9 +971,134 @@ class HomeFragment : Fragment(), View.OnClickListener, TripListAdapter.EditTripD
         startActivity(intent)
     }
 
+    private fun setupQuickTools() {
+        binding.btnQuickFuelPlanner.setOnClickListener {
+            startActivity(Intent(requireContext(), FuelStopPlannerActivity::class.java))
+        }
+        binding.btnQuickBackhaul.setOnClickListener {
+            startActivity(Intent(requireContext(), BackhaulCalculatorActivity::class.java))
+        }
+        binding.btnQuickDiesel.setOnClickListener {
+            startActivity(Intent(requireContext(), VahanInfoDetailsActivity::class.java))
+        }
+        binding.btnQuickLoadCapacity.setOnClickListener {
+            startActivity(Intent(requireContext(), LoadCapacityCalculatorActivity::class.java))
+        }
+        binding.btnQuickEstimator.setOnClickListener {
+            startActivity(Intent(requireContext(), TripEstimatorActivity::class.java))
+        }
+    }
+
+    private fun setupSearchAndFilters() {
+        binding.etSearchTrips.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                searchQuery = s?.toString()?.trim() ?: ""
+                updateAdapterList()
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        binding.chipFilterAll.setOnClickListener {
+            filterMode = TripFilterMode.ALL
+            updateFilterChipStyles()
+            updateAdapterList()
+        }
+
+        binding.chipFilterProfitable.setOnClickListener {
+            filterMode = TripFilterMode.PROFITABLE
+            updateFilterChipStyles()
+            updateAdapterList()
+        }
+
+        binding.chipFilterLoss.setOnClickListener {
+            filterMode = TripFilterMode.LOSS
+            updateFilterChipStyles()
+            updateAdapterList()
+        }
+    }
+
+    private fun updateFilterChipStyles() {
+        when (filterMode) {
+            TripFilterMode.ALL -> {
+                binding.chipFilterAll.setBackgroundResource(R.drawable.bg_chip_selected)
+                binding.chipFilterAll.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                binding.chipFilterProfitable.setBackgroundResource(R.drawable.bg_chip_unselected)
+                binding.chipFilterProfitable.setTextColor(0xFF37474F.toInt())
+                binding.chipFilterLoss.setBackgroundResource(R.drawable.bg_chip_unselected)
+                binding.chipFilterLoss.setTextColor(0xFF37474F.toInt())
+            }
+            TripFilterMode.PROFITABLE -> {
+                binding.chipFilterAll.setBackgroundResource(R.drawable.bg_chip_unselected)
+                binding.chipFilterAll.setTextColor(0xFF37474F.toInt())
+                binding.chipFilterProfitable.setBackgroundResource(R.drawable.bg_chip_selected)
+                binding.chipFilterProfitable.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                binding.chipFilterLoss.setBackgroundResource(R.drawable.bg_chip_unselected)
+                binding.chipFilterLoss.setTextColor(0xFF37474F.toInt())
+            }
+            TripFilterMode.LOSS -> {
+                binding.chipFilterAll.setBackgroundResource(R.drawable.bg_chip_unselected)
+                binding.chipFilterAll.setTextColor(0xFF37474F.toInt())
+                binding.chipFilterProfitable.setBackgroundResource(R.drawable.bg_chip_unselected)
+                binding.chipFilterProfitable.setTextColor(0xFF37474F.toInt())
+                binding.chipFilterLoss.setBackgroundResource(R.drawable.bg_chip_selected)
+                binding.chipFilterLoss.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            }
+        }
+    }
+
+    private fun checkActiveDrafts() {
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val db = AppDatabase.getDatabase(requireContext())
+                val drafts = db.productsDao().getAllProducts()
+                withContext(Dispatchers.Main) {
+                    if (_binding == null) return@withContext
+                    if (drafts.isNotEmpty()) {
+                        val latest = drafts.first()
+                        binding.cardContinueDraft.visibility = View.VISIBLE
+                        val truck = latest.truckNumber ?: "Truck"
+                        val src = latest.srcPlace ?: ""
+                        val dest = latest.destPlace ?: ""
+                        val routeInfo = if (src.isNotEmpty() && dest.isNotEmpty()) "$src ➔ $dest" else ""
+                        binding.tvDraftDetails.text = if (routeInfo.isNotEmpty()) "$truck • $routeInfo" else truck
+
+                        binding.btnResumeDraft.setOnClickListener {
+                            startActivity(Intent(requireContext(), DraftActivity::class.java))
+                        }
+                        binding.cardContinueDraft.setOnClickListener {
+                            startActivity(Intent(requireContext(), DraftActivity::class.java))
+                        }
+                    } else {
+                        binding.cardContinueDraft.visibility = View.GONE
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error checking drafts: ${e.message}")
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        bannerAdView?.resume()
+        checkActiveDrafts()
+    }
+
+    override fun onPause() {
+        bannerAdView?.pause()
+        super.onPause()
+    }
+
     override fun onDestroyView() {
+        (bannerAdView?.parent as? ViewGroup)?.removeView(bannerAdView)
+        bannerAdView = null
         super.onDestroyView()
+        bannerRunnable?.let { bannerHandler?.removeCallbacks(it) }
+        bannerHandler = null
+        bannerRunnable = null
         tripListAdapter = null
         materialDatePicker = null
+        _binding = null
     }
 }

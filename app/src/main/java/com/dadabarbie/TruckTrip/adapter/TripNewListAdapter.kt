@@ -89,9 +89,13 @@ class TripNewListAdapter(val context: Context, val editTripDataListner: EditTrip
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = differ.currentList[position]
+        holder.binding.root.setOnClickListener {
+            viewTripDataListner.viewTripDataMethod(item)
+        }
         holder.binding.editIcon.setOnClickListener {
             editTripDataListner.editTripData(item)
         }
+
         holder.binding.srcName.text=item.source
         holder.binding.dest.text=item.destination
         holder.binding.srcDate.text=item.start_date
@@ -130,27 +134,27 @@ class TripNewListAdapter(val context: Context, val editTripDataListner: EditTrip
         holder.binding.dowanloadIcon.setOnClickListener{
             viewTripDataListner.viewTripDataMethod(item)
         }
-        if(position%3==0){
-            holder.binding.myTemplate.visible()
-            GlobalScope.launch {
-                /*ca-app-pub-8808039515208362/1007625609*/
-                val adLoader = AdLoader.Builder(context, "ca-app-pub-8808039515208362/1007625609")
-                    .forNativeAd { nativeAd ->
-                        holder.binding.myTemplate.setNativeAd(nativeAd)
-                        holder.binding.myTemplate.visibility = View.VISIBLE
-                    }
-                    .withAdListener(object : AdListener() {
-                        override fun onAdFailedToLoad(error: LoadAdError) {
-                            Log.e("AdMob", "Ad failed to load: ${error.message}")
-                        }
-                    })
-                    .build()
-
-                adLoader.loadAd(AdRequest.Builder().build())
-            }
-        }else{
-            holder.binding.myTemplate.gone()
-        }
+//        if(position%3==0){
+//            holder.binding.myTemplate.visible()
+//            GlobalScope.launch {
+//                /*ca-app-pub-8808039515208362/1007625609*/
+//                val adLoader = AdLoader.Builder(context, "ca-app-pub-8808039515208362/1007625609")
+//                    .forNativeAd { nativeAd ->
+//                        holder.binding.myTemplate.setNativeAd(nativeAd)
+//                        holder.binding.myTemplate.visibility = View.VISIBLE
+//                    }
+//                    .withAdListener(object : AdListener() {
+//                        override fun onAdFailedToLoad(error: LoadAdError) {
+//                            Log.e("AdMob", "Ad failed to load: ${error.message}")
+//                        }
+//                    })
+//                    .build()
+//
+//                adLoader.loadAd(AdRequest.Builder().build())
+//            }
+//        }else{
+//            holder.binding.myTemplate.gone()
+//        }
 
 
     }

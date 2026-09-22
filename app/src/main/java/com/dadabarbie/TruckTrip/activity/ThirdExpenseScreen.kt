@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -14,7 +15,10 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.webkit.MimeTypeMap
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -22,6 +26,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.view.WindowCompat
@@ -50,7 +55,10 @@ import com.dadabarbie.TruckTrip.model.addTrip.Expense
 import com.dadabarbie.TruckTrip.model.addTrip.Income
 import com.dadabarbie.TruckTrip.room.AppDatabase
 import com.dadabarbie.TruckTrip.room.model.TripDataTestModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.chip.Chip
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.vasyerp.cafvd.room.model.Products
@@ -73,6 +81,7 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
         var amount: Int,
         var type: ExpenseType
     )
+
     private var originalRoute: ArrayList<String> = arrayListOf()
     enum class ExpenseType { KHARCHA, AAVAK }
 
@@ -100,9 +109,14 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
     @Volatile
     private var isCompletingTrip = false
 
+    // 🆕 NEW: Variables for quick add feature
+    private var selectedAmount = 0
+    private var selectedCategory = ""
+
     private var endDate = ""
     var langCode = ""
-    var routeArray: ArrayList<String> =arrayListOf()
+    var routeArray: ArrayList<String> = arrayListOf()
+
     private val voiceRecognitionLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -173,10 +187,8 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
         SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             enableEdgeToEdge()
-            // 35 (android - 15)
             WindowCompat.setDecorFitsSystemWindows(window, false)
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
         }
         langCode = Prefs[Constants.languageCode] ?: "hi"
         intent.getStringExtra("TRIP_ID")?.let { tripId = it }
@@ -194,13 +206,9 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
             intent.getStringExtra("END_DATE")?.let { if (it.isNotEmpty()) endDate = it }
         }
 
-        // ✅ FIX: Properly retrieve end date with logging
         val retrievedEndDate = intent.getStringExtra("END_DATE")
-        Log.d("EndDateDebug", "Retrieved END_DATE from intent: $retrievedEndDate")
-
         if (!retrievedEndDate.isNullOrEmpty()) {
             endDate = retrievedEndDate
-            Log.d("EndDateDebug", "Set endDate to: $endDate")
         }
         textToSpeech = TextToSpeech(this, this)
         setupViews()
@@ -240,7 +248,12 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
         Constants.creditList.clear()
         Constants.debitList.clear()
         Constants.refreshApiGet(Event(1))
-        finish()
+
+        com.dadabarbie.TruckTrip.ads.AdMobManager.onTripSavedSuccessfully(this) {
+            if (!isFinishing && !isDestroyed) {
+                finish()
+            }
+        }
     }
 
     private fun openFile(data: String) {
@@ -261,14 +274,14 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
     private fun setupEditMode() {
         if (Constants.debitList.isNotEmpty()) {
             expenseList.addAll(Constants.debitList.map {
-                ExpenseItem(note = it.note ?: "", amount = it.amount?.toIntOrNull() ?: 0, type = ExpenseType.KHARCHA)
+                ExpenseItem(note = it.desc ?: "", amount = it.amount?.toIntOrNull() ?: 0, type = ExpenseType.KHARCHA)
             })
             expenseAdapter.notifyDataSetChanged()
             binding.layoutExpenseEmpty.visibility = View.GONE
         }
         if (Constants.creditList.isNotEmpty()) {
             incomeList.addAll(Constants.creditList.map {
-                ExpenseItem(note = it.note ?: "", amount = it.amount?.toIntOrNull() ?: 0, type = ExpenseType.AAVAK)
+                ExpenseItem(note = it.desc ?: "", amount = it.amount?.toIntOrNull() ?: 0, type = ExpenseType.AAVAK)
             })
             incomeAdapter.notifyDataSetChanged()
             binding.layoutIncomeEmpty.visibility = View.GONE
@@ -315,33 +328,300 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
 
     private var currentBottomSheetAdapter: ExpenseAdapter? = null
 
+    // 🆕 UPDATED: showExpenseBottomSheet with DYNAMIC chips based on type
+    // 🆕 UPDATED: showExpenseBottomSheet with FULL SCREEN support
     private fun showExpenseBottomSheet(type: ExpenseType) {
         currentBottomSheetType = type
         tempBottomSheetList.clear()
+        selectedAmount = 0
+        selectedCategory = ""
+
         val bottomSheetBinding = BottomSheetExpenseBinding.inflate(layoutInflater)
-        val bottomSheetDialog = BottomSheetDialog(this).apply { setContentView(bottomSheetBinding.root) }
+        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme).apply {
+            setContentView(bottomSheetBinding.root)
+
+            // ✅ Make bottom sheet full screen
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            behavior.skipCollapsed = true
+            behavior.isDraggable = true
+
+            // ✅ Set peek height to full screen
+            behavior.peekHeight = Resources.getSystem().displayMetrics.heightPixels
+
+            // ✅ Prevent dismiss on outside touch
+            setCanceledOnTouchOutside(false)
+        }
+
         currentBottomSheetDialog = bottomSheetDialog
 
         when (type) {
             ExpenseType.KHARCHA -> {
                 bottomSheetBinding.tvTitle.text = getString(R.string.kharcha_dalo)
-                bottomSheetBinding.fabMic.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.tamil_txt))
+                bottomSheetBinding.fabMic.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.tamil_txt)
+                )
             }
             ExpenseType.AAVAK -> {
                 bottomSheetBinding.tvTitle.text = getString(R.string.aavak_dalo)
-                bottomSheetBinding.fabMic.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.greencolor))
+                bottomSheetBinding.fabMic.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.greencolor)
+                )
             }
         }
 
-        currentBottomSheetAdapter = ExpenseAdapter(tempBottomSheetList) { item, action -> handleBottomSheetAction(item, action) }
-        bottomSheetBinding.rvBottomSheetExpenses.layoutManager = LinearLayoutManager(this)
-        bottomSheetBinding.rvBottomSheetExpenses.adapter = currentBottomSheetAdapter
-        bottomSheetBinding.fabMic.setOnClickListener { startVoiceRecognitionForBottomSheet() }
+        // ✅ Setup RecyclerView with proper layout manager
+        currentBottomSheetAdapter = ExpenseAdapter(tempBottomSheetList) { item, action ->
+            handleBottomSheetAction(item, action)
+        }
+        bottomSheetBinding.rvBottomSheetExpenses.apply {
+            layoutManager = LinearLayoutManager(this@ThirdExpenseScreen)
+            adapter = currentBottomSheetAdapter
+            // ✅ Enable nested scrolling
+            isNestedScrollingEnabled = true
+            setHasFixedSize(false)
+        }
+
+        // Setup dynamic chips
+        setupDynamicQuickAddChips(bottomSheetBinding, type)
+
+        bottomSheetBinding.btnCustomAmount.setOnClickListener {
+            showCustomAmountDialog(type)
+        }
+        bottomSheetBinding.btnClose.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+
+        bottomSheetBinding.fabMic.setOnClickListener {
+            startVoiceRecognitionForBottomSheet()
+        }
+
         bottomSheetBinding.btnSave.setOnClickListener {
             saveBottomSheetExpenses()
             bottomSheetDialog.dismiss()
         }
+
+        // ✅ Handle back button in bottom sheet
+        bottomSheetDialog.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == android.view.KeyEvent.KEYCODE_BACK &&
+                event.action == android.view.KeyEvent.ACTION_UP) {
+                bottomSheetDialog.dismiss()
+                true
+            } else {
+                false
+            }
+        }
+
         bottomSheetDialog.show()
+
+        // ✅ Force expand after show
+        bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    // 🆕 NEW METHOD: Setup DYNAMIC chips based on Expense or Income type
+    private fun setupDynamicQuickAddChips(bottomSheetBinding: BottomSheetExpenseBinding, type: ExpenseType) {
+        val amountChipGroup = bottomSheetBinding.chipGroupAmounts
+        val categoryChipGroup = bottomSheetBinding.chipGroupCategories
+
+        // Clear existing chips
+        amountChipGroup.removeAllViews()
+        categoryChipGroup.removeAllViews()
+
+        // 🔴 DIFFERENT AMOUNT CHIPS FOR EXPENSE vs INCOME
+        val amounts = if (type == ExpenseType.KHARCHA) {
+            // Expense amounts: smaller values
+            listOf(50, 100, 200, 500, 1000, 2000, 5000)
+        } else {
+            // Income amounts: larger values
+            listOf(10000, 15000, 20000, 25000, 30000, 40000, 50000)
+        }
+
+        // 🔴 DIFFERENT CATEGORY CHIPS FOR EXPENSE vs INCOME
+        val categories = if (type == ExpenseType.KHARCHA) {
+            // Expense categories
+            mapOf(
+                getString(R.string.diesel_) to getString(R.string.diesel),
+                getString(R.string.khana_) to getString(R.string.food),
+                getString(R.string.toll_) to getString(R.string.toll_tax),
+                getString(R.string.repair_) to getString(R.string.repair),
+                getString(R.string.chai_pani_) to getString(R.string.chai_pani),
+                getString(R.string.other_) to getString(R.string.other)
+            )
+        } else {
+            // Income categories
+            mapOf(
+                "📦 ${getString(R.string.loading_bhada)}" to getString(R.string.loading_bhada),
+                "🚛 ${getString(R.string.unloading_bhada)}" to getString(R.string.unloading_bhada),
+                "💰 ${getString(R.string.advance)}" to getString(R.string.advance),
+                "🧾 ${getString(R.string.balance_slip)}" to getString(R.string.balance_slip),
+                "⏱️ ${getString(R.string.waiting_charges_rukne_ka_charge)}" to getString(R.string.waiting_charges_rukne_ka_charge),
+                "➕ ${getString(R.string.extra_income)}" to getString(R.string.extra_income)
+            )
+        }
+
+        // 🆕 ADD AMOUNT CHIPS DYNAMICALLY
+        amounts.forEach { amount ->
+            val chip = Chip(this).apply {
+                text = "₹$amount"
+                textSize = 14f
+                isCheckable = true
+                chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
+                setChipStrokeColorResource(R.color.color_primary)
+                chipStrokeWidth = 2f
+                setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        selectedAmount = amount
+                        Log.d("QuickAdd", "Amount selected: $selectedAmount")
+                        if (selectedCategory.isNotEmpty()) {
+                            addQuickExpense(selectedAmount, selectedCategory)
+                            amountChipGroup.clearCheck()
+                            categoryChipGroup.clearCheck()
+                        }
+                    }
+                }
+            }
+            amountChipGroup.addView(chip)
+        }
+
+        // 🆕 ADD CATEGORY CHIPS DYNAMICALLY
+        categories.forEach { (displayText, value) ->
+            val chip = Chip(this).apply {
+                text = displayText
+                textSize = 14f
+                isCheckable = true
+                chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
+                setChipStrokeColorResource(R.color.color_primary)
+                chipStrokeWidth = 2f
+                setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        selectedCategory = value
+                        Log.d("QuickAdd", "Category selected: $selectedCategory")
+                        if (selectedAmount > 0) {
+                            addQuickExpense(selectedAmount, selectedCategory)
+                            amountChipGroup.clearCheck()
+                            categoryChipGroup.clearCheck()
+                        }
+                    }
+                }
+            }
+            categoryChipGroup.addView(chip)
+        }
+    }
+
+    // 🆕 NEW METHOD: Add Quick Expense
+    private fun addQuickExpense(amount: Int, category: String) {
+        val item = ExpenseItem(
+            note = category,
+            amount = amount,
+            type = currentBottomSheetType ?: ExpenseType.KHARCHA
+        )
+        tempBottomSheetList.add(item)
+        currentBottomSheetAdapter?.notifyItemInserted(tempBottomSheetList.size - 1)
+
+        speakText("$category ka $amount rupaye jod diya")
+        Toast.makeText(this, "✓ $category - ₹$amount", Toast.LENGTH_SHORT).show()
+
+        selectedAmount = 0
+        selectedCategory = ""
+    }
+
+    // 🆕 UPDATED: Show Custom Amount Dialog with DYNAMIC categories
+    private fun showCustomAmountDialog(type: ExpenseType) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_custom_amount, null)
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setCancelable(true)
+            .create()
+
+        val tvAmountDisplay = dialogView.findViewById<TextView>(R.id.tvAmountDisplay)
+        val spinnerCategory = dialogView.findViewById<AutoCompleteTextView>(R.id.spinnerCategory)
+        val btnAddExpense = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnAddExpense)
+        val btnCancel = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
+
+        var currentAmount = ""
+        var selectedCat = ""
+
+        // 🔴 DIFFERENT CATEGORIES FOR EXPENSE vs INCOME
+        val categories = if (type == ExpenseType.KHARCHA) {
+            arrayOf(getString(R.string.diesel), getString(R.string.food), getString(R.string.toll_tax), getString(R.string.puncture_tire), getString(R.string.driver_kharch),
+                getString(R.string.maintenance), getString(R.string.unloading_charge),
+                getString(R.string.loading_charge), getString(R.string.police_rto_fine),
+                getString(R.string.parking_charge), getString(R.string.broker_commission),
+                getString(R.string.document_paper_kharcha), getString(R.string.engine_oil_lubricants),
+                getString(R.string.truck_service), getString(R.string.border_entry),
+                getString(R.string.weighbridge_charges), getString(R.string.spare_parts),
+                getString(R.string.driver_personal_kharcha), getString(R.string.truck_electrical_items),
+                getString(R.string.mechanic_charges), getString(R.string.road_repair_contribution),
+                getString(R.string.truck_tools_equipment), getString(R.string.medicine_first_aid),
+                getString(R.string.challan_fine), getString(R.string.truck_insurance),
+                getString(R.string.mandi_charges), getString(R.string.other))
+        } else {
+            arrayOf(
+                getString(R.string.loading_bhada),
+                getString(R.string.unloading_bhada),
+                getString(R.string.advance),
+                getString(R.string.balance_slip),
+                getString(R.string.waiting_charges_rukne_ka_charge),
+                getString(R.string.extra_income)
+            )
+        }
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, categories)
+        spinnerCategory.setAdapter(adapter)
+        spinnerCategory.setOnItemClickListener { _, _, position, _ ->
+            selectedCat = categories[position]
+            updateAddButton(btnAddExpense, currentAmount, selectedCat)
+        }
+
+        // Setup number pad
+        val numberButtons = listOf(
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn0),
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn1),
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn2),
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn3),
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn4),
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn5),
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn6),
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn7),
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn8),
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn9),
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn00)
+        )
+
+        numberButtons.forEach { button ->
+            button?.setOnClickListener {
+                currentAmount += button.text
+                tvAmountDisplay.text = "₹$currentAmount"
+                updateAddButton(btnAddExpense, currentAmount, selectedCat)
+            }
+        }
+
+        dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnClear)?.setOnClickListener {
+            currentAmount = ""
+            tvAmountDisplay.text = "₹0"
+            updateAddButton(btnAddExpense, currentAmount, selectedCat)
+        }
+
+        btnCancel.setOnClickListener { dialog.dismiss() }
+
+        btnAddExpense.setOnClickListener {
+            val amount = currentAmount.toIntOrNull() ?: 0
+            if (amount > 0 && selectedCat.isNotEmpty()) {
+                addQuickExpense(amount, selectedCat)
+                dialog.dismiss()
+            }
+        }
+
+        dialog.show()
+    }
+
+    private fun updateAddButton(
+        button: com.google.android.material.button.MaterialButton,
+        amount: String,
+        category: String
+    ) {
+        val hasAmount = amount.isNotEmpty() && amount.toIntOrNull() ?: 0 > 0
+        val hasCategory = category.isNotEmpty()
+        button.isEnabled = hasAmount && hasCategory
     }
 
     private fun startVoiceRecognitionForBottomSheet() {
@@ -409,10 +689,8 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
         }
     }
 
-    // Add this at the top with other variables
     private var currentBottomSheetExpenseType: ExpenseType? = null
 
-    // Update showEditDialogForBottomSheet method
     private fun showEditDialogForBottomSheet(item: ExpenseItem) {
         isEditBottomSheetOpen = true
         speakText(getString(R.string.edit_karne_ke_liye_bolo))
@@ -423,45 +701,30 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
 
         val tvCurrentNote = editView.findViewById<TextView>(R.id.tvCurrentNote)
         val tvCurrentAmount = editView.findViewById<TextView>(R.id.tvCurrentAmount)
-        val etNote = editView.findViewById<EditText>(R.id.etNote)
-        val etAmount = editView.findViewById<EditText>(R.id.etAmount)
-        val mainLayout = editView.findViewById<androidx.cardview.widget.CardView>(R.id.mainLayout)
-        val fabEditMic = editView.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fabEditMic)
-        val btnCancel = editView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
-        val btnUpdate = editView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnUpdate)
-
-        // ✅ NEW: Find TextInputLayouts for border color
-//        val tilNote = editView.findViewById<com.google.android.material.textfield.TextInputLayout>(R.id.tilNote)
-//        val tilAmount = editView.findViewById<com.google.android.material.textfield.TextInputLayout>(R.id.tilAmount)
-
+        val btnUpdate = editView.findViewById<MaterialButton>(R.id.btnUpdate)
+        val btnCancel = editView.findViewById<MaterialButton>(R.id.btnCancel)
+        val fabEditMic = editView.findViewById<ImageView>(R.id.fabEditMic)
+        val mainLayout = editView.findViewById<CardView>(R.id.mainLayout)
         tvCurrentNote.text = "Current: ${item.note}"
         tvCurrentAmount.text = "Current: ₹${item.amount}"
-        etNote.setText(item.note)
-        etAmount.setText(item.amount.toString())
+        tvCurrentNote.setText(item.note)
+        tvCurrentAmount.setText(item.amount.toString())
 
-        // ✅ NEW: Set colors based on current bottom sheet type
         val itemType = currentBottomSheetType ?: item.type
         val primaryColor: Int
         val secondaryColor: Int
 
         if (itemType == ExpenseType.AAVAK) {
-            // Green colors for Income
             primaryColor = ContextCompat.getColor(this, R.color.greencolor)
             secondaryColor = ContextCompat.getColor(this, R.color.green)
         } else {
-            // Red/Tamil colors for Expense
             primaryColor = ContextCompat.getColor(this, R.color.tamil_txt)
             secondaryColor = ContextCompat.getColor(this, R.color.tamil_txt)
         }
 
-        // Apply colors
         fabEditMic.backgroundTintList = ColorStateList.valueOf(primaryColor)
         btnUpdate.backgroundTintList = ColorStateList.valueOf(primaryColor)
         mainLayout.backgroundTintList = ColorStateList.valueOf(primaryColor)
-//        tilNote.boxStrokeColor = primaryColor
-//        tilNote.hintTextColor = ColorStateList.valueOf(primaryColor)
-//        tilAmount.boxStrokeColor = primaryColor
-//        tilAmount.hintTextColor = ColorStateList.valueOf(primaryColor)
 
         fabEditMic.setOnClickListener {
             if (isVoiceListening) return@setOnClickListener Toast.makeText(this, getString(R.string.pehle_se_sun_rahe_hain), Toast.LENGTH_SHORT).show()
@@ -482,8 +745,8 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
         }
 
         btnUpdate.setOnClickListener {
-            val newNote = etNote.text?.toString()?.trim() ?: ""
-            val newAmount = etAmount.text?.toString()?.trim()?.toIntOrNull() ?: 0
+            val newNote = tvCurrentNote.text?.toString()?.trim() ?: ""
+            val newAmount = tvCurrentAmount.text?.toString()?.trim()?.toIntOrNull() ?: 0
             when {
                 newNote.isEmpty() -> Toast.makeText(this, getString(R.string.note_khali_nahi_ho_sakta), Toast.LENGTH_SHORT).show()
                 newAmount <= 0 -> Toast.makeText(this, getString(R.string.amount_sahi_nahi_hai), Toast.LENGTH_SHORT).show()
@@ -972,7 +1235,14 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
                 try {
                     startDate = format.parse(startDateStr)
                     if (startDate != null) {
-                        datePickerDialog.datePicker.minDate = startDate.time
+                        val cal = Calendar.getInstance().apply {
+                            time = startDate
+                            set(Calendar.HOUR_OF_DAY, 0)
+                            set(Calendar.MINUTE, 0)
+                            set(Calendar.SECOND, 0)
+                            set(Calendar.MILLISECOND, 0)
+                        }
+                        datePickerDialog.datePicker.minDate = cal.timeInMillis
                         Log.d("EndDateDebug", "Successfully set minDate using format: ${format.toPattern()}")
                         break
                     }
@@ -1047,7 +1317,8 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
                 "",
                 "",
                 false,
-                ""
+                "",
+                lang = com.dadabarbie.TruckTrip.Utils.Prefs[Constants.languageCode, "en"]
             )
         )
     }
@@ -1183,7 +1454,7 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
                                 incomeList.sumOf { it.amount } - expenseList.sumOf { it.amount }))
                 .setPositiveButton("OK") { _, _ ->
                     // Delete draft from DB since trip is completed
-                    GlobalScope.launch(Dispatchers.IO) {
+                    lifecycleScope.launch(Dispatchers.IO) {
                         try {
                             val db = AppDatabase.getDatabase(applicationContext)
                             db.productsDao().deleteDraftByTripId(tripId)
@@ -1193,7 +1464,9 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
                     }
 
                     isTripCompleted = true
-                    finish()
+                    com.dadabarbie.TruckTrip.ads.AdMobManager.showInterstitialIfReady(this@ThirdExpenseScreen) {
+                        finish()
+                    }
                 }
                 .show()
         }, 1500)
@@ -1469,7 +1742,7 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
             return
         }
 
-        GlobalScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val db = AppDatabase.getDatabase(applicationContext)
                 val draftDao = db.productsDao()
@@ -1529,7 +1802,7 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
                     // ✅ VERIFY immediately after update
                     withContext(Dispatchers.Main) {
                         Handler(Looper.getMainLooper()).postDelayed({
-                            GlobalScope.launch(Dispatchers.IO) {
+                            lifecycleScope.launch(Dispatchers.IO) {
                                 val verified = draftDao.getDraftById(tripId)
                                 if (verified != null) {
                                     Log.d("DraftSave", "✅ VERIFICATION: Draft updated successfully")
@@ -1616,7 +1889,7 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
                         // ✅ Verify insert
                         withContext(Dispatchers.Main) {
                             Handler(Looper.getMainLooper()).postDelayed({
-                                GlobalScope.launch(Dispatchers.IO) {
+                                lifecycleScope.launch(Dispatchers.IO) {
                                     val inserted = draftDao.getDraftById(tripId)
                                     if (inserted != null) {
                                         Log.d("DraftSave", "✅ VERIFY: Insert successful")
@@ -1669,29 +1942,39 @@ class ThirdExpenseScreen : BaseActivity(), TextToSpeech.OnInitListener {
 
         Log.d("DraftLoad", "Final parsed route: $parsedRoute")
 
+        val creditList: List<Income> = try {
+            if (!entity.modelList1.isNullOrEmpty()) {
+                gson.fromJson(entity.modelList1, object : TypeToken<List<Income>>() {}.type) ?: emptyList()
+            } else emptyList()
+        } catch (e: Exception) {
+            emptyList()
+        }
+
+        val debitList: List<Expense> = try {
+            if (!entity.modelList2.isNullOrEmpty()) {
+                gson.fromJson(entity.modelList2, object : TypeToken<List<Expense>>() {}.type) ?: emptyList()
+            } else emptyList()
+        } catch (e: Exception) {
+            emptyList()
+        }
+
         return TripDataTestModel(
-            truckNumber = entity.truckNumber,
-            srcPlace = entity.srcPlace,
-            destPlace = entity.destPlace,
-            srcDate = entity.srcDate,
-            destDate = entity.destDate,
-            avg = entity.avg,
-            randomNumber = entity.randomNumber,
-            modelList1 = gson.fromJson(
-                entity.modelList1,
-                object : TypeToken<List<Income>>() {}.type
-            ),
-            modelList2 = gson.fromJson(
-                entity.modelList2,
-                object : TypeToken<List<Expense>>() {}.type
-            ),
+            truckNumber = entity.truckNumber ?: "",
+            srcPlace = entity.srcPlace ?: "",
+            destPlace = entity.destPlace ?: "",
+            srcDate = entity.srcDate ?: "",
+            destDate = entity.destDate ?: "",
+            avg = entity.avg ?: "",
+            randomNumber = entity.randomNumber ?: "",
+            modelList1 = creditList,
+            modelList2 = debitList,
             id = entity.id.toString(),
             routeList = entity.routeJson ?: "",
             route = parsedRoute
         )
     }
     private fun verifyRouteSaved() {
-        GlobalScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val db = AppDatabase.getDatabase(applicationContext)
                 val draft = db.productsDao().getDraftById(tripId)

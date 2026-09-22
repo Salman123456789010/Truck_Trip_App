@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ਟੈਸਟ ਐਪਲੀਕੇਸ਼ਨ</string>
     <string name="ruppe">\u20b9</string>
@@ -25,7 +25,7 @@
     <string name="resend_otp_in_s">ਵਿੱਚ ਓਟੀਪੀ ਦੁਬਾਰਾ ਭੇਜ ਸਕਦਾ ਹੈ </string>
     <string name="my_trip_list">ਮੇਰੀ ਯਾਤਰਾ ਦੀ ਸੂਚੀ</string>
     <string name="home">ਹੋਮ</string>
-    <string name="vahan_info">ਵਾਹਨ ਜਾਣਕਾਰੀ</string>
+    <string name="vahan_info">ਟੂਲਸ</string>
     <string name="news">ਖ਼ਬਰਾਂ</string>
     <string name="profile">ਪ੍ਰੋਫਾਈਲ</string>
     <string name="driver_s_gross_income">ਡਰਾਈਵਰ ਦੀ ਕੁੱਲ ਆਮਦਨ:</string>
@@ -127,14 +127,10 @@
     <string name="total_income_bhada">ਕੁੱਲ ਆਮਦਨ (ਭਾੜਾ)</string>
     <string name="advance_taken">ਅਗਾਊਂ ਲਿਆ</string>
     <string name="balance">ਬੈਲੇਂਸ</string>
-
-    <!-- Fuel Bottom Sheet Strings -->
     <string name="diesel_liters">ਡੀਜ਼ਲ ਲੀਟਰ</string>
     <string name="amount_required">ਰਕਮ</string>
     <string name="km_reading_odometer">ਕਿਮੀ ਰੀਡਿੰਗ (ਓਡੋਮੀਟਰ)</string>
     <string name="place_pump">ਸਥਾਨ / ਪੰਪ</string>
-
-    <!-- Trip End Dialog -->
     <string name="trip_end_date">ਟ੍ਰਿਪ ਸਮਾਪਤੀ ਤਾਰੀਖ</string>
     <string name="driver_income_for_trip">ਟ੍ਰਿਪ ਲਈ ਡਰਾਈਵਰ ਆਮਦਨ</string>
     <string name="driver_income_for_trip_">ਟ੍ਰਿਪ ਲਈ ਡਰਾਈਵਰ ਆਮਦਨ <font fgcolor='#FF0000'>*</font> :</string>
@@ -142,33 +138,6 @@
     <string name="complete_trip_">ਟ੍ਰਿਪ ਪੂਰੀ ਕਰੋ <font fgcolor='#FF0000'>*</font> :</string>
     <string name="cancel">ਰੱਦ ਕਰੋ</string>
     <string name="submit">ਸਬਮਿਟ ਕਰੋ</string>
-
-<!--    <string name="trip_help_text">-->
-<!--    ਇੱਥੇ ਤੁਸੀਂ ਆਪਣੀਆਂ ਸਭ ਯਾਤਰਾਵਾਂ ਵੇਖ ਸਕਦੇ ਹੋ।-->
-<!--    ਟ੍ਰਿਪ ਸ਼ੇਅਰ, ਡਾਊਨਲੋਡ, ਸੋਧਣ ਜਾਂ ਮਿਟਾਉਣ ਲਈ ਬਟਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।-->
-<!--    ਨවੀਂ ਯਾਤਰਾ ਸ਼ੁਰੂ ਕਰਨ ਲਈ “+ Add Trip” 'ਤੇ ਟੈਪ ਕਰੋ।-->
-<!--    ਸੰਭਾਲੇ ਹੋਏ ਡਰਾਫਟ ਖੋਲ੍ਹਣ ਲਈ ਨੋਟੀਫਿਕੇਸ਼ਨ ਆਈਕਨ 'ਤੇ ਟੈਪ ਕਰੋ।-->
-<!--    </string>-->
-
-<!--    <string name="trip_list_title">ਟ੍ਰਿਪ ਸੂਚੀ ਅਤੇ ਕਾਰਵਾਈਆਂ</string>-->
-<!--    <string name="start_new_trip">ਨਵੀਂ ਯਾਤਰਾ ਸ਼ੁਰੂ ਕਰੋ</string>-->
-<!--    <string name="add_trip_dec">-->
-<!--    ਸ਼ੁਰੂ ਮਿਤੀ, ਸ਼ੁਰੂਆਤੀ ਥਾਂ, ਅੰਤਮ ਥਾਂ ਅਤੇ ਟਰੱਕ ਨੰਬਰ ਦਰਜ ਕਰੋ।-->
-<!--    ਤੁਸੀਂ ਮਾਈਕ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਬੋਲ ਕੇ ਵੀ ਵੇਰਵੇ ਭਰ ਸਕਦੇ ਹੋ।-->
-<!--    ਟ੍ਰਿਪ ਦੀ ਗਣਨਾ ਸ਼ੁਰੂ ਕਰਨ ਲਈ Add 'ਤੇ ਟੈਪ ਕਰੋ।-->
-<!--    </string>-->
-
-<!--    <string name="manage_trip_title">ਟ੍ਰਿਪ ਹਿਸਾਬ ਪ੍ਰਬੰਧਨ</string>-->
-<!--    <string name="trip_transaction_dec">ਇੱਥੋਂ ਸਾਰੇ ਟ੍ਰਿੱਪ ਰਿਕਾਰਡ ਜੋੜੋ। ਖਰਚੇ ਜੋੜਣ ਲਈ Add Expenditure, ਕਮਾਈ ਜੋੜਣ ਲਈ Add Income ਅਤੇ ਡੀਜ਼ਲ ਵੇਰਵੇ ਭਰਨ ਲਈ Add Fuel ਵਰਤੋ। ਸਾਰੇ ਲੈਨਦੇਣ ਹੇਠਾਂ ਲਿਸਟ ਵਿੱਚ ਦਿਖਾਈ ਦਿੰਦੇ ਹਨ। ਉੱਪਰ ਨੀਲੇ ਰੰਗ ਵਿੱਚ ਕੁੱਲ ਮੁਨਾਫ਼ਾ ਦਿਖਾਇਆ ਜਾਂਦਾ ਹੈ।</string>-->
-<!--    <string name="add_expanse_tittle">ਖਰਚਾ ਸ਼ਾਮਲ ਕਰੋ</string>-->
-<!--    <string name="add_expense_dec">ਖਰਚ ਦੀ ਰਕਮ, ਨੋਟ ਅਤੇ ਜਗ੍ਹਾ ਦਰਜ ਕਰੋ। ਖਰਚੇ ਦੀ ਕਿਸਮ ਅਤੇ ਤਾਰੀਖ ਚੁਣੋ। ਤੁਸੀਂ ਮਾਈਕ ਦੀ ਮਦਦ ਨਾਲ ਬੋਲ ਕੇ ਵੀ ਵੇਰਵੇ ਜੋੜ ਸਕਦੇ ਹੋ। ਸੇਵ \'ਤੇ ਟੈਪ ਕਰੋ ਅਤੇ ਖਰਚਾ ਟ੍ਰਿਪ ਹਿਸਾਬ ਸੂਚੀ ਵਿੱਚ ਨਜ਼ਰ ਆਏਗਾ।</string>-->
-<!--    <string name="add_income_tittle">ਆਮਦਨ ਸ਼ਾਮਲ ਕਰੋ (ਭਾੜਾ / ਐਡਵਾਂਸ)</string>-->
-<!--    <string name="add_income_dec">ਆਮਦਨ ਦੀ ਰਕਮ ਦਰਜ ਕਰੋ ਅਤੇ ਕੋਈ ਨੋਟ ਜੋੜੋ, ਜਿਵੇਂ ਪਾਰਟੀ ਦਾ ਨਾਮ ਜਾਂ ਕਾਰਣ। ਤੁਸੀਂ ਮਾਈਕ ਦੀ ਮਦਦ ਨਾਲ ਬੋਲ ਕੇ ਵੀ ਵੇਰਵੇ ਜੋੜ ਸਕਦੇ ਹੋ। ਸੇਵ \'ਤੇ ਟੈਪ ਕਰੋ ਅਤੇ ਆਮਦਨ ਟ੍ਰਿਪ ਹਿਸਾਬ ਅਤੇ ਕੁੱਲ ਲਾਭ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋ ਜਾਵੇਗੀ।</string>-->
-<!--    <string name="add_fuel_tittle">ਫਿਊਲ ਦੇ ਵੇਰਵੇ ਸ਼ਾਮਲ ਕਰੋ</string>-->
-<!--    <string name="add_fuel_dec">ਫਿਊਲ ਖਰਚ ਜੋੜਣ ਲਈ ਡੀਜ਼ਲ ਦੇ ਲੀਟਰ ਅਤੇ ਰਕਮ ਦਰਜ ਕਰੋ। ਮਾਈਲੇਜ ਕੱਢਣ ਲਈ ਕਿਲੋਮੀਟਰ (ਓਡੋਮੀਟਰ) ਰੀਡਿੰਗ ਭਰੋ। ਜਗ੍ਹਾ ਜਾਂ ਪੰਪ ਦਾ ਨਾਮ ਜੋੜੋ ਅਤੇ ਤਾਰੀਖ ਚੁਣੋ। ਸੇਵ \'ਤੇ ਟੈਪ ਕਰੋ, ਫਿਊਲ ਟ੍ਰਿਪ ਹਿਸਾਬ ਅਤੇ ਔਸਤ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋ ਜਾਵੇਗਾ।</string>-->
-<!--    <string name="complete_trip_tittle">ਟ੍ਰਿਪ ਪੂਰੀ ਕਰੋ</string>-->
-<!--    <string name="complete_trip_dec">ਟ੍ਰਿਪ ਦੀ ਖਤਮ ਤਾਰੀਖ ਚੁਣੋ ਅਤੇ ਡਰਾਇਵਰ ਦੀ ਆਮਦਨ ਦਿਖਾਉਣ ਲਈ ਰਕਮ ਦਰਜ ਕਰੋ। ਇਹ ਰਕਮ ਸਿਰਫ਼ ਡਰਾਇਵਰ ਦੀ ਆਮਦਨ ਦਿਖਾਉਣ ਲਈ ਹੈ, ਗਣਨਾ ਵਿੱਚ ਵਰਤੀ ਨਹੀਂ ਜਾਂਦੀ। ਸਬਮਿਟ \'ਤੇ ਟੈਪ ਕਰੋ, ਟ੍ਰਿਪ ਪੂਰੀ ਹੋ ਜਾਵੇਗੀ ਅਤੇ ਸਾਂਝਾ ਕਰਨ ਲਈ PDF ਡਾਊਨਲੋਡ ਹੋਵੇਗੀ।</string>-->
-
     <string name="trip_help_text"><![CDATA[
 ਇੱਥੇ ਤੁਸੀਂ ਆਪਣੀਆਂ ਸਭ ਯਾਤਰਾਂ ਦੇਖ ਸਕਦੇ ਹੋ।
 ਯਾਤਰਾ ਨੂੰ ਸਾਂਝਾ ਕਰਨ, ਡਾਊਨਲੋਡ ਕਰਨ, ਸੋਧਣ ਜਾਂ ਮਿਟਾਉਣ ਲਈ ਬਟਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।
@@ -178,7 +147,7 @@
     <string name="please_enter_amount">ਕਿਰਪਾ ਕਰਕੇ ਰਕਮ ਦਰਜ ਕਰੋ</string>
     <string name="please_enter_diesel_liters">ਕਿਰਪਾ ਕਰਕੇ ਡੀਜ਼ਲ ਦੇ ਲੀਟਰ ਦਰਜ ਕਰੋ</string>
 
-     <string name="term_condition">ਟਰਮ ਅਤੇ ਕੰਡੀਸ਼ਨ</string>
+    <string name="term_condition">ਟਰਮ ਅਤੇ ਕੰਡੀਸ਼ਨ</string>
     <string name="privacy_policy">ਪਰਾਈਵੇਸੀ ਨੀਤੀ</string>
     <string name="you_can_check_term_condition">ਤੁਸੀਂ ਟਰਮ ਅਤੇ ਕੰਡੀਸ਼ਨ ਚੈਕ ਕਰ ਸਕਦੇ ਹੋ।</string>
     <string name="you_can_check_privacy">ਤੁਸੀਂ ਪਰਾਈਵੇਸੀ ਨੀਤੀ ਚੈਕ ਕਰ ਸਕਦੇ ਹੋ।</string>
@@ -325,8 +294,7 @@ Submit ‘ਤੇ ਟੈਪ ਕਰੋ ਤਾਂ ਜੋ ਟਰਿੱਪ ਪੂਰ�
     <string name="total_kharcha">ਕੁੱਲ ਖਰਚ: ₹%1$d\n</string>
     <string name="total_aavak">ਕੁੱਲ ਆਮਦਨ: ₹%1$d\n</string>
     <string name="munafa">ਮੁਨਾਫਾ: ₹%1$d</string>
-
-    <string name="bolo_khane_ke_500">ਦੱਸੋ: ਖਾਣੇ ਦੇ 500</string>
+    <string name="bolo_khane_ke_500">ਟੈਪ ਕਰੋ ਅਤੇ ਬੋਲੋ: ਖਾਣਾ 500</string>
     <string name="aapki_list">ਤੁਹਾਡੀ ਲਿਸਟ:</string>
     <string name="save_karo">ਸੇਵ ਕਰੋ</string>
     <string name="kya_karna_hai">ਕੀ ਕਰਨਾ ਹੈ?</string>
@@ -551,8 +519,9 @@ Mode ਬਦਲਣਾ ਹੋਵੇ ਤਾਂ App Mode ਤੇ ਕਲਿੱਕ ਕ�
     <string name="truck_number_mic">ਟਰੱਕ ਨੰਬਰ ਪਾਓ</string>
 
     <string name="voice_all_expense_add_and_save">
-ਤੁਸੀਂ ਸਾਰਾ ਖਰਚਾ ਇਕੱਠੇ ਬੋਲ ਕੇ ਇੱਥੇ ਪਾ ਸਕਦੇ ਹੋ, ਆਖਿਰ ਵਿੱਚ ਸੇਵ ਦਬਾਓ ਤੇ ਹੋ ਗਿਆ।
+ਸਭ ਤੋਂ ਪਹਿਲਾਂ ਮਾਈਕ ਤੇ ਟੈਪ ਕਰੋ। ਫਿਰ ਇੱਕ ਡਾਇਲਾਗ ਖੁਲੇਗਾ। ਖਰਚੇ ਬੋਲਦੇ ਜਾਓ ਅਤੇ ਅਖੀਰ ਵਿੱਚ ਸੇਵ ਤੇ ਟੈਪ ਕਰਕੇ ਪੂਰੀ ਲਿਸਟ ਸੇਵ ਕਰੋ।
 </string>
+
     <string name="voice_all_income_add_and_save">
 ਤੁਸੀਂ ਸਾਰੀ ਆਮਦਨ ਇਕੱਠੇ ਬੋਲ ਕੇ ਇੱਥੇ ਪਾ ਸਕਦੇ ਹੋ, ਆਖਿਰ ਵਿੱਚ ਸੇਵ ਦਬਾਓ ਤੇ ਹੋ ਗਿਆ।
 </string>
@@ -560,5 +529,567 @@ Mode ਬਦਲਣਾ ਹੋਵੇ ਤਾਂ App Mode ਤੇ ਕਲਿੱਕ ਕ�
     <string name="if_you_want_to_delete_so_your_draft_data_will_be_clear_so_are_you_want_to_logout">
 ਜੇ ਤੁਸੀਂ ਮਿਟਾਉਂਦੇ ਹੋ ਤਾਂ ਸਾਰਾ ਡਰਾਫਟ ਡਾਟਾ ਸਾਫ਼ ਹੋ ਜਾਵੇਗਾ। ਕੀ ਤੁਸੀਂ ਪੱਕਾ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
 </string>
+    <string name="app_feedback">ਐਪ ਫੀਡਬੈਕ</string>
+    <string name="app_kaisa_laga_problem_ya_suggestion_ho_to_yaha_bataye">ਐਪ ਕਿਵੇਂ ਲੱਗੀ? ਕੋਈ ਸਮੱਸਿਆ ਜਾਂ ਸੁਝਾਅ ਹੋਵੇ ਤਾਂ ਦੱਸੋ</string>
+    <string name="feedback">ਫੀਡਬੈਕ</string>
+    <string name="aapki_raay_zaroori_hai">ਤੁਹਾਡੀ ਰਾਏ ਜ਼ਰੂਰੀ ਹੈ!</string>
+    <string name="your_opinion_matters">ਤੁਹਾਡੀ ਰਾਏ ਮਹੱਤਵਪੂਰਨ ਹੈ!</string>
+    <string name="kya_aapko_hamara_app_pasand_aaya">ਕੀ ਤੁਹਾਨੂੰ ਸਾਡੀ ਐਪ ਪਸੰਦ ਆਈ?</string>
+    <string name="do_you_like_our_app">ਕੀ ਤੁਹਾਨੂੰ ਸਾਡੀ ਐਪ ਪਸੰਦ ਹੈ?</string>
+    <string name="haan_yes">✅ ਹਾਂ</string>
+    <string name="nahi_no">❌ ਨਹੀਂ</string>
+    <string name="kuch_feedback_dena_chahenge">ਕੀ ਤੁਸੀਂ ਫੀਡਬੈਕ ਦੇਣਾ ਚਾਹੋਗੇ?</string>
+    <string name="want_to_give_feedback_or_suggestions">ਫੀਡਬੈਕ ਜਾਂ ਸੁਝਾਅ ਦੇਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
+    <string name="apna_feedback_yahan_likhein_write_your_feedback_here">ਆਪਣਾ ਫੀਡਬੈਕ ਇੱਥੇ ਲਿਖੋ</string>
+    <string name="submit_feedback">📤 ਫੀਡਬੈਕ ਭੇਜੋ</string>
+    <string name="aapka_time_dene_ke_liye_shukriya">ਸਮਾਂ ਦੇਣ ਲਈ ਧੰਨਵਾਦ!</string>
+    <string name="please_answer_both_questions">ਕਿਰਪਾ ਕਰਕੇ ਦੋਵੇਂ ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ ਦਿਓ</string>
+    <string name="feedback_get_message">ਫੀਡਬੈਕ ਲਈ ਹਾਂ ਕਹੋ, ਅਸੀਂ ਸੰਪਰਕ ਕਰਾਂਗੇ।</string>
+    <string name="thanks_for_this_feedback">ਫੀਡਬੈਕ ਲਈ ਧੰਨਵਾਦ</string>
+    <string name="food">ਖਾਣਾ</string>
+    <string name="toll_tax">ਟੋਲ ਟੈਕਸ</string>
+    <string name="puncture_tire">ਪੰਕਚਰ / ਟਾਇਰ</string>
+    <string name="driver_kharch">ਟ੍ਰਿਪ ਦੇ ਪੈਸੇ</string>
+    <string name="maintenance">ਮੁਰੰਮਤ</string>
+    <string name="loading_charge">ਲੋਡਿੰਗ ਖਰਚ</string>
+    <string name="unloading_charge">ਅਨਲੋਡਿੰਗ ਖਰਚ</string>
+    <string name="parking_charge">ਪਾਰਕਿੰਗ ਖਰਚ</string>
+    <string name="police_rto_fine">ਪੁਲਿਸ ਜੁਰਮਾਨਾ</string>
+    <string name="document_paper_kharcha">ਕਾਗਜ਼ ਖਰਚ</string>
+    <string name="broker_commission">ਦਲਾਲ ਕਮੀਸ਼ਨ</string>
+    <string name="engine_oil_lubricants">ਇੰਜਨ ਤੇਲ</string>
+    <string name="truck_service">ਟਰੱਕ ਸਰਵਿਸ</string>
+    <string name="phone_recharge">ਮੋਬਾਈਲ ਰੀਚਾਰਜ</string>
+    <string name="tea_snacks">ਚਾਹ ਨਾਸ਼ਤਾ</string>
+    <string name="hotel_stay">ਹੋਟਲ ਖਰਚ</string>
+    <string name="border_entry">ਬਾਰਡਰ ਐਂਟਰੀ</string>
+    <string name="weighbridge_charges">ਕਾਂਟਾ ਖਰਚ</string>
+    <string name="spare_parts">ਸਪੇਅਰ ਪਾਰਟ</string>
+    <string name="driver_personal_kharcha">ਡਰਾਈਵਰ ਨਿੱਜੀ ਖਰਚ</string>
+    <string name="truck_electrical_items">ਬਿਜਲੀ ਸਮਾਨ</string>
+    <string name="mechanic_charges">ਮਕੈਨਿਕ ਖਰਚ</string>
+    <string name="road_repair_contribution">ਰੋਡ ਮੁਰੰਮਤ</string>
+    <string name="truck_tools_equipment">ਔਜ਼ਾਰ</string>
+    <string name="medicine_first_aid">ਦਵਾਈ</string>
+    <string name="challan_fine">ਚਲਾਨ</string>
+    <string name="truck_insurance">ਟਰੱਕ ਬੀਮਾ</string>
+    <string name="registration_fitness">ਕਾਗਜ਼ ਫਿਟਨੈਸ</string>
+    <string name="mandi_charges">ਮੰਡੀ ਖਰਚ</string>
+    <string name="other_expenses">ਹੋਰ ਖਰਚ</string>
+    <string name="edit_expense">ਖਰਚ ਐਡਿਟ ਕਰੋ</string>
+    <string name="add_income_info">ਇੱਥੇ ਟ੍ਰਿਪ ਦੀ ਕਮਾਈ, ਤਨਖਾਹ, ਅਡਵਾਂਸ ਜਾਂ ਹੋਰ ਰਕਮ ਦਰਜ ਕਰੋ</string>
+    <string name="add_fuel_info">ਇੱਥੇ ਡੀਜ਼ਲ ਦੀ ਐਂਟਰੀ ਕਰੋ ਤਾਂ ਜੋ ਐਵਰੇਜ ਨਿਕਲੇ</string>
+    <string name="add_expanse_info">ਇੱਥੇ ਟ੍ਰਿਪ ਦਾ ਖਰਚ ਪਾਓ ਅਤੇ ਕਿਸਮ ਚੁਣੋ</string>
+    <string name="expense_saved">ਖਰਚ ਸਫਲਤਾਪੂਰਵਕ ਸੇਵ ਹੋ ਗਿਆ</string>
+    <string name="expense_updated">ਖਰਚ ਸਫਲਤਾਪੂਰਵਕ ਅੱਪਡੇਟ ਹੋ ਗਿਆ</string>
+    <string name="invalid_amount">ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ ਰਕਮ ਭਰੋ</string>
+    <string name="select_type_first">ਪਹਿਲਾਂ ਖਰਚ ਦੀ ਕਿਸਮ ਚੁਣੋ</string>
+    <string name="loading_bhada">ਲੋਡਿੰਗ ਭਾੜਾ</string>
+    <string name="unloading_bhada">ਅਨਲੋਡਿੰਗ ਭਾੜਾ</string>
+    <string name="advance">ਐਡਵਾਂਸ</string>
+    <string name="balance_slip">ਬੈਲੈਂਸ / ਸਲਿੱਪ</string>
+    <string name="waiting_charges_rukne_ka_charge">ਰੁਕਣ ਦਾ ਚਾਰਜ</string>
+    <string name="extra_income">ਵਾਧੂ ਕਮਾਈ</string>
+    <string name="fuel">ਡੀਜ਼ਲ</string>
+    <string name="fuel_l">ਡੀਜ਼ਲ - %1$sL</string>
+    <string name="fuel_add_note">Fuel ਇੱਥੇ ਨਾ ਪਾਓ, Diesel ਦਾ ਸਹੀ ਔਸਤ ਆਉਣ ਲਈ ਨੀਲੇ Fuel ਨਿਸ਼ਾਨ ਵਿੱਚ ਪਾਓ</string>
+    <string name="please_select_expense_type">ਕਿਰਪਾ ਕਰਕੇ ਖਰਚੇ ਦੀ ਕਿਸਮ ਚੁਣੋ</string>
+    <string name="expense_updated_successfully">ਖਰਚਾ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਹੋ ਗਿਆ</string>
+    <string name="expense_added_successfully">ਖਰਚਾ ਸਫਲਤਾਪੂਰਵਕ ਜੋੜਿਆ ਗਿਆ</string>
+    <string name="you_have_no_any_draft">ਤੁਹਾਡਾ ਕੋਈ ਡਰਾਫਟ ਨਹੀਂ ਹੈ</string>
+    <string name="please_select_trip_end_date">ਯਾਤਰਾ ਦੀ ਅੰਤਿਮ ਤਾਰੀਖ ਚੁਣੋ</string>
+    <string name="please_enter_driver_income">ਡਰਾਈਵਰ ਦੀ ਕਮਾਈ ਭਰੋ</string>
+    <string name="please_enter_valid_driver_income_amount">ਸਹੀ ਕਮਾਈ ਰਕਮ ਭਰੋ</string>
+    <string name="please_enter_valid_odometer_reading">ਸਹੀ ਮੀਟਰ ਰੀਡਿੰਗ ਭਰੋ</string>
+    <string name="end_date_cannot_be_before_start_date">ਅੰਤਿਮ ਤਾਰੀਖ ਸ਼ੁਰੂ ਤੋਂ ਪਹਿਲਾਂ ਨਹੀਂ ਹੋ ਸਕਦੀ</string>
+    <string name="invalid_date_format">ਗਲਤ ਤਾਰੀਖ ਫਾਰਮੈਟ</string>
+    <string name="live_label">ਲਾਈਵ</string>
+    <string name="petrol_label">ਪੈਟਰੋਲ</string>
+    <string name="diesel_label">ਡੀਜ਼ਲ</string>
+    <string name="lpg_label">ਐਲਪੀਜੀ</string>
+    <string name="search_city_hint">ਸ਼ਹਿਰ ਖੋਜੋ</string>
+    <string name="search">ਖੋਜੋ</string>
+    <string name="no_data_found">ਕੋਈ ਡਾਟਾ ਨਹੀਂ ਮਿਲਿਆ</string>
+    <string name="nearby_cities_count">ਨੇੜਲੇ ਸ਼ਹਿਰ</string>
+    <string name="nearby_distance_km">ਨੇੜਲੀ ਦੂਰੀ (ਕਿ.ਮੀ.)</string>
+    <string name="near_by_cities">ਨੇੜਲੇ ਸ਼ਹਿਰ (ਇੱਕੋ ਰੇਟ)</string>
+    <string name="nearby_distance_km_">ਦੂਰੀ</string>
+    <string name="fuel_price">ਇੰਧਨ ਕੀਮਤ</string>
+    <string name="diesel_prices">ਡੀਜ਼ਲ ਕੀਮਤ</string>
+    <string name="working_on_this_coming_soon">ਜਲਦੀ ਆ ਰਿਹਾ ਹੈ</string>
+    <string name="driver_discount">ਡਰਾਈਵਰ ਛੂਟ</string>
+    <string name="voice">ਆਵਾਜ਼ ਨਾਲ ਬੋਲੋ:</string>
+    <string name="custom_add">➕ ਕਸਟਮ ਜੋੜੋ</string>
+    <string name="other">ਹੋਰ</string>
+    <string name="repair">ਮੁਰੰਮਤ</string>
+    <string name="toll">ਟੋਲ</string>
+    <string name="khana">ਖਾਣਾ</string>
+    <string name="diesel">ਡੀਜ਼ਲ</string>
+    <string name="chai_pani">ਚਾਹ/ਪਾਣੀ</string>
+    <string name="recharge">ਰੀਚਾਰਜ</string>
+    <string name="select_category">ਸ਼੍ਰੇਣੀ ਚੁਣੋ</string>
+    <string name="custom_amount">ਕਸਟਮ ਰਕਮ</string>
+    <string name="diesel_">🛢️ ਡੀਜ਼ਲ</string>
+    <string name="khana_">🍽️ ਖਾਣਾ</string>
+    <string name="toll_">🛣️ ਟੋਲ</string>
+    <string name="repair_">🔧 ਮੁਰੰਮਤ</string>
+    <string name="chai_pani_">☕ ਚਾਹ/ਪਾਣੀ</string>
+    <string name="other_">📝 ਹੋਰ</string>
+    <string name="add_fast">ਤੁਰੰਤ ਜੋੜੋ:</string>
+    <string name="abhi_kuch_nahi_hai">ਇਸ ਵੇਲੇ ਇੱਥੇ ਕੁਝ ਨਹੀਂ ਹੈ</string>
+    <string name="what_s_included">ਕੀ-ਕੀ ਸ਼ਾਮਲ ਹੈ</string>
+    <string name="remove_all_ads">✔ ਸਾਰੇ ਇਸ਼ਤਿਹਾਰ ਹਟਾਓ</string>
+    <string name="unlock_premium_features">✔ ਪ੍ਰੀਮੀਅਮ ਫੀਚਰ ਅਨਲੌਕ ਕਰੋ</string>
+    <string name="connect_with_owner_directly">✔ Owner App ਨਾਲ ਸਿੱਧਾ ਕਨੈਕਟ ਕਰੋ</string>
+    <string name="unlimited_trips">✔ ਅਸੀਮਿਤ ਟ੍ਰਿਪਾਂ</string>
+    <string name="cancel_subscription_anytime">✔ ਕਿਸੇ ਵੀ ਸਮੇਂ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਰੱਦ ਕਰੋ</string>
+    <string name="our_team_will_guide_you_individually_to_use_the_app">✔ ਸਾਡੀ ਟੀਮ ਤੁਹਾਨੂੰ ਐਪ ਵਰਤਣ ਲਈ ਨਿੱਜੀ ਤੌਰ \'ਤੇ ਮਾਰਗਦਰਸ਼ਨ ਕਰੇਗੀ</string>
+    <string name="learn_step_by_step_using_youtube_video_tutorials">✔ YouTube ਵੀਡੀਓ ਟਿਊਟੋਰਿਅਲ ਰਾਹੀਂ ਕਦਮ-ਦਰ-ਕਦਮ ਸਿੱਖੋ</string>
+    <string name="subscribe_now">ਹੁਣੇ ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ</string>
+    <string name="mileage_amp_estimator"><![CDATA[ਮਾਈਲੇਜ ਅਤੇ ਅਨੁਮਾਨ]]></string>
+    <string name="trip_mileage_amp_profit_estimator"><![CDATA[ਟ੍ਰਿਪ ਮਾਈਲੇਜ ਅਤੇ ਮੁਨਾਫ਼ਾ ਅਨੁਮਾਨ]]></string>
+    <string name="enter_trip_parameters">ਟ੍ਰਿਪ ਦੀ ਜਾਣਕਾਰੀ ਦਰਜ ਕਰੋ</string>
+    <string name="total_one_way_distance_km">ਇੱਕ ਪਾਸੇ ਦੀ ਕੁੱਲ ਦੂਰੀ (ਕਿਮੀ)</string>
+    <string name="e_g_850">ਜਿਵੇਂ 850</string>
+    <string name="truck_mileage_km_liter">ਟਰੱਕ ਮਾਈਲੇਜ (ਕਿਮੀ/ਲੀਟਰ)</string>
+    <string name="e_g_4_2">ਜਿਵੇਂ 4.2</string>
+    <string name="diesel_fuel_price_liter">ਡੀਜ਼ਲ / ਬਾਲਣ ਦੀ ਕੀਮਤ (₹/ਲੀਟਰ)</string>
+    <string name="e_g_92_50">ਜਿਵੇਂ 92.50</string>
+    <string name="toll_driver_bhatta_amp_other_expenses"><![CDATA[ਟੋਲ, ਡਰਾਈਵਰ ਭੱਤਾ ਅਤੇ ਹੋਰ ਖਰਚੇ (₹)]]></string>
+    <string name="e_g_3500">ਜਿਵੇਂ 3500</string>
+    <string name="offered_freight_amount">ਪੇਸ਼ ਕੀਤੀ ਗਈ ਫ੍ਰੇਟ ਰਕਮ (₹)</string>
+    <string name="e_g_28000">ਜਿਵੇਂ 28000</string>
+    <string name="calculate_estimate_amp_profit"><![CDATA[ਅਨੁਮਾਨਿਤ ਖਰਚਾ ਅਤੇ ਮੁਨਾਫ਼ਾ ਗਿਣੋ]]></string>
+    <string name="trip_estimate_summary">📊 ਟ੍ਰਿਪ ਅਨੁਮਾਨ ਸਾਰਾਂਸ਼</string>
+    <string name="required_fuel">ਲੋੜੀਂਦਾ ਬਾਲਣ:</string>
+    <string name="estimated_fuel_cost">ਅਨੁਮਾਨਿਤ ਬਾਲਣ ਖਰਚ:</string>
+    <string name="total_estimated_expenses">ਕੁੱਲ ਅਨੁਮਾਨਿਤ ਖਰਚ:</string>
+    <string name="suggested_min_freight_rate">ਸੁਝਾਇਆ ਗਿਆ ਘੱਟੋ-ਘੱਟ ਫ੍ਰੇਟ ਰੇਟ:</string>
+    <string name="estimated_net_profit">ਅਨੁਮਾਨਿਤ ਸ਼ੁੱਧ ਮੁਨਾਫ਼ਾ:</string>
+    <string name="total_return_distance_km">ਵਾਪਸੀ ਦੀ ਕੁੱਲ ਦੂਰੀ (ਕਿਮੀ)</string>
+    <string name="e_g_750">ਜਿਵੇਂ 750</string>
+    <string name="return_freight_amount">ਵਾਪਸੀ ਫ੍ਰੇਟ ਰਕਮ (₹)</string>
+    <string name="e_g_18000">ਜਿਵੇਂ 18000</string>
+    <string name="total_trip_distance">ਕੁੱਲ ਟ੍ਰਿਪ ਦੂਰੀ:</string>
+    <string name="total_freight_amount">ਕੁੱਲ ਫ੍ਰੇਟ ਰਕਮ:</string>
+    <!-- Load Capacity Calculator Strings -->
+    <string name="load_capacity_calculator">ਲੋਡ ਸਮਰੱਥਾ ਕੈਲਕੁਲੇਟਰ</string>
+    <string name="maximum_truck_capacity">ਵੱਧ ਤੋਂ ਵੱਧ ਟਰੱਕ ਸਮਰੱਥਾ</string>
+    <string name="truck_capacity">ਟਰੱਕ ਸਮਰੱਥਾ</string>
+    <string name="add_cargo">+ ਮਾਲ ਜੋੜੋ</string>
+    <string name="cargo_name">ਮਾਲ ਦਾ ਨਾਂ</string>
+    <string name="weight_per_item">ਪ੍ਰਤੀ ਚੀਜ਼ ਵਜ਼ਨ</string>
+    <string name="quantity">ਗਿਣਤੀ</string>
+    <string name="total_loaded">ਕੁੱਲ ਲੋਡ ਕੀਤਾ ਵਜ਼ਨ</string>
+    <string name="remaining_capacity">ਬਾਕੀ ਸਮਰੱਥਾ</string>
+    <string name="capacity_used">ਵਰਤੀ ਗਈ ਸਮਰੱਥਾ</string>
+    <string name="load_capacity_ok">ਲੋਡ ਸਮਰੱਥਾ ਠੀਕ ਹੈ</string>
+    <string name="over_capacity">ਸਮਰੱਥਾ ਤੋਂ ਵੱਧ</string>
+    <string name="exceeded_by">ਤੋਂ ਵੱਧ: %1$s</string>
+    <string name="truck_dimensions">ਟਰੱਕ ਦਾ ਆਕਾਰ (ਮਰਜ਼ੀ ਮੁਤਾਬਕ)</string>
+    <string name="cargo_dimensions">ਮਾਲ ਦਾ ਆਕਾਰ (ਮਰਜ਼ੀ ਮੁਤਾਬਕ)</string>
+    <string name="estimated_volume">ਅਨੁਮਾਨਿਤ ਆਇਤਨ</string>
+    <string name="estimated_space_used">ਅਨੁਮਾਨਿਤ ਵਰਤੀ ਜਗ੍ਹਾ</string>
+    <string name="estimated_volume_ok">ਅਨੁਮਾਨਿਤ ਆਇਤਨ ਠੀਕ ਹੈ</string>
+    <string name="estimated_volume_exceeded">ਅਨੁਮਾਨਿਤ ਆਇਤਨ ਵੱਧ ਹੈ</string>
+    <string name="load_capacity_summary">ਲੋਡ ਸਮਰੱਥਾ ਦਾ ਸਾਰ</string>
+    <string name="estimated_space_summary">ਅਨੁਮਾਨਿਤ ਜਗ੍ਹਾ ਦਾ ਸਾਰ</string>
+    <string name="overall_result">ਕੁੱਲ ਨਤੀਜਾ</string>
+    <string name="load_within_limits">ਲੋਡ ਟਰੱਕ ਦੀ ਹੱਦ ਦੇ ਅੰਦਰ ਹੈ</string>
+    <string name="load_exceeds_limits">ਲੋਡ ਟਰੱਕ ਦੀ ਹੱਦ ਤੋਂ ਵੱਧ ਹੈ</string>
+    <string name="weight_exceeds_by">ਵਜ਼ਨ ਸਮਰੱਥਾ ਤੋਂ %1$s ਵੱਧ ਹੈ</string>
+    <string name="volume_exceeds_by">ਅਨੁਮਾਨਿਤ ਆਇਤਨ ਟਰੱਕ ਦੀ ਉਪਲਬਧ ਜਗ੍ਹਾ ਤੋਂ %1$s ਵੱਧ ਹੈ</string>
+    <string name="estimated_volume_disclaimer">ਸਿਰਫ਼ ਅਨੁਮਾਨਿਤ ਜਗ੍ਹਾ ਦੀ ਵਰਤੋਂ। ਅਸਲ ਫਿਟਿੰਗ ਦੀ ਗਾਰੰਟੀ ਨਹੀਂ।</string>
+    <string name="reset">ਰੀਸੈੱਟ</string>
+    <string name="edit_cargo">ਬਦਲੋ</string>
+    <string name="delete_cargo">ਹਟਾਓ</string>
+    <string name="save_cargo">ਸੰਭਾਲੋ</string>
+    <string name="length">ਲੰਬਾਈ</string>
+    <string name="width">ਚੌੜਾਈ</string>
+    <string name="height">ਉਚਾਈ</string>
+    <string name="unit_kg">ਕਿਲੋ</string>
+    <string name="unit_ton">ਟਨ</string>
+    <string name="unit_ft">ਫੁੱਟ</string>
+    <string name="unit_m">ਮੀਟਰ</string>
+    <string name="no_cargo_added_yet">ਅਜੇ ਕੋਈ ਮਾਲ ਨਹੀਂ ਜੋੜਿਆ ਗਿਆ। ਉੱਪਰ \'+ ਮਾਲ ਜੋੜੋ\' \'ਤੇ ਕਲਿੱਕ ਕਰੋ।</string>
+    <string name="please_enter_valid_truck_capacity">ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ ਟਰੱਕ ਸਮਰੱਥਾ ਭਰੋ</string>
+    <string name="please_enter_valid_cargo_weight">ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ ਪ੍ਰਤੀ ਚੀਜ਼ ਵਜ਼ਨ ਭਰੋ</string>
+    <string name="please_enter_cargo_name">ਕਿਰਪਾ ਕਰਕੇ ਮਾਲ ਦਾ ਨਾਂ ਭਰੋ</string>
+    <string name="reset_confirm_title">ਸਭ ਰੀਸੈੱਟ ਕਰੋ?</string>
+    <string name="reset_confirm_msg">ਕੀ ਤੁਸੀਂ ਸਾਰੀ ਜਾਣਕਾਰੀ ਅਤੇ ਮਾਲ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
+    <string name="give_feedback">ਰਾਏ ਦਿਓ</string>
+    <string name="fuel_stop_planner">ਡੀਜ਼ਲ ਸਟਾਪ ਪਲਾਨਰ</string>
+    <string name="plan_fuel_stops">ਡੀਜ਼ਲ ਸਟਾਪ ਪਲਾਨ ਕਰੋ</string>
+    <string name="fuel_planner_subtitle">ਡੀਜ਼ਲ ਦਾ ਹਿਸਾਬ, ਸੁਰੱਖਿਅਤ ਡਰਾਈਵਿੰਗ ਰੇਂਜ ਅਤੇ ਖਰਚਾ</string>
+    <string name="detailed_trip_report">ਪੂਰੀ ਟ੍ਰਿਪ ਰਿਪੋਰਟ</string>
+    <string name="starting_point">ਗੱਡੀ ਕਿੱਥੋਂ ਸ਼ੁਰੂ ਹੋਵੇਗੀ</string>
+    <string name="trip_distance_km">ਕੁੱਲ ਦੂਰੀ (ਕਿਮੀ)</string>
+    <string name="truck_no_optional">ਗੱਡੀ ਨੰਬਰ</string>
+    <string name="load_condition">ਲੋਡ ਦੀ ਹਾਲਤ</string>
+    <string name="current_fuel_liters">ਟੈਂਕੀ ਵਿੱਚ ਮੌਜੂਦਾ ਡੀਜ਼ਲ (ਲੀਟਰ)</string>
+    <string name="tank_capacity_liters">ਡੀਜ਼ਲ ਟੈਂਕੀ ਦੀ ਸਮਰੱਥਾ (ਲੀਟਰ)</string>
+    <string name="average_mileage_km_l">ਗੱਡੀ ਦੀ ਮਾਈਲੇਜ (ਕਿਮੀ/ਲੀਟਰ)</string>
+    <string name="fuel_price_per_liter">ਡੀਜ਼ਲ ਦਾ ਰੇਟ (ਪ੍ਰਤੀ ਲੀਟਰ)</string>
+    <string name="safety_reserve">ਐਮਰਜੈਂਸੀ ਡੀਜ਼ਲ ਰਿਜ਼ਰਵ</string>
+    <string name="safety_reserve_explanation">ਟ੍ਰੈਫਿਕ, ਭਾਰੀ ਲੋਡ ਅਤੇ ਖਰਾਬ ਰਸਤੇ ਲਈ ਥੋੜ੍ਹਾ ਡੀਜ਼ਲ ਬਚਾ ਕੇ ਰੱਖਣਾ ਚੰਗਾ ਰਹਿੰਦਾ ਹੈ।</string>
+    <string name="calculate_plan">ਡੀਜ਼ਲ ਪਲਾਨ ਕੱਢੋ</string>
+    <string name="fill_tank_helper">ਪੂਰੀ ਟੈਂਕੀ ਭਰੋ</string>
+    <string name="send_to_trip_estimator">ਇਹ ਖਰਚਾ ਟ੍ਰਿਪ ਕੈਲਕੁਲੇਟਰ ਵਿੱਚ ਭੇਜੋ</string>
+    <string name="fuel_status">ਡੀਜ਼ਲ ਦੀ ਹਾਲਤ</string>
+    <string name="current_driving_range">ਕੁੱਲ ਚੱਲ ਸਕਣ ਵਾਲੀ ਦੂਰੀ</string>
+    <string name="safe_driving_range">ਸੁਰੱਖਿਅਤ ਡਰਾਈਵਿੰਗ ਰੇਂਜ</string>
+    <string name="estimated_fuel_required">ਲੋੜੀਂਦਾ ਕੁੱਲ ਡੀਜ਼ਲ</string>
+    <string name="fuel_with_safety">ਰਿਜ਼ਰਵ ਸਮੇਤ ਕੁੱਲ ਡੀਜ਼ਲ</string>
+    <string name="fuel_remaining_at_dest">ਮੰਜ਼ਿਲ \'ਤੇ ਬਚਣ ਵਾਲਾ ਡੀਜ਼ਲ</string>
+    <string name="fuel_cost_per_km">ਪ੍ਰਤੀ ਕਿਮੀ ਡੀਜ਼ਲ ਖਰਚਾ</string>
+    <string name="recommended_stop">ਇੱਥੇ ਡੀਜ਼ਲ ਭਰਵਾਉਣਾ ਸਹੀ ਰਹੇਗਾ</string>
+    <string name="recommended_fuel_to_add">ਇੰਨਾ ਡੀਜ਼ਲ ਭਰਵਾਓ</string>
+    <string name="safe_status_title">ਸੁਰੱਖਿਅਤ ਸਫ਼ਰ</string>
+    <string name="safe_status_desc">ਮੌਜੂਦਾ ਡੀਜ਼ਲ ਨਾਲ ਗੱਡੀ ਆਰਾਮ ਨਾਲ ਮੰਜ਼ਿਲ \'ਤੇ ਪਹੁੰਚ ਜਾਵੇਗੀ।</string>
+    <string name="refuel_recommended_title">ਡੀਜ਼ਲ ਭਰਵਾਉਣਾ ਬਿਹਤਰ ਹੈ</string>
+    <string name="refuel_recommended_desc">ਗੱਡੀ ਪਹੁੰਚ ਜਾਵੇਗੀ, ਪਰ ਰਿਜ਼ਰਵ ਸੁਰੱਖਿਅਤ ਰੱਖਣ ਲਈ ਰਸਤੇ ਵਿੱਚ ਡੀਜ਼ਲ ਪੁਆ ਲਓ।</string>
+    <string name="refuel_required_title">ਰਸਤੇ ਵਿੱਚ ਡੀਜ਼ਲ ਪੁਆਉਣਾ ਜ਼ਰੂਰੀ ਹੈ</string>
+    <string name="refuel_required_desc">ਮੰਜ਼ਿਲ ਤੋਂ ਪਹਿਲਾਂ ਹੀ ਡੀਜ਼ਲ ਮੁੱਕ ਜਾਵੇਗਾ, ਪੰਪ \'ਤੇ ਰੁਕਣਾ ਪਵੇਗਾ।</string>
+    <string name="fuel_stop_timeline">ਸੁਝਾਏ ਗਏ ਡੀਜ਼ਲ ਪੰਪ</string>
+    <string name="no_stops_needed">ਡੀਜ਼ਲ ਭਰਵਾਉਣ ਦੀ ਲੋੜ ਨਹੀਂ ਹੈ। ਕਾਫ਼ੀ ਡੀਜ਼ਲ ਮੌਜੂਦ ਹੈ।</string>
+    <string name="empty_load">ਖ਼ਾਲੀ ਗੱਡੀ</string>
+    <string name="half_loaded">ਅੱਧਾ ਲੋਡ</string>
+    <string name="fully_loaded">ਪੂਰਾ ਭਰਿਆ ਲੋਡ</string>
+    <string name="err_curr_fuel_greater_than_tank">ਮੌਜੂਦਾ ਡੀਜ਼ਲ ਟੈਂਕੀ ਦੀ ਸਮਰੱਥਾ ਤੋਂ ਵੱਧ ਨਹੀਂ ਹੋ ਸਕਦਾ।</string>
+    <string name="err_invalid_mileage">ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ ਮਾਈਲੇਜ ਭਰੋ।</string>
+    <string name="err_missing_distance">ਕਿਰਪਾ ਕਰਕੇ ਟ੍ਰਿਪ ਦੀ ਦੂਰੀ ਭਰੋ।</string>
+    <string name="err_invalid_tank_capacity">ਕਿਰਪਾ ਕਰਕੇ ਟੈਂਕੀ ਦੀ ਸਹੀ ਸਮਰੱਥਾ ਭਰੋ।</string>
+    <string name="fuel_station_connect_msg">ਰਸਤੇ ਦੇ ਸਸਤੇ ਪੰਪ ਇੰਟਰਨੈੱਟ ਕੁਨੈਕਟ ਹੋਣ \'ਤੇ ਦਿਖਾਈ ਦੇਣਗੇ।</string>
+    <string name="backhaul_calculator">ਵਾਪਸੀ ਭਾੜਾ ਅਤੇ ਮੁਨਾਫ਼ਾ ਕੈਲਕੁਲੇਟਰ</string>
+    <string name="backhaul_calculator_short">ਵਾਪਸੀ ਕੈਲਕੁਲੇਟਰ</string>
+    <string name="backhaul_calculator_title">ਵਾਪਸੀ ਲੋਡ ਕੈਲਕੁਲੇਟਰ</string>
+    <string name="backhaul_calculator_subtitle">ਖ਼ਾਲੀ ਵਾਪਸੀ ਬਨਾਮ ਵਾਪਸੀ ਲੋਡ ਦੇ ਮੁਨਾਫ਼ੇ ਦਾ ਹਿਸਾਬ</string>
+    <string name="outbound_trip">ਜਾਣ ਦਾ ਫੇਰਾ</string>
+    <string name="outbound_journey">ਜਾਣ ਦਾ ਫੇਰਾ (A ਤੋਂ B)</string>
+    <string name="return_trip">ਵਾਪਸੀ ਦਾ ਫੇਰਾ</string>
+    <string name="return_journey">ਵਾਪਸੀ ਦਾ ਫੇਰਾ (B ਤੋਂ A)</string>
+    <string name="outbound_revenue">ਜਾਣ ਦਾ ਭਾੜਾ / ਕਮਾਈ</string>
+    <string name="return_revenue">ਵਾਪਸੀ ਦਾ ਭਾੜਾ</string>
+    <string name="return_type">ਵਾਪਸੀ ਦੀ ਕਿਸਮ</string>
+    <string name="empty_return">ਖ਼ਾਲੀ ਵਾਪਸੀ (₹0 ਕਮਾਈ)</string>
+    <string name="with_backhaul_load">ਵਾਪਸੀ ਲੋਡ ਦੇ ਨਾਲ</string>
+    <string name="empty_return_banner_msg">ਖ਼ਾਲੀ ਵਾਪਸੀ: ₹0 ਕਮਾਈ। ਗੱਡੀ ਬਿਨਾਂ ਕਿਸੇ ਕਮਾਈ ਦੇ ਡੀਜ਼ਲ ਅਤੇ ਟੋਲ ਖਰਚ ਕਰ ਰਹੀ ਹੈ।</string>
+    <string name="trip_expenses">ਆਉਣ-ਜਾਣ ਦਾ ਕੁੱਲ ਖਰਚਾ</string>
+    <string name="fuel_cost">ਡੀਜ਼ਲ ਦਾ ਖਰਚਾ</string>
+    <string name="toll_cost">ਟੋਲ ਟੈਕਸ ਖਰਚਾ</string>
+    <string name="driver_cost">ਡਰਾਈਵਰ / ਭੱਤਾ ਖਰਚਾ</string>
+    <string name="total_trip_cost">ਟ੍ਰਿਪ ਦਾ ਕੁੱਲ ਖਰਚਾ</string>
+    <string name="quick_calc_fuel">⚡ ਤੁਰੰਤ ਡੀਜ਼ਲ ਖਰਚਾ ਕੱਢੋ</string>
+    <string name="return_cost_allocation">ਵਾਪਸੀ ਫੇਰੇ ਦਾ ਖਰਚਾ</string>
+    <string name="target_profit_optimizer">ਮਨਚਾਹਾ ਮੁਨਾਫ਼ਾ ਪਲਾਨਰ</string>
+    <string name="desired_additional_profit">ਵਾਧੂ ਮਨਚਾਹਾ ਮੁਨਾਫ਼ਾ</string>
+    <string name="calculate_and_compare">🔄 ਹਿਸਾਬ ਕੱਢੋ ਅਤੇ ਤੁਲਨਾ ਕਰੋ</string>
+    <string name="empty_return_cost_title">🔴 ਖ਼ਾਲੀ ਗੱਡੀ ਵਾਪਸ ਲਿਆਉਣ ਦਾ ਨੁਕਸਾਨ</string>
+    <string name="empty_return_cost_desc">ਤੁਹਾਡੀ ਗੱਡੀ ਖ਼ਾਲੀ ਮੁੜਨ ਵਿੱਚ ਲਗਭਗ %1$s ਦਾ ਡੀਜ਼ਲ ਅਤੇ ਟੋਲ ਖਰਚ ਕਰ ਰਹੀ ਹੈ। ਵਾਪਸੀ ਲੋਡ ਮਿਲਣ ਨਾਲ ਇਹ ਖਰਚਾ ਬਚੇਗਾ ਅਤੇ ਮੁਨਾਫ਼ਾ ਵਧੇਗਾ।</string>
+    <string name="without_backhaul">ਖ਼ਾਲੀ ਗੱਡੀ ਦੀ ਹਾਲਤ ਵਿੱਚ</string>
+    <string name="with_backhaul">ਵਾਪਸੀ ਲੋਡ ਮਿਲਣ \'ਤੇ</string>
+    <string name="profit_improvement">🚀 ਮੁਨਾਫ਼ੇ ਵਿੱਚ ਵਾਧਾ</string>
+    <string name="minimum_backhaul_target">ਘੱਟੋ-ਘੱਟ ਇੰਨਾ ਭਾੜਾ ਲਓ</string>
+    <string name="minimum_backhaul_target_desc">ਘੱਟੋ-ਘੱਟ %1$s ਦਾ ਵਾਪਸੀ ਭਾੜਾ ਲਓ ਤਾਂ ਜੋ ਵਾਪਸੀ ਦਾ ਡੀਜ਼ਲ-ਟੋਲ ਖਰਚਾ ਵਸੂਲ ਹੋ ਸਕੇ।</string>
+    <string name="target_profit_backhaul">ਟਾਰਗੇਟ ਵਾਪਸੀ ਭਾੜਾ</string>
+    <string name="target_profit_backhaul_desc">ਖਰਚਾ ਕੱਢ ਕੇ %1$s ਦਾ ਸ਼ੁੱਧ ਮੁਨਾਫ਼ਾ ਕਮਾਉਣ ਲਈ ਘੱਟੋ-ਘੱਟ %2$s ਦਾ ਭਾੜਾ ਤੈਅ ਕਰੋ।</string>
+    <string name="trip_breakeven_title">ਬਿਨਾਂ ਮੁਨਾਫ਼ੇ ਬਿਨਾਂ ਨੁਕਸਾਨ ਦਾ ਹਿਸਾਬ</string>
+    <string name="return_contribution_title">ਵਾਪਸੀ ਲੋਡ ਤੋਂ ਸ਼ੁੱਧ ਬੱਚਤ</string>
+    <string name="save_to_trip">💾 ਪਲਾਨ ਸੇਵ ਕਰੋ</string>
+    <string name="share_summary">📤 ਹਿਸਾਬ ਸ਼ੇਅਰ ਕਰੋ</string>
+    <string name="select_from_my_trips">📋 ਮੇਰੀਆਂ ਟ੍ਰਿਪਾਂ ਵਿੱਚੋਂ ਚੁਣੋ</string>
+    <string name="no_saved_trips_found">ਕੋਈ ਸੇਵ ਕੀਤੀ ਟ੍ਰਿਪ ਨਹੀਂ ਮਿਲੀ।</string>
+    <string name="what_if_return_load">ਜੇਕਰ ਵਾਪਸੀ ਭਾੜਾ ਇੰਨਾ ਮਿਲੇ ਤਾਂ ਕੀ ਮੁਨਾਫ਼ਾ ਹੋਵੇਗਾ:</string>
+    <string name="profit_per_km_label">ਪ੍ਰਤੀ ਕਿਮੀ ਮੁਨਾਫ਼ਾ</string>
+    <string name="net_profit_label">ਸ਼ੁੱਧ ਮੁਨਾਫ਼ਾ</string>
+    <string name="net_loss_label">ਘਾਟਾ / ਨੁਕਸਾਨ</string>
+    <string name="backhaul_info_title">ਵਾਪਸੀ ਲੋਡ (Backhaul) ਕਿਉਂ ਜ਼ਰੂਰੀ ਹੈ?</string>
+    <string name="backhaul_info_message">ਜਦੋਂ ਟਰੱਕ ਮਾਲ ਪਹੁੰਚਾ ਕੇ ਖ਼ਾਲੀ ਵਾਪਸ ਮੁੜਦਾ ਹੈ, ਤਾਂ ਵੀ ਡੀਜ਼ਲ, ਟੋਲ ਅਤੇ ਡਰਾਈਵਰ ਦਾ ਖਰਚਾ ਪੈਂਦਾ ਹੈ।\n\nਵਾਪਸੀ ਵਿੱਚ ਕੋਈ ਵੀ ਲੋਡ ਮਿਲਣ ਨਾਲ ਇਹ ਨੁਕਸਾਨ ਬਚ ਜਾਂਦਾ ਹੈ ਅਤੇ ਪੂਰਾ ਫੇਰਾ ਮੁਨਾਫ਼ੇ ਵਿੱਚ ਬਦਲ ਜਾਂਦਾ ਹੈ।</string>
+    <string name="resume_draft">ਅਧੂਰਾ ਹਿਸਾਬ ਪੂਰਾ ਕਰੋ</string>
+    <string name="continue_draft_title">ਅਧੂਰਾ ਟ੍ਰਿਪ ਹਿਸਾਬ</string>
+    <string name="continue_draft_desc">ਆਪਣੀ ਬਚੀ ਹੋਈ ਟ੍ਰਿਪ ਦਾ ਹਿਸਾਬ ਇੱਥੋਂ ਜਾਰੀ ਰੱਖੋ</string>
+    <string name="quick_tools_title">ਜ਼ਰੂਰੀ ਟ੍ਰਾਂਸਪੋਰਟ ਟੂਲਜ਼</string>
+    <string name="search_trips_hint">ਗੱਡੀ ਨੰਬਰ, ਸ਼ਹਿਰ ਜਾਂ ਤਾਰੀਖ ਨਾਲ ਖੋਜੋ...</string>
+    <string name="filter_all">ਸਾਰੀਆਂ ਟ੍ਰਿਪਾਂ</string>
+    <string name="filter_profitable">ਮੁਨਾਫ਼ੇ ਵਾਲੀਆਂ</string>
+    <string name="filter_loss">ਘਾਟੇ ਵਾਲੀਆਂ</string>
+    <string name="net_profit_summary">ਕੁੱਲ ਸ਼ੁੱਧ ਮੁਨਾਫ਼ਾ</string>
+    <string name="plan_backhaul_return">ਵਾਪਸੀ ਲੋਡ ਦਾ ਹਿਸਾਬ ਲਗਾਓ</string>
+    <string name="plan_backhaul_return_desc">ਖ਼ਾਲੀ ਵਾਪਸੀ ਦਾ ਨੁਕਸਾਨ ਰੋਕਣ ਲਈ ਵਾਪਸੀ ਭਾੜਾ ਤੈਅ ਕਰੋ</string>
+    <string name="repeat_trip">ਇਹੀ ਟ੍ਰਿਪ ਦੁਬਾਰਾ ਬਣਾਓ</string>
+    <string name="repeat_trip_desc">ਉਸੇ ਗੱਡੀ ਅਤੇ ਰੂਟ ਨਾਲ ਤੁਰੰਤ ਨਵੀਂ ਟ੍ਰਿਪ ਸ਼ੁਰੂ ਕਰੋ</string>
+    <string name="category_trip_planning">ਟ੍ਰਿਪ ਪਲਾਨਿੰਗ ਅਤੇ ਅਨੁਮਾਨ</string>
+    <string name="category_fuel_mgmt">ਡੀਜ਼ਲ ਅਤੇ ਰੂਟ ਮੈਨੇਜਮੈਂਟ</string>
+    <string name="category_cargo_reports">ਮਾਲ ਅਤੇ ਵਿਸਤ੍ਰਿਤ ਰਿਪੋਰਟਾਂ</string>
+    <string name="my_trucking_stats">ਮੇਰੀਆਂ ਗੱਡੀਆਂ ਅਤੇ ਟ੍ਰਿਪ ਹਿਸਾਬ</string>
+    <string name="total_trips_logged">ਦਰਜ ਕੁੱਲ ਟ੍ਰਿਪਾਂ</string>
+    <string name="active_app_mode">ਚਾਲੂ ਐਪ ਮੋਡ</string>
+    <string name="mode_simple_title">ਸੌਖਾ ਬੋਲ ਕੇ ਮੋਡ</string>
+    <string name="mode_full_title">ਪੂਰਾ ਖਾਤਾ-ਵਹੀ ਮੋਡ</string>
+    <string name="no_trips_matching_search">ਖੋਜ ਮੁਤਾਬਕ ਕੋਈ ਟ੍ਰਿਪ ਨਹੀਂ ਮਿਲੀ</string>
+    <string name="clear_filter">ਫ਼ਿਲਟਰ ਹਟਾਓ</string>
+    <string name="active_draft_count">%1$d ਟ੍ਰਿਪਾਂ ਦਾ ਹਿਸਾਬ ਬਾਕੀ ਹੈ</string>
+    <string name="desc_trip_estimator">ਮਾਈਲੇਜ, ਡੀਜ਼ਲ ਖਰਚ ਅਤੇ ਮੁਨਾਫ਼ੇ ਦਾ ਅਨੁਮਾਨ ਲਗਾਓ</string>
+    <string name="desc_backhaul_calc">ਖ਼ਾਲੀ ਵਾਪਸੀ ਦਾ ਖਰਚ ਅਤੇ ਭਾੜੇ ਦਾ ਹਿਸਾਬ ਕੱਢੋ</string>
+    <string name="desc_fuel_planner">ਰਸਤੇ ਦੇ ਸਸਤੇ ਡੀਜ਼ਲ ਪੰਪ ਅਤੇ ਡਰਾਈਵਿੰਗ ਰੇਂਜ ਦੇਖੋ</string>
+    <string name="desc_diesel_info">ਦੇਸ਼ ਦੇ ਪ੍ਰਮੁੱਖ ਸ਼ਹਿਰਾਂ ਵਿੱਚ ਅੱਜ ਦਾ ਲਾਈਵ ਡੀਜ਼ਲ ਰੇਟ</string>
+    <string name="desc_load_capacity">ਗੱਡੀ ਦੀ ਪਾਸਿੰਗ ਅਤੇ ਐਕਸਲ ਵਜ਼ਨ ਸਮਰੱਥਾ ਜਾਂਚੋ</string>
+    <string name="desc_trip_report">ਟ੍ਰਿਪ ਦੇ ਸਾਰੇ ਖਰਚੇ, ਕਮਾਈ ਅਤੇ ਮੁਨਾਫ਼ੇ ਦਾ ਪੂਰਾ ਵੇਰਵਾ</string>
+    <string name="change_language_app">ਭਾਸ਼ਾ ਬਦਲੋ</string>
+    <string name="subscription">ਸਬਸਕ੍ਰਿਪਸ਼ਨ</string>
+    <string name="plan_change">ਪਲਾਨ ਬਦਲੋ</string>
+    <string name="app_use_video">ਐਪ ਚਲਾਉਣ ਦੀ ਵੀਡੀਓ</string>
+    <string name="feed_back">ਫੀਡਬੈਕ ਦਿਓ</string>
+    <string name="return_distance_km_if_applicable">ਵਾਪਸੀ ਦੀ ਦੂਰੀ (ਕਿਮੀ, ਜੇ ਲਾਗੂ ਹੋਵੇ)</string>
+    <string name="e_g_850_or_leave_0_for_one_way">ਜਿਵੇਂ 850 (ਸਿਰਫ਼ ਇੱਕ ਪਾਸੇ ਲਈ 0 ਰੱਖੋ)</string>
+    <string name="truck_mileage_average_km_per_liter">ਗੱਡੀ ਦੀ ਮਾਈਲੇਜ / ਐਵਰੇਜ (ਕਿਮੀ/ਲੀਟਰ)</string>
+    <string name="e_g_3_8">ਜਿਵੇਂ 3.8</string>
+    <string name="fuel_diesel_price_per_liter">ਡੀਜ਼ਲ ਦਾ ਰੇਟ (ਪ੍ਰਤੀ ਲੀਟਰ)</string>
+    <string name="e_g_92_5">ਜਿਵੇਂ 92.5</string>
+    <string name="other_expenses_tolls_driver_maintenance">ਹੋਰ ਖਰਚੇ (ਟੋਲ, ਡਰਾਈਵਰ, ਮੁਰੰਮਤ)</string>
+    <string name="terms_amp_conditions">ਨਿਯਮ ਅਤੇ ਸ਼ਰਤਾਂ</string>
+    <string name="change_profile_photo">ਪ੍ਰੋਫਾਈਲ ਫੋਟੋ ਬਦਲੋ</string>
+    <string name="delete_profile_photo">ਫੋਟੋ ਹਟਾਓ</string>
+    <string name="profile_photo_updated">ਪ੍ਰੋਫਾਈਲ ਫੋਟੋ ਅੱਪਡੇਟ ਹੋ ਗਈ</string>
+    <string name="profile_photo_deleted">ਪ੍ਰੋਫਾਈਲ ਫੋਟੋ ਹਟਾ ਦਿੱਤੀ ਗਈ</string>
+    <string name="delete_photo_confirm">ਕੀ ਤੁਸੀਂ ਪ੍ਰੋਫਾਈਲ ਫੋਟੋ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
 
+    <!-- Backhaul Calculator Revamp Strings -->
+    <string name="outbound_trip_card_title">ਜਾਣ ਦਾ ਫੇਰਾ</string>
+    <string name="outbound_origin_label">ਮਾਲ ਚੁੱਕਣ ਦੀ ਥਾਂ (ਪਿਕਅੱਪ)</string>
+    <string name="outbound_destination_label">ਮਾਲ ਪਹੁੰਚਾਉਣ ਦੀ ਥਾਂ (ਡਿਲਿਵਰੀ)</string>
+    <string name="outbound_distance_label">ਜਾਣ ਦੀ ਦੂਰੀ (ਕਿਮੀ)</string>
+    <string name="outbound_revenue_label">ਜਾਣ ਦਾ ਭਾੜਾ (₹)</string>
+    <string name="trip_expenses_card_title">ਆਉਣ-ਜਾਣ ਦਾ ਕੁੱਲ ਖਰਚਾ</string>
+    <string name="diesel_expense_label">ਡੀਜ਼ਲ ਦਾ ਕੁੱਲ ਖਰਚਾ (₹)</string>
+    <string name="toll_expense_label">ਟੋਲ ਟੈਕਸ ਖਰਚਾ (₹)</string>
+    <string name="driver_expense_label">ਡਰਾਈਵਰ ਭੱਤਾ ਅਤੇ ਖਰਚਾ (₹)</string>
+    <string name="other_trip_expenses_label">ਹੋਰ ਫੁਟਕਲ ਖਰਚੇ (₹)</string>
+    <string name="total_round_trip_cost">ਆਉਣ-ਜਾਣ ਦਾ ਕੁੱਲ ਖਰਚਾ</string>
+    <string name="return_mode_title">ਵਾਪਸੀ ਦਾ ਤਰੀਕਾ ਚੁਣੋ</string>
+    <string name="mode_empty_deadhead">ਖ਼ਾਲੀ ਵਾਪਸੀ (₹0 ਕਮਾਈ)</string>
+    <string name="mode_with_backhaul">ਵਾਪਸੀ ਲੋਡ (ਭਾੜਾ ਲੈ ਕੇ)</string>
+    <string name="return_freight_rate_label">ਵਾਪਸੀ ਦਾ ਭਾੜਾ (₹)</string>
+    <string name="results_comparison_title">ਮੁਨਾਫ਼ੇ ਅਤੇ ਨੁਕਸਾਨ ਦਾ ਹਿਸਾਬ</string>
+    <string name="without_backhaul_loss_label">ਖ਼ਾਲੀ ਮੁੜਨ \'ਤੇ ਨੁਕਸਾਨ</string>
+    <string name="with_backhaul_profit_label">ਵਾਪਸੀ ਲੋਡ \'ਤੇ ਕੁੱਲ ਮੁਨਾਫ਼ਾ</string>
+    <string name="profit_difference_label">ਵਾਧੂ ਮੁਨਾਫ਼ਾ ਜੁੜਿਆ</string>
+    <string name="min_backhaul_needed_title">ਘੱਟੋ-ਘੱਟ ਇੰਨਾ ਭਾੜਾ ਲਓ</string>
+    <string name="min_backhaul_needed_desc">ਵਾਪਸੀ ਦਾ ਡੀਜ਼ਲ ਅਤੇ ਟੋਲ ਕੱਢਣ ਲਈ ਘੱਟੋ-ਘੱਟ ਇੰਨਾ ਭਾੜਾ ਤੈਅ ਕਰੋ</string>
+    <string name="target_backhaul_title">ਮਨਚਾਹਾ ਵਾਪਸੀ ਭਾੜਾ</string>
+    <string name="btn_calculate_results">ਕੁੱਲ ਹਿਸਾਬ ਦੇਖੋ</string>
+    <string name="status_empty_return_title">ਖ਼ਾਲੀ ਵਾਪਸੀ</string>
+    <string name="status_empty_return_desc">ਖ਼ਾਲੀ ਗੱਡੀ ਮੁੜਨ ਨਾਲ ਬਿਨਾਂ ਕਮਾਈ ਦੇ ਡੀਜ਼ਲ ਅਤੇ ਟੋਲ ਦਾ ਸਿੱਧਾ ਨੁਕਸਾਨ ਹੁੰਦਾ ਹੈ।</string>
+    <string name="status_below_cost_title">ਵਾਪਸੀ ਖਰਚੇ ਤੋਂ ਘੱਟ ਭਾੜਾ</string>
+    <string name="status_below_cost_desc">ਭਾੜਾ ਵਾਪਸੀ ਦੇ ਡੀਜ਼ਲ-ਟੋਲ ਖਰਚੇ ਤੋਂ ਘੱਟ ਹੈ। ਇਸ ਨਾਲ ਨੁਕਸਾਨ ਘਟੇਗਾ, ਪਰ ਪੂਰਾ ਖਰਚਾ ਨਹੀਂ ਨਿਕਲੇਗਾ।</string>
+    <string name="status_break_even_title">ਲਾਗਤ ਵਸੂਲ ਭਾੜਾ</string>
+    <string name="status_break_even_desc">ਵਾਪਸੀ ਲੋਡ ਨਾਲ ਤੁਹਾਡੇ ਮੁੜਨ ਦਾ ਪੂਰਾ ਖਰਚਾ ਨਿਕਲ ਗਿਆ ਹੈ।</string>
+    <string name="status_strong_backhaul_title">ਵਧੀਆ ਮੁਨਾਫ਼ੇ ਵਾਲਾ ਲੋਡ</string>
+    <string name="status_strong_backhaul_desc">ਸ਼ਾਨਦਾਰ! ਵਾਪਸੀ ਭਾੜੇ ਨਾਲ ਪੂਰਾ ਖਰਚਾ ਵੀ ਨਿਕਲ ਗਿਆ ਅਤੇ ਚੰਗਾ ਸ਼ੁੱਧ ਮੁਨਾਫ਼ਾ ਮਿਲਿਆ।</string>
+    <string name="scenario_preview_format">ਵਾਪਸੀ ਭਾੜਾ: %1$s ➔ ਕੁੱਲ ਮੁਨਾਫ਼ਾ: %2$s (%3$s)</string>
+    <string name="quick_fuel_calc_title">ਡੀਜ਼ਲ ਕੈਲਕੁਲੇਟਰ</string>
+    <string name="apply_fuel_cost">ਡੀਜ਼ਲ ਖਰਚਾ ਜੋੜੋ</string>
+    <string name="covered_label">ਨਿਕਲ ਗਿਆ</string>
+
+    <!-- Fuel Stop Planner Polish Strings -->
+    <string name="fuel_planner_tagline">ਡਰਾਈਵਿੰਗ ਰੇਂਜ ਅਤੇ ਸਹੀ ਡੀਜ਼ਲ ਪੰਪਾਂ ਦੀ ਪਲਾਨਿੰਗ</string>
+    <string name="trip_info_title">ਸਫ਼ਰ ਦੀ ਜਾਣਕਾਰੀ</string>
+    <string name="fuel_parameters_title">ਡੀਜ਼ਲ ਦੀ ਜਾਣਕਾਰੀ</string>
+    <string name="safety_reserve_title">ਸੁਰੱਖਿਅਤ ਰਿਜ਼ਰਵ ਡੀਜ਼ਲ (%)</string>
+    <string name="why_reserve_title">20% ਕਿਉਂ ਰੱਖਣਾ?</string>
+    <string name="btn_fill_tank">ਟੈਂਕੀ ਫੁੱਲ ਕਰੋ</string>
+    <string name="btn_calculate_plan">ਡੀਜ਼ਲ ਪਲਾਨ ਬਣਾਓ</string>
+    <string name="fuel_recommendation_title">ਡੀਜ਼ਲ ਪੰਪ ਸੁਝਾਅ</string>
+    <string name="refuel_around_format">%1$,.0f ਤੋਂ %2$,.0f ਕਿਮੀ ਵਿਚਕਾਰ ਡੀਜ਼ਲ ਭਰਵਾਓ</string>
+    <string name="recommended_fuel_to_add_qty">ਸੁਝਾਇਆ ਗਿਆ ਡੀਜ਼ਲ: ~%1$,.1f ਲੀਟਰ</string>
+    <string name="no_stops_needed_msg">ਮੰਜ਼ਿਲ ਤੱਕ ਰੁਕਣ ਦੀ ਲੋੜ ਨਹੀਂ ਹੈ।</string>
+    <string name="enough_fuel_margin_msg">ਤੁਹਾਡੇ ਕੋਲ %1$d%% ਸੁਰੱਖਿਅਤ ਮਾਰਜਿਨ ਨਾਲ ਕਾਫ਼ੀ ਡੀਜ਼ਲ ਹੈ।</string>
+    <string name="range_fuel_analysis_title">ਦੂਰੀ ਅਤੇ ਡੀਜ਼ਲ ਵਿਸ਼ਲੇਸ਼ਣ</string>
+    <string name="status_safe_title">ਸੁਰੱਖਿਅਤ ਸਫ਼ਰ</string>
+    <string name="status_safe_desc">ਮੌਜੂਦਾ ਡੀਜ਼ਲ ਵਿੱਚ ਗੱਡੀ ਆਰਾਮ ਨਾਲ ਮੰਜ਼ਿਲ ਤੱਕ ਪਹੁੰਚ ਜਾਵੇਗੀ।</string>
+    <string name="status_refuel_rec_title">ਡੀਜ਼ਲ ਭਰਵਾਉਣਾ ਬਿਹਤਰ</string>
+    <string name="status_refuel_rec_desc">ਗੱਡੀ ਪਹੁੰਚ ਜਾਵੇਗੀ, ਪਰ ਰਿਜ਼ਰਵ ਮਾਰਜਿਨ ਬਣਾਈ ਰੱਖਣ ਲਈ ਰਸਤੇ ਵਿੱਚ ਡੀਜ਼ਲ ਭਰਵਾ ਲਓ।</string>
+    <string name="status_refuel_req_title">ਡੀਜ਼ਲ ਭਰਵਾਉਣਾ ਜ਼ਰੂਰੀ</string>
+    <string name="status_refuel_req_desc">ਮੰਜ਼ਿਲ ਤੋਂ ਪਹਿਲਾਂ ਡੀਜ਼ਲ ਖ਼ਤਮ ਹੋਣ ਤੋਂ ਬਚਣ ਲਈ ਪੰਪ \'ਤੇ ਰੁਕਣਾ ਪਵੇਗਾ।</string>
+    <string name="fuel_shortage_label">ਕਮੀ</string>
+    <string name="fuel_price_not_provided">ਡੀਜ਼ਲ ਰੇਟ ਦਰਜ ਨਹੀਂ ਹੈ</string>
+    <string name="recommended_fuel_stops_count">ਸੁਝਾਏ ਗਏ ਡੀਜ਼ਲ ਪੰਪ (%1$d)</string>
+    <string name="please_enter_distance">ਕਿਰਪਾ ਕਰਕੇ ਟ੍ਰਿਪ ਦੀ ਦੂਰੀ ਦਰਜ ਕਰੋ</string>
+    <string name="please_enter_mileage">ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ ਮਾਈਲੇਜ ਦਰਜ ਕਰੋ</string>
+    <string name="please_enter_tank_capacity">ਕਿਰਪਾ ਕਰਕੇ ਟੈਂਕੀ ਦੀ ਸਮਰੱਥਾ ਦਰਜ ਕਰੋ</string>
+    <string name="current_fuel_exceeds_tank">ਮੌਜੂਦਾ ਡੀਜ਼ਲ ਟੈਂਕੀ ਸਮਰੱਥਾ ਤੋਂ ਵੱਧ ਨਹੀਂ ਹੋ ਸਕਦਾ</string>
+    <string name="toast_tank_full">ਟੈਂਕੀ ਪੂਰੀ ਭਰੀ ਗਈ (%1$s ਲੀਟਰ)</string>
+    <string name="toast_enter_tank_first">ਪਹਿਲਾਂ ਟੈਂਕੀ ਸਮਰੱਥਾ ਦਰਜ ਕਰੋ</string>
+    <string name="load_condition_title">ਲੋਡ ਦੀ ਹਾਲਤ</string>
+    <string name="twenty_percent_recommended">20% (ਸੁਝਾਇਆ ਗਿਆ)</string>
+    <string name="estimated_fuel_cost_title">ਅਨੁਮਾਨਿਤ ਡੀਜ਼ਲ ਖਰਚਾ</string>
+    <string name="total_cost_label">ਕੁੱਲ ਖਰਚਾ</string>
+    <string name="cost_per_km_label">ਪ੍ਰਤੀ ਕਿਮੀ ਖਰਚਾ</string>
+    <string name="send_fuel_cost_to_estimator">🔗 ਟ੍ਰਿਪ ਐਸਟੀਮੇਟਰ ਵਿੱਚ ਭੇਜੋ →</string>
+    <string name="fuel_safety_reserve_dialog_title">🛡️ ਡੀਜ਼ਲ ਸੇਫ਼ਟੀ ਰਿਜ਼ਰਵ</string>
+    <string name="fuel_safety_reserve_dialog_msg">ਸੇਫ਼ਟੀ ਰਿਜ਼ਰਵ ਕਿਉਂ ਜ਼ਰੂਰੀ ਹੈ?\n\n• ਟ੍ਰੈਫਿਕ ਜਾਮ, ਡਾਇਵਰਸ਼ਨ ਅਤੇ ਦੇਰੀ ਤੋਂ ਬਚਾਉਂਦਾ ਹੈ।\n• ਭਾਰੀ ਲੋਡ ਅਤੇ ਚੜ੍ਹਾਈ ਵਿੱਚ ਵਾਧੂ ਖਪਤ ਸੰਭਾਲਦਾ ਹੈ।\n• ਕੈਬਿਨ ਵਿੱਚ ਏਸੀ ਅਤੇ ਆਈਡਲਿੰਗ ਕਵਰ ਕਰਦਾ ਹੈ।\n• ਟੈਂਕੀ ਤਲ ਦੇ ਕਚਰੇ ਅਤੇ ਹਵਾ ਤੋਂ ਇੰਜਣ ਸੁਰੱਖਿਅਤ ਰੱਖਦਾ ਹੈ।\n\nਚਿੰਤਾ ਮੁਕਤ ਸਫ਼ਰ ਲਈ ਘੱਟੋ-ਘੱਟ 20% ਰਿਜ਼ਰਵ ਰੱਖੋ।</string>
+    <string name="btn_got_it">ਸਮਝ ਗਿਆ</string>
+
+    <!-- Load Capacity Localization Strings -->
+    <string name="truck_carrying_capacity_title">ਗੱਡੀ ਦੀ ਵਜ਼ਨ ਸਮਰੱਥਾ</string>
+    <string name="truck_dimensions_optional">ਬਾਡੀ ਦਾ ਮਾਪ (ਵਿਕਲਪਿਕ)</string>
+    <string name="item_dimensions_optional">ਸਾਮਾਨ ਦਾ ਮਾਪ (ਵਿਕਲਪਿਕ)</string>
+    <string name="truck_dim_hint">ਲੰਬਾਈ/ਚੌੜਾਈ ਨਹੀਂ ਪਤਾ? ਬੰਦ ਰੱਖੋ। ਵਜ਼ਨ ਦਾ ਹਿਸਾਬ 100% ਸਹੀ ਹੋਵੇਗਾ!</string>
+    <string name="truck_bed_size">ਡਾਲਾ / ਬਾਡੀ ਦਾ ਆਕਾਰ</string>
+    <string name="cargo_items_title">ਲੋਡ ਕੀਤਾ ਸਾਮਾਨ</string>
+    <string name="load_capacity_summary_title">ਵਜ਼ਨ ਸਮਰੱਥਾ ਸਾਰਾਂਸ਼</string>
+    <string name="estimated_space_summary_title">ਜਗ੍ਹਾ (ਵਾਲੀਅਮ) ਸਾਰਾਂਸ਼</string>
+    <string name="estimated_truck_volume">ਬਾਡੀ ਦੀ ਕੁੱਲ ਜਗ੍ਹਾ</string>
+    <string name="estimated_cargo_volume">ਸਾਮਾਨ ਦੁਆਰਾ ਘੇਰੀ ਜਗ੍ਹਾ</string>
+    <string name="size_per_item">ਇੱਕ ਨਗ ਦਾ ਆਕਾਰ</string>
+    <string name="leave_off_hint">ਲੋੜ ਨਾ ਹੋਵੇ ਤਾਂ ਬੰਦ ਰੱਖੋ</string>
+    <string name="cargo_hint_name">ਜਿਵੇਂ ਸੀਮਿੰਟ ਬੋਰੀਆਂ, ਪਾਈਪ, ਮਸ਼ੀਨਰੀ</string>
+    <string name="cargo_hint_weight">ਜਿਵੇਂ 50</string>
+    <string name="cargo_hint_qty">ਜਿਵੇਂ 100</string>
+    <string name="truck_cap_hint">ਜਿਵੇਂ 15000 ਜਾਂ 15</string>
+    <string name="quantity_greater_zero">ਨਗ ਗਿਣਤੀ 0 ਤੋਂ ਵੱਧ ਹੋਣੀ ਚਾਹੀਦੀ ਹੈ</string>
+    <string name="cleared_all_data">ਸਾਰਾ ਡੇਟਾ ਹਟਾ ਦਿੱਤਾ ਗਿਆ</string>
+    <!-- CreateTripActivity Strings -->
+    <!-- CreateTripActivity Localized Strings -->
+
+    <!-- CreateTripActivity Localized Strings -->
+
+    <!-- CreateTripActivity Localized Strings -->
+    <!-- values-pb/strings.xml -->
+
+    <string name="create_new_trip_title">ਟ੍ਰਿਪ ਬਣਾਓ</string>
+    <string name="create_trip_subtitle">ਹੇਠਾਂ ਟ੍ਰਿਪ ਦੀ ਜਾਣਕਾਰੀ ਭਰੋ</string>
+    <string name="auto_draft">ਆਪਣੇ ਆਪ ਸੇਵ ਹੋਇਆ</string>
+    <string name="vehicle_route_card_title">ਵਾਹਨ ਅਤੇ ਰੂਟ ਦੀ ਜਾਣਕਾਰੀ</string>
+    <string name="vehicle_route_card_sub">ਟਰੱਕ ਨੰਬਰ, ਰੂਟ ਸਟਾਪ, ਤਾਰੀਖ ਅਤੇ ਓਡੋਮੀਟਰ</string>
+    <string name="truck_number_label">ਟਰੱਕ ਨੰਬਰ</string>
+    <string name="truck_number_hint">ਜਿਵੇਂ ਕਿ MH12AB1234</string>
+    <string name="eway_bill_label">POD / E-Way Bill ਨੰ. (ਵਿਕਲਪਿਕ)</string>
+    <string name="eway_bill_hint">ਜਿਵੇਂ ਕਿ 123456789012</string>
+    <string name="route_label">ਰੂਟ</string>
+    <string name="from_label">ਕਿੱਥੋਂ</string>
+    <string name="from_place_hint">ਸ਼ੁਰੂਆਤੀ ਥਾਂ</string>
+    <string name="to_label">ਕਿੱਥੇ</string>
+    <string name="to_place_hint">ਮੰਜ਼ਿਲ ਦੀ ਥਾਂ</string>
+    <string name="add_via_place">+ ਰਸਤੇ ਵਿੱਚ ਸਟਾਪ ਜੋੜੋ</string>
+    <string name="via_place_label">ਸਟਾਪ ਦੀ ਥਾਂ</string>
+    <string name="via_place_hint">ਵਿਚਕਾਰਲੇ ਸਟਾਪ ਦਾ ਨਾਮ</string>
+    <string name="trip_date_label">ਟ੍ਰਿਪ ਦੀ ਤਾਰੀਖ</string>
+    <string name="trip_date_hint">ਤਾਰੀਖ ਚੁਣੋ</string>
+    <string name="start_odometer_label">ਸ਼ੁਰੂਆਤੀ ਓਡੋਮੀਟਰ (ਵਿਕਲਪਿਕ)</string>
+    <string name="start_odometer_hint">ਸ਼ੁਰੂਆਤੀ ਕਿਲੋਮੀਟਰ</string>
+
+    <string name="freight_advance_card_title">ਭਾੜਾ ਅਤੇ ਅਡਵਾਂਸ</string>
+    <string name="freight_advance_card_sub">ਭਾੜੇ ਦੀ ਰਕਮ, ਅਡਵਾਂਸ ਅਤੇ ਭੁਗਤਾਨ ਦਾ ਤਰੀਕਾ ਭਰੋ</string>
+    <string name="total_freight_label">ਕੁੱਲ ਭਾੜਾ</string>
+    <string name="freight_amount_hint">ਰਕਮ ₹</string>
+    <string name="advance_received_label">ਮਿਲਿਆ ਅਡਵਾਂਸ</string>
+    <string name="advance_amount_hint">ਰਕਮ ₹</string>
+    <string name="payment_cash">ਨਕਦ</string>
+    <string name="payment_online">ਆਨਲਾਈਨ</string>
+    <string name="payment_status_label">ਭੁਗਤਾਨ ਦੀ ਸਥਿਤੀ</string>
+    <string name="payment_paid">ਭੁਗਤਾਨ ਹੋ ਗਿਆ</string>
+    <string name="payment_pending">ਭੁਗਤਾਨ ਬਾਕੀ</string>
+    <string name="party_name_hint">ਪਾਰਟੀ ਦਾ ਨਾਮ (ਵਿਕਲਪਿਕ)</string>
+    <string name="add_income_type">+ ਵਾਧੂ ਆਮਦਨ ਜੋੜੋ</string>
+    <string name="income_amount_hint">ਆਮਦਨ ਦੀ ਰਕਮ ₹</string>
+    <string name="income_note_hint">ਆਮਦਨ ਦਾ ਨੋਟ (ਜਿਵੇਂ ਬੋਨਸ)</string>
+    <string name="balance_due_label">ਬਕਾਇਆ ਰਕਮ</string>
+
+    <string name="create_trip_expenses_title">ਟ੍ਰਿਪ ਦੇ ਖਰਚੇ</string>
+    <string name="trip_expenses_card_sub">ਡੀਜ਼ਲ, ਟੋਲ, ਭੱਤਾ ਅਤੇ ਹੋਰ ਖਰਚੇ</string>
+    <string name="diesel_fuel_label">ਡੀਜ਼ਲ / ਇੰਧਨ</string>
+    <string name="diesel_amount_hint">ਰਕਮ ₹</string>
+    <string name="diesel_liters_hint">ਲੀਟਰ</string>
+    <string name="diesel_pump_hint">ਪੰਪ ਦਾ ਨਾਮ (ਵਿਕਲਪਿਕ)</string>
+    <string name="toll_charges_label">ਟੋਲ / ਫਾਸਟੈਗ</string>
+    <string name="toll_amount_hint">ਰਕਮ ₹</string>
+    <string name="driver_bhatta_label">ਡਰਾਈਵਰ ਭੱਤਾ</string>
+    <string name="bhatta_amount_hint">ਰਕਮ ₹</string>
+    <string name="hamali_loading_label">ਹਮਾਲੀ / ਲੋਡਿੰਗ</string>
+    <string name="hamali_amount_hint">ਰਕਮ ₹</string>
+    <string name="other_expenses_label">ਹੋਰ ਖਰਚੇ</string>
+    <string name="other_amount_hint">ਰਕਮ ₹</string>
+    <string name="other_note_hint">ਖਰਚੇ ਦੀ ਜਾਣਕਾਰੀ</string>
+    <string name="add_more_expense">+ ਹੋਰ ਖਰਚਾ ਜੋੜੋ</string>
+
+    <string name="live_profit_card_title">ਲਾਈਵ ਮੁਨਾਫਾ ਕੈਲਕੁਲੇਟਰ</string>
+    <string name="total_income_label">ਕੁੱਲ ਆਮਦਨ</string>
+    <string name="total_expense_label">ਕੁੱਲ ਖਰਚਾ</string>
+    <string name="create_trip_net_profit_label">ਸ਼ੁੱਧ ਮੁਨਾਫਾ</string>
+    <string name="save_trip_btn">ਟ੍ਰਿਪ ਸੇਵ ਕਰੋ</string>
+    <string name="save_and_pdf_btn">ਸੇਵ ਕਰੋ ਅਤੇ PDF ਬਣਾਓ</string>
+
+    <string name="please_wait">ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ</string>
+    <string name="complete_trip_sub">ਤੁਰੰਤ ਟ੍ਰਿਪ ਰਿਪੋਰਟ ਬਣਾਉਣ ਲਈ ਆਖਰੀ ਤਾਰੀਖ ਅਤੇ ਓਡੋਮੀਟਰ ਰੀਡਿੰਗ ਭਰੋ</string>
+    <string name="driver_salary_hint">ਡਰਾਈਵਰ ਦੀ ਤਨਖਾਹ / ਆਮਦਨ ਦਰਜ ਕਰੋ</string>
+    <string name="generating_pdf_progress">PDF ਰਿਪੋਰਟ ਬਣ ਰਹੀ ਹੈ... ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ</string>
+    <string name="test_return_price_scenarios">ਵਾਪਸੀ ਦੇ ਕਿਰਾਏ ਦੇ ਵਿਕਲਪ ਵੇਖੋ:</string>
+    <string name="select_a_trip">ਟ੍ਰਿਪ ਚੁਣੋ</string>
+    <string name="truck_avg">ਟਰੱਕ ਔਸਤ</string>
+    <string name="truck_average_mileage_km_l">ਟਰੱਕ ਦੀ ਔਸਤ ਮਾਈਲੇਜ (ਕਿਮੀ/ਲੀਟਰ):</string>
+    <string name="got_it">ਸਮਝ ਗਿਆ</string>
+    <string name="fuel_stop_1">⛽ ਬਾਲਣ ਸਟਾਪ 1</string>
+    <string name="truck_friendly">🚛 ਟਰੱਕ ਲਈ ਸੁਵਿਧਾਜਨਕ</string>
+    <string name="fuel_remaining">ਬਚਿਆ ਹੋਇਆ ਬਾਲਣ</string>
+    <string name="recommended_refuel">ਬਾਲਣ ਭਰਨ ਦੀ ਸਲਾਹ</string>
+    <string name="congratulations_advanced_trip_analytics_and_export_options_are_now_unlocked_for_your_account">ਵਧਾਈਆਂ! ਤੁਹਾਡੇ ਅਕਾਊਂਟ ਵਿੱਚ ਐਡਵਾਂਸਡ ਟ੍ਰਿਪ ਐਨਾਲਿਟਿਕਸ ਅਤੇ ਐਕਸਪੋਰਟ ਵਿਕਲਪ ਹੁਣ ਉਪਲਬਧ ਹਨ।</string>
+    <string name="server_issue_title">ਸਰਵਰ ਇਸ ਵੇਲੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ</string>
+    <string name="saved_to_draft_server_issue_desc">ਸਾਡੇ ਸਰਵਰ ਵਿੱਚ ਇਸ ਵੇਲੇ ਥੋੜ੍ਹੀ ਸਮੱਸਿਆ ਹੈ। ਤੁਹਾਡੀ ਟ੍ਰਿਪ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ Drafts ਵਿੱਚ ਸੇਵ ਹੋ ਗਈ ਹੈ। ਕਨੈਕਸ਼ਨ ਵਾਪਸ ਆਉਣ ਤੋਂ ਬਾਅਦ ਤੁਸੀਂ Drafts ਵਿੱਚੋਂ ਟ੍ਰਿਪ ਦੇਖ ਸਕਦੇ ਹੋ ਅਤੇ PDF ਬਣਾ ਸਕਦੇ ਹੋ।</string>
+    <string name="go_to_drafts">Drafts ਵੇਖੋ</string>
+    <string name="close">ਬੰਦ ਕਰੋ</string>
+    <string name="advance_received">ਮਿਲਿਆ ਐਡਵਾਂਸ</string>
+    <string name="diesel_charges_label">ਡੀਜ਼ਲ / ਬਾਲਣ</string>
+    <string name="trip_preview_title">ਟ੍ਰਿਪ ਪ੍ਰੀਵਿਊ ਅਤੇ ਜਾਣਕਾਰੀ</string>
+    <string name="expense_label">ਖਰਚਾ</string>
+    <string name="income_label">ਆਮਦਨ</string>
+    <string name="select_print_format">ਪ੍ਰਿੰਟ ਫਾਰਮੈਟ ਚੁਣੋ</string>
+    <string name="print_letter_head_format">ਲੈਟਰਹੈੱਡ ਫਾਰਮੈਟ ਵਿੱਚ ਪ੍ਰਿੰਟ ਕਰੋ</string>
+    <string name="print_blank_with_hidden_gst_format">GST ਲੁਕਾ ਕੇ ਬਲੈਂਕ ਫਾਰਮੈਟ ਪ੍ਰਿੰਟ ਕਰੋ</string>
+    <string name="print_blank_format">ਬਲੈਂਕ ਫਾਰਮੈਟ ਪ੍ਰਿੰਟ ਕਰੋ</string>
+    <string name="party_label">ਪਾਰਟੀ</string>
+    <string name="payment_mode_label">ਭੁਗਤਾਨ ਦਾ ਤਰੀਕਾ</string>
+    <string name="pump_label">ਪੰਪ</string>
+    <string name="liters_suffix">ਲੀਟਰ</string>
+    <string name="unlock_advanced_trip_report">ਐਡਵਾਂਸਡ ਟ੍ਰਿਪ ਰਿਪੋਰਟ ਅਨਲੌਕ ਕਰੋ</string>
+    <string name="watch_a_short_video_ad_to_unlock_detailed_trip_statistics_and_analytics">ਵਿਸਤ੍ਰਿਤ ਟ੍ਰਿਪ ਅੰਕੜੇ ਅਤੇ ਵਿਸ਼ਲੇਸ਼ਣ ਅਨਲੌਕ ਕਰਨ ਲਈ ਇੱਕ ਛੋਟਾ ਵੀਡੀਓ ਵਿਗਿਆਪਨ ਦੇਖੋ।</string>
+    <string name="watch_ad">ਵਿਗਿਆਪਨ ਦੇਖੋ</string>
+    <string name="select_language">ਭਾਸ਼ਾ ਚੁਣੋ</string>
+    <string name="save_plan">💾 ਪਲਾਨ ਸੇਵ ਕਰੋ</string>
+    <string name="share_plan">📤 ਪਲਾਨ ਸਾਂਝਾ ਕਰੋ</string>
+
+    <!-- Trip Report Bottom Sheet Strings -->
+    <string name="select_report_period">ਰਿਪੋਰਟ ਦੀ ਮਿਆਦ ਚੁਣੋ</string>
+    <string name="daily">ਰੋਜ਼ਾਨਾ</string>
+    <string name="weekly">ਹਫ਼ਤਾਵਾਰੀ</string>
+    <string name="monthly">ਮਹੀਨਾਵਾਰ</string>
+    <string name="date_range_label">ਤਾਰੀਖ ਦੀ ਸੀਮਾ</string>
+    <string name="from_date_label">ਸ਼ੁਰੂਆਤੀ ਤਾਰੀਖ</string>
+    <string name="to_date_label">ਅੰਤਿਮ ਤਾਰੀਖ</string>
+    <string name="tap_to_change">ਬਦਲਣ ਲਈ ਟੈਪ ਕਰੋ</string>
+    <string name="truck_no_label">ਟਰੱਕ ਨੰਬਰ</string>
+    <string name="optional_label">(ਵਿਕਲਪਿਕ)</string>
+    <string name="enter_truck_number_hint">ਟਰੱਕ ਨੰਬਰ ਦਰਜ ਕਰੋ (ਜਿਵੇਂ GJ-01-AB-1234)</string>
+    <string name="download_pdf_report">PDF ਰਿਪੋਰਟ ਡਾਊਨਲੋਡ ਕਰੋ</string>
+    <string name="export_report">ਰਿਪੋਰਟ ਐਕਸਪੋਰਟ ਕਰੋ</string>
+    <string name="trip_report_sheet_desc">ਸਮਾਂ ਸੀਮਾ ਚੁਣੋ, ਟਰੱਕ ਨੰਬਰ ਦਰਜ ਕਰੋ ਅਤੇ ਵਿਸਤ੍ਰਿਤ ਵਿਸ਼ਲੇਸ਼ਣ ਰਿਪੋਰਟ ਡਾਊਨਲੋਡ ਕਰੋ।</string>
+    <string name="please_enter_truck_number_err">ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਵੈਧ ਟਰੱਕ ਨੰਬਰ ਦਰਜ ਕਰੋ</string>
+    <string name="please_select_valid_date_range">ਸ਼ੁਰੂਆਤੀ ਤਾਰੀਖ ਅੰਤਿਮ ਤਾਰੀਖ ਤੋਂ ਬਾਅਦ ਨਹੀਂ ਹੋ ਸਕਦੀ</string>
+    <string name="generating_downloading_pdf">PDF ਤਿਆਰ ਅਤੇ ਡਾਊਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...</string>
+    <string name="exporting_report_data">ਰਿਪੋਰਟ ਡਾਟਾ ਐਕਸਪੋਰਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...</string>
+    <string name="report_downloaded_success">ਰਿਪੋਰਟ ਸਫਲਤਾਪੂਰਵਕ ਡਾਊਨਲੋਡ ਹੋ ਗਈ ਹੈ!</string>
+    <string name="report_exported_success">ਰਿਪੋਰਟ ਸਫਲਤਾਪੂਰਵਕ ਐਕਸਪੋਰਟ ਹੋ ਗਈ ਹੈ!</string>
+    <string name="file_not_found">ਫਾਈਲ ਨਹੀਂ ਮਿਲੀ</string>
+    <string name="cannot_open_file">ਫਾਈਲ ਖੋਲ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕਦੀ</string>
+    <string name="open_trip_report">ਟ੍ਰਿਪ ਰਿਪੋਰਟ ਖੋਲ੍ਹੋ</string>
+    <string name="day_single">1 ਦਿਨ</string>
+    <string name="days_plural">%1$d ਦਿਨ</string>
+    <string name="report_timeframe_summary">ਸਮਾਂ ਸੀਮਾ: %1$s (%2$s ਤੋਂ %3$s ਤੱਕ)</string>
+
+    <!-- App Update Dialog Strings -->
+    <string name="app_update_available">ਐਪ ਅੱਪਡੇਟ ਉਪਲਬਧ ਹੈ</string>
+    <string name="update_now">ਹੁਣੇ ਅੱਪਡੇਟ ਕਰੋ</string>
+    <string name="update_feature_performance">ਤੇਜ਼ ਪਰਫਾਰਮੈਂਸ ਅਤੇ ਹੋਰ ਸੁਚੱਜਾ ਅਨੁਭਵ</string>
+    <string name="update_feature_reports">ਨਵੀਆਂ ਵਿਸਤ੍ਰਿਤ ਰਿਪੋਰਟਾਂ ਅਤੇ ਡਾਟਾ ਐਕਸਪੋਰਟ</string>
+    <string name="update_feature_stability">ਸੁਰੱਖਿਆ ਸੁਧਾਰ ਅਤੇ ਬੱਗ ਫਿਕਸ</string>
 </resources>

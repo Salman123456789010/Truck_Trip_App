@@ -38,6 +38,7 @@ class HowToUseActivity : BaseActivity(), OnboardingVoiceListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityHowToUseBinding.inflate(layoutInflater)
         setContentView(binding.root)
         SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
@@ -150,21 +151,19 @@ class HowToUseActivity : BaseActivity(), OnboardingVoiceListener {
 
         binding.backBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         binding.youtubeIcon.setOnClickListener {
-            val url = "https://www.youtube.com/@TruckWallah_TW"
+            val url = "https://youtu.be/TVZarieiabw?si=gmabHWdAn-tdAiDn"
             openLink(url)
         }
 
         binding.btnSkip.setOnClickListener {
             val pos = binding.viewPager.currentItem
             if (pos == 0) {
-                if(!Prefs[Constants.languageCode, ""].toString().isNullOrEmpty()){
+                if (Prefs[Constants.isLogin]) {
                     finish()
-
-                }else{
+                    onBackPressedDispatcher.onBackPressed()
+                } else {
                     startActivity(Intent(this, LoginScreenActivity::class.java))
                     finish()
-//                    startActivity(Intent(this@SplashActivity, LanguageSelction::class.java).putExtra("languageFlag",""))
-
                 }
             } else {
                 binding.viewPager.currentItem = pos - 1

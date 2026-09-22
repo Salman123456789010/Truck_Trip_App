@@ -4,13 +4,10 @@
         <item name="colorPrimary">@color/green</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">@color/green</item>
-        <item name="android:windowBackground">@color/white</item>
-
-
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/surface_app_bg</item>
+        <item name="fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/font_plus_jakarta_sans</item>
     </style>
-
 
     <style name="Theme.TestApplication" parent="Base.Theme.TestApplication" />
     <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
@@ -30,4 +27,88 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <!-- Professional Typography Appearances -->
+    <style name="TextAppearance.TruckTrip.Display" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">@color/text_main</item>
+    </style>
+
+    <style name="TextAppearance.TruckTrip.Title.Large" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_main</item>
+    </style>
+
+    <style name="TextAppearance.TruckTrip.Title.Medium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_main</item>
+    </style>
+
+    <style name="TextAppearance.TruckTrip.Title.Small" parent="TextAppearance.Material3.TitleSmall">
+        <item name="fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_main</item>
+    </style>
+
+    <style name="TextAppearance.TruckTrip.Body.Medium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_main</item>
+    </style>
+
+    <style name="TextAppearance.TruckTrip.Body.Small" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_muted</item>
+    </style>
+
+    <style name="TextAppearance.TruckTrip.Caption" parent="TextAppearance.Material3.LabelSmall">
+        <item name="fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/text_light</item>
+    </style>
+
+    <!-- Component Styles -->
+    <style name="Widget.TruckTrip.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/surface_card</item>
+        <item name="cardCornerRadius">@dimen/corner_radius_md</item>
+        <item name="cardElevation">@dimen/elevation_subtle</item>
+        <item name="strokeColor">@color/border_subtle</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="Widget.TruckTrip.Button.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/brand_primary</item>
+        <item name="cornerRadius">@dimen/corner_radius_md</item>
+        <item name="android:minHeight">@dimen/button_height_primary</item>
+        <item name="android:fontFamily">@font/font_plus_jakarta_sans</item>
+        <item name="android:textColor">@color/text_inverse</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 </resources>

@@ -8,6 +8,7 @@ import com.dadabarbie.TruckTrip.languagemodel.LanguageResponseModel
 import com.dadabarbie.TruckTrip.model.deleteTrip.DeleteTripRequestModel
 import com.dadabarbie.TruckTrip.model.deleteTrip.DeleteTripResponseModel
 import com.dadabarbie.TruckTrip.model.getTrip.TripGetResponseModel
+import com.dadabarbie.TruckTrip.model.fuel.FuelPriceResponseModel
 import com.dadabarbie.TruckTrip.model.news.NewsDetailsModel
 import com.dadabarbie.TruckTrip.model.news.NewsGetRequestModel
 import com.dadabarbie.TruckTrip.model.versionModel.AppVersionModel
@@ -16,6 +17,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.http.Query
 import javax.inject.Inject
 
@@ -57,6 +60,10 @@ class AuthRepository @Inject constructor(private val apiService: ApiService) : B
         return apiService
     }
 
+    fun getParticularPdf(tripId: String, printType: String = ""): Call<ResponseBody> {
+        return apiService.getParticularPdf(tripId, printType)
+    }
+
     suspend fun getAllTripData(
         from_date: String, to_date: String, page: Int, size: Int
     ): Flow<NetworkResult<TripGetResponseModel>> {
@@ -69,6 +76,11 @@ class AuthRepository @Inject constructor(private val apiService: ApiService) : B
         }.flowOn(
             Dispatchers.IO
         )
+    }
+    suspend fun getUserFeedback(feedback: String, message: String): Flow<NetworkResult<DeleteTripResponseModel>> {
+        return flow {
+            emit(safeApiCall { apiService.userFeedback(com.dadabarbie.TruckTrip.model.FeedBackRequest(feedback, message)) })
+        }.flowOn(Dispatchers.IO)
     }
 
 
@@ -83,6 +95,26 @@ class AuthRepository @Inject constructor(private val apiService: ApiService) : B
         }.flowOn(
             Dispatchers.IO
         )
+    }
+
+    suspend fun getCitywiseFuelPrices(
+        state: String?,
+        city: String?,
+        page: Int,
+        size: Int
+    ): Flow<NetworkResult<FuelPriceResponseModel>> {
+        return flow {
+            emit(
+                safeApiCall {
+                    apiService.getCitywiseFuelPrices(
+                        state,
+                        city,
+                        page,
+                        size
+                    )
+                }
+            )
+        }.flowOn(Dispatchers.IO)
     }
 
     suspend fun logOut():Flow<NetworkResult<DeleteTripResponseModel>>{
@@ -101,6 +133,38 @@ class AuthRepository @Inject constructor(private val apiService: ApiService) : B
     suspend fun deleteTrip(id:String):Flow<NetworkResult<DeleteTripResponseModel>>{
         return flow {
             emit(safeApiCall { apiService.deleteTrip(DeleteTripRequestModel(id)) })
+        }.flowOn(Dispatchers.IO)
+    }
+
+    fun getTripsReport(
+        fromDate: String,
+        toDate: String,
+        format: String? = null,
+        truckNo: String? = null
+    ): Call<ResponseBody> {
+        return apiService.getTripsReport(fromDate, toDate, format, truckNo?.ifBlank { null })
+    }
+
+    fun exportTripsReport(
+        fromDate: String,
+        toDate: String,
+        format: String? = null,
+        truckNo: String? = null
+    ): Call<ResponseBody> {
+        return apiService.exportTripsReport(fromDate, toDate, format, truckNo?.ifBlank { null })
+    }
+
+    suspend fun verifySubscription(
+        request: com.dadabarbie.TruckTrip.model.subscription.SubscriptionVerifyRequestModel
+    ): Flow<NetworkResult<com.dadabarbie.TruckTrip.model.subscription.SubscriptionVerifyResponseModel>> {
+        return flow {
+            emit(safeApiCall { apiService.verifySubscription(request) })
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getSubscriptionStatus(): Flow<NetworkResult<com.dadabarbie.TruckTrip.model.subscription.SubscriptionStatusResponseModel>> {
+        return flow {
+            emit(safeApiCall { apiService.getSubscriptionStatus() })
         }.flowOn(Dispatchers.IO)
     }
 }

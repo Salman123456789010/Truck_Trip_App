@@ -159,6 +159,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:padding="@dimen/_6sdp">
 
                         <LinearLayout
@@ -221,6 +222,7 @@
                     android:layout_marginBottom="@dimen/_8sdp"
                     app:cardBackgroundColor="#FFEBEE"
                     app:cardCornerRadius="@dimen/_12sdp"
+                    android:visibility="gone"
                     app:cardElevation="0dp"
                     app:strokeColor="#F44336"
                     app:strokeWidth="2dp">
@@ -411,6 +413,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:id="@+id/shareIcon"
                     android:orientation="vertical">
 
                     <FrameLayout
@@ -419,7 +422,7 @@
                         android:background="@drawable/bg_gradient_green_circle">
 
                         <ImageView
-                            android:id="@+id/shareIcon"
+
                             android:layout_width="@dimen/_14sdp"
                             android:layout_height="@dimen/_14sdp"
                             android:layout_gravity="center"
@@ -475,6 +478,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:id="@+id/editIcon"
                     android:orientation="vertical">
 
                     <FrameLayout
@@ -483,7 +487,7 @@
                         android:background="@drawable/bg_gradient_green_circle">
 
                         <ImageView
-                            android:id="@+id/editIcon"
+
                             android:layout_width="@dimen/_14sdp"
                             android:layout_height="@dimen/_14sdp"
                             android:layout_gravity="center"
@@ -507,15 +511,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:id="@+id/deleteIcon"
                     android:orientation="vertical">
 
                     <FrameLayout
                         android:layout_width="@dimen/_32sdp"
                         android:layout_height="@dimen/_32sdp"
+
                         android:background="@drawable/bg_gradient_green_circle">
 
                         <ImageView
-                            android:id="@+id/deleteIcon"
+
                             android:layout_width="@dimen/_14sdp"
                             android:layout_height="@dimen/_14sdp"
                             android:layout_gravity="center"

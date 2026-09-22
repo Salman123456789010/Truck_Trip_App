@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:id="@+id/mainLayout"
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
@@ -17,39 +18,47 @@
 
         <ImageView
             android:id="@+id/backBtn"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/baseline_arrow_back_24" />
-
-        <TextView
-            android:id="@+id/tittleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/add_hissab"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_15sdp" />
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_arrow_back_24"
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="@dimen/_3sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_toEndOf="@+id/tittleText"
-            android:fontFamily="@font/roboto_medium"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="14dp"
+            android:fontFamily="@font/font_plus_jakarta_sans"
+            android:textStyle="bold"
             android:gravity="end"
             android:maxLines="1"
             android:text="@string/save"
             android:textColor="@color/white"
-            android:textSize="@dimen/_15sdp" />
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tittleText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/backBtn"
+            android:layout_toStartOf="@+id/done"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="8dp"
+            android:gravity="center"
+            android:fontFamily="@font/font_plus_jakarta_sans"
+            android:textStyle="bold"
+            android:text="@string/add_hissab"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:singleLine="true"
+            android:ellipsize="end" />
 
     </RelativeLayout>
 
@@ -81,7 +90,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/font_plus_jakarta_sans"
                 android:text="@string/total_profit"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp" />
@@ -93,7 +102,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/font_plus_jakarta_sans"
+                android:textStyle="bold"
                 android:text="0"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp" />
@@ -105,6 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/mainProfit"
+        android:id="@+id/mainParentLayout"
         android:layout_marginTop="@dimen/_5sdp"
         android:paddingBottom="@dimen/_10sdp">
 
@@ -113,6 +124,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:fillViewport="true"
+            android:id="@+id/mainScrollview"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_60sdp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -257,6 +257,8 @@
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+            <!-- Easy Way Card -->
+
 
             <!-- Divider Text -->
             <TextView

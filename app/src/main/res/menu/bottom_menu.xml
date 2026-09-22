@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/home_icon"
+        android:title="होम"/>
+
+    <item
+        android:id="@+id/nav_trips"
+        android:icon="@drawable/ic_truck"
+        android:title="ट्रिप्स"/>
+
+    <item
+        android:id="@+id/nav_expenses"
+        android:icon="@drawable/expense_background"
+        android:title="खर्चे"/>
+
+    <item
+        android:id="@+id/nav_reports"
+        android:icon="@drawable/bg_hint_box"
+        android:title="रिपोर्ट"/>
+</menu>

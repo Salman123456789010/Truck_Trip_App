@@ -42,11 +42,17 @@ import com.google.gson.reflect.TypeToken
 import com.vasyerp.cafvd.room.model.Products
 import com.vasyerp.freshvegetables.util.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
+import com.dadabarbie.TruckTrip.Utils.ServerWarmupManager
+import com.dadabarbie.TruckTrip.api.ApiService
 import kotlinx.coroutines.launch
 import java.util.Locale
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashBoardActivity : BaseActivity(), OnClickListener {
+    @Inject
+    lateinit var apiService: ApiService
+
     lateinit var binding: ActivityDashBoardBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -60,7 +66,9 @@ class DashBoardActivity : BaseActivity(), OnClickListener {
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ServerWarmupManager.warmupServer(apiService)
         WindowCompat.setDecorFitsSystemWindows(window, true)
+
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
         SystemUiUtils.setupStatusBar(this, R.color.color_primary, false)
@@ -70,8 +78,22 @@ class DashBoardActivity : BaseActivity(), OnClickListener {
             // 35 (android - 15)
             WindowCompat.setDecorFitsSystemWindows(window, false)
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
         }
+
+        // Initialize Google Play Billing connection and handle background purchases
+        val billingManager = com.dadabarbie.TruckTrip.billing.BillingManager.getInstance(this)
+        billingManager.startConnection()
+        billingManager.onPurchaseCompleted = { purchaseToken, productId, orderId, purchaseTime ->
+            val userId = com.dadabarbie.TruckTrip.billing.SubscriptionManager.getUserId()
+            authViewModel.verifySubscription(
+                userId = userId,
+                productId = productId,
+                purchaseToken = purchaseToken,
+                orderId = orderId,
+                purchaseTime = purchaseTime
+            )
+        }
+
         appVersionNameCheck()
         setObserver()
     }
@@ -184,6 +206,7 @@ class DashBoardActivity : BaseActivity(), OnClickListener {
         super.onResume()
 
         setData()
+        authViewModel.checkSubscriptionStatus()
     }
     fun setData(){
         totalCount=0
@@ -268,7 +291,8 @@ class DashBoardActivity : BaseActivity(), OnClickListener {
                 if(totalCount>0){
                     startActivity(Intent(this, DraftActivity::class.java))
                 }else{
-                    Toast.makeText(applicationContext,"You Have No Any Draft",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext,
+                        getString(R.string.you_have_no_any_draft),Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -322,7 +346,7 @@ class DashBoardActivity : BaseActivity(), OnClickListener {
         )
     }
     fun textChanges(type: Int) {
-        val locale = Locale(Prefs[Constants.languageCode,""])
+        val locale = Locale(Prefs[Constants.languageCode, ""])
         Locale.setDefault(locale)
         val config = Configuration()
         config.locale = locale
@@ -351,4 +375,8 @@ class DashBoardActivity : BaseActivity(), OnClickListener {
         }
     }
 
+    override fun onDestroy() {
+        com.dadabarbie.TruckTrip.ads.AdMobManager.destroyBanner()
+        super.onDestroy()
+    }
 }

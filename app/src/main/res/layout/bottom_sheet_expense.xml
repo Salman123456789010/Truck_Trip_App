@@ -1,81 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <!-- Top Section - Fixed -->
+    <!-- ✅ Main scrollable content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:paddingBottom="80dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/kharcha_dalo"
+                    android:textSize="@dimen/_12sdp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="#333333" />
+
+                <!-- ✅ Close button for better UX -->
+                <ImageView
+                    android:id="@+id/btnClose"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/baseline_close_24"
+                    android:padding="6dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                  />
+            </LinearLayout>
+
+            <!-- Quick Add Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_fast"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="#666666"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Amount Chips with Horizontal Scroll -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginBottom="12dp">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupAmounts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="false"
+                    app:chipSpacingHorizontal="8dp" />
+            </HorizontalScrollView>
+
+            <!-- Category Chips -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:singleSelection="true"
+                app:selectionRequired="false"
+                app:chipSpacingHorizontal="8dp"
+                app:chipSpacingVertical="4dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Custom Amount Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCustomAmount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/custom_amount"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:strokeColor="@color/color_primary"
+                android:textColor="@color/color_primary"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginVertical="8dp" />
+
+            <!-- Voice Input Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/voice"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="#666666"
+                android:layout_marginBottom="8dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabMic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                app:fabCustomSize="80dp"
+                app:maxImageSize="40dp"
+                android:src="@drawable/mic_phone"
+                app:tint="#FFFFFF"
+                app:backgroundTint="@color/tamil_txt"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tvHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bolo_khane_ke_500"
+                android:textSize="12sp"
+                android:textColor="#999999"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginVertical="8dp" />
+
+            <!-- List Header -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/aapki_list"
+                android:textSize="16sp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="#333333"
+                android:layout_marginBottom="12dp" />
+
+            <!-- ✅ RecyclerView with proper scroll handling -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvBottomSheetExpenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp"
+                android:nestedScrollingEnabled="false"
+                android:clipToPadding="false"
+                android:overScrollMode="never" />
+
+            <!-- ✅ Empty state -->
+            <LinearLayout
+                android:id="@+id/layoutEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="32dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/normal_flow_add_trip"
+                    android:alpha="0.5"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/abhi_kuch_nahi_hai"
+                    android:textSize="14sp"
+                    android:textColor="#999999"
+                    android:gravity="center" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ✅ Fixed Save Button at Bottom -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:orientation="vertical"
-        android:padding="@dimen/_10sdp">
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/kharcha_dalo"
-            android:textSize="@dimen/_12sdp"
-           android:fontFamily="@font/roboto_medium"
-            android:textColor="#333333"
-            android:layout_marginBottom="20dp" />
-
-        <!-- Mic Button -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabMic"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            app:fabCustomSize="120dp"
-            app:maxImageSize="60dp"
-            android:src="@drawable/mic_phone"
-            app:tint="#FFFFFF"
-            app:backgroundTint="@color/tamil_txt"
-
-            android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bolo_khane_ke_500"
-            android:textSize="16sp"
-            android:textColor="#666666"
-            android:layout_gravity="center"
-            android:layout_marginBottom="24dp" />
-
-        <!-- List Header -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/aapki_list"
-            android:textSize="16sp"
-          android:fontFamily="@font/roboto_medium"
-            android:layout_marginBottom="12dp" />
-    </LinearLayout>
-
-    <!-- Scrollable List Section -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBottomSheetExpenses"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:minHeight="100dp"
-        android:maxHeight="300dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:clipToPadding="false" />
-
-    <!-- Bottom Button - Fixed -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp"
+        android:padding="16dp"
         android:background="@android:color/white"
-        android:elevation="4dp">
+        android:elevation="8dp">
+
+        <!-- Shadow effect -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/shadow_top"
+            android:layout_marginBottom="8dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"
@@ -88,4 +220,5 @@
             app:cornerRadius="12dp"
             android:textColor="#FFFFFF" />
     </LinearLayout>
-</LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
